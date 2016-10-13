@@ -12,12 +12,12 @@
 
 #include "libft.h"
 
-int		ft_count_tab(char **array)
+int		ft_count_tab(char **tab)
 {
 	int		i;
 
 	i = 0;
-	while (array[i])
+	while (tab[i])
 		i++;
 	return (i);
 }

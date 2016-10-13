@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 16:52:08 by jthevene          #+#    #+#             */
-/*   Updated: 2016/04/24 12:26:35 by jules            ###   ########.fr       */
+/*   Updated: 2016/06/01 16:55:50 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void				*ft_memset(void *s, int c, size_t n);
 int					ft_nbrlen(int i);
 void				ft_putchar(char c);
 void				ft_putchar_fd(char c, int fd);
+int					ft_putchar_int(int i);
 void				ft_putendl(char const *s);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr(int n);
@@ -87,10 +88,9 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_lstaddend(t_list **alst, t_list *new_elem);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 size_t				ft_lstlen(t_list **alst);
-int					ft_count_tab(char **array);
 void				ft_swap(char *a, char *b);
 int					get_next_line(int const fd, char **line);
+int					ft_count_tab(char **array);
 char				*ft_strpathjoin(const char *s1, const char *s2);
-void				ft_puttab(char **array);
 
 #endif

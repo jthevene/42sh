@@ -6,13 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 11:31:13 by jules             #+#    #+#             */
-/*   Updated: 2016/10/12 15:33:08 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/13 10:36:02 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
-
-extern	t_shell		g_shell;
 
 // static void		ft_sigwinch(int sig)
 // {

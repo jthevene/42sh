@@ -6,13 +6,13 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 12:21:52 by jules             #+#    #+#             */
-/*   Updated: 2016/10/12 09:34:03 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/12 12:17:29 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
 
-int		ft_init_termios(struct termios my_termios)
+int		init_termios(struct termios my_termios)
 {
 	char			*term_name;
 

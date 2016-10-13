@@ -6,11 +6,30 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 12:05:57 by jules             #+#    #+#             */
-/*   Updated: 2016/10/11 12:07:25 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/12 15:37:19 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "42shsh.h"
+#include "42sh.h"
+
+char	*get_var(t_shell *g_shell, char *n_var)
+{
+	char	*str;
+	t_var	*var;
+
+	str = NULL;
+	var = g_shell->vars;
+	while (var)
+	{
+		if (!ft_strcmp(var->name, n_var))
+		{
+			str = ft_strdup(var->value);
+			return (str);
+		}
+		var = var->next;
+	}
+	return (str);
+}
 
 t_var	*new_var(char *v_name, char *v_value)
 {

@@ -6,13 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:40:03 by jules             #+#    #+#             */
-/*   Updated: 2016/10/12 09:39:27 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/13 10:34:29 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
-
-extern t_shell	g_shell;
 
 static int		init_env()
 {
@@ -44,14 +42,13 @@ static int		init_env()
 
 int		init_all()
 {
-	ft_bzero(&g_shell, sizeof(t_env));
-	init_signal();
+	ft_bzero(&g_shell, sizeof(t_shell));
+	ft_signal();
 	if (!init_env())
 		return (1);
 	g_shell.current_line = NULL;
-	g_shell.buf = (*char)ft_memalloc(7); //pas sûr pour le 7
 	init_hist();
-	tcgetattr(STDIN_FILENO, &data->t_back);// save les données termios d'origine
-	init_termios(g_shell->t_back);
+	tcgetattr(STDIN_FILENO, &g_shell.t_back);// save les données termios d'origine
+	init_termios(g_shell.t_back);
 	return (0);
 }

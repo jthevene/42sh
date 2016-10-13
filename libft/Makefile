@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jules <jules@student.42.fr>                +#+  +:+       +#+         #
+#    By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/11 15:52:42 by jthevene          #+#    #+#              #
-#    Updated: 2016/04/24 12:26:18 by jules            ###   ########.fr        #
+#    Updated: 2016/05/24 15:48:36 by jthevene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC = ft_memccpy.c	ft_putnbr_fd.c	ft_striteri.c ft_strrchr.c ft_lstmap.c \
 		ft_itoa.c ft_putendl_fd.c ft_strequ.c ft_strnew.c ft_lstdelone.c \
 		ft_memalloc.c ft_putnbr.c ft_striter.c ft_strnstr.c ft_lstnew.c \
 		ft_count_tab.c ft_nbrlen.c ft_swap.c get_next_line.c \
-		ft_strpathjoin.c ft_puttab.c
+		ft_strpathjoin.c ft_putchar_int.c
 
 
 OBJ = $(SRC:.c=.o)

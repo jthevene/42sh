@@ -6,7 +6,7 @@
 #    By: jules <jules@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/11 15:52:42 by jthevene          #+#    #+#              #
-#    Updated: 2016/04/24 12:26:18 by jules            ###   ########.fr        #
+#    Updated: 2016/10/13 10:25:29 by sgaudin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ FLAGS = -Wall -Wextra -Werror
 all : $(NAME)
 
 $(NAME) :
-	@gcc -c $(FLAGS) $(SRC) -I.
+	@gcc -c $(FLAGS) $(SRC) -I./includes
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 

@@ -6,7 +6,7 @@
 #    By: jules <jules@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/07 18:50:01 by jthevene          #+#    #+#              #
-#    Updated: 2016/10/12 11:34:50 by jules            ###   ########.fr        #
+#    Updated: 2016/10/13 10:24:33 by sgaudin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,7 @@ SRC					=	main.c 			\
 						signal.c 		\
 						termios.c 		\
 						var.c 			\
-						
-											
+
 OBJ					=	$(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
 all:

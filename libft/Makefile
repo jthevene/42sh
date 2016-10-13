@@ -6,7 +6,11 @@
 #    By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/11 15:52:42 by jthevene          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2016/05/24 15:48:36 by jthevene         ###   ########.fr        #
+=======
+#    Updated: 2016/10/13 10:25:29 by sgaudin          ###   ########.fr        #
+>>>>>>> f2664c0a00f4e39c14bdea8c23d97236db88910c
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +39,7 @@ FLAGS = -Wall -Wextra -Werror
 all : $(NAME)
 
 $(NAME) :
-	@gcc -c $(FLAGS) $(SRC) -I.
+	@gcc -c $(FLAGS) $(SRC) -I./includes
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 

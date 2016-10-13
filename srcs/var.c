@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 12:05:57 by jules             #+#    #+#             */
-/*   Updated: 2016/10/12 15:37:19 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/13 15:59:57 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,19 @@ t_var	*new_var(char *v_name, char *v_value)
 
 void	ft_varappend(t_var **alst, t_var *new_element)
 {
-	t_var	*it;
+	t_var	*tmp;
 
+	ft_putstr("varappend1\n");
 	if (!*alst)
+	{
 		*alst = new_element;
+		ft_putstr("varappend2\n");
+	}
 	else
 	{
-		it = *alst;
-		while (it->next)
-			it = it->next;
-		it->next = new_element;
+		tmp = *alst;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new_element;
 	}
 }

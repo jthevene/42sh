@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2016/10/13 10:46:43 by sgaudin          ###   ########.fr       */
+/*   Updated: 2016/10/13 15:56:49 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,17 @@
 # include <sys/ioctl.h>
 # include <curses.h>
 # include "../libft/includes/libft.h"
+
+# define K_PRINT   1
+# define K_ESCAPE  2
+# define K_UP      3
+# define K_DOWN    4
+# define K_RIGHT   5
+# define K_LEFT    6
+# define K_DEL	   7
+# define K_BACKSP  8
+# define K_RETURN  9
+# define K_UNKNOWN 10
 
 typedef struct 		s_lst
 {
@@ -58,6 +69,10 @@ typedef struct		s_shell
 t_shell		*g_shell;
 
 /*
+** CURSOR_MOVE
+*/
+void				ft_cursor_right(int i);
+/*
 ** HISTORY
 */
 void				init_hist();
@@ -66,6 +81,10 @@ void				ft_newhist(char *line);
 ** INIT
 */
 int					init_all();
+/*
+** LINE_EDITION
+*/
+int					readkey(void);
 /*
 ** SIGNAL
 */

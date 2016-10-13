@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 12:21:52 by jules             #+#    #+#             */
-/*   Updated: 2016/10/12 12:17:29 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/13 13:25:45 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int		init_termios(struct termios my_termios)
 	if (tgetent(NULL, term_name) == ERR)
 		return (1);
 	tcgetattr(STDIN_FILENO, &my_termios);
-	my_termios.c_lflag &= ~ICANON;
-	my_termios.c_lflag &= ~ECHO;
-	my_termios.c_cc[VMIN] = 1;
-	my_termios.c_cc[VTIME] = 0;
+	my_termios.c_lflag &= ~ICANON; // pour ne pas attendre un appui sur ENTER
+	my_termios.c_lflag &= ~ECHO;// pour ne pas afficher les touches tapees
+	my_termios.c_cc[VMIN] = 1;// pour rendre read() bloquant tant que rien n'est lu
+	my_termios.c_cc[VTIME] = 0;// pour retourner immediatement quand un byte est lu
 	tcsetattr(STDIN_FILENO, TCSANOW, &my_termios);
 	tputs(tgetstr("ti", NULL), 1, ft_putchar_int);
 	return (0);

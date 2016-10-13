@@ -10,7 +10,7 @@
 #                                                                              #
 #******************************************************************************#
 
-NAME				=	21sh
+NAME				=	42sh
 
 SRC_DIR				=	srcs
 INCLUDE_DIR			=	includes
@@ -28,8 +28,10 @@ LIB_FLAGS			=	-lncurses
 LFLAGS				=	-L$(LIBFT_DIR) -l$(LIBFT)
 
 SRC					=	main.c 			\
+						cursor_move.c 	\
 						history.c 		\
 						init.c 			\
+						line_edition.c 	\
 						signal.c 		\
 						termios.c 		\
 						var.c 			\

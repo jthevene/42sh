@@ -13,6 +13,7 @@
 #include "../includes/redir.h"
 #include "../includes/globing.h"
 
+/*
 static char		*get_rng_str(char *str, int i)// uac-rgs => "c-r"
 {
 	char	*rng_str;
@@ -21,7 +22,7 @@ static char		*get_rng_str(char *str, int i)// uac-rgs => "c-r"
 	rng_str = ft_strsub(str, i - 1, 3);
 	return (rng_str);
 }
-
+*/
 char	*fill_rng(char *str) // globbing [a-c] str = "a-c", return une str avec tous les char imprimables sauf "abc"
 {
 	int		i;
@@ -76,7 +77,7 @@ char	*fill_nomult(char *str) // [!...]
 	return (ret);
 }
 
-char	*fill_norng(char *str) // [!...-...]
+char	*fill_norng(char *str) // [!.-.]
 {
 	int		i;
 	int		j;
@@ -105,18 +106,16 @@ char	*fill_norng(char *str) // [!...-...]
 	ret[j] = '\0';
 	return (ret);
 }
+/*
 
-char	*fill_mix(char *str) // [ae-rt]
+char	*fill_mix(char *str, int i) // [ae-rt]
 {
-	int		i;
-	int		j;
-	int		k;
+	FT_INIT(int, j, 0);
+	FT_INIT(int, k, 0);
 	char	*ret;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	str = clean_brackets(str);
+	if (ft_strchr(str, '[') && ft_strchr(str, ']'))
+		str = clean_brackets(str);
 	while (str[i] != '-')
 		i++;
 	if (!(ret = (char *)malloc(sizeof(char) * (str[i + 1] - str[i - 1]) + ft_strlen(str) - 2)))
@@ -133,4 +132,28 @@ char	*fill_mix(char *str) // [ae-rt]
 	if (str[1] == '!')
 		ret = fill_nomult(ret);
 	return (ret);
+}
+
+*/
+
+char	*fill_mix(char *str) /*** Probleme de compte sur le ;en, a revoir ! ***/
+{
+	FT_INIT(int, i, 0);
+	FT_INIT(int, len, 0);
+	FT_INIT(char *, ret, NULL);
+	str = clean_brackets(str);
+	while (str[i])
+	{
+		if (str[i] == '-' && str[i + 1] && str[i - 1])
+		{
+			len += str[i + 1] - str[i - 1];
+			i++;
+		}
+		len++;
+		i++;
+	}
+	if (!(ret = (char *)malloc(sizeof(char) * len + ft_strlen(str) - 2)))
+		return (NULL);
+	printf("len = %d\n", len);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2016/10/13 15:56:49 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/13 16:45:43 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct		s_shell
 	char			*line; // VARIABLE SIMON
 }					t_shell;
 
-t_shell		*g_shell;
+// t_shell		*g_shell;
 
 /*
 ** CURSOR_MOVE
@@ -99,6 +99,6 @@ void				ft_reset_termios(struct termios t_back);
 */
 char				*get_var(t_shell *g_shell, char *n_var);
 t_var				*new_var(char *v_name, char *v_value);
-void				ft_varappend(t_var **alst, t_var *new_element);
+void				ft_varappend(t_var *new_element);
 
 #endif

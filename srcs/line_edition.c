@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 10:54:10 by jules             #+#    #+#             */
-/*   Updated: 2016/10/13 15:01:36 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/13 17:07:08 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ int				readkey(void)
 	if (c == 27)// caractere d'echappement recu
 		return (readkeyspecial());// on doit donc traiter une touche speciale codee sur plusieurs bytes
 	if (ft_isprint(c))
+	{
+		//ajouter c à g_shell.current_line
 		return (K_PRINT);
+	}
 	if (c == 127)
 		return (K_BACKSP);
 	if (c == 126)

@@ -6,11 +6,13 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 12:05:57 by jules             #+#    #+#             */
-/*   Updated: 2016/10/13 15:59:57 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/13 16:58:44 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
+
+extern t_shell		g_shell;
 
 char	*get_var(t_shell *g_shell, char *n_var)
 {
@@ -45,21 +47,18 @@ t_var	*new_var(char *v_name, char *v_value)
 	return (var);
 }
 
-void	ft_varappend(t_var **alst, t_var *new_element)
+void	ft_varappend(t_var *new_element)
 {
 	t_var	*tmp;
 
-	ft_putstr("varappend1\n");
-	if (!*alst)
-	{
-		*alst = new_element;
-		ft_putstr("varappend2\n");
-	}
+	if (!g_shell.vars)
+		g_shell.vars = new_element;
 	else
 	{
-		tmp = *alst;
+		tmp = g_shell.vars;
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new_element;
 	}
+	
 }

@@ -6,14 +6,14 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 11:27:15 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/10/07 14:16:11 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/13 10:45:10 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GLOBING_H
 # define GLOBING_H
 
-# include "../../42sh.h"
+# include "../../includes/42sh.h"
 
 # ifndef FT_INIT
 #  define FT_INIT(t, n, v) t n = v

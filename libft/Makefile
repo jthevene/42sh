@@ -1,18 +1,14 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+         #
+#    By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2014/11/11 15:52:42 by jthevene          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2016/05/24 15:48:36 by jthevene         ###   ########.fr        #
-=======
-#    Updated: 2016/10/13 10:25:29 by sgaudin          ###   ########.fr        #
->>>>>>> f2664c0a00f4e39c14bdea8c23d97236db88910c
+#    Created: 2016/10/13 10:44:16 by sgaudin           #+#    #+#              #
+#    Updated: 2016/10/13 10:50:43 by sgaudin          ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
 
 NAME = libft.a
 
@@ -29,7 +25,7 @@ SRC = ft_memccpy.c	ft_putnbr_fd.c	ft_striteri.c ft_strrchr.c ft_lstmap.c \
 		ft_itoa.c ft_putendl_fd.c ft_strequ.c ft_strnew.c ft_lstdelone.c \
 		ft_memalloc.c ft_putnbr.c ft_striter.c ft_strnstr.c ft_lstnew.c \
 		ft_count_tab.c ft_nbrlen.c ft_swap.c get_next_line.c \
-		ft_strpathjoin.c ft_putchar_int.c
+		ft_strpathjoin.c ft_putchar_int.c ft_isspace.c
 
 
 OBJ = $(SRC:.c=.o)

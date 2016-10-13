@@ -6,7 +6,7 @@
 /*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 14:52:21 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/09/30 14:53:05 by sgaudin          ###   ########.fr       */
+/*   Updated: 2016/10/13 10:56:00 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int 		fdlist_pushback(t_fdlist **fdlist, int key)
 
 	if (!(*fdlist))
 	{
-		ft_printf("!(*fdlist)\n");
+		printf("!(*fdlist)\n");
 		if (!((*fdlist) = (t_fdlist *)malloc(sizeof(t_fdlist))))
 			return (0);
 		(*fdlist)->prev = NULL;
@@ -27,7 +27,7 @@ int 		fdlist_pushback(t_fdlist **fdlist, int key)
 	}
 	else
 	{
-		ft_printf("pushing back\n");
+		printf("pushing back\n");
 		if (!(new = (t_fdlist *)malloc(sizeof(t_fdlist))))
 			return (0);
 		new->next = NULL;
@@ -53,7 +53,7 @@ int 		create_file(char *filename, t_fdlist **fdlist, int type)
 		return (0);
 	if (!(*fdlist))
 	{
-		ft_printf("initializing fdlist\n");
+		printf("initializing fdlist\n");
 		fdlist_pushback(&(*fdlist), 0);
 	}
 	if (!fdlist_pushback(&(*fdlist), fd))
@@ -80,11 +80,11 @@ void 		free_fdlist(t_fdlist **fdlist)
 		free(tmp);
 		tmp = tmp_n;
 	}
-	ft_printf("freeing tmp\n");
+	printf("freeing tmp\n");
 	free(tmp);
-	ft_printf("tmp freed\n");
+	printf("tmp freed\n");
 	tmp = NULL;
-	ft_printf("fdlist and tmp freed, have a nice day\n");
+	printf("fdlist and tmp freed, have a nice day\n");
 	fdlist = NULL;
 }
 
@@ -112,7 +112,7 @@ void		exec_redir_right(int fd/*, int fd_out*/)
 	{
 		//dup2(fd, fd_out);
 		//execve(/* CMD ICI */, /* ARGS de la CMD ICI */, /* ENV ICI */);
-		ft_printf("OKOK\n");
+		printf("OKOK\n");
 	}
 	close(fd);
 	wait(NULL);

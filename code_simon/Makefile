@@ -5,14 +5,14 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/09/05 17:36:29 by sgaudin           #+#    #+#              #
-#    Updated: 2016/10/07 11:36:36 by sgaudin          ###   ########.fr        #
+#    Created: 2016/10/13 10:42:48 by sgaudin           #+#    #+#              #
+#    Updated: 2016/10/13 10:44:40 by sgaudin          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = 42sh
 
-INCLUDES = ./../42sh.h ./includes/redir.h
+INCLUDES = ../includes/42sh.h ./includes/redir.h
 
 REDIR = ./redirections/
 GLOB = ./globing/

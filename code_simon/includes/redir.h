@@ -6,14 +6,14 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 14:30:50 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/10/07 11:57:28 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/13 10:45:19 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REDIR_H
 # define REDIR_H
 
-# include "../../42sh.h"
+# include "../../includes/42sh.h"
 
 # ifndef FT_INIT
 #  define FT_INIT(type, name, value) type name = value

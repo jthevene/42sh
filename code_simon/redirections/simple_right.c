@@ -6,7 +6,7 @@
 /*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 14:35:45 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/09/29 14:35:48 by sgaudin          ###   ########.fr       */
+/*   Updated: 2016/10/13 10:55:03 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int		get_filename(int i, int last_fd, t_fdlist **fdlist)
 	filename[j] = '\0';
 	FT_INIT(int, fd, create_file(filename, &(*fdlist), SIMPLE));
 	if (!fdlist)
-		ft_printf("get_filename, fdlist n'existe pas\n");
+		printf("get_filename, fdlist n'existe pas\n");
 	return (get_filename(i, fd, fdlist));
 }
 
@@ -48,14 +48,14 @@ int				simple_right(void)
 	t_fdlist	*fdlist;
 
 	fdlist = NULL;
-	ft_printf("Entrée dans simple_right\n");
+	printf("Entrée dans simple_right\n");
 	if (!ft_strchr(g_shell->line, '>'))
 		return (0);
-	ft_printf("Redirection détectée\n");
+	printf("Redirection détectée\n");
 	fd_out = detect_out();
 	if (!(fd = get_filename(1, 0, &fdlist)))
 		return (0);
-	ft_printf("Prêt pour fork la commande et dup la sortie dans le fichier\n");
+	printf("Prêt pour fork la commande et dup la sortie dans le fichier\n");
 //	exec_redir_right(fd/*, fd_out*/);
 	if (fdlist->next)
 		fdlist = fdlist->next;

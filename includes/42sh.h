@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2016/10/13 10:34:44 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/13 10:46:43 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <term.h>
 # include <sys/ioctl.h>
 # include <curses.h>
-# include "../libft/libft.h"
+# include "../libft/includes/libft.h"
 
 typedef struct 		s_lst
 {
@@ -51,7 +51,8 @@ typedef struct		s_shell
 	struct termios	my_termios;
 	struct termios	t_back;
 	char			*current_line;
-	char			buf[3]; //trouver quelle taille est necessaire 
+	char			buf[3]; //trouver quelle taille est necessaire
+	char			*line; // VARIABLE SIMON
 }					t_shell;
 
 t_shell		*g_shell;

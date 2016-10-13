@@ -6,7 +6,7 @@
 /*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 14:35:45 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/09/29 14:35:48 by sgaudin          ###   ########.fr       */
+/*   Updated: 2016/10/13 10:55:21 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	get_filename_double(int i, int last_fd)
 	}
 	filename[j] = '\0';
 	FT_INIT(int, fd, open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644));
-	ft_printf("FD créé : %d\n", fd);
+	printf("FD créé : %d\n", fd);
 	free(filename);
 	return (get_filename_double(i, fd));
 }
@@ -47,16 +47,16 @@ int			double_right(void)
 	int		fd;
 	int		fd_out;
 
-	ft_printf("Entrée dans double_right\n");
+	printf("Entrée dans double_right\n");
 	if (!ft_strchr(g_shell->line, '>'))
 		return (0); /* Pas de redirection(s) droite */
-	ft_printf("Redirection détectée\n");
+	printf("Redirection détectée\n");
 	fd_out = detect_out();
-	ft_printf("Detect_out OK : %d\n", fd_out);
+	printf("Detect_out OK : %d\n", fd_out);
 	if (!(fd = get_filename_double(1, 0)))
 		return (0); /* Pas de fichier spécifié pour la redirection ou pas de double redir */
-	ft_printf("Test 2 OK, fichier créé, on a récup le fd %d\n", fd);
-	ft_printf("Prêt pour fork la commande et dup la sortie dans le fichier\n");
+	printf("Test 2 OK, fichier créé, on a récup le fd %d\n", fd);
+	printf("Prêt pour fork la commande et dup la sortie dans le fichier\n");
 	close(fd);
 //	exec_redir_right(fd);
 	return (1);

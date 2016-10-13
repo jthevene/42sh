@@ -43,14 +43,14 @@ char	*clean_brackets(char *str) // enleve les []
 
 void	fill_glob_struct(int glob_case, char *line, t_glob *glob)//1=mult, 2=rng, 3=nomult 4=norng 5=mixed
 {
-	if (glob_case == 1)
+	if (glob_case == MULT)
 		glob->mult = clean_brackets(line);
-	if (glob_case == 2)
+	if (glob_case == RNG)
 		glob->rng = fill_rng(line);
-	if (glob_case == 3)
+	if (glob_case == NOMULT)
 		glob->no_mult = fill_nomult(line);
-	if (glob_case == 4)
+	if (glob_case == NORNG)
 		glob->no_rng = fill_norng(line);
-	if (glob_case == 5)
+	if (glob_case == MIX)
 		glob->mix = fill_mix(line);
 }	

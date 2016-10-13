@@ -55,7 +55,7 @@ typedef struct			s_glob
 
 int						glob_parser(void);
 
-void					hub_bracket(void);
+void					hub_bracket(t_glob *glob);
 void					init_tabs1(t_glob *glob, int i, int j);
 void					init_tabs2(t_glob *glob);
 void					init_tabs3(t_glob *glob);

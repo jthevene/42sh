@@ -63,10 +63,12 @@ int 			glob_parser(void)
 	if (!verif_tokens(g_shell->line))
 		return (0);
 	glob = init_glob();
-//	ft_printf("upper : |%s|\nlower : |%s|\nalpha : |%s|\ndigit : |%s|\nalnum : |%s|\nspace : |%s|\ngraph : |%s|\nprint : |%s|\npunct : |%s|\ncntrl : |%s|\nxdigit : |%s|\n",
+//	printf("upper : |%s|\nlower : |%s|\nalpha : |%s|\ndigit : |%s|\nalnum : |%s|\nspace : |%s|\ngraph : |%s|\nprint : |%s|\npunct : |%s|\ncntrl : |%s|\nxdigit : |%s|\n",
 //		glob->upper, glob->lower, glob->alpha, glob->digit, glob->alnum, glob->space, glob->graph, glob->print, glob->punct, glob->cntrl, glob->xdigit);
-//	if (ft_strchr(g_shell->line, '['))
-//		hub_bracket(&glob);
+	if (ft_strchr(g_shell->line, '['))
+		hub_bracket(glob);
+	printf("Free glob below\n");
 	free(glob);
+	printf("Glob freed, g'night\n");
 	return (1);
 }

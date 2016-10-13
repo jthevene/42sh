@@ -30,10 +30,11 @@ void			ft_infinite_loop(void)
 {
 	int		ret;
 
-	ret = get_next_line(0, &g_shell->line);
+	ret = get_next_line(0, &g_shell->line); /* GNL leaking, careful !! */
 	if (ret)
 		glob_parser();
 	free(g_shell->line);
+	free(g_shell);
 	ft_putstr("\n$> ");
 	while (1)
 		;
@@ -46,6 +47,5 @@ int				main(int argc, char **argv, char **env)
 	g_shell = ft_init_gshell2();
 	ft_putstr("$> ");
 	ft_infinite_loop();
-	free(g_shell);
 	return (0);
 }

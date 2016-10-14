@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_glob_struct.c                                 :+:      :+:    :+:   */
+/*   glob_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/05 11:39:09 by jules             #+#    #+#             */
-/*   Updated: 2016/10/07 13:48:09 by jules            ###   ########.fr       */
+/*   Created: 2016/10/14 15:01:24 by sgaudin           #+#    #+#             */
+/*   Updated: 2016/10/14 15:01:47 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*clean_brackets(char *str) // enleve les []
 	start = i + 1;
 	while (str[++i] != ']')
 		len++;
-	if (!(ret = (char *)malloc(sizeof(char)*len)))
+	if (!(ret = (char *)malloc(sizeof(char) * len)))
 		return (NULL);
 	i = 0;
 	while (i < len)
@@ -41,16 +41,31 @@ char	*clean_brackets(char *str) // enleve les []
 	return (ret);
 }
 
-void	fill_glob_struct(int glob_case, char *line, t_glob *glob)//1=mult, 2=rng, 3=nomult 4=norng 5=mixed
+char	*get_rng_str(char *str, int i)// uac-rgs => "c-r"
 {
-	if (glob_case == MULT)
-		glob->mult = clean_brackets(line);
-	if (glob_case == RNG)
-		glob->rng = fill_rng(line);
-	if (glob_case == NOMULT)
-		glob->no_mult = fill_nomult(line);
-	if (glob_case == NORNG)
-		glob->no_rng = fill_norng(line);
-	if (glob_case == MIX)
-		glob->mix = fill_mix(line);
-}	
+	char	*rng_str;
+	
+	rng_str = NULL;
+	rng_str = ft_strsub(str, i - 1, 3);
+	return (rng_str);
+}
+
+int		get_len_mix(char *str)
+{
+	FT_INIT(int, i, 0);
+	FT_INIT(int, len, 0);
+	FT_INIT(char *, tmp, clean_brackets(str));
+	while (tmp[i])
+	{
+		if (tmp[i] == '-' && tmp[i + 1] && tmp[i - 1])
+		{
+			len += tmp[i + 1] - tmp[i - 1];
+			i++;
+		}
+		else
+			len++;
+		i++;
+	}
+	free(tmp);
+	return (len);
+}

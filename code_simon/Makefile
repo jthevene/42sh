@@ -18,11 +18,11 @@ REDIR = ./redirections/
 GLOB = ./globing/
 
 SRCS = 	$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
-		$(GLOB)glob_parser.c $(GLOB)square_brackets.c $(GLOB)fill_glob_struct.c\
-		$(GLOB)init_tabs.c $(GLOB)brackets_cases.c main.c
+		$(GLOB)glob_parser.c $(GLOB)hub_bracket.c $(GLOB)fill_tabs.c\
+		$(GLOB)init_tabs.c $(GLOB)sbracket_utils.c main.c
 
 BIN =	simple_right.o double_right.o redir_utils.o main.o glob_parser.o \
-		square_brackets.o fill_glob_struct.o init_tabs.o brackets_cases.o
+		hub_bracket.o fill_tabs.o init_tabs.o sbracket_utils.o
 
 CC_FLAGS = -Wall -Wextra -Werror
 

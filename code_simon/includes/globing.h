@@ -65,7 +65,8 @@ char					*fill_rng(char *str);
 char					*fill_nomult(char *str);
 char					*fill_norng(char *str);
 char					*fill_mix(char *str);
+
 char					*clean_brackets(char *str);
-void					fill_glob_struct(int glob_case, char *line, t_glob *glob);
+int						get_len_mix(char *str);
 
 #endif

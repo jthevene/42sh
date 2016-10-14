@@ -67,8 +67,7 @@ int 			glob_parser(void)
 //		glob->upper, glob->lower, glob->alpha, glob->digit, glob->alnum, glob->space, glob->graph, glob->print, glob->punct, glob->cntrl, glob->xdigit);
 	if (ft_strchr(g_shell->line, '['))
 		hub_bracket(glob);
-	printf("Free glob below\n");
 	free(glob);
-	printf("Glob freed, g'night\n");
+	printf("Glob freed\n");
 	return (1);
 }

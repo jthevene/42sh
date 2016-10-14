@@ -13,16 +13,6 @@
 #include "../includes/redir.h"
 #include "../includes/globing.h"
 
-/*
-static char		*get_rng_str(char *str, int i)// uac-rgs => "c-r"
-{
-	char	*rng_str;
-	
-	rng_str = NULL;
-	rng_str = ft_strsub(str, i - 1, 3);
-	return (rng_str);
-}
-*/
 char	*fill_rng(char *str) // globbing [a-c] str = "a-c", return une str avec tous les char imprimables sauf "abc"
 {
 	int		i;
@@ -136,24 +126,15 @@ char	*fill_mix(char *str, int i) // [ae-rt]
 
 */
 
-char	*fill_mix(char *str) /*** Probleme de compte sur le len, a revoir ! ***/
+char	*fill_mix(char *str)
 {
-	FT_INIT(int, i, 0);
-	FT_INIT(int, len, 0);
+//	FT_INIT(int, i, 0);
 	FT_INIT(char *, ret, NULL);
-	str = clean_brackets(str);
-	while (str[i])
-	{
-		if (str[i] == '-' && str[i + 1] && str[i - 1])
-		{
-			len += str[i + 1] - str[i - 1];
-			i++;
-		}
-		len++;
-		i++;
-	}
-	if (!(ret = (char *)malloc(sizeof(char) * len + ft_strlen(str) - 2)))
+	FT_INIT(char *, tmp, clean_brackets(str));
+	if (!(ret = (char *)malloc(sizeof(char) * get_len_mix(tmp) + 1)))
 		return (NULL);
-	printf("len = %d\n", len);
+	printf("len : %d\n", get_len_mix(tmp));
+	free(tmp);
+	free(ret);
 	return (NULL);
 }

@@ -136,7 +136,7 @@ char	*fill_mix(char *str, int i) // [ae-rt]
 
 */
 
-char	*fill_mix(char *str) /*** Probleme de compte sur le ;en, a revoir ! ***/
+char	*fill_mix(char *str) /*** Probleme de compte sur le len, a revoir ! ***/
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, len, 0);

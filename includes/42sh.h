@@ -66,7 +66,7 @@ typedef struct		s_shell
 	char			*line; // VARIABLE SIMON
 }					t_shell;
 
-// t_shell		*g_shell;
+t_shell		*g_shell;
 
 /*
 ** CURSOR_MOVE

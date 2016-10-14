@@ -13,21 +13,22 @@
 #include "../includes/redir.h"
 #include "../includes/globing.h"
 
-char	*clean_brackets(char *str) // enleve les []
+char		*clean_brackets(char *str) // enleve les []
 {
-	int		i;
-	int		len;
+	FT_INIT(int, i, 0);
+	FT_INIT(int, len, 0);
+	FT_INIT(char *, ret, NULL);	
 	int		start;
-	char	*ret;
-	
-	i = 0;
-	ret = NULL;
-	len = 0;
-	while (str[i] != '[')
+
+	while (str[i] && str[i] != '[')
 		i++;
 	start = i + 1;
-	while (str[++i] != ']')
+	i++;
+	while (str[i] && str[i] != ']')
+	{
+		i++;
 		len++;
+	}
 	if (!(ret = (char *)malloc(sizeof(char) * len)))
 		return (NULL);
 	i = 0;
@@ -41,7 +42,7 @@ char	*clean_brackets(char *str) // enleve les []
 	return (ret);
 }
 
-char	*get_rng_str(char *str, int i)// uac-rgs => "c-r"
+char		*get_rng_str(char *str, int i)// uac-rgs => "c-r"
 {
 	char	*rng_str;
 	
@@ -50,7 +51,7 @@ char	*get_rng_str(char *str, int i)// uac-rgs => "c-r"
 	return (rng_str);
 }
 
-int		get_len_mix(char *str)
+int			get_len_mix(char *str)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, len, 0);
@@ -68,4 +69,33 @@ int		get_len_mix(char *str)
 	}
 	free(tmp);
 	return (len);
+}
+
+int 	get_letters(char **ret, char *str)
+{
+	FT_INIT(int, i, 0);
+	FT_INIT(int, j, 0);
+	FT_INIT(int, k, 0);
+	while (str[i])
+	{
+		if (str[i] == '-' && str[i - 1] && str[i + 1])
+		{
+			while (j < i - 1)
+			{
+				(*ret)[k] = str[j];
+				j++;
+				k++;
+			}
+			j += 3;
+			i++;
+		}
+		i++;
+	}
+	while (str[j])
+	{
+		(*ret)[k] = str[j];
+		j++;
+		k++;
+	}
+	return (0);
 }

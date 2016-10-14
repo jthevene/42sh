@@ -13,25 +13,21 @@
 #include "../includes/redir.h"
 #include "../includes/globing.h"
 
-char	*fill_rng(char *str) // globbing [a-c] str = "a-c", return une str avec tous les char imprimables sauf "abc"
+char	*fill_rng(char *str) /* Test de la derniere fois : ls [a-c] ---> lmn... A corriger. */
 {
-	int		i;
-	int		first;
-	int		last;
 	int		diff;
-	char	*ret;
 
-	i = 0;
-	first = str[0];
-	last = 1;
-	ret = NULL;
-	str = clean_brackets(str);
-	while (str[last] != '-')
+	FT_INIT(int, i, 0);
+	FT_INIT(int, first, str[0]);
+	FT_INIT(int, last, 1);
+	FT_INIT(char *, ret, NULL);
+	FT_INIT(char *, tmp, clean_brackets(str));
+	while (tmp[last] != '-')
 		last++;
-	if (!(ret = (char *)malloc(sizeof(char) * (str[2] - str[0] + 1))))
+	if (!(ret = (char *)malloc(sizeof(char) * (tmp[2] - tmp[0] + 1))))
 		return (NULL);
 	last++;
-	diff = str[last] - str[0];
+	diff = tmp[last] - tmp[0];
 	while (i <= diff)
 	{
 		ret[i] = first;
@@ -39,6 +35,8 @@ char	*fill_rng(char *str) // globbing [a-c] str = "a-c", return une str avec tou
 		first++;
 	}
 	ret[i] = '\0';
+	printf("ret = %s\n", ret);
+	free(tmp);
 	return (ret);
 }
 
@@ -128,12 +126,22 @@ char	*fill_mix(char *str, int i) // [ae-rt]
 
 char	*fill_mix(char *str)
 {
-//	FT_INIT(int, i, 0);
-	FT_INIT(char *, ret, NULL);
+	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp, clean_brackets(str));
+	FT_INIT(char *, ret, NULL);
 	if (!(ret = (char *)malloc(sizeof(char) * get_len_mix(tmp) + 1)))
 		return (NULL);
-	printf("len : %d\n", get_len_mix(tmp));
+	ft_bzero(ret, get_len_mix(tmp));
+	get_letters(&ret, tmp);
+	printf("ret first phase = %s\n", ret);
+	while (str[i])
+	{
+		if (str[i] == '-')
+		{
+
+		}
+		i++;
+	}
 	free(tmp);
 	free(ret);
 	return (NULL);

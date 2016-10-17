@@ -12,9 +12,9 @@
 
 #include "../includes/globing.h"
 
-static int 		verif_tokens(char *str)
+static int		verif_tokens(char *str)
 {
-	int 		nb;
+	int			nb;
 
 	nb = 0;
 	if (ft_strchr(str, '[') && !ft_strchr(str, ']'))
@@ -54,7 +54,7 @@ t_glob			*init_glob(void)
 	return (glob);
 }
 
-int 			glob_parser(void)
+int				glob_parser(void)
 {
 	t_glob		*glob;
 

@@ -16,7 +16,8 @@
 static t_shell	*ft_init_gshell2(void)
 {
 	t_shell		*shell;
- 	if (!(shell = (t_shell *)malloc(sizeof(t_shell))))
+
+	if (!(shell = (t_shell *)malloc(sizeof(t_shell))))
 	{
 		printf("ft_init_shell Initialisation shell -> try again");
 		exit(0);

@@ -12,7 +12,7 @@
 
 #include "../includes/globing.h"
 
-static int 		catch_dash_mix(int i)
+static int		catch_dash_mix(int i)
 {
 	FT_INIT(int, letters, 0);
 	while (g_shell->line[i] == '!' || g_shell->line[i] == '[')
@@ -41,7 +41,7 @@ static int 		catch_dash_mix(int i)
 	return (0);
 }
 
-static int 		catch_dash(int i)
+static int		catch_dash(int i)
 {
 	FT_INIT(int, nb, 0);
 	nb = catch_dash_mix(i);
@@ -58,7 +58,7 @@ static int 		catch_dash(int i)
 	return (nb);
 }
 
-void	fill_bracket_tabs(int glob_case, char *line, t_glob *glob)//1=mult, 2=rng, 3=nomult 4=norng 5=mixed
+void			fill_bracket_tabs(int glob_case, char *line, t_glob *glob)
 {
 	if (glob_case == MULT)
 	{
@@ -87,7 +87,7 @@ void	fill_bracket_tabs(int glob_case, char *line, t_glob *glob)//1=mult, 2=rng, 
 	}
 }
 
-void 			hub_bracket(t_glob *glob)
+void			hub_bracket(t_glob *glob)
 {
 	FT_INIT(int, i, 0);
 	while (g_shell->line[i])

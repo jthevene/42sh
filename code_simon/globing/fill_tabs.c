@@ -51,7 +51,7 @@ char	*fill_nomult(char *str) // [!...]
 	ret = NULL;
 	str = clean_brackets(str);
 	if (!(ret = (char *)malloc(sizeof(char) * (94 - ft_strlen(str)) + 1)))
-		return (NULL);	while (i <= 126)
+		return (NULL);
 	while (i <= 126)
 	{
 		if (!strchr(str, i))
@@ -67,19 +67,14 @@ char	*fill_nomult(char *str) // [!...]
 
 char	*fill_norng(char *str) // [!.-.]
 {
-	int		i;
-	int		j;
-	int		first;
-	int		last;
-	char	*ret;
-
-	i = 32;
-	j = 0;
-	first = str[0];
-	last = 0;
-	ret = NULL;
+	FT_INIT(int, i, 32);
+	FT_INIT(int, j, 0);
+	FT_INIT(int, first, str[0]);
+	FT_INIT(int, last, 0);
+	FT_INIT(char *, ret, NULL);
 	str = clean_brackets(str);
 	if (!(ret = (char *)malloc(sizeof(char) * (94 - (str[2] - str[0])) + 1)))
+		return (NULL);
 	while (str[last] != '-')
 		last++;
 	last++;
@@ -94,6 +89,7 @@ char	*fill_norng(char *str) // [!.-.]
 	ret[j] = '\0';
 	return (ret);
 }
+
 /*
 
 char	*fill_mix(char *str, int i) // [ae-rt]

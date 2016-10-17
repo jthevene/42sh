@@ -41,19 +41,15 @@ char	*fill_rng(char *str)
 
 char	*fill_nomult(char *str) // [!...]
 {
-	int		i;
-	int		j;
-	char	*ret;
-
-	i = 32;
-	j = 0;
-	ret = NULL;
-	str = clean_brackets(str);
-	if (!(ret = (char *)malloc(sizeof(char) * (94 - ft_strlen(str)) + 1)))
+	FT_INIT(int, i, 32);
+	FT_INIT(int, j, 0);
+	FT_INIT(char *, ret, NULL);
+	FT_INIT(char *, tmp, ft_strchr(str, '[') ? clean_brackets(str) : ft_strdup(str));
+	if (!(ret = (char *)malloc(sizeof(char) * (94 - ft_strlen(tmp)) + 1)))
 		return (NULL);
 	while (i <= 126)
 	{
-		if (!strchr(str, i))
+		if (!strchr(tmp, i))
 		{
 			ret[j] = i;
 			j++;
@@ -61,6 +57,7 @@ char	*fill_nomult(char *str) // [!...]
 		i++;
 	}
 	ret[j] = '\0';
+	free(tmp);
 	return (ret);
 }
 
@@ -68,24 +65,25 @@ char	*fill_norng(char *str) // [!.-.]
 {
 	FT_INIT(int, i, 32);
 	FT_INIT(int, j, 0);
-	FT_INIT(int, first, str[0]);
 	FT_INIT(int, last, 0);
 	FT_INIT(char *, ret, NULL);
-	str = clean_brackets(str);
-	if (!(ret = (char *)malloc(sizeof(char) * (94 - (str[2] - str[0])) + 1)))
+	FT_INIT(char *, tmp, clean_brackets(str));
+	FT_INIT(int, first, tmp[1]);
+	if (!(ret = (char *)malloc(sizeof(char) * (94 - (tmp[2] - tmp[0])) + 1)))
 		return (NULL);
-	while (str[last] != '-')
+	while (tmp[last] != '-')
 		last++;
 	last++;
 	while (i <= 126)
 	{
 		if (i == first)
-			i = str[last] + 1;
+			i = tmp[last] + 1;
 		ret[j] = i;
 		i++;
 		j++;
 	}
 	ret[j] = '\0';
+	free(tmp);
 	return (ret);
 }
 
@@ -115,8 +113,13 @@ char	*fill_mix(char *str)
 		}
 		i++;
 	}
-	printf("ret mix : %s\n", ret);
+	if (tmp_str[0] == '!')
+	{
+		tmp_ret = fill_nomult(ret);
+		free(tmp_str);
+		free(ret);
+		return (tmp_ret);
+	}
 	free(tmp_str);
-	free(ret);
-	return (NULL);
+	return (ret);
 }

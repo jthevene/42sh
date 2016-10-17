@@ -64,26 +64,31 @@ void			fill_bracket_tabs(int glob_case, char *line, t_glob *glob)
 	{
 		printf("\033[32mmult\033[0m\n");
 		glob->mult = clean_brackets(line);
+		printf("\033[34mret mult :\033[0m %s\n", glob->mult);
 	}
 	if (glob_case == RNG)
 	{
 		printf("\033[32mrng\033[0m\n");
 		glob->rng = fill_rng(line);
+		printf("\033[34mret rng :\033[0m %s\n", glob->rng);
 	}
 	if (glob_case == NOMULT)
 	{
 		printf("\033[32mno mult\033[0m\n");
 		glob->no_mult = fill_nomult(line);
+		printf("\033[34mret no_mult :\033[0m %s\n", glob->no_mult);
 	}
 	if (glob_case == NORNG)
 	{
 		printf("\033[32mno rng\033[0m\n");
 		glob->no_rng = fill_norng(line);
+		printf("\033[34mret no_rng :\033[0m %s\n", glob->no_rng);
 	}
 	if (glob_case == MIX)
 	{
 		printf("\033[32mmix\033[0m\n");
 		glob->mix = fill_mix(line);
+		printf("\033[34mret mix :\033[0m %s\n", glob->mix);
 	}
 }
 

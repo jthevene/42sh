@@ -100,7 +100,7 @@ void			hub_bracket(t_glob *glob)
 			else if (catch_dash(i) == 0) /* [!...] */
 				fill_bracket_tabs(NOMULT, g_shell->line, glob);
 			if (catch_dash(i) >= 2) /* [..-..] || [...-...-...] || [!..-..] || [!...-...-...] */
-//				fill_bracket_tabs(MIX, g_shell->line, glob);
+				fill_bracket_tabs(MIX, g_shell->line, glob);
 				;
 			break ;
 		}

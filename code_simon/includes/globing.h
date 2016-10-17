@@ -69,5 +69,6 @@ char					*fill_mix(char *str);
 char					*clean_brackets(char *str);
 int						get_len_mix(char *str);
 int						get_letters(char **ret, char *str);
+char					*get_rng_str(char *str, int i);
 
 #endif

@@ -13,15 +13,15 @@
 #include "../includes/redir.h"
 #include "../includes/globing.h"
 
-char	*fill_rng(char *str) /* Test de la derniere fois : ls [a-c] ---> lmn... A corriger. */
+char	*fill_rng(char *str)
 {
 	int		diff;
 
 	FT_INIT(int, i, 0);
-	FT_INIT(int, first, str[0]);
 	FT_INIT(int, last, 1);
 	FT_INIT(char *, ret, NULL);
-	FT_INIT(char *, tmp, clean_brackets(str));
+	FT_INIT(char *, tmp, ft_strchr(str, '[') ? clean_brackets(str) : ft_strdup(str));
+	FT_INIT(int, first, tmp[0]);
 	while (tmp[last] != '-')
 		last++;
 	if (!(ret = (char *)malloc(sizeof(char) * (tmp[2] - tmp[0] + 1))))
@@ -35,7 +35,6 @@ char	*fill_rng(char *str) /* Test de la derniere fois : ls [a-c] ---> lmn... A c
 		first++;
 	}
 	ret[i] = '\0';
-	printf("ret = %s\n", ret);
 	free(tmp);
 	return (ret);
 }
@@ -90,55 +89,34 @@ char	*fill_norng(char *str) // [!.-.]
 	return (ret);
 }
 
-/*
-
-char	*fill_mix(char *str, int i) // [ae-rt]
-{
-	FT_INIT(int, j, 0);
-	FT_INIT(int, k, 0);
-	char	*ret;
-
-	if (ft_strchr(str, '[') && ft_strchr(str, ']'))
-		str = clean_brackets(str);
-	while (str[i] != '-')
-		i++;
-	if (!(ret = (char *)malloc(sizeof(char) * (str[i + 1] - str[i - 1]) + ft_strlen(str) - 2)))
-		return (NULL);
-	while (str[j] != '\0')
-	{
-		if (j == i - 1)
-			j += 3;
-		ret[k] = str[j];
-		j++;
-		k++;
-	}
-	ret = ft_strjoin(fill_rng(get_rng_str(str, i)), ret);
-	if (str[1] == '!')
-		ret = fill_nomult(ret);
-	return (ret);
-}
-
-*/
-
 char	*fill_mix(char *str)
 {
 	FT_INIT(int, i, 0);
-	FT_INIT(char *, tmp, clean_brackets(str));
+	FT_INIT(char *, tmp_str, clean_brackets(str));
+	FT_INIT(char *, tmp_rng, NULL);
+	FT_INIT(char *, tmp_rng2, NULL);
+	FT_INIT(char *, tmp_ret, NULL);
 	FT_INIT(char *, ret, NULL);
-	if (!(ret = (char *)malloc(sizeof(char) * get_len_mix(tmp) + 1)))
+	if (!(ret = (char *)malloc(sizeof(char) * get_len_mix(tmp_str) + 1)))
 		return (NULL);
-	ft_bzero(ret, get_len_mix(tmp));
-	get_letters(&ret, tmp);
-	printf("ret first phase = %s\n", ret);
-	while (str[i])
+	ft_bzero(ret, get_len_mix(tmp_str));
+	get_letters(&ret, tmp_str);
+	while (tmp_str[i])
 	{
-		if (str[i] == '-')
+		if (tmp_str[i] == '-')
 		{
-
+			tmp_rng2 = get_rng_str(tmp_str, i);
+			tmp_rng = fill_rng(tmp_rng2);
+			tmp_ret = ret;
+			ret = ft_strjoin(tmp_rng, ret);
+			free(tmp_rng);
+			free(tmp_rng2);
+			free(tmp_ret);
 		}
 		i++;
 	}
-	free(tmp);
+	printf("ret mix : %s\n", ret);
+	free(tmp_str);
 	free(ret);
 	return (NULL);
 }

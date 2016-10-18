@@ -12,7 +12,7 @@
 
 #include "../includes/redir.h"
 
-int 		fdlist_pushback(t_fdlist **fdlist, int key)
+int			fdlist_pushback(t_fdlist **fdlist, int key)
 {
 	t_fdlist *tmp;
 	t_fdlist *new;
@@ -41,14 +41,14 @@ int 		fdlist_pushback(t_fdlist **fdlist, int key)
 	return (1);
 }
 
-int 		create_file(char *filename, t_fdlist **fdlist, int type)
+int			create_file(char *filename, t_fdlist **fdlist, int type)
 {
 	int			fd;
 
 	if (type == SIMPLE)
-		fd = open(filename,	O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else
-		fd = open(filename,	O_WRONLY | O_CREAT | O_APPEND, 0644);
+		fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 		return (0);
 	if (!(*fdlist))
@@ -57,7 +57,7 @@ int 		create_file(char *filename, t_fdlist **fdlist, int type)
 		fdlist_pushback(&(*fdlist), 0);
 	}
 	if (!fdlist_pushback(&(*fdlist), fd))
-			return (0);
+		return (0);
 	free(filename);
 	return (fd);
 }

@@ -22,19 +22,19 @@
 # define SIMPLE 1
 # define DOUBLE 2
 
-typedef struct 			s_fdlist
+typedef struct		s_fdlist
 {
-	int 				key;
-	struct s_fdlist		*prev;
-	struct s_fdlist 	*next;
-}						t_fdlist;
+	int				key;
+	struct s_fdlist	*prev;
+	struct s_fdlist	*next;
+}					t_fdlist;
 
-int						simple_right();
-int						double_right();
+int					simple_right();
+int					double_right();
 
-int						detect_out();
-void					exec_redir_right(int fd/*, int fd_out*/);
-int						create_file(char *filename, t_fdlist **fdlist, int type);
-void 					free_fdlist(t_fdlist **fdlist);
+int					detect_out();
+void				exec_redir_right(int fd/*, int fd_out*/);
+int					create_file(char *filename, t_fdlist **fdlist, int type);
+void				free_fdlist(t_fdlist **fdlist);
 
 #endif

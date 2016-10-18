@@ -12,9 +12,9 @@
 
 #include "../includes/globing.h"
 
-static int 		verif_tokens(char *str)
+static int		verif_tokens(char *str)
 {
-	int 		nb;
+	int			nb;
 
 	nb = 0;
 	if (ft_strchr(str, '[') && !ft_strchr(str, ']'))
@@ -51,10 +51,30 @@ t_glob			*init_glob(void)
 	init_tabs1(glob, 0, 0);
 	init_tabs2(glob);
 	init_tabs3(glob);
+	glob->mult = NULL;
+	glob->no_mult = NULL;
+	glob->rng = NULL;
+	glob->no_rng = NULL;
+	glob->mix = NULL;
 	return (glob);
 }
 
-int 			glob_parser(void)
+void			free_glob(t_glob *glob)
+{
+	if (glob->mult)
+		free(glob->mult);
+	if (glob->no_mult)
+		free(glob->no_mult);
+	if (glob->rng)
+		free(glob->rng);
+	if (glob->no_rng)
+		free(glob->no_rng);
+	if (glob->mix)
+		free(glob->mix);
+	free(glob);
+}
+
+int				glob_parser(void)
 {
 	t_glob		*glob;
 
@@ -67,8 +87,7 @@ int 			glob_parser(void)
 //		glob->upper, glob->lower, glob->alpha, glob->digit, glob->alnum, glob->space, glob->graph, glob->print, glob->punct, glob->cntrl, glob->xdigit);
 	if (ft_strchr(g_shell->line, '['))
 		hub_bracket(glob);
-	printf("Free glob below\n");
-	free(glob);
-	printf("Glob freed, g'night\n");
+	free_glob(glob);
+	printf("Glob freed\n");
 	return (1);
 }

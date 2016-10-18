@@ -5,64 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/13 10:54:10 by jules             #+#    #+#             */
-/*   Updated: 2016/10/13 17:07:08 by jules            ###   ########.fr       */
+/*   Created: 2016/10/14 11:01:23 by jules             #+#    #+#             */
+/*   Updated: 2016/10/18 10:59:01 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
 
-static int		which_arrow(char c)
+void	fill_current_line(char c)
 {
-	if (c == 'A')
-		return (K_UP);
-	else if (c == 'B')
-		return (K_DOWN);
-	else if (c == 'C')
-		return (K_RIGHT);
-	else
-		return (K_LEFT);
-}
+	char	tmp1[2];
+	char	*tmp2;
+	int 	len;
 
-static int		readkeyspecial(void)
-{
-	struct termios		t;
-	char				c;
-	int					n_lus;
-
-	tcgetattr(STDIN_FILENO, &t);
-	t.c_cc[VMIN] = 0; // pour retourner du read meme s'il n'y a aucun byte a lire apres le 
-	tcsetattr(STDIN_FILENO, TCSANOW, &t);
-	n_lus = read(STDIN_FILENO, &c, 1);
-	t.c_cc[VMIN] = 1;// on retablit le read bloquant dans tous les cas avant de return
-	tcsetattr(STDIN_FILENO, TCSANOW, &t);
-	if (n_lus <= 0)
-		return (K_ESCAPE);
-	if (c != '[')
-		return (K_UNKNOWN);
-	read(STDIN_FILENO, &c, 1);
-	if (c == 'A' || c == 'B' || c == 'C' || c == 'D')
-		return (which_arrow(c));
-	return (K_UNKNOWN);
-}
-
-int				readkey(void)
-{
-	char c;
-
-	read(STDIN_FILENO, &c, 1);// on bloque ici en attendant au moins 1 byte
-	if (c == 27)// caractere d'echappement recu
-		return (readkeyspecial());// on doit donc traiter une touche speciale codee sur plusieurs bytes
-	if (ft_isprint(c))
+	tmp2 = NULL;
+	len = 0;
+	if (!g_shell.current_line)
 	{
-		//ajouter c à g_shell.current_line
-		return (K_PRINT);
+		if (!(g_shell.current_line = (char*)malloc(sizeof(char) * 2)))
+			return;
+		g_shell.current_line[0] = c;
+		g_shell.current_line[1] = '\0';		
 	}
-	if (c == 127)
-		return (K_BACKSP);
-	if (c == 126)
-		return (K_DEL);
-	if (c == 10)
-		return (K_RETURN);
-	return (K_UNKNOWN);
+	else
+	{
+		tmp1[0] = c;
+		tmp1[1] = '\0';
+		tmp2 = ft_strdup(g_shell.current_line);
+		len = ft_strlen(g_shell.current_line);
+		if (!(g_shell.current_line = (char*)malloc(sizeof(char) * len + 2)))
+			return;
+		g_shell.current_line = ft_strcat(tmp2, tmp1);
+		free(tmp2);
+	}
 }

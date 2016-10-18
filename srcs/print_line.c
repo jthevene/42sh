@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history.c                                          :+:      :+:    :+:   */
+/*   print_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/11 11:53:52 by jules             #+#    #+#             */
-/*   Updated: 2016/10/17 14:37:24 by jules            ###   ########.fr       */
+/*   Created: 2016/10/14 10:41:51 by jules             #+#    #+#             */
+/*   Updated: 2016/10/18 10:54:58 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
 
-void		init_hist()
+void	clean_line(int i)
 {
-	g_shell.hist->content = NULL;
-	g_shell.hist->next = NULL;
-	g_shell.hist->prev = NULL;
+	i += 3;
+	tputs(tgetstr("dl", NULL), 1, ft_putchar_int);
+	// tputs(tgoto("ch", 0, 0), 1, ft_putchar_int);
+	while (i-- > 0)
+		tputs(tgetstr("le", NULL), 1, ft_putchar_int);
 }
 
-void		ft_newhist(char *line)
-{
-	t_lst	*new_line;
+// void	print_line(int c)
+// {
 
-	new_line = NULL;
-	new_line->content = ft_strdup(line);
-	new_line->next = NULL;
-	new_line->prev = g_shell.hist;
-	g_shell.hist->next = new_line;
-	g_shell.hist = new_line;
-}
+// }

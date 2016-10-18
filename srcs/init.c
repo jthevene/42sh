@@ -6,13 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:40:03 by jules             #+#    #+#             */
-/*   Updated: 2016/10/13 17:00:09 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/18 11:17:03 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
-
-extern t_shell		g_shell;
 
 static int		init_env()
 {
@@ -44,8 +42,15 @@ static int		init_env()
 
 int		init_all()
 {
+ 	t_shell		*shell;
+
+ 	if (!(shell = (t_shell *)malloc(sizeof(t_shell))))
+ 	{
+ 		ft_putendl("ft_init_shell Initialisation shell -> try again");
+ 		exit(0);
+ 	}
 	ft_bzero(&g_shell, sizeof(t_shell));
-	// ft_signal();
+	ft_signal();
 	if (!init_env())
 		return (1);
 	init_hist();

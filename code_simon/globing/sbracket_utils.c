@@ -99,3 +99,30 @@ int			get_letters(char **ret, char *str)
 	}
 	return (0);
 }
+
+int			check_rng(char *str)
+{
+	FT_INIT(int, i, 0);
+	FT_INIT(char *, tmp, clean_brackets(str));
+	if (!ft_strchr(tmp, '-'))
+	{
+		free(tmp);
+		return (1);
+	}
+	while (tmp[i])
+	{
+		if (tmp[i] == '-' && tmp[i - 1] && tmp[i + 1] 
+			&& tmp[i + 1] != ']' && tmp[i - 1] != '[')
+		{
+			if (tmp[i - 1] > tmp[i + 1])
+			{
+				free(tmp);
+				return (0);
+			}
+			i++;
+		}
+		i++;
+	}
+	free(tmp);
+	return (1);
+}

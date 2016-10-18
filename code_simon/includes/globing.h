@@ -40,6 +40,11 @@ typedef struct			s_glob
 	char				*no_mult;
 	char				*no_rng;
 	char				*mix;
+
+	char				*selection;
+	int					type;
+	struct s_glob		*next;
+
 	char				upper[27];
 	char				lower[27];
 	char				alpha[53];
@@ -70,5 +75,6 @@ char					*clean_brackets(char *str);
 int						get_len_mix(char *str);
 int						get_letters(char **ret, char *str);
 char					*get_rng_str(char *str, int i);
+int						check_rng(char *str);
 
 #endif

@@ -58,8 +58,13 @@ static int		catch_dash(int i)
 	return (nb);
 }
 
-void			fill_bracket_tabs(int glob_case, char *line, t_glob *glob)
+int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob)
 {
+	if (!check_rng(line))
+	{
+		ft_putstr_fd("42sh : no matches found: /*** NOTRE COMMANDE GLOB ***/", 2);
+		return (0);
+	}
 	if (glob_case == MULT)
 	{
 		printf("\033[32mmult\033[0m\n");
@@ -80,16 +85,27 @@ void			fill_bracket_tabs(int glob_case, char *line, t_glob *glob)
 	}
 	if (glob_case == NORNG)
 	{
+		if (!check_rng(line))
+		{
+			ft_putstr_fd("42sh : no matches found: /*** NOTRE COMMANDE GLOB ***/", 2);
+			return (0);
+		}
 		printf("\033[32mno rng\033[0m\n");
 		glob->no_rng = fill_norng(line);
 		printf("\033[34mret no_rng :\033[0m %s\n", glob->no_rng);
 	}
 	if (glob_case == MIX)
 	{
+		if (!check_rng(line))
+		{
+			ft_putstr_fd("42sh : no matches found: /*** NOTRE COMMANDE GLOB ***/", 2);
+			return (0);
+		}
 		printf("\033[32mmix\033[0m\n");
 		glob->mix = fill_mix(line);
 		printf("\033[34mret mix :\033[0m %s\n", glob->mix);
 	}
+	return (1);
 }
 
 void			hub_bracket(t_glob *glob)
@@ -106,7 +122,6 @@ void			hub_bracket(t_glob *glob)
 				fill_bracket_tabs(NOMULT, g_shell->line, glob);
 			if (catch_dash(i) >= 2) /* [..-..] || [...-...-...] || [!..-..] || [!...-...-...] */
 				fill_bracket_tabs(MIX, g_shell->line, glob);
-				;
 			break ;
 		}
 		else if (g_shell->line[i] == '[' && g_shell->line[i + 1]

@@ -6,13 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 12:05:57 by jules             #+#    #+#             */
-/*   Updated: 2016/10/13 16:58:44 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/17 14:37:48 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
-
-extern t_shell		g_shell;
 
 char	*get_var(t_shell *g_shell, char *n_var)
 {

@@ -28,10 +28,12 @@ LIB_FLAGS			=	-lncurses
 LFLAGS				=	-L$(LIBFT_DIR) -l$(LIBFT)
 
 SRC					=	main.c 			\
+						catch_key.c 	\
 						cursor_move.c 	\
 						history.c 		\
 						init.c 			\
 						line_edition.c 	\
+						print_line.c 	\
 						signal.c 		\
 						termios.c 		\
 						var.c 			\

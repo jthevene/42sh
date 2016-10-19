@@ -34,6 +34,7 @@ SRC					=	main.c 			\
 						init.c 			\
 						line_edition.c 	\
 						print_line.c 	\
+						return_key.c 	\
 						signal.c 		\
 						termios.c 		\
 						var.c 			\

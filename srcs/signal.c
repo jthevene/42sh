@@ -6,22 +6,22 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 11:31:13 by jules             #+#    #+#             */
-/*   Updated: 2016/10/18 11:16:44 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/18 11:30:59 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
 
-static void		ft_sigwinch(int sig)
-{
-	t_select	*data;
+// static void		ft_sigwinch(int sig)
+// {
+// 	t_select	*data;
 
-	data = get_struct(0, 0);
-	(void)sig;
-	ft_clear_window();
-	if (!check_window_size(data))
-		ft_print(data);
-}
+// 	data = get_struct(0, 0);
+// 	(void)sig;
+// 	ft_clear_window();
+// 	if (!check_window_size(data))
+// 		ft_print(data);
+// }
 
 // static void		ft_sigint(int sig)
 // {
@@ -52,10 +52,10 @@ static void		ft_sigwinch(int sig)
 // 	signal(SIGTSTP, ft_sigtstp);
 // }
 
-void			ft_signal(void)
-{
-	signal(SIGWINCH, ft_sigwinch); //si on change la taille de la fenetre
-	// signal(SIGTSTP, ft_sigtstp);
-	// signal(SIGCONT, ft_sigcont);
-	// signal(SIGINT, ft_sigint);
-}
+// void			ft_signal(void)
+// {
+// 	signal(SIGWINCH, ft_sigwinch); //si on change la taille de la fenetre
+// 	// signal(SIGTSTP, ft_sigtstp);
+// 	// signal(SIGCONT, ft_sigcont);
+// 	// signal(SIGINT, ft_sigint);
+// }

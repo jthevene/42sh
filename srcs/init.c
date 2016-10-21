@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:40:03 by jules             #+#    #+#             */
-/*   Updated: 2016/10/18 11:30:19 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/19 10:20:19 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ static int		init_env()
 	return (1);
 }
 
+static void		init_win()
+{
+	g_shell.win = ft_memalloc(sizeof(struct winsize));
+	g_shell.win->ws_row = 0;
+	g_shell.win->ws_col = 0;
+	g_shell.win->ws_xpixel = 0;
+	g_shell.win->ws_ypixel = 0;
+	ioctl(0, TIOCGWINSZ, g_shell.win);
+}
+
 int		init_all()
 {
  	t_shell		*shell;
@@ -49,12 +59,13 @@ int		init_all()
  		ft_putendl("ft_init_shell Initialisation shell -> try again");
  		exit(0);
  	}
-	ft_bzero(&g_shell, sizeof(t_shell));
 	// ft_signal();
 	if (!init_env())
 		return (1);
 	init_hist();
+	init_win();
 	g_shell.current_line = NULL;
+	g_shell.cursor_x = 0;
 	tcgetattr(STDIN_FILENO, &g_shell.t_back);// save les données termios d'origine
 	init_termios(g_shell.t_back);
 	return (0);

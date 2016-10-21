@@ -6,22 +6,18 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 11:31:13 by jules             #+#    #+#             */
-/*   Updated: 2016/10/18 11:30:59 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/19 10:14:42 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
 
-// static void		ft_sigwinch(int sig)
-// {
-// 	t_select	*data;
-
-// 	data = get_struct(0, 0);
-// 	(void)sig;
-// 	ft_clear_window();
-// 	if (!check_window_size(data))
-// 		ft_print(data);
-// }
+static void		ft_sigwinch(int sig)
+{
+	(void)sig;
+	ioctl(0, TIOCGWINSZ, g_shell.win);
+	//réafficher current_line correctement si c'etait sur plusieurs lignes
+}
 
 // static void		ft_sigint(int sig)
 // {
@@ -52,10 +48,10 @@
 // 	signal(SIGTSTP, ft_sigtstp);
 // }
 
-// void			ft_signal(void)
-// {
-// 	signal(SIGWINCH, ft_sigwinch); //si on change la taille de la fenetre
-// 	// signal(SIGTSTP, ft_sigtstp);
-// 	// signal(SIGCONT, ft_sigcont);
-// 	// signal(SIGINT, ft_sigint);
-// }
+void			ft_signal(void)
+{
+	signal(SIGWINCH, ft_sigwinch);
+	// signal(SIGTSTP, ft_sigtstp);
+	// signal(SIGCONT, ft_sigcont);
+	// signal(SIGINT, ft_sigint);
+}

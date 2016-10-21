@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2016/10/18 11:24:57 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/19 09:40:28 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct		s_shell
 {
 	char			*oldpwd;
 	t_var			*vars;
+	int 			cursor_x;
+	struct winsize	*win;
 	int				running;
 	t_lst			*hist;
 	struct termios	my_termios;
@@ -66,7 +68,7 @@ typedef struct		s_shell
 	char			*line; // VARIABLE SIMON
 }					t_shell;
 
-t_shell		*g_shell;
+t_shell		g_shell;
 
 /*
 ** CATCH_KEY
@@ -76,6 +78,8 @@ int					readkey(void);
 ** CURSOR_MOVE
 */
 void				ft_cursor_right(int i);
+void				ft_cursor_left(int i);
+void				cursor_next_line(void);
 /*
 ** HISTORY
 */
@@ -90,9 +94,19 @@ int					init_all();
 */
 void				fill_current_line(char c);
 /*
+** MAIN
+*/
+void				display_prompt(void);
+/*
 ** PRINT_LINE
 */
 void				clean_line(int i);
+void				print_line(int i);
+/*
+** RETURN_KEY
+*/
+void				return_key(void);
+void				backspace_key(void);
 /*
 ** SIGNAL
 */

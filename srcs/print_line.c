@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 10:41:51 by jules             #+#    #+#             */
-/*   Updated: 2016/10/21 12:36:43 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/21 16:42:50 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,11 @@ void	clean_line(int i)
 	while (nb_rows > 0)
 	{
 		i = g_shell.win->ws_col;
-		// tputs(tgetstr("dl", NULL), 1, ft_putchar_int);
+		tputs(tgetstr("dl", NULL), 1, ft_putchar_int);
 		while (i-- > 0)
 			tputs(tgetstr("le", NULL), 1, ft_putchar_int);
 		if (nb_rows > 1)
-		{
-			ft_putchar('O');
 			tputs(tgetstr("up", NULL), 1, ft_putchar_int);
-		}
 		nb_rows--;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2016/10/19 09:40:28 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/24 17:36:00 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void				display_prompt(void);
 /*
 ** PRINT_LINE
 */
-void				clean_line(int i);
+void				clean_line();
 void				print_line(int i);
 /*
 ** RETURN_KEY

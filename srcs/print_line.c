@@ -6,20 +6,25 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 10:41:51 by jules             #+#    #+#             */
-/*   Updated: 2016/10/21 16:42:50 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/24 17:41:17 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
 
-void	clean_line(int i)
+void	clean_line()
 {
+	int 	i;
 	int 	nb_rows;
 
-	i += 3;
+	i = ft_strlen(g_shell.current_line) + 2;
 	nb_rows = 1;
 	if (i > g_shell.win->ws_col)
+	{
 		nb_rows = i / g_shell.win->ws_col;
+		if ((i % g_shell.win->ws_col) != 0)
+			nb_rows++;
+	}
 	while (nb_rows > 0)
 	{
 		i = g_shell.win->ws_col;
@@ -37,7 +42,7 @@ void	print_line(int i)
 	int 	j;
 
 	j = 0;
-	clean_line(i); // i = nb de char déjà écris et que l'on va effacer
+	clean_line(); // i = nb de char déjà écris et que l'on va effacer
 	display_prompt();
 	while (j < i + 1)
 	{

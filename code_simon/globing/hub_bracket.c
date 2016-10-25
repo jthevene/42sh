@@ -21,7 +21,7 @@ static int		catch_dash_mix(int i)
 	{
 		while (g_shell.line[i] != '-')
 		{
-			letters++;
+			letters += g_shell.line[i - 1] == '[' ? 0 : 1;
 			i++;
 		}
 		if (letters >= 2 && g_shell.line[i + 1] != ']')
@@ -60,9 +60,17 @@ static int		catch_dash(int i)
 
 int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob)
 {
+	char 	*tmp_error;
+	FT_INIT(int, ret, check_categories(g_shell.line, glob));
+
+	if (ret == -1 || ret == 1)
+		return (0);
 	if (!check_rng(line))
 	{
-		ft_putstr_fd("42sh: no matches found: /*** NOTRE COMMANDE GLOB ***/", 2);
+		tmp_error = ft_strjoin("42sh: no matches found: ", glob->command);
+		ft_putstr_fd(tmp_error, 2);
+		ft_putchar_fd('\n', 2);
+		free(tmp_error);
 		return (0);
 	}
 	if (glob_case == MULT)
@@ -85,22 +93,13 @@ int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob)
 	}
 	if (glob_case == NORNG)
 	{
-		if (!check_rng(line))
-		{
-			ft_putstr_fd("42sh : no matches found: /*** NOTRE COMMANDE GLOB ***/", 2);
-			return (0);
-		}
+
 		printf("\033[32mno rng\033[0m\n");
 		glob->no_rng = fill_norng(line);
 		printf("\033[34mret no_rng :\033[0m %s\n", glob->no_rng);
 	}
 	if (glob_case == MIX)
 	{
-		if (!check_rng(line))
-		{
-			ft_putstr_fd("42sh : no matches found: /*** NOTRE COMMANDE GLOB ***/", 2);
-			return (0);
-		}
 		printf("\033[32mmix\033[0m\n");
 		glob->mix = fill_mix(line);
 		printf("\033[34mret mix :\033[0m %s\n", glob->mix);
@@ -113,6 +112,7 @@ void			hub_bracket(t_glob *glob)
 	FT_INIT(int, i, 0);
 	while (g_shell.line[i])
 	{
+		printf("i = %d\n", i);
 		if (g_shell.line[i] == '[' && g_shell.line[i + 1]
 			&& g_shell.line[i + 1] == '!')
 		{

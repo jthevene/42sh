@@ -41,7 +41,7 @@ typedef struct			s_glob
 	char				*no_rng;
 	char				*mix;
 
-	char				*selection;
+	char				*command;
 	int					type;
 	struct s_glob		*next;
 
@@ -64,6 +64,8 @@ void					hub_bracket(t_glob *glob);
 void					init_tabs1(t_glob *glob, int i, int j);
 void					init_tabs2(t_glob *glob);
 void					init_tabs3(t_glob *glob);
+
+int 					check_categories(char *str, t_glob *glob);
 
 char					*fill_mult(char *str);
 char					*fill_rng(char *str);

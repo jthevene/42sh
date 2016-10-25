@@ -60,49 +60,49 @@ static int		catch_dash(int i)
 
 int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob)
 {
-	char 	*tmp_error;
+	FT_INIT(char *, tmp_error, NULL);
 	FT_INIT(int, ret, check_categories(g_shell.line, glob));
 
+	glob->type = glob_case;
 	if (ret == -1 || ret == 1)
 		return (0);
 	if (!check_rng(line))
 	{
 		tmp_error = ft_strjoin("42sh: no matches found: ", glob->command);
-		ft_putstr_fd(tmp_error, 2);
-		ft_putchar_fd('\n', 2);
+		ft_putendl_fd(tmp_error, 2);
 		free(tmp_error);
 		return (0);
 	}
 	if (glob_case == MULT)
 	{
 		printf("\033[32mmult\033[0m\n");
-		glob->mult = clean_brackets(line);
-		printf("\033[34mret mult :\033[0m %s\n", glob->mult);
+		glob->bracket = clean_brackets(line);
+		printf("\033[34mret mult :\033[0m %s\n", glob->bracket);
 	}
 	if (glob_case == RNG)
 	{
 		printf("\033[32mrng\033[0m\n");
-		glob->rng = fill_rng(line);
-		printf("\033[34mret rng :\033[0m %s\n", glob->rng);
+		glob->bracket = fill_rng(line);
+		printf("\033[34mret rng :\033[0m %s\n", glob->bracket);
 	}
 	if (glob_case == NOMULT)
 	{
 		printf("\033[32mno mult\033[0m\n");
-		glob->no_mult = fill_nomult(line);
-		printf("\033[34mret no_mult :\033[0m %s\n", glob->no_mult);
+		glob->bracket = fill_nomult(line);
+		printf("\033[34mret no_mult :\033[0m %s\n", glob->bracket);
 	}
 	if (glob_case == NORNG)
 	{
 
 		printf("\033[32mno rng\033[0m\n");
-		glob->no_rng = fill_norng(line);
-		printf("\033[34mret no_rng :\033[0m %s\n", glob->no_rng);
+		glob->bracket = fill_norng(line);
+		printf("\033[34mret no_rng :\033[0m %s\n", glob->bracket);
 	}
 	if (glob_case == MIX)
 	{
 		printf("\033[32mmix\033[0m\n");
-		glob->mix = fill_mix(line);
-		printf("\033[34mret mix :\033[0m %s\n", glob->mix);
+		glob->bracket = fill_mix(line);
+		printf("\033[34mret mix :\033[0m %s\n", glob->bracket);
 	}
 	return (1);
 }

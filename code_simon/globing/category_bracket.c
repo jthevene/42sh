@@ -15,27 +15,27 @@
 static int 		category_choice(char *category, t_glob *glob)
 {
 	if (!ft_strcmp(category, "upper"))
-		glob->mult = ft_strdup(glob->upper);
+		glob->bracket = ft_strdup(glob->upper);
 	else if (!ft_strcmp(category, "lower"))
-		glob->mult = ft_strdup(glob->lower);
+		glob->bracket = ft_strdup(glob->lower);
 	else if (!ft_strcmp(category, "alpha"))
-		glob->mult = ft_strdup(glob->alpha);
+		glob->bracket = ft_strdup(glob->alpha);
 	else if (!ft_strcmp(category, "digit"))
-		glob->mult = ft_strdup(glob->digit);
+		glob->bracket = ft_strdup(glob->digit);
 	else if (!ft_strcmp(category, "alnum"))
-		glob->mult = ft_strdup(glob->alnum);
+		glob->bracket = ft_strdup(glob->alnum);
 	else if (!ft_strcmp(category, "space"))
-		glob->mult = ft_strdup(glob->space);
+		glob->bracket = ft_strdup(glob->space);
 	else if (!ft_strcmp(category, "graph"))
-		glob->mult = ft_strdup(glob->graph);
+		glob->bracket = ft_strdup(glob->graph);
 	else if (!ft_strcmp(category, "print"))
-		glob->mult = ft_strdup(glob->print);
+		glob->bracket = ft_strdup(glob->print);
 	else if (!ft_strcmp(category, "punct"))
-		glob->mult = ft_strdup(glob->punct);
+		glob->bracket = ft_strdup(glob->punct);
 	else if (!ft_strcmp(category, "cntrl"))
-		glob->mult = ft_strdup(glob->cntrl);
+		glob->bracket = ft_strdup(glob->cntrl);
 	else if (!ft_strcmp(category, "xdigit"))
-		glob->mult = ft_strdup(glob->xdigit);
+		glob->bracket = ft_strdup(glob->xdigit);
 	else
 		printf("No match found /// Category choice\n");
 	return (0);
@@ -68,9 +68,9 @@ int 			check_categories(char *str, t_glob *glob)
 		}
 	}
 	free(category);
-	if (!glob->mult)
+	if (!glob->bracket)
 		return (0);
 	else
-		printf("glob->mult = %s\n", glob->mult);
+		printf("glob->bracket = %s\n", glob->bracket);
 	return (1);
 }

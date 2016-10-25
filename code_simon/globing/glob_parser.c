@@ -74,26 +74,14 @@ t_glob			*init_glob(void)
 	init_tabs1(glob, 0, 0);
 	init_tabs2(glob);
 	init_tabs3(glob);
-	glob->mult = NULL;
-	glob->no_mult = NULL;
-	glob->rng = NULL;
-	glob->no_rng = NULL;
-	glob->mix = NULL;
+	glob->bracket = NULL;
 	return (glob);
 }
 
 void			free_glob(t_glob *glob)
 {
-	if (glob->mult)
-		free(glob->mult);
-	if (glob->no_mult)
-		free(glob->no_mult);
-	if (glob->rng)
-		free(glob->rng);
-	if (glob->no_rng)
-		free(glob->no_rng);
-	if (glob->mix)
-		free(glob->mix);
+	if (glob->bracket)
+		free(glob->bracket);
 	if (glob->command)
 		free(glob->command);
 	free(glob);

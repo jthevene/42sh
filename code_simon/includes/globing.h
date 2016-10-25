@@ -35,11 +35,7 @@
 
 typedef struct			s_glob
 {
-	char				*mult;
-	char				*rng;
-	char				*no_mult;
-	char				*no_rng;
-	char				*mix;
+	char				*bracket;
 
 	char				*command;
 	int					type;

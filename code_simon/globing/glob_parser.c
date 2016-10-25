@@ -32,6 +32,23 @@ static int		verif_tokens(char *str)
 	return (1);
 }
 
+static void		get_command(char *str)
+{
+	FT_INIT(int, i, 0);
+	FT_INIT(int, len, 0);
+//	FT_INIT(char *, str, NULL);
+
+	while (str[i] && str[i] != ' ')
+		i++;
+	i++;
+	while (str[i] && str[i] != ' ')
+	{
+		i++;
+		len++;
+	}
+	printf("len = %d\n", len);
+}
+
 t_glob			*init_glob(void)
 {
 	t_glob		*glob;
@@ -83,6 +100,7 @@ int				glob_parser(void)
 	if (!verif_tokens(g_shell->line))
 		return (0);
 	glob = init_glob();
+	get_command(g_shell->line);
 //	printf("upper : |%s|\nlower : |%s|\nalpha : |%s|\ndigit : |%s|\nalnum : |%s|\nspace : |%s|\ngraph : |%s|\nprint : |%s|\npunct : |%s|\ncntrl : |%s|\nxdigit : |%s|\n",
 //		glob->upper, glob->lower, glob->alpha, glob->digit, glob->alnum, glob->space, glob->graph, glob->print, glob->punct, glob->cntrl, glob->xdigit);
 	if (ft_strchr(g_shell->line, '['))

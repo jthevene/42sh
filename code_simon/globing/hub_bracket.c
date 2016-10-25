@@ -62,7 +62,7 @@ int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob)
 {
 	if (!check_rng(line))
 	{
-		ft_putstr_fd("42sh : no matches found: /*** NOTRE COMMANDE GLOB ***/", 2);
+		ft_putstr_fd("42sh: no matches found: /*** NOTRE COMMANDE GLOB ***/", 2);
 		return (0);
 	}
 	if (glob_case == MULT)

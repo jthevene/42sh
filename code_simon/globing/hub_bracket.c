@@ -15,22 +15,22 @@
 static int		catch_dash_mix(int i)
 {
 	FT_INIT(int, letters, 0);
-	while (g_shell->line[i] == '!' || g_shell->line[i] == '[')
+	while (g_shell.line[i] == '!' || g_shell.line[i] == '[')
 		i++;
-	if (ft_strchr(g_shell->line, '-'))
+	if (ft_strchr(g_shell.line, '-'))
 	{
-		while (g_shell->line[i] != '-')
+		while (g_shell.line[i] != '-')
 		{
 			letters++;
 			i++;
 		}
-		if (letters >= 2 && g_shell->line[i + 1] != ']')
+		if (letters >= 2 && g_shell.line[i + 1] != ']')
 			return (2);
 		i += 1;
 		letters = 0;
-		while (g_shell->line[i] != ']')
+		while (g_shell.line[i] != ']')
 		{
-			if (g_shell->line[i] == '-')
+			if (g_shell.line[i] == '-')
 				letters += catch_dash_mix(i);
 			letters++;
 			i++;
@@ -45,10 +45,10 @@ static int		catch_dash(int i)
 {
 	FT_INIT(int, nb, 0);
 	nb = catch_dash_mix(i);
-	while (g_shell->line[i] != ']')
+	while (g_shell.line[i] != ']')
 	{
-		if (g_shell->line[i] == '-' && g_shell->line[i - 1]
-			&& g_shell->line[i + 1] && g_shell->line[i + 1] != ']')
+		if (g_shell.line[i] == '-' && g_shell.line[i - 1]
+			&& g_shell.line[i + 1] && g_shell.line[i + 1] != ']')
 		{
 			nb++;
 			i++;
@@ -111,28 +111,28 @@ int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob)
 void			hub_bracket(t_glob *glob)
 {
 	FT_INIT(int, i, 0);
-	while (g_shell->line[i])
+	while (g_shell.line[i])
 	{
-		if (g_shell->line[i] == '[' && g_shell->line[i + 1]
-			&& g_shell->line[i + 1] == '!')
+		if (g_shell.line[i] == '[' && g_shell.line[i + 1]
+			&& g_shell.line[i + 1] == '!')
 		{
 			if (catch_dash(i) == 1) /* [!.-.] */
-				fill_bracket_tabs(NORNG, g_shell->line, glob);
+				fill_bracket_tabs(NORNG, g_shell.line, glob);
 			else if (catch_dash(i) == 0) /* [!...] */
-				fill_bracket_tabs(NOMULT, g_shell->line, glob);
+				fill_bracket_tabs(NOMULT, g_shell.line, glob);
 			if (catch_dash(i) >= 2) /* [..-..] || [...-...-...] || [!..-..] || [!...-...-...] */
-				fill_bracket_tabs(MIX, g_shell->line, glob);
+				fill_bracket_tabs(MIX, g_shell.line, glob);
 			break ;
 		}
-		else if (g_shell->line[i] == '[' && g_shell->line[i + 1]
-			&& g_shell->line[i + 1] != '!')
+		else if (g_shell.line[i] == '[' && g_shell.line[i + 1]
+			&& g_shell.line[i + 1] != '!')
 		{
 			if (catch_dash(i) == 1) /* [.-.] */
-				fill_bracket_tabs(RNG, g_shell->line, glob);
+				fill_bracket_tabs(RNG, g_shell.line, glob);
 			else if (catch_dash(i) == 0) /* [...] */
-				fill_bracket_tabs(MULT, g_shell->line, glob);
+				fill_bracket_tabs(MULT, g_shell.line, glob);
 			if (catch_dash(i) >= 2) /* [..-..] || [...-...-...] || [!..-..] || [!...-...-...] */
-				fill_bracket_tabs(MIX, g_shell->line, glob);
+				fill_bracket_tabs(MIX, g_shell.line, glob);
 			break ;
 		}
 		i++;

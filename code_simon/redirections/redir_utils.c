@@ -93,10 +93,10 @@ int			detect_out(void)
 	int		i;
 
 	i = 0;
-	while (g_shell->line[i] && g_shell->line[i] != '>')
+	while (g_shell.line[i] && g_shell.line[i] != '>')
 		i++;
-	if (g_shell->line[i - 1] != ' ' && ft_isdigit(g_shell->line[i - 1]))
-		return (g_shell->line[i - 1] - 48);
+	if (g_shell.line[i - 1] != ' ' && ft_isdigit(g_shell.line[i - 1]))
+		return (g_shell.line[i - 1] - 48);
 	else
 		return (1);
 }

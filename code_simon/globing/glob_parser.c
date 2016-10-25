@@ -95,15 +95,15 @@ int				glob_parser(void)
 {
 	t_glob		*glob;
 
-	if (!g_shell->line)
+	if (!g_shell.line)
 		return (0);
-	if (!verif_tokens(g_shell->line))
+	if (!verif_tokens(g_shell.line))
 		return (0);
 	glob = init_glob();
-	get_command(g_shell->line);
+	get_command(g_shell.line);
 //	printf("upper : |%s|\nlower : |%s|\nalpha : |%s|\ndigit : |%s|\nalnum : |%s|\nspace : |%s|\ngraph : |%s|\nprint : |%s|\npunct : |%s|\ncntrl : |%s|\nxdigit : |%s|\n",
 //		glob->upper, glob->lower, glob->alpha, glob->digit, glob->alnum, glob->space, glob->graph, glob->print, glob->punct, glob->cntrl, glob->xdigit);
-	if (ft_strchr(g_shell->line, '['))
+	if (ft_strchr(g_shell.line, '['))
 		hub_bracket(glob);
 	free_glob(glob);
 	printf("Glob freed\n");

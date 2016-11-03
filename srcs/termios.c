@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 12:21:52 by jules             #+#    #+#             */
-/*   Updated: 2016/10/17 16:59:53 by jules            ###   ########.fr       */
+/*   Updated: 2016/10/25 16:21:03 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int		init_termios(struct termios my_termios)
 	my_termios.c_cc[VMIN] = 1;
 	my_termios.c_cc[VTIME] = 0;
 	tcsetattr(STDIN_FILENO, TCSANOW, &my_termios);
-	// tputs(tgetstr("ti", NULL), 1, ft_putchar_int); //pas trop sûr de ce que ça fait
 	return (0);
 }
 

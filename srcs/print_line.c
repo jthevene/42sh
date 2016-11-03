@@ -6,12 +6,13 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 10:41:51 by jules             #+#    #+#             */
-/*   Updated: 2016/10/24 17:41:17 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/03 11:58:32 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
 
+// efface la ligne en cours d'edition
 void	clean_line()
 {
 	int 	i;
@@ -42,7 +43,8 @@ void	print_line(int i)
 	int 	j;
 
 	j = 0;
-	clean_line(); // i = nb de char déjà écris et que l'on va effacer
+	(void)i;
+	clean_line();
 	display_prompt();
 	while (j < i + 1)
 	{

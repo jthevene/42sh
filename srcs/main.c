@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:20:49 by jules             #+#    #+#             */
-/*   Updated: 2016/10/21 16:09:19 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/03 10:51:50 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void		display_prompt(void)
 {
 	ft_putstr("\033[32m$> \033[0m");
-	g_shell.cursor_x += 2;
 }
 
 static	void	run_shell(void)
@@ -29,10 +28,7 @@ static	void	run_shell(void)
 		g_shell.running = 1;
 		key = readkey();
 		if (key == K_PRINT)
-		{
-			g_shell.cursor_x += 1;	
 			print_line(i++);
-		}
 		else if (key == K_UP || key == K_DOWN)
 			// HISTORIQUE
 			ft_putendl("UP/DOWN");

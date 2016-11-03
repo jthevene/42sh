@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2016/10/24 17:36:00 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/03 11:56:52 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <curses.h>
 # include "../libft/includes/libft.h"
 
-# define K_PRINT   1
+# define K_PRINT   1 //caractere imprimable
 # define K_ESCAPE  2
 # define K_UP      3
 # define K_DOWN    4
@@ -56,15 +56,15 @@ typedef struct		s_var
 typedef struct		s_shell
 {
 	char			*oldpwd;
-	t_var			*vars;
+	t_var			*vars;//contenu de ENV
 	int 			cursor_x;
 	struct winsize	*win;
 	int				running;
 	t_lst			*hist;
 	struct termios	my_termios;
 	struct termios	t_back;
-	char			*current_line;
-	char			buf[3]; //trouver quelle taille est necessaire
+	char			*current_line; //ligne en cours d'edition
+	char			buf[8]; //pas sur qu'on en ait besoin en fait
 	char			*line; // VARIABLE SIMON
 }					t_shell;
 

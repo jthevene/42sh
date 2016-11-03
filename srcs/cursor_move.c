@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 14:38:47 by jules             #+#    #+#             */
-/*   Updated: 2016/10/19 09:51:09 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/03 11:58:08 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,15 @@ void		ft_cursor_right(int i)
 {
 	while (i-- > 0)
 		tputs(tgetstr("nd", NULL), 1, ft_putchar_int);
-	g_shell.cursor_x += 1;
 }
 
 void		ft_cursor_left(int i)
 {
 	while (i-- > 0)
 		tputs(tgetstr("le", NULL), 1, ft_putchar_int);
-	g_shell.cursor_x -= 1;
 }
 
+// recule le curseur vers la gauche et descend d'une ligne
 void		cursor_next_line(void)
 {
 	int 	i;
@@ -43,5 +42,4 @@ void		cursor_next_line(void)
 			tputs(tgetstr("le", NULL), 1, ft_putchar_int);
 	}
 	tputs(tgetstr("do", NULL), 1, ft_putchar_int);
-	g_shell.cursor_x = 0;
 }

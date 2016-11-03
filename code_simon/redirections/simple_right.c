@@ -16,21 +16,21 @@ static int		get_filename(int i, int last_fd, t_fdlist **fdlist)
 {
 	FT_INIT(int, j, 0);
 	FT_INIT(int, tmp, 0);
-	while (g_shell->line[i] && g_shell->line[i - 1] != '>')
+	while (g_shell.line[i] && g_shell.line[i - 1] != '>')
 		i++;
-	if (!g_shell->line[i])
+	if (!g_shell.line[i])
 		return (last_fd);
-	while (g_shell->line[i] && ft_isspace(g_shell->line[i]))
+	while (g_shell.line[i] && ft_isspace(g_shell.line[i]))
 		i++;
-	if (!g_shell->line[i])
+	if (!g_shell.line[i])
 		return (0);
 	tmp = i;
-	while (g_shell->line[tmp] && !ft_isspace(g_shell->line[tmp]))
+	while (g_shell.line[tmp] && !ft_isspace(g_shell.line[tmp]))
 		tmp++;
 	FT_INIT(char *, filename, ft_strnew(tmp - i + 1));
-	while (g_shell->line[i] && !ft_isspace(g_shell->line[i]))
+	while (g_shell.line[i] && !ft_isspace(g_shell.line[i]))
 	{
-		filename[j] = g_shell->line[i];
+		filename[j] = g_shell.line[i];
 		i++;
 		j++;
 	}
@@ -49,7 +49,7 @@ int				simple_right(void)
 
 	fdlist = NULL;
 	printf("Entrée dans simple_right\n");
-	if (!ft_strchr(g_shell->line, '>'))
+	if (!ft_strchr(g_shell.line, '>'))
 		return (0);
 	printf("Redirection détectée\n");
 	fd_out = detect_out();

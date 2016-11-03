@@ -16,15 +16,15 @@
 # include "../../includes/42sh.h"
 
 # ifndef FT_INIT
-#  define FT_INIT(t, n, v) t n = v
+#  define FT_INIT(t, n, v) t n = v // Macro d'initialisation de variable
 # endif
 
 # ifndef FT_MULTI4
-#  define FT_MULTI4(a, b, c, d) a = b = c = d
+#  define FT_MULTI4(a, b, c, d) a = b = c = d // Macro de multi assignation
 # endif
 
 # ifndef FT_MULTI3
-#  define FT_MULTI3(a, b, c) a = b = c
+#  define FT_MULTI3(a, b, c) a = b = c // Macro de multi assignation
 # endif
 
 # define MULT 1

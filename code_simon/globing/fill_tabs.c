@@ -87,7 +87,7 @@ char	*fill_norng(char *str) // [!.-.]
 	return (ret);
 }
 
-char	*fill_mix(char *str)
+char	*fill_mix(char *str) // Exemple : [.-....-...-.-..]
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp_str, clean_brackets(str));

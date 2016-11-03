@@ -12,7 +12,11 @@
 
 #include "../includes/redir.h"
 
-static int		get_filename(int i, int last_fd, t_fdlist **fdlist)
+// Exemple : Sur une commande comme ça : ls -l > test1 > test2 > test3
+// On récupère les 3 noms de fichiers, on les créé dans le bon mode
+// Et on stocke les fd pour pouvoir les close plus tard
+// On récupère également le bon fd dans lequel stocker la sortie
+static int		get_filename(int i, int last_fd, t_fdlist **fdlist) 
 {
 	FT_INIT(int, j, 0);
 	FT_INIT(int, tmp, 0);
@@ -53,10 +57,10 @@ int				simple_right(void)
 		return (0);
 	printf("Redirection détectée\n");
 	fd_out = detect_out();
-	if (!(fd = get_filename(1, 0, &fdlist)))
+	if (!(fd = get_filename(1, 0, &fdlist))) // Fonction qui récupère tous les fd à ouvrir, créé les fichiers, et stocke tous les fd dans une liste.
 		return (0);
 	printf("Prêt pour fork la commande et dup la sortie dans le fichier\n");
-//	exec_redir_right(fd/*, fd_out*/);
+//	exec_redir_right(fd/*, fd_out*/); /* Fonction qui va rediriger la sortie de la commande vers le fichier de la redir */
 	if (fdlist->next)
 		fdlist = fdlist->next;
 	free_fdlist(&fdlist);

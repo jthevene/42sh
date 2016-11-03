@@ -35,11 +35,11 @@ void			ft_infinite_loop(void)
 	ret = 0;
 	while (1)
 	{
-		ret = get_next_line(0, &g_shell.line); /* GNL leaking, careful !! */
+		ret = get_next_line(0, &g_shell.line); /* Jules' GNL leaking, careful !! */
 		if (!ft_strcmp(g_shell.line, "exit"))
 			exit(0);
 		if (ret)
-			glob_parser();
+			glob_parser(); // ---> Appel du parser pour le glob ('[' seulement pour l'instant)
 		free(g_shell.line);
 		ft_putstr("\n$> ");
 		ret = 0;
@@ -53,6 +53,6 @@ int				main(int argc, char **argv, char **env)
 	g_shell.line = NULL;
 //	g_shell = ft_init_gshell2();
 	ft_putstr("$> ");
-	ft_infinite_loop();
+	ft_infinite_loop(); // Bête boucle infinie pour tester mon globing.
 	return (0);
 }

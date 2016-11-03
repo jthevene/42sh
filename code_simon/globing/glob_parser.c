@@ -71,7 +71,7 @@ t_glob			*init_glob(void)
 	ft_bzero(glob->punct, 33);
 	ft_bzero(glob->cntrl, 34);
 	ft_bzero(glob->xdigit, 17);
-	init_tabs1(glob, 0, 0);
+	init_tabs1(glob, 0, 0); // Les 3 fonctions init_tabs servent à remplir les tableaux pour [[:upper:]], [[:xdigit:]] etc...
 	init_tabs2(glob);
 	init_tabs3(glob);
 	glob->bracket = NULL;
@@ -93,14 +93,12 @@ int				glob_parser(void)
 
 	if (!g_shell.line)
 		return (0);
-	if (!verif_tokens(g_shell.line))
+	if (!verif_tokens(g_shell.line)) // --> Verification que les tokens de glob sont bien présents
 		return (0);
 	glob = init_glob();
 	get_command(g_shell.line, glob);
-//	printf("upper : |%s|\nlower : |%s|\nalpha : |%s|\ndigit : |%s|\nalnum : |%s|\nspace : |%s|\ngraph : |%s|\nprint : |%s|\npunct : |%s|\ncntrl : |%s|\nxdigit : |%s|\n",
-//		glob->upper, glob->lower, glob->alpha, glob->digit, glob->alnum, glob->space, glob->graph, glob->print, glob->punct, glob->cntrl, glob->xdigit);
 	if (ft_strchr(g_shell.line, '['))
-		hub_bracket(glob);
+		hub_bracket(glob); // Hub bracket est le hub de fonctions qui va gérer tous les cas possibles pour les expression de globing contenant des barckets de ce type : '[]'
 	free_glob(glob);
 	printf("Glob freed\n");
 	return (1);

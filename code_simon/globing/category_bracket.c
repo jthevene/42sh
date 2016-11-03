@@ -12,6 +12,7 @@
 
 #include "../includes/globing.h"
 
+// Cette fonction gère les entrées de ce type : [[:upper:]]
 static int 		category_choice(char *category, t_glob *glob)
 {
 	if (!ft_strcmp(category, "upper"))
@@ -41,6 +42,7 @@ static int 		category_choice(char *category, t_glob *glob)
 	return (0);
 }
 
+// Fonction qui check si l'entrée est correcte, sinon imprime un message d'erreur
 int 			check_categories(char *str, t_glob *glob)
 {
 	FT_INIT(int, i, 0);

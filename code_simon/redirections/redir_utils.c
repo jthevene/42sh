@@ -12,7 +12,7 @@
 
 #include "../includes/redir.h"
 
-int			fdlist_pushback(t_fdlist **fdlist, int key)
+int			fdlist_pushback(t_fdlist **fdlist, int key) // Petit pushback adapté à la liste chainée dans la structure (redir.h)
 {
 	t_fdlist *tmp;
 	t_fdlist *new;
@@ -41,7 +41,7 @@ int			fdlist_pushback(t_fdlist **fdlist, int key)
 	return (1);
 }
 
-int			create_file(char *filename, t_fdlist **fdlist, int type)
+int			create_file(char *filename, t_fdlist **fdlist, int type) // Créé le fichier en fonction du type de redir (soit APPEND, soit TRUNC)
 {
 	int			fd;
 

@@ -12,7 +12,7 @@
 
 #include "../includes/globing.h"
 
-static int		catch_dash_mix(int i)
+static int		catch_dash_mix(int i) // Cette fonction est la pour ce genre de cas de figure : [a-dfg-hjkl-vbn]
 {
 	FT_INIT(int, letters, 0);
 	while (g_shell.line[i] == '!' || g_shell.line[i] == '[')
@@ -41,7 +41,7 @@ static int		catch_dash_mix(int i)
 	return (0);
 }
 
-static int		catch_dash(int i)
+static int		catch_dash(int i) // Fonction qui vérifie la validité de l'expression en regardant le dash dans cette dernière
 {
 	FT_INIT(int, nb, 0);
 	nb = catch_dash_mix(i);
@@ -58,7 +58,7 @@ static int		catch_dash(int i)
 	return (nb);
 }
 
-int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob)
+int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob) // Fonciton qui choisit la méthode de remplissage de notre tableau de caractères
 {
 	FT_INIT(char *, tmp_error, NULL);
 	FT_INIT(int, ret, check_categories(g_shell.line, glob));
@@ -107,12 +107,11 @@ int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob)
 	return (1);
 }
 
-void			hub_bracket(t_glob *glob)
+void			hub_bracket(t_glob *glob) // Gère les différents cas de figure, cf commentaires en dessous
 {
 	FT_INIT(int, i, 0);
 	while (g_shell.line[i])
 	{
-		printf("i = %d\n", i);
 		if (g_shell.line[i] == '[' && g_shell.line[i + 1]
 			&& g_shell.line[i + 1] == '!')
 		{

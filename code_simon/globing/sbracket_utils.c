@@ -51,7 +51,7 @@ char		*get_rng_str(char *str, int i)// uac-rgs => "c-r"
 	return (rng_str);
 }
 
-int			get_len_mix(char *str)
+int			get_len_mix(char *str) // Calcule la longueur de la chaîne à allouer pour le glob->bracket quand on a un cas "mix"
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, len, 0);
@@ -100,7 +100,7 @@ int			get_letters(char **ret, char *str)
 	return (0);
 }
 
-int			check_rng(char *str)
+int			check_rng(char *str) // Check si on a un rng valide ([a-g] valide, [z-a] invalide)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp, clean_brackets(str));

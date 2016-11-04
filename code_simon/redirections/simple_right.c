@@ -60,6 +60,7 @@ int				simple_right(void)
 	if (!(fd = get_filename(1, 0, &fdlist))) // Fonction qui récupère tous les fd à ouvrir, créé les fichiers, et stocke tous les fd dans une liste.
 		return (0);
 	printf("Prêt pour fork la commande et dup la sortie dans le fichier\n");
+	printf("fd_out = %d\n", fd_out);
 //	exec_redir_right(fd/*, fd_out*/); /* Fonction qui va rediriger la sortie de la commande vers le fichier de la redir */
 	if (fdlist->next)
 		fdlist = fdlist->next;

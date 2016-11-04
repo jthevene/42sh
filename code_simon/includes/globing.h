@@ -32,15 +32,21 @@
 # define NOMULT 3
 # define NORNG 4
 # define MIX 5
+# define CATEGORY 6
+
+typedef struct 			s_sbracket
+{
+	char 				*bracket;
+	int 				type;
+	struct s_sbracket	*next;
+	struct s_sbracket	*prev;
+}						t_sbracket;
 
 typedef struct			s_glob
 {
-	char				*bracket;
+	t_sbracket			*sbracket;
 
 	char				*command;
-	int					type;
-	struct s_glob		*next;
-
 	char				upper[27];
 	char				lower[27];
 	char				alpha[53];
@@ -69,10 +75,14 @@ char					*fill_nomult(char *str);
 char					*fill_norng(char *str);
 char					*fill_mix(char *str);
 
+int 					count_brackets(char *str, char bracket);
 char					*clean_brackets(char *str);
 int						get_len_mix(char *str);
 int						get_letters(char **ret, char *str);
 char					*get_rng_str(char *str, int i);
 int						check_rng(char *str);
+
+int 					sbracket_pushback(t_sbracket **list, int type);
+void					print_sbracket(t_sbracket *list);
 
 #endif

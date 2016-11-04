@@ -14,10 +14,10 @@
 
 static int		verif_tokens(char *str)
 {
-	int			nb;
-
-	nb = 0;
+	FT_INIT(int, nb, 0);
 	if (ft_strchr(str, '[') && !ft_strchr(str, ']'))
+		return (0);
+	else if (!count_brackets(str, '[') || !count_brackets(str, '{'))
 		return (0);
 	else
 		nb++;
@@ -60,6 +60,7 @@ t_glob			*init_glob(void)
 	t_glob		*glob;
 
 	glob = (t_glob *)malloc(sizeof(t_glob));
+	glob->sbracket = NULL;
 	ft_bzero(glob->upper, 27);
 	ft_bzero(glob->lower, 27);
 	ft_bzero(glob->alpha, 53);
@@ -74,10 +75,10 @@ t_glob			*init_glob(void)
 	init_tabs1(glob, 0, 0); // Les 3 fonctions init_tabs servent à remplir les tableaux pour [[:upper:]], [[:xdigit:]] etc...
 	init_tabs2(glob);
 	init_tabs3(glob);
-	glob->bracket = NULL;
 	return (glob);
 }
 
+/*
 void			free_glob(t_glob *glob)
 {
 	if (glob->bracket)
@@ -86,20 +87,20 @@ void			free_glob(t_glob *glob)
 		free(glob->command);
 	free(glob);
 }
-
+*/
 int				glob_parser(void)
 {
-	t_glob		*glob;
+	static t_glob		*glob = NULL;
 
 	if (!g_shell.line)
 		return (0);
-	if (!verif_tokens(g_shell.line)) // --> Verification que les tokens de glob sont bien présents
+	if (!verif_tokens(g_shell.line)) // --> Verification que les tokens de glob sont bien présents et valides
 		return (0);
-	glob = init_glob();
+	glob = glob == NULL ? init_glob() : glob;
 	get_command(g_shell.line, glob);
 	if (ft_strchr(g_shell.line, '['))
 		hub_bracket(glob); // Hub bracket est le hub de fonctions qui va gérer tous les cas possibles pour les expression de globing contenant des barckets de ce type : '[]'
-	free_glob(glob);
-	printf("Glob freed\n");
+//	free_glob(glob);
+//	printf("Glob freed\n");
 	return (1);
 }

@@ -20,11 +20,11 @@ GLOB = ./globing/
 SRCS = 	$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
 		$(GLOB)glob_parser.c $(GLOB)hub_bracket.c $(GLOB)fill_tabs.c\
 		$(GLOB)init_tabs.c $(GLOB)sbracket_utils.c $(GLOB)category_bracket.c\
-		main.c
+		$(GLOB)sbracket_list.c main.c
 
 BIN =	simple_right.o double_right.o redir_utils.o main.o glob_parser.o \
 		hub_bracket.o fill_tabs.o init_tabs.o sbracket_utils.o \
-		category_bracket.o
+		category_bracket.o sbracket_list.o
 
 CC_FLAGS = -Wall -Wextra -Werror
 

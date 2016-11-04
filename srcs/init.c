@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:40:03 by jules             #+#    #+#             */
-/*   Updated: 2016/10/25 17:03:55 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/04 14:42:54 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		init_all()
  		ft_putendl("ft_init_shell Initialisation shell -> try again");
  		exit(0);
  	}
-	// ft_signal();
+	ft_signal();
 	if (!init_env())
 		return (1);
 	init_hist();

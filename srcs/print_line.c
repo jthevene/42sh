@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 10:41:51 by jules             #+#    #+#             */
-/*   Updated: 2016/11/03 11:58:32 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/04 14:02:43 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,14 @@ void	print_line(int i)
 	(void)i;
 	clean_line();
 	display_prompt();
-	while (j < i + 1)
-	{
-		if (j + 3 == g_shell.win->ws_col)
-		{
-			cursor_next_line();
-		}
-		ft_putchar(g_shell.current_line[j]);
-		j++;
-	}
+	// while (j < i + 1)
+	// {
+	// 	if (j + 3 == g_shell.win->ws_col)
+	// 	{
+	// 		cursor_next_line();
+	// 	}
+	// 	ft_putchar(g_shell.current_line[j]);
+	// 	j++;
+	// }
+	ft_putstr(g_shell.current_line);
 }

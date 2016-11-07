@@ -15,8 +15,7 @@
 
 char		*clean_brackets(char *str) // enleve les []
 {
-	int		start;
-
+	FT_INIT(int, start, 0);
 	FT_INIT(int, i, 0);
 	FT_INIT(int, len, 0);
 	FT_INIT(char *, ret, NULL);

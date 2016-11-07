@@ -26,13 +26,14 @@ SRCS = 	$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
 		\
 		$(G_UTILS1)catch_dash.c $(G_UTILS1)check_rng.c $(G_UTILS1)clean_brackets.c\
 		$(G_UTILS1)count_brackets.c $(G_UTILS1)get_functions.c\
+		$(G_UTILS1)str_nodouble.c\
 		\
 		main.c
 
 BIN =	simple_right.o double_right.o redir_utils.o main.o glob_parser.o \
 		hub_bracket.o fill_tabs.o init_tabs.o \
 		category_bracket.o sbracket_list.o catch_dash.o check_rng.o \
-		clean_brackets.o count_brackets.o get_functions.o
+		clean_brackets.o count_brackets.o get_functions.o str_nodouble.o
 
 
 CC_FLAGS = -Wall -Wextra -Werror

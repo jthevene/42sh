@@ -15,8 +15,7 @@
 
 char	*fill_rng(char *str)
 {
-	int		diff;
-
+	FT_INIT(int, diff, 0);
 	FT_INIT(int, i, 0);
 	FT_INIT(int, last, 1);
 	FT_INIT(char *, ret, NULL);
@@ -36,15 +35,20 @@ char	*fill_rng(char *str)
 	}
 	ret[i] = '\0';
 	free(tmp);
-	return (ret);
+	tmp = strdup_nodouble(ret);
+	free(ret);
+	return (tmp);
 }
 
 char	*fill_nomult(char *str) // [!...]
 {
 	FT_INIT(int, i, 32);
 	FT_INIT(int, j, 0);
-	FT_INIT(char *, ret, NULL);
 	FT_INIT(char *, tmp, ft_strchr(str, '[') ? clean_brackets(str) : ft_strdup(str));
+	FT_INIT(char *, ret, strdup_nodouble(tmp));
+	free(tmp);
+	tmp = ft_strdup(ret);
+	free(ret);
 	if (!(ret = (char *)malloc(sizeof(char) * (94 - ft_strlen(tmp)) + 1)))
 		return (NULL);
 	while (i <= 126)
@@ -84,7 +88,9 @@ char	*fill_norng(char *str) // [!.-.]
 	}
 	ret[j] = '\0';
 	free(tmp);
-	return (ret);
+	tmp = strdup_nodouble(ret);
+	free(ret);
+	return (tmp);
 }
 
 char	*fill_mix(char *str) // Exemple : [.-....-...-.-..]
@@ -106,7 +112,7 @@ char	*fill_mix(char *str) // Exemple : [.-....-...-.-..]
 			tmp_rng2 = get_rng_str(tmp_str, i);
 			tmp_rng = fill_rng(tmp_rng2);
 			tmp_ret = ret;
-			ret = ft_strjoin(tmp_rng, ret);
+			ret = strjoin_nodouble(tmp_rng, ret);
 			free(tmp_rng);
 			free(tmp_rng2);
 			free(tmp_ret);

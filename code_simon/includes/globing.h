@@ -36,7 +36,6 @@
 # define NOMULT 3
 # define NORNG 4
 # define MIX 5
-# define CATEGORY 6
 
 typedef struct 			s_sbracket
 {
@@ -86,6 +85,10 @@ int						get_letters(char **ret, char *str);
 char					*get_rng_str(char *str, int i);
 int						check_rng(char *str);
 int						catch_dash(int i);
+
+char					*strjoin_nodouble(char *s1, char *s2);
+char 					*strdup_nodouble(char *str);
+char					*mult_nodouble(char *str);
 
 int 					sbracket_pushback(t_sbracket **list, int type);
 void					print_sbracket(t_sbracket *list);

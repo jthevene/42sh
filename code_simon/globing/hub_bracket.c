@@ -139,26 +139,17 @@ void			hub_bracket(t_glob *glob) // Gère les différents cas de figure, cf comm
 		if (g_shell.line[i] == '[' && g_shell.line[i + 1]
 			&& g_shell.line[i + 1] == '!')
 		{
-			if (catch_dash(i) == 1) /* [!.-.] */
-				fill_bracket_tabs(NORNG, g_shell.line, glob);
-			else if (catch_dash(i) == 0) /* [!...] */
-				fill_bracket_tabs(NOMULT, g_shell.line, glob);
-			if (catch_dash(i) >= 2) /* [..-..] || [...-...-...] || [!..-..] || [!...-...-...] */
-				fill_bracket_tabs(MIX, g_shell.line, glob);
+			fill_bracket_tabs(catch_dash(i) == 1 ? NORNG 
+			: FT_TER(catch_dash(i) < 2, NOMULT, MIX), g_shell.line, glob);
 			break ;
 		}
 		else if (g_shell.line[i] == '[' && g_shell.line[i + 1]
 			&& g_shell.line[i + 1] != '!')
 		{
-			if (catch_dash(i) == 1) /* [.-.] */
-				fill_bracket_tabs(RNG, g_shell.line, glob);
-			else if (catch_dash(i) == 0) /* [...] */
-				fill_bracket_tabs(MULT, g_shell.line, glob);
-			if (catch_dash(i) >= 2) /* [..-..] || [...-...-...] || [!..-..] || [!...-...-...] */
-				fill_bracket_tabs(MIX, g_shell.line, glob);
+			fill_bracket_tabs(catch_dash(i) == 1 ? RNG 
+			: FT_TER(catch_dash(i) < 2, MULT, MIX), g_shell.line, glob);
 			break ;
 		}
 		i++;
 	}
-	print_sbracket(glob->sbracket);
 }

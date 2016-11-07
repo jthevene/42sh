@@ -27,6 +27,10 @@
 #  define FT_MULTI3(a, b, c) a = b = c // Macro de multi assignation
 # endif
 
+# ifndef FT_TER
+#  define FT_TER(si, alors, sinon) si ? alors : sinon
+# endif
+
 # define MULT 1
 # define RNG 2
 # define NOMULT 3

@@ -78,11 +78,15 @@ char					*fill_nomult(char *str);
 char					*fill_norng(char *str);
 char					*fill_mix(char *str);
 
+int 					next_bracket(char *str, int i);
 int 					count_brackets(char *str, char bracket);
+
 char					*clean_brackets(char *str);
+
 int						get_len_mix(char *str);
 int						get_letters(char **ret, char *str);
 char					*get_rng_str(char *str, int i);
+
 int						check_rng(char *str);
 int						catch_dash(int i);
 

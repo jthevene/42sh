@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:20:49 by jules             #+#    #+#             */
-/*   Updated: 2016/11/03 10:51:50 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/08 11:47:49 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void		display_prompt(void)
 {
 	ft_putstr("\033[32m$> \033[0m");
+	g_shell.cursor_x += 3;
 }
 
 static	void	run_shell(void)

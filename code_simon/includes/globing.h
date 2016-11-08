@@ -31,11 +31,11 @@
 #  define FT_TER(si, alors, sinon) si ? alors : sinon
 # endif
 
-# define MULT 1
-# define RNG 2
-# define NOMULT 3
-# define NORNG 4
-# define MIX 5
+# define MULT 1 // [abc]
+# define RNG 2 // [a-c]
+# define NOMULT 3 // [!abc]
+# define NORNG 4 // [!a-c]
+# define MIX 5 // [abc-fE-W] || [!abc-fE-W]
 
 typedef struct 			s_sbracket
 {

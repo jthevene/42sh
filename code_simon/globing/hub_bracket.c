@@ -12,7 +12,7 @@
 
 #include "../includes/globing.h"
 
-int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob) // Fonciton qui choisit la méthode de remplissage de notre tableau de caractères
+int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob) // Fonction qui choisit la méthode de remplissage de notre tableau de caractères (glob->sbracket->bracket)
 {
 	FT_INIT(char *, tmp_error, NULL);
 	FT_INIT(int, ret, 0);
@@ -41,7 +41,7 @@ int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob) // Fonciton qu
 	return (1);
 }
 
-void			hub_bracket(t_glob *glob) // Gère les différents cas de figure, cf commentaires en dessous
+void			hub_bracket(t_glob *glob) // Gère les différents cas de figure, cf commentaires dans le .h ac les definitions des macros
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, ret, 0);

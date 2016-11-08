@@ -3,28 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/08 14:28:58 by jthevene          #+#    #+#             */
-/*   Updated: 2014/11/10 15:23:08 by jthevene         ###   ########.fr       */
+/*   Created: 2015/11/26 13:32:36 by sgaudin           #+#    #+#             */
+/*   Updated: 2016/02/03 10:32:41 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-char	*ft_strnstr(const char *src, const char *str, size_t n)
+char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 {
-	size_t		i;
+	unsigned int		i;
+	unsigned int		j;
+	unsigned int		taille;
 
-	i = ft_strlen(str);
-	if (!*str)
-		return ((char *)src);
-	while (*src && n >= i)
+	i = 0;
+	j = 0;
+	taille = ft_strlen(s2);
+	if (taille == 0)
+		return ((char*)s1);
+	while (s1[i] != '\0' && i < n)
 	{
-		if (!ft_strncmp(src, str, i))
-			return ((char *)src);
-		n--;
-		src++;
+		while (s1[i + j] == s2[j] && (i + j) < n)
+		{
+			if (j == taille - 1)
+				return ((char*)s1 + i);
+			j++;
+		}
+		j = 0;
+		i++;
 	}
-	return (0);
+	return (NULL);
 }

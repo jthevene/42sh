@@ -3,25 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/07 18:56:49 by jthevene          #+#    #+#             */
-/*   Updated: 2015/01/03 19:52:30 by jthevene         ###   ########.fr       */
+/*   Created: 2015/11/26 11:22:36 by sgaudin           #+#    #+#             */
+/*   Updated: 2016/02/03 10:24:54 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t			i;
+	unsigned char	*tmp1;
+	unsigned char	*tmp2;
+	int				i;
 
 	i = 0;
-	while (((((unsigned char *)s1)[i] || ((unsigned char *)s2)[i]) \
-		&& i < n) || i < n)
+	tmp1 = (unsigned char*)s1;
+	tmp2 = (unsigned char*)s2;
+	if (tmp1 == NULL || tmp2 == NULL)
+		return (0);
+	if (n == 0)
+		return (0);
+	while (n--)
 	{
-		if (((unsigned char *)s1)[i] != ((unsigned char *)s2)[i])
-			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
+		if (tmp1[i] != tmp2[i])
+			return (tmp1[i] - tmp2[i]);
 		i++;
 	}
 	return (0);

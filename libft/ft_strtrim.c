@@ -3,62 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/12 16:53:45 by jthevene          #+#    #+#             */
-/*   Updated: 2014/11/17 19:04:57 by jthevene         ###   ########.fr       */
+/*   Created: 2015/11/26 15:55:27 by sgaudin           #+#    #+#             */
+/*   Updated: 2016/02/03 10:34:12 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-static int		start(const char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] == ' ' || str[i] == ',' || str[i] == '\n' || str[i] == '\t')
-	{
-		i++;
-		if (str[i] == '\0')
-			return (-1);
-	}
-	return (i);
-}
-
-static int		end(const char *str)
-{
-	int i;
-
-	i = ft_strlen(str) - 1;
-	while (str[i] == ' ' || str[i] == ',' || str[i] == '\n' || str[i] == '\t')
-	{
-		i--;
-	}
-	return (i);
-}
-
-char			*ft_strtrim(const char *s)
+static int	count_spaces(char const *s)
 {
 	int		i;
-	int		j;
-	char	*dest;
+	size_t	spaces;
 
-	if (s == NULL)
-		return (NULL);
 	i = 0;
-	j = start(s);
-	if (i == -1)
-		return ("");
-	dest = (char *)malloc(sizeof(char) * (end(s) - start(s) + 1));
-	if (dest == NULL)
-		return (NULL);
-	while (j <= end(s))
+	spaces = 0;
+	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
 	{
-		dest[i] = s[j];
 		i++;
-		j++;
+		spaces++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	if (spaces == ft_strlen(s))
+		return (spaces);
+	while (s[i] != '\0')
+		i++;
+	i--;
+	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
+	{
+		i--;
+		spaces++;
+	}
+	return (spaces);
+}
+
+char		*ft_strtrim(char const *s)
+{
+	int				spaces;
+	char			*new_string;
+	unsigned int	i;
+	unsigned int	j;
+
+	if (!s)
+		return (NULL);
+	spaces = count_spaces(s);
+	i = 0;
+	j = 0;
+	new_string = (char*)malloc(sizeof(new_string) * (ft_strlen(s) - spaces));
+	if (new_string == NULL)
+		return (NULL);
+	if (spaces == 0)
+		new_string = ft_strcpy(new_string, s);
+	while (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
+		i++;
+	while (j < (ft_strlen(s) - spaces))
+		new_string[j++] = s[i++];
+	new_string[j] = '\0';
+	return (new_string);
 }

@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 18:10:34 by jthevene          #+#    #+#             */
-/*   Updated: 2015/01/06 23:59:11 by jthevene         ###   ########.fr       */
+/*   Created: 2015/09/21 16:47:21 by sgaudin           #+#    #+#             */
+/*   Updated: 2016/02/03 10:28:08 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 int		ft_strcmp(const char *s1, const char *s2)
 {
-	int		i;
+	int				i;
+	unsigned char	*tmp1;
+	unsigned char	*tmp2;
 
 	i = 0;
-	while (((unsigned char *)s1)[i] == ((unsigned char *)s2)[i] &&
-		s1[i] && s2[i])
-		i++;
-	if (((unsigned char *)s1)[i] > ((unsigned char *)s2)[i])
-		return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
-	else if (((unsigned char *)s1)[i] < ((unsigned char *)s2)[i])
-		return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
-	else
+	if (!s1 || !s2)
 		return (0);
+	tmp1 = (unsigned char *)s1;
+	tmp2 = (unsigned char *)s2;
+	while (tmp1[i] != '\0' && tmp2[i] != '\0' && tmp1[i] == tmp2[i])
+		i++;
+	return (tmp1[i] - tmp2[i]);
 }

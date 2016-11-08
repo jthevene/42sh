@@ -12,7 +12,7 @@
 
 NAME = 42sh
 
-INCLUDES = ../includes/42sh.h ./includes/redir.h
+INCLUDES = ../includes/42sh.h ./includes/redir.h ./includes/globing.h
 
 REDIR = ./redirections/
 GLOB = ./globing/

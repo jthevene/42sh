@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/03 18:44:38 by jthevene          #+#    #+#             */
-/*   Updated: 2014/11/04 14:49:25 by jthevene         ###   ########.fr       */
+/*   Created: 2015/11/26 14:36:24 by sgaudin           #+#    #+#             */
+/*   Updated: 2016/02/03 10:27:35 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strcat(char *s1, const char *s2)
 {
-	int		i;
-	int		j;
+	int i;
+	int j;
 
 	i = 0;
 	j = 0;
@@ -23,10 +23,9 @@ char	*ft_strcat(char *s1, const char *s2)
 		i++;
 	while (s2[j] != '\0')
 	{
-		s1[i] = s2[j];
+		s1[i + j] = s2[j];
 		j++;
-		i++;
 	}
-	s1[i] = '\0';
+	s1[i + j] = '\0';
 	return (s1);
 }

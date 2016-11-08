@@ -1,50 +1,65 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   itoa.c                                             :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/13 16:38:22 by jthevene          #+#    #+#             */
-/*   Updated: 2014/11/18 17:04:54 by jthevene         ###   ########.fr       */
+/*   Created: 2015/11/27 14:52:35 by sgaudin           #+#    #+#             */
+/*   Updated: 2016/02/03 10:22:34 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-static void		ft_str_nbr(int nbr, char *dst)
+static int	ft_sign(int n)
 {
-	if (nbr >= 0)
-	{
-		if (nbr >= 10)
-		{
-			ft_str_nbr(nbr / 10, dst);
-			ft_str_nbr(nbr % 10, dst);
-		}
-		else
-			dst[ft_strlen(dst)] = nbr + '0';
-	}
-	else
-	{
-		dst[0] = '-';
-		ft_str_nbr(-nbr, dst);
-	}
+	if (n < 0)
+		return (1);
+	return (0);
 }
 
-char			*ft_itoa(int nbr)
+static int	ft_size(int n)
 {
-	char	*dst;
+	int size;
 
-	dst = malloc(sizeof(char) * 11);
-	if (!dst)
-		return (NULL);
-	ft_bzero(dst, 13);
-	if (nbr == -2147483648)
+	size = 0;
+	if (!n)
+		return (0);
+	if (n == 0)
+		return (1);
+	while (n != 0)
 	{
-		ft_str_nbr(nbr + 1, dst);
-		dst[10] = '8';
+		n /= 10;
+		size++;
 	}
-	else
-		ft_str_nbr(nbr, dst);
-	return (dst);
+	return (size);
+}
+
+char		*ft_itoa(int n)
+{
+	char	*str;
+	int		i;
+	int		sign;
+
+	sign = ft_sign(n);
+	str = (char*)malloc(sizeof(str) * (ft_size(n) + sign + 1));
+	if (!str)
+		return (NULL);
+	if (sign == 1)
+		n = -n;
+	i = ft_size(n) + sign;
+	str[i] = '\0';
+	if (n == 0)
+		return (ft_strdup("0"));
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	while (n != 0)
+	{
+		str[--i] = ((n % 10) + '0');
+		n /= 10;
+	}
+	if (sign == 1)
+		str[--i] = '-';
+	return (str);
 }

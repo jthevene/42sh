@@ -3,27 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 17:03:15 by jthevene          #+#    #+#             */
-/*   Updated: 2014/11/10 15:01:47 by jthevene         ###   ########.fr       */
+/*   Created: 2015/11/24 15:11:27 by sgaudin           #+#    #+#             */
+/*   Updated: 2016/02/03 10:33:21 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-char	*ft_strstr(const char *src, const char *str)
+char	*ft_strstr(const char *s1, const char *s2)
 {
-	size_t		i;
+	int		i;
+	int		j;
+	int		taille;
 
-	i = ft_strlen(str);
-	if (!*str)
-		return ((char *)src);
-	while (*src)
+	i = 0;
+	j = 0;
+	taille = ft_strlen(s2);
+	if (taille == 0)
+		return ((char*)s1);
+	while (s1[i] != '\0')
 	{
-		if (!ft_strncmp(src, str, i))
-			return ((char *)src);
-		src++;
+		while (s1[i + j] == s2[j])
+		{
+			if (j == taille - 1)
+				return ((char*)s1 + i);
+			j++;
+		}
+		j = 0;
+		i++;
 	}
-	return (0);
+	return (NULL);
 }

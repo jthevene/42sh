@@ -15,10 +15,10 @@
 // efface la ligne en cours d'edition
 void	clean_line()
 {
-	int i;
+//	int i;
 	int nb_rows;
 	
-	i = ft_strlen(g_shell.current_line) + 2;
+//	i = ft_strlen(g_shell.current_line) + 2;
 	nb_rows = g_shell.cursor_y + 1;
 	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("dl", NULL), 1, ft_putchar_int);

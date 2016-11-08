@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 11:31:13 by jules             #+#    #+#             */
-/*   Updated: 2016/11/07 15:22:03 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/08 16:52:18 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,13 @@ static void		ft_sigwinch(int sig)
 {
 	(void)sig;
 	ioctl(0, TIOCGWINSZ, g_shell.win);
-	print_line(ft_strlen(g_shell.current_line));
+	if (g_shell.current_line)
+	{
+		clean_line();
+		display_prompt();
+		ft_putstr(g_shell.current_line);
+		// print_line(ft_strlen(g_shell.current_line));
+	}
 }
 
 // static void		ft_sigint(int sig)

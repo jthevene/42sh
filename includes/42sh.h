@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2016/11/08 11:48:08 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/08 12:20:56 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct		s_shell
 	char			*oldpwd;
 	t_var			*vars;//contenu de ENV
 	int 			cursor_x;
-	int 			cursor_y; // 0 = premiere ligne de la commande en cours d'edition
+	int 			nb_rows; // 0 = premiere ligne de la commande en cours d'edition
 	struct winsize	*win;
 	int				running;
 	t_lst			*hist;

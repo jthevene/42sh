@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 10:41:51 by jules             #+#    #+#             */
-/*   Updated: 2016/11/07 15:03:07 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/08 17:23:08 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,22 @@
 void	clean_line()
 {
 	int i;
-	int nb_rows;
 	
-	i = ft_strlen(g_shell.current_line) + 2;
-	nb_rows = g_shell.cursor_y + 1;
+	i = ft_strlen(g_shell.current_line) + 3;
+	g_shell.nb_rows = 1;
+	if (i > g_shell.win->ws_col)
+	{
+		g_shell.nb_rows = i / g_shell.win->ws_col;
+		if ((i % g_shell.win->ws_col) != 0)
+			g_shell.nb_rows++;
+	}
 	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("dl", NULL), 1, ft_putchar_int);
-	while (nb_rows-- > 1)
+	while (g_shell.nb_rows-- > 1)
 	{
 		tputs(tgetstr("dl", NULL), 1, ft_putchar_int);
 		tputs(tgetstr("up", NULL), 1, ft_putchar_int);
 	}
-	// while (g_shell.cursor_y-- >= 0)
-	// {
-	// 	tputs(tgetstr("dl", NULL), 1, ft_putchar_int);
-	// 	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
-	// 	if (g_shell.cursor_y > 0)
-	// 		tputs(tgetstr("up", NULL), 1, ft_putchar_int);
-	// }
 }
 
 void	print_line(int i)
@@ -41,12 +39,12 @@ void	print_line(int i)
 	int 	j;
 
 	j = 0;
+	(void)i;
 	clean_line();
 	g_shell.cursor_x = 0;
-	g_shell.cursor_y = 0;
 	display_prompt();
 	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
-	while (j < i + 1)
+	while (j <= i)
 	{
 		ft_putchar(g_shell.current_line[j]);
 		g_shell.cursor_x++;
@@ -55,7 +53,6 @@ void	print_line(int i)
 		{
 			cursor_next_line();
 			g_shell.cursor_x = 0;
-			g_shell.cursor_y++;
 		}
 	}
 }

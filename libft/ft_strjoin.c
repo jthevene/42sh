@@ -3,30 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/12 14:15:33 by jthevene          #+#    #+#             */
-/*   Updated: 2014/11/12 16:52:41 by jthevene         ###   ########.fr       */
+/*   Created: 2015/11/26 15:33:45 by sgaudin           #+#    #+#             */
+/*   Updated: 2016/02/03 10:30:35 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*str;
-	size_t	s1_len;
-	size_t	s2_len;
+	unsigned int	size;
+	char			*joined;
 
 	if (!s1 || !s2)
 		return (NULL);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	str = ft_strnew(s1_len + s2_len);
-	if (str)
-	{
-		ft_strcpy(str, s1);
-		ft_strcpy(str + s1_len, s2);
-	}
-	return (str);
+	size = ft_strlen(s1) + ft_strlen(s2);
+	joined = (char*)malloc(sizeof(joined) * size);
+	joined = ft_strnew(size);
+	if (joined == NULL)
+		return (NULL);
+	joined = ft_strcat(joined, s1);
+	joined = ft_strcat(joined, s2);
+	return (joined);
 }

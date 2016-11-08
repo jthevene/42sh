@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   memchr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/07 18:29:02 by jthevene          #+#    #+#             */
-/*   Updated: 2014/11/24 18:17:50 by jthevene         ###   ########.fr       */
+/*   Created: 2015/11/27 17:15:12 by sgaudin           #+#    #+#             */
+/*   Updated: 2016/02/03 10:24:42 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t		i;
-	void		*str;
+	unsigned char	*str;
+	unsigned char	tmp;
+	size_t			i;
 
 	i = 0;
-	if (!s || !n)
-		return (NULL);
-	while (i < n)
+	tmp = (unsigned char)c;
+	str = (unsigned char *)s;
+	if (str)
 	{
-		if (((unsigned char *)s)[i] == (unsigned char)c)
+		while (n--)
 		{
-			str = ((void *)s + i * sizeof(unsigned char));
-			return (str);
+			if (str[i] == tmp)
+				return ((void*)&str[i]);
+			i++;
 		}
-		i++;
 	}
 	return (NULL);
 }

@@ -49,7 +49,7 @@ $(LIBFT_NAME):
 	@make -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
-	$(COMPILER) $(LFLAGS) $(LIB_FLAGS) $^ libft/libft.a -o $@
+	$(COMPILER) $(LFLAGS) $(LIB_FLAGS) $^ libft/libft.a -ltermcap -Incurses -o $@
 
 $(OBJ): | $(OBJ_DIR)
 

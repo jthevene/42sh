@@ -31,3 +31,23 @@ int 			count_brackets(char *str, char bracket)
 		return (0);
 	return (1);
 }
+
+int 			next_bracket(char *str, int i)
+{
+	FT_INIT(int, count, 0);
+	FT_INIT(int, ret, 0);
+	while (str[i])
+	{
+		if (str[i] == '[')
+			count++;
+		if (str[i] == ']')
+		{
+			count--;
+			if (!count)
+				break ;
+		}
+		i++;
+		ret++;
+	}
+	return (ret);
+}

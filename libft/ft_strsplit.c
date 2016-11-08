@@ -3,79 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/17 16:54:30 by jthevene          #+#    #+#             */
-/*   Updated: 2015/03/07 18:09:06 by jthevene         ###   ########.fr       */
+/*   Created: 2015/11/26 17:32:24 by sgaudin           #+#    #+#             */
+/*   Updated: 2016/02/03 10:33:03 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-int		ft_nb_strings(const char *s, char c)
+static int	ft_countwords(char const *s, char c)
 {
-	static int		i;
-	static int		nb_strings;
+	int i;
+	int words;
 
 	i = 0;
-	nb_strings = 0;
+	words = 0;
+	if (s[i] != c)
+		words++;
+	while (s[i] == c && s[i] != '\0')
+		i++;
 	while (s[i] != '\0')
 	{
-		while (s[i] == c && s[i] != '\0')
-			i++;
-		while (s[i] != c && s[i] != '\0')
-			i++;
-		if (s[i] != '\0' || s[i - 1] != c)
-			nb_strings++;
+		if (s[i - 1] == c && s[i] != c)
+			words++;
+		i++;
 	}
-	return (nb_strings);
+	return (words);
 }
 
-char	**ft_supersplit(char const *s, char c, char ***res)
+static int	ft_length(char const *s, char c)
 {
-	static int		i;
-	static int		j;
-	static int		k;
+	int length;
+	int i;
+
+	length = 0;
+	i = 0;
+	while (s[i] != '\0' && s[i] != c)
+	{
+		length++;
+		i++;
+	}
+	if (length == 0)
+		length++;
+	return (length);
+}
+
+char		**ft_strsplit(char const *s, char c)
+{
+	char	**tab;
+	int		i;
 
 	i = 0;
-	k = 0;
-	j = 0;
-	while (s[i] != '\0')
+	if (!s)
+		return (NULL);
+	tab = (char**)malloc(sizeof(char *) * (ft_countwords(s, c) + 1));
+	if (tab == NULL)
+		return (NULL);
+	while (*s)
 	{
-		while (s[i] == c && s[i] != '\0')
-			i++;
-		if (s[i] != c && s[i] != '\0')
+		if (*s == c)
+			s++;
+		else
 		{
-			j = i;
-			while (s[i] != c && s[i] != '\0')
-				i++;
-			if (s[i] != '\0' || s[i - 1] != c)
-			{
-				res[0][k] = ft_strsub(s, j, i - j);
-				k++;
-			}
+			tab[i] = ft_strsub(s, 0, ft_length(s, c));
+			if (tab[i] == NULL)
+				return (NULL);
+			s = s + ft_length(s, c);
+			i++;
 		}
 	}
-	res[0][k] = NULL;
-	return (*res);
-}
-
-char	**ft_strsplit(char const *s, char c)
-{
-	char	**res;
-	int		nb_strings;
-
-	nb_strings = 0;
-	if (s == NULL)
-		return (NULL);
-	nb_strings = ft_nb_strings(s, c);
-	res = (char **)malloc(sizeof(char *) * (nb_strings + 1));
-	if (res == NULL)
-		return (NULL);
-	if (nb_strings == 0)
-	{
-		res[0] = NULL;
-		return (res);
-	}
-	return (ft_supersplit(s, c, &res));
+	tab[i] = NULL;
+	return (tab);
 }

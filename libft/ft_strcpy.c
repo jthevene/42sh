@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/03 16:58:26 by jthevene          #+#    #+#             */
-/*   Updated: 2014/11/26 16:36:41 by jthevene         ###   ########.fr       */
+/*   Created: 2015/09/17 22:15:58 by sgaudin           #+#    #+#             */
+/*   Updated: 2016/02/03 10:28:16 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strcpy(char *dest, const char *src)
 {
-	int		i;
+	int i;
 
 	i = 0;
 	if (!src)

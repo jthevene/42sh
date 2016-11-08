@@ -45,27 +45,32 @@ void			hub_bracket(t_glob *glob) // Gère les différents cas de figure, cf comm
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, ret, 0);
+	FT_INIT(char *, tmp, NULL);
 	while (g_shell.line[i])
 	{
 		if (g_shell.line[i] == '[' && g_shell.line[i + 1]
 			&& g_shell.line[i + 1] == '!')
 		{
 			ret = catch_dash(i);
+			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, i) + 1);
 			fill_bracket_tabs(ret == 1 ? NORNG 
 			: FT_TER(ret < 2, NOMULT, MIX), g_shell.line, glob);
+			i += next_bracket(g_shell.line, i);
+			free(tmp);
 			printf("\033[32mRet = %s\033[0m\n", glob->sbracket->bracket);
-			break ;
 		}
 		else if (g_shell.line[i] == '[' && g_shell.line[i + 1]
 			&& g_shell.line[i + 1] != '!')
 		{
 			ret = catch_dash(i);
+			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, i) + 1);
 			fill_bracket_tabs(ret == 1 ? RNG 
-			: FT_TER(ret < 2, MULT, MIX), g_shell.line, glob);
+			: FT_TER(ret < 2, MULT, MIX), tmp, glob);
 			if (!ret)
 				glob->sbracket->bracket = mult_nodouble(glob->sbracket->bracket);
+			i += next_bracket(g_shell.line, i);
+			free(tmp);
 			printf("\033[32mRet = %s\033[0m\n", glob->sbracket->bracket);
-			break ;
 		}
 		i++;
 	}

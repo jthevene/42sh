@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 12:21:52 by jules             #+#    #+#             */
-/*   Updated: 2016/10/25 16:21:03 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/07 15:31:51 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	ft_reset_termios(struct termios t_back)
 	t_back.c_lflag |= ICANON;
 	t_back.c_lflag |= ECHO;
 	tcsetattr(0, 0, &t_back);
-	tputs(tgetstr("te", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("me", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("vs", NULL), 1, ft_putchar_int);
 }

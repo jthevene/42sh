@@ -32,7 +32,7 @@ static int		verif_tokens(char *str)
 	return (1);
 }
 
-static int		get_command(char *str, t_glob *glob)
+static int		get_command(char *str, t_glob *glob) // Fonction qui recupere la commande pour le message d'erreur
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, 0);
@@ -101,6 +101,5 @@ int				glob_parser(void)
 	if (ft_strchr(g_shell.line, '['))
 		hub_bracket(glob); // Hub bracket est le hub de fonctions qui va gérer tous les cas possibles pour les expression de globing contenant des barckets de ce type : '[]'
 //	free_glob(glob);
-//	printf("Glob freed\n");
 	return (1);
 }

@@ -27,12 +27,15 @@
 #  define FT_MULTI3(a, b, c) a = b = c // Macro de multi assignation
 # endif
 
-# define MULT 1
-# define RNG 2
-# define NOMULT 3
-# define NORNG 4
-# define MIX 5
-# define CATEGORY 6
+# ifndef FT_TER
+#  define FT_TER(si, alors, sinon) si ? alors : sinon
+# endif
+
+# define MULT 1 // [abc]
+# define RNG 2 // [a-c]
+# define NOMULT 3 // [!abc]
+# define NORNG 4 // [!a-c]
+# define MIX 5 // [abc-fE-W] || [!abc-fE-W]
 
 typedef struct 			s_sbracket
 {
@@ -81,6 +84,11 @@ int						get_len_mix(char *str);
 int						get_letters(char **ret, char *str);
 char					*get_rng_str(char *str, int i);
 int						check_rng(char *str);
+int						catch_dash(int i);
+
+char					*strjoin_nodouble(char *s1, char *s2);
+char 					*strdup_nodouble(char *str);
+char					*mult_nodouble(char *str);
 
 int 					sbracket_pushback(t_sbracket **list, int type);
 void					print_sbracket(t_sbracket *list);

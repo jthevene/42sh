@@ -3,7 +3,11 @@
 void	parse(t_tree *tree)
 {
 	if (dotcoma(tree) == 0)
+	{
 		printf("No ; !\n");
+		printf("content : (%s)\n", tree->content);
+		
+	}
 	else
 	{
 		printf("content : (%s)\n", tree->content);
@@ -70,5 +74,7 @@ int		dotcoma(t_tree *tree)
 	tree->left->content = epur_str(tree->left->content);
 	free(tree->content);
 	tree->content = ft_strdup(";");
+	parse(tree->left);
+	parse(tree->right);
 	return (1);
 }

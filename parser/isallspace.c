@@ -54,37 +54,37 @@ char	*epur_str(char *str)
 
 char	*search(char *src, char *str1, char *str2)
 {
-   int i;
-   int j;
-   int	firstOcc;
+	int i;
+	int j;
+	int	firstOcc;
 
-   i = 0;
-   j = 0;
-   while (src[i] != '\0')
-   {
-      while ((src[i] != str1[0] && src[i] != str2[0]) && src[i] != '\0')
-         i++;
-      if (src[i] == '\0')
-         return (NULL);
-      firstOcc = i;
-      while (src[i] == str1[j] && src[i] != '\0' && str1[j] != '\0')
-      {
-         i++;
-         j++;
-      }
-      while (src[i] == str2[j] && src[i] != '\0' && str2[j] != '\0')
-      {
-         i++;
-         j++;
-      }
-      if (str1[j] == '\0')
-         return ((char*)&str1[firstOcc]);
-      if (str2[j] == '\0')
-         return ((char*)&str2[firstOcc]);
-      if (src[i] == '\0')
-         return (NULL);
-      i = firstOcc + 1;
-      j = 0;
-   }
-   return (NULL);
+	i = 0;
+	j = 0;
+	while (src[i] != '\0')
+	{
+		while (src[i] != str1[0] && src[i] != str2[0] && src[i] != '\0')
+			i++;
+		if (src[i] == '\0')
+			return (NULL);
+		firstOcc = i;
+		while (src[i] == str1[j] && src[i] != '\0' && str1[j] != '\0')
+		{
+			i++;
+			j++;
+		}
+		if (!str1[j])
+			return ((char*)&src[firstOcc]);
+		while (src[i] == str2[j] && src[i] != '\0' && str2[j] != '\0')
+		{
+			i++;
+			j++;
+		}
+		if (str2[j] == '\0')
+			return ((char*)&src[firstOcc]);
+		if (src[i] == '\0')
+			return (NULL);
+		i = firstOcc + 1;
+		j = 0;
+	}
+	return (NULL);
 }

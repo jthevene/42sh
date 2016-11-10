@@ -17,7 +17,7 @@ int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob) // Fonction qu
 	FT_INIT(char *, tmp_error, NULL);
 	FT_INIT(int, ret, 0);
 	sbracket_pushback(&glob->sbracket, glob_case);
-	ret = check_categories(g_shell.line, glob);
+	ret = check_categories(line, glob);
 	glob->sbracket->type = ret == 1 ? MIX : glob->sbracket->type;
 	if (ret == -1 || ret == 1)
 		return (0);
@@ -54,7 +54,7 @@ void			hub_bracket(t_glob *glob) // Gère les différents cas de figure, cf comm
 			ret = catch_dash(i);
 			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, i) + 1);
 			fill_bracket_tabs(ret == 1 ? NORNG 
-			: FT_TER(ret < 2, NOMULT, MIX), g_shell.line, glob);
+			: FT_TER(ret < 2, NOMULT, MIX), tmp, glob);
 			i += next_bracket(g_shell.line, i);
 			free(tmp);
 			printf("\033[32mRet = %s\033[0m\n", glob->sbracket->bracket);
@@ -64,6 +64,7 @@ void			hub_bracket(t_glob *glob) // Gère les différents cas de figure, cf comm
 		{
 			ret = catch_dash(i);
 			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, i) + 1);
+			printf("tmp = %s\n", tmp);
 			fill_bracket_tabs(ret == 1 ? RNG 
 			: FT_TER(ret < 2, MULT, MIX), tmp, glob);
 			if (!ret)

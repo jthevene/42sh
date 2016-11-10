@@ -13,7 +13,10 @@
 #ifndef REDIR_H
 # define REDIR_H
 
-# include "../../includes/42sh.h"
+# ifndef I_42SH_H
+#  define I_42SH_H
+#  include "../../includes/42sh.h"
+# endif
 
 # ifndef FT_INIT
 #  define FT_INIT(type, name, value) type name = value

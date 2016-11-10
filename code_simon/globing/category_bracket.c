@@ -56,6 +56,7 @@ int 			check_categories(char *str, t_glob *glob)
 		j = i + 2;
 		while (str[i] && str[i] != ' ')
 			i++;
+		printf("str[i - 1] = %c %c %c\n", str[i - 1], str[i - 2], str[i - 3]);
 		if (str[i - 1] == ']' && str[i - 2] == ']' && str[i - 3] == ':')
 		{
 			category = ft_strsub(str, j + 1, i - j - 4);
@@ -64,7 +65,7 @@ int 			check_categories(char *str, t_glob *glob)
 		}
 		else
 		{
-			printf("Bad pattern check categories\n");
+			printf("Bad pattern check categories : %s\n", category);
 			free(category);
 			return (-1);
 		}

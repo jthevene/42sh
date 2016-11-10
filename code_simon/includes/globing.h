@@ -13,7 +13,10 @@
 #ifndef GLOBING_H
 # define GLOBING_H
 
-# include "../../includes/42sh.h"
+# ifndef I_42SH_H
+#  define I_42SH_H
+#  include "../../includes/42sh.h"
+# endif
 
 # ifndef FT_INIT
 #  define FT_INIT(t, n, v) t n = v // Macro d'initialisation de variable

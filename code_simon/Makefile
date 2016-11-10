@@ -22,18 +22,19 @@ SRCS = 	$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
 		\
 		$(GLOB)glob_parser.c $(GLOB)hub_bracket.c $(GLOB)fill_tabs.c\
 		$(GLOB)init_tabs.c $(GLOB)category_bracket.c\
-		$(GLOB)sbracket_list.c \
+		$(GLOB)sbracket_list.c $(GLOB)handle_mixed_expr.c\
 		\
 		$(G_UTILS1)catch_dash.c $(G_UTILS1)check_rng.c $(G_UTILS1)clean_brackets.c\
 		$(G_UTILS1)count_brackets.c $(G_UTILS1)get_functions.c\
-		$(G_UTILS1)str_nodouble.c\
+		$(G_UTILS1)str_nodouble.c $(G_UTILS1)mixed_expr_get_len.c\
 		\
 		main.c
 
 BIN =	simple_right.o double_right.o redir_utils.o main.o glob_parser.o \
 		hub_bracket.o fill_tabs.o init_tabs.o \
 		category_bracket.o sbracket_list.o catch_dash.o check_rng.o \
-		clean_brackets.o count_brackets.o get_functions.o str_nodouble.o
+		clean_brackets.o count_brackets.o get_functions.o str_nodouble.o \
+		handle_mixed_expr.o mixed_expr_get_len.o
 
 
 CC_FLAGS = -Wall -Wextra -Werror

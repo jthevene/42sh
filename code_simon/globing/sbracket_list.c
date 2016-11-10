@@ -19,7 +19,6 @@ int					sbracket_pushback(t_sbracket **list, int type)
 
 	if (!(*list))
 	{
-		printf("!(*list)\n");
 		if (!((*list) = (t_sbracket *)malloc(sizeof(t_sbracket))))
 			return (0);
 		FT_MULTI3((*list)->next, (*list)->prev, NULL);
@@ -28,7 +27,6 @@ int					sbracket_pushback(t_sbracket **list, int type)
 	}
 	else
 	{
-		printf("pushing back\n");
 		if (!(new = (t_sbracket *)malloc(sizeof(t_sbracket))))
 			return (0);
 		new->next = NULL;

@@ -56,7 +56,6 @@ int 			check_categories(char *str, t_glob *glob)
 		j = i + 2;
 		while (str[i] && str[i] != ' ')
 			i++;
-		printf("str[i - 1] = %c %c %c\n", str[i - 1], str[i - 2], str[i - 3]);
 		if (str[i - 1] == ']' && str[i - 2] == ']' && str[i - 3] == ':')
 		{
 			category = ft_strsub(str, j + 1, i - j - 4);
@@ -77,4 +76,28 @@ int 			check_categories(char *str, t_glob *glob)
 	else
 		printf("glob->sbracket->bracket = %s\n", glob->sbracket->bracket);
 	return (1);
+}
+
+int 			detect_category(char *str)
+{
+	FT_INIT(int, i, 0);
+	FT_INIT(int, j, 0);
+	while (str[i])
+	{
+		if (str[i] == '[')
+		{
+			j = i;
+			if (str[j + 1] == ':')
+			{
+				while (str[j] && str[j] != ']')
+				{
+					if (str[j - 1] == ':')
+						return (1);
+					j++;
+				}
+			}
+		}
+		i++;
+	}
+	return (0);
 }

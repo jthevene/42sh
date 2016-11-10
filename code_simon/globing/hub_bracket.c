@@ -53,7 +53,9 @@ void			hub_bracket(t_glob *glob) // Gère les différents cas de figure, cf comm
 		{
 			ret = catch_dash(i);
 			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, i) + 1);
-			fill_bracket_tabs(ret == 1 ? NORNG 
+//			fill_bracket_tabs(ret == 1 ? NORNG 
+//			: FT_TER(ret < 2, NOMULT, MIX), tmp, glob);
+			handle_mixed_expr(ret == 1 ? NORNG
 			: FT_TER(ret < 2, NOMULT, MIX), tmp, glob);
 			i += next_bracket(g_shell.line, i);
 			free(tmp);
@@ -65,8 +67,10 @@ void			hub_bracket(t_glob *glob) // Gère les différents cas de figure, cf comm
 			ret = catch_dash(i);
 			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, i) + 1);
 			printf("tmp = %s\n", tmp);
-			fill_bracket_tabs(ret == 1 ? RNG 
-			: FT_TER(ret < 2, MULT, MIX), tmp, glob);
+//			fill_bracket_tabs(ret == 1 ? RNG
+//			: FT_TER(ret < 2, MULT, MIX), tmp, glob);
+			handle_mixed_expr(ret == 1 ? NORNG
+			: FT_TER(ret < 2, NOMULT, MIX), tmp, glob);
 			if (!ret)
 				glob->sbracket->bracket = mult_nodouble(glob->sbracket->bracket);
 			i += next_bracket(g_shell.line, i);

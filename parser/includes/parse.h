@@ -44,5 +44,12 @@ int		dotcoma(t_tree *tree);
 char	*search(char *src, char *str1, char *str2);
 t_tree		*create_node(void);
 int		and_or(t_tree *tree);
+char	*search2(char *src, char *str1, char *str2, char *str3);
+int		redirections(t_tree *tree);
+void	pipe_tree(t_tree *tree, char *chr, int len);
+void	dbless_tree(t_tree *tree, char *chr, int len);
+void	dbmore_tree(t_tree *tree, char *chr, int len);
+void	less_tree(t_tree *tree, char *chr, int len);
+void	more_tree(t_tree *tree, char *chr, int len);
 
 #endif

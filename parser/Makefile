@@ -7,6 +7,7 @@ SRC  =  ./tree.c \
 	./search.c \
 	./main.c \
 	./parse.c \
+	./parse2.c \
 	./get_next_line.c \
 
 OBJ =	$(SRC:.c=.o)

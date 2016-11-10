@@ -42,5 +42,7 @@ int		isallspace(char *str);
 char	*epur_str(char *str);
 int		dotcoma(t_tree *tree);
 char	*search(char *src, char *str1, char *str2);
+t_tree		*create_node(void);
+int		and_or(t_tree *tree);
 
 #endif

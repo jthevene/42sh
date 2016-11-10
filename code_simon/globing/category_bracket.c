@@ -64,7 +64,7 @@ int 			check_categories(char *str, t_glob *glob)
 		}
 		else
 		{
-			printf("Bad pattern check categories\n");
+			printf("Bad pattern check categories : %s\n", category);
 			free(category);
 			return (-1);
 		}
@@ -76,4 +76,28 @@ int 			check_categories(char *str, t_glob *glob)
 	else
 		printf("glob->sbracket->bracket = %s\n", glob->sbracket->bracket);
 	return (1);
+}
+
+int 			detect_category(char *str)
+{
+	FT_INIT(int, i, 0);
+	FT_INIT(int, j, 0);
+	while (str[i])
+	{
+		if (str[i] == '[')
+		{
+			j = i;
+			if (str[j + 1] == ':')
+			{
+				while (str[j] && str[j] != ']')
+				{
+					if (str[j - 1] == ':')
+						return (1);
+					j++;
+				}
+			}
+		}
+		i++;
+	}
+	return (0);
 }

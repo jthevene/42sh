@@ -13,7 +13,10 @@
 #ifndef GLOBING_H
 # define GLOBING_H
 
-# include "../../includes/42sh.h"
+# ifndef I_42SH_H
+#  define I_42SH_H
+#  include "../../includes/42sh.h"
+# endif
 
 # ifndef FT_INIT
 #  define FT_INIT(t, n, v) t n = v // Macro d'initialisation de variable
@@ -36,6 +39,10 @@
 # define NOMULT 3 // [!abc]
 # define NORNG 4 // [!a-c]
 # define MIX 5 // [abc-fE-W] || [!abc-fE-W]
+
+/* Pour les commandes mixees (cf handle_mixed_expr) */
+#define DEBUT 1
+#define FIN 2
 
 typedef struct 			s_sbracket
 {
@@ -66,11 +73,15 @@ typedef struct			s_glob
 int						glob_parser(void);
 
 void					hub_bracket(t_glob *glob);
+int						fill_bracket_tabs(int glob_case, char *line, t_glob *glob);
 void					init_tabs1(t_glob *glob, int i, int j);
 void					init_tabs2(t_glob *glob);
 void					init_tabs3(t_glob *glob);
 
 int 					check_categories(char *str, t_glob *glob);
+
+void					handle_mixed_expr(int glob_case, char *line, t_glob *glob);
+int 					mixed_expr_get_len(char *str, int pos);
 
 char					*fill_mult(char *str);
 char					*fill_rng(char *str);

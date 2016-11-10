@@ -3,16 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apinho <apinho@student.42.fr>              +#+  +:+       +#+         #
+#    By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/20 15:38:21 by apinho            #+#    #+#              #
-#    Updated: 2016/10/06 17:35:04 by apinho           ###   ########.fr        #
+#    Updated: 2016/11/10 12:10:22 by hjacque          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =	libft.a
 
-SRC =	./ft_putstrtimespace.c \
+SRC =	./ft_isallspace.c \
+	./ft_epurstr.c \
+	./ft_putstrtimespace.c \
 	./ft_strndup.c \
 	./ft_putstrspace.c \
 	./ft_putstrtime.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/13 02:09:03 by hjacque           #+#    #+#             */
-/*   Updated: 2016/10/06 15:08:10 by apinho           ###   ########.fr       */
+/*   Updated: 2016/11/10 12:10:09 by hjacque          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+int					ft_isallspace(char *str);
+char				*ft_epurstr(char *str);
 char				*ft_strjoinfree(char *s1, char *s2, int flag_str_to_free);
 void				ft_putstrtimespace(char const *s);
 void				ft_putstrspace(char const *s);

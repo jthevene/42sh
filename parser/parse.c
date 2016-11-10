@@ -18,44 +18,6 @@ void	parse(t_tree *tree)
 	//parse(tree->right);
 }
 
-t_tree		*create_node(void)
-{
-	t_tree *tree;
-
-	if (!(tree = malloc(sizeof(t_tree))))
-		return (NULL);
-	tree->left = NULL;
-	tree->right = NULL;
-	return (tree);
-}
-
-int		main(int ac, char **av)
-{
-	t_all	*all;
-	t_tree	*tree;
-
-	(void)ac;
-	(void)av;
-	tree = create_node();
-	if (!(all = (t_all *)malloc(sizeof(t_all))))
-		return (0);
-	while (93)
-	{
-		ft_putstr("$> ");
-		get_next_line(0, &(all->line));
-		if ((ft_strcmp(all->line, "\0") == 0) || (isallspace(all->line) == 1))
-			;
-		else
-		{
-			tree->content = epur_str(ft_strdup(all->line));
-			all->epured = search(tree->content, "&&", "||");
-			printf("search : %s\n", all->epured);
-			parse(tree);
-		}
-	}
-	return (0);
-}
-
 int		dotcoma(t_tree *tree)
 {
 	char	*chr;
@@ -68,10 +30,10 @@ int		dotcoma(t_tree *tree)
 	tree->right = create_node();
 	tree->type = SEMICOLON;
 	tree->right->content = ft_strdup(chr + 1);
-	tree->right->content = epur_str(tree->right->content);
+	tree->right->content = ft_epurstr(tree->right->content);
 	len = chr - tree->content;
 	tree->left->content = ft_strndup(tree->content, len);
-	tree->left->content = epur_str(tree->left->content);
+	tree->left->content = ft_epurstr(tree->left->content);
 	free(tree->content);
 	tree->content = ft_strdup(";");
 	parse(tree->left);

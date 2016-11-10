@@ -3,8 +3,10 @@ CC =	gcc
 
 NAME =  ft_parse
 
-SRC  =  ./parse.c \
-	./isallspace.c \
+SRC  =  ./tree.c \
+	./search.c \
+	./main.c \
+	./parse.c \
 	./get_next_line.c \
 
 OBJ =	$(SRC:.c=.o)

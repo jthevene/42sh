@@ -30,19 +30,21 @@ static t_shell	*ft_init_gshell2(void)
 
 void			ft_infinite_loop(void)
 {
-	int		ret;
+//	int		ret;
 
-	ret = 0;
+//	ret = 0;
 	while (1)
 	{
-		ret = get_next_line(0, &g_shell.line); /* Jules' GNL leaking, careful !! */
+//		ret = get_next_line(0, &g_shell.line);
+		g_shell.line = ft_strdup("l [abc[:upper:]]");
+		printf("bite -> %p\n", g_shell.line);
 		if (!ft_strcmp(g_shell.line, "exit"))
 			exit(0);
-		if (ret)
+//		if (ret)
 			glob_parser(); // ---> Appel du parser pour le glob ('[' seulement pour l'instant)
 		free(g_shell.line);
 		ft_putstr("\n$> ");
-		ret = 0;
+//		ret = 0;
 	}
 }
 

@@ -77,7 +77,7 @@ static char			*replace_category(char *str, t_glob *glob)
 	ret[++j] = '[';
 	while (tmp_cat[i])
 		ret[++j] = tmp_cat[i++];
-	free(tmp_cat);
+//	free(tmp_cat);
 	i = 1;
 	while (str[i])
 	{
@@ -87,7 +87,7 @@ static char			*replace_category(char *str, t_glob *glob)
 		i++;
 	}
 	ret[++j] = '\0';
-	free(category);
+//	free(category);
 	return (ret);
 }
 
@@ -102,13 +102,11 @@ char 				*handle_categories(char *str, t_glob *glob)
 		ret = ft_strdup(tmp);
 		printf("ret 1 -> %p\n", ret);
 		printf("tmp 1 -> %p\n", tmp);
-		free(tmp);
+//		free(tmp);
 		tmp = replace_category(ret, glob);
 		printf("tmp 2 -> %p\n", tmp);
-		free(ret);
+//		free(ret);
 	}
-	ret = ft_strdup(tmp);
-	printf("ret 2 -> %p\n", ret);
-	free(tmp);
-	return (ret);
+	printf("tmp = %s\n", tmp);
+	return (tmp);
 }

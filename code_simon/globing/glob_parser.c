@@ -88,6 +88,7 @@ void			free_glob(t_glob *glob)
 	free(glob);
 }
 */
+
 int				glob_parser(void)
 {
 	static t_glob		*glob = NULL;

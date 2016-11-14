@@ -15,12 +15,13 @@
 int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob) // Fonction qui choisit la méthode de remplissage de notre tableau de caractères (glob->sbracket->bracket)
 {
 	FT_INIT(char *, tmp_error, NULL);
-	FT_INIT(int, ret, 0);
+	glob_case = MIX;
 	sbracket_pushback(&glob->sbracket, glob_case);
-	ret = check_categories(line, glob);
-	glob->sbracket->type = ret == 1 ? MIX : glob->sbracket->type;
-	if (ret == -1 || ret == 1)
-		return (0);
+	tmp_error = handle_categories(line, glob);
+	free(line);
+	line = ft_strdup(tmp_error);
+	printf("line 2 -> %p\n", line);
+	free(tmp_error);
 	if (!check_rng(line))
 	{
 		tmp_error = ft_strjoin("42sh: no matches found: ", glob->command);
@@ -52,11 +53,12 @@ void			hub_bracket(t_glob *glob) // Gère les différents cas de figure, cf comm
 			&& g_shell.line[i + 1] == '!')
 		{
 			ret = catch_dash(i);
-			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, i) + 1);
-//			fill_bracket_tabs(ret == 1 ? NORNG 
-//			: FT_TER(ret < 2, NOMULT, MIX), tmp, glob);
-			handle_mixed_expr(ret == 1 ? NORNG
+//			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, i) + 1);
+			tmp = ft_strdup("l [abc[:upper:]]");
+			fill_bracket_tabs(ret == 1 ? NORNG 
 			: FT_TER(ret < 2, NOMULT, MIX), tmp, glob);
+//			handle_mixed_expr(ret == 1 ? NORNG
+//			: FT_TER(ret < 2, NOMULT, MIX), tmp, glob);
 			i += next_bracket(g_shell.line, i);
 			free(tmp);
 			printf("\033[32mRet = %s\033[0m\n", glob->sbracket->bracket);
@@ -65,12 +67,13 @@ void			hub_bracket(t_glob *glob) // Gère les différents cas de figure, cf comm
 			&& g_shell.line[i + 1] != '!')
 		{
 			ret = catch_dash(i);
-			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, i) + 1);
-			printf("tmp = %s\n", tmp);
-//			fill_bracket_tabs(ret == 1 ? RNG
+//			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, i) + 1);
+			tmp = ft_strdup("l [abc[:upper:]]");
+			printf("line 1-> %p\n", tmp);
+			fill_bracket_tabs(ret == 1 ? RNG
+			: FT_TER(ret < 2, MULT, MIX), tmp, glob);
+//			handle_mixed_expr(ret == 1 ? RNG
 //			: FT_TER(ret < 2, MULT, MIX), tmp, glob);
-			handle_mixed_expr(ret == 1 ? NORNG
-			: FT_TER(ret < 2, NOMULT, MIX), tmp, glob);
 			if (!ret)
 				glob->sbracket->bracket = mult_nodouble(glob->sbracket->bracket);
 			i += next_bracket(g_shell.line, i);

@@ -12,6 +12,7 @@
 
 #include "../includes/globing.h"
 
+/*
 int 			detect_mixed_expr(char *str)
 {
 	FT_INIT(int, i, 0);
@@ -29,56 +30,27 @@ int 			detect_mixed_expr(char *str)
 	return (0);
 }
 
-static char 	*separate_chars_debut(char *line)
-{
-	FT_INIT(char *, ret, ft_strnew(mixed_expr_get_len(line, pos)));
-	FT_INIT(int, i, 0);
-	FT_INIT(int, j, 0);
-	while (str[i] && (str[i + 1] != '[' && str[i + 2] != ':'))
-	{
-		ret[j] = str[i];
-		i++;
-		j++;
-	}
-	while (str[i])
-	{
-		if (str[i + 1] == ':' && str[i + 2] == ']')
-		{
-			i += 3;
-			break ;
-		}
-		i++;
-	}
-	if (str[i] && str[i] != ']')
-	{
-		while (str[i])
-		{
-			ret[j] = str[i];
-			i++;
-			j++;
-		}
-	}
-	return (ret);
-}
-
 char			*separate_chars(char *line, int pos)
 {
 	FT_INIT(char *, ret, NULL);
 	if (pos == DEBUT)
-		ret = separate_chars_debut(line);
-	// POS FIN MAINTENANT
+		ret = separate_chars_debut(line, pos);
+	else if (pos == FIN)
+		ret = separate_chars_fin(line, pos);
+	printf("ret = %s\n", ret);
 	return (ret);
 }
 
 void			handle_mixed_expr(int glob_case, char *line, t_glob *glob)
 {
 	FT_INIT(int, pos, 0);
+	FT_INIT(char *, chars, NULL);
 	if (glob_case && glob)
 		ft_putchar('\n');
 	if (!detect_category(line))
 	{
 		printf("\033[33mCategory not detected\033[0m\n");
-//		fill_bracket_tabs(glob_case, line, glob);
+		fill_bracket_tabs(glob_case, line, glob);
 	}
 	else
 	{
@@ -86,12 +58,13 @@ void			handle_mixed_expr(int glob_case, char *line, t_glob *glob)
 		if (!(pos = detect_mixed_expr(line)))
 		{
 			printf("fill_bracket_tabs\n");
-//			fill_bracket_tabs(glob_case, line, glob);
+			fill_bracket_tabs(glob_case, line, glob);
 		}
 		else
 		{
 			printf("\033[33mMixed expr detected\033[0m\n");
-			separate_chars(line, pos);
+			chars = separate_chars(line, pos);
 		}
 	}
 }
+*/

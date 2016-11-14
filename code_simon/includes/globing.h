@@ -78,10 +78,12 @@ void					init_tabs1(t_glob *glob, int i, int j);
 void					init_tabs2(t_glob *glob);
 void					init_tabs3(t_glob *glob);
 
-int 					check_categories(char *str, t_glob *glob);
+char 					*handle_categories(char *str, t_glob *glob);
 
 void					handle_mixed_expr(int glob_case, char *line, t_glob *glob);
 int 					mixed_expr_get_len(char *str, int pos);
+char 					*separate_chars_debut(char *str, int pos);
+char 					*separate_chars_fin(char *str, int pos);
 
 char					*fill_mult(char *str);
 char					*fill_rng(char *str);
@@ -97,6 +99,8 @@ char					*clean_brackets(char *str);
 int						get_len_mix(char *str);
 int						get_letters(char **ret, char *str);
 char					*get_rng_str(char *str, int i);
+char					*get_category(char *str);
+
 
 int						check_rng(char *str);
 int						catch_dash(int i);

@@ -13,72 +13,35 @@
 #include "../includes/globing.h"
 
 // Cette fonction gère les entrées de ce type : [[:upper:]]
-static int 		category_choice(char *category, t_glob *glob)
+static char 		*category_choice(char *category, t_glob *glob)
 {
 	if (!ft_strcmp(category, "upper"))
-		glob->sbracket->bracket = ft_strdup(glob->upper);
+		return (glob->upper);
 	else if (!ft_strcmp(category, "lower"))
-		glob->sbracket->bracket = ft_strdup(glob->lower);
+		return (glob->lower);
 	else if (!ft_strcmp(category, "alpha"))
-		glob->sbracket->bracket = ft_strdup(glob->alpha);
+		return (glob->alpha);
 	else if (!ft_strcmp(category, "digit"))
-		glob->sbracket->bracket = ft_strdup(glob->digit);
+		return (glob->digit);
 	else if (!ft_strcmp(category, "alnum"))
-		glob->sbracket->bracket = ft_strdup(glob->alnum);
+		return (glob->alnum);
 	else if (!ft_strcmp(category, "space"))
-		glob->sbracket->bracket = ft_strdup(glob->space);
+		return (glob->space);
 	else if (!ft_strcmp(category, "graph"))
-		glob->sbracket->bracket = ft_strdup(glob->graph);
+		return (glob->graph);
 	else if (!ft_strcmp(category, "print"))
-		glob->sbracket->bracket = ft_strdup(glob->print);
+		return (glob->print);
 	else if (!ft_strcmp(category, "punct"))
-		glob->sbracket->bracket = ft_strdup(glob->punct);
+		return (glob->punct);
 	else if (!ft_strcmp(category, "cntrl"))
-		glob->sbracket->bracket = ft_strdup(glob->cntrl);
+		return (glob->cntrl);
 	else if (!ft_strcmp(category, "xdigit"))
-		glob->sbracket->bracket = ft_strdup(glob->xdigit);
+		return (glob->xdigit);
 	else
-		printf("No match found /// Category choice\n");
-	return (0);
+		return (NULL);
 }
 
-// Fonction qui check si l'entrée est correcte, sinon imprime un message d'erreur
-int 			check_categories(char *str, t_glob *glob)
-{
-	FT_INIT(int, i, 0);
-	FT_INIT(int, j, 0);
-	FT_INIT(char *, category, NULL);
-
-	while (str[i] != '[')
-		i++;
-	if (str[i + 1] && str[i + 2] && str[i + 1] == '[' && str[i + 2] == ':')
-	{
-		j = i + 2;
-		while (str[i] && str[i] != ' ')
-			i++;
-		if (str[i - 1] == ']' && str[i - 2] == ']' && str[i - 3] == ':')
-		{
-			category = ft_strsub(str, j + 1, i - j - 4);
-			printf("category = %s\n", category);
-			category_choice(category, glob);
-		}
-		else
-		{
-			printf("Bad pattern check categories : %s\n", category);
-			free(category);
-			return (-1);
-		}
-	}
-	if (category)
-		free(category);
-	if (!glob->sbracket->bracket)
-		return (0);
-	else
-		printf("glob->sbracket->bracket = %s\n", glob->sbracket->bracket);
-	return (1);
-}
-
-int 			detect_category(char *str)
+int 				detect_category(char *str)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, 0);
@@ -100,4 +63,52 @@ int 			detect_category(char *str)
 		i++;
 	}
 	return (0);
+}
+
+static char			*replace_category(char *str, t_glob *glob)
+{
+	FT_INIT(char *, ret, NULL);
+	FT_INIT(char *, category, get_category(str));
+	FT_INIT(char *, tmp_cat, ft_strdup(category_choice(category, glob)));
+	FT_INIT(int, i, 0);
+	FT_INIT(int, j, -1);
+
+	ret = ft_strnew(ft_strlen(category_choice(category, glob)) + ft_strlen(str) - ft_strlen(category) - 4);
+	ret[++j] = '[';
+	while (tmp_cat[i])
+		ret[++j] = tmp_cat[i++];
+	free(tmp_cat);
+	i = 1;
+	while (str[i])
+	{
+		if (str[i] == '[' && str[i + 1] == ':')
+			i = i + ft_strlen(category) + 4;
+		ret[++j] = str[i];
+		i++;
+	}
+	ret[++j] = '\0';
+	free(category);
+	return (ret);
+}
+
+char 				*handle_categories(char *str, t_glob *glob)
+{
+	FT_INIT(char *, tmp, ft_strdup(str));
+	FT_INIT(char *, ret, NULL);
+	while (1)
+	{
+		if (!detect_category(tmp))
+			break ;
+		ret = ft_strdup(tmp);
+		printf("ret 1 -> %p\n", ret);
+		printf("tmp 1 -> %p\n", tmp);
+		free(tmp);
+		tmp = replace_category(ret, glob);
+		printf("tmp 2 -> %p\n", tmp);
+		free(ret);
+	}
+	ret = ft_strdup(tmp);
+	printf("ret 2 -> %p\n", ret);
+	free(tmp);
+	return (ret);
 }

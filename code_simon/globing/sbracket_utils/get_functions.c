@@ -70,3 +70,23 @@ int			get_letters(char **ret, char *str)
 	}
 	return (0);
 }
+
+char		*get_category(char *str)
+{
+	FT_INIT(char *, category, NULL);
+	FT_INIT(int, i, -1);
+	FT_INIT(int, j, 0);
+	while (str[++i])
+	{
+		if (str[i] == '[' && str[i + 1] == ':')
+		{
+			j = i + 2;
+			while (str[i++])
+				if (str[i] == ']' && str[i - 1] == ':')
+					break ;
+			category = ft_strsub(str, j, i - j - 1);
+			break ;
+		}
+	}
+	return (category);
+}

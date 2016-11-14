@@ -73,7 +73,7 @@ char	*fill_norng(char *str) // [!.-.]
 	FT_INIT(char *, ret, NULL);
 	FT_INIT(char *, tmp, clean_brackets(str));
 	FT_INIT(int, first, tmp[1]);
-	if (!(ret = (char *)malloc(sizeof(char) * (94 - (tmp[2] - tmp[0])) + 1)))
+	if (!(ret = ft_strnew((94 - (tmp[2] - tmp[0])) + 1)))
 		return (NULL);
 	while (tmp[last] != '-')
 		last++;
@@ -87,10 +87,10 @@ char	*fill_norng(char *str) // [!.-.]
 		j++;
 	}
 	ret[j] = '\0';
-	free(tmp);
-	tmp = strdup_nodouble(ret);
-	free(ret);
-	return (tmp);
+//	free(tmp);
+//	tmp = strdup_nodouble(ret);
+//	free(ret);
+	return (ret);
 }
 
 char	*fill_mix(char *str) // Exemple : [.-....-...-.-..]

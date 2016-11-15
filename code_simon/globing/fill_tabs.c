@@ -101,9 +101,8 @@ char	*fill_mix(char *str) // Exemple : [.-....-...-.-..]
 	FT_INIT(char *, tmp_rng2, NULL);
 	FT_INIT(char *, tmp_ret, NULL);
 	FT_INIT(char *, ret, NULL);
-	if (!(ret = (char *)malloc(sizeof(char) * get_len_mix(tmp_str) + 1)))
+	if (!(ret = ft_strnew(get_len_mix(tmp_str) + 1)))
 		return (NULL);
-	ft_bzero(ret, get_len_mix(tmp_str));
 	get_letters(&ret, tmp_str);
 	while (tmp_str[i])
 	{

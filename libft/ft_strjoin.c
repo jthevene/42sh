@@ -20,9 +20,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s1 || !s2)
 		return (NULL);
 	size = ft_strlen(s1) + ft_strlen(s2);
-	joined = (char*)malloc(sizeof(joined) * size);
 	joined = ft_strnew(size);
-	if (joined == NULL)
+	if (!joined)
 		return (NULL);
 	joined = ft_strcat(joined, s1);
 	joined = ft_strcat(joined, s2);

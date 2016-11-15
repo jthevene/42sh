@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/globing.h"
-#include "../../includes/redir.h"
+#include "../../../includes/globing.h"
+#include "../../../includes/redir.h"
 
 int			check_rng(char *str) // Check si on a un rng valide ([a-g] valide, [z-a] invalide)
 {

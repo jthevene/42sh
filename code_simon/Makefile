@@ -6,7 +6,7 @@
 #    By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/13 10:42:48 by sgaudin           #+#    #+#              #
-#    Updated: 2016/10/13 10:44:40 by sgaudin          ###   ########.fr        #
+#    Updated: 2016/11/15 18:43:34 by sgaudin          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,19 +15,18 @@ NAME = 42sh
 INCLUDES = ../includes/42sh.h ./includes/redir.h ./includes/globing.h
 
 REDIR = ./redirections/
-GLOB = ./globing/
-G_UTILS1 = ./globing/sbracket_utils/
+SBRACK = ./globing/square_brackets/
+UTILS_1 = ./globing/square_brackets/sbracket_utils/
 
 SRCS = 	$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
 		\
-		$(GLOB)glob_parser.c $(GLOB)hub_bracket.c $(GLOB)fill_tabs.c\
-		$(GLOB)init_tabs.c $(GLOB)category_bracket.c\
-		$(GLOB)sbracket_list.c $(GLOB)handle_mixed_expr.c\
+		$(SBRACK)glob_parser.c $(SBRACK)hub_bracket.c $(SBRACK)fill_tabs.c\
+		$(SBRACK)init_tabs.c $(SBRACK)category_bracket.c\
+		$(SBRACK)sbracket_list.c \
 		\
-		$(G_UTILS1)catch_dash.c $(G_UTILS1)check_rng.c $(G_UTILS1)clean_brackets.c\
-		$(G_UTILS1)count_brackets.c $(G_UTILS1)get_functions.c\
-		$(G_UTILS1)str_nodouble.c $(G_UTILS1)mixed_expr_get_len.c\
-		$(G_UTILS1)separate_expr.c \
+		$(UTILS_1)catch_dash.c $(UTILS_1)check_rng.c $(UTILS_1)clean_brackets.c\
+		$(UTILS_1)count_brackets.c $(UTILS_1)get_functions.c\
+		$(UTILS_1)str_nodouble.c \
 		\
 		main.c
 
@@ -35,7 +34,6 @@ BIN =	simple_right.o double_right.o redir_utils.o main.o glob_parser.o \
 		hub_bracket.o fill_tabs.o init_tabs.o \
 		category_bracket.o sbracket_list.o catch_dash.o check_rng.o \
 		clean_brackets.o count_brackets.o get_functions.o str_nodouble.o \
-		handle_mixed_expr.o mixed_expr_get_len.o separate_expr.o
 
 
 CC_FLAGS = -Wall -Wextra -Werror
@@ -45,6 +43,12 @@ LIBFT = ../libft/
 all: $(NAME)
 
 $(NAME):
+	gcc $(CC_FLAGS) $(INCLUDES) $(SRCS) -c
+	gcc $(CC_FLAGS) $(BIN) $(LIBFT)libft.a -o $(NAME)
+	mkdir bin_folder
+	mv $(BIN) bin_folder
+
+libft:
 	make -C $(LIBFT)
 	gcc $(CC_FLAGS) $(INCLUDES) $(SRCS) -c
 	gcc $(CC_FLAGS) $(BIN) $(LIBFT)libft.a -o $(NAME)
@@ -53,10 +57,17 @@ $(NAME):
 
 clean:
 	rm -rf bin_folder
+
+clean_lib:
 	make -C $(LIBFT) clean
 
 fclean: clean
 	rm -rf $(NAME)
+	sh ../rm_files.sh
+
+fclean_lib: clean_lib
 	make -C $(LIBFT) fclean
 
 re: fclean all
+
+re_lib: fclean_lib libft

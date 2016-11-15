@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/redir.h"
-#include "../../includes/globing.h"
+#include "../../../includes/redir.h"
+#include "../../../includes/globing.h"
 
 char			*strjoin_nodouble(char *s1, char *s2)
 {

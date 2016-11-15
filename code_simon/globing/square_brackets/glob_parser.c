@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/globing.h"
+#include "../../includes/globing.h"
 
 static int		verif_tokens(char *str)
 {
@@ -100,7 +100,7 @@ int				glob_parser(void)
 	glob = glob == NULL ? init_glob() : glob;
 	get_command(g_shell.line, glob);
 	if (ft_strchr(g_shell.line, '['))
-		hub_bracket(glob); // Hub bracket est le hub de fonctions qui va gérer tous les cas possibles pour les expression de globing contenant des barckets de ce type : '[]'
+		hub_sbracket(glob); // Hub bracket est le hub de fonctions qui va gérer tous les cas possibles pour les expression de globing contenant des brackets de ce type : '[]'
 //	free_glob(glob);
 	return (1);
 }

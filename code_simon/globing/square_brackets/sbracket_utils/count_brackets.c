@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/globing.h"
-#include "../../includes/redir.h"
+#include "../../../includes/globing.h"
+#include "../../../includes/redir.h"
 
 int 			count_brackets(char *str, char bracket)
 {

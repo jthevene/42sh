@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   globing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/05 11:27:15 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/10/13 10:45:10 by sgaudin          ###   ########.fr       */
+/*   Created: 2016/11/15 18:56:07 by sgaudin           #+#    #+#             */
+/*   Updated: 2016/11/15 18:56:08 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,10 @@
 # define NORNG 4 // [!a-c]
 # define MIX 5 // [abc-fE-W] || [!abc-fE-W]
 
-/* Pour les commandes mixees (cf handle_mixed_expr) */
-#define DEBUT 1
-#define FIN 2
-
+/* Struct qui stocke le resultat d'une commande avec des [] */
 typedef struct 			s_sbracket
 {
 	char 				*bracket;
-	int 				type;
 	struct s_sbracket	*next;
 	struct s_sbracket	*prev;
 }						t_sbracket;
@@ -72,44 +68,40 @@ typedef struct			s_glob
 
 int						glob_parser(void);
 
-void					hub_bracket(t_glob *glob);
-int						fill_bracket_tabs(int glob_case, char *line, t_glob *glob);
+/* Initialisation et gestion de depart */
+void					hub_sbracket(t_glob *glob);
 void					init_tabs1(t_glob *glob, int i, int j);
 void					init_tabs2(t_glob *glob);
 void					init_tabs3(t_glob *glob);
 
-char 					*handle_categories(char *str, t_glob *glob);
-
-void					handle_mixed_expr(int glob_case, char *line, t_glob *glob);
-int 					mixed_expr_get_len(char *str, int pos);
-char 					*separate_chars_debut(char *str, int pos);
-char 					*separate_chars_fin(char *str, int pos);
-
+/* Traitement de la commande */
+int						fill_bracket_tabs(int glob_case, char *line, t_glob *glob);
 char					*fill_mult(char *str);
 char					*fill_rng(char *str);
 char					*fill_nomult(char *str);
 char					*fill_norng(char *str);
 char					*fill_mix(char *str);
+char 					*handle_categories(char *str, t_glob *glob);
 
-int 					next_bracket(char *str, int i);
-int 					count_brackets(char *str, char bracket);
-
+/* Fonctions utilitaires */
 char					*clean_brackets(char *str);
-
 int						get_len_mix(char *str);
 int						get_letters(char **ret, char *str);
 char					*get_rng_str(char *str, int i);
 char					*get_category(char *str);
-
-
 int						check_rng(char *str);
 int						catch_dash(int i);
+int 					count_brackets(char *str, char bracket);
+int 					next_bracket(char *str, int i);
 
+
+/* Fonctions enlevant les doublons d'une chaine */
 char					*strjoin_nodouble(char *s1, char *s2);
 char 					*strdup_nodouble(char *str);
 char					*mult_nodouble(char *str);
 
-int 					sbracket_pushback(t_sbracket **list, int type);
+/* Fonctions de liste chainee */
+int 					sbracket_pushback(t_sbracket **list);
 void					print_sbracket(t_sbracket *list);
 
 #endif

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/globing.h"
-#include "../../includes/redir.h"
+#include "../../../includes/globing.h"
+#include "../../../includes/redir.h"
 
 char		*get_rng_str(char *str, int i)// uac-rgs => "c-r"
 {

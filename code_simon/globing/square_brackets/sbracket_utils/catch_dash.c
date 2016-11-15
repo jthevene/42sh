@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/globing.h"
-#include "../../includes/redir.h"
+#include "../../../includes/globing.h"
+#include "../../../includes/redir.h"
 
 static int		catch_dash_mix(int i) // Cette fonction est la pour ce genre de cas de figure : [a-dfg-hjkl-vbn]
 {

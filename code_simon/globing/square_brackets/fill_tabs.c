@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/redir.h"
-#include "../includes/globing.h"
+#include "../../includes/redir.h"
+#include "../../includes/globing.h"
 
 char	*fill_rng(char *str)
 {
@@ -87,9 +87,7 @@ char	*fill_norng(char *str) // [!.-.]
 		j++;
 	}
 	ret[j] = '\0';
-//	free(tmp);
-//	tmp = strdup_nodouble(ret);
-//	free(ret);
+	free(tmp);
 	return (ret);
 }
 

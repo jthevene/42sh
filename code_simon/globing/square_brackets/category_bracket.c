@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/globing.h"
+#include "../../includes/globing.h"
 
 // Cette fonction gère les entrées de ce type : [[:upper:]]
 static char 		*category_choice(char *category, t_glob *glob)

@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/globing.h"
+#include "../../includes/globing.h"
 
 int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob) // Fonction qui choisit la méthode de remplissage de notre tableau de caractères (glob->sbracket->bracket)
 {
 	FT_INIT(char *, tmp_error, NULL);
 	glob_case = MIX;
-	sbracket_pushback(&glob->sbracket, glob_case);
+	sbracket_pushback(&glob->sbracket);
 	tmp_error = handle_categories(line, glob);
 	free(line);
 	line = ft_strdup(tmp_error);
@@ -41,7 +41,7 @@ int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob) // Fonction qu
 	return (1);
 }
 
-void			hub_bracket(t_glob *glob) // Gère les différents cas de figure, cf commentaires dans le .h ac les definitions des macros
+void			hub_sbracket(t_glob *glob) // Gère les différents cas de figure, cf commentaires dans le .h ac les definitions des macros
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, ret, 0);
@@ -55,8 +55,6 @@ void			hub_bracket(t_glob *glob) // Gère les différents cas de figure, cf comm
 			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, i) + 1);
 			fill_bracket_tabs(ret == 1 ? NORNG 
 			: FT_TER(ret < 2, NOMULT, MIX), ft_strdup(tmp), glob);
-//			handle_mixed_expr(ret == 1 ? NORNG
-//			: FT_TER(ret < 2, NOMULT, MIX), tmp, glob);
 			i += next_bracket(g_shell.line, i);
 			free(tmp);
 			printf("\033[32mRet = %s\033[0m\n", glob->sbracket->bracket);
@@ -68,8 +66,6 @@ void			hub_bracket(t_glob *glob) // Gère les différents cas de figure, cf comm
 			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, i) + 1);
 			fill_bracket_tabs(ret == 1 ? RNG
 			: FT_TER(ret < 2, MULT, MIX), ft_strdup(tmp), glob);
-//			handle_mixed_expr(ret == 1 ? RNG
-//			: FT_TER(ret < 2, MULT, MIX), tmp, glob);
 			if (!ret)
 				glob->sbracket->bracket = mult_nodouble(glob->sbracket->bracket);
 			i += next_bracket(g_shell.line, i);

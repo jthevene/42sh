@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/redir.h"
-#include "../../includes/globing.h"
+#include "../../../includes/redir.h"
+#include "../../../includes/globing.h"
 
 char		*clean_brackets(char *str) // enleve les []
 {

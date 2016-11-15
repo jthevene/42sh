@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/globing.h"
+#include "../../includes/globing.h"
 
-int					sbracket_pushback(t_sbracket **list, int type)
+int					sbracket_pushback(t_sbracket **list)
 {
 	t_sbracket *tmp;
 	t_sbracket *new;
@@ -23,7 +23,6 @@ int					sbracket_pushback(t_sbracket **list, int type)
 			return (0);
 		FT_MULTI3((*list)->next, (*list)->prev, NULL);
 		(*list)->bracket = NULL;
-		(*list)->type = type;
 	}
 	else
 	{
@@ -37,19 +36,6 @@ int					sbracket_pushback(t_sbracket **list, int type)
 		new->prev = tmp;
 		(*list) = (*list)->next;
 		(*list)->bracket = NULL;
-		(*list)->type = type;
 	}
 	return (1);
-}
-
-void			print_sbracket(t_sbracket *list)
-{
-	while (list->prev)
-		list = list->prev;
-	while (list->next)
-	{
-		printf("bracket = %s\n", list->bracket);
-		list = list->next;
-	}
-	printf("bracket = %s\n", list->bracket);
 }

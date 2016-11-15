@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/globing.h"
+#include "../../includes/globing.h"
 
 void		init_tabs1(t_glob *glob, int i, int j)
 {

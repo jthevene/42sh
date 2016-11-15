@@ -49,7 +49,7 @@ char	*fill_nomult(char *str) // [!...]
 	free(tmp);
 	tmp = ft_strdup(ret);
 	free(ret);
-	if (!(ret = (char *)malloc(sizeof(char) * (94 - ft_strlen(tmp)) + 1)))
+	if (!(ret = (char *)malloc(sizeof(char) * (94 - ft_strlen(tmp)) + 2)))
 		return (NULL);
 	while (i <= 126)
 	{

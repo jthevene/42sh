@@ -72,16 +72,19 @@ static char			*replace_category(char *str, t_glob *glob)
 	FT_INIT(char *, tmp_cat, ft_strdup(category_choice(category, glob)));
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, -1);
+	FT_INIT(int, check, 0);
 
 	ret = ft_strnew(ft_strlen(category_choice(category, glob)) + ft_strlen(str) - ft_strlen(category) - 4);
 	ret[++j] = '[';
+	if (str[1] == '!')
+		ret[++j] = '!';
 	while (tmp_cat[i])
 		ret[++j] = tmp_cat[i++];
 	free(tmp_cat);
-	i = 1;
+	i = str[1] == '!' ? 2 : 1;
 	while (str[i])
 	{
-		if (str[i] == '[' && str[i + 1] == ':')
+		if (str[i] == '[' && str[i + 1] == ':' && !check++)
 			i = i + ft_strlen(category) + 4;
 		ret[++j] = str[i];
 		i++;

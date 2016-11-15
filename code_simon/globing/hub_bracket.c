@@ -54,7 +54,7 @@ void			hub_bracket(t_glob *glob) // Gère les différents cas de figure, cf comm
 			ret = catch_dash(i);
 			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, i) + 1);
 			fill_bracket_tabs(ret == 1 ? NORNG 
-			: FT_TER(ret < 2, NOMULT, MIX), tmp, glob);
+			: FT_TER(ret < 2, NOMULT, MIX), ft_strdup(tmp), glob);
 //			handle_mixed_expr(ret == 1 ? NORNG
 //			: FT_TER(ret < 2, NOMULT, MIX), tmp, glob);
 			i += next_bracket(g_shell.line, i);

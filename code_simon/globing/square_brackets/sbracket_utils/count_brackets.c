@@ -32,15 +32,16 @@ int 			count_brackets(char *str, char bracket)
 	return (1);
 }
 
-int 			next_bracket(char *str, int i)
+int 			next_bracket(char *str, char c, int i)
 {
 	FT_INIT(int, count, 0);
 	FT_INIT(int, ret, 0);
+	FT_INIT(int, c2, c == '[' ? ']' : '}');
 	while (str[i])
 	{
-		if (str[i] == '[')
+		if (str[i] == c2)
 			count++;
-		if (str[i] == ']')
+		if (str[i] == c2)
 		{
 			count--;
 			if (!count)

@@ -41,16 +41,24 @@
 # define MIX 5 // [abc-fE-W] || [!abc-fE-W]
 
 /* Struct qui stocke le resultat d'une commande avec des [] */
-typedef struct 			s_sbracket
+typedef struct 			s_bracket
 {
-	char 				*bracket;
-	struct s_sbracket	*next;
-	struct s_sbracket	*prev;
-}						t_sbracket;
+	char 				*content;
+	struct s_bracket	*next;
+	struct s_bracket	*prev;
+}						t_bracket;
+
+typedef struct 			s_clist
+{
+	t_bracket			*cbracket;
+	struct t_clist		*next;
+	struct t_clist		*prev;
+}						t_clist;
 
 typedef struct			s_glob
 {
-	t_sbracket			*sbracket;
+	t_bracket			*sbracket;
+	t_clist				*cbracket;
 
 	char				*command;
 	char				upper[27];
@@ -92,7 +100,7 @@ char					*get_category(char *str);
 int						check_rng(char *str);
 int						catch_dash(int i);
 int 					count_brackets(char *str, char bracket);
-int 					next_bracket(char *str, int i);
+int 					next_bracket(char *str, char c, int i);
 
 
 /* Fonctions enlevant les doublons d'une chaine */
@@ -101,7 +109,6 @@ char 					*strdup_nodouble(char *str);
 char					*mult_nodouble(char *str);
 
 /* Fonctions de liste chainee */
-int 					sbracket_pushback(t_sbracket **list);
-void					print_sbracket(t_sbracket *list);
+int 					bracket_pushback(t_bracket **list);
 
 #endif

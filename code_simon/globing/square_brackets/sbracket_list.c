@@ -12,21 +12,21 @@
 
 #include "../../includes/globing.h"
 
-int					sbracket_pushback(t_sbracket **list)
+int					bracket_pushback(t_bracket **list)
 {
-	t_sbracket *tmp;
-	t_sbracket *new;
+	t_bracket *tmp;
+	t_bracket *new;
 
 	if (!(*list))
 	{
-		if (!((*list) = (t_sbracket *)malloc(sizeof(t_sbracket))))
+		if (!((*list) = (t_bracket *)malloc(sizeof(t_bracket))))
 			return (0);
 		FT_MULTI3((*list)->next, (*list)->prev, NULL);
-		(*list)->bracket = NULL;
+		(*list)->content = NULL;
 	}
 	else
 	{
-		if (!(new = (t_sbracket *)malloc(sizeof(t_sbracket))))
+		if (!(new = (t_bracket *)malloc(sizeof(t_bracket))))
 			return (0);
 		new->next = NULL;
 		while ((*list)->next)
@@ -35,7 +35,7 @@ int					sbracket_pushback(t_sbracket **list)
 		(*list)->next = new;
 		new->prev = tmp;
 		(*list) = (*list)->next;
-		(*list)->bracket = NULL;
+		(*list)->content = NULL;
 	}
 	return (1);
 }

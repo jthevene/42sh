@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   square_brackets.c                                  :+:      :+:    :+:   */
+/*   hub_sbracket.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/06 15:37:04 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/10/06 15:37:18 by sgaudin          ###   ########.fr       */
+/*   Created: 2016/11/16 11:01:41 by sgaudin           #+#    #+#             */
+/*   Updated: 2016/11/16 11:01:41 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob) // Fonction qu
 {
 	FT_INIT(char *, tmp_error, NULL);
 	glob_case = MIX;
-	sbracket_pushback(&glob->sbracket);
+	bracket_pushback(&glob->sbracket);
 	tmp_error = handle_categories(line, glob);
 	free(line);
 	line = ft_strdup(tmp_error);
@@ -29,15 +29,15 @@ int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob) // Fonction qu
 		return (0);
 	}
 	if (glob_case == MULT)
-		glob->sbracket->bracket = clean_brackets(line);
+		glob->sbracket->content = clean_brackets(line);
 	if (glob_case == RNG)
-		glob->sbracket->bracket = fill_rng(line);
+		glob->sbracket->content = fill_rng(line);
 	if (glob_case == NOMULT)
-		glob->sbracket->bracket = fill_nomult(line);
+		glob->sbracket->content = fill_nomult(line);
 	if (glob_case == NORNG)
-		glob->sbracket->bracket = fill_norng(line);
+		glob->sbracket->content = fill_norng(line);
 	if (glob_case == MIX)
-		glob->sbracket->bracket = fill_mix(line);
+		glob->sbracket->content = fill_mix(line);
 	return (1);
 }
 
@@ -52,25 +52,25 @@ void			hub_sbracket(t_glob *glob) // Gère les différents cas de figure, cf com
 			&& g_shell.line[i + 1] == '!')
 		{
 			ret = catch_dash(i);
-			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, i) + 1);
+			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, '[', i) + 1);
 			fill_bracket_tabs(ret == 1 ? NORNG 
 			: FT_TER(ret < 2, NOMULT, MIX), ft_strdup(tmp), glob);
-			i += next_bracket(g_shell.line, i);
+			i += next_bracket(g_shell.line, '[', i);
 			free(tmp);
-			printf("\033[32mRet = %s\033[0m\n", glob->sbracket->bracket);
+			printf("\033[32mRet = %s\033[0m\n", glob->sbracket->content);
 		}
 		else if (g_shell.line[i] == '[' && g_shell.line[i + 1]
 			&& g_shell.line[i + 1] != '!')
 		{
 			ret = catch_dash(i);
-			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, i) + 1);
+			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, '[', i) + 1);
 			fill_bracket_tabs(ret == 1 ? RNG
 			: FT_TER(ret < 2, MULT, MIX), ft_strdup(tmp), glob);
 			if (!ret)
-				glob->sbracket->bracket = mult_nodouble(glob->sbracket->bracket);
-			i += next_bracket(g_shell.line, i);
+				glob->sbracket->content = mult_nodouble(glob->sbracket->content);
+			i += next_bracket(g_shell.line, '[', i);
 			free(tmp);
-			printf("\033[32mRet = %s\033[0m\n", glob->sbracket->bracket);
+			printf("\033[32mRet = %s\033[0m\n", glob->sbracket->content);
 		}
 		i++;
 	}

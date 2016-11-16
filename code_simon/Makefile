@@ -18,9 +18,10 @@ REDIR = ./redirections/
 SBRACK = ./globing/square_brackets/
 UTILS_1 = ./globing/square_brackets/sbracket_utils/
 
-SRCS = 	$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
+SRCS = 	globing/glob_parser.c \
+		$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
 		\
-		$(SBRACK)glob_parser.c $(SBRACK)hub_bracket.c $(SBRACK)fill_tabs.c\
+		$(SBRACK)hub_sbracket.c $(SBRACK)fill_tabs.c\
 		$(SBRACK)init_tabs.c $(SBRACK)category_bracket.c\
 		$(SBRACK)sbracket_list.c \
 		\
@@ -31,7 +32,7 @@ SRCS = 	$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
 		main.c
 
 BIN =	simple_right.o double_right.o redir_utils.o main.o glob_parser.o \
-		hub_bracket.o fill_tabs.o init_tabs.o \
+		hub_sbracket.o fill_tabs.o init_tabs.o \
 		category_bracket.o sbracket_list.o catch_dash.o check_rng.o \
 		clean_brackets.o count_brackets.o get_functions.o str_nodouble.o \
 

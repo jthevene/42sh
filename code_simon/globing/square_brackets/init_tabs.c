@@ -14,29 +14,26 @@
 
 void		init_tabs1(t_glob *glob, int i, int j)
 {
-	FT_INIT(char, c, 'A');
-	while (c <= 'Z')
+	FT_INIT(char, c, 64);
+	while (++c <= 'Z')
 	{
 		FT_MULTI4(glob->upper[i], glob->alpha[j], glob->alnum[j], c);
-		c++;
 		i++;
 		j++;
 	}
 	i = 0;
-	c = 'a';
-	while (c <= 'z')
+	c = 96;
+	while (++c <= 'z')
 	{
 		FT_MULTI4(glob->lower[i], glob->alpha[j], glob->alnum[j], c);
-		c++;
 		i++;
 		j++;
 	}
 	i = 0;
-	c = '0';
-	while (c <= '9')
+	c = 47;
+	while (++c <= '9')
 	{
 		FT_MULTI4(glob->digit[i], glob->alnum[j], glob->xdigit[i], c);
-		c++;
 		i++;
 		j++;
 	}
@@ -46,8 +43,8 @@ void		init_tabs2(t_glob *glob)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, 0);
-	FT_INIT(char, c, 33);
-	while (c <= 126)
+	FT_INIT(char, c, 32);
+	while (++c <= 126)
 	{
 		if ((c >= 33 && c <= 47) || (c >= 58 && c <= 64) ||
 			(c >= 91 && c <= 96) || (c >= 123 && c <= 126))
@@ -57,7 +54,6 @@ void		init_tabs2(t_glob *glob)
 		}
 		FT_MULTI3(glob->graph[i], glob->print[i], c);
 		i++;
-		c++;
 	}
 	glob->print[i] = 32;
 	i = 0;

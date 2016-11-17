@@ -13,13 +13,14 @@
 #include "../../includes/redir.h"
 #include "../../includes/globing.h"
 
-char	*fill_rng(char *str)
+char			*fill_rng(char *str)
 {
 	FT_INIT(int, diff, 0);
 	FT_INIT(int, i, 0);
 	FT_INIT(int, last, 1);
 	FT_INIT(char *, ret, NULL);
-	FT_INIT(char *, tmp, ft_strchr(str, '[') ? clean_brackets(str) : ft_strdup(str));
+	FT_INIT(char *, tmp, ft_strchr(str, '[')
+		? clean_brackets(str) : ft_strdup(str));
 	FT_INIT(int, first, tmp[0]);
 	while (tmp[last] != '-')
 		last++;
@@ -40,11 +41,12 @@ char	*fill_rng(char *str)
 	return (tmp);
 }
 
-char	*fill_nomult(char *str) // [!...]
+char			*fill_nomult(char *str) // [!...]
 {
 	FT_INIT(int, i, 32);
 	FT_INIT(int, j, 0);
-	FT_INIT(char *, tmp, ft_strchr(str, '[') ? clean_brackets(str) : ft_strdup(str));
+	FT_INIT(char *, tmp, ft_strchr(str, '[')
+		? clean_brackets(str) : ft_strdup(str));
 	FT_INIT(char *, ret, strdup_nodouble(tmp));
 	free(tmp);
 	tmp = ft_strdup(ret);
@@ -65,7 +67,7 @@ char	*fill_nomult(char *str) // [!...]
 	return (ret);
 }
 
-char	*fill_norng(char *str) // [!.-.]
+char			*fill_norng(char *str) // [!.-.]
 {
 	FT_INIT(int, i, 32);
 	FT_INIT(int, j, 0);
@@ -91,29 +93,31 @@ char	*fill_norng(char *str) // [!.-.]
 	return (ret);
 }
 
-char	*fill_mix(char *str) // Exemple : [.-....-...-.-..]
+static void		create_mix(char *tmp_str, char **ret, int i)
 {
-	FT_INIT(int, i, 0);
-	FT_INIT(char *, tmp_str, clean_brackets(str));
 	FT_INIT(char *, tmp_rng, NULL);
 	FT_INIT(char *, tmp_rng2, NULL);
 	FT_INIT(char *, tmp_ret, NULL);
-	FT_INIT(char *, ret, NULL);
-	if (!(ret = ft_strnew(get_len_mix(tmp_str) + 1)))
-		return (NULL);
+	tmp_rng2 = get_rng_str(tmp_str, i);
+	tmp_rng = fill_rng(tmp_rng2);
+	tmp_ret = (*ret);
+	(*ret) = strjoin_nodouble(tmp_rng, (*ret));
+	free(tmp_rng);
+	free(tmp_rng2);
+	free(tmp_ret);
+}
+
+char			*fill_mix(char *str) // Exemple : [.-....-...-.-..]
+{
+	FT_INIT(int, i, 0);
+	FT_INIT(char *, tmp_ret, NULL);
+	FT_INIT(char *, tmp_str, clean_brackets(str));
+	FT_INIT(char *, ret, ft_strnew(get_len_mix(tmp_str) + 1));
 	get_letters(&ret, tmp_str);
 	while (tmp_str[i])
 	{
 		if (tmp_str[i] == '-')
-		{
-			tmp_rng2 = get_rng_str(tmp_str, i);
-			tmp_rng = fill_rng(tmp_rng2);
-			tmp_ret = ret;
-			ret = strjoin_nodouble(tmp_rng, ret);
-			free(tmp_rng);
-			free(tmp_rng2);
-			free(tmp_ret);
-		}
+			create_mix(tmp_str, &ret, i);
 		i++;
 	}
 	if (tmp_str[0] == '!')

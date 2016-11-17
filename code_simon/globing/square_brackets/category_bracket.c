@@ -6,15 +6,15 @@
 /*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 15:35:08 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/10/25 15:35:10 by sgaudin          ###   ########.fr       */
+/*   Updated: 2016/11/17 10:55:51 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/globing.h"
 
-// Cette fonction gère les entrées de ce type : [[:upper:]]
-static char 		*category_choice(char *category, t_glob *glob)
+static char				*category_choice(char *category, t_glob *glob)
 {
+	// Cette fonction gère les entrées de ce type : [[:upper:]]
 	if (!ft_strcmp(category, "upper"))
 		return (glob->upper);
 	else if (!ft_strcmp(category, "lower"))
@@ -41,7 +41,7 @@ static char 		*category_choice(char *category, t_glob *glob)
 		return (NULL);
 }
 
-int 				detect_category(char *str)
+int						detect_category(char *str)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, 0);
@@ -65,7 +65,7 @@ int 				detect_category(char *str)
 	return (0);
 }
 
-static char			*replace_category(char *str, t_glob *glob)
+static char				*replace_category(char *str, t_glob *glob)
 {
 	FT_INIT(char *, ret, NULL);
 	FT_INIT(char *, category, get_category(str));
@@ -73,8 +73,8 @@ static char			*replace_category(char *str, t_glob *glob)
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, -1);
 	FT_INIT(int, check, 0);
-
-	ret = ft_strnew(ft_strlen(category_choice(category, glob)) + ft_strlen(str) - ft_strlen(category) - 4);
+	ret = ft_strnew(ft_strlen(category_choice(category, glob))
+		+ ft_strlen(str) - ft_strlen(category) - 4);
 	ret[++j] = '[';
 	if (str[1] == '!')
 		ret[++j] = '!';
@@ -94,7 +94,7 @@ static char			*replace_category(char *str, t_glob *glob)
 	return (ret);
 }
 
-char 				*handle_categories(char *str, t_glob *glob)
+char					*handle_categories(char *str, t_glob *glob)
 {
 	FT_INIT(char *, ret, ft_strdup(str));
 	FT_INIT(char *, tmp, NULL);

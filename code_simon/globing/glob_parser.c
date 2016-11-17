@@ -36,7 +36,6 @@ static int		get_command(char *str, t_glob *glob) // Fonction qui recupere la com
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, 0);
-
 	while (str[i] && str[i] != ' ')
 		i++;
 	i++;
@@ -96,7 +95,7 @@ int				glob_parser(void)
 
 	if (!g_shell.line)
 		return (0);
-	if (!verif_tokens(g_shell.line)) // --> Verification que les tokens de glob sont bien présents et valides
+	if (!verif_tokens(g_shell.line))
 		return (0);
 	glob = glob == NULL ? init_glob() : glob;
 	get_command(g_shell.line, glob);

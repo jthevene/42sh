@@ -12,10 +12,9 @@
 
 #include "../../includes/globing.h"
 
-int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob) // Fonction qui choisit la méthode de remplissage de notre tableau de caractères (glob->sbracket->bracket)
+int				fill_bracket_tabs(char *line, t_glob *glob) // Fonction qui choisit la méthode de remplissage de notre tableau de caractères (glob->sbracket->bracket)
 {
 	FT_INIT(char *, tmp_error, NULL);
-	glob_case = MIX;
 	bracket_pushback(&glob->sbracket);
 	tmp_error = handle_categories(line, glob);
 	free(line);
@@ -28,33 +27,22 @@ int				fill_bracket_tabs(int glob_case, char *line, t_glob *glob) // Fonction qu
 		free(tmp_error);
 		return (0);
 	}
-	if (glob_case == MULT)
-		glob->sbracket->content = clean_brackets(line);
-	if (glob_case == RNG)
-		glob->sbracket->content = fill_rng(line);
-	if (glob_case == NOMULT)
-		glob->sbracket->content = fill_nomult(line);
-	if (glob_case == NORNG)
-		glob->sbracket->content = fill_norng(line);
-	if (glob_case == MIX)
-		glob->sbracket->content = fill_mix(line);
+	glob->sbracket->content = fill_mix(line);
 	return (1);
 }
 
 void			hub_sbracket(t_glob *glob) // Gère les différents cas de figure, cf commentaires dans le .h ac les definitions des macros
 {
 	FT_INIT(int, i, 0);
-	FT_INIT(int, ret, 0);
 	FT_INIT(char *, tmp, NULL);
 	while (g_shell.line[i])
 	{
 		if (g_shell.line[i] == '[' && g_shell.line[i + 1]
 			&& g_shell.line[i + 1] == '!')
 		{
-			ret = catch_dash(i);
-			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, '[', i) + 1);
-			fill_bracket_tabs(ret == 1 ? NORNG 
-			: FT_TER(ret < 2, NOMULT, MIX), ft_strdup(tmp), glob);
+			tmp = ft_strsub(g_shell.line, i,
+				next_bracket(g_shell.line, '[', i) + 1);
+			fill_bracket_tabs(ft_strdup(tmp), glob);
 			i += next_bracket(g_shell.line, '[', i);
 			free(tmp);
 			printf("\033[32mRet = %s\033[0m\n", glob->sbracket->content);
@@ -62,12 +50,9 @@ void			hub_sbracket(t_glob *glob) // Gère les différents cas de figure, cf com
 		else if (g_shell.line[i] == '[' && g_shell.line[i + 1]
 			&& g_shell.line[i + 1] != '!')
 		{
-			ret = catch_dash(i);
-			tmp = ft_strsub(g_shell.line, i, next_bracket(g_shell.line, '[', i) + 1);
-			fill_bracket_tabs(ret == 1 ? RNG
-			: FT_TER(ret < 2, MULT, MIX), ft_strdup(tmp), glob);
-			if (!ret)
-				glob->sbracket->content = mult_nodouble(glob->sbracket->content);
+			tmp = ft_strsub(g_shell.line, i,
+				next_bracket(g_shell.line, '[', i) + 1);
+			fill_bracket_tabs(ft_strdup(tmp), glob);
 			i += next_bracket(g_shell.line, '[', i);
 			free(tmp);
 			printf("\033[32mRet = %s\033[0m\n", glob->sbracket->content);

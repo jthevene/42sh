@@ -19,7 +19,6 @@ char			*strjoin_nodouble(char *s1, char *s2)
 	FT_INIT(int, j, -1);
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(char *, ret, NULL);
-
 	if (!s1 || !s2)
 		return (NULL);
 	tmp = ft_strnew(ft_strlen(s1) + ft_strlen(s2));
@@ -65,7 +64,6 @@ char			*strdup_nodouble(char *str)
 char			*mult_nodouble(char *str)
 {
 	FT_INIT(char *, ret, NULL);
-
 	ret = strdup_nodouble(str);
 	free(str);
 	return (ret);

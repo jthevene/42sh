@@ -101,6 +101,8 @@ int				glob_parser(void)
 	get_command(g_shell.line, glob);
 	if (ft_strchr(g_shell.line, '['))
 		hub_sbracket(glob); // Hub bracket est le hub de fonctions qui va gérer tous les cas possibles pour les expression de globing contenant des brackets de ce type : '[]'
+	if (glob->command)
+		free(glob->command);
 //	if (ft_strchr(g_shell.line, '{'))
 //		hub_cbracket(glob);
 //	free_glob(glob);

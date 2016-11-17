@@ -39,7 +39,7 @@ int				next_bracket(char *str, char c, int i)
 	FT_INIT(int, c2, c == '[' ? ']' : '}');
 	while (str[i])
 	{
-		if (str[i] == c2)
+		if (str[i] == c)
 			count++;
 		if (str[i] == c2)
 		{

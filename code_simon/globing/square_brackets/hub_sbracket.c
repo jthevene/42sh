@@ -15,7 +15,6 @@
 int				fill_bracket_tabs(char *line, t_glob *glob) // Fonction qui choisit la méthode de remplissage de notre tableau de caractères (glob->sbracket->bracket)
 {
 	FT_INIT(char *, tmp, NULL);
-	bracket_pushback(&glob->sbracket);
 	tmp = handle_categories(line, glob);
 	free(line);
 	line = ft_strdup(tmp);
@@ -27,6 +26,7 @@ int				fill_bracket_tabs(char *line, t_glob *glob) // Fonction qui choisit la m�
 		free(tmp);
 		return (0);
 	}
+	bracket_pushback(&glob->sbracket);
 	glob->sbracket->content = fill_mix(line);
 	return (1);
 }

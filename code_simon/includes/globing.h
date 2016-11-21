@@ -48,9 +48,10 @@ typedef struct			s_bracket
 	struct s_bracket	*prev;
 }						t_bracket;
 
+//Struct qui stocke le resultat d'une commande avec des {}
 typedef struct			s_clist
 {
-	t_bracket			*cbracket;
+	t_bracket			*list;
 	struct t_clist		*next;
 	struct t_clist		*prev;
 }						t_clist;
@@ -61,6 +62,7 @@ typedef struct			s_glob
 	t_clist				*cbracket;
 
 	char				*command;
+
 	char				upper[27];
 	char				lower[27];
 	char				alpha[53];
@@ -108,5 +110,8 @@ char					*mult_nodouble(char *str);
 
 // Fonctions de liste chainee
 int						bracket_pushback(t_bracket **list);
+
+// FONCTIONS CURLY BRACKETS
+void					hub_cbracket(t_glob *glob);
 
 #endif

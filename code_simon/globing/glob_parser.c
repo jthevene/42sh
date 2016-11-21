@@ -12,7 +12,7 @@
 
 #include "../includes/globing.h"
 
-static int		verif_tokens(char *str)
+static int				verif_tokens(char *str)
 {
 	FT_INIT(int, nb, 0);
 	if (ft_strchr(str, '[') && !ft_strchr(str, ']'))
@@ -32,7 +32,7 @@ static int		verif_tokens(char *str)
 	return (1);
 }
 
-static int		get_command(char *str, t_glob *glob) // Fonction qui recupere la commande pour le message d'erreur
+static int				get_command(char *str, t_glob *glob) // Fonction qui recupere la commande pour le message d'erreur
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, 0);
@@ -54,9 +54,9 @@ static int		get_command(char *str, t_glob *glob) // Fonction qui recupere la com
 	return (0);
 }
 
-t_glob			*init_glob(void)
+t_glob					*init_glob(void)
 {
-	t_glob		*glob;
+	t_glob				*glob;
 
 	glob = (t_glob *)malloc(sizeof(t_glob));
 	glob->sbracket = NULL;
@@ -89,7 +89,7 @@ void			free_glob(t_glob *glob)
 }
 */
 
-int				glob_parser(void)
+int						glob_parser(void)
 {
 	static t_glob		*glob = NULL;
 
@@ -103,8 +103,8 @@ int				glob_parser(void)
 		hub_sbracket(glob); // Hub bracket est le hub de fonctions qui va gérer tous les cas possibles pour les expression de globing contenant des brackets de ce type : '[]'
 	if (glob->command)
 		free(glob->command);
-//	if (ft_strchr(g_shell.line, '{'))
-//		hub_cbracket(glob);
+	if (ft_strchr(g_shell.line, '{'))
+		hub_cbracket(glob);
 //	free_glob(glob);
 	return (1);
 }

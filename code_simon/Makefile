@@ -16,6 +16,7 @@ INCLUDES = ../includes/42sh.h ./includes/redir.h ./includes/globing.h
 
 REDIR = ./redirections/
 SBRACK = ./globing/square_brackets/
+CBRACK = ./globing/curly_brackets/
 UTILS_1 = ./globing/square_brackets/sbracket_utils/
 
 SRCS = 	globing/glob_parser.c \
@@ -25,16 +26,25 @@ SRCS = 	globing/glob_parser.c \
 		$(SBRACK)init_tabs.c $(SBRACK)category_bracket.c\
 		$(SBRACK)sbracket_list.c \
 		\
+		$(CBRACK)hub_cbracket.c\
+		\
 		$(UTILS_1)catch_dash.c $(UTILS_1)check_rng.c $(UTILS_1)clean_brackets.c\
 		$(UTILS_1)count_brackets.c $(UTILS_1)get_functions.c\
 		$(UTILS_1)str_nodouble.c \
 		\
 		main.c
 
-BIN =	simple_right.o double_right.o redir_utils.o main.o glob_parser.o \
+BIN =	glob_parser.o \
+		\
+		simple_right.o double_right.o redir_utils.o \
+		\
 		hub_sbracket.o fill_tabs.o init_tabs.o \
 		category_bracket.o sbracket_list.o catch_dash.o check_rng.o \
 		clean_brackets.o count_brackets.o get_functions.o str_nodouble.o \
+		\
+		hub_cbracket.o\
+		\
+		main.o
 
 
 CC_FLAGS = -Wall -Wextra -Werror

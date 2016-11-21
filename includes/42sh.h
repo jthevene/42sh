@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2016/11/08 12:20:56 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/16 16:36:35 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct 		s_lst
 	void			*content;
 	struct s_lst	*prev;
 	struct s_lst	*next;
+	struct s_lst	*last;
 } 					t_lst;
 
 typedef struct		s_var
@@ -62,6 +63,7 @@ typedef struct		s_shell
 	struct winsize	*win;
 	int				running;
 	t_lst			*hist;
+	int 			hist_fd;
 	struct termios	my_termios;
 	struct termios	t_back;
 	char			*current_line; //ligne en cours d'edition
@@ -86,6 +88,7 @@ void				cursor_next_line(void);
 */
 void				init_hist();
 void				ft_newhist(char *line);
+void				nav_hist(int arrow);
 /*
 ** INIT
 */

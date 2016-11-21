@@ -14,10 +14,6 @@
 
 int					fill_clist(char *line)
 {
-	FT_INIT(int, i, 0);
-	while (line[i])
-	{
-		i++;
-	}
+	printf("line = %s\n", line);
 	return (1);
 }

@@ -52,8 +52,8 @@ typedef struct			s_bracket
 typedef struct			s_clist
 {
 	t_bracket			*list;
-	struct t_clist		*next;
-	struct t_clist		*prev;
+	struct s_clist		*next;
+	struct s_clist		*prev;
 }						t_clist;
 
 typedef struct			s_glob
@@ -115,6 +115,6 @@ int						bracket_pushback(t_bracket **list);
 int						hub_cbracket(t_glob *glob);
 int						clist_pushback(t_clist **clist);
 int						fill_clist(char *line);
-
+int						cbracket_errors(char *line, t_glob *glob);
 
 #endif

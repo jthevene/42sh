@@ -27,6 +27,7 @@ SRCS = 	globing/glob_parser.c \
 		$(SBRACK)sbracket_list.c \
 		\
 		$(CBRACK)hub_cbracket.c $(CBRACK)fill_clist.c $(CBRACK)cbracket_list.c \
+		$(CBRACK)cbracket_errors.c\
 		\
 		$(UTILS_1)catch_dash.c $(UTILS_1)check_rng.c $(UTILS_1)clean_brackets.c\
 		$(UTILS_1)count_brackets.c $(UTILS_1)get_functions.c\
@@ -42,7 +43,7 @@ BIN =	glob_parser.o \
 		category_bracket.o sbracket_list.o catch_dash.o check_rng.o \
 		clean_brackets.o count_brackets.o get_functions.o str_nodouble.o \
 		\
-		hub_cbracket.o fill_clist.o cbracket_list.o \
+		hub_cbracket.o fill_clist.o cbracket_list.o cbracket_errors.o\
 		\
 		main.o
 

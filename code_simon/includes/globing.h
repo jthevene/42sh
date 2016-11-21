@@ -112,6 +112,9 @@ char					*mult_nodouble(char *str);
 int						bracket_pushback(t_bracket **list);
 
 // FONCTIONS CURLY BRACKETS
-void					hub_cbracket(t_glob *glob);
+int						hub_cbracket(t_glob *glob);
+int						clist_pushback(t_clist **clist);
+int						fill_clist(char *line);
+
 
 #endif

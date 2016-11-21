@@ -17,7 +17,7 @@ int					clist_pushback(t_clist **clist)
 	t_clist *new;
 	t_clist *tmp;
 
-	if (!(*lcist))
+	if (!(*clist))
 	{
 		if (!((*clist) = (t_clist *)malloc(sizeof(t_clist))))
 			return (0);
@@ -65,4 +65,5 @@ int					clist_list_pushback(t_clist **clist)
 		(*clist)->list = (*clist)->list->next;
 		(*clist)->list->content = NULL;
 	}
+	return (1);
 }

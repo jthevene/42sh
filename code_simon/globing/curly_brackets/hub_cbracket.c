@@ -35,7 +35,7 @@ static int		cbracket_errors(char *line, t_glob *glob)
 
 int				handle_cbracket(char *line, t_glob *glob)
 {
-	if (!cbracket_errors(char *line))
+	if (!cbracket_errors(line, glob))
 		return (0);
 	if (!clist_pushback(&glob->cbracket))
 		return (0);

@@ -18,6 +18,7 @@ REDIR = ./redirections/
 SBRACK = ./globing/square_brackets/
 CBRACK = ./globing/curly_brackets/
 UTILS_1 = ./globing/square_brackets/sbracket_utils/
+UTILS_2 = ./globing/curly_brackets/cbracket_utils/
 
 SRCS = 	globing/glob_parser.c \
 		$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
@@ -33,6 +34,8 @@ SRCS = 	globing/glob_parser.c \
 		$(UTILS_1)count_brackets.c $(UTILS_1)get_functions.c\
 		$(UTILS_1)str_nodouble.c \
 		\
+		$(UTILS_2)commas_utils.c\
+		\
 		main.c
 
 BIN =	glob_parser.o \
@@ -43,7 +46,9 @@ BIN =	glob_parser.o \
 		category_bracket.o sbracket_list.o catch_dash.o check_rng.o \
 		clean_brackets.o count_brackets.o get_functions.o str_nodouble.o \
 		\
-		hub_cbracket.o fill_clist.o cbracket_list.o cbracket_errors.o\
+		hub_cbracket.o fill_clist.o cbracket_list.o cbracket_errors.o \
+		\
+		commas_utils.o \
 		\
 		main.o
 

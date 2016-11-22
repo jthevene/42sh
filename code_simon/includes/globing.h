@@ -114,7 +114,11 @@ int						bracket_pushback(t_bracket **list);
 // FONCTIONS CURLY BRACKETS
 int						hub_cbracket(t_glob *glob);
 int						clist_pushback(t_clist **clist);
-int						fill_clist(char *line);
+int						clist_list_pushback(t_clist **clist);
+int						fill_clist(char *line, t_glob *glob);
 int						cbracket_errors(char *line, t_glob *glob);
+
+int						next_comma(char *str, int i);
+int						check_commas(char *line, int i);
 
 #endif

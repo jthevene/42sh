@@ -12,50 +12,6 @@
 
 #include "../../includes/globing.h"
 
-int		count_commas(char *line, int i)
-{
-	FT_INIT(int, count, 0);
-	FT_INIT(int, tmp, 0);
-	while (line[i])
-	{
-		if (line[i] == ',')
-			count++;
-		if (line[i] == '{')
-		{
-			if (!(tmp = count_commas(line, i + 1)))
-				return (0);
-			else
-				count += tmp;
-			i += next_bracket(line, '{', i);
-		}
-		i++;
-	}
-	return (count);
-}
-
-int		check_commas(char *line, int i)
-{
-	FT_INIT(int, commas, count_commas(line, i));
-	if (!commas)
-		return (0);
-	else if (commas == 1)
-	{
-		while (line[i] != ',')
-			i++;
-		return (line[i + 1] != '}' ? 1 : 0);
-	}
-	while (line[++i])
-	{
-		if (line[i] == '{')
-		{
-			if (!check_commas(line, i + 1))
-				return (0);
-			i += next_bracket(line, '{', i);
-		}
-	}
-	return (1);
-}
-
 int		is_expansion(char *line, int i)
 {
 	while (line[i])
@@ -82,7 +38,7 @@ int		valid_expansion(char *line)
 		{
 			if (!(line[i - 1] && line[i - 2] && line[i - 2] == '{'))
 				return (0);
-			if (!(line[i + 1] && line[i + 2] && line[i + 2] == '}'))
+			if (!(line[i + 2] && line[i + 3] && line[i + 3] == '}'))
 				return (0);
 			return (1);
 		}

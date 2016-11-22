@@ -18,7 +18,7 @@ int				handle_cbracket(char *line, t_glob *glob)
 		return (0);
 	if (!clist_pushback(&glob->cbracket))
 		return (0);
-	fill_clist(line);
+	fill_clist(line, glob);
 	return (1);
 }
 

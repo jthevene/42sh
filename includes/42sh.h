@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2016/11/16 16:36:35 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/20 17:57:05 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct 		s_lst
 	void			*content;
 	struct s_lst	*prev;
 	struct s_lst	*next;
+	int 			number;
 	struct s_lst	*last;
 } 					t_lst;
 
@@ -89,6 +90,7 @@ void				cursor_next_line(void);
 void				init_hist();
 void				ft_newhist(char *line);
 void				nav_hist(int arrow);
+void				ft_history(int i);
 /*
 ** INIT
 */

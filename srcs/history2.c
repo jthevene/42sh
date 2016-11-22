@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   history2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/29 16:57:59 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/11/22 17:37:39 by jules            ###   ########.fr       */
+/*   Created: 2016/11/21 16:55:54 by jules             #+#    #+#             */
+/*   Updated: 2016/11/22 17:55:35 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "42sh.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+void	ft_histdel()
 {
-	if (alst != NULL && *alst != NULL && del != NULL)
+	if (g_shell.hist != NULL && *g_shell.hist != NULL)
 	{
-		while ((*alst)->next != NULL)
+		while ((*g_shell.hist)->prev != NULL)
 		{
-			del((*alst)->content, (*alst)->content_size);
-			free(*alst);
-			*alst = (*alst)->next;
+			free(g_shell.hist->content);
+			free(*g_shell.hist);
+			*g_shell.hist = (*g_shell.hist)->prev;
 		}
-		del((*alst)->content, (*alst)->content_size);
-		free(*alst);
-		*alst = NULL;
+		free(g_shell.hist->content);
+		free(*g_shell.hist);
+		*g_shell.hist = NULL;
 	}
+	init_hist()
 }

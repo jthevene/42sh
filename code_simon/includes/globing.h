@@ -121,4 +121,6 @@ int						cbracket_errors(char *line, t_glob *glob);
 int						next_comma(char *str, int i);
 int						check_commas(char *line, int i);
 
+int						last_bracket(char *str);
+
 #endif

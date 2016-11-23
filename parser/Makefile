@@ -4,6 +4,7 @@ CC =	gcc
 NAME =  ft_parse
 
 SRC  =  ./free_tree.c \
+	./fork.c \
 	./tree.c \
 	./search.c \
 	./main.c \

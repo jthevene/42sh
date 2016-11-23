@@ -11,3 +11,16 @@ void	free_tree(t_tree *tree)
 		free(tree);
 	}
 }
+
+void	free_tab(char **tab)
+{
+	int		i;
+
+	i = 0;
+	while (tab && tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}

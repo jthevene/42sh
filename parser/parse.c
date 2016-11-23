@@ -7,10 +7,18 @@ void	parse(t_tree *tree)
 		if (and_or(tree) == 0)
 		{
 			if (redirections(tree) == 0)
-				;
+			{
+				if (tree->content)
+					tree->type = COMMAND;
+				printf("{COMMAND}\n");
+				printf("type : %d\n", tree->type);
+				printf("content : (%s)\n", tree->content);
+				//printf("left : (%s)\n", tree->left->content);
+				//printf("right : (%s)\n", tree->right->content);
+			}
 			else
 			{
-				printf("{ALL}\n");
+				printf("{REDIRECTIONS}\n");
 				printf("type : %d\n", tree->type);
 				printf("content : (%s)\n", tree->content);
 				printf("left : (%s)\n", tree->left->content);
@@ -19,7 +27,7 @@ void	parse(t_tree *tree)
 		}
 		else
 		{
-			printf("{ALL}\n");
+			printf("{AND_OR}\n");
 			printf("type : %d\n", tree->type);
 			printf("content : (%s)\n", tree->content);
 			printf("left : (%s)\n", tree->left->content);
@@ -28,7 +36,7 @@ void	parse(t_tree *tree)
 	}
 	else
 	{
-		printf("{ALL}\n");
+		printf("{SEMICOLON}\n");
 		printf("type : %d\n", tree->type);
 		printf("content : (%s)\n", tree->content);
 		printf("left : (%s)\n", tree->left->content);

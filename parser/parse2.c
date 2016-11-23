@@ -11,7 +11,7 @@ void	dbless_tree(t_tree *tree, char *chr, int len)
 	len = chr - tree->content;
 	tree->left->content = ft_strndup(tree->content, len);
 	tree->left->content = ft_epurstr(tree->left->content);
-	while (*tmp != ' ')
+	while (*tmp != ' ' && *tmp != '\0')
 		tmp++;
 	tree->right->content = ft_strdup(tmp);
 	tree->right->content = ft_epurstr(tree->right->content);
@@ -32,7 +32,7 @@ void	dbmore_tree(t_tree *tree, char *chr, int len)
 	len = chr - tree->content;
 	tree->left->content = ft_strndup(tree->content, len);
 	tree->left->content = ft_epurstr(tree->left->content);
-	while (*tmp != ' ')
+	while (*tmp != ' ' && *tmp != '\0')
 		tmp++;
 	tree->right->content = ft_strdup(tmp);
 	tree->right->content = ft_epurstr(tree->right->content);
@@ -53,7 +53,7 @@ void	less_tree(t_tree *tree, char *chr, int len)
 	len = chr - tree->content;
 	tree->left->content = ft_strndup(tree->content, len);
 	tree->left->content = ft_epurstr(tree->left->content);
-	while (*tmp != ' ')
+	while (*tmp != ' ' && *tmp != '\0')
 		tmp++;
 	tree->right->content = ft_strdup(tmp);
 	tree->right->content = ft_epurstr(tree->right->content);
@@ -74,7 +74,7 @@ void	more_tree(t_tree *tree, char *chr, int len)
 	len = chr - tree->content;
 	tree->left->content = ft_strndup(tree->content, len);
 	tree->left->content = ft_epurstr(tree->left->content);
-	while (*tmp != ' ')
+	while (*tmp != ' ' && *tmp != '\0')
 		tmp++;
 	tree->right->content = ft_strdup(tmp);
 	tree->right->content = ft_epurstr(tree->right->content);

@@ -3,7 +3,8 @@ CC =	gcc
 
 NAME =  ft_parse
 
-SRC  =  ./tree.c \
+SRC  =  ./free_tree.c \
+	./tree.c \
 	./search.c \
 	./main.c \
 	./parse.c \

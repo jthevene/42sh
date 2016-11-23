@@ -22,5 +22,6 @@ int		main(int ac, char **av)
 			parse(tree);
 		}
 	}
+	free_tree(tree);
 	return (0);
 }

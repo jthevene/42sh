@@ -37,6 +37,7 @@ typedef struct		s_all
 	char			*epured;
 }					t_all;
 
+void	free_tree(t_tree *tree);
 void	parse(t_tree *tree);
 int		isallspace(char *str);
 char	*epur_str(char *str);

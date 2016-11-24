@@ -65,8 +65,8 @@ int		next_comma(char *str, int i)
 	{
 		if (str[i] == '{')
 		{
+			ret += next_bracket(str, '{', i) + 1;
 			i += next_bracket(str, '{', i) + 1;
-			ret += next_bracket(str, '{', ret);
 		}
 		if (str[i] == ',')
 			return (ret);

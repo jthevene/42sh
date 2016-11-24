@@ -41,7 +41,7 @@ int					i_get_arg_len(char *str, int i, int type)
 	}
 	else if (type == BEGIN)
 	{
-		while (str[i] != ',' && str[i] != ' ' && str[i] != '}')
+		while (str[i] != '\0' && str[i] != ',' && str[i] != '}' && str[i] != '{')
 		{
 			i--;
 			ret++;
@@ -49,7 +49,7 @@ int					i_get_arg_len(char *str, int i, int type)
 	}
 	else if (type == END)
 	{
-		while (str[i] != ',' && str[i] != '}' && str[i] != '{')
+		while (str[i] && str[i] != '}' && str[i] != '{' && str[i] != ',')
 		{
 			i++;
 			ret++;
@@ -80,7 +80,7 @@ int					i_get_expr_end(char *str)
 	while (str[i] != '}')
 		i++;
 	i++;
-	while (str[i] != '}' && str[i] != ',')
+	while (str[i] && str[i] != '}' && str[i] != ',')
 		i++;
 	return (i);
 }

@@ -39,3 +39,26 @@ int					bracket_pushback(t_bracket **list)
 	}
 	return (1);
 }
+
+void			rewind_tbracket(t_bracket **list)
+{
+	while ((*list)->prev)
+		(*list) = (*list)->prev;
+}
+
+void			free_tbracket(t_bracket **list)
+{
+	FT_INIT(t_bracket *, tmp, NULL);
+	while ((*list)->prev)
+		(*list) = (*list)->prev;
+	while ((*list)->next)
+	{
+		free((*list)->content);
+		tmp = (*list);
+		(*list) = (*list)->next;
+		free(tmp);
+	}
+	free((*list)->content);
+	tmp = (*list);
+	(*list) = NULL;
+}

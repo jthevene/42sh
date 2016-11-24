@@ -132,6 +132,8 @@ char					*mult_nodouble(char *str);
 
 // Fonctions de liste chainee
 int						bracket_pushback(t_bracket **list);
+void					rewind_tbracket(t_bracket **list);
+void					free_tbracket(t_bracket **list);
 
 // FONCTIONS CURLY BRACKETS
 int						hub_cbracket(t_glob *glob);
@@ -147,6 +149,7 @@ int						i_recup_lastb(char *str, t_glob *glob);
 int						i_get_arg_len(char *str, int i, int type);
 int						i_algo_imbricated(char *str, t_glob *glob);
 char					**i_get_arg_ext(char *str);
+int						i_get_expr_end(char *str);
 
 int						last_bracket(char *str);
 

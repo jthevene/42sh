@@ -73,3 +73,14 @@ char				**i_get_arg_ext(char *str)
 	i_tab[1] = !end_len ? NULL : ft_strsub(str, i + 1, end_len);
 	return (i_tab);
 }
+
+int					i_get_expr_end(char *str)
+{
+	FT_INIT(int, i, last_bracket(str));
+	while (str[i] != '}')
+		i++;
+	i++;
+	while (str[i] != '}' && str[i] != ',')
+		i++;
+	return (i);
+}

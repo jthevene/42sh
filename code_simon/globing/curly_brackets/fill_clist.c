@@ -19,7 +19,10 @@ void			get_patterns(char *str, t_glob *glob)
 	if (!ft_strchr(str, '{'))
 		glob->cbracket->list->content = ft_strdup(str);
 	else
+	{
+		i_algo_imbricated(str, glob);
 		glob->cbracket->list->content = ft_strdup("QUENELLE");
+	}
 	printf("CURRENT : %s\n", glob->cbracket->list->content);
 }
 

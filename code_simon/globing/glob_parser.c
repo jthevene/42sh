@@ -61,6 +61,7 @@ t_glob					*init_glob(void)
 	glob = (t_glob *)malloc(sizeof(t_glob));
 	glob->sbracket = NULL;
 	glob->cbracket = NULL;
+	glob->tmp_c = NULL;
 	ft_bzero(glob->upper, 27);
 	ft_bzero(glob->lower, 27);
 	ft_bzero(glob->alpha, 53);

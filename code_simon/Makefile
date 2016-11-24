@@ -34,7 +34,7 @@ SRCS = 	globing/glob_parser.c \
 		$(UTILS_1)count_brackets.c $(UTILS_1)get_functions.c\
 		$(UTILS_1)str_nodouble.c \
 		\
-		$(UTILS_2)commas_utils.c $(UTILS_2)algo_imbricated.c \
+		$(UTILS_2)commas_utils.c $(UTILS_2)algo_imbricated.c $(UTILS_2)imbric_utils.c \
 		\
 		main.c
 
@@ -48,7 +48,7 @@ BIN =	glob_parser.o \
 		\
 		hub_cbracket.o fill_clist.o cbracket_list.o cbracket_errors.o \
 		\
-		commas_utils.o algo_imbricated.o \
+		commas_utils.o algo_imbricated.o imbric_utils.o \
 		\
 		main.o
 

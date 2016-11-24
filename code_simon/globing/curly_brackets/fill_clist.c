@@ -19,7 +19,10 @@ void			get_patterns(char *str, t_glob *glob)
 	if (!ft_strchr(str, '{'))
 		glob->cbracket->list->content = ft_strdup(str);
 	else
+	{
+		i_algo_imbricated(ft_strdup(str), glob);
 		glob->cbracket->list->content = ft_strdup("QUENELLE");
+	}
 	printf("CURRENT : %s\n", glob->cbracket->list->content);
 }
 
@@ -33,7 +36,7 @@ int				fill_clist(char *line, t_glob *glob)
 		if (next_comma(line, i) == -1)
 		{
 			tmp = ft_strsub(line, i, ft_strlen(line) - i - 1);
-			printf("next_comma = %s\n", tmp);
+			printf("next_comma 1 = %s\n", tmp);
 			get_patterns(tmp, glob);
 			break ;
 		}
@@ -42,7 +45,7 @@ int				fill_clist(char *line, t_glob *glob)
 			tmp = ft_strsub(line, i, next_comma(line, i));
 			i += next_comma(line, i);
 		}
-		printf("next_comma = %s\n", tmp);
+		printf("next_comma 2 = %s\n", tmp);
 		get_patterns(tmp, glob);
 		free(tmp);
 		i++;

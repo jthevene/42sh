@@ -34,11 +34,32 @@
 #  define FT_TER(si, alors, sinon) si ? alors : sinon
 # endif
 
-# define MULT 1 // [abc]
-# define RNG 2 // [a-c]
-# define NOMULT 3 // [!abc]
-# define NORNG 4 // [!a-c]
-# define MIX 5 // [abc-fE-W] || [!abc-fE-W]
+# ifndef MULT
+#  define MULT 1 // [abc]
+# endif
+# ifndef RNG
+#  define RNG 2 // [a-c]
+# endif
+# ifndef NOMULT
+#  define NOMULT 3 // [!abc]
+# endif
+# ifndef NORNG
+#  define NORNG 4 // [!a-c]
+# endif
+# ifndef MIX
+#  define MIX 5 // [abc-fE-W] || [!abc-fE-W]
+# endif
+
+// Macros pour algo_imbricated, dans c_bracket
+# ifndef ARG
+#  define ARG 1
+# endif
+# ifndef BEGIN
+#  define BEGIN 2
+# endif
+# ifndef END
+#  define END 3
+# endif
 
 // Struct qui stocke le resultat d'une commande avec des []
 typedef struct			s_bracket
@@ -60,6 +81,7 @@ typedef struct			s_glob
 {
 	t_bracket			*sbracket;
 	t_clist				*cbracket;
+	t_bracket			*tmp_c;
 
 	char				*command;
 
@@ -110,6 +132,8 @@ char					*mult_nodouble(char *str);
 
 // Fonctions de liste chainee
 int						bracket_pushback(t_bracket **list);
+void					rewind_tbracket(t_bracket **list);
+void					free_tbracket(t_bracket **list);
 
 // FONCTIONS CURLY BRACKETS
 int						hub_cbracket(t_glob *glob);
@@ -120,6 +144,12 @@ int						cbracket_errors(char *line, t_glob *glob);
 
 int						next_comma(char *str, int i);
 int						check_commas(char *line, int i);
+
+int						i_recup_lastb(char *str, t_glob *glob);
+int						i_get_arg_len(char *str, int i, int type);
+int						i_algo_imbricated(char *str, t_glob *glob);
+char					**i_get_arg_ext(char *str);
+int						i_get_expr_end(char *str);
 
 int						last_bracket(char *str);
 

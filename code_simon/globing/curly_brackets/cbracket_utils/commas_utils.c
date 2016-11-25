@@ -26,7 +26,7 @@ int		count_commas(char *line, int i)
 				return (0);
 			else
 				count += tmp;
-			i += next_bracket(line, '{', i);
+			i += next_bracket(line, '{', i + 1);
 		}
 		if (line[i] == '}')
 			return (count);
@@ -68,10 +68,13 @@ int		next_comma(char *str, int i)
 			ret += next_bracket(str, '{', i) + 1;
 			i += next_bracket(str, '{', i) + 1;
 		}
-		if (str[i] == ',')
+		else if (str[i] == ',')
 			return (ret);
-		i++;
-		ret++;
+		else
+		{
+			i++;
+			ret++;
+		}
 	}
 	return (-1);
 }

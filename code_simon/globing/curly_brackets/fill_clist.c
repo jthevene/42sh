@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/globing.h"
-#define FILS_DE_PUTERIE "ls { a {bc{d,e}f{g,h},i} , jk {lm{no,p}q{r,s} , t} uv}"
+#define FILS_DE_PUTERIE "ls {a{bc{d,e}f{g,h},i},jk{lm{no,p}q{r,s},t}uv}"
 
 void			get_patterns(char *str, t_glob *glob)
 {

@@ -28,7 +28,7 @@ int					last_bracket(char *str)
 	return (ret);
 }
 
-int					i_get_arg_len(char *str, int i, int type)
+int					i_get_arg_len(char *str, int i, int type, t_glob *glob)
 {
 	FT_INIT(int, ret, 0);
 	if (type == ARG)
@@ -41,11 +41,12 @@ int					i_get_arg_len(char *str, int i, int type)
 	}
 	else if (type == BEGIN)
 	{
-		while (str[i] != '\0' && str[i] != ',' && str[i] != '}' && str[i] != '{')
+		while (i >= 0 && str[i] != '\0' && str[i] != ',' && str[i] != '}' && str[i] != '{')
 		{
 			i--;
 			ret++;
 		}
+		glob->c_touch = str[i] == '}' ? TRUE : FALSE;
 	}
 	else if (type == END)
 	{
@@ -58,18 +59,18 @@ int					i_get_arg_len(char *str, int i, int type)
 	return (ret);
 }
 
-char				**i_get_arg_ext(char *str)
+char				**i_get_arg_ext(char *str, t_glob *glob)
 {
 	FT_INIT(char **, i_tab, NULL);
 	FT_INIT(int, i, last_bracket(str));
-	FT_INIT(int, begin_len, i_get_arg_len(str, i - 1, BEGIN));
+	FT_INIT(int, begin_len, i_get_arg_len(str, i - 1, BEGIN, glob));
 	FT_INIT(int, end_len, 0);
 	if (!(i_tab = (char **)malloc(sizeof(char *) * 2)))
 		return (NULL);
 	i_tab[0] = !begin_len ? NULL : ft_strsub(str, i - begin_len, begin_len);
 	while (str[i] != '}')
 		i++;
-	end_len = i_get_arg_len(str, i + 1, END);
+	end_len = i_get_arg_len(str, i + 1, END, glob);
 	i_tab[1] = !end_len ? NULL : ft_strsub(str, i + 1, end_len);
 	return (i_tab);
 }

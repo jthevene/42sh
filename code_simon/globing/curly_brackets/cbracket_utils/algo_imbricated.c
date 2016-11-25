@@ -16,11 +16,11 @@ int				i_recup_lastb(char *str, t_glob *glob)
 {
 	FT_INIT(int, i, last_bracket(str) + 1);
 	FT_INIT(int, arg_len, 0);
-	while (str[i] != '}')
+	while (str[i] && str[i] != '}')
 	{
 		if (!(bracket_pushback(&glob->tmp_c)))
 			return (0);
-		arg_len = i_get_arg_len(str, i, ARG);
+		arg_len = i_get_arg_len(str, i, ARG, glob);
 		if (!(glob->tmp_c->content = ft_strsub(str, i, arg_len)))
 			return (0);
 		i += arg_len;
@@ -41,13 +41,16 @@ t_bracket		*i_create_new_args(char **arg_ext, t_glob *glob)
 		bracket_pushback(&new_args);
 		if (!arg_ext[0] && !arg_ext[1])
 			new_args->content = ft_strdup(glob->tmp_c->content);
-		if (arg_ext[0])
-			tmp = ft_strjoin(arg_ext[0], glob->tmp_c->content);
-		if (arg_ext[1])
-			new_args->content = tmp ? ft_strjoin(tmp, arg_ext[1])
-			: ft_strjoin(glob->tmp_c->content, arg_ext[1]);
 		else
-			new_args->content = ft_strdup(tmp);
+		{
+			if (arg_ext[0])
+				tmp = ft_strjoin(arg_ext[0], glob->tmp_c->content);
+			if (arg_ext[1])
+				new_args->content = tmp ? ft_strjoin(tmp, arg_ext[1])
+				: ft_strjoin(glob->tmp_c->content, arg_ext[1]);
+			else
+				new_args->content = ft_strdup(tmp);
+		}
 		if (tmp)
 			free(tmp);
 		printf("new_arg created : %s\n", new_args->content);
@@ -61,15 +64,21 @@ t_bracket		*i_create_new_args(char **arg_ext, t_glob *glob)
 	return (new_args);
 }
 
-char			*recreate_string(char *str, t_bracket *new_args)
+char			*recreate_string(char *str, t_bracket *new_args, int c_touch)
 {
 	FT_INIT(int, i, last_bracket(str) - 1);
 	FT_INIT(char *, new_str, NULL);
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(char *, tmp2, NULL);
-	while (str[i] != '\0' && str[i] != ',' && str[i] != '{')
+	while (str[i] != '\0' && str[i] != ',' && str[i] != '{' && str[i] != '}')
 		i--;
 	new_str = i > 0 ? ft_strsub(str, 0, i + 1) : NULL;
+	if (c_touch == TRUE)
+	{
+		tmp = new_str;
+		new_str = ft_strjoin(new_str, "{");
+		free(tmp);
+	}
 	while (new_args->next)
 	{
 		tmp = new_str;
@@ -84,6 +93,12 @@ char			*recreate_string(char *str, t_bracket *new_args)
 	tmp = new_str;
 	new_str = ft_strjoin(new_str, new_args->content);
 	free(tmp);
+	if (c_touch == TRUE)
+	{
+		tmp = new_str;
+		new_str = ft_strjoin(new_str, "}");
+		free(tmp);
+	}
 	i = i_get_expr_end(str);
 	if (i != (int)ft_strlen(str))
 	{
@@ -98,13 +113,13 @@ char			*recreate_string(char *str, t_bracket *new_args)
 
 int				i_algo_imbricated(char *str, t_glob *glob)
 {
-	FT_INIT(char **, arg_ext, i_get_arg_ext(str));
+	FT_INIT(char **, arg_ext, i_get_arg_ext(str, glob));
 	FT_INIT(t_bracket *, new_args, NULL);
 	FT_INIT(char *, tmp, NULL);
 	i_recup_lastb(str, glob);
 	new_args = i_create_new_args(arg_ext, glob);
 	rewind_tbracket(&new_args);
-	tmp = recreate_string(str, new_args);
+	tmp = recreate_string(str, new_args, glob->c_touch);
 	free(str);
 	str = ft_strdup(tmp);
 	free(tmp);
@@ -113,6 +128,7 @@ int				i_algo_imbricated(char *str, t_glob *glob)
 	return (1);
 }
 
-// l {a,{bcd,e{f,g}h,lol}}
+// l {a,{bcd,e{,g}h,lol}}
 // l {a,{bcd,cou{f,g}cou}}
 // l {b{aba,obo}s,co{llier,lliers},LOL}
+// l jk{lm{no,p}q{r,s}bw{eh,ah}cl{ef,ou},t}uv

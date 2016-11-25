@@ -61,6 +61,13 @@
 #  define END 3
 # endif
 
+# ifndef TRUE
+#  define TRUE 1
+# endif
+# ifndef FALSE
+#  define FALSE 0
+# endif
+
 // Struct qui stocke le resultat d'une commande avec des []
 typedef struct			s_bracket
 {
@@ -81,7 +88,9 @@ typedef struct			s_glob
 {
 	t_bracket			*sbracket;
 	t_clist				*cbracket;
+
 	t_bracket			*tmp_c;
+	int					c_touch;
 
 	char				*command;
 
@@ -146,9 +155,9 @@ int						next_comma(char *str, int i);
 int						check_commas(char *line, int i);
 
 int						i_recup_lastb(char *str, t_glob *glob);
-int						i_get_arg_len(char *str, int i, int type);
+int						i_get_arg_len(char *str, int i, int type, t_glob *glob);
 int						i_algo_imbricated(char *str, t_glob *glob);
-char					**i_get_arg_ext(char *str);
+char					**i_get_arg_ext(char *str, t_glob *glob);
 int						i_get_expr_end(char *str);
 
 int						last_bracket(char *str);

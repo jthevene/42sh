@@ -62,6 +62,7 @@ t_glob					*init_glob(void)
 	glob->sbracket = NULL;
 	glob->cbracket = NULL;
 	glob->tmp_c = NULL;
+	glob->c_touch = FALSE;
 	ft_bzero(glob->upper, 27);
 	ft_bzero(glob->lower, 27);
 	ft_bzero(glob->alpha, 53);

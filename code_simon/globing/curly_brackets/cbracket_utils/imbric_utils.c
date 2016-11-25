@@ -12,29 +12,6 @@
 
 #include "../../../includes/globing.h"
 
-int					last_bracket(char *str, int c)
-{
-	FT_INIT(int, i, 0);
-	FT_INIT(int, ret, 0);
-	FT_INIT(int, count, c);
-	while (str[i])
-		i++;
-	--i;
-	ret = i;
-	while (str[i])
-	{
-		if (str[i] == '{')
-		{
-			count--;
-			if (!count)
-				break ;
-		}
-		i--;
-		ret--;
-	}
-	return (ret);
-}
-
 int					i_get_arg_len(char *str, int i, int type, t_glob *glob)
 {
 	FT_INIT(int, ret, 0);
@@ -93,16 +70,4 @@ int					i_get_expr_end(char *str, int lastb_count)
 	while (str[i] && str[i] != '{' && str[i] != '}' && str[i] != ',')
 		i++;
 	return (i);
-}
-
-void				free_double_tab(char ***tabl)
-{
-	FT_INIT(int, i, 0);
-	while ((*tabl)[i])
-	{
-		if ((*tabl)[i])
-			free((*tabl)[i]);
-		i++;
-	}
-	free((*tabl));
 }

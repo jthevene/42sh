@@ -15,16 +15,18 @@
 
 void			get_patterns(char *str, t_glob *glob)
 {
-	clist_list_pushback(&glob->cbracket);
 	if (!ft_strchr(str, '{'))
+	{
+		clist_list_pushback(&glob->cbracket);
 		glob->cbracket->list->content = ft_strdup(str);
+		printf("CURRENT : %s\n", glob->cbracket->list->content);
+	}
 	else
 	{
 		i_algo_imbricated(ft_strdup(str), glob);
-		glob->cbracket->list->content = ft_strdup("QUENELLE");
+		printf("Algo imbriquay executay\n");
 	}
 	glob->lastb_count = 1;
-	printf("CURRENT : %s\n", glob->cbracket->list->content);
 }
 
 int				fill_clist(char *line, t_glob *glob)

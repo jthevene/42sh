@@ -147,21 +147,29 @@ void					free_tbracket(t_bracket **list);
 
 // FONCTIONS CURLY BRACKETS
 int						hub_cbracket(t_glob *glob);
+int						cbracket_errors(char *line, t_glob *glob);
+
 int						clist_pushback(t_clist **clist);
 int						clist_list_pushback(t_clist **clist);
 int						fill_clist(char *line, t_glob *glob);
-int						cbracket_errors(char *line, t_glob *glob);
+void					rewind_tclist(t_clist **clist);
+void					print_clist_list(t_clist **clist);
+void					print_clist(t_clist **clist);
 
 int						next_comma(char *str, int i);
 int						check_commas(char *line, int i);
 
+int						detect_double_bracket(char *str);
+int						last_bracket(char *str, int c);
+int						count_imbric(char *str);
+
 int						i_recup_lastb(char *str, t_glob *glob);
 int						i_get_arg_len(char *str, int i, int type, t_glob *glob);
-int						i_algo_imbricated(char *str, t_glob *glob);
+void					i_algo_imbricated(char *str, t_glob *glob);
 char					**i_get_arg_ext(char *str, t_glob *glob);
 int						i_get_expr_end(char *str, int lastb_count);
 
-int						last_bracket(char *str, int c);
+void					i_hub_patterns(char *str, t_glob *glob);
 
 void					free_double_tab(char ***tabl);
 

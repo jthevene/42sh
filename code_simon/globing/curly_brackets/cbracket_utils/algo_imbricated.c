@@ -38,7 +38,7 @@ int				i_recup_lastb(char *str, t_glob *glob)
 			return (0);
 		i += arg_len;
 		i += str[i] == ',' ? 1 : 0;
-		printf("TMP_C->content = %s\n", glob->tmp_c->content);
+//		printf("TMP_C->content = %s\n", glob->tmp_c->content);
 	}
 	return (1);
 }
@@ -66,7 +66,7 @@ t_bracket		*i_create_new_args(char **arg_ext, t_glob *glob)
 		}
 		if (tmp)
 			free(tmp);
-		printf("new_arg created : %s\n", new_args->content);
+//		printf("new_arg created : %s\n", new_args->content);
 		if (!glob->tmp_c->next)
 			break ;
 		else
@@ -125,15 +125,16 @@ char			*recreate_string(char *str, t_bracket *new_args, t_glob *glob)
 	return (new_str);
 }
 
-int				i_algo_imbricated(char *str, t_glob *glob)
+void			i_algo_imbricated(char *str, t_glob *glob)
 {
 	FT_INIT(char **, arg_ext, NULL);
 	FT_INIT(t_bracket *, new_args, NULL);
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(int, count, count_imbric(str));
-	printf("count = %d\n", count);
+	FT_INIT(int, i, 0);
 	while (count)
 	{
+		i = 0;
 		i_recup_lastb(str, glob);
 		arg_ext = i_get_arg_ext(str, glob);
 		new_args = i_create_new_args(arg_ext, glob);
@@ -142,16 +143,18 @@ int				i_algo_imbricated(char *str, t_glob *glob)
 		free(str);
 		str = ft_strdup(tmp);
 		free(tmp);
-		printf("new_str = %s\n", str);
 		free_double_tab(&arg_ext);
 		free_tbracket(&new_args);
 		glob->lastb_count = glob->c_touch == TRUE ? glob->lastb_count + 1 : glob->lastb_count;
+		if (detect_double_bracket(str))
+			count--;
 		count--;
 	}
-	return (1);
+	i_hub_patterns(str, glob);
 }
 
 // l {a,{bcd,e{,g}h,lol}}
 // l {a,{bcd,cou{f,g}cou}}
 // l {b{aba,obo}s,co{llier,lliers},LOL}
 // l jk{lm{no,p}q{r,s}bw{eh,ah}cl{ef,ou},t}uv
+// l jk{lm{no,p}q{r,s,wak}bw{eh,ah}cl{ef,ou,ang},t}uv

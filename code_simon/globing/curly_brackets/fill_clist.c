@@ -23,6 +23,7 @@ void			get_patterns(char *str, t_glob *glob)
 		i_algo_imbricated(ft_strdup(str), glob);
 		glob->cbracket->list->content = ft_strdup("QUENELLE");
 	}
+	glob->lastb_count = 1;
 	printf("CURRENT : %s\n", glob->cbracket->list->content);
 }
 

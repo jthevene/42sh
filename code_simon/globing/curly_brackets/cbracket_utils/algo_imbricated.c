@@ -12,9 +12,22 @@
 
 #include "../../../includes/globing.h"
 
+int				count_imbric(char *str)
+{
+	FT_INIT(int, i, 0);
+	FT_INIT(int, count, 0);
+	while (str[i])
+	{
+		if (str[i] == '{')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
 int				i_recup_lastb(char *str, t_glob *glob)
 {
-	FT_INIT(int, i, last_bracket(str) + 1);
+	FT_INIT(int, i, last_bracket(str, glob->lastb_count) + 1);
 	FT_INIT(int, arg_len, 0);
 	while (str[i] && str[i] != '}')
 	{
@@ -64,20 +77,21 @@ t_bracket		*i_create_new_args(char **arg_ext, t_glob *glob)
 	return (new_args);
 }
 
-char			*recreate_string(char *str, t_bracket *new_args, int c_touch)
+char			*recreate_string(char *str, t_bracket *new_args, t_glob *glob)
 {
-	FT_INIT(int, i, last_bracket(str) - 1);
+	FT_INIT(int, i, last_bracket(str, glob->lastb_count) - 1);
 	FT_INIT(char *, new_str, NULL);
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(char *, tmp2, NULL);
 	while (str[i] != '\0' && str[i] != ',' && str[i] != '{' && str[i] != '}')
 		i--;
 	new_str = i > 0 ? ft_strsub(str, 0, i + 1) : NULL;
-	if (c_touch == TRUE)
+	if (glob->c_touch == TRUE)
 	{
 		tmp = new_str;
-		new_str = ft_strjoin(new_str, "{");
-		free(tmp);
+		new_str = tmp ? ft_strjoin(new_str, "{") : ft_strdup("{");
+		if (tmp)
+			free(tmp);
 	}
 	while (new_args->next)
 	{
@@ -93,13 +107,13 @@ char			*recreate_string(char *str, t_bracket *new_args, int c_touch)
 	tmp = new_str;
 	new_str = ft_strjoin(new_str, new_args->content);
 	free(tmp);
-	if (c_touch == TRUE)
+	if (glob->c_touch == TRUE)
 	{
 		tmp = new_str;
 		new_str = ft_strjoin(new_str, "}");
 		free(tmp);
 	}
-	i = i_get_expr_end(str);
+	i = i_get_expr_end(str, glob->lastb_count);
 	if (i != (int)ft_strlen(str))
 	{
 		tmp = new_str;
@@ -113,18 +127,27 @@ char			*recreate_string(char *str, t_bracket *new_args, int c_touch)
 
 int				i_algo_imbricated(char *str, t_glob *glob)
 {
-	FT_INIT(char **, arg_ext, i_get_arg_ext(str, glob));
+	FT_INIT(char **, arg_ext, NULL);
 	FT_INIT(t_bracket *, new_args, NULL);
 	FT_INIT(char *, tmp, NULL);
-	i_recup_lastb(str, glob);
-	new_args = i_create_new_args(arg_ext, glob);
-	rewind_tbracket(&new_args);
-	tmp = recreate_string(str, new_args, glob->c_touch);
-	free(str);
-	str = ft_strdup(tmp);
-	free(tmp);
-	printf("new_str = %s\n", str);
-// PENSER A FREE ARG_EXT ET NEW_ARGS
+	FT_INIT(int, count, count_imbric(str));
+	printf("count = %d\n", count);
+	while (count)
+	{
+		i_recup_lastb(str, glob);
+		arg_ext = i_get_arg_ext(str, glob);
+		new_args = i_create_new_args(arg_ext, glob);
+		rewind_tbracket(&new_args);
+		tmp = recreate_string(str, new_args, glob);
+		free(str);
+		str = ft_strdup(tmp);
+		free(tmp);
+		printf("new_str = %s\n", str);
+		free_double_tab(&arg_ext);
+		free_tbracket(&new_args);
+		glob->lastb_count = glob->c_touch == TRUE ? glob->lastb_count + 1 : glob->lastb_count;
+		count--;
+	}
 	return (1);
 }
 

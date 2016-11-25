@@ -53,12 +53,15 @@ void			free_tbracket(t_bracket **list)
 		(*list) = (*list)->prev;
 	while ((*list)->next)
 	{
-		free((*list)->content);
+		if ((*list)->content)
+			free((*list)->content);
 		tmp = (*list);
 		(*list) = (*list)->next;
 		free(tmp);
 	}
-	free((*list)->content);
+	if ((*list)->content)
+		free((*list)->content);
 	tmp = (*list);
 	(*list) = NULL;
+	free(tmp);
 }

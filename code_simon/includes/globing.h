@@ -91,6 +91,7 @@ typedef struct			s_glob
 
 	t_bracket			*tmp_c;
 	int					c_touch;
+	int					lastb_count;
 
 	char				*command;
 
@@ -158,8 +159,10 @@ int						i_recup_lastb(char *str, t_glob *glob);
 int						i_get_arg_len(char *str, int i, int type, t_glob *glob);
 int						i_algo_imbricated(char *str, t_glob *glob);
 char					**i_get_arg_ext(char *str, t_glob *glob);
-int						i_get_expr_end(char *str);
+int						i_get_expr_end(char *str, int lastb_count);
 
-int						last_bracket(char *str);
+int						last_bracket(char *str, int c);
+
+void					free_double_tab(char ***tabl);
 
 #endif

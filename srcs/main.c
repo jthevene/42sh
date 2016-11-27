@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:20:49 by jules             #+#    #+#             */
-/*   Updated: 2016/11/16 16:36:10 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/25 16:41:59 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static	void	run_shell(void)
 			print_line(i++);
 		else if (key == K_UP || key == K_DOWN)
 			// HISTORIQUE
-			nav_hist(key);
+			navigation_hist(key);
 		else if (key == K_RIGHT || key == K_LEFT)
 			ft_putendl("RIGHT/LEFT");
 		else if (key == K_BACKSP)

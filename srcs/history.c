@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:53:52 by jules             #+#    #+#             */
-/*   Updated: 2016/11/21 16:46:42 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/25 16:49:24 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,14 @@ void	init_hist()
 	}
 	g_shell.hist->content = NULL;
 	g_shell.hist->number = 0;
+	g_shell.nav_hist = 0;
 	g_shell.hist->next = NULL;
 	g_shell.hist->prev = NULL;
-	g_shell.hist->last = NULL;
+	g_shell.last_hist = NULL;
+	// g_shell.hist->last = (t_lst *)malloc(sizeof(t_lst));
 	filename = ft_strjoin(get_var(&g_shell, "HOME"), "/.history");
-	g_shell.hist_fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);//penser à close
+	g_shell.hist_fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+	close(g_shell.hist_fd);
 }
 
 void	ft_newhist(char *line)
@@ -39,18 +42,16 @@ void	ft_newhist(char *line)
 	new_hist = (t_lst *)malloc(sizeof(t_lst));
 	if (new_hist)
 	{
+		while (g_shell.hist->next)
+			g_shell.hist = g_shell.hist->next;
 		new_hist->content = ft_strdup(line);
 		new_hist->next = NULL;
 		new_hist->number = g_shell.hist->number + 1;
 		new_hist->prev = g_shell.hist;
 		g_shell.hist->next = new_hist;
-		g_shell.hist->last = new_hist;
+		g_shell.last_hist = new_hist;
 		g_shell.hist = new_hist;
 	}
-	write(g_shell.hist_fd, ft_itoa(g_shell.hist->number), ft_nbrlen(g_shell.hist->number));
-	write(g_shell.hist_fd, " ", 1);
-	write(g_shell.hist_fd, line, ft_strlen(line));
-	write(g_shell.hist_fd, "\n", 1);
 }
 
 static void		put_hist_line(char *content)
@@ -61,19 +62,17 @@ static void		put_hist_line(char *content)
 }
 
 //affiche la ligne suivante ou precedente de l'historique
-void	nav_hist(int arrow)
+void	navigation_hist(int arrow)
 {
-	static int 		last_elem = 1;
-
 	if (g_shell.hist->content)
 	{
 		if (arrow == K_UP)
 		{	
 			if (g_shell.hist->prev->content)
 			{
-				if (last_elem == 0)
+				if (g_shell.nav_hist == 0)
 					g_shell.hist = g_shell.hist->prev;
-				last_elem = 0;
+				g_shell.nav_hist = 1;
 				put_hist_line(g_shell.hist->content);
 				g_shell.current_line = ft_strdup(g_shell.hist->content);
 			}
@@ -93,18 +92,28 @@ void	nav_hist(int arrow)
 void	ft_history(int i)
 {
 	t_lst 	*tmp;
+	int 	space;
 
+	space = 0;
 	tmp = g_shell.hist;
-	if (i == 0)
-		i++;
-	if (i > 0)
+	if (g_shell.hist->content)
 	{
-		while (i-- > 0)
+		if (i == 0)
+			i++;
+		else if (i > g_shell.hist->number)
+			i = g_shell.hist->number;
+		if (i > 0)
 		{
-			ft_putstr(ft_itoa(tmp->number));
-			ft_putchar(' ');
-			ft_putendl(tmp->content);
-			tmp = tmp->prev;
+			while (i-- > 0)
+			{
+				space = 5 - ft_nbrlen(tmp->number);
+				while (space-- > 0)
+					ft_putchar(' ');
+				ft_putstr(ft_itoa(tmp->number));
+				ft_putchar(' ');
+				ft_putendl(tmp->content);
+				tmp = tmp->prev;
+			}
 		}
 	}
 }

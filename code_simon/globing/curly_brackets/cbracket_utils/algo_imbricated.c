@@ -49,8 +49,7 @@ t_bracket		*i_create_new_args(char **arg_ext, t_glob *glob)
 {
 	FT_INIT(t_bracket *, new_args, NULL);
 	FT_INIT(char *, tmp, NULL);
-	while (glob->tmp_c->prev)
-		glob->tmp_c = glob->tmp_c->prev;
+	rewind_tbracket(&glob->tmp_c);
 	while (1)
 	{
 		bracket_pushback(&new_args);

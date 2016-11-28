@@ -19,13 +19,10 @@ void			get_patterns(char *str, t_glob *glob)
 	{
 		clist_list_pushback(&glob->cbracket);
 		glob->cbracket->list->content = ft_strdup(str);
-		printf("CURRENT : %s\n", glob->cbracket->list->content);
+		printf("New pattern created : %s\n", glob->cbracket->list->content);
 	}
 	else
-	{
 		i_algo_imbricated(ft_strdup(str), glob);
-		printf("Algo imbriquay executay\n");
-	}
 	glob->lastb_count = 1;
 }
 
@@ -33,7 +30,6 @@ int				fill_clist(char *line, t_glob *glob)
 {
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(int, i, 1);
-	ft_putendl("WELCOME TO HELL");
 	while (line[i])
 	{
 		if (next_comma(line, i) == -1)

@@ -61,13 +61,6 @@
 #  define END 3
 # endif
 
-# ifndef RECUP
-#  define RECUP 1
-# endif
-# ifndef NEXT
-#  define NEXT 2
-# endif
-
 # ifndef TRUE
 #  define TRUE 1
 # endif
@@ -87,6 +80,8 @@ typedef struct			s_bracket
 typedef struct			s_clist
 {
 	t_bracket			*list;
+	int					index;
+	int					rewind;
 	struct s_clist		*next;
 	struct s_clist		*prev;
 }						t_clist;
@@ -176,7 +171,7 @@ void					i_algo_imbricated(char *str, t_glob *glob);
 char					**i_get_arg_ext(char *str, t_glob *glob);
 int						i_get_expr_end(char *str, int lastb_count);
 char					*i_next_bracket(char *str);
-
+void					rewind_index(t_clist **list, int index);
 
 void					i_hub_patterns(char *str, t_glob *glob);
 

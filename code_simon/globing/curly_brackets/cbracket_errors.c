@@ -52,7 +52,8 @@ int		cbracket_errors(char *line, t_glob *glob)
 	FT_INIT(char *, tmp, NULL);
 	if (ft_strchr(line, ' '))
 	{
-		tmp = ft_strjoin("42sh: Spaces are forbidden in expression: ", glob->command);
+		tmp = ft_strjoin("42sh: Spaces are forbidden in expression: "
+			, glob->command);
 		ft_putendl_fd(tmp, 2);
 		free(tmp);
 		return (0);
@@ -61,7 +62,8 @@ int		cbracket_errors(char *line, t_glob *glob)
 	{
 		tmp = ft_strjoin("42sh: Bad pattern in expression: ", glob->command);
 		ft_putendl_fd(tmp, 2);
-		ft_putendl_fd("Pattern should be of type: \"{,*.c}\", or \"{*.c,*.h}\"", 2);
+		ft_putendl_fd("Pattern should be of type: \"{,*.c}\",
+			or \"{*.c,*.h}\"", 2);
 		free(tmp);
 		return (0);
 	}

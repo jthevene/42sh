@@ -89,3 +89,11 @@ char				*i_next_bracket(char *str)
 	}
 	return (NULL);
 }
+
+void				rewind_index(t_clist **list, int index)
+{
+	while ((*list)->prev)
+		(*list) = (*list)->prev;
+	while ((*list) && (*list)->index != index)
+		(*list) = (*list)->next;
+}

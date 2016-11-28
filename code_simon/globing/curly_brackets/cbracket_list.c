@@ -101,6 +101,6 @@ void				print_clist(t_clist **clist)
 		print_clist_list(&(*clist));
 		(*clist) = (*clist)->next;
 	}
-	ft_putendl("t_clist node :\n");
+	ft_putendl("/***** t_clist node : *****/\n");
 	print_clist_list(&(*clist));
 }

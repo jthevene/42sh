@@ -12,12 +12,12 @@
 
 #include "../../../includes/globing.h"
 
-int					i_get_arg_len(char *str, int i, int type, t_glob *glob)
+int					i_get_arg_len(char *s, int i, int type, t_glob *glob)
 {
 	FT_INIT(int, ret, 0);
 	if (type == ARG)
 	{
-		while (str[i] != '\0' && str[i] != ',' && str[i] != '}')
+		while (s[i] != '\0' && s[i] != ',' && s[i] != '}')
 		{
 			i++;
 			ret++;
@@ -25,21 +25,21 @@ int					i_get_arg_len(char *str, int i, int type, t_glob *glob)
 	}
 	else if (type == BEGIN)
 	{
-		while (i >= 0 && str[i] != '\0' && str[i] != ',' && str[i] != '}' && str[i] != '{')
+		while (i >= 0 && s[i] != '\0' && s[i] != ',' && s[i] != '}' && s[i] != '{')
 		{
 			i--;
 			ret++;
 		}
-		glob->c_touch = str[i] == '}' ? TRUE : FALSE;
+		glob->c_touch = s[i] == '}' ? TRUE : FALSE;
 	}
 	else if (type == END)
 	{
-		while (str[i] && str[i] != '}' && str[i] != '{' && str[i] != ',')
+		while (s[i] && s[i] != '}' && s[i] != '{' && s[i] != ',')
 		{
 			i++;
 			ret++;
 		}
-		glob->c_touch = str[i] == '{' ? TRUE : glob->c_touch;
+		glob->c_touch = s[i] == '{' ? TRUE : glob->c_touch;
 	}
 	return (ret);
 }

@@ -45,7 +45,7 @@ int				i_recup_lastb(char *str, t_glob *glob)
 	return (1);
 }
 
-t_bracket		*i_create_new_args(char **arg_ext, t_glob *glob)
+t_bracket		*i_create_new_args(char **ext, t_glob *glob)
 {
 	FT_INIT(t_bracket *, new_args, NULL);
 	FT_INIT(char *, tmp, NULL);
@@ -53,15 +53,14 @@ t_bracket		*i_create_new_args(char **arg_ext, t_glob *glob)
 	while (1)
 	{
 		bracket_pushback(&new_args);
-		if (!arg_ext[0] && !arg_ext[1])
+		if (!ext[0] && !ext[1])
 			new_args->content = ft_strdup(glob->tmp_c->content);
 		else
 		{
-			if (arg_ext[0])
-				tmp = ft_strjoin(arg_ext[0], glob->tmp_c->content);
-			if (arg_ext[1])
-				new_args->content = tmp ? ft_strjoin(tmp, arg_ext[1])
-				: ft_strjoin(glob->tmp_c->content, arg_ext[1]);
+			tmp = ext[0] ? ft_strjoin(ext[0], glob->tmp_c->content) : NULL;
+			if (ext[1])
+				new_args->content = tmp ? ft_strjoin(tmp, ext[1])
+				: ft_strjoin(glob->tmp_c->content, ext[1]);
 			else
 				new_args->content = ft_strdup(tmp);
 		}
@@ -70,11 +69,9 @@ t_bracket		*i_create_new_args(char **arg_ext, t_glob *glob)
 //		printf("new_arg created : %s\n", new_args->content);
 		if (!glob->tmp_c->next)
 			break ;
-		else
-			glob->tmp_c = glob->tmp_c->next;
+		glob->tmp_c = glob->tmp_c->next;
 	}
 	free_tbracket(&glob->tmp_c);
-	glob->tmp_c = NULL;
 	return (new_args);
 }
 
@@ -97,7 +94,8 @@ char			*recreate_string(char *str, t_bracket *new_args, t_glob *glob)
 	while (new_args->next)
 	{
 		tmp = new_str;
-		new_str = !new_str ? ft_strdup(new_args->content) : ft_strjoin(new_str, new_args->content);
+		new_str = !new_str ? ft_strdup(new_args->content)
+		: ft_strjoin(new_str, new_args->content);
 		if (tmp)
 			free(tmp);
 		tmp = new_str;
@@ -146,7 +144,8 @@ void			i_algo_imbricated(char *str, t_glob *glob)
 		free(tmp);
 		free_double_tab(&arg_ext);
 		free_tbracket(&new_args);
-		glob->lastb_count = glob->c_touch == TRUE ? glob->lastb_count + 1 : glob->lastb_count;
+		glob->lastb_count = glob->c_touch == TRUE
+		? glob->lastb_count + 1 : glob->lastb_count;
 		if (detect_double_bracket(str))
 			count--;
 		count--;

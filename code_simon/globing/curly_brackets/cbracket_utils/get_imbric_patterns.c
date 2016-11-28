@@ -17,7 +17,7 @@ t_clist				*i_recup_multi_patterns(char *str)
 	FT_INIT(t_clist *, clist, NULL);
 	FT_INIT(int, i, -1);
 	FT_INIT(int, j, 0);
-	FT_INIT(int, index, 0);
+	FT_INIT(int, index, -1);
 	while (str[++i])
 	{
 		if (str[i] == '{')
@@ -25,15 +25,14 @@ t_clist				*i_recup_multi_patterns(char *str)
 			j = i + 1;
 			if (!(clist_pushback(&clist)))
 				return (0);
-			clist->index = index;
-			index++;
+			clist->index = ++index;
 			while (str[i] && str[i] != '}')
 			{
 				if (str[i] == ',' || str[i + 1] == '}')
 				{
 					if (!(clist_list_pushback(&clist)))
 						return (0);
-					clist->list->content = str[i] == ',' 
+					clist->list->content = str[i] == ','
 					? ft_strsub(str, j, i - j) : ft_strsub(str, j, i - j + 1);
 					j = i + 1;
 				}
@@ -77,8 +76,8 @@ char				*i_multi_patterns(t_clist **multi, int index)
 	{
 		if (!(*multi)->list->next)
 		{
-				rewind_tbracket(&(*multi)->list);
-				return (NULL);
+			rewind_tbracket(&(*multi)->list);
+			return (NULL);
 		}
 		else
 			(*multi)->list = (*multi)->list->next;
@@ -145,5 +144,4 @@ void				i_hub_patterns(char *str, t_glob *glob)
 		}
 	}
 	free(str);
-//	print_clist_list(&glob->cbracket);
 }

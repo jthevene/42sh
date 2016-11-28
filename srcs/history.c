@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:53:52 by jules             #+#    #+#             */
-/*   Updated: 2016/11/25 16:49:24 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/28 14:40:12 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ void	init_hist()
 	g_shell.nav_hist = 0;
 	g_shell.hist->next = NULL;
 	g_shell.hist->prev = NULL;
-	g_shell.last_hist = NULL;
-	// g_shell.hist->last = (t_lst *)malloc(sizeof(t_lst));
+	g_shell.last_hist = g_shell.hist;
 	filename = ft_strjoin(get_var(&g_shell, "HOME"), "/.history");
 	g_shell.hist_fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 	close(g_shell.hist_fd);
@@ -70,7 +69,7 @@ void	navigation_hist(int arrow)
 		{	
 			if (g_shell.hist->prev->content)
 			{
-				if (g_shell.nav_hist == 0)
+				if (g_shell.nav_hist == 1) //nav_hist est remis à 0 quand la touche return est pressée
 					g_shell.hist = g_shell.hist->prev;
 				g_shell.nav_hist = 1;
 				put_hist_line(g_shell.hist->content);

@@ -16,6 +16,8 @@ int				count_imbric(char *str)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, count, 0);
+	if (!str)
+		return (-1);
 	while (str[i])
 	{
 		if (str[i] == '{')

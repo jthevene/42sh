@@ -61,6 +61,13 @@
 #  define END 3
 # endif
 
+# ifndef RECUP
+#  define RECUP 1
+# endif
+# ifndef NEXT
+#  define NEXT 2
+# endif
+
 # ifndef TRUE
 #  define TRUE 1
 # endif
@@ -168,6 +175,8 @@ int						i_get_arg_len(char *str, int i, int type, t_glob *glob);
 void					i_algo_imbricated(char *str, t_glob *glob);
 char					**i_get_arg_ext(char *str, t_glob *glob);
 int						i_get_expr_end(char *str, int lastb_count);
+char					*i_next_bracket(char *str);
+
 
 void					i_hub_patterns(char *str, t_glob *glob);
 

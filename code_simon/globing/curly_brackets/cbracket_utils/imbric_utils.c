@@ -71,3 +71,21 @@ int					i_get_expr_end(char *str, int lastb_count)
 		i++;
 	return (i);
 }
+
+char				*i_next_bracket(char *str)
+{
+	FT_INIT(int, i, 0);
+	FT_INIT(int, nb, 0);
+	while (str[i])
+	{
+		if (str[i] == '{')
+		{
+			if (!nb)
+				nb++;
+			else
+				return (ft_strsub(str, i, ft_abs(i - ft_strlen(str))));
+		}
+		i++;
+	}
+	return (NULL);
+}

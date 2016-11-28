@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2016/11/25 16:37:37 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/28 10:47:25 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,13 @@ void				init_hist();
 void				ft_newhist(char *line);
 void				navigation_hist(int arrow);
 void				ft_history(int i);
+/*
+** HISTORY2
+*/
+void				delete_all_hist();
+void				delete_line_history(int i);
+void				show_hist_list();
+
 /*
 ** INIT
 */

@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 16:55:54 by jules             #+#    #+#             */
-/*   Updated: 2016/11/28 14:46:32 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/29 10:28:25 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ void	show_hist_list()
 		ft_putendl("LISTE VIDE");
 		return ;
 	}
-	while (tmp->prev)
+	while (tmp->prev != NULL)
+	{
 		tmp = tmp->prev;
+	}
 	ft_putendl("LISTE HISTORY");
 	ft_putendl("_ _ _ _ _ _ _ _ _ _ _ _ _ _");
 	while (tmp->next)
@@ -101,8 +103,18 @@ void	show_hist_list()
 
 void	update_history_file()
 {
+	char	*line;
+	char	*filename;
+
+	FT_INIT(int, ret, 0);
+	line = NULL;
 	filename = ft_strjoin(get_var(&g_shell, "HOME"), "/.history");
-	g_shell.hist_fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0600);
-	
+	g_shell.hist_fd = open(filename, O_RDWR | O_APPEND, 0600);
+	while ((ret = get_next_line(g_shell.hist_fd, &line)) == 1)
+	{
+		if (line)
+			ft_putendl(line);
+	}
+	ft_putendl("-----FIN-----");
 	close(g_shell.hist_fd);
 }

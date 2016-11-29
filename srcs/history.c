@@ -6,32 +6,20 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:53:52 by jules             #+#    #+#             */
-/*   Updated: 2016/11/28 14:40:12 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/29 10:28:03 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
 
-void	init_hist()
+void	get_hist(void)
 {
-	char	*filename;
+	char	*line;
 
-	g_shell.hist_fd = 0;
-	if (!(g_shell.hist = (t_lst*)malloc(sizeof(t_list))))
-	{
-		ft_putstr("g_shell.hist malloc failed");
-		ft_reset_termios(g_shell.t_back);
-		exit(0);
-	}
-	g_shell.hist->content = NULL;
-	g_shell.hist->number = 0;
-	g_shell.nav_hist = 0;
-	g_shell.hist->next = NULL;
-	g_shell.hist->prev = NULL;
-	g_shell.last_hist = g_shell.hist;
-	filename = ft_strjoin(get_var(&g_shell, "HOME"), "/.history");
-	g_shell.hist_fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
-	close(g_shell.hist_fd);
+	FT_INIT(int, ret, 0);
+	line = NULL;
+	while ((ret = get_next_line(g_shell.hist_fd, &line)) == 1)
+		ft_newhist(line);
 }
 
 void	ft_newhist(char *line)
@@ -46,8 +34,16 @@ void	ft_newhist(char *line)
 		new_hist->content = ft_strdup(line);
 		new_hist->next = NULL;
 		new_hist->number = g_shell.hist->number + 1;
-		new_hist->prev = g_shell.hist;
-		g_shell.hist->next = new_hist;
+		if (g_shell.hist->content)
+		{
+			new_hist->prev = g_shell.hist;
+			g_shell.hist->next = new_hist;
+		}
+		else
+		{
+			g_shell.hist = new_hist;
+			new_hist->prev = NULL;
+		}
 		g_shell.last_hist = new_hist;
 		g_shell.hist = new_hist;
 	}

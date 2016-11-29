@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 13:12:22 by jules             #+#    #+#             */
-/*   Updated: 2016/11/28 14:04:57 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/29 10:33:52 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	return_key(void)
 		display_prompt();
 		ft_putstr(g_shell.current_line);
 		if (g_shell.hist->content)
+		{
 			ft_newhist(g_shell.current_line);
+		}
 		else
 		{
 			g_shell.hist->content = ft_strdup(g_shell.current_line);

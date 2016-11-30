@@ -3,14 +3,15 @@ CC =	gcc
 
 NAME =  ft_parse
 
-SRC  =  ./free_tree.c \
-	./fork.c \
-	./tree.c \
-	./search.c \
-	./main.c \
-	./parse.c \
-	./parse2.c \
-	./get_next_line.c \
+SRC  =  ./srcs/free_tree.c \
+	./srcs/pipe.c \
+	./srcs/fork.c \
+	./srcs/tree.c \
+	./srcs/search.c \
+	./srcs/main.c \
+	./srcs/parse.c \
+	./srcs/parse2.c \
+	./srcs/get_next_line.c \
 
 OBJ =	$(SRC:.c=.o)
 

@@ -2,15 +2,17 @@
 
 void	exec_tree(t_all *all, t_tree *tree)
 {
-	if (tree->type == COMMAND)
+	if (tree->type == PIPE)
+		try_pipe(all, tree);
+	else if (tree->type == COMMAND)
 	{
 		get_cmd(all, tree->content);
 		get_path(all);
 	}
-	if (tree->left)
-		exec_tree(all, tree->left);
-	if (tree->right)
-		exec_tree(all, tree->right);
+//	if (tree->left)
+//		exec_tree(all, tree->left);
+//	if (tree->right)
+//		exec_tree(all, tree->right);
 }
 
 void	get_path(t_all *all)

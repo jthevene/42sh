@@ -7,7 +7,6 @@ int		main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	tree = create_node();
 	if (!(all = (t_all *)malloc(sizeof(t_all))))
 		return (0);
 	all->envcpy = ft_tabdup(env);
@@ -19,12 +18,14 @@ int		main(int ac, char **av, char **env)
 			;
 		else
 		{
+			tree = create_node();
 			tree->content = ft_epurstr(ft_strdup(all->line));
 			parse(tree);
 			exec_tree(all, tree);
+			free_tree(tree);
 		}
 	}
-	free_tree(tree);
+
 	return (0);
 }
 

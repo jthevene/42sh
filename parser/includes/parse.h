@@ -67,5 +67,7 @@ void	accessfork(t_all *all, struct stat sb, char *cmd);
 void	exec_fork(t_all *all, char *cmd);
 int		count_words(char *str);
 void	get_cmd(t_all *all, char *command);
+void	try_pipe(t_all *all, t_tree *tree);
+void	exec_pipe(char **output, char **input, t_all *all);
 
 #endif

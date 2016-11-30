@@ -30,6 +30,8 @@ int					i_get_arg_len(char *s, int i, int type, t_glob *glob)
 			i--;
 			ret++;
 		}
+//		if (s[i] == '\0' && count_imbric(s) >= 2)
+//			ret = 0;
 		glob->c_touch = s[i] == '}' ? TRUE : FALSE;
 	}
 	else if (type == END)

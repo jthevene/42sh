@@ -130,18 +130,20 @@ void				i_hub_patterns(char *str, t_glob *glob)
 		i_simple_patterns(str, glob);
 	else
 	{
-		if (!detect_double_bracket(str))
+		if (i_detect_imbric(str) == -1)
 		{
 			multi = i_create_multi_list(ft_strdup(str));
 			while ((tmp = i_multi_patterns(&multi, 0)))
 			{
 				clist_list_pushback(&glob->cbracket);
 				glob->cbracket->list->content = ft_strdup(tmp);
-//				printf("%d - RESULT RECURSIVE : %s\n\n", count, tmp);
+				printf("%d - RESULT RECURSIVE : %s\n\n", count, tmp);
 				count++;
 				free(tmp);
 			}
 		}
+		else
+			i2_hub_imbric(ft_strdup(str), glob);
 	}
 	free(str);
 }

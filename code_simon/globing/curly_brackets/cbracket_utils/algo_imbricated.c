@@ -131,7 +131,7 @@ void			i_algo_imbricated(char *str, t_glob *glob)
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(int, count, count_imbric(str));
 	FT_INIT(int, i, 0);
-	while (count)
+	while (count > 0)
 	{
 		i = 0;
 		i_recup_lastb(str, glob);
@@ -139,6 +139,7 @@ void			i_algo_imbricated(char *str, t_glob *glob)
 		new_args = i_create_new_args(arg_ext, glob);
 		rewind_tbracket(&new_args);
 		tmp = recreate_string(str, new_args, glob);
+		printf("NEW STR = %s\n", tmp);
 		free(str);
 		str = ft_strdup(tmp);
 		free(tmp);
@@ -146,7 +147,7 @@ void			i_algo_imbricated(char *str, t_glob *glob)
 		free_tbracket(&new_args);
 		glob->lastb_count = glob->c_touch == TRUE
 		? glob->lastb_count + 1 : glob->lastb_count;
-		if (detect_double_bracket(str))
+		if (detect_double_bracket(str) || i_detect_imbric(str) > 0)
 			count--;
 		count--;
 	}

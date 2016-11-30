@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/globing.h"
-#define FILS_DE_PUTERIE "ls {a{bc{d,e}f{g,h},i},jk{lm{no,p}q{r,s},t}uv}"
+#define FILS_DE_PUTERIE "ls {a{i,bc{d,e}f{g,h}z,blob},jk{lm{no,p}q{r,s},t}uv}"
 
 void			get_patterns(char *str, t_glob *glob)
 {
@@ -29,7 +29,7 @@ void			get_patterns(char *str, t_glob *glob)
 int				fill_clist(char *line, t_glob *glob)
 {
 	FT_INIT(char *, tmp, NULL);
-	FT_INIT(int, i, 1);
+	FT_INIT(int, i, line[0] == '{' ? 1 : 0);
 	while (line[i])
 	{
 		if (next_comma(line, i) == -1)
@@ -37,6 +37,7 @@ int				fill_clist(char *line, t_glob *glob)
 			tmp = ft_strsub(line, i, ft_strlen(line) - i - 1);
 			printf("next_comma 1 = %s\n", tmp);
 			get_patterns(tmp, glob);
+			free(tmp);
 			break ;
 		}
 		else

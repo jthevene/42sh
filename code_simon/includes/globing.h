@@ -171,7 +171,10 @@ void					i_algo_imbricated(char *str, t_glob *glob);
 char					**i_get_arg_ext(char *str, t_glob *glob);
 int						i_get_expr_end(char *str, int lastb_count);
 char					*i_next_bracket(char *str);
+int						i_detect_imbric(char *str);
 void					rewind_index(t_clist **list, int index);
+
+void					i2_hub_imbric(char *str, t_glob *glob);
 
 void					i_hub_patterns(char *str, t_glob *glob);
 

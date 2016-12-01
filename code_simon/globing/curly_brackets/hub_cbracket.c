@@ -30,12 +30,11 @@ int				hub_cbracket(t_glob *glob)
 	{
 		if (g_shell.line[i] == '{')
 		{
-			tmp = ft_strsub(g_shell.line, i,
-				next_bracket(g_shell.line, '{', i) + 1);
-			printf("tmp = %s\n", tmp);
+			tmp = next_expr(g_shell.line, i);
+			printf("Hub bracket = %s\n", tmp);
 			if (!handle_cbracket(tmp, glob))
 				return (0);
-			i += next_bracket(g_shell.line, '{', i);
+//			i += next_expr(g_shell.line, i);
 			free(tmp);
 		}
 		i++;

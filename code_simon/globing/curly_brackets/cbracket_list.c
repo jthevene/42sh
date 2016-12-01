@@ -78,6 +78,25 @@ void				rewind_tclist(t_clist **clist)
 	rewind_tbracket(&(*clist)->list);
 }
 
+void				free_tclist(t_clist **list)
+{
+	FT_INIT(t_clist *, tmp, NULL);
+	rewind_tclist(list);
+	while ((*list)->next)
+	{
+		if ((*list)->list)
+			free_tbracket(&(*list)->list);
+		tmp = (*list);
+		(*list) = (*list)->next;
+		free(tmp);
+	}
+	if ((*list)->list)
+		free_tbracket(&(*list)->list);
+	tmp = (*list);
+	(*list) = NULL;
+	free(tmp);
+}
+
 void				print_clist_list(t_clist **clist)
 {
 	rewind_tbracket(&(*clist)->list);

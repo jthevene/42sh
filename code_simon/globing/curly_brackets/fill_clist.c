@@ -13,6 +13,22 @@
 #include "../../includes/globing.h"
 #define FILS_DE_PUTERIE "ls {a{i,bc{d,e}f{g,h}z,blob},jk{lm{no,p}q{r,s},t}uv}"
 
+static int		touching_brackets(char *str)
+{
+	FT_INIT(int, i, 0);
+	while (str[i])
+	{
+		if (str[i] == '{')
+		{
+			i += next_bracket(str, '{', i);
+			if (str[i + 1] == '{')
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 void			get_patterns(char *str, t_glob *glob)
 {
 	if (!ft_strchr(str, '{'))
@@ -30,6 +46,11 @@ int				fill_clist(char *line, t_glob *glob)
 {
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(int, i, line[0] == '{' ? 1 : 0);
+	if (touching_brackets(line))
+	{
+		i_algo_imbricated(ft_strdup(line), glob);
+		return (1);
+	}
 	while (line[i])
 	{
 		if (next_comma(line, i) == -1)
@@ -50,5 +71,6 @@ int				fill_clist(char *line, t_glob *glob)
 		free(tmp);
 		i++;
 	}
+	print_clist(&glob->cbracket);
 	return (1);
 }

@@ -141,6 +141,7 @@ void				i_hub_patterns(char *str, t_glob *glob)
 				count++;
 				free(tmp);
 			}
+			free_tclist(&multi);
 		}
 		else
 			i2_hub_imbric(ft_strdup(str), glob);

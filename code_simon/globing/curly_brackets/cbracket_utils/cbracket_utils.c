@@ -35,6 +35,24 @@ int					last_bracket(char *str, int c)
 	return (ret);
 }
 
+char				*next_expr(char *str, int i)
+{
+	FT_INIT(int, ret, 0);
+	FT_INIT(int, j, 0);
+	while (str[i] != ' ')
+		i--;
+	i++;
+	j = i;
+	while (str[i])
+	{
+		if (str[i] == ' ')
+			break ;
+		i++;
+		ret++;
+	}
+	return (ft_strsub(str, j, ret));
+}
+
 void				free_double_tab(char ***tabl)
 {
 	FT_INIT(int, i, 0);

@@ -94,6 +94,7 @@ typedef struct			s_glob
 	t_bracket			*tmp_c;
 	int					c_touch;
 	int					lastb_count;
+	char				**ext_args;
 
 	char				*command;
 
@@ -150,6 +151,7 @@ void					free_tbracket(t_bracket **list);
 // FONCTIONS CURLY BRACKETS
 int						hub_cbracket(t_glob *glob);
 char					*next_expr(char *str, int i);
+char					**recup_ext_args(char *str);
 int						cbracket_errors(char *line, t_glob *glob);
 
 int						clist_pushback(t_clist **clist);
@@ -161,6 +163,8 @@ void					print_clist(t_clist **clist);
 void					free_tclist(t_clist **list);
 
 int						next_comma(char *str, int i);
+int						end_bracket(char *str, int i);
+int						is_bracket_in_exp(char *str, int i);
 int						check_commas(char *line, int i);
 
 int						detect_double_bracket(char *str);
@@ -178,9 +182,9 @@ t_clist					*i_create_multi_list(char *str);
 char					*i_multi_patterns(t_clist **multi, int index);
 
 void					rewind_index(t_clist **list, int index);
+char					*expand_pattern(char *pat, t_glob *glob);
 
 void					i2_hub_imbric(char *str, t_glob *glob);
-
 void					i_hub_patterns(char *str, t_glob *glob);
 
 void					free_double_tab(char ***tabl);

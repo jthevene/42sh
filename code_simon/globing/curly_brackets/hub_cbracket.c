@@ -34,8 +34,9 @@ int				hub_cbracket(t_glob *glob)
 			printf("Hub bracket = %s\n", tmp);
 			if (!handle_cbracket(tmp, glob))
 				return (0);
-//			i += next_expr(g_shell.line, i);
+			i += ft_strlen(tmp);
 			free(tmp);
+			free_double_tab(&glob->ext_args);
 		}
 		i++;
 	}

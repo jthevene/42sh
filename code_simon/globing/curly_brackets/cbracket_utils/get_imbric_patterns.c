@@ -95,20 +95,25 @@ void				i_simple_patterns(char *str, t_glob *glob)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, 0);
+	FT_INIT(char *, tmp, NULL);
 	while (str[i])
 	{
 		if (str[i] == ',')
 		{
 			clist_list_pushback(&glob->cbracket);
-			glob->cbracket->list->content = ft_strsub(str, j, i - j);
+			tmp = ft_strsub(str, j, i - j);
+			glob->cbracket->list->content = expand_pattern(tmp, glob);
 			printf("New pattern created : %s\n", glob->cbracket->list->content);
 			j = i + 1;
+			free(tmp);
 		}
 		i++;
 	}
 	clist_list_pushback(&glob->cbracket);
-	glob->cbracket->list->content = ft_strsub(str, j, i - j);
+	tmp = ft_strsub(str, j, i - j);
+	glob->cbracket->list->content = expand_pattern(tmp, glob);
 	printf("New pattern created : %s\n", glob->cbracket->list->content);
+	free(tmp);
 }
 
 t_clist				*i_create_multi_list(char *str)
@@ -136,8 +141,8 @@ void				i_hub_patterns(char *str, t_glob *glob)
 			while ((tmp = i_multi_patterns(&multi, 0)))
 			{
 				clist_list_pushback(&glob->cbracket);
-				glob->cbracket->list->content = ft_strdup(tmp);
-				printf("%d - RESULT RECURSIVE : %s\n\n", count, tmp);
+				glob->cbracket->list->content = expand_pattern(tmp, glob);
+				printf("%d - New pattern created : %s\n\n", count, glob->cbracket->list->content);
 				count++;
 				free(tmp);
 			}

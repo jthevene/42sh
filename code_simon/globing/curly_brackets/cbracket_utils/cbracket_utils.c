@@ -56,13 +56,16 @@ char				*next_expr(char *str, int i)
 void				free_double_tab(char ***tabl)
 {
 	FT_INIT(int, i, 0);
-	while ((*tabl)[i])
+	if ((*tabl))
 	{
-		if ((*tabl)[i])
-			free((*tabl)[i]);
-		i++;
+		while ((*tabl)[i])
+		{
+			if ((*tabl)[i])
+				free((*tabl)[i]);
+			i++;
+		}
+		free((*tabl));
 	}
-	free((*tabl));
 }
 
 int					detect_double_bracket(char *str)
@@ -75,4 +78,32 @@ int					detect_double_bracket(char *str)
 		i++;
 	}
 	return (0);
+}
+
+char				**recup_ext_args(char *str)
+{
+	FT_INIT(char **, args, NULL);
+	FT_INIT(int, i, 0);
+	FT_INIT(int, j, 0);
+	FT_INIT(int, len, 0);
+	if (!(args = (char **)malloc(sizeof(char *) * 3)))
+		return (NULL);
+	if (str[i] != '{')
+		while (str[i] != '{')
+			i++;
+	args[0] = i > 0 ? ft_strsub(str, 0, i) : NULL;
+	while (str[i])
+		i++;
+	if (str[--i] != '}')
+		while (str[i] != '}')
+			i--;
+	j = i + 1;
+	while (str[j])
+	{
+		j++;
+		len++;
+	}
+	args[1] = len > 0 ? ft_strsub(str, i + 1, len) : NULL;
+	args[2] = NULL;
+	return (args);
 }

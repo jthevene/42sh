@@ -61,6 +61,16 @@
 #  define END 3
 # endif
 
+# ifndef CHARS
+#  define CHARS 1
+# endif
+# ifndef DIGIT
+#  define DIGIT 2
+# endif
+# ifndef BOTH
+#  define BOTH 3
+# endif
+
 # ifndef TRUE
 #  define TRUE 1
 # endif
@@ -113,6 +123,7 @@ typedef struct			s_glob
 
 int						glob_parser(void);
 
+//FONCTIONS SQUARE BRACKETS
 // Initialisation et gestion de depart
 void					hub_sbracket(t_glob *glob);
 void					init_tabs1(t_glob *glob, int i, int j);
@@ -149,28 +160,33 @@ void					rewind_tbracket(t_bracket **list);
 void					free_tbracket(t_bracket **list);
 
 // FONCTIONS CURLY BRACKETS
+// Initialisation et gestion de depart
 int						hub_cbracket(t_glob *glob);
-char					*next_expr(char *str, int i);
 char					**recup_ext_args(char *str);
 int						cbracket_errors(char *line, t_glob *glob);
+int						fill_clist(char *line, t_glob *glob);
 
+// Fonctions de liste chainee
 int						clist_pushback(t_clist **clist);
 int						clist_list_pushback(t_clist **clist);
-int						fill_clist(char *line, t_glob *glob);
 void					rewind_tclist(t_clist **clist);
 void					print_clist_list(t_clist **clist);
 void					print_clist(t_clist **clist);
 void					free_tclist(t_clist **list);
+char					*next_expr(char *str, int i);
 
+// Fonctions utilitaires "cbracket"
 int						next_comma(char *str, int i);
 int						end_bracket(char *str, int i);
 int						is_bracket_in_exp(char *str, int i);
 int						check_commas(char *line, int i);
-
 int						detect_double_bracket(char *str);
 int						last_bracket(char *str, int c);
 int						count_imbric(char *str);
+void					free_double_tab(char ***tabl);
+char					*expand_pattern(char *pat, t_glob *glob);
 
+// Fonctions utilitaires servant pour les algos imbriqués
 int						i_recup_lastb(char *str, t_glob *glob);
 int						i_get_arg_len(char *str, int i, int type, t_glob *glob);
 void					i_algo_imbricated(char *str, t_glob *glob);
@@ -180,13 +196,16 @@ char					*i_next_bracket(char *str);
 int						i_detect_imbric(char *str);
 t_clist					*i_create_multi_list(char *str);
 char					*i_multi_patterns(t_clist **multi, int index);
-
 void					rewind_index(t_clist **list, int index);
-char					*expand_pattern(char *pat, t_glob *glob);
 
+// Fonctions de gestion des algos imbriqués
 void					i2_hub_imbric(char *str, t_glob *glob);
 void					i_hub_patterns(char *str, t_glob *glob);
 
-void					free_double_tab(char ***tabl);
+// Fonctions de gestion des expansions
+void					hub_expansion(char *str, t_glob *glob);
+
+// Fonctions utilitaires des expansions
+int						exp_type(char *str);
 
 #endif

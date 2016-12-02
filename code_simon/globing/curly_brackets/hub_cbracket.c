@@ -32,6 +32,7 @@ int				hub_cbracket(t_glob *glob)
 		{
 			tmp = next_expr(g_shell.line, i);
 			printf("Hub bracket = %s\n", tmp);
+			hub_expansion(tmp, glob);
 			if (!handle_cbracket(tmp, glob))
 				return (0);
 			i += ft_strlen(tmp);

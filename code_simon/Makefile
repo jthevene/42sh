@@ -28,7 +28,7 @@ SRCS = 	globing/glob_parser.c \
 		$(SBRACK)sbracket_list.c \
 		\
 		$(CBRACK)hub_cbracket.c $(CBRACK)fill_clist.c $(CBRACK)cbracket_list.c \
-		$(CBRACK)cbracket_errors.c\
+		$(CBRACK)cbracket_errors.c $(CBRACK)expansion.c \
 		\
 		$(UTILS_1)catch_dash.c $(UTILS_1)check_rng.c $(UTILS_1)clean_brackets.c\
 		$(UTILS_1)count_brackets.c $(UTILS_1)get_functions.c\
@@ -36,7 +36,7 @@ SRCS = 	globing/glob_parser.c \
 		\
 		$(UTILS_2)commas_utils.c $(UTILS_2)algo_imbricated.c $(UTILS_2)imbric_utils.c \
 		$(UTILS_2)get_imbric_patterns.c $(UTILS_2)cbracket_utils.c \
-		$(UTILS_2)imbric_utils2.c $(UTILS_2)double_brck.c\
+		$(UTILS_2)imbric_utils2.c $(UTILS_2)double_brck.c $(UTILS_2)expansion_utils.c \
 		\
 		main.c
 
@@ -48,10 +48,10 @@ BIN =	glob_parser.o \
 		category_bracket.o sbracket_list.o catch_dash.o check_rng.o \
 		clean_brackets.o count_brackets.o get_functions.o str_nodouble.o \
 		\
-		hub_cbracket.o fill_clist.o cbracket_list.o cbracket_errors.o \
+		hub_cbracket.o fill_clist.o cbracket_list.o cbracket_errors.o expansion.o \
 		\
 		commas_utils.o algo_imbricated.o imbric_utils.o get_imbric_patterns.o \
-		cbracket_utils.o imbric_utils2.o double_brck.o\
+		cbracket_utils.o imbric_utils2.o double_brck.o expansion_utils.o \
 		\
 		main.o
 

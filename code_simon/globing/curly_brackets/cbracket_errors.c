@@ -12,24 +12,6 @@
 
 #include "../../includes/globing.h"
 
-int		valid_expansion(char *line)
-{
-	FT_INIT(int, i, 0);
-	while (line[i])
-	{
-		if (line[i] == '.' && line[i + 1] == '.')
-		{
-			if (!(line[i - 1] && line[i - 2] && line[i - 2] == '{'))
-				return (0);
-			if (!(line[i + 2] && line[i + 3] && line[i + 3] == '}'))
-				return (0);
-			return (1);
-		}
-		i++;
-	}
-	return (1);
-}
-
 int		cbracket_errors(char *line, t_glob *glob)
 {
 	FT_INIT(char *, tmp, NULL);

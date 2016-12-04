@@ -99,12 +99,13 @@ typedef struct			s_clist
 typedef struct			s_glob
 {
 	t_bracket			*sbracket;
-	t_clist				*cbracket;
 
+	t_clist				*cbracket;
 	t_bracket			*tmp_c;
 	int					c_touch;
 	int					lastb_count;
 	char				**ext_args;
+	char				*exp;
 
 	char				*command;
 
@@ -207,5 +208,7 @@ void					hub_expansion(char *str, t_glob *glob);
 
 // Fonctions utilitaires des expansions
 int						exp_type(char *str);
+char					*ft_cdup(char c);
+int						is_solo_arg(t_bracket *args);
 
 #endif

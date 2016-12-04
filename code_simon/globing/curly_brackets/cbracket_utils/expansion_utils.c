@@ -33,3 +33,24 @@ int			exp_type(char *str)
 		return (CHARS);
 	return (BOTH);
 }
+
+char		*ft_cdup(char c)
+{
+	FT_INIT(char *, new, ft_strnew(1));
+	new[0] = c;
+	new[1] = '\0';
+	return (new);
+}
+
+int			is_solo_arg(t_bracket *args)
+{
+	FT_INIT(int, count, 0);
+	rewind_tbracket(&args);
+	while (args->next)
+	{
+		args = args->next;
+		count++;
+	}
+	count++;
+	return (count == 1 ? 1 : 0);
+}

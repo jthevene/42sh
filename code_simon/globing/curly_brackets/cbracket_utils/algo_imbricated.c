@@ -130,10 +130,8 @@ void			i_algo_imbricated(char *str, t_glob *glob)
 	FT_INIT(t_bracket *, new_args, NULL);
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(int, count, count_imbric(str));
-	FT_INIT(int, i, 0);
 	while (count > 0)
 	{
-		i = 0;
 		i_recup_lastb(str, glob);
 		arg_ext = i_get_arg_ext(str, glob);
 		new_args = i_create_new_args(arg_ext, glob);

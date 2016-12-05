@@ -35,9 +35,26 @@ static int		touching_brackets(char *str)
 	return (0);
 }
 
-static int		len_sub(char *str)
+static char		*special_sub(char *str, int i)
 {
-	return (str[ft_strlen(str) - 1] == '}' ? 1 : 0);
+	FT_INIT(char *, new, NULL);
+	FT_INIT(int, j, i);
+	FT_INIT(int, count, 0);
+	while (str[j])
+	{
+		if (str[j] == '{')
+			count++;
+		else if (str[j] == '}')
+		{
+			count--;
+			if (count == -1)
+				break ;
+		}
+		j++;
+	}
+	new = ft_strsub(str, i, j - i);
+	printf("new = %s j = %d\n", new, j);
+	return (new);
 }
 
 static int		start_cbracket(char *str, t_glob *glob)
@@ -76,7 +93,7 @@ int				fill_clist(char *line, t_glob *glob)
 		if (next_comma(line, i) == -1)
 		{
 			if (is_bracket_in_exp(line, i) > 1)
-				tmp = ft_strsub(line, i, ft_strlen(line) - i - len_sub(line));
+				tmp = special_sub(line, i);
 			else
 				tmp = ft_strsub(line, i, end_bracket(line, i));
 //			printf("next_comma 1 = %s\n", tmp);

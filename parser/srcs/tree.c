@@ -1,4 +1,4 @@
-#include "includes/parse.h"
+#include "../includes/parse.h"
 
 t_tree		*create_node(void)
 {
@@ -8,5 +8,7 @@ t_tree		*create_node(void)
 		return (NULL);
 	tree->left = NULL;
 	tree->right = NULL;
+	tree->type = 0;
+	tree->content = NULL;
 	return (tree);
 }

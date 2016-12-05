@@ -10,48 +10,66 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/globing.h"
+#include "../../includes/globing.h"
 
-int					sbracket_pushback(t_sbracket **list, int type)
+int					bracket_pushback(t_bracket **list)
 {
-	t_sbracket *tmp;
-	t_sbracket *new;
-
+	FT_INIT(t_bracket, *tmp, NULL);
+	FT_INIT(t_bracket, *new, NULL);
 	if (!(*list))
 	{
-		printf("!(*list)\n");
-		if (!((*list) = (t_sbracket *)malloc(sizeof(t_sbracket))))
+		if (!((*list) = (t_bracket *)malloc(sizeof(t_bracket))))
 			return (0);
-		FT_MULTI3((*list)->next, (*list)->prev, NULL);
-		(*list)->bracket = NULL;
-		(*list)->type = type;
+		(*list)->prev =  NULL;
+		(*list)->next = NULL;
+		(*list)->content = NULL;
 	}
 	else
 	{
-		printf("pushing back\n");
-		if (!(new = (t_sbracket *)malloc(sizeof(t_sbracket))))
+		if (!(new = (t_bracket *)malloc(sizeof(t_bracket))))
 			return (0);
+//		ft_putstr("TEST SIGV 1\n");
 		new->next = NULL;
-		while ((*list)->next)
-			(*list) = (*list)->next;
+//		ft_putstr("TEST SIGV 2\n");
+//		while ((*list)->next != NULL)
+//		{
+//			ft_putstr("TEST SIGV 3\n");
+//			(*list) = (*list)->next;
+//		}
 		tmp = (*list);
 		(*list)->next = new;
 		new->prev = tmp;
 		(*list) = (*list)->next;
-		(*list)->bracket = NULL;
-		(*list)->type = type;
+		(*list)->content = NULL;
 	}
 	return (1);
 }
 
-void			print_sbracket(t_sbracket *list)
+void			rewind_tbracket(t_bracket **list)
 {
-	while (list->prev)
-		list = list->prev;
-	while (list->next)
+	if ((*list))
 	{
-		printf("bracket = %s\n", list->bracket);
-		list = list->next;
+		while ((*list)->prev)
+			(*list) = (*list)->prev;
 	}
-	printf("bracket = %s\n", list->bracket);
+}
+
+void			free_tbracket(t_bracket **list)
+{
+	FT_INIT(t_bracket *, tmp, NULL);
+	while ((*list)->prev)
+		(*list) = (*list)->prev;
+	while ((*list)->next)
+	{
+		if ((*list)->content)
+			free((*list)->content);
+		tmp = (*list);
+		(*list) = (*list)->next;
+		free(tmp);
+	}
+	if ((*list)->content)
+		free((*list)->content);
+	tmp = (*list);
+	(*list) = NULL;
+	free(tmp);
 }

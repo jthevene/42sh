@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/get_next_line.h"
-#include "libft/libft.h"
+#include "../includes/get_next_line.h"
+#include "../libft/libft.h"
 
 static int		ft_get_last_line(char **line, char **stck, t_var *v)
 {

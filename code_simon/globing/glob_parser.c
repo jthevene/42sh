@@ -12,16 +12,18 @@
 
 #include "../includes/globing.h"
 
-static int		verif_tokens(char *str)
+static int				verif_tokens(char *str)
 {
 	FT_INIT(int, nb, 0);
 	if (ft_strchr(str, '[') && !ft_strchr(str, ']'))
 		return (0);
-	else if (!count_brackets(str, '[') || !count_brackets(str, '{'))
+	else if (!count_brackets(str, '['))
 		return (0);
 	else
 		nb++;
 	if (ft_strchr(str, '{') && !ft_strchr(str, '}'))
+		return (0);
+	else if (!count_brackets(str, '{'))
 		return (0);
 	else
 		nb++;
@@ -32,11 +34,10 @@ static int		verif_tokens(char *str)
 	return (1);
 }
 
-static int		get_command(char *str, t_glob *glob) // Fonction qui recupere la commande pour le message d'erreur
+static int				get_command(char *str, t_glob *glob) // Fonction qui recupere la commande pour le message d'erreur
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, 0);
-
 	while (str[i] && str[i] != ' ')
 		i++;
 	i++;
@@ -55,12 +56,17 @@ static int		get_command(char *str, t_glob *glob) // Fonction qui recupere la com
 	return (0);
 }
 
-t_glob			*init_glob(void)
+t_glob					*init_glob(void)
 {
-	t_glob		*glob;
+	t_glob				*glob;
 
 	glob = (t_glob *)malloc(sizeof(t_glob));
 	glob->sbracket = NULL;
+	glob->cbracket = NULL;
+	glob->tmp_c = NULL;
+	glob->c_touch = FALSE;
+	glob->lastb_count = 1;
+	glob->exp = NULL;
 	ft_bzero(glob->upper, 27);
 	ft_bzero(glob->lower, 27);
 	ft_bzero(glob->alpha, 53);
@@ -81,25 +87,32 @@ t_glob			*init_glob(void)
 /*
 void			free_glob(t_glob *glob)
 {
-	if (glob->bracket)
-		free(glob->bracket);
+	if (glob->sbracket)
+		free_tbracket(&glob->sbracket);
+	if (glob->cbracket)
+		free_tclist(&glob->cbracket);
 	if (glob->command)
 		free(glob->command);
 	free(glob);
 }
 */
-int				glob_parser(void)
+
+int						glob_parser(void)
 {
 	static t_glob		*glob = NULL;
 
 	if (!g_shell.line)
 		return (0);
-	if (!verif_tokens(g_shell.line)) // --> Verification que les tokens de glob sont bien présents et valides
+	if (!verif_tokens(g_shell.line))
 		return (0);
 	glob = glob == NULL ? init_glob() : glob;
 	get_command(g_shell.line, glob);
 	if (ft_strchr(g_shell.line, '['))
-		hub_bracket(glob); // Hub bracket est le hub de fonctions qui va gérer tous les cas possibles pour les expression de globing contenant des barckets de ce type : '[]'
-//	free_glob(glob);
+		hub_sbracket(glob); // Hub bracket est le hub de fonctions qui va gérer tous les cas possibles pour les expression de globing contenant des brackets de ce type : '[]'
+	if (glob->command)
+		free(glob->command);
+
+	if (ft_strchr(g_shell.line, '{'))
+		hub_cbracket(glob);
 	return (1);
 }

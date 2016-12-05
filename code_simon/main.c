@@ -35,7 +35,7 @@ void			ft_infinite_loop(void)
 	ret = 0;
 	while (1)
 	{
-		ret = get_next_line(0, &g_shell.line); /* Jules' GNL leaking, careful !! */
+		ret = get_next_line(0, &g_shell.line);
 		if (!ft_strcmp(g_shell.line, "exit"))
 			exit(0);
 		if (ret)

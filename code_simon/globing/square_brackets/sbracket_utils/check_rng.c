@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/globing.h"
-#include "../../includes/redir.h"
+#include "../../../includes/globing.h"
+#include "../../../includes/redir.h"
 
 int			check_rng(char *str) // Check si on a un rng valide ([a-g] valide, [z-a] invalide)
 {
@@ -24,7 +24,7 @@ int			check_rng(char *str) // Check si on a un rng valide ([a-g] valide, [z-a] i
 	}
 	while (tmp[i])
 	{
-		if (tmp[i] == '-' && tmp[i - 1] && tmp[i + 1] 
+		if (tmp[i] == '-' && tmp[i - 1] && tmp[i + 1]
 			&& tmp[i + 1] != ']' && tmp[i - 1] != '[')
 		{
 			if (tmp[i - 1] > tmp[i + 1])

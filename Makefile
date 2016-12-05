@@ -31,6 +31,7 @@ SRC					=	main.c 			\
 						catch_key.c 	\
 						cursor_move.c 	\
 						history.c 		\
+						history2.c 		\
 						init.c 			\
 						line_edition.c 	\
 						print_line.c 	\

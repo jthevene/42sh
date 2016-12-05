@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/globing.h"
-#include "../../includes/redir.h"
+#include "../../../includes/globing.h"
+#include "../../../includes/redir.h"
 
 char		*get_rng_str(char *str, int i)// uac-rgs => "c-r"
 {
@@ -26,7 +26,12 @@ int			get_len_mix(char *str) // Calcule la longueur de la chaîne à allouer pou
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, len, 0);
-	FT_INIT(char *, tmp, clean_brackets(str));
+	FT_INIT(char *, tmp, NULL);
+	tmp = ft_strchr(str, '[') && ft_strchr(str, ']')
+	? clean_brackets(str) : ft_strdup(str);
+	/*
+		SEGFAULT INEXPLICABLE ICI
+	*/
 	while (tmp[i])
 	{
 		if (tmp[i] == '-' && tmp[i + 1] && tmp[i - 1])
@@ -69,4 +74,24 @@ int			get_letters(char **ret, char *str)
 		k++;
 	}
 	return (0);
+}
+
+char		*get_category(char *str)
+{
+	FT_INIT(char *, category, NULL);
+	FT_INIT(int, i, -1);
+	FT_INIT(int, j, 0);
+	while (str[++i])
+	{
+		if (str[i] == '[' && str[i + 1] == ':')
+		{
+			j = i + 2;
+			while (str[i++])
+				if (str[i] == ']' && str[i - 1] == ':')
+					break ;
+			category = ft_strsub(str, j, i - j - 1);
+			break ;
+		}
+	}
+	return (category);
 }

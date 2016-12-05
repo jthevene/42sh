@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/redir.h"
-#include "../../includes/globing.h"
+#include "../../../includes/redir.h"
+#include "../../../includes/globing.h"
 
 char		*clean_brackets(char *str) // enleve les []
 {
@@ -28,7 +28,7 @@ char		*clean_brackets(char *str) // enleve les []
 		i++;
 		len++;
 	}
-	if (!(ret = (char *)malloc(sizeof(char) * len)))
+	if (!(ret = ft_strnew(len + 1)))
 		return (NULL);
 	i = 0;
 	while (i < len)

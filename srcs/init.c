@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:40:03 by jules             #+#    #+#             */
-/*   Updated: 2016/11/04 14:42:54 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/29 10:00:33 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,29 @@ static int		init_env()
 	g_shell.oldpwd = get_var(&g_shell, "OLDPWD");
 	g_shell.hist = (t_lst*)ft_memalloc(sizeof(t_lst));
 	return (1);
+}
+
+void	init_hist()
+{
+	char	*filename;
+
+	g_shell.hist_fd = 0;
+	if (!(g_shell.hist = (t_lst*)malloc(sizeof(t_list))))
+	{
+		ft_putstr("g_shell.hist malloc failed");
+		ft_reset_termios(g_shell.t_back);
+		exit(0);
+	}
+	g_shell.hist->content = NULL;
+	g_shell.hist->number = 0;
+	g_shell.nav_hist = 0;
+	g_shell.hist->next = NULL;
+	g_shell.hist->prev = NULL;
+	g_shell.last_hist = g_shell.hist;
+	filename = ft_strjoin(get_var(&g_shell, "HOME"), "/.history");
+	g_shell.hist_fd = open(filename, O_RDWR | O_CREAT, 0600);
+	get_hist();
+	close(g_shell.hist_fd);
 }
 
 static void		init_win()

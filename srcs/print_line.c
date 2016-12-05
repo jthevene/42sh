@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 10:41:51 by jules             #+#    #+#             */
-/*   Updated: 2016/11/08 17:23:08 by jules            ###   ########.fr       */
+/*   Updated: 2016/11/16 12:20:48 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // efface la ligne en cours d'edition
 void	clean_line()
 {
-<<<<<<< HEAD
+// <<<<<<< HEAD
 	int i;
 	
 	i = ft_strlen(g_shell.current_line) + 3;
@@ -26,13 +26,13 @@ void	clean_line()
 		if ((i % g_shell.win->ws_col) != 0)
 			g_shell.nb_rows++;
 	}
-=======
-//	int i;
-	int nb_rows;
+// =======
+// //	int i;
+// 	int nb_rows;
 	
-//	i = ft_strlen(g_shell.current_line) + 2;
-	nb_rows = g_shell.cursor_y + 1;
->>>>>>> 6694b3e1eadb64e40e9b0e4df29760ea8067343f
+// //	i = ft_strlen(g_shell.current_line) + 2;
+// 	nb_rows = g_shell.cursor_y + 1;
+// >>>>>>> 6694b3e1eadb64e40e9b0e4df29760ea8067343f
 	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("dl", NULL), 1, ft_putchar_int);
 	while (g_shell.nb_rows-- > 1)

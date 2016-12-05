@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:20:49 by jules             #+#    #+#             */
-/*   Updated: 2016/11/08 11:47:49 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/05 10:55:06 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ static	void	run_shell(void)
 		if (key == K_PRINT)
 			print_line(i++);
 		else if (key == K_UP || key == K_DOWN)
-			// HISTORIQUE
-			ft_putendl("UP/DOWN");
-		else if (key == K_RIGHT || key == K_LEFT)
-			ft_putendl("RIGHT/LEFT");
+			navigation_hist(key);
+		else if (key == K_RIGHT)
+			show_hist_list();
+		// else if (key == K_LEFT)
+			// update_history_file();
 		else if (key == K_BACKSP)
 			backspace_key();
 		else if (key == K_RETURN)
@@ -44,6 +45,7 @@ static	void	run_shell(void)
 		}
 		else if (key == K_ESCAPE)
 		{
+			close(g_shell.hist_fd);
 			ft_reset_termios(g_shell.t_back);
 			return;
 		}

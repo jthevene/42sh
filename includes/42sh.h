@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2016/11/08 12:20:56 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/05 10:42:46 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct 		s_lst
 	void			*content;
 	struct s_lst	*prev;
 	struct s_lst	*next;
+	int 			number;
 } 					t_lst;
 
 typedef struct		s_var
@@ -62,6 +63,10 @@ typedef struct		s_shell
 	struct winsize	*win;
 	int				running;
 	t_lst			*hist;
+	int 			hist_fd;
+	t_lst			*last_hist; //derniere ligne de l'historique
+	t_lst			*end_hist_file; //derniere ligne du fichier history
+	int 			nav_hist; // 0 = pas encore navigué dans l'historique
 	struct termios	my_termios;
 	struct termios	t_back;
 	char			*current_line; //ligne en cours d'edition
@@ -84,12 +89,22 @@ void				cursor_next_line(void);
 /*
 ** HISTORY
 */
-void				init_hist();
+void				get_hist(void);
 void				ft_newhist(char *line);
+void				navigation_hist(int arrow);
+void				ft_history(int i);
+/*
+** HISTORY2
+*/
+void				clear_history_list(void);
+void				delete_line_history(int i);
+void				show_hist_list(void);
+void				update_history_file(void);
 /*
 ** INIT
 */
-int					init_all();
+int					init_all(void);
+void				init_hist(void);
 /*
 ** LINE_EDITION
 */
@@ -101,7 +116,7 @@ void				display_prompt(void);
 /*
 ** PRINT_LINE
 */
-void				clean_line();
+void				clean_line(void);
 void				print_line(int i);
 /*
 ** RETURN_KEY

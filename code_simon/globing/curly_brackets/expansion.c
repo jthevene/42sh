@@ -42,7 +42,6 @@ t_bracket		*expansion_args(char *s, char *s2)
 
 int				e_solo(char *exp, int i, t_bracket *args, t_glob *glob)
 {
-	printf("E SOLO\n");
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(char *, tmp2, NULL);
 	tmp = ft_strsub(exp, 0, i - 1);
@@ -60,13 +59,10 @@ int				e_solo(char *exp, int i, t_bracket *args, t_glob *glob)
 	return (1);
 }
 
-int			e_recreate(char *exp, int i, char *s, char *s2, t_glob *glob)
+int				e_recreate(char *exp, int i, t_bracket *args, t_glob *glob)
 {
-	FT_INIT(t_bracket *, args, expansion_args(s, s2));
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(char *, tmp2, NULL);
-	free(s);
-	free(s2);
 	if (glob->exp)
 		free(glob->exp);
 	if (is_solo_arg(args))
@@ -109,18 +105,17 @@ int				is_valid_expansion(char *exp, int i, t_glob *glob)
 	while (exp[++j] != '}')
 		k++;
 	s2 = k ? ft_strsub(exp, j - k, k) : NULL;
-	if (!s || !s2 || exp_type(s) == BOTH || exp_type(s2) == BOTH)
-		return (0);
-	if ((exp_type(s) == DIGIT && ft_strlen(s) > 1 && exp_type(s2) == CHARS)
+	if (!s || !s2 || exp_type(s) == BOTH || exp_type(s2) == BOTH
+	|| (exp_type(s) == DIGIT && ft_strlen(s) > 1 && exp_type(s2) == CHARS)
 	|| (exp_type(s2) == DIGIT && ft_strlen(s2) > 1 && exp_type(s) == CHARS)
 	|| (exp_type(s) == CHARS && ft_strlen(s) > 1)
 	|| (exp_type(s2) == CHARS && ft_strlen(s2) > 1))
 	{
-		free(s);
-		free(s2);
+		free_double_str(&s, &s2);
 		return (0);
 	}
-	e_recreate(exp, i, s, s2, glob);
+	e_recreate(exp, i, expansion_args(s, s2), glob);
+	free_double_str(&s, &s2);
 	return (1);
 }
 
@@ -128,7 +123,6 @@ void			hub_expansion(char *str, t_glob *glob)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, 0);
-	printf("hub_expansion ---> %s\n", str);
 	while (str[i])
 	{
 		if (str[i] == '{')
@@ -154,4 +148,5 @@ void			hub_expansion(char *str, t_glob *glob)
 		}
 		i++;
 	}
+	free(str);
 }

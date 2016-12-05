@@ -31,17 +31,18 @@ int				hub_cbracket(t_glob *glob)
 		if (g_shell.line[i] == '{')
 		{
 			tmp = next_expr(g_shell.line, i);
-			hub_expansion(tmp, glob);
+			i += ft_strlen(tmp);
+			hub_expansion(ft_strdup(tmp), glob);
 			if (glob->exp)
 			{
 				free(tmp);
 				tmp = ft_strdup(glob->exp);
 				free(glob->exp);
+				glob->exp = NULL;
 			}
-			printf("Hub bracket = %s\n", tmp);
+			printf("Expression : %s\n", tmp);
 			if (!handle_cbracket(tmp, glob))
 				return (0);
-			i += ft_strlen(tmp);
 			free(tmp);
 			free_double_tab(&glob->ext_args);
 		}

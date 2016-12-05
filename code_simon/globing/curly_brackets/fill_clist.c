@@ -16,13 +16,19 @@
 static int		touching_brackets(char *str)
 {
 	FT_INIT(int, i, 0);
+	FT_INIT(int, j, 0);
 	while (str[i])
 	{
 		if (str[i] == '{')
 		{
 			i += next_bracket(str, '{', i);
-			if (str[i + 1] == '{')
-				return (1);
+			j = i;
+			while (str[j])
+			{
+				if (str[j] == '{')
+					return (1);
+				j++;
+			}
 		}
 		i++;
 	}
@@ -49,7 +55,7 @@ void			get_patterns(char *str, t_glob *glob)
 	{
 		clist_list_pushback(&glob->cbracket);
 		glob->cbracket->list->content = expand_pattern(str, glob);
-		printf("New pattern created : %s\n", glob->cbracket->list->content);
+		printf("New simple pattern created : %s\n", glob->cbracket->list->content);
 	}
 	else
 		i_algo_imbricated(ft_strdup(str), glob);
@@ -73,7 +79,7 @@ int				fill_clist(char *line, t_glob *glob)
 				tmp = ft_strsub(line, i, ft_strlen(line) - i - len_sub(line));
 			else
 				tmp = ft_strsub(line, i, end_bracket(line, i));
-			printf("next_comma 1 = %s\n", tmp);
+//			printf("next_comma 1 = %s\n", tmp);
 			get_patterns(tmp, glob);
 			free(tmp);
 			break ;
@@ -83,7 +89,7 @@ int				fill_clist(char *line, t_glob *glob)
 			tmp = ft_strsub(line, i, next_comma(line, i));
 			i += next_comma(line, i);
 		}
-		printf("next_comma 2 = %s\n", tmp);
+//		printf("next_comma 2 = %s\n", tmp);
 		get_patterns(tmp, glob);
 		free(tmp);
 		i++;

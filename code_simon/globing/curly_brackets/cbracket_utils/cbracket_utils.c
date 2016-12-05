@@ -39,7 +39,7 @@ char				*next_expr(char *str, int i)
 {
 	FT_INIT(int, ret, 0);
 	FT_INIT(int, j, 0);
-	while (str[i] != ' ')
+	while (str[i] && str[i] != ' ')
 		i--;
 	i++;
 	j = i;

@@ -130,7 +130,7 @@ void				i_hub_patterns(char *str, t_glob *glob)
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(int, count, 0);
 	FT_INIT(t_clist *, multi, NULL);
-	printf("new_str = %s\n\n", str);
+//	printf("new_str = %s\n\n", str);
 	if (!ft_strchr(str, '{'))
 		i_simple_patterns(str, glob);
 	else

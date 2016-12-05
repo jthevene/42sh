@@ -54,3 +54,11 @@ int			is_solo_arg(t_bracket *args)
 	count++;
 	return (count == 1 ? 1 : 0);
 }
+
+void		free_double_str(char **s, char **s2)
+{
+	if ((*s) != NULL)
+		free((*s));
+	if ((*s2) != NULL)
+		free((*s2));
+}

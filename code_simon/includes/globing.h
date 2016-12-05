@@ -123,6 +123,7 @@ typedef struct			s_glob
 }						t_glob;
 
 int						glob_parser(void);
+void					free_glob(t_glob *glob);
 
 //FONCTIONS SQUARE BRACKETS
 // Initialisation et gestion de depart
@@ -210,5 +211,6 @@ void					hub_expansion(char *str, t_glob *glob);
 int						exp_type(char *str);
 char					*ft_cdup(char c);
 int						is_solo_arg(t_bracket *args);
+void					free_double_str(char **s, char **s2);
 
 #endif

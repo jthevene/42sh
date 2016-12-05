@@ -17,11 +17,13 @@ static int				verif_tokens(char *str)
 	FT_INIT(int, nb, 0);
 	if (ft_strchr(str, '[') && !ft_strchr(str, ']'))
 		return (0);
-	else if (!count_brackets(str, '[') || !count_brackets(str, '{'))
+	else if (!count_brackets(str, '['))
 		return (0);
 	else
 		nb++;
 	if (ft_strchr(str, '{') && !ft_strchr(str, '}'))
+		return (0);
+	else if (!count_brackets(str, '{'))
 		return (0);
 	else
 		nb++;
@@ -85,8 +87,10 @@ t_glob					*init_glob(void)
 /*
 void			free_glob(t_glob *glob)
 {
-	if (glob->bracket)
-		free(glob->bracket);
+	if (glob->sbracket)
+		free_tbracket(&glob->sbracket);
+	if (glob->cbracket)
+		free_tclist(&glob->cbracket);
 	if (glob->command)
 		free(glob->command);
 	free(glob);
@@ -109,6 +113,5 @@ int						glob_parser(void)
 		free(glob->command);
 	if (ft_strchr(g_shell.line, '{'))
 		hub_cbracket(glob);
-//	free_glob(glob);
 	return (1);
 }

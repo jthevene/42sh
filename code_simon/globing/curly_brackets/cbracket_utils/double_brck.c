@@ -61,7 +61,7 @@ void		i2_recup_patterns(char *str, char *tmp, int i, t_glob *glob)
 	rewind_tbracket(&patterns);
 	tmp2 = i2_recreate_string(str, i, patterns);
 	free_tbracket(&patterns);
-	printf("!! !! !! /~~~~~ !! New string created : %s !! ~~~~~/ !! !! !!\n\n", tmp2);
+//	printf("!! !! !! /~~~~~ !! New string created : %s !! ~~~~~/ !! !! !!\n\n", tmp2);
 	i_algo_imbricated(tmp2, glob);
 }
 

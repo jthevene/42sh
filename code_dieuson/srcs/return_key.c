@@ -29,9 +29,12 @@ static void 	set_cursor_pos_to_end(int i)
 
 void	return_key(void)
 { 
-	// INSEREZ VOS FONCTIONS AU DESSUS
-	if (g_shell.current_line)
+	if (ft_strlen(g_shell.current_line))
 	{
+		ft_putchar(10);
+		g_shell.line = ft_strdup(g_shell.current_line);
+		glob_parser();
+		free(g_shell.line);
 		set_cursor_pos_to_end(g_shell.line_size);
 		ft_newhist(g_shell.current_line);
 		ft_bzero(g_shell.current_line, ft_strlen(g_shell.current_line));

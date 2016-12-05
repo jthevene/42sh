@@ -15,7 +15,7 @@
 
 # ifndef I_42SH_H
 #  define I_42SH_H
-#  include "../../includes/42sh.h"
+#  include "../../code_dieuson/includes/42sh.h"
 # endif
 
 # ifndef FT_INIT

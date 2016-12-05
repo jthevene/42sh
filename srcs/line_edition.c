@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "42sh.h"
+#include "../includes/42sh.h"
 
 // ajoute le caractere c à la fin de current_line
 void	fill_current_line(char c)

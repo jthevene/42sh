@@ -64,7 +64,7 @@ all: $(NAME)
 
 $(NAME):
 	gcc $(CC_FLAGS) $(INCLUDES) $(SRCS) -c
-	gcc $(CC_FLAGS) $(BIN) $(LIBFT)libft.a -o $(NAME)
+#	gcc $(CC_FLAGS) $(BIN) $(LIBFT)libft.a -o $(NAME)
 	mkdir bin_folder
 	mv $(BIN) bin_folder
 

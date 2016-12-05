@@ -53,6 +53,7 @@ typedef struct 		s_lst
 	void			*content;
 	struct s_lst	*prev;
 	struct s_lst	*next;
+	int 			number;
 } 					t_lst;
 
 typedef struct		s_var
@@ -87,6 +88,12 @@ typedef struct		s_shell
 	struct winsize	*prev_win;
 	int				running;
 	t_lst			*hist;
+	////////////////////////////	JULES PART
+	int 			hist_fd;
+	t_lst			*last_hist; //derniere ligne de l'historique
+	t_lst			*end_hist_file; //derniere ligne du fichier history
+	int 			nav_hist; // 0 = pas encore navigué dans l'historique
+	///////////////////////////		END JULES
 	struct termios	my_termios;
 	struct termios	t_back;
 	char			*current_line; //ligne en cours d'edition
@@ -105,23 +112,30 @@ int					readkey(void);
 /*
 ** CURSOR_MOVE
 */
+int					ft_cursor_right(int i);
 int 				distrib_cursor_mooves(int key);
 void 				arrow_moove_left();
 void 				arrow_moove_right();
-int					ft_cursor_right(int i);
-int					ft_cursor_left(int i);
-int					ft_cursor_up(int i);
-int					ft_cursor_dwn(int i);
-void				cursor_next_line(void);
 /*
 ** HISTORY
 */
+void				get_hist(void);
 void				init_hist();
 void				ft_newhist(char *line);
+void				navigation_hist(int arrow);
+void				ft_history(int i);
 /*
-** INIT
+** HISTORY2
 */
-int					init_all();
+void				clear_history_list(void);
+void				delete_line_history(int i);
+void				show_hist_list(void);
+void				update_history_file(void);
+ /*
+ ** INIT
+ */
+int					init_all(void);
+void				init_hist(void);
 /*
 ** LINE_EDITION
 */
@@ -158,5 +172,8 @@ void				ft_reset_termios(struct termios t_back);
 char				*get_var(t_shell *g_shell, char *n_var);
 t_var				*new_var(char *v_name, char *v_value);
 void				ft_varappend(t_var *new_element);
+
+// SIMON
+int						glob_parser(void);
 
 #endif

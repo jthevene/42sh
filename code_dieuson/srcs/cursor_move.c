@@ -96,10 +96,7 @@ int 	distrib_cursor_mooves(int key)
 {
 	FT_INIT(int, nb_col, g_shell.win->ws_col);
 	if (key == K_UP || key == K_DOWN)
-	{
-		// HISTORIQUE
-//		ft_putendl("UP/DOWN");
-	}
+		navigation_hist(key);
 	else if (key == K_RIGHT)
 		arrow_moove_right();
 	else if (key == K_LEFT)

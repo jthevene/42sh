@@ -137,6 +137,27 @@ void 	display_with_select(char *line)
 	}
 }
 
+void	clean_line()
+{
+	int i;
+	
+	i = ft_strlen(g_shell.current_line) + 3;
+	g_shell.nb_rows = 1;
+	if (i > g_shell.win->ws_col)
+	{
+		g_shell.nb_rows = i / g_shell.win->ws_col;
+		if ((i % g_shell.win->ws_col) != 0)
+			g_shell.nb_rows++;
+	}
+	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
+	tputs(tgetstr("dl", NULL), 1, ft_putchar_int);
+	while (g_shell.nb_rows-- > 1)
+	{
+		tputs(tgetstr("dl", NULL), 1, ft_putchar_int);
+		tputs(tgetstr("up", NULL), 1, ft_putchar_int);
+	}
+}
+
 void	print_line(int i)
 {
 	set_2d_line_val();

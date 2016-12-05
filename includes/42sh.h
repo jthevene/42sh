@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2016/11/29 09:04:48 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/05 10:42:46 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct		s_shell
 	t_lst			*hist;
 	int 			hist_fd;
 	t_lst			*last_hist; //derniere ligne de l'historique
-	t_lst			*new_session; //début de la nouvelle session
+	t_lst			*end_hist_file; //derniere ligne du fichier history
 	int 			nav_hist; // 0 = pas encore navigué dans l'historique
 	struct termios	my_termios;
 	struct termios	t_back;
@@ -96,7 +96,7 @@ void				ft_history(int i);
 /*
 ** HISTORY2
 */
-void				delete_all_hist(void);
+void				clear_history_list(void);
 void				delete_line_history(int i);
 void				show_hist_list(void);
 void				update_history_file(void);

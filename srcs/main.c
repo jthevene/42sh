@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:20:49 by jules             #+#    #+#             */
-/*   Updated: 2016/11/28 15:11:24 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/05 10:55:06 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static	void	run_shell(void)
 			navigation_hist(key);
 		else if (key == K_RIGHT)
 			show_hist_list();
-		else if (key == K_LEFT)
-			update_history_file();
+		// else if (key == K_LEFT)
+			// update_history_file();
 		else if (key == K_BACKSP)
 			backspace_key();
 		else if (key == K_RETURN)

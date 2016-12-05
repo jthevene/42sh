@@ -14,23 +14,28 @@
 
 int					bracket_pushback(t_bracket **list)
 {
-	t_bracket *tmp;
-	t_bracket *new;
-
+	FT_INIT(t_bracket, *tmp, NULL);
+	FT_INIT(t_bracket, *new, NULL);
 	if (!(*list))
 	{
 		if (!((*list) = (t_bracket *)malloc(sizeof(t_bracket))))
 			return (0);
-		FT_MULTI3((*list)->next, (*list)->prev, NULL);
+		(*list)->prev =  NULL;
+		(*list)->next = NULL;
 		(*list)->content = NULL;
 	}
 	else
 	{
 		if (!(new = (t_bracket *)malloc(sizeof(t_bracket))))
 			return (0);
+//		ft_putstr("TEST SIGV 1\n");
 		new->next = NULL;
-		while ((*list)->next)
-			(*list) = (*list)->next;
+//		ft_putstr("TEST SIGV 2\n");
+//		while ((*list)->next != NULL)
+//		{
+//			ft_putstr("TEST SIGV 3\n");
+//			(*list) = (*list)->next;
+//		}
 		tmp = (*list);
 		(*list)->next = new;
 		new->prev = tmp;
@@ -42,8 +47,11 @@ int					bracket_pushback(t_bracket **list)
 
 void			rewind_tbracket(t_bracket **list)
 {
-	while ((*list)->prev)
-		(*list) = (*list)->prev;
+	if ((*list))
+	{
+		while ((*list)->prev)
+			(*list) = (*list)->prev;
+	}
 }
 
 void			free_tbracket(t_bracket **list)

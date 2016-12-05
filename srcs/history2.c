@@ -6,13 +6,14 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 16:55:54 by jules             #+#    #+#             */
-/*   Updated: 2016/11/29 10:28:25 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/05 10:48:50 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
 
-void	delete_all_hist()
+// history -c
+void	clear_history_list()
 {
 	if (g_shell.hist != NULL)
 	{
@@ -69,52 +70,42 @@ void	show_hist_list()
 		return ;
 	}
 	while (tmp->prev != NULL)
-	{
 		tmp = tmp->prev;
-	}
-	ft_putendl("LISTE HISTORY");
-	ft_putendl("_ _ _ _ _ _ _ _ _ _ _ _ _ _");
+	ft_putendl("---LISTE HISTORY---");
 	while (tmp->next)
 	{
+		if (tmp == g_shell.end_hist_file)
+			ft_putchar('*');
 		ft_putnbr(tmp->number);
 		ft_putstr("=> ");
 		ft_putendl(tmp->content);
 		tmp = tmp->next;
 	}
+		if (tmp == g_shell.end_hist_file)
+			ft_putchar('*');
 	ft_putnbr(tmp->number);
 	ft_putstr("=> ");
 	ft_putendl(tmp->content);
-	ft_putendl("_ _ _ _ _ _ _ _ _ _ _ _ _ _");
-	ft_putendl("FIN");
+	ft_putendl("--------FIN--------");
 }
-
-// void	hist_r_option()
-// {
-// 	char	*filename;
-
-// 	filename = ft_strjoin(get_var(&g_shell, "HOME"), "/.history");
-// 	g_shell.hist_fd = open(filename, O_WRONLY | O_APPEND | O_CREAT | O_TRUNC, 0600);
-// 	while (get_next_line(g_shell.hist_fd, ))
-// 	{
-		
-// 	}
-// 	close(g_shell.hist_fd);
-// }
 
 void	update_history_file()
 {
 	char	*line;
 	char	*filename;
+	t_lst	*tmp;
 
-	FT_INIT(int, ret, 0);
+
+	tmp = g_shell.hist;
 	line = NULL;
 	filename = ft_strjoin(get_var(&g_shell, "HOME"), "/.history");
 	g_shell.hist_fd = open(filename, O_RDWR | O_APPEND, 0600);
-	while ((ret = get_next_line(g_shell.hist_fd, &line)) == 1)
+	while (tmp != g_shell.end_hist_file)
+		tmp = tmp->prev;
+	while (tmp->next)
 	{
-		if (line)
-			ft_putendl(line);
+		tmp = tmp->next;
+		ft_putendl_fd(tmp->content, g_shell.hist_fd);
 	}
-	ft_putendl("-----FIN-----");
 	close(g_shell.hist_fd);
 }

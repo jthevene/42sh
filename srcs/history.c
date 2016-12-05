@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:53:52 by jules             #+#    #+#             */
-/*   Updated: 2016/11/29 10:28:03 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/05 10:54:58 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 void	get_hist(void)
 {
 	char	*line;
+	char	*filename;
 
 	FT_INIT(int, ret, 0);
 	line = NULL;
+	filename = ft_strjoin(get_var(&g_shell, "HOME"), "/.history");
+	g_shell.hist_fd = open(filename, O_RDWR, 0600);
 	while ((ret = get_next_line(g_shell.hist_fd, &line)) == 1)
 		ft_newhist(line);
+	g_shell.end_hist_file = g_shell.hist;
 }
 
 void	ft_newhist(char *line)
@@ -63,7 +67,7 @@ void	navigation_hist(int arrow)
 	{
 		if (arrow == K_UP)
 		{	
-			if (g_shell.hist->prev->content)
+			if (g_shell.hist->prev && g_shell.hist->prev->content)
 			{
 				if (g_shell.nav_hist == 1) //nav_hist est remis à 0 quand la touche return est pressée
 					g_shell.hist = g_shell.hist->prev;

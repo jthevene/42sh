@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 12:21:52 by jules             #+#    #+#             */
-/*   Updated: 2016/11/29 10:30:08 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/05 10:56:02 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,4 @@ void	ft_reset_termios(struct termios t_back)
 	tcsetattr(0, 0, &t_back);
 	tputs(tgetstr("me", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("vs", NULL), 1, ft_putchar_int);
-	ft_putendl("RESET TERMIOS DONE");
 }

@@ -101,6 +101,7 @@ typedef struct			s_glob
 	t_bracket			*sbracket;
 
 	t_clist				*cbracket;
+
 	t_bracket			*tmp_c;
 	int					c_touch;
 	int					lastb_count;

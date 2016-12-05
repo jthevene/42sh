@@ -1,0 +1,111 @@
+#******************************************************************************#
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2016/10/13 10:43:29 by sgaudin           #+#    #+#              #
+#    Updated: 2016/10/13 10:43:29 by sgaudin          ###   ########.fr        #
+#                                                                              #
+#******************************************************************************#
+
+NAME				=	42sh
+
+SRC_DIR				=	srcs/
+INCLUDE_DIR			=	includes
+OBJ_DIR				=	objs
+
+LIBFT				=	ft
+LIBFT_DIR			=	libft
+LIBFT_NAME			=	$(LIBFT_DIR)/libft.a
+LIBFT_INCLUDE_DIR	=	$(LIBFT_DIR)/includes
+
+COMPILER			=	gcc
+CFLAGS				=	-g3 -O3 -Wall -Wextra -Werror -c
+LIB_FLAGS			=	-lncurses
+LFLAGS				=	-L$(LIBFT_DIR) -l$(LIBFT)
+
+SRC_DIEUSON			=	$(SRC_DIR)main.c $(SRC_DIR)catch_key.c 	\
+						$(SRC_DIR)cursor_move.c $(SRC_DIR)history.c \
+						$(SRC_DIR)history2.c $(SRC_DIR)init.c \
+						$(SRC_DIR)line_edition.c $(SRC_DIR)print_line.c \
+						$(SRC_DIR)return_key.c $(SRC_DIR)signal.c \
+						$(SRC_DIR)termios.c $(SRC_DIR)var.c \
+
+BIN_DIEUSON 		=	main.o catch_key.o 	\
+						cursor_move.o history.o \
+						history2.o init.o \
+						line_edition.o print_line.o \
+						return_key.o signal.o \
+						termios.o var.o \
+
+################# 		SIMON PART		####################################
+SIMON = ./code_simon/
+REDIR = $(SIMON)redirections/
+SBRACK = $(SIMON)globing/square_brackets/
+CBRACK = $(SIMON)globing/curly_brackets/
+UTILS_1 = $(SIMON)globing/square_brackets/sbracket_utils/
+UTILS_2 = $(SIMON)globing/curly_brackets/cbracket_utils/
+BIN_DIR_SIMON = $(SIMON)bin_folder/
+
+BIN_SIMON =	$(BIN_DIR_SIMON)glob_parser.o \
+		\
+		$(BIN_DIR_SIMON)simple_right.o $(BIN_DIR_SIMON)double_right.o \
+		$(BIN_DIR_SIMON)redir_utils.o \
+		\
+		$(BIN_DIR_SIMON)hub_sbracket.o $(BIN_DIR_SIMON)fill_tabs.o \
+		$(BIN_DIR_SIMON)init_tabs.o \
+		\
+		$(BIN_DIR_SIMON)category_bracket.o $(BIN_DIR_SIMON)sbracket_list.o \
+		$(BIN_DIR_SIMON)catch_dash.o $(BIN_DIR_SIMON)check_rng.o \
+		$(BIN_DIR_SIMON)clean_brackets.o $(BIN_DIR_SIMON)count_brackets.o \
+		$(BIN_DIR_SIMON)get_functions.o $(BIN_DIR_SIMON)str_nodouble.o \
+		\
+		$(BIN_DIR_SIMON)hub_cbracket.o $(BIN_DIR_SIMON)fill_clist.o \
+		$(BIN_DIR_SIMON)cbracket_list.o $(BIN_DIR_SIMON)cbracket_errors.o \
+		$(BIN_DIR_SIMON)expansion.o \
+		\
+		$(BIN_DIR_SIMON)commas_utils.o $(BIN_DIR_SIMON)algo_imbricated.o \
+		$(BIN_DIR_SIMON)imbric_utils.o $(BIN_DIR_SIMON)get_imbric_patterns.o \
+		$(BIN_DIR_SIMON)cbracket_utils.o $(BIN_DIR_SIMON)imbric_utils2.o \
+		$(BIN_DIR_SIMON)double_brck.o $(BIN_DIR_SIMON)expansion_utils.o
+################# 		END SIMON PART		####################################
+
+INCLUDES 	= -I$(INCLUDE_DIR) -I$(LIBFT_INCLUDE_DIR) \
+			-I$(SIMON)includes/
+
+all: $(NAME)
+
+$(NAME):
+	make -C $(SIMON)
+	gcc $(C_FLAGS) $(INCLUDES) $(SRC_DIEUSON)
+	gcc $(C_FLAGS) $(BIN_SIMON) $(BIN_DIEUSON) $(LIBFT)libft.a -o $(NAME)
+	mkdir bin_folder
+	mv $(BIN_DIEUSON) bin_folder
+
+libft:
+	make -C $(LIBFT)
+	gcc $(CC_FLAGS) $(INCLUDES) $(SRCS) -c
+	gcc $(CC_FLAGS) $(BIN) $(LIBFT)libft.a -o $(NAME)
+	mkdir bin_folder
+	mv $(BIN) bin_folder
+
+clean:
+	make -C $(SIMON) clean
+	rm -rf bin_folder
+
+clean_lib:
+	make -C $(LIBFT) clean
+
+fclean: clean
+	make -C $(SIMON) fclean
+	rm -rf $(NAME)
+	sh ../rm_files.sh
+
+fclean_lib: clean_lib
+	make -C $(LIBFT) fclean
+
+re: fclean all
+
+re_lib: fclean_lib libft

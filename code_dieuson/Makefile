@@ -30,9 +30,7 @@ LFLAGS				=	-L$(LIBFT_DIR) -l$(LIBFT)
 SRC					=	main.c 			\
 						catch_key.c 	\
 						cursor_move.c 	\
-						get_path.c 		\
 						history.c 		\
-						history2.c 		\
 						init.c 			\
 						line_edition.c 	\
 						print_line.c 	\
@@ -40,6 +38,8 @@ SRC					=	main.c 			\
 						signal.c 		\
 						termios.c 		\
 						var.c 			\
+						free_term.c 	\
+						copy_cut_past.c \
 
 OBJ					=	$(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
@@ -72,6 +72,6 @@ fclean: clean fcleanlib
 	@rm -f $(NAME)
 
 re:
-	@$(MAKE) fcleanlib
-	@$(MAKE) fclean
+#	@$(MAKE) fcleanlib
+#	@$(MAKE) fclean
 	@$(MAKE) all

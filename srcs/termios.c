@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "42sh.h"
+#include "../includes/42sh.h"
 
 int		init_termios(struct termios my_termios)
 {

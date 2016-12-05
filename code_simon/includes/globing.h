@@ -15,7 +15,7 @@
 
 # ifndef I_42SH_H
 #  define I_42SH_H
-#  include "../../includes/42sh.h"
+#  include "../../code_dieuson/includes/42sh.h"
 # endif
 
 # ifndef FT_INIT
@@ -101,6 +101,7 @@ typedef struct			s_glob
 	t_bracket			*sbracket;
 
 	t_clist				*cbracket;
+
 	t_bracket			*tmp_c;
 	int					c_touch;
 	int					lastb_count;

@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2016/12/05 10:42:46 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/05 16:21:40 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,11 @@ int					readkey(void);
 void				ft_cursor_right(int i);
 void				ft_cursor_left(int i);
 void				cursor_next_line(void);
+/*
+** GET_PATH
+*/
+t_list				*get_dir_content(char *dir);
+char				*ft_strpathjoin(const char *s1, const char *s2);
 /*
 ** HISTORY
 */

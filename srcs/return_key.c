@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 13:12:22 by jules             #+#    #+#             */
-/*   Updated: 2016/11/29 10:33:52 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/05 16:28:52 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,20 @@
 
 void	return_key(void)
 { 
+	DIR 		*ret;
+	t_list 		*list;
 
+	list = NULL;
+	if (!(ret = opendir(g_shell.current_line)))
+		ft_putendl("FAILED");
+	else
+	{
+		while (list->next)
+		{
+			ft_putendl(list->content);
+			list = list->next;
+		}
+	}
 	// INSEREZ VOS FONCTIONS AU DESSUS
 	if (g_shell.current_line)
 	{

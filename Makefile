@@ -30,6 +30,7 @@ LFLAGS				=	-L$(LIBFT_DIR) -l$(LIBFT)
 SRC					=	main.c 			\
 						catch_key.c 	\
 						cursor_move.c 	\
+						get_path.c 		\
 						history.c 		\
 						history2.c 		\
 						init.c 			\

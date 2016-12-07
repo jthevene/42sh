@@ -40,16 +40,16 @@ BIN_DIEUSON 		=	main.o catch_key.o 	\
 						return_key.o signal.o \
 						termios.o var.o history2.o\
 
-################# 		SIMON PART		####################################
-SIMON = ./code_simon/
-REDIR = $(SIMON)redirections/
-SBRACK = $(SIMON)globing/square_brackets/
-CBRACK = $(SIMON)globing/curly_brackets/
-UTILS_1 = $(SIMON)globing/square_brackets/sbracket_utils/
-UTILS_2 = $(SIMON)globing/curly_brackets/cbracket_utils/
-BIN_DIR_SIMON = $(SIMON)bin_folder/
+################# 		GLOBING PART		####################################
+GLOBING = ./code_simon/
+REDIR = $(GLOBING)redirections/
+SBRACK = $(GLOBING)globing/square_brackets/
+CBRACK = $(GLOBING)globing/curly_brackets/
+UTILS_1 = $(GLOBING)globing/square_brackets/sbracket_utils/
+UTILS_2 = $(GLOBING)globing/curly_brackets/cbracket_utils/
+BIN_DIR_GLOBING = $(GLOBING)bin_folder/
 
-SRC_SIMON =	$(SIMON)globing/glob_parser.c \
+SRC_GLOBING = $(GLOBING)globing/glob_parser.c \
 		$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
 		\
 		$(SBRACK)hub_sbracket.c $(SBRACK)fill_tabs.c\
@@ -67,9 +67,9 @@ SRC_SIMON =	$(SIMON)globing/glob_parser.c \
 		$(UTILS_2)get_imbric_patterns.c $(UTILS_2)cbracket_utils.c \
 		$(UTILS_2)imbric_utils2.c $(UTILS_2)double_brck.c $(UTILS_2)expansion_utils.c \
 		\
-		$(SIMON)globing/get_path.c \
+		$(GLOBING)globing/get_path.c \
 
-BIN_SIMON =	glob_parser.o \
+BIN_GLOBING = glob_parser.o \
 		\
 		simple_right.o double_right.o \
 		redir_utils.o \
@@ -94,7 +94,7 @@ BIN_SIMON =	glob_parser.o \
 ################# 		END SIMON PART		####################################
 
 INCLUDES 	= -I$(INCLUDE_DIR) -I$(LIBFT_INCLUDE_DIR) \
-			-I$(SIMON)includes/
+			-I$(GLOBING)includes/
 
 all: $(NAME)
 
@@ -102,20 +102,20 @@ lib:
 	make -C libft
 
 $(NAME):
-	gcc $(C_FLAGS) $(INCLUDES) $(SRC_DIEUSON) $(SRC_SIMON) -Incurses -c
-	gcc $(C_FLAGS) $(BIN_SIMON) $(BIN_DIEUSON) $(LIBFT_DIR)/libft.a -ltermcap -o $(NAME)
+	gcc $(C_FLAGS) $(INCLUDES) $(SRC_DIEUSON) $(SRC_GLOBING) -Incurses -c
+	gcc $(C_FLAGS) $(BIN_GLOBING) $(BIN_DIEUSON) $(LIBFT_DIR)/libft.a -ltermcap -o $(NAME)
 	mkdir bin_folder
-	mv $(BIN_DIEUSON) $(BIN_SIMON) bin_folder
+	mv $(BIN_DIEUSON) $(BIN_GLOBING) bin_folder
 
 clean:
-	make -C $(SIMON) clean
+	make -C $(GLOBING) clean
 	rm -rf bin_folder
 
 clean_lib:
 	make -C $(LIBFT_DIR) clean
 
 fclean: clean
-	make -C $(SIMON) fclean
+	make -C $(GLOBING) fclean
 	rm -rf $(NAME)
 	sh ./rm_files.sh
 

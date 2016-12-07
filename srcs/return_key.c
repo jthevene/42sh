@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 13:12:22 by jules             #+#    #+#             */
-/*   Updated: 2016/12/05 16:28:52 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/06 16:06:18 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,13 @@
 
 void	return_key(void)
 { 
-	DIR 		*ret;
-	t_list 		*list;
+	t_list	*dir_content;
 
-	list = NULL;
-	if (!(ret = opendir(g_shell.current_line)))
-		ft_putendl("FAILED");
+	dir_content = NULL;
+	if (dir_content = get_dir_content(g_shell.current_line))
+		ft_print_list_content(dir_content);
 	else
-	{
-		while (list->next)
-		{
-			ft_putendl(list->content);
-			list = list->next;
-		}
-	}
+		ft_putendl("FAILED");
 	// INSEREZ VOS FONCTIONS AU DESSUS
 	if (g_shell.current_line)
 	{
@@ -35,14 +28,10 @@ void	return_key(void)
 		display_prompt();
 		ft_putstr(g_shell.current_line);
 		if (g_shell.hist->content)
-		{
 			ft_newhist(g_shell.current_line);
-		}
 		else
-		{
 			g_shell.hist->content = ft_strdup(g_shell.current_line);
 			g_shell.hist->number++;
-		}
 		g_shell.current_line = NULL;
 		g_shell.nav_hist = 0;
 	}

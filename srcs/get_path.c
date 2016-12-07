@@ -6,11 +6,30 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 14:00:47 by jules             #+#    #+#             */
-/*   Updated: 2016/12/05 16:28:41 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/06 13:27:16 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "42sh.h"
+
+void		ft_print_list_content(t_list *lst)
+{
+	t_list	*tmp;
+	int		i;
+
+	tmp = lst;
+	i = 1;
+	if (tmp && tmp->content)
+	{
+		while (tmp->next && tmp->next->content)
+		{
+			ft_putnbr(i++);
+			ft_putstr(" => ");
+			ft_putendel(tmp->content);
+			tmp = tmp->next;
+		}
+	}
+}
 
 t_list		*get_dir_content(char *dir)
 {

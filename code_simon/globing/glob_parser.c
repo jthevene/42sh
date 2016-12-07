@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   glob_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 11:43:43 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/10/05 11:44:49 by sgaudin          ###   ########.fr       */
+/*   Updated: 2016/12/07 09:11:36 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,9 @@ int						glob_parser(void)
 		hub_sbracket(glob); // Hub bracket est le hub de fonctions qui va gérer tous les cas possibles pour les expression de globing contenant des brackets de ce type : '[]'
 	if (glob->command)
 		free(glob->command);
-
 	if (ft_strchr(g_shell.line, '{'))
 		hub_cbracket(glob);
+	if (ft_strchr(g_shell.line, '*'))
+		
 	return (1);
 }

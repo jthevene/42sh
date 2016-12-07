@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   globing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 18:56:07 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/11/17 11:26:34 by sgaudin          ###   ########.fr       */
+/*   Updated: 2016/12/07 09:09:20 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,5 +213,8 @@ int						exp_type(char *str);
 char					*ft_cdup(char c);
 int						is_solo_arg(t_bracket *args);
 void					free_double_str(char **s, char **s2);
+
+
+// WILDCARDS
 
 #endif

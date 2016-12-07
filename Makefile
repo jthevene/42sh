@@ -49,28 +49,48 @@ UTILS_1 = $(SIMON)globing/square_brackets/sbracket_utils/
 UTILS_2 = $(SIMON)globing/curly_brackets/cbracket_utils/
 BIN_DIR_SIMON = $(SIMON)bin_folder/
 
-BIN_SIMON =	$(BIN_DIR_SIMON)glob_parser.o \
+SRC_SIMON =	$(SIMON)globing/glob_parser.c \
+		$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
 		\
-		$(BIN_DIR_SIMON)simple_right.o $(BIN_DIR_SIMON)double_right.o \
-		$(BIN_DIR_SIMON)redir_utils.o \
+		$(SBRACK)hub_sbracket.c $(SBRACK)fill_tabs.c\
+		$(SBRACK)init_tabs.c $(SBRACK)category_bracket.c\
+		$(SBRACK)sbracket_list.c \
 		\
-		$(BIN_DIR_SIMON)hub_sbracket.o $(BIN_DIR_SIMON)fill_tabs.o \
-		$(BIN_DIR_SIMON)init_tabs.o \
+		$(CBRACK)hub_cbracket.c $(CBRACK)fill_clist.c $(CBRACK)cbracket_list.c \
+		$(CBRACK)cbracket_errors.c $(CBRACK)expansion.c \
 		\
-		$(BIN_DIR_SIMON)category_bracket.o $(BIN_DIR_SIMON)sbracket_list.o \
-		$(BIN_DIR_SIMON)catch_dash.o $(BIN_DIR_SIMON)check_rng.o \
-		$(BIN_DIR_SIMON)clean_brackets.o $(BIN_DIR_SIMON)count_brackets.o \
-		$(BIN_DIR_SIMON)get_functions.o $(BIN_DIR_SIMON)str_nodouble.o \
+		$(UTILS_1)catch_dash.c $(UTILS_1)check_rng.c $(UTILS_1)clean_brackets.c\
+		$(UTILS_1)count_brackets.c $(UTILS_1)get_functions.c\
+		$(UTILS_1)str_nodouble.c \
 		\
-		$(BIN_DIR_SIMON)hub_cbracket.o $(BIN_DIR_SIMON)fill_clist.o \
-		$(BIN_DIR_SIMON)cbracket_list.o $(BIN_DIR_SIMON)cbracket_errors.o \
-		$(BIN_DIR_SIMON)expansion.o \
+		$(UTILS_2)commas_utils.c $(UTILS_2)algo_imbricated.c $(UTILS_2)imbric_utils.c \
+		$(UTILS_2)get_imbric_patterns.c $(UTILS_2)cbracket_utils.c \
+		$(UTILS_2)imbric_utils2.c $(UTILS_2)double_brck.c $(UTILS_2)expansion_utils.c \
 		\
-		$(BIN_DIR_SIMON)commas_utils.o $(BIN_DIR_SIMON)algo_imbricated.o \
-		$(BIN_DIR_SIMON)imbric_utils.o $(BIN_DIR_SIMON)get_imbric_patterns.o \
-		$(BIN_DIR_SIMON)cbracket_utils.o $(BIN_DIR_SIMON)imbric_utils2.o \
-		$(BIN_DIR_SIMON)double_brck.o $(BIN_DIR_SIMON)expansion_utils.o \
-		$(BIN_DIR_SIMON)get_path.o
+		$(SIMON)globing/get_path.c \
+
+BIN_SIMON =	glob_parser.o \
+		\
+		simple_right.o double_right.o \
+		redir_utils.o \
+		\
+		hub_sbracket.o fill_tabs.o \
+		init_tabs.o \
+		\
+		category_bracket.o sbracket_list.o \
+		catch_dash.o check_rng.o \
+		clean_brackets.o count_brackets.o \
+		get_functions.o str_nodouble.o \
+		\
+		hub_cbracket.o fill_clist.o \
+		cbracket_list.o cbracket_errors.o \
+		expansion.o \
+		\
+		commas_utils.o algo_imbricated.o \
+		imbric_utils.o get_imbric_patterns.o \
+		cbracket_utils.o imbric_utils2.o \
+		double_brck.o expansion_utils.o \
+		get_path.o
 ################# 		END SIMON PART		####################################
 
 INCLUDES 	= -I$(INCLUDE_DIR) -I$(LIBFT_INCLUDE_DIR) \
@@ -78,15 +98,14 @@ INCLUDES 	= -I$(INCLUDE_DIR) -I$(LIBFT_INCLUDE_DIR) \
 
 all: $(NAME)
 
-libft:
-	make -C $(LIBFT)
+lib:
+	make -C libft
 
-$(NAME): libft
-	make -C $(SIMON)
-	gcc $(C_FLAGS) $(INCLUDES) $(SRC_DIEUSON) -Incurses -c
-	gcc $(C_FLAGS)  $(BIN_SIMON) $(BIN_DIEUSON) $(LIBFT_DIR)/libft.a -ltermcap -o $(NAME)
+$(NAME):
+	gcc $(C_FLAGS) $(INCLUDES) $(SRC_DIEUSON) $(SRC_SIMON) -Incurses -c
+	gcc $(C_FLAGS) $(BIN_SIMON) $(BIN_DIEUSON) $(LIBFT_DIR)/libft.a -ltermcap -o $(NAME)
 	mkdir bin_folder
-	mv $(BIN_DIEUSON) bin_folder
+	mv $(BIN_DIEUSON) $(BIN_SIMON) bin_folder
 
 clean:
 	make -C $(SIMON) clean
@@ -105,4 +124,4 @@ fclean_lib: clean_lib
 
 re: fclean all
 
-re_lib: fclean_lib libft
+re_lib: fclean_lib lib

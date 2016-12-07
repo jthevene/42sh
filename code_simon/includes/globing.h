@@ -110,6 +110,8 @@ typedef struct			s_glob
 
 	char				*command;
 
+	t_bracket			*args;
+
 	char				upper[27];
 	char				lower[27];
 	char				alpha[53];

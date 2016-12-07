@@ -91,13 +91,13 @@ void	show_hist_list()
 
 void	update_history_file()
 {
-	char	*line;
+//	char	*line;
 	char	*filename;
 	t_lst	*tmp;
 
 
 	tmp = g_shell.hist;
-	line = NULL;
+//	line = NULL;
 	filename = ft_strjoin(get_var(&g_shell, "HOME"), "/.history");
 	g_shell.hist_fd = open(filename, O_RDWR | O_APPEND, 0600);
 	while (tmp != g_shell.end_hist_file)

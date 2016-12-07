@@ -31,11 +31,11 @@ int					bracket_pushback(t_bracket **list)
 //		ft_putstr("TEST SIGV 1\n");
 		new->next = NULL;
 //		ft_putstr("TEST SIGV 2\n");
-//		while ((*list)->next != NULL)
-//		{
+		while ((*list)->next != NULL)
+		{
 //			ft_putstr("TEST SIGV 3\n");
-//			(*list) = (*list)->next;
-//		}
+			(*list) = (*list)->next;
+		}
 		tmp = (*list);
 		(*list)->next = new;
 		new->prev = tmp;

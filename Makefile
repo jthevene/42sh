@@ -69,7 +69,8 @@ BIN_SIMON =	$(BIN_DIR_SIMON)glob_parser.o \
 		$(BIN_DIR_SIMON)commas_utils.o $(BIN_DIR_SIMON)algo_imbricated.o \
 		$(BIN_DIR_SIMON)imbric_utils.o $(BIN_DIR_SIMON)get_imbric_patterns.o \
 		$(BIN_DIR_SIMON)cbracket_utils.o $(BIN_DIR_SIMON)imbric_utils2.o \
-		$(BIN_DIR_SIMON)double_brck.o $(BIN_DIR_SIMON)expansion_utils.o
+		$(BIN_DIR_SIMON)double_brck.o $(BIN_DIR_SIMON)expansion_utils.o \
+		$(BIN_DIR_SIMON)get_path.o
 ################# 		END SIMON PART		####################################
 
 INCLUDES 	= -I$(INCLUDE_DIR) -I$(LIBFT_INCLUDE_DIR) \

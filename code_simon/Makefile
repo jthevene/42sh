@@ -38,6 +38,7 @@ SRCS = 	globing/glob_parser.c \
 		$(UTILS_2)get_imbric_patterns.c $(UTILS_2)cbracket_utils.c \
 		$(UTILS_2)imbric_utils2.c $(UTILS_2)double_brck.c $(UTILS_2)expansion_utils.c \
 		\
+		./globing/get_path.c \
 		main.c
 
 BIN =	glob_parser.o \
@@ -53,6 +54,7 @@ BIN =	glob_parser.o \
 		commas_utils.o algo_imbricated.o imbric_utils.o get_imbric_patterns.o \
 		cbracket_utils.o imbric_utils2.o double_brck.o expansion_utils.o \
 		\
+		get_path.o \
 		main.o
 
 

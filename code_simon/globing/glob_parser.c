@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 11:43:43 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/12/07 09:11:36 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/07 09:22:51 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ int						glob_parser(void)
 		free(glob->command);
 	if (ft_strchr(g_shell.line, '{'))
 		hub_cbracket(glob);
-	if (ft_strchr(g_shell.line, '*'))
-		
+
 	return (1);
 }

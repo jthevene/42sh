@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 13:12:22 by jules             #+#    #+#             */
-/*   Updated: 2016/11/04 14:16:02 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/08 11:52:10 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,17 @@ void	return_key(void)
 { 
 	if (ft_strlen(g_shell.current_line))
 	{
-		ft_putchar(10);
 		g_shell.line = ft_strdup(g_shell.current_line);
 		glob_parser();
 		free(g_shell.line);
 		set_cursor_pos_to_end(g_shell.line_size);
-		ft_newhist(g_shell.current_line);
+		if (g_shell.hist->content)
+			ft_newhist(g_shell.current_line);
+		else
+			g_shell.hist->content = ft_strdup(g_shell.current_line);
+			g_shell.hist->number++;
+		g_shell.current_line = NULL;
+		g_shell.nav_hist = 0;
 		ft_bzero(g_shell.current_line, ft_strlen(g_shell.current_line));
 	}
 	else

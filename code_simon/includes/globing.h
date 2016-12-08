@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 18:56:07 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/12/07 09:09:20 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/08 11:38:02 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,4 +225,9 @@ int						only_star(char *str, t_glob *glob);
 int						only_cbrkt(char *str, t_glob *glob);
 int						mix_token(char *str, t_glob *glob);
 int						get_len_token(char *str);
+void					ft_print_list_content(t_list *lst);
+t_list					*get_dir_content(char *dir);
+char					*ft_strpathjoin(const char *s1, const char *s2);
+
+
 #endif

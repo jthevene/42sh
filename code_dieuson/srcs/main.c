@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:20:49 by jules             #+#    #+#             */
-/*   Updated: 2016/11/08 11:47:49 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/08 11:50:50 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ static	void	run_shell(void)
 			i++;
 
 		}
+		else if (key == K_RIGHT)
+			show_hist_list();
 		else if (distrib_cursor_mooves(key))
 			;
 		else if (key == K_BACKSP || key == K_DEL)

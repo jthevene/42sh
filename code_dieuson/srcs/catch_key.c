@@ -178,7 +178,7 @@ int				readkey(void)
 	}
 	if (c[0] == 4 && c[1] == 0) // CTRL + D
 		return (K_ESCAPE);
-	else if (c[0] > 31 && c[0] < 126)
+	else if (c[0] > 31 && c[0] < 127)
 	{
 		MULTI(g_shell.start_select, g_shell.end_select, 0);
 		fill_current_line(c[0]);

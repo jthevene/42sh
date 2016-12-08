@@ -130,7 +130,7 @@ void					free_glob(t_glob *glob);
 
 //FONCTIONS SQUARE BRACKETS
 // Initialisation et gestion de depart
-void					hub_sbracket(t_glob *glob);
+void					hub_sbracket(t_glob *glob, char *line);
 void					init_tabs1(t_glob *glob, int i, int j);
 void					init_tabs2(t_glob *glob);
 void					init_tabs3(t_glob *glob);
@@ -161,6 +161,7 @@ char					*mult_nodouble(char *str);
 
 // Fonctions de liste chainee
 int						bracket_pushback(t_bracket **list);
+int						pushback_content(t_bracket **list, char *content);
 void					rewind_tbracket(t_bracket **list);
 void					free_tbracket(t_bracket **list);
 

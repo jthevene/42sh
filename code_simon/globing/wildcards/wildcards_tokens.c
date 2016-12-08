@@ -41,9 +41,33 @@ int			only_star(char *str, t_glob *glob)
 int			only_cbrkt(char *str, t_glob *glob)
 {
 	FT_INIT(int, len, get_len_token(str));
-	printf("LEN ARG CBRKT : %d\n", len);
-	if (str && glob)
-		return (1);
+	FT_INIT(char *, path, get_cmd_path(str));
+	FT_INIT(t_list *, files, get_dir_content(path));
+	FT_INIT(int, i, -1);
+	hub_sbracket(glob, str);
+	while (files)
+	{
+		if ((int)ft_strlen(files->content) == len)
+		{
+			while (++i < len)
+			{
+				if (ft_strchr(glob->sbracket->content, files->content[i]))
+					glob->sbracket = glob->sbracket->next ? glob->sbracket->next : glob->sbracket;
+				else
+					break ;
+			}
+			if (i == len)
+			{
+				pushback_content(&glob->args, ft_strdup(files->content));
+				printf("Création d'argument : %s\n", glob->args->content);
+			}
+			rewind_tbracket(&glob->sbracket);
+			i = -1;
+		}
+		if (!files->next)
+			break ;
+		files = files->next;
+	}
 	return (0);
 }
 

@@ -45,6 +45,14 @@ int					bracket_pushback(t_bracket **list)
 	return (1);
 }
 
+int				pushback_content(t_bracket **list, char *content)
+{
+	if (!bracket_pushback(list))
+		return (0);
+	(*list)->content = content;
+	return (1);
+}
+
 void			rewind_tbracket(t_bracket **list)
 {
 	if ((*list) != NULL)

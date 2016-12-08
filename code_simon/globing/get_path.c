@@ -6,22 +6,23 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 14:00:47 by jules             #+#    #+#             */
-/*   Updated: 2016/12/07 09:24:31 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/08 12:40:55 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/globing.h"
 
- void		ft_print_list_content(t_list *lst)
+ void			ft_print_list_content(t_list *lst)
  {
  	t_list	*tmp;
  	int		i;
 
  	tmp = lst;
  	i = 1;
+ 	ft_putchar(10);
  	if (tmp && tmp->content)
  	{
- 		while (tmp->next && tmp->next->content)
+ 		while (tmp && tmp->content)
  		{
  			ft_putnbr(i++);
  			ft_putstr(" => ");
@@ -29,9 +30,23 @@
  			tmp = tmp->next;
  		}
  	}
- }
+}
 
-t_list		*get_dir_content(char *dir)
+// static char		*get_name(char *str)
+// {
+// 	char	**tab;
+// 	int		i;
+// 	char	*ret;
+
+// 	ret = NULL;
+// 	i = 0;
+// 	tab = ft_strsplit(str, '/');
+// 	i = ft_count_tab(tab);
+// 	ret = tab[i - 1];
+// 	return (ret);
+// }
+
+t_list			*get_dir_content(char *dir)
 {
  	t_list				*dir_content;
  	DIR 				*ret;
@@ -44,7 +59,7 @@ t_list		*get_dir_content(char *dir)
  		return (NULL);
  	while ((direntt = readdir(ret)))
  	{
- 		str = ft_strdup(ft_strpathjoin(dir, direntt->d_name));
+ 		str = ft_strdup(direntt->d_name);
  		ft_lstaddend(&dir_content, ft_lstnew(str, ft_strlen(str)));
  	}
  	return (dir_content);

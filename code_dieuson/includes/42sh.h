@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2016/11/08 12:20:56 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/08 12:07:25 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,5 +179,9 @@ void				ft_varappend(t_var *new_element);
 
 // SIMON
 int						glob_parser(void);
+void		ft_print_list_content(t_list *lst);
+t_list		*get_dir_content(char *dir);
+char	*ft_strpathjoin(const char *s1, const char *s2);
+
 
 #endif

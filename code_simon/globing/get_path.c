@@ -65,6 +65,26 @@ t_list			*get_dir_content(char *dir)
  	return (dir_content);
 }
 
+char			*get_cmd_path(char *str)
+{
+	FT_INIT(int, i, 0);
+	FT_INIT(char *, ret, NULL);
+	FT_INIT(char *, tmp, NULL);
+	while (str[i] && str[i] != '[' && str[i] != '*' && str[i] != '?')
+		i++;
+	while (str[i] && str[i] != '/')
+		i--;
+	if (!str[i])
+		return (ft_strdup("./"));
+	else
+	{
+		tmp = ft_strsub(str, 0, i);
+		ret = ft_strjoin(tmp, "/");
+		free(tmp);
+		return (ret);
+	}
+}
+
 char	*ft_strpathjoin(const char *s1, const char *s2)
 {
 	int		i;

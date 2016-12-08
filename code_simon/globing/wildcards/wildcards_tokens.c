@@ -50,7 +50,10 @@ int			only_cbrkt(char *str, t_glob *glob)
 int			mix_token(char *str, t_glob *glob)
 {
 	FT_INIT(int, len, get_len_token(str));
+	FT_INIT(char *, path, get_cmd_path(str));
 	printf("LEN ARG MIX: %d\n", len);
+	printf("PATH = %s\n", path);
+	free(path);
 	if (glob)
 		return (1);
 	return (0);

@@ -228,6 +228,7 @@ int						get_len_token(char *str);
 void					ft_print_list_content(t_list *lst);
 t_list					*get_dir_content(char *dir);
 char					*ft_strpathjoin(const char *s1, const char *s2);
+char					*get_cmd_path(char *str);
 
 
 #endif

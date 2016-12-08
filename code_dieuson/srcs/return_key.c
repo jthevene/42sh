@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 13:12:22 by jules             #+#    #+#             */
-/*   Updated: 2016/12/08 11:52:10 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/08 13:51:17 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	return_key(void)
 { 
 	if (ft_strlen(g_shell.current_line))
 	{
+		ft_putchar(10);
 		g_shell.line = ft_strdup(g_shell.current_line);
 		glob_parser();
 		free(g_shell.line);

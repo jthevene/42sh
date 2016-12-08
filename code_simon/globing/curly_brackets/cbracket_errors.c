@@ -12,59 +12,39 @@
 
 #include "../../includes/globing.h"
 
-int		is_expansion(char *line, int i)
-{
-	while (line[i])
-	{
-		if (line[i] == '{')
-		{
-			if (!is_expansion(line, i + 1))
-				return (0);
-			i += next_bracket(line, '{', i);
-		}
-		if (line[i] == '.' && line[i + 1] == '.')
-			return (1);
-		i++;
-	}
-	return (1);
-}
-
-int		valid_expansion(char *line)
+int		is_expansion(char *line)
 {
 	FT_INIT(int, i, 0);
 	while (line[i])
 	{
 		if (line[i] == '.' && line[i + 1] == '.')
-		{
-			if (!(line[i - 1] && line[i - 2] && line[i - 2] == '{'))
-				return (0);
-			if (!(line[i + 2] && line[i + 3] && line[i + 3] == '}'))
-				return (0);
 			return (1);
-		}
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 int		cbracket_errors(char *line, t_glob *glob)
 {
 	FT_INIT(char *, tmp, NULL);
+	printf("NTM\n");
 	if (ft_strchr(line, ' '))
 	{
 		tmp = ft_strjoin("42sh: Spaces are forbidden in expression: "
 			, glob->command);
 		ft_putendl_fd(tmp, 2);
 		free(tmp);
+		free(line);
 		return (0);
 	}
-	else if (!check_commas(line, 0))
+	else if (!check_commas(line, 0) && !(is_expansion(line)))
 	{
 		tmp = ft_strjoin("42sh: Bad pattern in expression: ", glob->command);
 		ft_putendl_fd(tmp, 2);
-		ft_putendl_fd("Pattern should be of type: \"{,*.c}\",\
-			or \"{*.c,*.h}\"", 2);
+		ft_putendl_fd("Pattern should be of type: \"{,*.c}\","
+			" or \"{*.c,*.h}\"", 2);
 		free(tmp);
+		free(line);
 		return (0);
 	}
 	return (1);

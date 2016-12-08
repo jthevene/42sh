@@ -78,3 +78,26 @@ int		next_comma(char *str, int i)
 	}
 	return (-1);
 }
+
+int		is_bracket_in_exp(char *str, int i)
+{
+	FT_INIT(int, count, 0);
+	while(str[i])
+	{
+		if (str[i] == '}')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+int		end_bracket(char *str, int i)
+{
+	FT_INIT(int, len, 0);
+	while (str[i] && str[i] != '}')
+	{
+		i++;
+		len++;
+	}
+	return (len);
+}

@@ -35,3 +35,24 @@ int				i_detect_imbric(char *str)
 	}
 	return (-1);
 }
+
+char			*expand_pattern(char *pat, t_glob *glob)
+{
+	FT_INIT(char *, tmp, NULL);
+	FT_INIT(char *, ret, NULL);
+	if (!glob->ext_args[0] && !glob->ext_args[1])
+		ret = ft_strdup(pat);
+	else
+	{
+		tmp = glob->ext_args[0] ? ft_strjoin(glob->ext_args[0], pat) : NULL;
+		if (glob->ext_args[1])
+			ret = tmp ? ft_strjoin(tmp, glob->ext_args[1])
+			: ft_strjoin(pat, glob->ext_args[1]);
+		else
+			ret = ft_strdup(tmp);
+	}
+	if (tmp)
+		free(tmp);
+//	free(pat);
+	return (ret);
+}

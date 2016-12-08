@@ -6,7 +6,7 @@
 #    By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/12 16:15:02 by sgaudin           #+#    #+#              #
-#    Updated: 2016/11/08 12:24:21 by sgaudin          ###   ########.fr        #
+#    Updated: 2016/12/08 10:36:02 by sgaudin          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -69,7 +69,8 @@ LFT_BIN = $(LFT)ft_atoi.o $(LFT)ft_bzero.o $(LFT)ft_isalnum.o $(LFT)ft_isalpha.o
 		$(LFT)ft_printhex.o $(LFT)ft_strtolower.o $(LFT)ft_strtoupper.o $(LFT)ft_abs.o \
 		$(LFT)ft_print_list.o $(LFT)ft_lstadd_bottom.o $(LFT)ft_itoabase.o $(LFT)ft_putwchar.o \
 		$(LFT)ft_atoibase.o $(LFT)ft_recursive_pow.o $(LFT)ft_putwstr.o $(LFT)get_next_line.o \
-		$(LFT)ft_putnbrendl.o
+		$(LFT)ft_putnbrendl.o $(LFT)ft_isspace.o $(LFT)ft_putchar_int.o $(LFT)ft_nbrlen.o \
+		$(LFT)ft_lstaddend.o
 
 CC = gcc -Wall -Wextra -Werror
 

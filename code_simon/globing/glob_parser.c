@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   glob_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 11:43:43 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/10/05 11:44:49 by sgaudin          ###   ########.fr       */
+/*   Updated: 2016/12/07 09:22:51 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ static int				verif_tokens(char *str)
 	FT_INIT(int, nb, 0);
 	if (ft_strchr(str, '[') && !ft_strchr(str, ']'))
 		return (0);
-	else if (!count_brackets(str, '[') || !count_brackets(str, '{'))
+	else if (!count_brackets(str, '['))
 		return (0);
 	else
 		nb++;
 	if (ft_strchr(str, '{') && !ft_strchr(str, '}'))
+		return (0);
+	else if (!count_brackets(str, '{'))
 		return (0);
 	else
 		nb++;
@@ -64,6 +66,7 @@ t_glob					*init_glob(void)
 	glob->tmp_c = NULL;
 	glob->c_touch = FALSE;
 	glob->lastb_count = 1;
+	glob->exp = NULL;
 	ft_bzero(glob->upper, 27);
 	ft_bzero(glob->lower, 27);
 	ft_bzero(glob->alpha, 53);
@@ -84,8 +87,10 @@ t_glob					*init_glob(void)
 /*
 void			free_glob(t_glob *glob)
 {
-	if (glob->bracket)
-		free(glob->bracket);
+	if (glob->sbracket)
+		free_tbracket(&glob->sbracket);
+	if (glob->cbracket)
+		free_tclist(&glob->cbracket);
 	if (glob->command)
 		free(glob->command);
 	free(glob);
@@ -100,14 +105,18 @@ int						glob_parser(void)
 		return (0);
 	if (!verif_tokens(g_shell.line))
 		return (0);
-	glob = glob == NULL ? init_glob() : glob;
-	get_command(g_shell.line, glob);
-	if (ft_strchr(g_shell.line, '['))
-		hub_sbracket(glob); // Hub bracket est le hub de fonctions qui va gérer tous les cas possibles pour les expression de globing contenant des brackets de ce type : '[]'
-	if (glob->command)
-		free(glob->command);
-	if (ft_strchr(g_shell.line, '{'))
-		hub_cbracket(glob);
-//	free_glob(glob);
+	if (g_shell.line[0] == '@')
+	{
+		glob = glob == NULL ? init_glob() : glob;
+		get_command(g_shell.line, glob);
+//		if (ft_strchr(g_shell.line, '['))
+//			hub_sbracket(glob); // Hub bracket est le hub de fonctions qui va gérer tous les cas possibles pour les expression de globing contenant des brackets de ce type : '[]'
+		if (ft_strchr(g_shell.line, '{'))
+			if (!hub_cbracket(glob))
+				return (0);
+		hub_final(glob);
+		if (glob->command)
+			free(glob->command);
+	}
 	return (1);
 }

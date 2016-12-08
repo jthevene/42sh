@@ -130,16 +130,13 @@ void			i_algo_imbricated(char *str, t_glob *glob)
 	FT_INIT(t_bracket *, new_args, NULL);
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(int, count, count_imbric(str));
-	FT_INIT(int, i, 0);
 	while (count > 0)
 	{
-		i = 0;
 		i_recup_lastb(str, glob);
 		arg_ext = i_get_arg_ext(str, glob);
 		new_args = i_create_new_args(arg_ext, glob);
 		rewind_tbracket(&new_args);
 		tmp = recreate_string(str, new_args, glob);
-		printf("NEW STR = %s\n", tmp);
 		free(str);
 		str = ft_strdup(tmp);
 		free(tmp);
@@ -151,7 +148,9 @@ void			i_algo_imbricated(char *str, t_glob *glob)
 			count--;
 		count--;
 	}
+	glob->lastb_count = 1;
 	i_hub_patterns(str, glob);
+//	printf("fuehfuhefuheuhe\n");
 }
 
 // l {a,{bcd,e{,g}h,lol}}

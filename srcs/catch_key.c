@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "42sh.h"
+#include "../includes/42sh.h"
 
 static int		which_arrow(char c)
 {

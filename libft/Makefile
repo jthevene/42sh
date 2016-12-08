@@ -6,7 +6,7 @@
 #    By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/06/29 16:12:52 by sgaudin           #+#    #+#              #
-#    Updated: 2016/10/13 10:49:39 by sgaudin          ###   ########.fr        #
+#    Updated: 2016/12/08 10:31:36 by sgaudin          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -27,7 +27,7 @@ ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_sqrt.c \
 ft_capitalize.c ft_printbase.c ft_printhex.c ft_strtolower.c ft_strtoupper.c \
 ft_abs.c ft_print_list.c ft_lstadd_bottom.c ft_itoabase.c ft_putwchar.c \
 ft_atoibase.c ft_recursive_pow.c ft_putwstr.c get_next_line.c ft_putnbrendl.c \
-ft_isspace.c ft_putchar_int.c ft_nbrlen.c
+ft_isspace.c ft_putchar_int.c ft_nbrlen.c ft_lstaddend.c
 
 BINARY = $(SRC:.c=.o)
 
@@ -35,10 +35,10 @@ all: $(NAME)
 
 $(NAME):
 	@printf "\033[31mCompilation des sources\033[0m"
-	@gcc -Wall -Wextra -Werror -c -I./includes/ $(SRC)
+	gcc -Wall -Wextra -Werror -c -I./includes/ $(SRC)
 	@printf "\033[32mDone !\033[0m\n"
 	@printf "\033[31mCreation et indexage de libft.a\n\033[0m"
-	@ar rcs $(NAME) $(BINARY)
+	ar rcs $(NAME) $(BINARY)
 	@printf "\033[31mCreation et indexage de libftprintf.a\033[0m"
 	@make -C ft_printf/ re
 	@printf "\033[32mDone !\033[0m\n"

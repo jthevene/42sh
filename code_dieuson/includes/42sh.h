@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2016/12/08 12:07:25 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/08 14:01:07 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,6 @@ int						glob_parser(void);
 void		ft_print_list_content(t_list *lst);
 t_list		*get_dir_content(char *dir);
 char	*ft_strpathjoin(const char *s1, const char *s2);
-
+t_list 		*qmark_get_matching_content(t_list *dir_content, char *target);
 
 #endif

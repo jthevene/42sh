@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 12:26:45 by jules             #+#    #+#             */
-/*   Updated: 2016/12/08 13:48:19 by jules            ###   ########.fr       */
+/*   Updated: 2016/12/08 14:44:49 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,23 @@
 
 t_list 		*qmark_get_matching_content(t_list *dir_content, char *target)
 {
-	t_list	*matching_content;
-	int 	len;
+	t_lst	*matching_content;
+	t_lst	*tmp;
+	size_t 	len;
+	int 	i;
 
 	matching_content = NULL;
+	tmp = NULL;
 	len = ft_strlen(target);
+	i = 0;
 	while (dir_content && dir_content->content)
 	{
-		if (len = ft_strlen(dir_content->content))
+		if (len == ft_strlen(dir_content->content))
 		{
-			matching_content = ft_lstnew(dir_content->content, len);
+			matching_content->content = ft_strdup(dir_content->content);
 			matching_content = matching_content->next;
 		}
 		dir_content = dir_content->next;
 	}
-	return (matching_content);
+	return (first);
 }

@@ -12,43 +12,43 @@
 
 #include "../includes/globing.h"
 
-// void		ft_print_list_content(t_list *lst)
-// {
-// 	t_list	*tmp;
-// 	int		i;
+ void		ft_print_list_content(t_list *lst)
+ {
+ 	t_list	*tmp;
+ 	int		i;
 
-// 	tmp = lst;
-// 	i = 1;
-// 	if (tmp && tmp->content)
-// 	{
-// 		while (tmp->next && tmp->next->content)
-// 		{
-// 			ft_putnbr(i++);
-// 			ft_putstr(" => ");
-// 			ft_putendl(tmp->content);
-// 			tmp = tmp->next;
-// 		}
-// 	}
-// }
+ 	tmp = lst;
+ 	i = 1;
+ 	if (tmp && tmp->content)
+ 	{
+ 		while (tmp->next && tmp->next->content)
+ 		{
+ 			ft_putnbr(i++);
+ 			ft_putstr(" => ");
+ 			ft_putendl(tmp->content);
+ 			tmp = tmp->next;
+ 		}
+ 	}
+ }
 
-// t_list		*get_dir_content(char *dir)
-// {
-// 	t_list				*dir_content;
-// 	DIR 				*ret;
-// 	struct dirent 		*direntt;
-// 	char				*str;
+t_list		*get_dir_content(char *dir)
+{
+ 	t_list				*dir_content;
+ 	DIR 				*ret;
+ 	struct dirent 		*direntt;
+ 	char				*str;
 
-// 	dir_content = NULL;
-// 	str = NULL;
-// 	if (!(ret = opendir(dir)))
-// 		return (NULL);
-// 	while ((direntt = readdir(ret)))
-// 	{
-// 		str = ft_strdup(ft_strpathjoin(dir, direntt->d_name));
-// 		ft_lstaddend(&dir_content, ft_lstnew(str, ft_strlen(str)));
-// 	}
-// 	return (dir_content);
-// }
+ 	dir_content = NULL;
+ 	str = NULL;
+ 	if (!(ret = opendir(dir)))
+ 		return (NULL);
+ 	while ((direntt = readdir(ret)))
+ 	{
+ 		str = ft_strdup(ft_strpathjoin(dir, direntt->d_name));
+ 		ft_lstaddend(&dir_content, ft_lstnew(str, ft_strlen(str)));
+ 	}
+ 	return (dir_content);
+}
 
 char	*ft_strpathjoin(const char *s1, const char *s2)
 {

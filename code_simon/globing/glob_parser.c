@@ -112,7 +112,8 @@ int						glob_parser(void)
 	if (ft_strchr(g_shell.line, '{'))
 		if (!hub_cbracket(glob))
 			return (0);
-	hub_final(glob);
+	if (g_shell.line[0] == '@')
+		hub_final(glob);
 	if (glob->command)
 		free(glob->command);
 	return (1);

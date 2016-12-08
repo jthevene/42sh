@@ -47,11 +47,11 @@ int			only_cbrkt(char *str, t_glob *glob)
 	hub_sbracket(glob, str);
 	while (files)
 	{
-		if (ft_strlen(files->content) == len)
+		if ((int)ft_strlen(files->content) == len)
 		{
 			while (++i < len)
 			{
-				if (ft_strchr(files->content[i], glob->sbracket->content))
+				if (ft_strchr(glob->sbracket->content, files->content[i]))
 					glob->sbracket = glob->sbracket->next ? glob->sbracket->next : glob->sbracket;
 				else
 					break ;

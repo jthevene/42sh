@@ -161,7 +161,7 @@ char					*mult_nodouble(char *str);
 
 // Fonctions de liste chainee
 int						bracket_pushback(t_bracket **list);
-int						pusback_content(t_bracket **list, char *content);
+int						pushback_content(t_bracket **list, char *content);
 void					rewind_tbracket(t_bracket **list);
 void					free_tbracket(t_bracket **list);
 

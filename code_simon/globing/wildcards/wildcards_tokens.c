@@ -45,12 +45,15 @@ int			only_cbrkt(char *str, t_glob *glob)
 	FT_INIT(t_list *, files, get_dir_content(path));
 	FT_INIT(int, i, -1);
 	hub_sbracket(glob, str);
+	rewind_tbracket(&glob->sbracket);
 	while (files)
 	{
+		printf("COUCOU FILES\n");
 		if ((int)ft_strlen(files->content) == len)
 		{
 			while (++i < len)
 			{
+				printf("I < LEN\n");
 				if (ft_strchr(glob->sbracket->content, files->content[i]))
 					glob->sbracket = glob->sbracket->next ? glob->sbracket->next : glob->sbracket;
 				else
@@ -68,6 +71,8 @@ int			only_cbrkt(char *str, t_glob *glob)
 			break ;
 		files = files->next;
 	}
+	free(path);
+	/* FREE FILES */
 	return (0);
 }
 

@@ -22,7 +22,7 @@ static int	is_only_token(char token, char *str)
 		if (str[i] != token)
 			return (0);
 		if (str[i] == '[')
-			i += next_bracket(str, i, '[');
+			i += next_bracket(str, '[', i);
 		i++;
 	}
 	return (1);

@@ -41,13 +41,15 @@ void			hub_sbracket(t_glob *glob, char *line) // Gère les différents cas de fi
 		{
 			tmp = ft_strsub(line, i,
 				next_bracket(line, '[', i) + 1);
-			printf("tmp = %s\n", tmp);
+			printf("tmp = |%s|\n", tmp);
 			fill_bracket_tabs(tmp, glob);
 			i += next_bracket(line, '[', i);
+			printf("str[i - 1] == %c\n", line[i - 1]);
 			if (tmp && ft_strlen(tmp) > 1)
 				free(tmp);
 			printf("\033[32mRet = %s\033[0m\n", glob->sbracket->content);
 		}
 		i++;
+		printf("i = %d\n", i);
 	}
 }

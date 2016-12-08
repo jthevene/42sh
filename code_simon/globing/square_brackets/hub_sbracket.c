@@ -31,19 +31,19 @@ int				fill_bracket_tabs(char *line, t_glob *glob) // Fonction qui choisit la m�
 	return (1);
 }
 
-void			hub_sbracket(t_glob *glob) // Gère les différents cas de figure, cf commentaires dans le .h ac les definitions des macros
+void			hub_sbracket(t_glob *glob, char *line) // Gère les différents cas de figure, cf commentaires dans le .h ac les definitions des macros
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp, NULL);
-	while (g_shell.line[i])
+	while (line[i])
 	{
-		if (g_shell.line[i] == '[')
+		if (line[i] == '[')
 		{
-			tmp = ft_strsub(g_shell.line, i,
-				next_bracket(g_shell.line, '[', i) + 1);
+			tmp = ft_strsub(line, i,
+				next_bracket(line, '[', i) + 1);
 			printf("tmp = %s\n", tmp);
 			fill_bracket_tabs(tmp, glob);
-			i += next_bracket(g_shell.line, '[', i);
+			i += next_bracket(line, '[', i);
 			if (tmp && ft_strlen(tmp) > 1)
 				free(tmp);
 			printf("\033[32mRet = %s\033[0m\n", glob->sbracket->content);

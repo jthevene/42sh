@@ -130,7 +130,7 @@ void					free_glob(t_glob *glob);
 
 //FONCTIONS SQUARE BRACKETS
 // Initialisation et gestion de depart
-void					hub_sbracket(t_glob *glob);
+void					hub_sbracket(t_glob *glob, char *line);
 void					init_tabs1(t_glob *glob, int i, int j);
 void					init_tabs2(t_glob *glob);
 void					init_tabs3(t_glob *glob);
@@ -161,6 +161,7 @@ char					*mult_nodouble(char *str);
 
 // Fonctions de liste chainee
 int						bracket_pushback(t_bracket **list);
+int						pusback_content(t_bracket **list, char *content);
 void					rewind_tbracket(t_bracket **list);
 void					free_tbracket(t_bracket **list);
 
@@ -228,11 +229,7 @@ int						get_len_token(char *str);
 void					ft_print_list_content(t_list *lst);
 t_list					*get_dir_content(char *dir);
 char					*ft_strpathjoin(const char *s1, const char *s2);
-<<<<<<< HEAD
 char					*get_cmd_path(char *str);
-
-=======
 t_list 					*qmark_get_matching_content(t_list *dir_content, char *target);
->>>>>>> a1d625661f1b51ec21a5bc104112d3fac2ef6afb
 
 #endif

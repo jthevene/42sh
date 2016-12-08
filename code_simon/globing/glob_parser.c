@@ -105,16 +105,18 @@ int						glob_parser(void)
 		return (0);
 	if (!verif_tokens(g_shell.line))
 		return (0);
-	glob = glob == NULL ? init_glob() : glob;
-	get_command(g_shell.line, glob);
-//	if (ft_strchr(g_shell.line, '['))
-//		hub_sbracket(glob); // Hub bracket est le hub de fonctions qui va gérer tous les cas possibles pour les expression de globing contenant des brackets de ce type : '[]'
-	if (ft_strchr(g_shell.line, '{'))
-		if (!hub_cbracket(glob))
-			return (0);
 	if (g_shell.line[0] == '@')
+	{
+		glob = glob == NULL ? init_glob() : glob;
+		get_command(g_shell.line, glob);
+//		if (ft_strchr(g_shell.line, '['))
+//			hub_sbracket(glob); // Hub bracket est le hub de fonctions qui va gérer tous les cas possibles pour les expression de globing contenant des brackets de ce type : '[]'
+		if (ft_strchr(g_shell.line, '{'))
+			if (!hub_cbracket(glob))
+				return (0);
 		hub_final(glob);
-	if (glob->command)
-		free(glob->command);
+		if (glob->command)
+			free(glob->command);
+	}
 	return (1);
 }

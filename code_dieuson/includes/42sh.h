@@ -26,7 +26,11 @@
 # include <term.h>
 # include <sys/ioctl.h>
 # include <curses.h>
-# include "../libft/includes/libft.h"
+
+# ifndef SH_LIBFT
+#  define SH_LIBFT
+#  include "../../libft/includes/libft.h"
+# endif
 
 # define K_PRINT   		1 //caractere imprimable
 # define K_ESCAPE  		2

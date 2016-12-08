@@ -69,7 +69,8 @@ LFT_BIN = $(LFT)ft_atoi.o $(LFT)ft_bzero.o $(LFT)ft_isalnum.o $(LFT)ft_isalpha.o
 		$(LFT)ft_printhex.o $(LFT)ft_strtolower.o $(LFT)ft_strtoupper.o $(LFT)ft_abs.o \
 		$(LFT)ft_print_list.o $(LFT)ft_lstadd_bottom.o $(LFT)ft_itoabase.o $(LFT)ft_putwchar.o \
 		$(LFT)ft_atoibase.o $(LFT)ft_recursive_pow.o $(LFT)ft_putwstr.o $(LFT)get_next_line.o \
-		$(LFT)ft_putnbrendl.o
+		$(LFT)ft_putnbrendl.o $(LFT)ft_isspace.c $(LFT)ft_putchar_int.c $(LFT)ft_nbrlen.c \
+		$(LFT)ft_lstaddtruc.c
 
 CC = gcc -Wall -Wextra -Werror
 

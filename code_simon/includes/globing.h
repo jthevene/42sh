@@ -216,7 +216,13 @@ char					*ft_cdup(char c);
 int						is_solo_arg(t_bracket *args);
 void					free_double_str(char **s, char **s2);
 
-
-// WILDCARDS
-
+// FONCTIONS WILDCARDS
+void					hub_final(t_glob *glob);
+int						g_parse_expr(char *str, t_glob *glob);
+int						g_no_token(char *str, t_glob *glob);
+int						only_qmark(char *str, t_glob *glob);
+int						only_star(char *str, t_glob *glob);
+int						only_cbrkt(char *str, t_glob *glob);
+int						mix_token(char *str, t_glob *glob);
+int						get_len_token(char *str);
 #endif

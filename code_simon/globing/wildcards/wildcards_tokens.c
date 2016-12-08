@@ -16,30 +16,42 @@ int			g_no_token(char *str, t_glob *glob)
 {
 	if (!bracket_pushback(&glob->args))
 		return (0);
+	printf("NO TOKEN\n");
 	glob->args->content = ft_strdup(str);
 	return (1);
 }
 
 int			only_qmark(char *str, t_glob *glob)
 {
-	if (str && glob)
+	FT_INIT(int, len, ft_strlen(str));
+	printf("LEN ARG QMARK : %d\n", len);
+	if (glob)
 		return (1);
+	return (0);
 }
 
-int			only_star(char *str, t_glob glob)
+int			only_star(char *str, t_glob *glob)
 {
+	printf("STAR\n");
 	if (str && glob)
 		return (1);
+	return (0);
 }
 
 int			only_cbrkt(char *str, t_glob *glob)
 {
+	FT_INIT(int, len, get_len_token(str));
+	printf("LEN ARG CBRKT : %d\n", len);
 	if (str && glob)
 		return (1);
+	return (0);
 }
 
 int			mix_token(char *str, t_glob *glob)
 {
-	if (str && glob)
+	FT_INIT(int, len, get_len_token(str));
+	printf("LEN ARG MIX: %d\n", len);
+	if (glob)
 		return (1);
+	return (0);
 }

@@ -45,6 +45,7 @@ GLOBING = ./code_simon/
 REDIR = $(GLOBING)redirections/
 SBRACK = $(GLOBING)globing/square_brackets/
 CBRACK = $(GLOBING)globing/curly_brackets/
+WILDCARDS = $(GLOBING)globing/wildcards/
 UTILS_1 = $(GLOBING)globing/square_brackets/sbracket_utils/
 UTILS_2 = $(GLOBING)globing/curly_brackets/cbracket_utils/
 BIN_DIR_GLOBING = $(GLOBING)bin_folder/
@@ -66,6 +67,8 @@ SRC_GLOBING = $(GLOBING)globing/glob_parser.c \
 		$(UTILS_2)commas_utils.c $(UTILS_2)algo_imbricated.c $(UTILS_2)imbric_utils.c \
 		$(UTILS_2)get_imbric_patterns.c $(UTILS_2)cbracket_utils.c \
 		$(UTILS_2)imbric_utils2.c $(UTILS_2)double_brck.c $(UTILS_2)expansion_utils.c \
+		\
+		$(WILDCARDS)hub_final.c $(WILDCARDS)wildcards_tokens.c $(WILDCARDS)get_len.c\
 		\
 		$(GLOBING)globing/get_path.c \
 
@@ -90,6 +93,7 @@ BIN_GLOBING = glob_parser.o \
 		imbric_utils.o get_imbric_patterns.o \
 		cbracket_utils.o imbric_utils2.o \
 		double_brck.o expansion_utils.o \
+		wildcards_tokens.o hub_final.o get_len.o\
 		get_path.o
 ################# 		END SIMON PART		####################################
 

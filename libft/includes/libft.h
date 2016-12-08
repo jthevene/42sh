@@ -124,4 +124,5 @@ char				*ft_strtoupper(char *str);
 
 int					ft_putwchar(wchar_t c);
 int					ft_putwstr(wchar_t *str);
+
 #endif

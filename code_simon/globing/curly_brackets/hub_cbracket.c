@@ -31,6 +31,7 @@ int				hub_cbracket(t_glob *glob)
 		if (g_shell.line[i] == '{')
 		{
 			tmp = next_expr(g_shell.line, i);
+			printf("TMP = %s\n", tmp);
 			i += ft_strlen(tmp);
 			hub_expansion(ft_strdup(tmp), glob);
 			if (glob->exp)

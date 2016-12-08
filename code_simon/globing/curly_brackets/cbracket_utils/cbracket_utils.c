@@ -45,6 +45,11 @@ char				*next_expr(char *str, int i)
 	j = i;
 	while (str[i])
 	{
+		if (str[i] == '{' || str[i] == '[')
+		{
+			ret += next_bracket(str, str[i], i);
+			i += next_bracket(str, str[i], i);
+		}
 		if (str[i] == ' ')
 			break ;
 		i++;

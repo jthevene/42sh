@@ -6,7 +6,7 @@
 #    By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/06/29 16:12:52 by sgaudin           #+#    #+#              #
-#    Updated: 2016/10/13 10:49:39 by sgaudin          ###   ########.fr        #
+#    Updated: 2016/12/08 10:31:36 by sgaudin          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -35,10 +35,10 @@ all: $(NAME)
 
 $(NAME):
 	@printf "\033[31mCompilation des sources\033[0m"
-	@gcc -Wall -Wextra -Werror -c -I./includes/ $(SRC)
+	gcc -Wall -Wextra -Werror -c -I./includes/ $(SRC)
 	@printf "\033[32mDone !\033[0m\n"
 	@printf "\033[31mCreation et indexage de libft.a\n\033[0m"
-	@ar rcs $(NAME) $(BINARY)
+	ar rcs $(NAME) $(BINARY)
 	@printf "\033[31mCreation et indexage de libftprintf.a\033[0m"
 	@make -C ft_printf/ re
 	@printf "\033[32mDone !\033[0m\n"

@@ -15,7 +15,6 @@
 static int	is_only_token(char token, char *str)
 {
 	FT_INIT(int, i, 0);
-	FT_INIT(int, count, 0);
 	if (!ft_strchr(str, token))
 		return (0);
 	while (str[i])
@@ -23,7 +22,7 @@ static int	is_only_token(char token, char *str)
 		if (str[i] != token)
 			return (0);
 		if (str[i] == '[')
-			i += next_bracket(str, i);
+			i += next_bracket(str, i, '[');
 		i++;
 	}
 	return (1);
@@ -31,13 +30,14 @@ static int	is_only_token(char token, char *str)
 
 int			g_parse_expr(char *str, t_glob *glob)
 {
-	if (!ft_strchr(str, '?') && !ft_strchr(str, '[') && ft_strchr(str, '*'))
+	printf("g_parse_expr = %s\n", str);
+	if (!ft_strchr(str, '?') && !ft_strchr(str, '[') && !ft_strchr(str, '*'))
 		return (g_no_token(str, glob));
-	else if (is_only_token(str, '?'))
+	else if (is_only_token('?', str))
 		return (only_qmark(str, glob));
-	else if (is_only_token(str, '*'))
+	else if (is_only_token('*', str))
 		return (only_star(str, glob));
-	else if (is_only_token(str, '['))
+	else if (is_only_token('[', str))
 		return (only_cbrkt(str, glob));
 	else
 		return (mix_token(str, glob));
@@ -47,15 +47,17 @@ void		hub_final(t_glob *glob) // Hub final du traitement globing
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp, NULL);
-	while (g_shell.line[i] != ' ')
+	while (g_shell.line && g_shell.line[i] != ' ')
 		i++;
 	i++;
+	if (glob->cbracket)
+		rewind_tbracket(&glob->cbracket->list);
 	while (g_shell.line[i])
 	{
 		tmp = next_expr(g_shell.line, i);
 		i += ft_strlen(tmp);
 		printf("Hub final = %s\n", tmp);
-		if (ft_strchr(tmp, '{') && ft_strchr(tmp,'}') && glob->cbracket)
+		if (ft_strchr(tmp, '{') && ft_strchr(tmp, '}') && glob->cbracket)
 		{
 			while (glob->cbracket->list->next)
 			{

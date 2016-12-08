@@ -19,6 +19,7 @@ SBRACK = ./globing/square_brackets/
 CBRACK = ./globing/curly_brackets/
 UTILS_1 = ./globing/square_brackets/sbracket_utils/
 UTILS_2 = ./globing/curly_brackets/cbracket_utils/
+WILDCARDS = ./globing/wildcards/
 
 SRCS = 	globing/glob_parser.c \
 		$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
@@ -38,6 +39,8 @@ SRCS = 	globing/glob_parser.c \
 		$(UTILS_2)get_imbric_patterns.c $(UTILS_2)cbracket_utils.c \
 		$(UTILS_2)imbric_utils2.c $(UTILS_2)double_brck.c $(UTILS_2)expansion_utils.c \
 		\
+		$(WILDCARDS)hub_final.c $(WILDCARDS)wildcards_tokens.c $(WILDCARDS)get_len.c \
+		\
 		./globing/get_path.c \
 		main.c
 
@@ -54,7 +57,7 @@ BIN =	glob_parser.o \
 		commas_utils.o algo_imbricated.o imbric_utils.o get_imbric_patterns.o \
 		cbracket_utils.o imbric_utils2.o double_brck.o expansion_utils.o \
 		\
-		get_path.o \
+		get_path.o wildcards_tokens.o hub_final.o get_len.o\
 		main.o
 
 

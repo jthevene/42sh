@@ -48,12 +48,12 @@ int			only_cbrkt(char *str, t_glob *glob)
 	rewind_tbracket(&glob->sbracket);
 	while (files)
 	{
-		printf("COUCOU FILES\n");
+//		printf("COUCOU FILES\n");
 		if ((int)ft_strlen(files->content) == len)
 		{
 			while (++i < len)
 			{
-				printf("I < LEN\n");
+//				printf("I < LEN\n");
 				if (ft_strchr(glob->sbracket->content, files->content[i]))
 					glob->sbracket = glob->sbracket->next ? glob->sbracket->next : glob->sbracket;
 				else

@@ -29,16 +29,13 @@ int					bracket_pushback(t_bracket **list)
 		if (!(new = (t_bracket *)malloc(sizeof(t_bracket))))
 			return (0);
 		new->next = NULL;
-		while ((*list)->next != NULL)
-		{
-//			printf("BOUCLE INFINIE WTF %s\n", (*list)->next->content);
+		new->content = NULL;
+		while ((*list)->next)
 			(*list) = (*list)->next;
-		}
 		tmp = (*list);
 		(*list)->next = new;
 		new->prev = tmp;
 		(*list) = (*list)->next;
-		(*list)->content = NULL;
 	}
 	return (1);
 }
@@ -53,12 +50,12 @@ int				pushback_content(t_bracket **list, char *content)
 
 void			rewind_tbracket(t_bracket **list)
 {
-	if ((*list) != NULL)
+	if (*list)
 	{
-		while ((*list)->prev != NULL)
+		while ((*list)->prev)
 		{
-			printf("LIST PREV CONTENT = %s\n", (*list)->prev->content);
-			printf("LIST CONTENT = %s\n", (*list)->content);
+//			printf("LIST PREV CONTENT = %s\n", (*list)->prev->content);
+//			printf("LIST CONTENT = %s\n", (*list)->content);
 			(*list) = (*list)->prev;
 		}
 	}

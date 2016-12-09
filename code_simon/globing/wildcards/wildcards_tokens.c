@@ -32,7 +32,10 @@ int			only_qmark(char *str, t_glob *glob)
 
 int			only_star(char *str, t_glob *glob)
 {
-	printf("STAR\n");
+	FT_INIT(char *, path, get_cmd_path(str));
+	FT_INIT(t_list *, files, get_dir_content(path));
+	ft_print_list_content(files);
+	free(path);
 	if (str && glob)
 		return (1);
 	return (0);
@@ -48,12 +51,10 @@ int			only_cbrkt(char *str, t_glob *glob)
 	rewind_tbracket(&glob->sbracket);
 	while (files)
 	{
-//		printf("COUCOU FILES\n");
 		if ((int)ft_strlen(files->content) == len)
 		{
 			while (++i < len)
 			{
-//				printf("I < LEN\n");
 				if (ft_strchr(glob->sbracket->content, files->content[i]))
 					glob->sbracket = glob->sbracket->next ? glob->sbracket->next : glob->sbracket;
 				else
@@ -72,6 +73,7 @@ int			only_cbrkt(char *str, t_glob *glob)
 		files = files->next;
 	}
 	free(path);
+	free_tbracket(&glob->sbracket);
 	/* FREE FILES */
 	return (0);
 }

@@ -41,6 +41,7 @@ static char				*category_choice(char *category, t_glob *glob)
 		return (NULL);
 }
 
+
 int						detect_category(char *str)
 {
 	FT_INIT(int, i, 0);
@@ -64,6 +65,7 @@ int						detect_category(char *str)
 	}
 	return (0);
 }
+
 
 static char				*replace_category(char *str, t_glob *glob)
 {
@@ -112,6 +114,6 @@ char					*handle_categories(char *str, t_glob *glob)
 		ft_strdel(&tmp2);
 	}
 	ret = ft_strdup(tmp);
-	ft_strdel(&tmp);
-	return (ret);
+	free(tmp);
+	return (ft_strdup(str));
 }

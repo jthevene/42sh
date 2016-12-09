@@ -15,20 +15,18 @@
 int				fill_bracket_tabs(char *line, t_glob *glob) // Fonction qui choisit la méthode de remplissage de notre tableau de caractères (glob->sbracket->bracket)
 {
 	FT_INIT(char *, tmp, NULL);
+	FT_INIT(char *, tmp2, NULL);
 	tmp = handle_categories(line, glob);
 	free(line);
-	line = ft_strdup(tmp);
-	free(tmp);
-	if (!check_rng(line))
+	if (!check_rng(tmp))
 	{
-		tmp = ft_strjoin("42sh: no matches found: ", glob->command);
-		ft_putendl_fd(tmp, 2);
-		free(tmp);
+		tmp2 = ft_strjoin("42sh: no matches found: ", glob->command);
+		ft_putendl_fd(tmp2, 2);
+		free(tmp2);
 		return (0);
 	}
 	bracket_pushback(&glob->sbracket);
-	glob->sbracket->content = fill_mix(line);
-	printf("PREV = %s, CONTENT = %s\n", glob->sbracket->prev ? glob->sbracket->prev->content : "NULL", glob->sbracket->content);
+	glob->sbracket->content = fill_mix(tmp);
 	return (1);
 }
 
@@ -42,7 +40,7 @@ void			hub_sbracket(t_glob *glob, char *line) // Gère les différents cas de fi
 		{
 			tmp = ft_strsub(line, i,
 				next_bracket(line, '[', i) + 1);
-			fill_bracket_tabs(tmp, glob);
+			fill_bracket_tabs(ft_strdup(tmp), glob);
 			i += next_bracket(line, '[', i);
 			if (tmp && ft_strlen(tmp) > 1)
 				free(tmp);

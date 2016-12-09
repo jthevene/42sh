@@ -142,6 +142,7 @@ char					*fill_nomult(char *str);
 char					*fill_norng(char *str);
 char					*fill_mix(char *str);
 char					*handle_categories(char *str, t_glob *glob);
+int						detect_category(char *str);
 
 // Fonctions utilitaires
 char					*clean_brackets(char *str);

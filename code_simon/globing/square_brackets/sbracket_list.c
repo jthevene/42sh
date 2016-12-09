@@ -33,8 +33,8 @@ int					bracket_pushback(t_bracket **list)
 		while ((*list)->next)
 			(*list) = (*list)->next;
 		tmp = (*list);
-		(*list)->next = new;
 		new->prev = tmp;
+		(*list)->next = new;
 		(*list) = (*list)->next;
 	}
 	return (1);

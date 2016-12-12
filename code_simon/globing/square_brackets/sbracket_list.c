@@ -64,19 +64,22 @@ void			rewind_tbracket(t_bracket **list)
 void			free_tbracket(t_bracket **list)
 {
 	FT_INIT(t_bracket *, tmp, NULL);
-	while ((*list)->prev)
-		(*list) = (*list)->prev;
-	while ((*list)->next)
+	if ((*list))
 	{
+		while ((*list)->prev)
+			(*list) = (*list)->prev;
+		while ((*list)->next)
+		{
+			if ((*list)->content)
+				free((*list)->content);
+			tmp = (*list);
+			(*list) = (*list)->next;
+			free(tmp);
+		}
 		if ((*list)->content)
 			free((*list)->content);
 		tmp = (*list);
-		(*list) = (*list)->next;
+		(*list) = NULL;
 		free(tmp);
 	}
-	if ((*list)->content)
-		free((*list)->content);
-	tmp = (*list);
-	(*list) = NULL;
-	free(tmp);
 }

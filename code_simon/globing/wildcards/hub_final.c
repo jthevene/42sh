@@ -35,10 +35,10 @@ int			g_parse_expr(char *str, t_glob *glob)
 		return (g_no_token(str, glob));
 	else if (is_only_token('?', str))
 		return (only_qmark(str, glob));
-	else if (is_only_token('*', str))
-		return (only_star(str, glob));
 	else if (is_only_token('[', str))
 		return (only_cbrkt(str, glob));
+	else if (ft_strchr(str, '*'))
+		return (mix_with_star(str, glob));
 	else
 		return (mix_token(str, glob));
 }

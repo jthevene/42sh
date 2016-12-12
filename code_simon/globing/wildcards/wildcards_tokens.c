@@ -30,17 +30,6 @@ int			only_qmark(char *str, t_glob *glob)
 	return (0);
 }
 
-int			only_star(char *str, t_glob *glob)
-{
-	FT_INIT(char *, path, get_cmd_path(str));
-	FT_INIT(t_list *, files, get_dir_content(path));
-	ft_print_list_content(files);
-	free(path);
-	if (str && glob)
-		return (1);
-	return (0);
-}
-
 int			only_cbrkt(char *str, t_glob *glob)
 {
 	FT_INIT(int, len, get_len_token(str));
@@ -78,14 +67,56 @@ int			only_cbrkt(char *str, t_glob *glob)
 	return (0);
 }
 
+int			mix_with_star(char *str, t_glob *glob)
+{
+	FT_INIT(char *, path, get_cmd_path(str));
+	FT_INIT(t_list *, files, get_dir_content(path));
+	ft_print_list_content(files);
+	free(path);
+	if (str && glob)
+		return (1);
+	return (0);
+}
+
 int			mix_token(char *str, t_glob *glob)
 {
-	FT_INIT(int, len, get_len_token(str));
 	FT_INIT(char *, path, get_cmd_path(str));
-	printf("LEN ARG MIX: %d\n", len);
-	printf("PATH = %s\n", path);
+	FT_INIT(char *, token, get_token(str));
+	FT_INIT(t_list *, files, get_dir_content(path));
+	FT_INIT(int, len, get_len_token(token));
+	FT_INIT(int, i, -1);
+	FT_INIT(int, j, -1);
+	hub_sbracket(glob, token);
+	rewind_tbracket(&glob->sbracket);
+	printf("/*** MIX_TOKEN ***/\nLEN = %d\nPATH = %s\nTOKEN = %s\n", len, path, token);
+	while (files)
+	{
+		if ((int)ft_strlen(files->content) == len)
+		{
+			while (++j < len)
+			{
+				if (token[++i] == '[' && ft_strchr(glob->sbracket->content, files->content[j]))
+				{
+					glob->sbracket = glob->sbracket->next ? glob->sbracket->next : glob->sbracket;
+					i += next_bracket(token, '[', i);
+				}
+				else if (token[i] != '?' && token[i] != '[' && files->content[j] != token[i])
+					break ;
+			}
+			if (j == len)
+			{
+				pushback_content(&glob->args, ft_strdup(files->content));
+				printf("Création d'argument : %s\n", glob->args->content);
+			}
+		}
+		rewind_tbracket(&glob->sbracket);
+		i = -1;
+		j = -1;
+		if (!files->next)
+			break ;
+		files = files->next;
+	}
 	free(path);
-	if (glob)
-		return (1);
+	free_tbracket(&glob->sbracket);
 	return (0);
 }

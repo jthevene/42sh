@@ -223,14 +223,16 @@ void					hub_final(t_glob *glob);
 int						g_parse_expr(char *str, t_glob *glob);
 int						g_no_token(char *str, t_glob *glob);
 int						only_qmark(char *str, t_glob *glob);
-int						only_star(char *str, t_glob *glob);
 int						only_cbrkt(char *str, t_glob *glob);
+int						mix_with_star(char *str, t_glob *glob);
 int						mix_token(char *str, t_glob *glob);
 int						get_len_token(char *str);
+char					*get_token(char *str);
 void					ft_print_list_content(t_list *lst);
 t_list					*get_dir_content(char *dir);
 char					*ft_strpathjoin(const char *s1, const char *s2);
 char					*get_cmd_path(char *str);
 t_list 					*qmark_get_matching_content(t_list *dir_content, char *target);
+int						ft_istrchr(const char *s, int c, int i);
 
 #endif

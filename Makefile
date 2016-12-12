@@ -68,7 +68,7 @@ SRC_GLOBING = $(GLOBING)globing/glob_parser.c \
 		$(UTILS_2)get_imbric_patterns.c $(UTILS_2)cbracket_utils.c \
 		$(UTILS_2)imbric_utils2.c $(UTILS_2)double_brck.c $(UTILS_2)expansion_utils.c \
 		\
-		$(WILDCARDS)hub_final.c $(WILDCARDS)wildcards_tokens.c $(WILDCARDS)get_len.c\
+		$(WILDCARDS)hub_final.c $(WILDCARDS)wildcards_tokens.c $(WILDCARDS)wildcards_utils.c\
 		$(WILDCARDS)question_mark.c \
 		$(GLOBING)globing/get_path.c  \
 
@@ -93,7 +93,7 @@ BIN_GLOBING = glob_parser.o \
 		imbric_utils.o get_imbric_patterns.o \
 		cbracket_utils.o imbric_utils2.o \
 		double_brck.o expansion_utils.o \
-		wildcards_tokens.o hub_final.o get_len.o\
+		wildcards_tokens.o hub_final.o wildcards_utils.o\
 		get_path.o question_mark.o
 ################# 		END SIMON PART		####################################
 

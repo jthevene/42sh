@@ -43,6 +43,30 @@ void	get_cmd(t_all *all, char *command)
 	all->cmd = ft_strdup(all->lines[0]);
 }
 
+void	get_cmds(t_all *all, char *command1, char *command2)
+{
+	if (count_words(command1) > 1)
+		all->lines = ft_strsplit(command1, ' ');
+	else
+	{
+		all->lines = malloc(sizeof(char *) * 3);
+		all->lines[0] = ft_strdup(command1);
+		all->lines[1] = NULL;
+		all->lines[2] = NULL;
+	}
+	all->cmd1 = ft_strdup(all->lines[0]);
+	if (count_words(command2) > 1)
+		all->lines = ft_strsplit(command2, ' ');
+	else
+	{
+		all->lines = malloc(sizeof(char *) * 3);
+		all->lines[0] = ft_strdup(command2);
+		all->lines[1] = NULL;
+		all->lines[2] = NULL;
+	}
+	all->cmd2 = ft_strdup(all->lines[0]);
+}
+
 int		count_words(char *str)
 {
 	int		i;

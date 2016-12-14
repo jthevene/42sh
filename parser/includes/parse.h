@@ -39,11 +39,17 @@ typedef struct		s_all
 	char			*line;
 	char			*epured;
 	char			*cmd;
+	char			*cmd1;
+	char			*cmd2;
+	char			*cmd1_path;
+	char			*cmd2_path;
 	char			**path;
 	char			**lines;
 	char			**envcpy;
 }					t_all;
 
+void	get_cmds(t_all *all, char *command1, char *command2);
+int		get_path_for_pipe(t_all *all, t_tree *tree);
 void	free_tree(t_tree *tree);
 void	free_tab(char **tab);
 void	parse(t_tree *tree);

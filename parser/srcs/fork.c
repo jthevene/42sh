@@ -3,7 +3,10 @@
 void	exec_tree(t_all *all, t_tree *tree)
 {
 	if (tree->type == PIPE)
-		try_pipe(all, tree);
+	{
+		get_cmds(all, tree->left->content, tree->right->content);
+		get_path_for_pipe(all, tree);
+	}
 	else if (tree->type == COMMAND)
 	{
 		get_cmd(all, tree->content);

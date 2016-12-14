@@ -1,0 +1,27 @@
+Ce qu'il reste à faire sur les wildcards :
+
+1 ---> Ajouter la partie de Jules
+
+2 ---> Ajouter la partie qui va gérer les "multi wildcards" (Exemple en dessous)
+Il faut faire une sorte de boucle ou de récursive qui va reformer les patterns comme dans l'exemple
+
+3 ---> Faire plein de tests pour voir si tout fonctionne nickel
+
+
+
+Exemple multi wildcards :
+
+"code_*/in*/*.h"
+		|
+		|
+		|
+	    \/
+"code_simon/in*/*.h" ET "code_dieuson/in*/*.h"
+		|
+		|
+		\/
+"code_simon/includes/*.h" ET "code_dieuson/includes/*.h"
+		|
+		|
+		\/
+Fichiers .h dans les dorectory trouvés

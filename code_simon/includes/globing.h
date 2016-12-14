@@ -233,6 +233,8 @@ t_list					*get_dir_content(char *dir);
 char					*ft_strpathjoin(const char *s1, const char *s2);
 char					*get_cmd_path(char *str);
 t_list 					*qmark_get_matching_content(t_list *dir_content, char *target);
-int						ft_istrchr(const char *s, int c, int i);
+void					check_file(int len, char *s, char *file, t_glob **glob);
+char					*get_next_star(char *str, int i);
+int						ft_istrstr(const char *s1, const char *s2, int i);
 
 #endif

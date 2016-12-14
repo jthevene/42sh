@@ -28,15 +28,32 @@ static int	is_only_token(char token, char *str)
 	return (1);
 }
 
+int			only_star(char *str, t_glob *glob)
+{
+	FT_INIT(char *, path, get_cmd_path(str));
+	FT_INIT(t_list *, files, get_dir_content(path));
+	while (files)
+	{
+		pushback_content(&glob->args, ft_strdup(files->content));
+		printf("Création d'argument : %s\n", glob->args->content);
+		if (!files->next)
+			break ;
+		files = files->next;
+	}
+	return (0);
+}
+
 int			g_parse_expr(char *str, t_glob *glob)
 {
-	printf("g_parse_expr = %s\n", str);
+//	printf("g_parse_expr = %s\n", str);
 	if (!ft_strchr(str, '?') && !ft_strchr(str, '[') && !ft_strchr(str, '*'))
 		return (g_no_token(str, glob));
 	else if (is_only_token('?', str))
 		return (only_qmark(str, glob));
 	else if (is_only_token('[', str))
 		return (only_cbrkt(str, glob));
+	else if (is_only_token('*', str))
+		return (only_star(str, glob));
 	else if (ft_strchr(str, '*'))
 		return (mix_with_star(str, glob));
 	else
@@ -56,7 +73,7 @@ void		hub_final(t_glob *glob) // Hub final du traitement globing
 	{
 		tmp = next_expr(g_shell.line, i);
 		i += ft_strlen(tmp);
-		printf("Hub final = %s\n", tmp);
+//		printf("Hub final = %s\n", tmp);
 		if (ft_strchr(tmp, '{') && ft_strchr(tmp, '}') && glob->cbracket)
 		{
 			while (glob->cbracket->list->next)

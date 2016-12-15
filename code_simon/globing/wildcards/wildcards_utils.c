@@ -30,45 +30,6 @@ int		get_len_token(char *str)
 	return (len);
 }
 
-void	check_file(int len, char *s, char *file, t_glob **g)
-{
-	FT_INIT(int, i, -1);
-	FT_INIT(int, j, -1);
-	FT_INIT(char *, tmp, NULL);
-	while (++j < len)
-	{
-		if (s[++i] == '[' && ft_strchr((*g)->sbracket->content, file[j]))
-		{
-			(*g)->sbracket = (*g)->sbracket->next ? (*g)->sbracket->next : (*g)->sbracket;
-			i += next_bracket(s, '[', i);
-		}
-		else if (s[i] == '*')
-		{
-			tmp = get_next_star(s, i + 1);
-			if (!tmp)
-			{
-				pushback_content(&(*g)->args, ft_strdup(file));
-				printf("Création d'argument : %s\n", (*g)->args->content);
-				break ;
-			}
-			if (ft_istrstr(file, tmp, j))
-				j = ft_istrstr(file, tmp, j);
-			else
-				break ;
-			i++;
-		}
-		else if (s[i] != '?' && s[i] != '[' && s[i] != '*' && file[j] != s[i])
-			break ;
-	}
-	if (j == len)
-	{
-		pushback_content(&(*g)->args, ft_strdup(file));
-		printf("Création d'argument : %s\n", (*g)->args->content);
-	}
-	if (tmp)
-		free(tmp);
-}
-
 char	*get_token(char *str)
 {
 	FT_INIT(int, i, 0);
@@ -103,19 +64,23 @@ char	*get_next_star(char *str, int i)
 	return (ft_strsub(str, start, len));
 }
 
-int		ft_istrstr(const char *s1, const char *s2, int i)
+int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 {
 	FT_INIT(int, j, 0);
 	FT_INIT(int, taille, ft_strlen(s2));
-	if (taille == 0)
+	if (taille == 0 || !g)
 		return (0);
-	while (s1[i] != '\0')
+	while (s1[i])
 	{
+		if (s2[j] == '?' || s2[j] == '[')
+				return (i + j);
 		while (s1[i + j] == s2[j])
 		{
 			if (j == taille - 1)
 				return (i + j);
 			j++;
+			if (s2[j] == '?' || s2[j] == '[')
+				return (i + j);
 		}
 		j = 0;
 		i++;

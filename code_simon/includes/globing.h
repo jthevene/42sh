@@ -111,6 +111,8 @@ typedef struct			s_glob
 	char				*command;
 
 	t_bracket			*args;
+	char				*f_path;
+	char				*l_path;
 
 	char				upper[27];
 	char				lower[27];
@@ -165,6 +167,7 @@ int						bracket_pushback(t_bracket **list);
 int						pushback_content(t_bracket **list, char *content);
 void					rewind_tbracket(t_bracket **list);
 void					free_tbracket(t_bracket **list);
+void					copy_list(t_bracket **src, t_bracket **dest);
 
 // FONCTIONS CURLY BRACKETS
 // Initialisation et gestion de depart
@@ -235,6 +238,8 @@ char					*get_cmd_path(char *str);
 t_list 					*qmark_get_matching_content(t_list *dir_content, char *target);
 void					check_file(int len, char *s, char *file, t_glob **glob);
 char					*get_next_star(char *str, int i);
-int						ft_istrstr(const char *s1, const char *s2, int i);
+int						ft_istrstr(char *s1, char *s2, int i, t_glob *g);
+int						push_content_path(t_bracket **l, char *s, t_glob *g);
+char					*get_cmd_last_path(char *str);
 
 #endif

@@ -83,3 +83,16 @@ void			free_tbracket(t_bracket **list)
 		free(tmp);
 	}
 }
+
+void			copy_list(t_bracket **src, t_bracket **dest)
+{
+	rewind_tbracket(&(*src));
+	while ((*src)->next)
+	{
+		pushback_content(&(*dest), ft_strdup((*src)->content));
+		(*src) = (*src)->next;
+	}
+	pushback_content(&(*dest), ft_strdup((*src)->content));
+	rewind_tbracket(&(*src));
+	rewind_tbracket(&(*dest));
+}

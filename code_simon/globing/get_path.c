@@ -85,6 +85,27 @@ char			*get_cmd_path(char *str)
 	}
 }
 
+char			*get_cmd_last_path(char *str)
+{
+	FT_INIT(int, i, 0);
+	FT_INIT(int, j, 0);
+	FT_INIT(char *, ret, NULL);
+	while (str[i] && str[i] != '[' && str[i] != '*' && str[i] != '?')
+		i++;
+	while (str[i] && str[i] != '/')
+		i++;
+	if (!str[i])
+		return (NULL);
+	else
+	{
+		j = i;
+		while (str[j])
+			j++;
+		ret = ft_strsub(str, i, j - i);
+		return (ret);
+	}
+}
+
 char	*ft_strpathjoin(const char *s1, const char *s2)
 {
 	int		i;

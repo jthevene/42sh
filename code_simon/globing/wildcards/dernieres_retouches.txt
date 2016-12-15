@@ -2,26 +2,14 @@ Ce qu'il reste à faire sur les wildcards :
 
 1 ---> Ajouter la partie de Jules
 
-2 ---> Ajouter la partie qui va gérer les "multi wildcards" (Exemple en dessous)
-Il faut faire une sorte de boucle ou de récursive qui va reformer les patterns comme dans l'exemple
-
-3 ---> Faire plein de tests pour voir si tout fonctionne nickel
+2 ---> Faire plein de tests pour voir si tout fonctionne nickel
 
 
 
-Exemple multi wildcards :
 
-"code_*/in*/*.h"
-		|
-		|
-		|
-	    \/
-"code_simon/in*/*.h" ET "code_dieuson/in*/*.h"
-		|
-		|
-		\/
-"code_simon/includes/*.h" ET "code_dieuson/includes/*.h"
-		|
-		|
-		\/
-Fichiers .h dans les dorectory trouvés
+
+EDIT D'AVANT LES VACANCES : Il reste a gerer les expression de ce type precis : "blablabla*?" ou "blablabla*[truc]", qui sont mal interpretees a cause de la valeur de retour de ft_istrstr qui n'est pas donnee a la bonne variable. Au lieu d'incrementer i ET j, elle n'incremente que j, ce qui n'est pas bon et ce qui donne lieu a un segfault.
+Sinon tout semble marcher nickel. Je me suis rendu compte que je n'avais pas teste les commandes de ce type : "ls coucou/{je,suis,une,commande}/de/merde
+Normalement ca marche, a tester.
+
+DABISOUS

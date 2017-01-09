@@ -46,23 +46,18 @@
 // 	return (ret);
 // }
 
-t_list			*get_dir_content(char *dir)
+t_lst		*get_dir_content(char *dir)
 {
- 	t_list				*dir_content;
- 	DIR 				*ret;
- 	struct dirent 		*direntt;
- 	char				*str;
+	t_lst				*dir_content;
+	DIR 				*ret;
+	struct dirent 		*direntt;
 
- 	dir_content = NULL;
- 	str = NULL;
- 	if (!(ret = opendir(dir)))
- 		return (NULL);
- 	while ((direntt = readdir(ret)))
- 	{
- 		str = ft_strdup(direntt->d_name);
- 		ft_lstaddend(&dir_content, ft_lstnew(str, ft_strlen(str)));
- 	}
- 	return (dir_content);
+	dir_content = NULL;
+	if (!(ret = opendir(dir)))
+		return (NULL);
+	while ((direntt = readdir(ret)))
+		ft_append_lst(&dir_content, ft_newlst(direntt->d_name));
+	return (dir_content);
 }
 
 char			*get_cmd_path(char *str)

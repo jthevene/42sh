@@ -77,11 +77,8 @@ int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 		j = s2[j] == '?' ? j + 1 : j;
 		if (s2[j] == '[')
 		{
-			if (!ft_strchr((*g)->sbracket->content, file[j]))
-				break ;
-			(*g)->sbracket = (*g)->sbracket->next ? (*g)->sbracket->next : (*g)->sbracket;
-			i += next_bracket(s, '[', i);
-			ret++;
+			ret = i + j;
+			break ;
 		}
 		while (s1[i + j] && s2[j] && s1[i + j] == s2[j])
 		{
@@ -101,6 +98,7 @@ int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 		j = 0;
 		i++;
 	}
+	printf("ret = %d\n", ret);
 	return (ret);
 }
 

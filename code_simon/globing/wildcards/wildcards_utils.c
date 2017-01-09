@@ -75,31 +75,35 @@ int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 	while (s1[i])
 	{
 		j = s2[j] == '?' ? j + 1 : j;
-		if (s2[j] == '[')
+		ret = i + j;
+		while (s1[i + j] && s2[j] && (s1[i + j] == s2[j] || s2[j] == '['))
 		{
-			ret = i + j;
-			break ;
-		}
-		while (s1[i + j] && s2[j] && s1[i + j] == s2[j])
-		{
-			if (j == taille - 1)
-			{
-				ret = i + j;
-				break ;
-			}
-			j++;
 			if (s2[j] == '[')
 			{
-				ret = i + j;
-				break ;
+//				printf("s1 = %s, s1[i] = %c, i = %d\n", s1, s1[i], i);
+				if (!ft_strchr(g->sbracket->content, s1[i]))
+				{
+//					printf("break\n");
+					break ;
+				}
+				g->sbracket = g->sbracket->next ? g->sbracket->next : g->sbracket;
+				ret++;
 			}
+			if (j == taille - 1)
+			{
+//				printf("ret = %d\n", ret);
+				return (ret);
+			}
+			j += s2[j] == '[' ? next_bracket(s2, '[', j) : 1;
+			ret += s2[j] == '?' ? 2 : 1;
 			j = s2[j] == '?' ? j + 1 : j;
+//			printf("j = %d, taille = %d\n", j, taille);
 		}
 		j = 0;
 		i++;
 	}
-	printf("ret = %d\n", ret);
-	return (ret);
+//	printf("%s ===> fail ret = %d\n", s1, ret);
+	return (0);
 }
 
 char	*ft_istrchr(const char *s, int c, int i)

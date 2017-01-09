@@ -12,26 +12,6 @@
 
 #include "../includes/globing.h"
 
- void			ft_print_list_content(t_list *lst)
- {
- 	t_list	*tmp;
- 	int		i;
-
- 	tmp = lst;
- 	i = 1;
- 	ft_putchar(10);
- 	if (tmp && tmp->content)
- 	{
- 		while (tmp && tmp->content)
- 		{
- 			ft_putnbr(i++);
- 			ft_putstr(" => ");
- 			ft_putendl(tmp->content);
- 			tmp = tmp->next;
- 		}
- 	}
-}
-
 // static char		*get_name(char *str)
 // {
 // 	char	**tab;

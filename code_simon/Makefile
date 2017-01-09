@@ -21,7 +21,7 @@ UTILS_1 = ./globing/square_brackets/sbracket_utils/
 UTILS_2 = ./globing/curly_brackets/cbracket_utils/
 WILDCARDS = ./globing/wildcards/
 
-SRCS =  main.c globing/glob_parser.c \
+SRCS =  main.c globing/glob_parser.c globing/get_path.c \
 		\
 		$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
 		\
@@ -41,8 +41,9 @@ SRCS =  main.c globing/glob_parser.c \
 		$(UTILS_2)imbric_utils2.c $(UTILS_2)double_brck.c $(UTILS_2)expansion_utils.c \
 		\
 		$(WILDCARDS)hub_final.c $(WILDCARDS)wildcards_tokens.c $(WILDCARDS)wildcards_utils.c\
-		$(WILDCARDS)question_mark.c $(WILDCARDS)wildcards_utils2.c\
-		$(GLOBING)globing/get_path.c  \
+		$(WILDCARDS)question_mark.c $(WILDCARDS)wildcards_utils2.c \
+		$(WILDCARDS)lst_tools.c \
+		\
 
 BIN =   main.o glob_parser.o \
 		\
@@ -66,7 +67,7 @@ BIN =   main.o glob_parser.o \
 		cbracket_utils.o imbric_utils2.o \
 		double_brck.o expansion_utils.o \
 		wildcards_tokens.o hub_final.o wildcards_utils.o\
-		get_path.o question_mark.o wildcards_utils2.o
+		get_path.o question_mark.o wildcards_utils2.o lst_tools.o
 
 
 CC_FLAGS = -Wall -Wextra -Werror

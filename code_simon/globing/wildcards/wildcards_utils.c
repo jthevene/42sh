@@ -69,14 +69,20 @@ int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 	FT_INIT(int, j, 0);
 	FT_INIT(int, ret, 0);
 	FT_INIT(int, taille, ft_strlen(s2));
-	if (taille == 0 || !g)
+	if (!taille || !g)
 		return (0);
 	i = s2[j] == '?' ? i + 1 : i;
-	j = s2[j] == '?' ? j + 1 : j;
 	while (s1[i])
 	{
+		j = s2[j] == '?' ? j + 1 : j;
 		if (s2[j] == '[')
-			ret = i + j;
+		{
+			if (!ft_strchr((*g)->sbracket->content, file[j]))
+				break ;
+			(*g)->sbracket = (*g)->sbracket->next ? (*g)->sbracket->next : (*g)->sbracket;
+			i += next_bracket(s, '[', i);
+			ret++;
+		}
 		while (s1[i + j] && s2[j] && s1[i + j] == s2[j])
 		{
 			if (j == taille - 1)

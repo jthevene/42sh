@@ -35,7 +35,7 @@ int			only_cbrkt(char *str, t_glob *glob)
 	glob->f_path = get_cmd_path(str);
 	glob->l_path = get_cmd_last_path(str);
 	FT_INIT(int, len, get_len_token(str));
-	FT_INIT(t_list *, files, get_dir_content(glob->f_path));
+	FT_INIT(t_lst *, files, get_dir_content(glob->f_path));
 	FT_INIT(int, i, -1);
 	hub_sbracket(glob, str);
 	rewind_tbracket(&glob->sbracket);
@@ -45,7 +45,7 @@ int			only_cbrkt(char *str, t_glob *glob)
 		{
 			while (++i < len)
 			{
-				if (ft_strchr(glob->sbracket->content, files->content[i]))
+				if (ft_strchr(glob->sbracket->content, ((char *)files->content)[i]))
 					glob->sbracket = glob->sbracket->next ? glob->sbracket->next : glob->sbracket;
 				else
 					break ;
@@ -76,7 +76,7 @@ int			mix_with_star(char *str, t_glob *glob)
 	glob->f_path = get_cmd_path(str);
 	glob->l_path = get_cmd_last_path(str);
 	FT_INIT(char *, token, get_token(str));
-	FT_INIT(t_list *, files, get_dir_content(glob->f_path));
+	FT_INIT(t_lst *, files, get_dir_content(glob->f_path));
 	hub_sbracket(glob, token);
 	rewind_tbracket(&glob->sbracket);
 //	printf("\n/*** MIX_WITH_STAR ***/\nF_PATH = %s\nL_PATH = %s\nTOKEN = %s\n\n", glob->f_path, glob->l_path, token);
@@ -101,7 +101,7 @@ int			mix_token(char *str, t_glob *glob)
 	glob->f_path = get_cmd_path(str);
 	glob->l_path = get_cmd_last_path(str);
 	FT_INIT(char *, token, get_token(str));
-	FT_INIT(t_list *, files, get_dir_content(glob->f_path));
+	FT_INIT(t_lst *, files, get_dir_content(glob->f_path));
 	FT_INIT(int, len, get_len_token(token));
 	hub_sbracket(glob, token);
 	rewind_tbracket(&glob->sbracket);

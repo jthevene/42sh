@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../../includes/globing.h"
 
 t_lst	*ft_newlst(char *content)
 {

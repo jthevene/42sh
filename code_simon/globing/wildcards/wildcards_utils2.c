@@ -57,7 +57,7 @@ void	check_file(int len, char *s, char *file, t_glob **g)
 				j = ft_istrstr(file, tmp, j, (*g));
 			else
 				break ;
-			printf("check_file : tmp = %s, s : %s, file : %s, i : %d, j : %d\n", tmp, s, file, i, j);
+//			printf("check_file : tmp = %s, s : %s, file : %s, i : %d, j : %d\n", tmp, s, file, i, j);
 			i += ft_strlen(tmp);
 			if (!ft_istrchr(s, '*', i))
 			{
@@ -66,11 +66,12 @@ void	check_file(int len, char *s, char *file, t_glob **g)
 			}
 			if (tmp)
 				free(tmp);
+			tmp = NULL;
 		}
 		else if (s[i] != '?' && s[i] != '[' && s[i] != '*' && file[j] != s[i])
 			break ;
 	}
-	if (j == len)
+	if (j == len && i + 1 == (int)ft_strlen(s))
 	{
 		push_content_path(&(*g)->args, ft_strdup(file), (*g));
 //		printf("Création d'argument : %s\n", (*g)->args->content);

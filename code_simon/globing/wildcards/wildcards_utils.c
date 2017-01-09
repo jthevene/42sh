@@ -67,23 +67,42 @@ char	*get_next_star(char *str, int i)
 int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 {
 	FT_INIT(int, j, 0);
+	FT_INIT(int, ret, 0);
 	FT_INIT(int, taille, ft_strlen(s2));
 	if (taille == 0 || !g)
 		return (0);
+	i = s2[j] == '?' ? i + 1 : i;
+	j = s2[j] == '?' ? j + 1 : j;
 	while (s1[i])
 	{
-		if (s2[j] == '?' || s2[j] == '[')
-				return (i + j);
-		while (s1[i + j] == s2[j])
+		if (s2[j] == '[')
+			ret = i + j;
+		while (s1[i + j] && s2[j] && s1[i + j] == s2[j])
 		{
 			if (j == taille - 1)
-				return (i + j);
+			{
+				ret = i + j;
+				break ;
+			}
 			j++;
-			if (s2[j] == '?' || s2[j] == '[')
-				return (i + j);
+			if (s2[j] == '[')
+			{
+				ret = i + j;
+				break ;
+			}
+			j = s2[j] == '?' ? j + 1 : j;
 		}
 		j = 0;
 		i++;
 	}
-	return (0);
+	return (ret);
+}
+
+char	*ft_istrchr(const char *s, int c, int i)
+{
+	while (s[i] && s[i] != (char)c)
+		i++;
+	if (s[i] == (char)c)
+		return ((char*)&s[i]);
+	return (NULL);
 }

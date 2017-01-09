@@ -58,7 +58,7 @@ int			g_parse_expr(char *str, t_glob *glob)
 	else
 		return (mix_token(str, glob));
 }
-
+/*
 int			recursive_handling(t_glob *glob)
 {
 	FT_INIT(t_bracket *, tmp, NULL);
@@ -79,7 +79,7 @@ int			recursive_handling(t_glob *glob)
 //	recursive_handling(glob);
 	return (1);
 }
-
+*/
 void		hub_final(t_glob *glob) // Hub final du traitement globing
 {
 	FT_INIT(int, i, 0);
@@ -108,12 +108,16 @@ void		hub_final(t_glob *glob) // Hub final du traitement globing
 			g_parse_expr(tmp, glob);
 		free(tmp);
 	}
-	recursive_handling(glob);
-	rewind_tbracket(&glob->args);
-	while (glob->args->next)
+//	recursive_handling(glob);
+	if (glob->args)
 	{
+		rewind_tbracket(&glob->args);
+		while (glob->args->next)
+		{
+			printf("Arg : %s\n", glob->args->content);
+			glob->args = glob->args->next;
+		}
 		printf("Arg : %s\n", glob->args->content);
-		glob->args = glob->args->next;
+		free_tbracket(&glob->args);
 	}
-	printf("Arg : %s\n", glob->args->content);
 }

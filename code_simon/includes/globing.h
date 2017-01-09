@@ -239,6 +239,7 @@ t_list 					*qmark_get_matching_content(t_list *dir_content, char *target);
 void					check_file(int len, char *s, char *file, t_glob **glob);
 char					*get_next_star(char *str, int i);
 int						ft_istrstr(char *s1, char *s2, int i, t_glob *g);
+char					*ft_istrchr(const char *s, int c, int i);
 int						push_content_path(t_bracket **l, char *s, t_glob *g);
 char					*get_cmd_last_path(char *str);
 

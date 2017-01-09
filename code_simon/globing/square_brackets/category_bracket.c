@@ -101,7 +101,6 @@ char					*handle_categories(char *str, t_glob *glob)
 	/*
 		LEAK INEXPICABLE ICI
 	*/
-	FT_INIT(char *, ret, NULL);
 	FT_INIT(char *, tmp, ft_strdup(str));
 	FT_INIT(char *, tmp2, NULL);
 	while (1)
@@ -113,7 +112,6 @@ char					*handle_categories(char *str, t_glob *glob)
 		tmp = replace_category(tmp2, glob);
 		ft_strdel(&tmp2);
 	}
-	ret = ft_strdup(tmp);
 	free(tmp);
 	return (ft_strdup(str));
 }

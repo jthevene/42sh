@@ -30,6 +30,45 @@ int				push_content_path(t_bracket **l, char *s, t_glob *g)
 	return (1);
 }
 
+int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
+{
+	FT_INIT(int, j, 0);
+	FT_INIT(int, ret, 0);
+	FT_INIT(int, taille, ft_strlen(s2));
+	if (!taille || !g)
+		return (0);
+	i = s2[j] == '?' ? i + 1 : i;
+	while (s1[i])
+	{
+		j = s2[j] == '?' ? j + 1 : j;
+		ret = i + j;
+		while (s1[i + j] && s2[j] && (s1[i + j] == s2[j] || s2[j] == '['))
+		{
+			if (s2[j] == '[')
+			{
+/*				if (!ft_strchr(g->sbracket->content, s1[i]))
+					break ;
+				g->sbracket = g->sbracket->next ? g->sbracket->next : g->sbracket;
+				ret++;
+*/
+			}
+			if (j == taille - 1)
+			{
+//				printf("ret = %d\n", ret);
+				return (ret);
+			}
+//			j += s2[j] == '[' ? next_bracket(s2, '[', j) : 1;
+			j++;
+			ret += s2[j] == '?' ? 2 : 1;
+			j = s2[j] == '?' ? j + 1 : j;
+		}
+		j = 0;
+		i++;
+	}
+//	printf("%s ===> fail ret = %d\n", s1, ret);
+	return (0);
+}
+
 void	check_file(int len, char *s, char *file, t_glob **g)
 {
 	FT_INIT(int, i, -1);

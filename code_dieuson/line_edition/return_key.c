@@ -34,7 +34,7 @@ void	return_key(void)
 	{
 		ft_putchar(10);
 		g_shell.line = ft_strdup(g_shell.current_line);
-//		glob_parser();
+		glob_parser();
 		free(g_shell.line);
 		set_cursor_pos_to_end(g_shell.line_size);
 		if (g_shell.hist->content)

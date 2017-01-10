@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 18:23:31 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/12/12 18:23:31 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/01/10 11:22:05 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*get_token(char *str)
 		i++;
 	if (!str[i])
 		return (NULL);
-	while (str[i] && str[i] != '/')
+	while (i >= 0 && str[i] && str[i] != '/')
 		i--;
 	i2 = ++i;
 	while (str[i] && str[i] != '/')
@@ -88,21 +88,22 @@ int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 				}
 				g->sbracket = g->sbracket->next ? g->sbracket->next : g->sbracket;
 				ret++;
+				j += next_bracket(s2, '[', j);
 			}
 			if (j == taille - 1)
 			{
-//				printf("ret = %d\n", ret);
+				printf("ret = %d\n", ret);
 				return (ret);
 			}
-			j += s2[j] == '[' ? next_bracket(s2, '[', j) : 1;
+			j++;
 			ret += s2[j] == '?' ? 2 : 1;
 			j = s2[j] == '?' ? j + 1 : j;
-//			printf("j = %d, taille = %d\n", j, taille);
+			printf("j = %d, taille = %d\n", j, taille);
 		}
 		j = 0;
 		i++;
 	}
-//	printf("%s ===> fail ret = %d\n", s1, ret);
+	printf("%s ===> fail ret = %d\n", s1, ret);
 	return (0);
 }
 

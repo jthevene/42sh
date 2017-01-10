@@ -57,7 +57,7 @@ void	check_file(int len, char *s, char *file, t_glob **g)
 				j = ft_istrstr(file, tmp, j, (*g));
 			else
 				break ;
-//			printf("check_file : tmp = %s, s : %s, file : %s, i : %d, j : %d\n", tmp, s, file, i, j);
+			printf("check_file : tmp = %s, s : %s, file : %s, i : %d, j : %d\n", tmp, s, file, i, j);
 			i += ft_strlen(tmp);
 			if (!ft_istrchr(s, '*', i))
 			{

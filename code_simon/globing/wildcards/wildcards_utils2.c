@@ -42,15 +42,15 @@ int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 	{
 		j = s2[j] == '?' ? j + 1 : j;
 		ret = i + j;
-		while (s1[i + j] && s2[j] && (s1[i + j] == s2[j] || s2[j] == '['))
+		while (s1[i + j] && s2[j] && (s1[i + j] == s2[j] || s2[j] == '[' || s2[j] == '?'))
 		{
 			if (s2[j] == '[')
 			{
-/*				if (!ft_strchr(g->sbracket->content, s1[i]))
+				if (!ft_strchr(g->sbracket->content, s1[i + j]))
 					break ;
 				g->sbracket = g->sbracket->next ? g->sbracket->next : g->sbracket;
-				ret++;
-*/
+				ret = i + j;
+				j += next_bracket(s2, '[', j);
 			}
 			if (j == taille - 1)
 			{
@@ -59,8 +59,7 @@ int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 			}
 //			j += s2[j] == '[' ? next_bracket(s2, '[', j) : 1;
 			j++;
-			ret += s2[j] == '?' ? 2 : 1;
-			j = s2[j] == '?' ? j + 1 : j;
+			ret++;
 		}
 		j = 0;
 		i++;

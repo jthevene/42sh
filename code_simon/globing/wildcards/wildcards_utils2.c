@@ -30,6 +30,23 @@ int				push_content_path(t_bracket **l, char *s, t_glob *g)
 	return (1);
 }
 
+int		ft_check_bracket(char *s1, int i, int stop, t_glob *g)
+{
+	FT_INIT(int, ret, 0);
+	while (s1[i])
+	{
+		if (ft_strchr(g->sbracket->content, s1[i]))
+		{
+			if (stop == TRUE)
+				return (i);
+			else
+				ret = i;
+		}
+		i++;
+	}
+	return (ret);
+}
+
 int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 {
 	FT_INIT(int, j, 0);
@@ -46,11 +63,10 @@ int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 		{
 			if (s2[j] == '[')
 			{
-				if (!ft_strchr(g->sbracket->content, s1[i + j]))
-					break ;
-				g->sbracket = g->sbracket->next ? g->sbracket->next : g->sbracket;
-				ret = i + j;
+				ret = ft_check_bracket(s1, i + j
+				, j + next_bracket(s2, '[', j) == taille - 1 ? FALSE : TRUE, g);
 				j += next_bracket(s2, '[', j);
+//				printf("s1 = %s, s2 = %s, ret = %d, j = %d\n", s1, s2, ret, j);
 			}
 			if (j == taille - 1)
 			{

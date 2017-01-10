@@ -29,11 +29,12 @@ static void 	set_cursor_pos_to_end(int i)
 
 void	return_key(void)
 { 
+	go_to_end();
 	if (ft_strlen(g_shell.current_line))
 	{
 		ft_putchar(10);
 		g_shell.line = ft_strdup(g_shell.current_line);
-		glob_parser();
+//		glob_parser();
 		free(g_shell.line);
 		set_cursor_pos_to_end(g_shell.line_size);
 		if (g_shell.hist->content)
@@ -47,6 +48,7 @@ void	return_key(void)
 	}
 	else
 		ft_putchar(10);
+	g_shell.len = 0;
 	display_prompt();
 }
 

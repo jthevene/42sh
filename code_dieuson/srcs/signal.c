@@ -25,27 +25,29 @@ void		ft_sigwinch(int sig)
 
  void		ft_sigint(int sig)  // ctrl + c
 {
-// 	printf("\nsig int =%d\n", sig);
- 	(void)sig;
- 	FT_INIT(int, nb_col, g_shell.line_size - g_shell.cursor_x);
- 	while (nb_col-- > 0)
-	 	arrow_moove_right();
+	(void)sig;
+	go_to_end();
  	if (g_shell.current_line)
 		ft_bzero(g_shell.current_line, g_shell.line_size - 3);
-	if (g_shell.line_2d_x)
-		ft_putstr("\n");
+	ft_putstr("\n");
 	display_prompt();
 }
 
 void 		ft_sigkill(int sig)
 {
-//	printf("\nsig kill =%d\n", sig);
 	(void)sig;
 	if (g_shell.current_line)
 		ft_bzero(g_shell.current_line, g_shell.line_size - 3);
 	if (g_shell.line_2d_x)
 		ft_putstr("\n");
 	ft_reset_termios(g_shell.t_back);
+	exit(0);
+}
+
+void 		ft_segfault(int sig)
+{
+	(void)sig;
+	ft_putstr("Error segfault\nFin du programme\n");
 	exit(0);
 }
 // static void		ft_sigint(int sig)
@@ -79,12 +81,13 @@ static void		ft_sigcont(int sig)
 }*/
 void 			distrib_sig(int sig)
 {
+	printf("sig =%d\n", sig);
 //	if (sig == SIGQUIT)
 //		return ;
-	if (sig == SIGINT)
+/*	if (sig == SIGINT)
 		ft_sigint(sig);
 	else if (sig == SIGWINCH)
-		ft_sigwinch(sig);
+		ft_sigwinch(sig);*/
 }
 
 void			ft_signal(void)
@@ -97,6 +100,7 @@ void			ft_signal(void)
 	}*/
 	signal(SIGWINCH, ft_sigwinch);
 	signal(SIGINT, ft_sigint);
+	signal(SIGSEGV, ft_segfault);
 //	signal(i, ft_sigkill);
 //	signal(SIGTSTP, ft_sigtstp);
 //	signal(SIGCONT, ft_sigcont);

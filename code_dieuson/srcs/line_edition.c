@@ -63,7 +63,7 @@ void	fill_current_line(char c)
 			tmp = g_shell.current_line;
 			g_shell.current_line = (char*)malloc(sizeof(char) * (len + 1 + 256));
 			ft_strcpy(g_shell.current_line, tmp);
-			free(tmp);
+			ft_strdel(&tmp);
 		}
 	}
 	g_shell.current_line[len] = c;

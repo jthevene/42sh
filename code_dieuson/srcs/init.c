@@ -91,7 +91,7 @@ int		init_all()
 	ft_signal();
 	if (!init_env())
 		return (1);
-	init_hist();
+//	init_hist();
 	init_win();
 	g_shell.current_line = NULL;
 	g_shell.cursor_x = 3;
@@ -110,6 +110,7 @@ int		init_all()
 	g_shell.start_select = 0;
 	g_shell.end_select = 0;
 	g_shell.clipboard = NULL;
+	g_shell.len = 0;
 	g_shell.c = ft_strnew(16);
 	tcgetattr(STDIN_FILENO, &g_shell.t_back);// save les données termios d'origine
 	init_termios(g_shell.t_back);

@@ -64,7 +64,8 @@ static	void	run_shell(void)
 	while (42)
 	{
 		g_shell.running = 1;
-//		ft_putstr("shell ok\n");
+	//	ft_putstr("shell ok\n");
+//		printf("\n\nnb =%d,\n\n", tgetflag("ms"));
 		key = readkey();
 		if (key == K_PRINT)
 		{
@@ -94,9 +95,12 @@ static	void	run_shell(void)
 			return_key();
 			i = 0;
 			g_shell.cursor_x = 3;
+			set_2d_line_val();
+			set_2d_cursor_val();
 		}
 		else if (key == K_ESCAPE)
 		{
+			go_to_end();
 			ft_putstr("\n");
 			ft_reset_termios(g_shell.t_back);
 			return ;

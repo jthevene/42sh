@@ -60,79 +60,25 @@ void 	reset_cursor_pos()
 	}
 }
 
-int 	set_cursor_start(int len)
-{
-	if (len < g_shell.line_2d_y)
-	{
-		ft_putstr("\n");
-		tputs(tgetstr("rc", NULL), 1, ft_putchar_int);
-		tputs(tgetstr("up", NULL), 1, ft_putchar_int); // scroll up
-		tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
-		tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
-		ft_putstr("\033[32m$> \033[0m");
-		tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
-		len = g_shell.line_2d_y;
-	}
-	else
-	{
-		tputs(tgetstr("rc", NULL), 1, ft_putchar_int);
-		tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
-	}
-	return (len);
-}
-
-int 	set_cursor_start2(int len, int diff_win) // Permet de gerer les modification de taille du terminal, echec et non fonctionnel
-{
-	tputs(tgetstr("rc", NULL), 1, ft_putchar_int);
-	if (!diff_win)
-		return (len);
-	if (diff_win > 0) // Agrandissement
-	{
-		if (g_shell.prev_line_2d_y == 1 && !g_shell.line_2d_y 
-			&& g_shell.line_2d_x + 1 == g_shell.win->ws_col && !g_shell.prev_line_2d_x)
-			tputs(tgetstr("up", NULL), 1, ft_putchar_int);
-	}
-	else if (diff_win < 0)
-	{
-		if (g_shell.prev_line_2d_y < g_shell.line_2d_y)
-		{
-//			tputs(tgetstr("sf", NULL), 1, ft_putchar_int);
-//			ft_putstr("\n");
-//			ft_putstr("\ntest\n");
-//			usleep(300000);
-		}
-	}
-
-	if (diff_win != 0)
-	{
-		tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
-		tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
-		ft_putstr("\033[32m$> \033[0m");
-		tputs(tgetstr("sc", NULL), 1, ft_putchar_int);		
-	}
-	return (len);
-}
-
 void 	display_with_select(char *line)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, start_select, -3);
 	FT_INIT(int, end_select, -3);
-	start_select += g_shell.start_select < g_shell.end_select ? g_shell.start_select : g_shell.end_select;
-	end_select += g_shell.end_select > g_shell.start_select ? g_shell.end_select : g_shell.start_select;
+	if (!g_shell.start_select || !g_shell.end_select)
+		return ;
+	start_select += g_shell.start_select < g_shell.end_select ? 
+					g_shell.start_select : g_shell.end_select;
+	end_select += g_shell.end_select > g_shell.start_select ? 
+					g_shell.end_select : g_shell.start_select;
 	while (line[i])
 	{
 		if (i == start_select)
-		{
-			ft_putstr("\033[47m");
-			ft_putstr("\033[30m");
-		}
+			ft_putstr("\033[47m\033[30m");
 		ft_putchar(line[i]);
-		if (i == end_select || (i == end_select - 1 && end_select == g_shell.line_size - 3))
-		{
-			ft_putstr("\033[0m");
-			ft_putstr("\033[0m");
-		}
+		if (i == end_select || (i == end_select - 1 
+			&& end_select == g_shell.line_size - 3))
+			ft_putstr("\033[0m\033[0m");
 		i++;
 	}
 }
@@ -158,22 +104,55 @@ void	clean_line()
 	}
 }
 
+void 	go_to_end()
+{
+	FT_INIT(int, nb_col, 0);
+	nb_col = g_shell.line_size - g_shell.cursor_x;
+	if (nb_col <= 0)
+		return ;
+	while (nb_col--)
+		arrow_moove_right();
+}
+
+int 	set_cursor_start(int len, int ref_cursor)
+{
+	FT_INIT(int, go_up, g_shell.line_2d_y);
+	if (go_up - g_shell.prev_line_2d_y > 1)
+		go_up = g_shell.prev_line_2d_y + 1;
+	if (len < g_shell.line_2d_y)
+	{
+		if (ref_cursor == g_shell.line_size)
+			tputs(tgetstr("do", NULL), 1, ft_putchar_int);
+		while (go_up-- > 0)
+			tputs(tgetstr("up", NULL), 1, ft_putchar_int); // scroll up
+		len = g_shell.line_2d_y;
+	}
+	else
+		tputs(tgetstr("rc", NULL), 1, ft_putchar_int);
+	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
+	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
+	tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
+	ft_putstr("\033[32m$> \033[0m");
+	return (len);
+}
+
 void	print_line(int i)
 {
 	set_2d_line_val();
 	set_2d_cursor_val();
-	static int len = 0;
-//	FT_INIT(int, diff_win, g_shell.win->ws_col - g_shell.prev_win->ws_col);
-//	monitoring();
+	FT_INIT(int, ref_cursor, g_shell.cursor_x);
+//	monitoring();	
 	if (i)
 		i--;
-	len = set_cursor_start(len);
+	go_to_end();
+	g_shell.len = set_cursor_start(g_shell.len, ref_cursor);
 	if (!g_shell.start_select && !g_shell.end_select)
 		ft_putstr(g_shell.current_line);
 	else
 		display_with_select(g_shell.current_line);
-	if (!g_shell.line_2d_x)	
+	if (!g_shell.line_2d_x && g_shell.cursor_x == g_shell.line_size)	
 		ft_putstr("\n");
+	g_shell.cursor_x = ref_cursor;
 	reset_cursor_pos();
 	get_win_val();
 	return ;

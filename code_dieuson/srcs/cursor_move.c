@@ -96,7 +96,10 @@ int 	distrib_cursor_mooves(int key)
 {
 	FT_INIT(int, nb_col, g_shell.win->ws_col);
 	if (key == K_UP || key == K_DOWN)
+	{
+		go_to_end();
 		navigation_hist(key);
+	}
 	else if (key == K_RIGHT)
 		arrow_moove_right();
 	else if (key == K_LEFT)
@@ -129,7 +132,5 @@ int 	distrib_cursor_mooves(int key)
 	}
 	else
 		return (0);
-	if (g_shell.start_select && g_shell.end_select)
-		print_line(g_shell.line_size);
 	return (0);
 }

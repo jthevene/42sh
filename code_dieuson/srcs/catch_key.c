@@ -22,6 +22,7 @@ int 			detect_selection_text(char *key, int start ,
 			cursor_x + 1 : cursor_x);
 		if (g_shell.end_select >= g_shell.line_size)
 			g_shell.end_select = g_shell.line_size - 1;
+		print_line(g_shell.line_size);
 		return (K_RIGHT);
 	}
 	else if (key[4] == 50 && key[5] == 68) // Selection zone de text SHIFT + LEFT
@@ -37,54 +38,11 @@ int 			detect_selection_text(char *key, int start ,
 					g_shell.end_select - 2 : g_shell.end_select;
 		if (!(end && end < cursor_x))
 			g_shell.end_select = cursor_x > 3 ? cursor_x - 1 : cursor_x;
+		print_line(g_shell.line_size);
 		return (K_LEFT);
 	}
 	return (0);
 }
-
-/*
-int 			detect_selection_text(char *key)
-{
-	if (key[4] == 50 && key[5] == 67) 	// Selection zone de text SHIFT + RIGHT
-	{
-		g_shell.start_select = g_shell.start_select ?
-			g_shell.start_select : g_shell.cursor_x;
-
-
-		if (g_shell.end_select && g_shell.end_select == g_shell.cursor_x)
-			g_shell.end_select = g_shell.cursor_x + 1;
-		else
-			g_shell.end_select = g_shell.cursor_x;
-
-
-		if (g_shell.end_select >= g_shell.line_size)
-			g_shell.end_select = g_shell.line_size - 1;
-		return (K_RIGHT);
-	}
-	else if (key[4] == 50 && key[5] == 68) // Selection zone de text SHIFT + LEFT
-	{
-		g_shell.start_select = g_shell.start_select ? 
-			g_shell.start_select : g_shell.cursor_x - 1;
-		if (g_shell.end_select && g_shell.end_select < g_shell.cursor_x)
-		{
-			g_shell.end_select = g_shell.cursor_x;
-			if (g_shell.cursor_x == g_shell.start_select + 1)
-				g_shell.end_select = g_shell.end_select > 3 ?
-					g_shell.end_select - 1 : g_shell.end_select;
-			else
-				g_shell.end_select = g_shell.end_select > 3 ?
-					g_shell.end_select - 2 : g_shell.end_select;
-		}
-		else
-		{
-			g_shell.end_select = g_shell.cursor_x;
-			g_shell.end_select = g_shell.end_select > 3 ? 
-				g_shell.end_select - 1 : g_shell.end_select;
-		}
-		return (K_LEFT);
-	}
-	return (0);
-}*/
 
 int 			arrow_combo(char *key)
 {

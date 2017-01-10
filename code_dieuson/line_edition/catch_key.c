@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "42sh.h"
+#include "../includes/42sh.h"
 
 int 			detect_selection_text(char *key, int start ,
 												 int end , int cursor_x)
@@ -137,13 +137,11 @@ int				readkey(void)
 	if (c[0] == 4 && c[1] == 0) // CTRL + D
 		return (K_ESCAPE);
 	else if (c[0] > 31 && c[0] < 127)
-	{
-		MULTI(g_shell.start_select, g_shell.end_select, 0);
-		fill_current_line(c[0]);
 		return (K_PRINT);
-	}
 	else if (c[0] == 5) // CTRL + E
 		return (K_COPY);
+	else if (c[0] == 9) // TAB
+		return (K_TAB);
 	else if (c[0] == 18) // CTRL + R
 		return (K_CUT);
 	else if (c[0] == 20) // PAST CTRL + T

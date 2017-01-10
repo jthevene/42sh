@@ -13,9 +13,10 @@
 NAME				=	42sh
 
 DIEUSON 			=	./code_dieuson/
-SRC_DIR				=	$(DIEUSON)srcs/
+SRC_DIR				=	$(DIEUSON)line_edition/
 INCLUDE_DIR			=	$(DIEUSON)includes
 OBJ_DIR				=	./objs
+DIR_AUTO 			= 	$(DIEUSON)completion_dynamique/
 
 LIBFT_DIR			=	./libft
 LIBFT_NAME			=	$(LIBFT_DIR)/libft.a
@@ -32,6 +33,11 @@ SRC_DIEUSON			=	$(SRC_DIR)main.c $(SRC_DIR)catch_key.c 	\
 						$(SRC_DIR)return_key.c $(SRC_DIR)signal.c \
 						$(SRC_DIR)termios.c $(SRC_DIR)var.c \
 						$(SRC_DIR)history2.c \
+						$(DIR_AUTO)detect_auto_completion.c $(DIR_AUTO)get_files.c \
+						$(DIR_AUTO)match_elements.c $(DIR_AUTO)set_path.c \
+						$(DIR_AUTO)display_completion.c $(DIR_AUTO)build_list.c \
+						$(DIR_AUTO)set_sentence.c $(DIR_AUTO)free_auto_completion.c \
+						$(DIR_AUTO)tools.c $(DIR_AUTO)set_path_second_part.c
 
 BIN_DIEUSON 		=	main.o catch_key.o 	\
 						cursor_move.o history.o \
@@ -39,6 +45,10 @@ BIN_DIEUSON 		=	main.o catch_key.o 	\
 						line_edition.o print_line.o \
 						return_key.o signal.o \
 						termios.o var.o history2.o\
+						detect_auto_completion.o get_files.o \
+						match_elements.o set_path.o display_completion.o \
+						build_list.o set_sentence.o free_auto_completion.o \
+						tools.o set_path_second_part.o
 
 ################# 		GLOBING PART		####################################
 GLOBING = ./code_simon/
@@ -50,27 +60,27 @@ UTILS_1 = $(GLOBING)globing/square_brackets/sbracket_utils/
 UTILS_2 = $(GLOBING)globing/curly_brackets/cbracket_utils/
 BIN_DIR_GLOBING = $(GLOBING)bin_folder/
 
-SRC_GLOBING = $(GLOBING)globing/glob_parser.c \
-		$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
+SRC_GLOBING = $(GLOBING)globing/glob_parser.c $(GLOBING)globing/get_path.c \
+		$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c \
 		\
-		$(SBRACK)hub_sbracket.c $(SBRACK)fill_tabs.c\
-		$(SBRACK)init_tabs.c $(SBRACK)category_bracket.c\
+		$(SBRACK)hub_sbracket.c $(SBRACK)fill_tabs.c \
+		$(SBRACK)init_tabs.c $(SBRACK)category_bracket.c \
 		$(SBRACK)sbracket_list.c \
 		\
 		$(CBRACK)hub_cbracket.c $(CBRACK)fill_clist.c $(CBRACK)cbracket_list.c \
 		$(CBRACK)cbracket_errors.c $(CBRACK)expansion.c \
 		\
-		$(UTILS_1)catch_dash.c $(UTILS_1)check_rng.c $(UTILS_1)clean_brackets.c\
-		$(UTILS_1)count_brackets.c $(UTILS_1)get_functions.c\
+		$(UTILS_1)catch_dash.c $(UTILS_1)check_rng.c $(UTILS_1)clean_brackets.c \
+		$(UTILS_1)count_brackets.c $(UTILS_1)get_functions.c \
 		$(UTILS_1)str_nodouble.c \
 		\
 		$(UTILS_2)commas_utils.c $(UTILS_2)algo_imbricated.c $(UTILS_2)imbric_utils.c \
 		$(UTILS_2)get_imbric_patterns.c $(UTILS_2)cbracket_utils.c \
 		$(UTILS_2)imbric_utils2.c $(UTILS_2)double_brck.c $(UTILS_2)expansion_utils.c \
 		\
-		$(WILDCARDS)hub_final.c $(WILDCARDS)wildcards_tokens.c $(WILDCARDS)wildcards_utils.c\
-		$(WILDCARDS)question_mark.c $(WILDCARDS)wildcards_utils2.c\
-		$(GLOBING)globing/get_path.c  \
+		$(WILDCARDS)hub_final.c $(WILDCARDS)wildcards_tokens.c $(WILDCARDS)wildcards_utils.c \
+		$(WILDCARDS)question_mark.c $(WILDCARDS)wildcards_utils2.c $(WILDCARDS)lst_tools.c\
+		\
 
 BIN_GLOBING = glob_parser.o \
 		\
@@ -94,7 +104,8 @@ BIN_GLOBING = glob_parser.o \
 		cbracket_utils.o imbric_utils2.o \
 		double_brck.o expansion_utils.o \
 		wildcards_tokens.o hub_final.o wildcards_utils.o\
-		get_path.o question_mark.o wildcards_utils2.o
+		get_path.o question_mark.o wildcards_utils2.o \
+		lst_tools.o
 ################# 		END SIMON PART		####################################
 
 INCLUDES 	= -I$(INCLUDE_DIR) -I$(LIBFT_INCLUDE_DIR) \
@@ -107,7 +118,8 @@ lib:
 
 $(NAME):
 	gcc $(C_FLAGS) $(INCLUDES) $(SRC_DIEUSON) $(SRC_GLOBING) -Incurses -c
-	gcc $(C_FLAGS) $(BIN_GLOBING) $(BIN_DIEUSON) $(LIBFT_DIR)/libft.a -ltermcap -o $(NAME)
+	gcc $(C_FLAGS) $(BIN_GLOBING) $(BIN_DIEUSON) $(LIBFT_DIR)/libftprintf.a \
+			$(LIBFT_DIR)/libft.a -ltermcap -o $(NAME)
 	mkdir bin_folder
 	mv $(BIN_DIEUSON) $(BIN_GLOBING) bin_folder
 

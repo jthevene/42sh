@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "42sh.h"
+#include "../includes/42sh.h"
 
 void		display_prompt(void)
 {
@@ -69,6 +69,8 @@ static	void	run_shell(void)
 		key = readkey();
 		if (key == K_PRINT)
 		{
+			MULTI(g_shell.start_select, g_shell.end_select, 0);
+			fill_current_line(g_shell.c[0]);
 			g_shell.cursor_x++;
 			print_line(i);
 			i++;
@@ -104,6 +106,11 @@ static	void	run_shell(void)
 			ft_putstr("\n");
 			ft_reset_termios(g_shell.t_back);
 			return ;
+		}
+		else if (key == K_TAB)
+		{
+			detect_auto_completion(g_shell.current_line);
+			print_line(i);
 		}
 		g_shell.running = 0;
 	}

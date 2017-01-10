@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <42sh.h>
+#include "../includes/42sh.h"
 
 static void 	set_cursor_pos_to_end(int i)
 {

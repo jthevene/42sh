@@ -51,6 +51,23 @@
 # define K_COPY	  		17
 # define K_CUT	  		18
 # define K_PAST	  		19
+# define K_TAB     		20
+
+typedef struct				s_file
+{
+	char					*name;
+	int 					type;
+	int 					len;
+	char 					*absolute_path;
+	int 					nb_elem;
+	struct s_file			*next;
+}							t_file;
+
+typedef struct				s_completion
+{
+	struct s_file 			*elem;
+	struct s_completion		*next;
+}							t_completion;
 
 typedef struct 		s_lst
 {
@@ -70,6 +87,7 @@ typedef struct		s_var
 typedef struct		s_shell
 {
 	char 			*c;
+	int 			len;
 	char			*oldpwd;
 	char 			*clipboard;
 	t_var			*vars;//contenu de ENV
@@ -108,6 +126,30 @@ typedef struct		s_shell
 t_shell		g_shell;
 
 /*
+** AUTO_COMLETION
+*/
+void 						free_int_tab(float *tab_to_del, int len);
+void 						free_lists(t_file *match_files);
+void 						free_lst_lst(t_completion *lst_lst);
+void						free_auto_tab(char **table);
+void 						free_files(t_file **files_list);
+
+int 						arrondi(float val);
+int 						ft_nb_elem_lst(int nb_elem, int nb_col);
+
+char						*set_sentence(char *str, int len_str, char *name);
+char 						*set_end_path(char **new_path, char **sentence);
+
+t_file						*sort_list(t_file *files);
+char 						*default_sentence(char **sentence);
+char						*detect_auto_completion(char *sentence);
+t_file 						*store_files_dirs(DIR *rep, t_file *files, char *path, char *to_search);
+t_file 						*compare_list_sentence(t_file *files, char *sentence);
+char 						**set_path(char **sentence, char *home, char *current_path);
+void 						display_completion(char *sentence, t_file *match_files);
+t_completion 				*build_lst_lst(t_file *match_files, int nb_elem, int nb_col);
+char 						*similarity(t_file *match_files, char *sentence);
+/*
 ** CATCH_KEY
 */
 void 		set_2d_line_val();
@@ -120,6 +162,7 @@ int					ft_cursor_right(int i);
 int 				distrib_cursor_mooves(int key);
 void 				arrow_moove_left();
 void 				arrow_moove_right();
+void 				go_to_end();
 /*
 ** HISTORY
 */

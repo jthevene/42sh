@@ -1,4 +1,4 @@
-#include "42sh.h"
+#include "../includes/42sh.h"
 
 static char 	*store_selection(int start_select, int end_select, int key)
 {

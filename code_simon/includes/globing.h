@@ -95,7 +95,15 @@ typedef struct			s_clist
 	struct s_clist		*next;
 	struct s_clist		*prev;
 }						t_clist;
-
+/*
+typedef struct 			s_lst
+{
+	void				*content;
+	struct s_lst		*prev;
+	struct s_lst		*next;
+	int 				number;
+} 						t_lst;
+*/
 typedef struct			s_glob
 {
 	t_bracket			*sbracket;
@@ -229,17 +237,29 @@ int						only_qmark(char *str, t_glob *glob);
 int						only_cbrkt(char *str, t_glob *glob);
 int						mix_with_star(char *str, t_glob *glob);
 int						mix_token(char *str, t_glob *glob);
+
 int						get_len_token(char *str);
 char					*get_token(char *str);
-void					ft_print_list_content(t_list *lst);
-t_list					*get_dir_content(char *dir);
+
+t_lst					*get_dir_content(char *dir);
 char					*ft_strpathjoin(const char *s1, const char *s2);
 char					*get_cmd_path(char *str);
-t_list 					*qmark_get_matching_content(t_list *dir_content, char *target);
+
+t_lst 					*qmark_get_matching_content(t_lst *dir_content, char *target);
+
 void					check_file(int len, char *s, char *file, t_glob **glob);
 char					*get_next_star(char *str, int i);
+
 int						ft_istrstr(char *s1, char *s2, int i, t_glob *g);
+char					*ft_istrchr(const char *s, int c, int i);
+
 int						push_content_path(t_bracket **l, char *s, t_glob *g);
 char					*get_cmd_last_path(char *str);
+
+t_lst					*ft_newlst(char *content);
+void					ft_append_lst(t_lst **lst, t_lst *new_elem);
+void					ft_print_list_content(t_lst *lst);
+void					ft_lst_rewind(t_lst **lst);
+void					ft_lst_forward(t_lst **lst);
 
 #endif

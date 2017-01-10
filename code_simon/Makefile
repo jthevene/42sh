@@ -21,7 +21,8 @@ UTILS_1 = ./globing/square_brackets/sbracket_utils/
 UTILS_2 = ./globing/curly_brackets/cbracket_utils/
 WILDCARDS = ./globing/wildcards/
 
-SRCS = 	globing/glob_parser.c \
+SRCS =  main.c globing/glob_parser.c globing/get_path.c \
+		\
 		$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
 		\
 		$(SBRACK)hub_sbracket.c $(SBRACK)fill_tabs.c\
@@ -39,26 +40,34 @@ SRCS = 	globing/glob_parser.c \
 		$(UTILS_2)get_imbric_patterns.c $(UTILS_2)cbracket_utils.c \
 		$(UTILS_2)imbric_utils2.c $(UTILS_2)double_brck.c $(UTILS_2)expansion_utils.c \
 		\
-		$(WILDCARDS)hub_final.c $(WILDCARDS)wildcards_tokens.c $(WILDCARDS)get_len.c \
+		$(WILDCARDS)hub_final.c $(WILDCARDS)wildcards_tokens.c $(WILDCARDS)wildcards_utils.c\
+		$(WILDCARDS)question_mark.c $(WILDCARDS)wildcards_utils2.c \
+		$(WILDCARDS)lst_tools.c \
 		\
-		./globing/get_path.c \
-		main.c
 
-BIN =	glob_parser.o \
+BIN =   main.o glob_parser.o \
 		\
-		simple_right.o double_right.o redir_utils.o \
+		simple_right.o double_right.o \
+		redir_utils.o \
 		\
-		hub_sbracket.o fill_tabs.o init_tabs.o \
-		category_bracket.o sbracket_list.o catch_dash.o check_rng.o \
-		clean_brackets.o count_brackets.o get_functions.o str_nodouble.o \
+		hub_sbracket.o fill_tabs.o \
+		init_tabs.o \
 		\
-		hub_cbracket.o fill_clist.o cbracket_list.o cbracket_errors.o expansion.o \
+		category_bracket.o sbracket_list.o \
+		catch_dash.o check_rng.o \
+		clean_brackets.o count_brackets.o \
+		get_functions.o str_nodouble.o \
 		\
-		commas_utils.o algo_imbricated.o imbric_utils.o get_imbric_patterns.o \
-		cbracket_utils.o imbric_utils2.o double_brck.o expansion_utils.o \
+		hub_cbracket.o fill_clist.o \
+		cbracket_list.o cbracket_errors.o \
+		expansion.o \
 		\
-		get_path.o wildcards_tokens.o hub_final.o get_len.o\
-		main.o
+		commas_utils.o algo_imbricated.o \
+		imbric_utils.o get_imbric_patterns.o \
+		cbracket_utils.o imbric_utils2.o \
+		double_brck.o expansion_utils.o \
+		wildcards_tokens.o hub_final.o wildcards_utils.o\
+		get_path.o question_mark.o wildcards_utils2.o lst_tools.o
 
 
 CC_FLAGS = -Wall -Wextra -Werror
@@ -69,7 +78,7 @@ all: $(NAME)
 
 $(NAME):
 	gcc $(CC_FLAGS) $(INCLUDES) $(SRCS) -c
-#	gcc $(CC_FLAGS) $(BIN) $(LIBFT)libft.a -o $(NAME)
+	gcc $(CC_FLAGS) $(BIN) $(LIBFT)libft.a -o $(NAME)
 	mkdir bin_folder
 	mv $(BIN) bin_folder
 

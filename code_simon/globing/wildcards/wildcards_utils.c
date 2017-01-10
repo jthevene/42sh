@@ -67,23 +67,50 @@ char	*get_next_star(char *str, int i)
 int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 {
 	FT_INIT(int, j, 0);
+	FT_INIT(int, ret, 0);
 	FT_INIT(int, taille, ft_strlen(s2));
-	if (taille == 0 || !g)
+	if (!taille || !g)
 		return (0);
+	i = s2[j] == '?' ? i + 1 : i;
 	while (s1[i])
 	{
-		if (s2[j] == '?' || s2[j] == '[')
-				return (i + j);
-		while (s1[i + j] == s2[j])
+		j = s2[j] == '?' ? j + 1 : j;
+		ret = i + j;
+		while (s1[i + j] && s2[j] && (s1[i + j] == s2[j] || s2[j] == '['))
 		{
+			if (s2[j] == '[')
+			{
+//				printf("s1 = %s, s1[i] = %c, i = %d\n", s1, s1[i], i);
+				if (!ft_strchr(g->sbracket->content, s1[i]))
+				{
+//					printf("break\n");
+					break ;
+				}
+				g->sbracket = g->sbracket->next ? g->sbracket->next : g->sbracket;
+				ret++;
+			}
 			if (j == taille - 1)
-				return (i + j);
-			j++;
-			if (s2[j] == '?' || s2[j] == '[')
-				return (i + j);
+			{
+//				printf("ret = %d\n", ret);
+				return (ret);
+			}
+			j += s2[j] == '[' ? next_bracket(s2, '[', j) : 1;
+			ret += s2[j] == '?' ? 2 : 1;
+			j = s2[j] == '?' ? j + 1 : j;
+//			printf("j = %d, taille = %d\n", j, taille);
 		}
 		j = 0;
 		i++;
 	}
+//	printf("%s ===> fail ret = %d\n", s1, ret);
 	return (0);
+}
+
+char	*ft_istrchr(const char *s, int c, int i)
+{
+	while (s[i] && s[i] != (char)c)
+		i++;
+	if (s[i] == (char)c)
+		return ((char*)&s[i]);
+	return (NULL);
 }

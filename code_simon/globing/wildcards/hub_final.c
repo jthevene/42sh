@@ -31,7 +31,7 @@ static int	is_only_token(char token, char *str)
 int			only_star(char *str, t_glob *glob)
 {
 	FT_INIT(char *, path, get_cmd_path(str));
-	FT_INIT(t_list *, files, get_dir_content(path));
+	FT_INIT(t_lst *, files, get_dir_content(path));
 	while (files)
 	{
 		pushback_content(&glob->args, ft_strdup(files->content));
@@ -58,28 +58,28 @@ int			g_parse_expr(char *str, t_glob *glob)
 	else
 		return (mix_token(str, glob));
 }
-
-int			recursive_handling(t_glob *glob)
+/*
+int			multi_handling(t_glob *glob)
 {
 	FT_INIT(t_bracket *, tmp, NULL);
 	rewind_tbracket(&glob->args);
-	if (!ft_strchr(glob->args->content, '*')
-		&& !ft_strchr(glob->args->content, '?')
-		&& !ft_strchr(glob->args->content, '['))
-		return (0);
-	copy_list(&glob->args, &tmp);
-	free_tbracket(&glob->args);
-	while (tmp->next)
+	while (ft_strchr(glob->args->content, '*')
+		|| ft_strchr(glob->args->content, '?')
+		|| ft_strchr(glob->args->content, '['))
 	{
+		copy_list(&glob->args, &tmp);
+		free_tbracket(&glob->args);
+		while (tmp->next)
+		{
+			g_parse_expr(tmp->content, glob);
+			tmp = tmp->next;
+		}
 		g_parse_expr(tmp->content, glob);
-		tmp = tmp->next;
+		free_tbracket(&tmp);
 	}
-	g_parse_expr(tmp->content, glob);
-	free_tbracket(&tmp);
-//	recursive_handling(glob);
 	return (1);
 }
-
+*/
 void		hub_final(t_glob *glob) // Hub final du traitement globing
 {
 	FT_INIT(int, i, 0);
@@ -108,12 +108,16 @@ void		hub_final(t_glob *glob) // Hub final du traitement globing
 			g_parse_expr(tmp, glob);
 		free(tmp);
 	}
-	recursive_handling(glob);
-	rewind_tbracket(&glob->args);
-	while (glob->args->next)
+//	multi_handling(glob);
+	if (glob->args)
 	{
+		rewind_tbracket(&glob->args);
+		while (glob->args->next)
+		{
+			printf("Arg : %s\n", glob->args->content);
+			glob->args = glob->args->next;
+		}
 		printf("Arg : %s\n", glob->args->content);
-		glob->args = glob->args->next;
+		free_tbracket(&glob->args);
 	}
-	printf("Arg : %s\n", glob->args->content);
 }

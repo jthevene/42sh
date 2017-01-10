@@ -177,11 +177,4 @@ char				*get_var(t_shell *g_shell, char *n_var);
 t_var				*new_var(char *v_name, char *v_value);
 void				ft_varappend(t_var *new_element);
 
-// SIMON
-int						glob_parser(void);
-void		ft_print_list_content(t_list *lst);
-t_list		*get_dir_content(char *dir);
-char	*ft_strpathjoin(const char *s1, const char *s2);
-t_list 		*qmark_get_matching_content(t_list *dir_content, char *target);
-
 #endif

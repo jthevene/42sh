@@ -177,4 +177,7 @@ char				*get_var(t_shell *g_shell, char *n_var);
 t_var				*new_var(char *v_name, char *v_value);
 void				ft_varappend(t_var *new_element);
 
+// SIMON
+int					glob_parser(void);
+
 #endif

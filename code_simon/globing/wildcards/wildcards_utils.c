@@ -39,7 +39,7 @@ char	*get_token(char *str)
 		i++;
 	if (!str[i])
 		return (NULL);
-	while (str[i] && str[i] != '/')
+	while (i >= 0 && str[i] && str[i] != '/')
 		i--;
 	i2 = ++i;
 	while (str[i] && str[i] != '/')

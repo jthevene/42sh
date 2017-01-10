@@ -50,27 +50,27 @@ UTILS_1 = $(GLOBING)globing/square_brackets/sbracket_utils/
 UTILS_2 = $(GLOBING)globing/curly_brackets/cbracket_utils/
 BIN_DIR_GLOBING = $(GLOBING)bin_folder/
 
-SRC_GLOBING = $(GLOBING)globing/glob_parser.c \
-		$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
+SRC_GLOBING = $(GLOBING)globing/glob_parser.c $(GLOBING)globing/get_path.c \
+		$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c \
 		\
-		$(SBRACK)hub_sbracket.c $(SBRACK)fill_tabs.c\
-		$(SBRACK)init_tabs.c $(SBRACK)category_bracket.c\
+		$(SBRACK)hub_sbracket.c $(SBRACK)fill_tabs.c \
+		$(SBRACK)init_tabs.c $(SBRACK)category_bracket.c \
 		$(SBRACK)sbracket_list.c \
 		\
 		$(CBRACK)hub_cbracket.c $(CBRACK)fill_clist.c $(CBRACK)cbracket_list.c \
 		$(CBRACK)cbracket_errors.c $(CBRACK)expansion.c \
 		\
-		$(UTILS_1)catch_dash.c $(UTILS_1)check_rng.c $(UTILS_1)clean_brackets.c\
-		$(UTILS_1)count_brackets.c $(UTILS_1)get_functions.c\
+		$(UTILS_1)catch_dash.c $(UTILS_1)check_rng.c $(UTILS_1)clean_brackets.c \
+		$(UTILS_1)count_brackets.c $(UTILS_1)get_functions.c \
 		$(UTILS_1)str_nodouble.c \
 		\
 		$(UTILS_2)commas_utils.c $(UTILS_2)algo_imbricated.c $(UTILS_2)imbric_utils.c \
 		$(UTILS_2)get_imbric_patterns.c $(UTILS_2)cbracket_utils.c \
 		$(UTILS_2)imbric_utils2.c $(UTILS_2)double_brck.c $(UTILS_2)expansion_utils.c \
 		\
-		$(WILDCARDS)hub_final.c $(WILDCARDS)wildcards_tokens.c $(WILDCARDS)wildcards_utils.c\
-		$(WILDCARDS)question_mark.c $(WILDCARDS)wildcards_utils2.c\
-		$(GLOBING)globing/get_path.c  \
+		$(WILDCARDS)hub_final.c $(WILDCARDS)wildcards_tokens.c $(WILDCARDS)wildcards_utils.c \
+		$(WILDCARDS)question_mark.c $(WILDCARDS)wildcards_utils2.c $(WILDCARDS)lst_tools.c\
+		\
 
 BIN_GLOBING = glob_parser.o \
 		\
@@ -94,7 +94,8 @@ BIN_GLOBING = glob_parser.o \
 		cbracket_utils.o imbric_utils2.o \
 		double_brck.o expansion_utils.o \
 		wildcards_tokens.o hub_final.o wildcards_utils.o\
-		get_path.o question_mark.o wildcards_utils2.o
+		get_path.o question_mark.o wildcards_utils2.o \
+		lst_tools.o
 ################# 		END SIMON PART		####################################
 
 INCLUDES 	= -I$(INCLUDE_DIR) -I$(LIBFT_INCLUDE_DIR) \

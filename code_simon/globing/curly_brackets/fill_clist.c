@@ -72,7 +72,7 @@ void			get_patterns(char *str, t_glob *glob)
 	{
 		clist_list_pushback(&glob->cbracket);
 		glob->cbracket->list->content = expand_pattern(str, glob);
-		printf("New simple pattern created : %s\n", glob->cbracket->list->content);
+//		printf("New simple pattern created : %s\n", glob->cbracket->list->content);
 	}
 	else
 		i_algo_imbricated(ft_strdup(str), glob);
@@ -111,6 +111,6 @@ int				fill_clist(char *line, t_glob *glob)
 		free(tmp);
 		i++;
 	}
-	print_clist(&glob->cbracket);
+//	print_clist(&glob->cbracket);
 	return (1);
 }

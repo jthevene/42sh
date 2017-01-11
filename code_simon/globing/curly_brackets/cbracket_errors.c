@@ -27,7 +27,6 @@ int		is_expansion(char *line)
 int		cbracket_errors(char *line, t_glob *glob)
 {
 	FT_INIT(char *, tmp, NULL);
-	printf("NTM\n");
 	if (ft_strchr(line, ' '))
 	{
 		tmp = ft_strjoin("42sh: Spaces are forbidden in expression: "

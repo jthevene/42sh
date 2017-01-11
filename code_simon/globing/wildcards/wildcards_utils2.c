@@ -33,9 +33,20 @@ int				push_content_path(t_bracket **l, char *s, t_glob *g)
 int		ft_check_bracket(char *s1, int i, int stop, t_glob *g)
 {
 	FT_INIT(int, ret, 0);
+	FT_INIT(char, last, i - 1 >= 0 ? s1[i - 1] : '\0');
 	while (s1[i])
 	{
-		if (ft_strchr(g->sbracket->content, s1[i]))
+		if (last)
+		{
+			if (ft_strchr(g->sbracket->content, s1[i]) && s1[i - 1] == last)
+			{
+				if (stop == TRUE)
+					return (i);
+				else
+					ret = i;
+			}			
+		}
+		else if (ft_strchr(g->sbracket->content, s1[i]))
 		{
 			if (stop == TRUE)
 				return (i);
@@ -111,13 +122,15 @@ void	check_file(int len, char *s, char *file, t_glob **g)
 				j = ft_istrstr(file, tmp, j, (*g));
 			else
 				break ;
-			printf("check_file : tmp = %s, s : %s, file : %s, i : %d, j : %d\n", tmp, s, file, i, j);
+//			printf("check_file : tmp = %s, s : %s, file : %s, i : %d, j : %d, len : %d\n", tmp, s, file, i, j, len);
 			i += ft_strlen(tmp);
 			if (!ft_istrchr(s, '*', i))
 			{
 				j++;
 				break ;
 			}
+			else if (ft_istrchr(s, '*', i) && j + 1 == len)
+				j--;
 			if (tmp)
 				free(tmp);
 			tmp = NULL;

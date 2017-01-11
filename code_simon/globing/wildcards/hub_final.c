@@ -58,10 +58,12 @@ int			g_parse_expr(char *str, t_glob *glob)
 	else
 		return (mix_token(str, glob));
 }
-/*
+
 int			multi_handling(t_glob *glob)
 {
 	FT_INIT(t_bracket *, tmp, NULL);
+	if (!glob->args)
+		return (0);
 	rewind_tbracket(&glob->args);
 	while (ft_strchr(glob->args->content, '*')
 		|| ft_strchr(glob->args->content, '?')
@@ -79,7 +81,7 @@ int			multi_handling(t_glob *glob)
 	}
 	return (1);
 }
-*/
+
 void		hub_final(t_glob *glob) // Hub final du traitement globing
 {
 	FT_INIT(int, i, 0);
@@ -108,7 +110,7 @@ void		hub_final(t_glob *glob) // Hub final du traitement globing
 			g_parse_expr(tmp, glob);
 		free(tmp);
 	}
-//	multi_handling(glob);
+	multi_handling(glob);
 	if (glob->args)
 	{
 		rewind_tbracket(&glob->args);

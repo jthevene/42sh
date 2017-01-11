@@ -103,7 +103,7 @@ void				i_simple_patterns(char *str, t_glob *glob)
 			clist_list_pushback(&glob->cbracket);
 			tmp = ft_strsub(str, j, i - j);
 			glob->cbracket->list->content = expand_pattern(tmp, glob);
-			printf("New pattern created : %s\n", glob->cbracket->list->content);
+//			printf("New pattern created : %s\n", glob->cbracket->list->content);
 			j = i + 1;
 			free(tmp);
 		}
@@ -112,7 +112,7 @@ void				i_simple_patterns(char *str, t_glob *glob)
 	clist_list_pushback(&glob->cbracket);
 	tmp = ft_strsub(str, j, i - j);
 	glob->cbracket->list->content = expand_pattern(tmp, glob);
-	printf("New pattern created : %s\n", glob->cbracket->list->content);
+//	printf("New pattern created : %s\n", glob->cbracket->list->content);
 	free(tmp);
 }
 
@@ -142,7 +142,7 @@ void				i_hub_patterns(char *str, t_glob *glob)
 			{
 				clist_list_pushback(&glob->cbracket);
 				glob->cbracket->list->content = expand_pattern(tmp, glob);
-				printf("%d - New pattern created : %s\n\n", count, glob->cbracket->list->content);
+//				printf("%d - New pattern created : %s\n\n", count, glob->cbracket->list->content);
 				count++;
 				free(tmp);
 			}

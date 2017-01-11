@@ -44,7 +44,7 @@ void			hub_sbracket(t_glob *glob, char *line) // Gère les différents cas de fi
 			i += next_bracket(line, '[', i);
 			if (tmp && ft_strlen(tmp) > 1)
 				free(tmp);
-			printf("\033[32mRet = %s\033[0m\n", glob->sbracket->content);
+//			printf("\033[32mRet = %s\033[0m\n", glob->sbracket->content);
 		}
 		i++;
 	}

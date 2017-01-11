@@ -52,8 +52,6 @@ static char 	*set_similarity(char *similarity, int nb_args,
 		ft_strdel(&tmp);
 		if (similarity && sentence && !ft_strcmp(similarity, sentence))
 			ft_strdel(&similarity);
-//		else
-//			ft_putstr(similarity);
 	}
 	else
 	{
@@ -78,6 +76,11 @@ char 			*similarity(t_file *match_files, char *sentence)
 		len_cmp++;
 	}
 	similarity = set_similarity(similarity, nb_args, match_files, sentence);
+	if (similarity && !ft_strlen(similarity))
+	{
+		ft_strdel(&similarity);
+		similarity = "";
+	}
 	return (similarity);
 }
 

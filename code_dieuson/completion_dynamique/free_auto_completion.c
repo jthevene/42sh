@@ -34,7 +34,7 @@ void 			free_files(t_file **files_list)
 	
 	if (!(*files_list))
 		return ;
-	while((*files_list) && files_list)
+	while((*files_list))
 	{
 		ft_strdel(&((*files_list)->name));
 		ft_strdel(&((*files_list)->absolute_path));

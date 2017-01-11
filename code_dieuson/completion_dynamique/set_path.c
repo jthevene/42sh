@@ -87,6 +87,10 @@ char 			**set_path(char **sentence, char *home, char *current_path)
 	FT_INIT(char**, dirs, NULL);
 	home = !home ? "" : home;
 	current_path = !current_path ? "" : current_path;
+
+	if ((*sentence)[ft_strlen(*sentence) - 1] == ' ')
+		return (ft_strsplit(current_path, '\n'));
+
 	if (!ft_strchr(*sentence, ' ') && *sentence[0] != '/' && ft_strlen(current_path))
 		return (ft_strsplit(getenv("PATH"), ':'));
 	else

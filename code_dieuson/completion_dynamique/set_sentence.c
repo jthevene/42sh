@@ -27,6 +27,18 @@ char		*set_sentence(char *str, int len_str, char *name)
 	return (str);
 }
 
+char 			*is_space(char *sentence, char *str)
+{
+	FT_INIT(char*, tmp, str);
+	if (sentence[ft_strlen(sentence) - 1] == ' ')
+	{
+		str = ft_strjoin(str, " ");
+		ft_strdel(&tmp);
+	}
+	ft_strdel(&sentence);
+	return (str);
+}
+
 char 			*default_sentence(char **sentence)
 {
 	FT_INIT(char **, path, NULL);
@@ -52,6 +64,6 @@ char 			*default_sentence(char **sentence)
 		i++;
 	}
 	free_simple_tab(&path);
-	ft_strdel(sentence);
+	str = is_space(*sentence, str);
 	return (str);
 }

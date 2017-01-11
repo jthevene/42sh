@@ -46,6 +46,7 @@ static void		display_form(t_completion *all_col, int nb_elem,
 		}
 	}
 	ft_strdel(&tmp);
+	ft_putendl("");
 }
 
 static float 			*get_display_values(t_file *match_files)
@@ -91,13 +92,16 @@ void 			display_completion(char *sentence, t_file *match_files)
 {
 	if (!sentence || !match_files)
 		return ;
+	if (match_files->nb_elem == 1)
+	{
+		fill_current_line(' ');
+		g_shell.cursor_x++;
+		return ;
+	}
 	FT_INIT(float*, disp_val, get_display_values(match_files));
 	FT_INIT(t_completion *, lst_lst, NULL);
 	FT_INIT(t_completion*, tmp_lst, NULL);
-	FT_INIT(float, nb_elem, disp_val[0]);
-	FT_INIT(float, len_str, disp_val[1]);
 	FT_INIT(float, nb_col, disp_val[2]);
-	FT_INIT(float, nb_line, disp_val[3]);
 	FT_INIT(float, nb_elem_lst, disp_val[4]);
 	if (!ask_to_show_data(disp_val))
 		return (free(disp_val));
@@ -105,10 +109,7 @@ void 			display_completion(char *sentence, t_file *match_files)
 				1 : nb_elem_lst), nb_col);
 	tmp_lst = lst_lst;
 	display_form(lst_lst, disp_val[0], disp_val[1], disp_val[2]);
-	ft_putendl("");
 	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
 	free(disp_val);
 	free_lst_lst(tmp_lst);
-	if (nb_elem || len_str || nb_col || nb_line || nb_elem_lst || lst_lst)
-		return ;
 }

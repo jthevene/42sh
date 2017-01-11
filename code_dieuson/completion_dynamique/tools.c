@@ -1,5 +1,17 @@
 #include "../includes/42sh.h"
 
+int 			prev_sentence_value(char *sentence)
+{
+	FT_INIT(int, val, 0);
+	FT_INIT(int, poid, 0);
+	while (sentence && sentence[poid])
+	{
+		val += sentence[poid] + poid;
+		poid++;
+	}
+	return (val);
+}
+
 int 			arrondi(float val)
 {
 	FT_INIT(int, val2, val);

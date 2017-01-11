@@ -3,15 +3,36 @@
 static char 	*verif_second_str(struct stat infos, char *second_str,
 					char *first_str, char **sentence)
 {
+	FT_INIT(char*, tmp, NULL);
+	FT_INIT(int, len, ft_strlen(*sentence) - 1);
 	ft_strdel(&first_str);
 	if (S_ISDIR(infos.st_mode) && second_str[ft_strlen(second_str) - 1] != '/')
 	{
-		first_str = second_str;
-		second_str = ft_strjoin(second_str, "/");
-		ft_strdel(&first_str);
+		if ((*sentence)[len] != '/')
+		{
+			len = ft_strlen(second_str) - ft_strlen(ft_strrchr(second_str, '/')) + 1;
+			tmp = ft_strnew(len);
+			ft_strncpy(tmp, second_str, len);
+			ft_strdel(&second_str);
+			second_str = tmp;
+		}
+		else
+		{
+			first_str = second_str;
+			second_str = ft_strjoin(second_str, "/");
+			ft_strdel(&first_str);
+			ft_strdel(sentence);
+			*sentence = ft_strdup("");
+		}
 	}
-	ft_strdel(sentence);
-	*sentence = ft_strdup("");
+	else
+	{
+		len = ft_strlen(second_str) - ft_strlen(ft_strrchr(second_str, '/')) + 1;
+		tmp = ft_strnew(len);
+		ft_strncpy(tmp, second_str, len);
+		ft_strdel(&second_str);
+		second_str = tmp;
+	}
 	return (second_str);
 }
 

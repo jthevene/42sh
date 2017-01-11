@@ -48,6 +48,7 @@ void 		ft_segfault(int sig)
 {
 	(void)sig;
 	ft_putstr("Error segfault\nFin du programme\n");
+	ft_reset_termios(g_shell.t_back);
 	exit(0);
 }
 // static void		ft_sigint(int sig)

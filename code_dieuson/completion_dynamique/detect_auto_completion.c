@@ -41,7 +41,7 @@ t_file 			*get_file_path(char *path, char *sentence)
 	return (files);
 }
 
-t_file 			*files_list(char **sentence)
+static t_file	*files_list(char **sentence)
 {
 	FT_INIT(char**, path, NULL);
 	FT_INIT(t_file*, files, NULL);
@@ -64,7 +64,7 @@ t_file 			*files_list(char **sentence)
 	return (head);
 }
 
-char 			*if_new_sentence(char *sentence, t_file *files
+static char 	*if_new_sentence(char *sentence, t_file *files
 					, char *new_sentence)
 {
 	FT_INIT(int, i, 0);
@@ -98,11 +98,9 @@ char			*detect_auto_completion(char *sentence)
 		check = 0;
 		return (if_new_sentence(copy_sentence, files, new_sentence));
 	}
-	if (new_sentence)
-		ft_strdel(&new_sentence);
-	if (!check)
-		display_completion(copy_sentence, match_files);
-	check++;
+	if (check != prev_sentence_value(sentence))
+		check = prev_sentence_value(sentence);
+	display_completion(copy_sentence, match_files);
 	ft_strdel(&copy_sentence);
 	return (sentence);
 }

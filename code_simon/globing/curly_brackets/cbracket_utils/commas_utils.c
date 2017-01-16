@@ -82,7 +82,7 @@ int		next_comma(char *str, int i)
 int		is_bracket_in_exp(char *str, int i)
 {
 	FT_INIT(int, count, 0);
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == '}')
 			count++;

@@ -60,15 +60,12 @@ char				*next_expr(char *str, int i)
 
 void				free_double_tab(char ***tabl)
 {
-	FT_INIT(int, i, 0);
 	if ((*tabl))
 	{
-		while ((*tabl)[i])
-		{
-			if ((*tabl)[i])
-				free((*tabl)[i]);
-			i++;
-		}
+		if ((*tabl)[0])
+			free((*tabl)[0]);
+		if ((*tabl)[1])
+			free((*tabl)[1]);
 		free((*tabl));
 	}
 }

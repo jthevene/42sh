@@ -72,7 +72,6 @@ void			get_patterns(char *str, t_glob *glob)
 	{
 		clist_list_pushback(&glob->cbracket);
 		glob->cbracket->list->content = expand_pattern(str, glob);
-//		printf("New simple pattern created : %s\n", glob->cbracket->list->content);
 	}
 	else
 		i_algo_imbricated(ft_strdup(str), glob);
@@ -96,7 +95,6 @@ int				fill_clist(char *line, t_glob *glob)
 				tmp = special_sub(line, i);
 			else
 				tmp = ft_strsub(line, i, end_bracket(line, i));
-//			printf("next_comma 1 = %s\n", tmp);
 			get_patterns(tmp, glob);
 			free(tmp);
 			break ;
@@ -106,7 +104,6 @@ int				fill_clist(char *line, t_glob *glob)
 			tmp = ft_strsub(line, i, next_comma(line, i));
 			i += next_comma(line, i);
 		}
-//		printf("next_comma 2 = %s\n", tmp);
 		get_patterns(tmp, glob);
 		free(tmp);
 		i++;

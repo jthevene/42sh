@@ -98,9 +98,6 @@ static char				*replace_category(char *str, t_glob *glob)
 
 char					*handle_categories(char *str, t_glob *glob)
 {
-	/*
-		LEAK INEXPICABLE ICI
-	*/
 	FT_INIT(char *, tmp, ft_strdup(str));
 	FT_INIT(char *, tmp2, NULL);
 	while (1)
@@ -112,6 +109,5 @@ char					*handle_categories(char *str, t_glob *glob)
 		tmp = replace_category(tmp2, glob);
 		ft_strdel(&tmp2);
 	}
-	free(tmp);
-	return (ft_strdup(str));
+	return (tmp);
 }

@@ -57,7 +57,7 @@ void			rewind_tbracket(t_bracket **list)
 	}
 }
 
-void			free_tbracket(t_bracket **list)
+int				free_tbracket(t_bracket **list)
 {
 	FT_INIT(t_bracket *, tmp, NULL);
 	if ((*list))
@@ -78,6 +78,7 @@ void			free_tbracket(t_bracket **list)
 		(*list) = NULL;
 		free(tmp);
 	}
+	return (1);
 }
 
 void			copy_list(t_bracket **src, t_bracket **dest)

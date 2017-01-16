@@ -12,6 +12,18 @@
 
 #include "../../../includes/globing.h"
 
+int					i_get_arg_len_end(char *s, int i, t_glob *glob)
+{
+	FT_INIT(int, ret, 0);
+	while (s[i] && s[i] != '}' && s[i] != '{' && s[i] != ',')
+	{
+		i++;
+		ret++;
+	}
+	glob->c_touch = s[i] == '{' ? TRUE : glob->c_touch;
+	return (ret);
+}
+
 int					i_get_arg_len(char *s, int i, int type, t_glob *glob)
 {
 	FT_INIT(int, ret, 0);
@@ -25,24 +37,16 @@ int					i_get_arg_len(char *s, int i, int type, t_glob *glob)
 	}
 	else if (type == BEGIN)
 	{
-		while (i >= 0 && s[i] != '\0' && s[i] != ',' && s[i] != '}' && s[i] != '{')
+		while (i >= 0 && s[i] != '\0' && s[i] != ','
+			&& s[i] != '}' && s[i] != '{')
 		{
 			i--;
 			ret++;
 		}
-//		if (s[i] == '\0' && count_imbric(s) >= 2)
-//			ret = 0;
 		glob->c_touch = s[i] == '}' ? TRUE : FALSE;
 	}
 	else if (type == END)
-	{
-		while (s[i] && s[i] != '}' && s[i] != '{' && s[i] != ',')
-		{
-			i++;
-			ret++;
-		}
-		glob->c_touch = s[i] == '{' ? TRUE : glob->c_touch;
-	}
+		ret += i_get_arg_len_end(s, i, glob);
 	return (ret);
 }
 
@@ -90,12 +94,4 @@ char				*i_next_bracket(char *str)
 		i++;
 	}
 	return (NULL);
-}
-
-void				rewind_index(t_clist **list, int index)
-{
-	while ((*list)->prev)
-		(*list) = (*list)->prev;
-	while ((*list) && (*list)->index != index)
-		(*list) = (*list)->next;
 }

@@ -58,7 +58,13 @@ int			is_solo_arg(t_bracket *args)
 void		free_double_str(char **s, char **s2)
 {
 	if ((*s) != NULL)
+	{
 		free((*s));
+		(*s) = NULL;
+	}
 	if ((*s2) != NULL)
+	{
 		free((*s2));
+		(*s2) = NULL;
+	}
 }

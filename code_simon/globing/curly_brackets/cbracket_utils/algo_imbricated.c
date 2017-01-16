@@ -12,22 +12,7 @@
 
 #include "../../../includes/globing.h"
 
-int				count_imbric(char *str)
-{
-	FT_INIT(int, i, 0);
-	FT_INIT(int, count, 0);
-	if (!str)
-		return (-1);
-	while (str[i])
-	{
-		if (str[i] == '{')
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-int				i_recup_lastb(char *str, t_glob *glob)
+int			i_recup_lastb(char *str, t_glob *glob)
 {
 	FT_INIT(int, i, last_bracket(str, glob->lastb_count) + 1);
 	FT_INIT(int, arg_len, 0);
@@ -44,7 +29,7 @@ int				i_recup_lastb(char *str, t_glob *glob)
 	return (1);
 }
 
-t_bracket		*i_create_new_args(char **ext, t_glob *glob)
+t_bracket	*i_create_new_args(char **ext, t_glob *glob)
 {
 	FT_INIT(t_bracket *, new_args, NULL);
 	FT_INIT(char *, tmp, NULL);
@@ -73,56 +58,62 @@ t_bracket		*i_create_new_args(char **ext, t_glob *glob)
 	return (new_args);
 }
 
-char			*recreate_string(char *str, t_bracket *new_args, t_glob *glob)
+char		*recreate_2(char *s, char *new_s, t_bracket *new_a, t_glob *g)
+{
+	FT_INIT(char *, tmp, new_s);
+	FT_INIT(char *, tmp2, NULL);
+	FT_INIT(int, i, 0);
+	new_s = ft_strjoin(new_s, new_a->content);
+	free(tmp);
+	if (g->c_touch == TRUE)
+	{
+		tmp = new_s;
+		new_s = ft_strjoin(new_s, "}");
+		free(tmp);
+	}
+	i = i_get_expr_end(s, g->lastb_count);
+	if (i != (int)ft_strlen(s))
+	{
+		tmp = new_s;
+		tmp2 = ft_strsub(s, i, ft_strlen(s) - i);
+		new_s = ft_strjoin(new_s, tmp2);
+		free(tmp);
+		free(tmp2);
+	}
+	return (new_s);
+}
+
+char		*recreate_string(char *str, t_bracket *new_args, t_glob *glob)
 {
 	FT_INIT(int, i, last_bracket(str, glob->lastb_count) - 1);
-	FT_INIT(char *, new_str, NULL);
+	FT_INIT(char *, new_s, NULL);
 	FT_INIT(char *, tmp, NULL);
-	FT_INIT(char *, tmp2, NULL);
 	while (str[i] != '\0' && str[i] != ',' && str[i] != '{' && str[i] != '}')
 		i--;
-	new_str = i > 0 ? ft_strsub(str, 0, i + 1) : NULL;
+	new_s = i > 0 ? ft_strsub(str, 0, i + 1) : NULL;
 	if (glob->c_touch == TRUE)
 	{
-		tmp = new_str;
-		new_str = tmp ? ft_strjoin(new_str, "{") : ft_strdup("{");
+		tmp = new_s;
+		new_s = tmp ? ft_strjoin(new_s, "{") : ft_strdup("{");
 		if (tmp)
 			free(tmp);
 	}
 	while (new_args->next)
 	{
-		tmp = new_str;
-		new_str = !new_str ? ft_strdup(new_args->content)
-		: ft_strjoin(new_str, new_args->content);
+		tmp = new_s;
+		new_s = !new_s ? ft_strdup(new_args->content)
+		: ft_strjoin(new_s, new_args->content);
 		if (tmp)
 			free(tmp);
-		tmp = new_str;
-		new_str = ft_strjoin(new_str, ",");
+		tmp = new_s;
+		new_s = ft_strjoin(new_s, ",");
 		free(tmp);
 		new_args = new_args->next;
 	}
-	tmp = new_str;
-	new_str = ft_strjoin(new_str, new_args->content);
-	free(tmp);
-	if (glob->c_touch == TRUE)
-	{
-		tmp = new_str;
-		new_str = ft_strjoin(new_str, "}");
-		free(tmp);
-	}
-	i = i_get_expr_end(str, glob->lastb_count);
-	if (i != (int)ft_strlen(str))
-	{
-		tmp = new_str;
-		tmp2 = ft_strsub(str, i, ft_strlen(str) - i);
-		new_str = ft_strjoin(new_str, tmp2);
-		free(tmp);
-		free(tmp2);
-	}
-	return (new_str);
+	return (recreate_2(str, new_s, new_args, glob));
 }
 
-int				i_algo_imbricated(char *str, t_glob *glob)
+int			i_algo_imbricated(char *str, t_glob *glob)
 {
 	FT_INIT(char **, arg_ext, NULL);
 	FT_INIT(t_bracket *, new_args, NULL);

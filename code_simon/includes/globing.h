@@ -174,7 +174,7 @@ char					*mult_nodouble(char *str);
 int						bracket_pushback(t_bracket **list);
 int						pushback_content(t_bracket **list, char *content);
 void					rewind_tbracket(t_bracket **list);
-void					free_tbracket(t_bracket **list);
+int						free_tbracket(t_bracket **list);
 void					copy_list(t_bracket **src, t_bracket **dest);
 
 // FONCTIONS CURLY BRACKETS

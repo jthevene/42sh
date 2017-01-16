@@ -73,8 +73,7 @@ int				e_recreate(char *exp, int i, t_bracket *args, t_glob *glob)
 	{
 		tmp2 = ft_strjoin(args->content, ",");
 		glob->exp = ft_strjoin(tmp, tmp2);
-		free(tmp);
-		free(tmp2);
+		free_double_str(&tmp, &tmp2);
 		tmp = ft_strdup(glob->exp);
 		free(glob->exp);
 		args = args->next;
@@ -85,10 +84,8 @@ int				e_recreate(char *exp, int i, t_bracket *args, t_glob *glob)
 	tmp2 = ft_strjoin(args->content, glob->exp);
 	free(glob->exp);
 	glob->exp = ft_strjoin(tmp, tmp2);
-	free(tmp);
-	free(tmp2);
-	free_tbracket(&args);
-	return (1);
+	free_double_str(&tmp, &tmp2);
+	return (free_tbracket(&args));
 }
 
 int				is_valid_expansion(char *exp, int i, t_glob *glob)
@@ -116,6 +113,7 @@ int				is_valid_expansion(char *exp, int i, t_glob *glob)
 	}
 	e_recreate(exp, i, expansion_args(s, s2), glob);
 	free_double_str(&s, &s2);
+	free(exp);
 	return (1);
 }
 
@@ -128,17 +126,14 @@ void			hub_expansion(char *str, t_glob *glob)
 		if (str[i] == '{')
 		{
 			j = i;
-			while (str[j] != '}')
+			while (str[j] && str[j] != '}')
 			{
 				if (str[j] == '.' && str[j + 1] == '.')
 				{
 					if (!is_valid_expansion(str, i + 1, glob))
-						ft_putstr("/!!!!!! Expansion is not valid !!!!!!/\n");
+						break ;
 					else
-					{
-						free(str);
 						str = ft_strdup(glob->exp);
-					}
 					j += 2;
 				}
 				if (str[++j] == '{')

@@ -14,7 +14,6 @@
 
 static char				*category_choice(char *category, t_glob *glob)
 {
-	// Cette fonction gère les entrées de ce type : [[:upper:]]
 	if (!ft_strcmp(category, "upper"))
 		return (glob->upper);
 	else if (!ft_strcmp(category, "lower"))
@@ -41,7 +40,6 @@ static char				*category_choice(char *category, t_glob *glob)
 		return (NULL);
 }
 
-
 int						detect_category(char *str)
 {
 	FT_INIT(int, i, 0);
@@ -65,7 +63,6 @@ int						detect_category(char *str)
 	}
 	return (0);
 }
-
 
 static char				*replace_category(char *str, t_glob *glob)
 {

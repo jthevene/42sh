@@ -29,9 +29,7 @@ int			get_len_mix(char *str) // Calcule la longueur de la chaîne à allouer pou
 	FT_INIT(char *, tmp, NULL);
 	tmp = ft_strchr(str, '[') && ft_strchr(str, ']')
 	? clean_brackets(str) : ft_strdup(str);
-	/*
-		SEGFAULT INEXPLICABLE ICI
-	*/
+	// Ancien segfault inexplicable
 	while (tmp[i])
 	{
 		if (tmp[i] == '-' && tmp[i + 1] && tmp[i - 1])

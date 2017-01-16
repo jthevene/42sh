@@ -12,7 +12,7 @@
 
 #include "../../includes/globing.h"
 
-int					bracket_pushback(t_bracket **list)
+int				bracket_pushback(t_bracket **list)
 {
 	FT_INIT(t_bracket, *tmp, NULL);
 	FT_INIT(t_bracket, *new, NULL);
@@ -20,7 +20,7 @@ int					bracket_pushback(t_bracket **list)
 	{
 		if (!((*list) = (t_bracket *)malloc(sizeof(t_bracket))))
 			return (0);
-		(*list)->prev =  NULL;
+		(*list)->prev = NULL;
 		(*list)->next = NULL;
 		(*list)->content = NULL;
 	}
@@ -53,11 +53,7 @@ void			rewind_tbracket(t_bracket **list)
 	if (*list)
 	{
 		while ((*list)->prev)
-		{
-//			printf("LIST PREV CONTENT = %s\n", (*list)->prev->content);
-//			printf("LIST CONTENT = %s\n", (*list)->content);
 			(*list) = (*list)->prev;
-		}
 	}
 }
 

@@ -133,7 +133,7 @@ void			hub_expansion(char *str, t_glob *glob)
 				if (str[j] == '.' && str[j + 1] == '.')
 				{
 					if (!is_valid_expansion(str, i + 1, glob))
-						printf("/!!!!!! Expansion is not valid !!!!!!/\n");
+						ft_putstr("/!!!!!! Expansion is not valid !!!!!!/\n");
 					else
 					{
 						free(str);
@@ -141,8 +141,7 @@ void			hub_expansion(char *str, t_glob *glob)
 					}
 					j += 2;
 				}
-				j++;
-				if (str[j] == '{')
+				if (str[++j] == '{')
 					j += next_bracket(str, '{', i);
 			}
 		}

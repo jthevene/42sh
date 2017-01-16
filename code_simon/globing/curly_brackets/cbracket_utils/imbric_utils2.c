@@ -53,6 +53,5 @@ char			*expand_pattern(char *pat, t_glob *glob)
 	}
 	if (tmp)
 		free(tmp);
-//	free(pat);
 	return (ret);
 }

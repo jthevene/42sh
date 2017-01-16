@@ -40,7 +40,6 @@ int				i_recup_lastb(char *str, t_glob *glob)
 			return (0);
 		i += arg_len;
 		i += str[i] == ',' ? 1 : 0;
-//		printf("TMP_C->content = %s\n", glob->tmp_c->content);
 	}
 	return (1);
 }
@@ -66,7 +65,6 @@ t_bracket		*i_create_new_args(char **ext, t_glob *glob)
 		}
 		if (tmp)
 			free(tmp);
-//		printf("new_arg created : %s\n", new_args->content);
 		if (!glob->tmp_c->next)
 			break ;
 		glob->tmp_c = glob->tmp_c->next;
@@ -124,7 +122,7 @@ char			*recreate_string(char *str, t_bracket *new_args, t_glob *glob)
 	return (new_str);
 }
 
-void			i_algo_imbricated(char *str, t_glob *glob)
+int				i_algo_imbricated(char *str, t_glob *glob)
 {
 	FT_INIT(char **, arg_ext, NULL);
 	FT_INIT(t_bracket *, new_args, NULL);
@@ -150,11 +148,5 @@ void			i_algo_imbricated(char *str, t_glob *glob)
 	}
 	glob->lastb_count = 1;
 	i_hub_patterns(str, glob);
-//	printf("fuehfuhefuheuhe\n");
+	return (1);
 }
-
-// l {a,{bcd,e{,g}h,lol}}
-// l {a,{bcd,cou{f,g}cou}}
-// l {b{aba,obo}s,co{llier,lliers},LOL}
-// l jk{lm{no,p}q{r,s}bw{eh,ah}cl{ef,ou},t}uv
-// l jk{lm{no,p}q{r,s,wak}bw{eh,ah}cl{ef,ou,ang},t}uv

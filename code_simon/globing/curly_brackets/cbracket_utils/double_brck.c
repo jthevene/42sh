@@ -61,13 +61,12 @@ void		i2_recup_patterns(char *str, char *tmp, int i, t_glob *glob)
 	rewind_tbracket(&patterns);
 	tmp2 = i2_recreate_string(str, i, patterns);
 	free_tbracket(&patterns);
-//	printf("!! !! !! /~~~~~ !! New string created : %s !! ~~~~~/ !! !! !!\n\n", tmp2);
 	i_algo_imbricated(tmp2, glob);
+	free(tmp);
 }
 
-void		i2_hub_imbric(char *str, t_glob *glob)
+void		i2_hub_imbric(char *str, int i, t_glob *glob)
 {
-	FT_INIT(int, i, 0);
 	FT_INIT(int, ret, 0);
 	FT_INIT(char *, tmp, NULL);
 	while (str[i] != '{')
@@ -79,7 +78,6 @@ void		i2_hub_imbric(char *str, t_glob *glob)
 			tmp = ft_strsub(str, i, ft_strlen(str) - i - 1);
 			if (ft_strchr(tmp, '{'))
 				i2_recup_patterns(str, tmp, i, glob);
-			free(tmp);
 			break ;
 		}
 		else
@@ -88,7 +86,6 @@ void		i2_hub_imbric(char *str, t_glob *glob)
 			if (ft_strchr(tmp, '{'))
 			{
 				i2_recup_patterns(str, tmp, i, glob);
-				free(tmp);
 				break ;
 			}
 			i += next_comma(str, i);

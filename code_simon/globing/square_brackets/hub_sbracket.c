@@ -46,7 +46,6 @@ void			hub_sbracket(t_glob *glob, char *line)
 			i += next_bracket(line, '[', i);
 			if (tmp && ft_strlen(tmp) > 1)
 				free(tmp);
-//			printf("\033[32mRet = %s\033[0m\n", glob->sbracket->content);
 		}
 		i++;
 	}

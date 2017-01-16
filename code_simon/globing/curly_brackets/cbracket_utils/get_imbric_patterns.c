@@ -149,7 +149,7 @@ void				i_hub_patterns(char *str, t_glob *glob)
 			free_tclist(&multi);
 		}
 		else
-			i2_hub_imbric(ft_strdup(str), glob);
+			i2_hub_imbric(ft_strdup(str), 0, glob);
 	}
 	free(str);
 }

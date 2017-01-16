@@ -1,0 +1,2 @@
+1 - Gerer "@ls *?"
+2 - Recheck "@ls *{1..9}*"

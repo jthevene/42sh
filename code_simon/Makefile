@@ -30,7 +30,7 @@ SRCS =  main.c globing/glob_parser.c globing/get_path.c \
 		$(SBRACK)sbracket_list.c \
 		\
 		$(CBRACK)hub_cbracket.c $(CBRACK)fill_clist.c $(CBRACK)cbracket_list.c \
-		$(CBRACK)cbracket_errors.c $(CBRACK)expansion.c \
+		$(CBRACK)cbracket_errors.c $(CBRACK)expansion.c $(CBRACK)print_clist.c \
 		\
 		$(UTILS_1)catch_dash.c $(UTILS_1)check_rng.c $(UTILS_1)clean_brackets.c\
 		$(UTILS_1)count_brackets.c $(UTILS_1)get_functions.c\
@@ -60,7 +60,7 @@ BIN =   main.o glob_parser.o \
 		\
 		hub_cbracket.o fill_clist.o \
 		cbracket_list.o cbracket_errors.o \
-		expansion.o \
+		expansion.o print_clist.o \
 		\
 		commas_utils.o algo_imbricated.o \
 		imbric_utils.o get_imbric_patterns.o \

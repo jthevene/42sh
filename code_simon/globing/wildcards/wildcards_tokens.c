@@ -12,62 +12,50 @@
 
 #include "../../includes/globing.h"
 
-int			g_no_token(char *str, t_glob *glob)
-{
-	if (!bracket_pushback(&glob->args))
-		return (0);
-	glob->args->content = ft_strdup(str);
-//	printf("Création d'argument : %s\n", glob->args->content);
-	return (1);
-}
-
 int			only_qmark(char *str, t_glob *glob)
 {
-//	FT_INIT(int, len, ft_strlen(str));
-//	printf("LEN ARG QMARK : %d\n", len);
 	if (str && glob)
 		return (1);
 	return (0);
 }
 
-int			only_cbrkt(char *str, t_glob *glob)
+void		only_cbrkt2(int i, int len, t_lst *f, t_glob *g)
 {
-	glob->f_path = get_cmd_path(str);
-	glob->l_path = get_cmd_last_path(str);
-	FT_INIT(int, len, get_len_token(str));
-	FT_INIT(t_lst *, files, get_dir_content(glob->f_path));
-	FT_INIT(int, i, -1);
-	hub_sbracket(glob, str);
-	rewind_tbracket(&glob->sbracket);
-	while (files)
+	while (++i < len)
 	{
-		if ((int)ft_strlen(files->content) == len)
+		if (ft_strchr(g->sbracket->content, ((char*)f->content)[i]))
+			g->sbracket = g->sbracket->next ? g->sbracket->next : g->sbracket;
+		else
+			break ;
+	}
+	if (i == len)
+		push_content_path(&g->args, ft_strdup(f->content), g);
+}
+
+int			only_cbrkt(char *str, t_glob *g)
+{
+	g->f_path = get_cmd_path(str);
+	g->l_path = get_cmd_last_path(str);
+	FT_INIT(int, len, get_len_token(str));
+	FT_INIT(t_lst *, f, get_dir_content(g->f_path));
+	FT_INIT(int, i, -1);
+	hub_sbracket(g, str);
+	rewind_tbracket(&g->sbracket);
+	while (f)
+	{
+		if ((int)ft_strlen(f->content) == len)
 		{
-			while (++i < len)
-			{
-				if (ft_strchr(glob->sbracket->content, ((char *)files->content)[i]))
-					glob->sbracket = glob->sbracket->next ? glob->sbracket->next : glob->sbracket;
-				else
-					break ;
-			}
-			if (i == len)
-			{
-				push_content_path(&glob->args, ft_strdup(files->content), glob);
-//				printf("Création d'argument : %s\n", glob->args->content);
-			}
-			rewind_tbracket(&glob->sbracket);
+			only_cbrkt2(i, len, f, g);
+			rewind_tbracket(&g->sbracket);
 			i = -1;
 		}
-		if (!files->next)
+		if (!f->next)
 			break ;
-		files = files->next;
+		f = f->next;
 	}
-	if (glob->f_path)
-		free(glob->f_path);
-	if (glob->l_path)
-		free(glob->l_path);
-	free_tbracket(&glob->sbracket);
-	ft_lst_free(&files);
+	free_double_str(&g->f_path, &g->l_path);
+	free_tbracket(&g->sbracket);
+	ft_lst_free(&f);
 	return (0);
 }
 
@@ -106,7 +94,6 @@ int			mix_token(char *str, t_glob *glob)
 	FT_INIT(int, len, get_len_token(token));
 	hub_sbracket(glob, token);
 	rewind_tbracket(&glob->sbracket);
-//	printf("\n/*** MIX_TOKEN ***/\nF_PATH = %s\nL_PATH = %s\nTOKEN = %s\n\n", glob->f_path, glob->l_path, token);
 	while (files)
 	{
 		if ((int)ft_strlen(files->content) == len)

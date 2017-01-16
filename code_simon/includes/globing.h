@@ -213,6 +213,7 @@ int						i_get_expr_end(char *str, int lastb_count);
 char					*i_next_bracket(char *str);
 int						i_detect_imbric(char *str);
 t_clist					*i_create_multi_list(char *str);
+t_clist					*i_recup_multi_patterns(char *str, int i, int j);
 char					*i_multi_patterns(t_clist **multi, int index);
 void					rewind_index(t_clist **list, int index);
 
@@ -231,6 +232,8 @@ void					free_double_str(char **s, char **s2);
 
 // FONCTIONS WILDCARDS
 void					hub_final(t_glob *glob);
+int						is_only_token(char token, char *str);
+int						only_star(char *str, t_glob *glob);
 int						g_parse_expr(char *str, t_glob *glob);
 int						g_no_token(char *str, t_glob *glob);
 int						only_qmark(char *str, t_glob *glob);
@@ -247,6 +250,7 @@ char					*get_cmd_path(char *str);
 
 t_lst 					*qmark_get_matching_content(t_lst *dir_content, char *target);
 
+int						ft_check_bracket(char *s1, int i, int stop, t_glob *g);
 void					check_file(int len, char *s, char *file, t_glob **glob);
 char					*get_next_star(char *str, int i);
 

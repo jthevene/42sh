@@ -64,7 +64,6 @@ char	*get_next_star(char *str, int i)
 	return (ft_strsub(str, start, len));
 }
 
-
 char	*ft_istrchr(const char *s, int c, int i)
 {
 	while (s[i] && s[i] != (char)c)
@@ -72,4 +71,33 @@ char	*ft_istrchr(const char *s, int c, int i)
 	if (s[i] == (char)c)
 		return ((char*)&s[i]);
 	return (NULL);
+}
+
+int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
+{
+	FT_INIT(int, j, 0);
+	FT_INIT(int, ret, 0);
+	FT_INIT(int, taille, ft_strlen(s2));
+	if (!taille || !g)
+		return (0);
+	i = s2[j] == '?' ? i + 1 : i;
+	while (s1[i])
+	{
+		j = s2[j] == '?' ? j + 1 : j;
+		while ((ret = i + j) >= 0 && s1[i + j] && s2[j] && (s1[i + j] == s2[j]
+			|| s2[j] == '[' || s2[j] == '?'))
+		{
+			if (s2[j] == '[')
+				ret = ft_check_bracket(s1, i + j
+				, j + next_bracket(s2, '[', j) == taille - 1 ? FALSE : TRUE, g);
+			j += s2[j] == '[' ? next_bracket(s2, '[', j) : 0;
+			if (j == taille - 1)
+				return (ret);
+			j++;
+			ret++;
+		}
+		j = 0;
+		i++;
+	}
+	return (0);
 }

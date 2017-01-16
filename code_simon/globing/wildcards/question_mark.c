@@ -12,9 +12,9 @@
 
 #include "../../includes/globing.h"
 
-t_lst 		*qmark_get_matching_content(t_lst *dir_content, char *target)
+t_lst		*qmark_get_matching_content(t_lst *dir_content, char *target)
 {
-	size_t 	len;
+	size_t	len;
 	t_lst	*matching;
 
 	len = ft_strlen(target);

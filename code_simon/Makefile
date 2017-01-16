@@ -42,7 +42,7 @@ SRCS =  main.c globing/glob_parser.c globing/get_path.c \
 		\
 		$(WILDCARDS)hub_final.c $(WILDCARDS)wildcards_tokens.c $(WILDCARDS)wildcards_utils.c\
 		$(WILDCARDS)question_mark.c $(WILDCARDS)wildcards_utils2.c \
-		$(WILDCARDS)lst_tools.c \
+		$(WILDCARDS)lst_tools.c $(WILDCARDS)check_file.c\
 		\
 
 BIN =   main.o glob_parser.o \
@@ -67,7 +67,8 @@ BIN =   main.o glob_parser.o \
 		cbracket_utils.o imbric_utils2.o \
 		double_brck.o expansion_utils.o \
 		wildcards_tokens.o hub_final.o wildcards_utils.o\
-		get_path.o question_mark.o wildcards_utils2.o lst_tools.o
+		get_path.o question_mark.o wildcards_utils2.o lst_tools.o \
+		check_file.o \
 
 
 CC_FLAGS = -Wall -Wextra -Werror

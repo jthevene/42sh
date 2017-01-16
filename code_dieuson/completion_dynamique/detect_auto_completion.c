@@ -103,7 +103,7 @@ char			*detect_auto_completion(char *sentence)
 	FT_INIT(char*, copy_sentence, ft_strdup(sentence));
 	files = files_list(&copy_sentence);
 	to_search = str_to_search(copy_sentence);
-	if ((match_files =  compare_list_sentence(files, to_search)))
+	if ((match_files = compare_list_sentence(files, to_search)))
 		new_sentence = similarity(match_files, to_search);
 	if (new_sentence && ft_strlen(new_sentence))
 	{

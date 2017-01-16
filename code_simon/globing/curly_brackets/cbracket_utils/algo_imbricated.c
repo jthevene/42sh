@@ -95,16 +95,14 @@ char		*recreate_string(char *str, t_bracket *new_args, t_glob *glob)
 	{
 		tmp = new_s;
 		new_s = tmp ? ft_strjoin(new_s, "{") : ft_strdup("{");
-		if (tmp)
-			free(tmp);
+		free(tmp ? tmp : NULL);
 	}
 	while (new_args->next)
 	{
 		tmp = new_s;
 		new_s = !new_s ? ft_strdup(new_args->content)
 		: ft_strjoin(new_s, new_args->content);
-		if (tmp)
-			free(tmp);
+		free(tmp ? tmp : NULL);
 		tmp = new_s;
 		new_s = ft_strjoin(new_s, ",");
 		free(tmp);

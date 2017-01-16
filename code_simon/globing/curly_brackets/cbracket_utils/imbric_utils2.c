@@ -12,7 +12,7 @@
 
 #include "../../../includes/globing.h"
 
-t_clist				*i_recup_multi_patterns(char *str, int i, int j)
+t_clist			*i_recup_multi_patterns(char *str, int i, int j)
 {
 	FT_INIT(t_clist *, clist, NULL);
 	FT_INIT(int, index, -1);

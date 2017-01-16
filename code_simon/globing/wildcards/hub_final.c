@@ -12,7 +12,7 @@
 
 #include "../../includes/globing.h"
 
-static int	is_only_token(char token, char *str)
+int			is_only_token(char token, char *str)
 {
 	FT_INIT(int, i, 0);
 	if (!ft_strchr(str, token))
@@ -28,6 +28,14 @@ static int	is_only_token(char token, char *str)
 	return (1);
 }
 
+int			g_no_token(char *str, t_glob *glob)
+{
+	if (!bracket_pushback(&glob->args))
+		return (0);
+	glob->args->content = ft_strdup(str);
+	return (1);
+}
+
 int			only_star(char *str, t_glob *glob)
 {
 	FT_INIT(char *, path, get_cmd_path(str));
@@ -35,29 +43,12 @@ int			only_star(char *str, t_glob *glob)
 	while (files)
 	{
 		pushback_content(&glob->args, ft_strdup(files->content));
-//		printf("Création d'argument : %s\n", glob->args->content);
 		if (!files->next)
 			break ;
 		files = files->next;
 	}
 	ft_lst_free(&files);
 	return (0);
-}
-
-int			g_parse_expr(char *str, t_glob *glob)
-{
-	if (!ft_strchr(str, '?') && !ft_strchr(str, '[') && !ft_strchr(str, '*'))
-		return (g_no_token(str, glob));
-	else if (is_only_token('?', str))
-		return (only_qmark(str, glob));
-	else if (is_only_token('[', str))
-		return (only_cbrkt(str, glob));
-	else if (is_only_token('*', str))
-		return (only_star(str, glob));
-	else if (ft_strchr(str, '*'))
-		return (mix_with_star(str, glob));
-	else
-		return (mix_token(str, glob));
 }
 
 int			multi_handling(t_glob *glob)
@@ -83,44 +74,31 @@ int			multi_handling(t_glob *glob)
 	return (1);
 }
 
-void		hub_final(t_glob *glob) // Hub final du traitement globing
+void		hub_final(t_glob *g)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp, NULL);
 	while (g_shell.line && g_shell.line[i] != ' ')
 		i++;
 	i++;
-	if (glob->cbracket)
-		rewind_tbracket(&glob->cbracket->list);
+	rewind_tbracket(g->cbracket ? &g->cbracket->list : NULL);
 	while (g_shell.line[i])
 	{
 		tmp = next_expr(g_shell.line, i);
 		i += ft_strlen(tmp);
-		if (ft_strchr(tmp, '{') && ft_strchr(tmp, '}') && glob->cbracket)
+		if (ft_strchr(tmp, '{') && ft_strchr(tmp, '}') && g->cbracket)
 		{
-			while (glob->cbracket->list->next)
+			while (g->cbracket->list->next)
 			{
-				g_parse_expr(glob->cbracket->list->content, glob);
-				glob->cbracket->list = glob->cbracket->list->next;
+				g_parse_expr(g->cbracket->list->content, g);
+				g->cbracket->list = g->cbracket->list->next;
 			}
-			g_parse_expr(glob->cbracket->list->content, glob);
-			if (glob->cbracket->next)
-				glob->cbracket = glob->cbracket->next;
+			g_parse_expr(g->cbracket->list->content, g);
+			g->cbracket = g->cbracket->next ? g->cbracket->next : g->cbracket;
 		}
 		else
-			g_parse_expr(tmp, glob);
+			g_parse_expr(tmp, g);
 		free(tmp);
 	}
-	multi_handling(glob);
-	if (glob->args)
-	{
-		rewind_tbracket(&glob->args);
-		while (glob->args->next)
-		{
-			printf("Arg : %s\n", glob->args->content);
-			glob->args = glob->args->next;
-		}
-		printf("Arg : %s\n", glob->args->content);
-		free_tbracket(&glob->args);
-	}
+	multi_handling(g);
 }

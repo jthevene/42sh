@@ -12,11 +12,35 @@
 
 #include "../../../includes/globing.h"
 
-char				*i_multi_patterns(t_clist **multi, int index)
+char				*i_multi_patterns2(t_clist **multi, int index)
 {
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(char *, tmp2, NULL);
 	FT_INIT(char *, tmp3, NULL);
+	tmp2 = i_multi_patterns(multi, index + 1);
+	rewind_index(multi, index);
+	if (!tmp2)
+	{
+		if (!(*multi)->list->next)
+		{
+			rewind_tbracket(&(*multi)->list);
+			return (NULL);
+		}
+		else
+			(*multi)->list = (*multi)->list->next;
+		tmp2 = i_multi_patterns(multi, index + 1);
+	}
+	rewind_index(multi, index);
+	tmp = ft_strdup((*multi)->list->content);
+	tmp3 = ft_strjoin(tmp, tmp2);
+	free(tmp);
+	free(tmp2);
+	return (tmp3);
+}
+
+char				*i_multi_patterns(t_clist **multi, int index)
+{
+	FT_INIT(char *, tmp, NULL);
 	while ((*multi) && (*multi)->index != index)
 		(*multi) = (*multi)->next;
 	if (!(*multi)->next)
@@ -39,25 +63,7 @@ char				*i_multi_patterns(t_clist **multi, int index)
 			return (ft_strdup((*multi)->list->prev->content));
 		}
 	}
-	tmp2 = i_multi_patterns(multi, index + 1);
-	rewind_index(multi, index);
-	if (!tmp2)
-	{
-		if (!(*multi)->list->next)
-		{
-			rewind_tbracket(&(*multi)->list);
-			return (NULL);
-		}
-		else
-			(*multi)->list = (*multi)->list->next;
-		tmp2 = i_multi_patterns(multi, index + 1);
-	}
-	rewind_index(multi, index);
-	tmp = ft_strdup((*multi)->list->content);
-	tmp3 = ft_strjoin(tmp, tmp2);
-	free(tmp);
-	free(tmp2);
-	return (tmp3);
+	return (i_multi_patterns2(multi, index));
 }
 
 void				i_simple_patterns(char *str, t_glob *glob)

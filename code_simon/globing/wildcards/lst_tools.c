@@ -12,9 +12,9 @@
 
 #include "../../includes/globing.h"
 
-t_lst	*ft_newlst(char *content)
+t_lst		*ft_newlst(char *content)
 {
-	t_lst 	*new;
+	t_lst	*new;
 
 	new = (t_lst*)ft_memalloc(sizeof(t_lst));
 	if (new)
@@ -32,7 +32,7 @@ t_lst	*ft_newlst(char *content)
 
 void		ft_append_lst(t_lst **lst, t_lst *new_elem)
 {
-	t_lst 	*tmp;
+	t_lst	*tmp;
 
 	if (!*lst)
 	{
@@ -56,7 +56,6 @@ void		ft_print_list_content(t_lst *lst)
 
 	tmp = lst;
 	i = 1;
-
 	if (tmp && tmp->content)
 	{
 		while (tmp->next && tmp->next->content)
@@ -74,7 +73,7 @@ void		ft_print_list_content(t_lst *lst)
 		ft_putendl("Liste NULL");
 }
 
-void	ft_lst_rewind(t_lst **lst)
+void		ft_lst_rewind(t_lst **lst)
 {
 	if ((*lst) != NULL)
 	{
@@ -83,7 +82,7 @@ void	ft_lst_rewind(t_lst **lst)
 	}
 }
 
-void	ft_lst_free(t_lst **list)
+void		ft_lst_free(t_lst **list)
 {
 	FT_INIT(t_lst *, tmp, NULL);
 	if ((*list))
@@ -104,14 +103,3 @@ void	ft_lst_free(t_lst **list)
 		free(tmp);
 	}
 }
-
-/*
-void	ft_lst_forward(t_lst **lst)
-{
-	if ((*lst) != NULL)
-	{
-		while ((*lst)->next)
-			(*lst) = (*lst)->next;
-	}
-}
-*/

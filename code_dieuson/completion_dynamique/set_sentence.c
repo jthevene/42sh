@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_sentence.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dvirgile <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/16 17:19:59 by dvirgile          #+#    #+#             */
+/*   Updated: 2017/01/16 17:20:05 by dvirgile         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/42sh.h"
 
 void		free_simple_tab(char ***tab_to_del)
@@ -27,7 +39,7 @@ char		*set_sentence(char *str, int len_str, char *name)
 	return (str);
 }
 
-char 			*is_space(char *sentence, char *str)
+char		*is_space(char *sentence, char *str)
 {
 	FT_INIT(char*, tmp, str);
 	if (sentence[ft_strlen(sentence) - 1] == ' ')
@@ -39,7 +51,7 @@ char 			*is_space(char *sentence, char *str)
 	return (str);
 }
 
-char 			*default_sentence(char **sentence)
+char		*default_sentence(char **sentence)
 {
 	FT_INIT(char **, path, NULL);
 	FT_INIT(int, i, 0);
@@ -59,7 +71,7 @@ char 			*default_sentence(char **sentence)
 			tmp = str;
 			str = ft_strjoin(str, " ");
 			if (tmp)
-				ft_strdel(&tmp);	
+				ft_strdel(&tmp);
 		}
 		i++;
 	}

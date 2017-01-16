@@ -137,6 +137,7 @@ void 						free_files(t_file **files_list);
 int 						arrondi(float val);
 int 						ft_nb_elem_lst(int nb_elem, int nb_col);
 int 						prev_sentence_value(char *sentence);
+int 						verif_sentence(char *sentence);
 
 char						*set_sentence(char *str, int len_str, char *name);
 char 						*set_end_path(char **new_path, char **sentence);

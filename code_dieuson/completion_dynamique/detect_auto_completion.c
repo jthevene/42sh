@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   detect_auto_completion.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dvirgile <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/16 17:17:47 by dvirgile          #+#    #+#             */
+/*   Updated: 2017/01/16 17:18:00 by dvirgile         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/42sh.h"
 
 static char		*str_to_search(char *sentence)
@@ -21,20 +33,20 @@ static char		*str_to_search(char *sentence)
 t_file 			*get_file_path(char *path, char *sentence)
 {
 	DIR 		*rep;
-	
+
 	FT_INIT(t_file*, files, NULL);
 	if (!path || !sentence)
 		return (NULL);
-	rep  = opendir(path);
-	if (rep && !ft_strchr(sentence, ' ') && sentence[0] != '/' && 
+	rep = opendir(path);
+	if (rep && !ft_strchr(sentence, ' ') && sentence[0] != '/' &&
 		getenv("PATH"))
 		files = store_files_dirs(rep, files, path, str_to_search(sentence));
-	else if (rep && path && sentence[ft_strlen(sentence)] != ' ')
+	else if (rep && path && sentence[ft_strlen(sentence) - 1] != ' ')
 		files = store_files_dirs(rep, files, path, str_to_search(sentence));
 	else
 	{
 		closedir(rep);
-		rep =  opendir(".");
+		rep = opendir(".");
 		files = store_files_dirs(rep, files, path, str_to_search(sentence));
 	}
 	closedir(rep);
@@ -86,7 +98,7 @@ char			*detect_auto_completion(char *sentence)
 	FT_INIT(char*, new_sentence, NULL);
 	FT_INIT(char*, to_search, NULL);
 	FT_INIT(static int, check, 0);
-	if (!sentence || !ft_strlen(sentence))
+	if (!sentence || !ft_strlen(sentence) || !verif_sentence(sentence))
 		return (sentence);
 	FT_INIT(char*, copy_sentence, ft_strdup(sentence));
 	files = files_list(&copy_sentence);

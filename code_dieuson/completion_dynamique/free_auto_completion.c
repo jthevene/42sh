@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_auto_completion.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dvirgile <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/16 17:18:44 by dvirgile          #+#    #+#             */
+/*   Updated: 2017/01/16 17:18:49 by dvirgile         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/42sh.h"
 
-void 			free_lists(t_file *match_files)
+void			free_lists(t_file *match_files)
 {
 	FT_INIT(t_file*, tmp, NULL);
-	
 	if (!match_files)
 		return ;
-	while(match_files)
+	while (match_files)
 	{
 		ft_strdel(&(match_files->name));
 		ft_strdel(&(match_files->absolute_path));
@@ -16,9 +27,9 @@ void 			free_lists(t_file *match_files)
 	}
 }
 
-void 			free_lst_lst(t_completion *lst_lst)
+void			free_lst_lst(t_completion *lst_lst)
 {
-	FT_INIT(t_completion*, tmp_lst, NULL);	
+	FT_INIT(t_completion*, tmp_lst, NULL);
 	while (lst_lst->next)
 	{
 		tmp_lst = lst_lst;
@@ -28,13 +39,12 @@ void 			free_lst_lst(t_completion *lst_lst)
 	free(lst_lst);
 }
 
-void 			free_files(t_file **files_list)
+void			free_files(t_file **files_list)
 {
 	FT_INIT(t_file*, tmp, NULL);
-	
 	if (!(*files_list))
 		return ;
-	while((*files_list))
+	while ((*files_list))
 	{
 		ft_strdel(&((*files_list)->name));
 		ft_strdel(&((*files_list)->absolute_path));
@@ -44,7 +54,7 @@ void 			free_files(t_file **files_list)
 	}
 }
 
-void		free_auto_tab(char **table)
+void			free_auto_tab(char **table)
 {
 	int		colonne;
 
@@ -57,4 +67,3 @@ void		free_auto_tab(char **table)
 	}
 	free(table);
 }
-

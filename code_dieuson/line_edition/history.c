@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:53:52 by jules             #+#    #+#             */
-/*   Updated: 2016/12/05 10:54:58 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/16 17:16:43 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	get_hist(void)
 void	ft_newhist(char *line)
 {
 	t_lst	*new_hist;
-	
+
 	new_hist = (t_lst *)malloc(sizeof(t_lst));
 	if (new_hist)
 	{
@@ -66,7 +66,7 @@ void	navigation_hist(int arrow)
 	if (g_shell.hist->content)
 	{
 		if (arrow == K_UP)
-		{	
+		{
 			if (g_shell.hist->prev && g_shell.hist->prev->content)
 			{
 				if (g_shell.nav_hist == 1) //nav_hist est remis à 0 quand la touche return est pressée

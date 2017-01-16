@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build_list.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dvirgile <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/16 17:17:39 by dvirgile          #+#    #+#             */
+/*   Updated: 2017/01/16 17:17:42 by dvirgile         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/42sh.h"
 
-t_completion 	*create_cell(t_file *elem)
+t_completion	*create_cell(t_file *elem)
 {
 	FT_INIT(t_completion *, new_cell, NULL);
 	new_cell = (t_completion*)malloc(sizeof(t_completion));
@@ -30,8 +42,7 @@ static t_file	*build_col(t_file **match_files, int nb_elem_lst)
 	return (head_col);
 }
 
-
-t_completion 	*build_lst_lst(t_file *match_files, int nb_elem, int nb_col)
+t_completion	*build_lst_lst(t_file *match_files, int nb_elem, int nb_col)
 {
 	FT_INIT(t_completion *, all_col, NULL);
 	FT_INIT(t_completion *, head_all_col, NULL);

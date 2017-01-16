@@ -1,29 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display_completion.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dvirgile <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/16 17:18:06 by dvirgile          #+#    #+#             */
+/*   Updated: 2017/01/16 17:18:25 by dvirgile         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/42sh.h"
 
-static int 		if_col(t_file *col, t_file *tmp_col, char *tmp, 
+static	int		if_col(t_file *col, char *tmp,
 								int len_str, t_completion *all_col)
 {
+	FT_INIT(int, nb_elem, 0);
+	FT_INIT(t_file *, tmp_col, NULL);
 	if (col)
 	{
 		tmp = set_sentence(tmp, len_str, col->name);
 		tmp_col = col;
 		col = col->next;
-
 		ft_strdel(&(tmp_col)->name);
 		ft_strdel(&(tmp_col)->absolute_path);
 		free(tmp_col);
-
 		all_col->elem = col;
-		return (-1);
+		nb_elem--;
 	}
-	return (0);
+	return (nb_elem);
 }
 
 static void		display_form(t_completion *all_col, int nb_elem,
 					int len_str, int nb_col)
 {
 	FT_INIT(t_file *, col, all_col->elem);
-	FT_INIT(t_file *, tmp_col, col);
 	FT_INIT(t_completion *, head, all_col);
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(int, ref_col, 0);
@@ -32,7 +43,7 @@ static void		display_form(t_completion *all_col, int nb_elem,
 	{
 		head = !ref_col ? all_col : head;
 		col = all_col->elem;
-		nb_elem += if_col(col, tmp_col, tmp, len_str, all_col);
+		nb_elem += if_col(col, tmp, len_str, all_col);
 		if (ref_col >= nb_col - 1)
 		{
 			ft_putendl("");
@@ -49,7 +60,7 @@ static void		display_form(t_completion *all_col, int nb_elem,
 	ft_putendl("");
 }
 
-static float 			*get_display_values(t_file *match_files)
+static float	*get_display_values(t_file *match_files)
 {
 	FT_INIT(float*, tab_val, (float*)malloc(sizeof(float) * 6));
 	tab_val[0] = (float)match_files->nb_elem;
@@ -61,7 +72,7 @@ static float 			*get_display_values(t_file *match_files)
 	return (tab_val);
 }
 
-static int 				ask_to_show_data(float *disp_val)
+static	int		ask_to_show_data(float *disp_val)
 {
 	FT_INIT(int, max_elem_lst, disp_val[5]);
 	FT_INIT(int, elem_lst, disp_val[4]);
@@ -74,12 +85,13 @@ static int 				ask_to_show_data(float *disp_val)
 		while (readkey() && !situation)
 		{
 			c = g_shell.c;
-			if (c[0] == 89 || c[0] == 121) // YES
+			if (c[0] == 89 || c[0] == 121)
 				break ;
-			else if (c[0] == 78 || c[0] == 110) // NO
+			else if (c[0] == 78 || c[0] == 110)
 			{
 				ft_putendl("");
-				tputs(tgetstr("sc", NULL), 1, ft_putchar_int);				
+				tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
+				free(disp_val);
 				return (0);
 			}
 		}
@@ -88,7 +100,7 @@ static int 				ask_to_show_data(float *disp_val)
 	return (1);
 }
 
-void 			display_completion(char *sentence, t_file *match_files)
+void			display_completion(char *sentence, t_file *match_files)
 {
 	if (!sentence || !match_files)
 		return ;
@@ -96,6 +108,7 @@ void 			display_completion(char *sentence, t_file *match_files)
 	{
 		fill_current_line(' ');
 		g_shell.cursor_x++;
+		free_lists(match_files);
 		return ;
 	}
 	FT_INIT(float*, disp_val, get_display_values(match_files));
@@ -104,9 +117,9 @@ void 			display_completion(char *sentence, t_file *match_files)
 	FT_INIT(float, nb_col, disp_val[2]);
 	FT_INIT(float, nb_elem_lst, disp_val[4]);
 	if (!ask_to_show_data(disp_val))
-		return (free(disp_val));
-	lst_lst = build_lst_lst(match_files, (nb_elem_lst == 0 ? 
-				1 : nb_elem_lst), nb_col);
+		return (free_lists(match_files));
+	lst_lst = build_lst_lst(match_files, (nb_elem_lst == 0 ?
+			1 : nb_elem_lst), nb_col);
 	tmp_lst = lst_lst;
 	display_form(lst_lst, disp_val[0], disp_val[1], disp_val[2]);
 	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);

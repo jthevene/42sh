@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   catch_key.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dvirgile <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/13 10:54:10 by jules             #+#    #+#             */
-/*   Updated: 2016/11/08 12:27:52 by sgaudin          ###   ########.fr       */
+/*   Created: 2017/01/16 17:16:00 by dvirgile          #+#    #+#             */
+/*   Updated: 2017/01/16 17:16:00 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int 			arrow_combo(char *key)
 	else if (key[4] == 53 && key[5] == 66)
 		return (K_OL_DOWN);
 	else
-		return (detect_selection_text(key, g_shell.start_select, 
+		return (detect_selection_text(key, g_shell.start_select,
 			g_shell.end_select, g_shell.cursor_x));
 }
 
@@ -84,10 +84,10 @@ int 			detect_arrow(char *key)
 
 int 		is_arrow(char *key)
 {
-	if (key[0] == 27 && key[1] == 91 && key[2] == 49 
+	if (key[0] == 27 && key[1] == 91 && key[2] == 49
 		&& key[3] == 59 && key[4] == 53)
 		return (1);
-	if ((key[0] == 27 && key[1] == 91 && (key[2] != 51 
+	if ((key[0] == 27 && key[1] == 91 && (key[2] != 51
 		&& key[2] != 70 && key[2] != 72)))
 		return (1);
 	return (0);

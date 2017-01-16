@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   match_elements.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dvirgile <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/16 17:19:09 by dvirgile          #+#    #+#             */
+/*   Updated: 2017/01/16 17:19:10 by dvirgile         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/42sh.h"
 
-static t_file 	*get_values(t_file *match_files)
+static t_file		*get_values(t_file *match_files)
 {
 	FT_INIT(t_file*, head, match_files);
 	FT_INIT(int, nb_elem, 0);
@@ -18,7 +30,7 @@ static t_file 	*get_values(t_file *match_files)
 	return (head);
 }
 
-static int 		verif_matchs(t_file *files, size_t len_cmp, int nb_args)
+static	int			verif_matchs(t_file *files, size_t len_cmp, int nb_args)
 {
 	FT_INIT(t_file*, before, files);
 	FT_INIT(t_file*, after, before->next);
@@ -39,14 +51,11 @@ static int 		verif_matchs(t_file *files, size_t len_cmp, int nb_args)
 	return (0);
 }
 
-static char 	*set_similarity(char *similarity, int nb_args, 
-					t_file *match_files, char *sentence)
+static char			*set_similarity(char *similarity, char *sentence)
 {
 	FT_INIT(char*, tmp, NULL);
 	if (similarity && ft_strlen(similarity))
 	{
-		if (nb_args == 1 && match_files->type)
-			ft_strcat(similarity, "/");
 		tmp = similarity;
 		similarity = ft_strdup(similarity + ft_strlen(sentence));
 		ft_strdel(&tmp);
@@ -61,13 +70,12 @@ static char 	*set_similarity(char *similarity, int nb_args,
 	return (similarity);
 }
 
-char 			*similarity(t_file *match_files, char *sentence)
+char				*similarity(t_file *match_files, char *sentence)
 {
 	FT_INIT(int, len_cmp, ft_strlen(sentence));
 	FT_INIT(char*, similarity, ft_strnew(match_files->len * 2));
 	FT_INIT(int, nb_args, match_files->nb_elem);
 	FT_INIT(int, verif, nb_args);
-
 	while (verif && len_cmp <= match_files->len)
 	{
 		verif = verif_matchs(match_files, len_cmp, nb_args);
@@ -75,7 +83,7 @@ char 			*similarity(t_file *match_files, char *sentence)
 			ft_strncpy(similarity, match_files->name, len_cmp);
 		len_cmp++;
 	}
-	similarity = set_similarity(similarity, nb_args, match_files, sentence);
+	similarity = set_similarity(similarity, sentence);
 	if (similarity && !ft_strlen(similarity))
 	{
 		ft_strdel(&similarity);
@@ -84,7 +92,7 @@ char 			*similarity(t_file *match_files, char *sentence)
 	return (similarity);
 }
 
-t_file 			*compare_list_sentence(t_file *files, char *sentence)
+t_file				*compare_list_sentence(t_file *files, char *sentence)
 {
 	FT_INIT(t_file*, match_files, NULL);
 	FT_INIT(t_file*, head, NULL);

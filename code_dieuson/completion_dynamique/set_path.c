@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_path.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dvirgile <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/16 17:19:24 by dvirgile          #+#    #+#             */
+/*   Updated: 2017/01/16 17:19:37 by dvirgile         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/42sh.h"
 
-static char		*set_begining(char *sentence, char *home, char *current_path)
+static	char		*set_begining(char *sentence, char *home,
+					char *current_path)
 {
 	FT_INIT(char*, new_path, ft_strnew(ft_strlen(sentence) + 100));
 	if (ft_strlen(sentence) >= 2 && !ft_strncmp(sentence, "./", 2))
@@ -15,20 +28,20 @@ static char		*set_begining(char *sentence, char *home, char *current_path)
 	}
 	else if (!ft_strcmp(sentence, ".."))
 	{
-		ft_strncpy(new_path, current_path, ft_strlen(current_path) - 
+		ft_strncpy(new_path, current_path, ft_strlen(current_path) -
 			ft_strlen(ft_strrchr(current_path, '/')));
-		ft_strcat(new_path, "/");	
+		ft_strcat(new_path, "/");
 	}
 	else
 	{
 		ft_strcpy(new_path, current_path);
-		ft_strcat(new_path, "/");	
+		ft_strcat(new_path, "/");
 		ft_strcat(new_path, sentence);
 	}
 	return (new_path);
 }
 
-static void 	remove_char(char **str, char c)
+static void			remove_char(char **str, char c)
 {
 	if (!str || !c)
 		return ;
@@ -40,7 +53,7 @@ static void 	remove_char(char **str, char c)
 	}
 }
 
-static char 	*parse_dirs(char **dirs, char *new_path, char *home)
+static	char		*parse_dirs(char **dirs, char *new_path, char *home)
 {
 	while (dirs && *dirs)
 	{
@@ -49,8 +62,8 @@ static char 	*parse_dirs(char **dirs, char *new_path, char *home)
 		else if (!ft_strcmp(*dirs, ".."))
 		{
 			remove_char(&new_path, '/');
-			ft_bzero((void*)(new_path +  (ft_strlen(new_path) - 
-			ft_strlen(ft_strrchr(new_path, '/')))) , ft_strlen(new_path));
+			ft_bzero((void*)(new_path + (ft_strlen(new_path) -
+			ft_strlen(ft_strrchr(new_path, '/')))), ft_strlen(new_path));
 			if (!ft_strlen(new_path))
 				ft_strcpy(new_path, "/");
 		}
@@ -69,7 +82,7 @@ static char 	*parse_dirs(char **dirs, char *new_path, char *home)
 	return (new_path);
 }
 
-char 			**clear_path(char **sentence)
+char				**clear_path(char **sentence)
 {
 	FT_INIT(char*, tmp, NULL);
 	tmp = *sentence;
@@ -81,17 +94,16 @@ char 			**clear_path(char **sentence)
 	return (sentence);
 }
 
-char 			**set_path(char **sentence, char *home, char *current_path)
+char				**set_path(char **sentence, char *home, char *current_path)
 {
 	FT_INIT(char*, new_path, NULL);
 	FT_INIT(char**, dirs, NULL);
 	home = !home ? "" : home;
 	current_path = !current_path ? "" : current_path;
-
 	if ((*sentence)[ft_strlen(*sentence) - 1] == ' ')
 		return (ft_strsplit(current_path, '\n'));
-
-	if (!ft_strchr(*sentence, ' ') && *sentence[0] != '/' && ft_strlen(current_path))
+	if (!ft_strchr(*sentence, ' ') && *sentence[0] != '/'
+		&& ft_strlen(current_path))
 		return (ft_strsplit(getenv("PATH"), ':'));
 	else
 		sentence = clear_path(sentence);

@@ -67,7 +67,7 @@ int			only_cbrkt(char *str, t_glob *glob)
 	if (glob->l_path)
 		free(glob->l_path);
 	free_tbracket(&glob->sbracket);
-	/* FREE FILES */
+	ft_lst_free(&files);
 	return (0);
 }
 
@@ -79,7 +79,6 @@ int			mix_with_star(char *str, t_glob *glob)
 	FT_INIT(t_lst *, files, get_dir_content(glob->f_path));
 	hub_sbracket(glob, token);
 	rewind_tbracket(&glob->sbracket);
-//	printf("\n/*** MIX_WITH_STAR ***/\nF_PATH = %s\nL_PATH = %s\nTOKEN = %s\n\n", glob->f_path, glob->l_path, token);
 	while (files)
 	{
 		check_file(ft_strlen(files->content), token, files->content, &glob);
@@ -91,8 +90,10 @@ int			mix_with_star(char *str, t_glob *glob)
 		free(glob->f_path);
 	if (glob->l_path)
 		free(glob->l_path);
+	if (token)
+		free(token);
 	free_tbracket(&glob->sbracket);
-	/* FREE FILES */
+	ft_lst_free(&files);
 	return (0);
 }
 
@@ -119,7 +120,9 @@ int			mix_token(char *str, t_glob *glob)
 		free(glob->f_path);
 	if (glob->l_path)
 		free(glob->l_path);
+	if (token)
+		free(token);
 	free_tbracket(&glob->sbracket);
-	/* FREE FILES */
+	ft_lst_free(&files);
 	return (0);
 }

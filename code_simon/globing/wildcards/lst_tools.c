@@ -83,6 +83,29 @@ void	ft_lst_rewind(t_lst **lst)
 	}
 }
 
+void	ft_lst_free(t_lst **list)
+{
+	FT_INIT(t_lst *, tmp, NULL);
+	if ((*list))
+	{
+		ft_lst_rewind(list);
+		while ((*list)->next)
+		{
+			if ((*list)->content)
+				free((*list)->content);
+			tmp = (*list);
+			(*list) = (*list)->next;
+			free(tmp);
+		}
+		if ((*list)->content)
+			free((*list)->content);
+		tmp = (*list);
+		(*list) = NULL;
+		free(tmp);
+	}
+}
+
+/*
 void	ft_lst_forward(t_lst **lst)
 {
 	if ((*lst) != NULL)
@@ -91,3 +114,4 @@ void	ft_lst_forward(t_lst **lst)
 			(*lst) = (*lst)->next;
 	}
 }
+*/

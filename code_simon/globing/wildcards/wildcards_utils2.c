@@ -77,21 +77,15 @@ int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 				ret = ft_check_bracket(s1, i + j
 				, j + next_bracket(s2, '[', j) == taille - 1 ? FALSE : TRUE, g);
 				j += next_bracket(s2, '[', j);
-//				printf("s1 = %s, s2 = %s, ret = %d, j = %d\n", s1, s2, ret, j);
 			}
 			if (j == taille - 1)
-			{
-//				printf("ret = %d\n", ret);
 				return (ret);
-			}
-//			j += s2[j] == '[' ? next_bracket(s2, '[', j) : 1;
 			j++;
 			ret++;
 		}
 		j = 0;
 		i++;
 	}
-//	printf("%s ===> fail ret = %d\n", s1, ret);
 	return (0);
 }
 
@@ -115,14 +109,12 @@ void	check_file(int len, char *s, char *file, t_glob **g)
 			if (!tmp)
 			{
 				push_content_path(&(*g)->args, ft_strdup(file), (*g));
-//				printf("Création d'argument : %s\n", (*g)->args->content);
 				break ;
 			}
 			if (ft_istrstr(file, tmp, j, (*g)))
 				j = ft_istrstr(file, tmp, j, (*g));
 			else
 				break ;
-//			printf("check_file : tmp = %s, s : %s, file : %s, i : %d, j : %d, len : %d\n", tmp, s, file, i, j, len);
 			i += ft_strlen(tmp);
 			if (!ft_istrchr(s, '*', i))
 			{
@@ -139,10 +131,7 @@ void	check_file(int len, char *s, char *file, t_glob **g)
 			break ;
 	}
 	if (j == len && i + 1 == (int)ft_strlen(s))
-	{
 		push_content_path(&(*g)->args, ft_strdup(file), (*g));
-//		printf("Création d'argument : %s\n", (*g)->args->content);
-	}
 	if (tmp)
 		free(tmp);
 }

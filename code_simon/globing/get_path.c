@@ -37,6 +37,7 @@ t_lst		*get_dir_content(char *dir)
 		return (NULL);
 	while ((direntt = readdir(ret)))
 		ft_append_lst(&dir_content, ft_newlst(direntt->d_name));
+	closedir(ret);
 	return (dir_content);
 }
 

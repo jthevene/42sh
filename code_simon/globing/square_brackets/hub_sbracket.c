@@ -27,10 +27,12 @@ int				fill_bracket_tabs(char *line, t_glob *glob) // Fonction qui choisit la m�
 	}
 	bracket_pushback(&glob->sbracket);
 	glob->sbracket->content = fill_mix(tmp);
+	if (tmp)
+		free(tmp);
 	return (1);
 }
 
-void			hub_sbracket(t_glob *glob, char *line) // Gère les différents cas de figure, cf commentaires dans le .h ac les definitions des macros
+void			hub_sbracket(t_glob *glob, char *line)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp, NULL);

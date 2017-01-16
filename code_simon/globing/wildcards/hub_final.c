@@ -40,6 +40,7 @@ int			only_star(char *str, t_glob *glob)
 			break ;
 		files = files->next;
 	}
+	ft_lst_free(&files);
 	return (0);
 }
 

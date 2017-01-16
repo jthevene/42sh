@@ -260,6 +260,7 @@ t_lst					*ft_newlst(char *content);
 void					ft_append_lst(t_lst **lst, t_lst *new_elem);
 void					ft_print_list_content(t_lst *lst);
 void					ft_lst_rewind(t_lst **lst);
-void					ft_lst_forward(t_lst **lst);
+void					ft_lst_free(t_lst **list);
+/* void					ft_lst_forward(t_lst **lst); */
 
 #endif

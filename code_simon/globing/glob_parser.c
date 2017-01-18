@@ -34,7 +34,7 @@ static int				verif_tokens(char *str)
 	return (1);
 }
 
-static int				get_command(char *str, t_glob *glob) // Fonction qui recupere la commande pour le message d'erreur
+static int				get_command(char *str, t_glob *glob)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, 0);
@@ -78,24 +78,26 @@ t_glob					*init_glob(void)
 	ft_bzero(glob->punct, 33);
 	ft_bzero(glob->cntrl, 34);
 	ft_bzero(glob->xdigit, 17);
-	init_tabs1(glob, 0, 0); // Les 3 fonctions init_tabs servent à remplir les tableaux pour [[:upper:]], [[:xdigit:]] etc...
+	init_tabs1(glob, 0, 0);
 	init_tabs2(glob);
 	init_tabs3(glob);
 	return (glob);
 }
 
-/*
-void			free_glob(t_glob *glob)
+static void				print_args(t_glob *glob)
 {
-	if (glob->sbracket)
-		free_tbracket(&glob->sbracket);
-	if (glob->cbracket)
-		free_tclist(&glob->cbracket);
-	if (glob->command)
-		free(glob->command);
-	free(glob);
+	if (glob->args)
+	{
+		rewind_tbracket(&glob->args);
+		while (glob->args->next)
+		{
+			printf("Arg : %s\n", glob->args->content);
+			glob->args = glob->args->next;
+		}
+		printf("Arg : %s\n", glob->args->content);
+		free_tbracket(&glob->args);
+	}
 }
-*/
 
 int						glob_parser(void)
 {
@@ -113,17 +115,7 @@ int						glob_parser(void)
 			if (!hub_cbracket(glob))
 				return (0);
 		hub_final(glob);
-		if (glob->args)
-		{
-			rewind_tbracket(&glob->args);
-			while (glob->args->next)
-			{
-				printf("Arg : %s\n", glob->args->content);
-				glob->args = glob->args->next;
-			}
-			printf("Arg : %s\n", glob->args->content);
-			free_tbracket(&glob->args);
-		}
+		print_args(glob);
 		if (glob->command)
 			free(glob->command);
 	}

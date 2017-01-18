@@ -50,7 +50,7 @@ int				pushback_content(t_bracket **list, char *content)
 
 void			rewind_tbracket(t_bracket **list)
 {
-	if (*list)
+	if (list != NULL && (*list))
 	{
 		while ((*list)->prev)
 			(*list) = (*list)->prev;

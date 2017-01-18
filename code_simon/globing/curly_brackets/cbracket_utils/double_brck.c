@@ -12,12 +12,6 @@
 
 #include "../../../includes/globing.h"
 
-// 1 ---> Recup la partie a traiter (next_comma) --->>>>> OK
-// 2 ---> Recup le 'i' de cette partie --->>>>> OK
-// 3 ---> Créer la liste chainée qui va contenir toutes les possibilités --->>>>> OK
-// 4 ---> Recréer la chaine de caractères avec les nouveaux arguments --->>>>> OK
-// 5 ---> Renvoyer tout ce joyeux bordel au début (algo_imbricated) --->>>>> OK
-
 char		*i2_recreate_string(char *str, int index, t_bracket *patterns)
 {
 	FT_INIT(char *, new_str, ft_strsub(str, 0, index));

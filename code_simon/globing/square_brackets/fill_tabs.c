@@ -41,7 +41,7 @@ char			*fill_rng(char *str)
 	return (tmp);
 }
 
-char			*fill_nomult(char *str) // [!...]
+char			*fill_nomult(char *str)
 {
 	FT_INIT(int, i, 32);
 	FT_INIT(int, j, 0);
@@ -67,7 +67,7 @@ char			*fill_nomult(char *str) // [!...]
 	return (ret);
 }
 
-char			*fill_norng(char *str) // [!.-.]
+char			*fill_norng(char *str)
 {
 	FT_INIT(int, i, 32);
 	FT_INIT(int, j, 0);
@@ -107,7 +107,7 @@ static void		create_mix(char *tmp_str, char **ret, int i)
 	free(tmp_ret);
 }
 
-char			*fill_mix(char *str) // Exemple : [.-....-...-.-..]
+char			*fill_mix(char *str)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp_ret, NULL);

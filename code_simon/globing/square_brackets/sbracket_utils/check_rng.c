@@ -13,7 +13,7 @@
 #include "../../../includes/globing.h"
 #include "../../../includes/redir.h"
 
-int			check_rng(char *str) // Check si on a un rng valide ([a-g] valide, [z-a] invalide)
+int			check_rng(char *str)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp, clean_brackets(str));

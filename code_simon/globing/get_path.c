@@ -12,25 +12,11 @@
 
 #include "../includes/globing.h"
 
-// static char		*get_name(char *str)
-// {
-// 	char	**tab;
-// 	int		i;
-// 	char	*ret;
-
-// 	ret = NULL;
-// 	i = 0;
-// 	tab = ft_strsplit(str, '/');
-// 	i = ft_count_tab(tab);
-// 	ret = tab[i - 1];
-// 	return (ret);
-// }
-
-t_lst		*get_dir_content(char *dir)
+t_lst			*get_dir_content(char *dir)
 {
 	t_lst				*dir_content;
-	DIR 				*ret;
-	struct dirent 		*direntt;
+	DIR					*ret;
+	struct dirent		*direntt;
 
 	dir_content = NULL;
 	if (!(ret = opendir(dir)))
@@ -82,7 +68,7 @@ char			*get_cmd_last_path(char *str)
 	}
 }
 
-char	*ft_strpathjoin(const char *s1, const char *s2)
+char			*ft_strpathjoin(const char *s1, const char *s2)
 {
 	int		i;
 	int		j;

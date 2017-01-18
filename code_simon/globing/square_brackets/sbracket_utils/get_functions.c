@@ -13,7 +13,7 @@
 #include "../../../includes/globing.h"
 #include "../../../includes/redir.h"
 
-char		*get_rng_str(char *str, int i)// uac-rgs => "c-r"
+char		*get_rng_str(char *str, int i)
 {
 	char	*rng_str;
 
@@ -22,14 +22,13 @@ char		*get_rng_str(char *str, int i)// uac-rgs => "c-r"
 	return (rng_str);
 }
 
-int			get_len_mix(char *str) // Calcule la longueur de la chaîne à allouer pour le glob->bracket quand on a un cas "mix"
+int			get_len_mix(char *str)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, len, 0);
 	FT_INIT(char *, tmp, NULL);
 	tmp = ft_strchr(str, '[') && ft_strchr(str, ']')
 	? clean_brackets(str) : ft_strdup(str);
-	// Ancien segfault inexplicable
 	while (tmp[i])
 	{
 		if (tmp[i] == '-' && tmp[i + 1] && tmp[i - 1])

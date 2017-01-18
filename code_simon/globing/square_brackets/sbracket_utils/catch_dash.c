@@ -13,7 +13,7 @@
 #include "../../../includes/globing.h"
 #include "../../../includes/redir.h"
 
-static int		catch_dash_mix(int i) // Cette fonction est la pour ce genre de cas de figure : [a-dfg-hjkl-vbn]
+static int		catch_dash_mix(int i)
 {
 	FT_INIT(int, letters, 0);
 	while (g_shell.line[i] == '!' || g_shell.line[i] == '[')
@@ -42,7 +42,7 @@ static int		catch_dash_mix(int i) // Cette fonction est la pour ce genre de cas 
 	return (0);
 }
 
-int				catch_dash(int i) // Fonction qui vérifie la validité de l'expression en regardant le dash dans cette dernière
+int				catch_dash(int i)
 {
 	FT_INIT(int, nb, 0);
 	nb = catch_dash_mix(i);

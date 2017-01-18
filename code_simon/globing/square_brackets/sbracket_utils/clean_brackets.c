@@ -13,7 +13,7 @@
 #include "../../../includes/redir.h"
 #include "../../../includes/globing.h"
 
-char		*clean_brackets(char *str) // enleve les []
+char		*clean_brackets(char *str)
 {
 	FT_INIT(int, start, 0);
 	FT_INIT(int, i, 0);

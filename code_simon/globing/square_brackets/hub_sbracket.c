@@ -12,7 +12,7 @@
 
 #include "../../includes/globing.h"
 
-int				fill_bracket_tabs(char *line, t_glob *glob) // Fonction qui choisit la méthode de remplissage de notre tableau de caractères (glob->sbracket->bracket)
+int				fill_bracket_tabs(char *line, t_glob *glob)
 {
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(char *, tmp2, NULL);

@@ -31,7 +31,7 @@
 # endif
 
 # ifndef FT_TER
-#  define FT_TER(si, alors, sinon) si ? alors : sinon
+#  define FT_TER(si, alors, sinon) si ? alors : sinon // Macro de ternaire
 # endif
 
 # ifndef MULT
@@ -86,7 +86,7 @@ typedef struct			s_bracket
 	struct s_bracket	*prev;
 }						t_bracket;
 
-//Struct qui stocke le resultat d'une commande avec des {}
+// Struct qui stocke le resultat d'une commande avec des {}
 typedef struct			s_clist
 {
 	t_bracket			*list;
@@ -95,15 +95,17 @@ typedef struct			s_clist
 	struct s_clist		*next;
 	struct s_clist		*prev;
 }						t_clist;
-/*
-typedef struct 			s_lst
+
+// Struct pour le fichier globing/wildcards/check_file.c
+typedef	struct			s_checkfile
 {
-	void				*content;
-	struct s_lst		*prev;
-	struct s_lst		*next;
-	int 				number;
-} 						t_lst;
-*/
+	int					*i;
+	int					*j;
+	int					len;
+	char				*s;
+	char				*file;
+}						t_checkfile;
+
 typedef struct			s_glob
 {
 	t_bracket			*sbracket;
@@ -248,7 +250,7 @@ t_lst					*get_dir_content(char *dir);
 char					*ft_strpathjoin(const char *s1, const char *s2);
 char					*get_cmd_path(char *str);
 
-t_lst 					*qmark_get_matching_content(t_lst *dir_content, char *target);
+t_lst					*qmark_get_matching_content(t_lst *dir_content, char *target);
 
 int						ft_check_bracket(char *s1, int i, int stop, t_glob *g);
 void					check_file(int len, char *s, char *file, t_glob **glob);
@@ -265,6 +267,5 @@ void					ft_append_lst(t_lst **lst, t_lst *new_elem);
 void					ft_print_list_content(t_lst *lst);
 void					ft_lst_rewind(t_lst **lst);
 void					ft_lst_free(t_lst **list);
-/* void					ft_lst_forward(t_lst **lst); */
 
 #endif

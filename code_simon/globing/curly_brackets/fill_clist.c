@@ -52,7 +52,6 @@ static char		*special_sub(char *str, int i)
 		j++;
 	}
 	new = ft_strsub(str, i, j - i);
-	printf("new = %s j = %d\n", new, j);
 	return (new);
 }
 
@@ -102,6 +101,5 @@ int				fill_clist(char *line, t_glob *glob)
 		free(tmp);
 		i++;
 	}
-//	print_clist(&glob->cbracket);
 	return (1);
 }

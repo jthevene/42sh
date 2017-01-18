@@ -1,3 +1,5 @@
 1 - Gerer "@ls *?"
 2 - Recheck "@ls *{1..9}*"
 3 - Leak quand on fait "@ls {1.9}" (cbracket_errors.c)
+
+PS : square_brackets/sbracket_utils/get_functions:32:1 Ancien segfault inexplicable

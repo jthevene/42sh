@@ -12,11 +12,66 @@
 
 #include "../../includes/globing.h"
 
-void			check_file(int len, char *s, char *file, t_glob **g)
+static t_checkfile	*init_checkfile(int *i, int *j, int len, char *s)
+{
+	FT_INIT(t_checkfile *, cf, NULL);
+	if (!(cf = (t_checkfile *)malloc(sizeof(t_checkfile))))
+		return (NULL);
+	cf->i = i;
+	cf->j = j;
+	cf->len = len;
+	cf->s = ft_strdup(s);
+	return (cf);
+}
+
+static int			free_checkfile(char **tmp, t_checkfile **cf)
+{
+	if (tmp && (*tmp))
+		free((*tmp));
+	if (cf && (*cf))
+	{
+		if ((*cf)->s)
+			free((*cf)->s);
+		if ((*cf)->file)
+			free((*cf)->file);
+		free((*cf));
+		(*cf) = NULL;
+	}
+	return (0);
+}
+
+static int			check_star(char *file, t_checkfile *cf, t_glob *g)
+{
+	FT_INIT(char *, tmp, get_next_star(cf->s, (*cf->i) + 1));
+	cf->file = ft_strdup(file);
+	if (!tmp)
+	{
+		push_content_path(&g->args, ft_strdup(cf->file), g);
+		return (free_checkfile(&tmp, &cf));
+	}
+	if (ft_istrstr(cf->file, tmp, (*cf->j), g))
+		(*cf->j) = ft_istrstr(cf->file, tmp, (*cf->j), g);
+	else
+		return (free_checkfile(&tmp, &cf));
+	(*cf->i) += ft_strlen(tmp);
+	if (!ft_istrchr(cf->s, '*', (*cf->i)))
+	{
+		(*cf->j)++;
+		return (free_checkfile(&tmp, &cf));
+	}
+	else if (ft_istrchr(cf->s, '*', (*cf->i)) && (*cf->j) + 1 == cf->len)
+		(*cf->j)--;
+	if (tmp)
+		free(tmp);
+	tmp = NULL;
+	return (1);
+}
+
+void				check_file(int len, char *s, char *file, t_glob **g)
 {
 	FT_INIT(int, i, -1);
 	FT_INIT(int, j, -1);
-	FT_INIT(char *, tmp, NULL);
+	FT_INIT(t_checkfile *, cf, NULL);
 	while (++j < len)
 	{
 		if (s[++i] == '[')
@@ -29,33 +84,14 @@ void			check_file(int len, char *s, char *file, t_glob **g)
 		}
 		else if (s[i] == '*')
 		{
-			tmp = get_next_star(s, i + 1);
-			if (!tmp)
-			{
-				push_content_path(&(*g)->args, ft_strdup(file), (*g));
+			cf = init_checkfile(&i, &j, len, s);
+			if (!check_star(file, cf, (*g)))
 				break ;
-			}
-			if (ft_istrstr(file, tmp, j, (*g)))
-				j = ft_istrstr(file, tmp, j, (*g));
-			else
-				break ;
-			i += ft_strlen(tmp);
-			if (!ft_istrchr(s, '*', i))
-			{
-				j++;
-				break ;
-			}
-			else if (ft_istrchr(s, '*', i) && j + 1 == len)
-				j--;
-			if (tmp)
-				free(tmp);
-			tmp = NULL;
+			free_checkfile(NULL, &cf);
 		}
 		else if (s[i] != '?' && s[i] != '[' && s[i] != '*' && file[j] != s[i])
 			break ;
 	}
 	if (j == len && i + 1 == (int)ft_strlen(s))
 		push_content_path(&(*g)->args, ft_strdup(file), (*g));
-	if (tmp)
-		free(tmp);
 }

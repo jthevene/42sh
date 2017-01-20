@@ -238,7 +238,7 @@ int						is_only_token(char token, char *str);
 int						only_star(char *str, t_glob *glob);
 int						g_parse_expr(char *str, t_glob *glob);
 int						g_no_token(char *str, t_glob *glob);
-int						only_qmark(char *str, t_glob *glob);
+int						only_qmark(char *str, int star, t_glob *glob);
 int						only_cbrkt(char *str, t_glob *glob);
 int						mix_with_star(char *str, t_glob *glob);
 int						mix_token(char *str, t_glob *glob);
@@ -250,7 +250,7 @@ t_lst					*get_dir_content(char *dir);
 char					*ft_strpathjoin(const char *s1, const char *s2);
 char					*get_cmd_path(char *str);
 
-t_lst					*qmark_get_matching_content(t_lst *dir_content, char *target);
+t_lst					*only_qmark2(t_lst *dir_content, char *target);
 
 int						ft_check_bracket(char *s1, int i, int stop, t_glob *g);
 void					check_file(int len, char *s, char *file, t_glob **glob);

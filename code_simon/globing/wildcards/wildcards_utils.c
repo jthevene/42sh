@@ -91,7 +91,7 @@ int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 				ret = ft_check_bracket(s1, i + j
 				, j + next_bracket(s2, '[', j) == taille - 1 ? FALSE : TRUE, g);
 			j += s2[j] == '[' ? next_bracket(s2, '[', j) : 0;
-			if (j == taille - 1)
+			if (j == taille - 1 && ret != 0)
 				return (ret);
 			j++;
 			ret++;

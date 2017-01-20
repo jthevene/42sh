@@ -12,10 +12,26 @@
 
 #include "../../includes/globing.h"
 
-int			only_qmark(char *str, t_glob *glob)
+int			only_qmark(char *str, int star, t_glob *glob)
 {
-	if (str && glob)
-		return (1);
+	glob->f_path = get_cmd_path(str);
+	glob->l_path = get_cmd_last_path(str);
+	FT_INIT(t_lst *, files, get_dir_content(glob->f_path));
+	FT_INIT(size_t, len, get_len_token(str));
+	while (files->next && files->next->content)
+	{
+		if (star == TRUE && ft_strlen(files->content) >= len)
+			push_content_path(&glob->args, ft_strdup(files->content), glob);
+		else if (star == FALSE && len == ft_strlen(files->content))
+			push_content_path(&glob->args, ft_strdup(files->content), glob);
+		files = files->next;
+	}
+	if (star == TRUE && ft_strlen(files->content) >= len)
+		push_content_path(&glob->args, ft_strdup(files->content), glob);
+	else if (star == FALSE && len == ft_strlen(files->content))
+		push_content_path(&glob->args, ft_strdup(files->content), glob);
+	ft_lst_free(&files);
+	free_double_str(&glob->f_path, &glob->l_path);
 	return (0);
 }
 

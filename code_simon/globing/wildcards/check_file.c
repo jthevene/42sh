@@ -43,14 +43,15 @@ static int			free_checkfile(char **tmp, t_checkfile **cf)
 static int			check_star(char *file, t_checkfile *cf, t_glob *g)
 {
 	FT_INIT(char *, tmp, get_next_star(cf->s, (*cf->i) + 1));
+	FT_INIT(int, ret, 0);
 	cf->file = ft_strdup(file);
 	if (!tmp)
 	{
 		push_content_path(&g->args, ft_strdup(cf->file), g);
 		return (free_checkfile(&tmp, &cf));
 	}
-	if (ft_istrstr(cf->file, tmp, (*cf->j), g))
-		(*cf->j) = ft_istrstr(cf->file, tmp, (*cf->j), g);
+	if ((ret = ft_istrstr(cf->file, tmp, (*cf->j), g)))
+		(*cf->j) = ret == -1 ? 0 : ft_istrstr(cf->file, tmp, (*cf->j), g);
 	else
 		return (free_checkfile(&tmp, &cf));
 	(*cf->i) += ft_strlen(tmp);

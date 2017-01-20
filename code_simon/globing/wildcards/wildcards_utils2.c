@@ -12,12 +12,33 @@
 
 #include "../../includes/globing.h"
 
+static int		is_only_qmark_and_star(char *str)
+{
+	FT_INIT(int, i, 0);
+	FT_INIT(int, star, 0);
+	while (str[i])
+	{
+		if (str[i] == '*')
+			star++;
+		if (str[i] == '*' || str[i] == '?')
+			i++;
+		else
+			return (0);
+	}
+	if (star >= 1)
+		return (1);
+	else
+		return (0);
+}
+
 int				g_parse_expr(char *str, t_glob *glob)
 {
 	if (!ft_strchr(str, '?') && !ft_strchr(str, '[') && !ft_strchr(str, '*'))
 		return (g_no_token(str, glob));
+	else if (is_only_qmark_and_star(str))
+		return (only_qmark(str, TRUE, glob));
 	else if (is_only_token('?', str))
-		return (only_qmark(str, glob));
+		return (only_qmark(str, FALSE, glob));
 	else if (is_only_token('[', str))
 		return (only_cbrkt(str, glob));
 	else if (is_only_token('*', str))

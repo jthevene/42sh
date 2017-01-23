@@ -47,6 +47,7 @@ void	return_key(void)
 		g_shell.line = ft_strdup(g_shell.current_line);
 		glob_parser();
 		detect_builtins();
+		cd(g_shell.line);
 		free(g_shell.line);
 		set_cursor_pos_to_end(g_shell.line_size);
 		if (g_shell.hist->content)

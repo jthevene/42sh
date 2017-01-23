@@ -1,0 +1,9 @@
+ cd [-L|-P] [dir]
+
+ Options:
+        -L	force symbolic links to be followed
+        -P	use the physical directory structure without following symbolic
+    	links
+
+ cd nimporte_quoi dir:
+ 	- cd va chercher dans le pwd "nimporte_quoi" et le remplacer par "dir"

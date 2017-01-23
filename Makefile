@@ -109,9 +109,10 @@ BIN_GLOBING = glob_parser.o \
 
 #################		BUILTIN PART 			####################################
 
-SRC_BUILTIN = builtins/echo.c builtins/env.c builtins/setenv.c builtins/unsetenv.c
+SRC_BUILTIN = builtins/echo.c builtins/env.c builtins/setenv.c builtins/unsetenv.c \
+				builtins/cd.c
 
-BIN_BUILTIN = echo.o env.o setenv.o unsetenv.o
+BIN_BUILTIN = echo.o env.o setenv.o unsetenv.o cd.o
 
 #################		END BUILTIN PART 		####################################
 

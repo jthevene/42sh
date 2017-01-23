@@ -1,3 +1,0 @@
-4 - Verifier les pb quand on cherche pluieurs args (@ls M* globing/*.c)
-
-PS : square_brackets/sbracket_utils/get_functions:32:1 Ancien segfault inexplicable

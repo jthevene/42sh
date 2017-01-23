@@ -156,6 +156,7 @@ char 						*similarity(t_file *match_files, char *sentence);
 ** CD
 */
 void 				cd(char *line);
+char		 		*path_converter(char *sentence, char *home, char *pwd);
 /*
 ** CATCH_KEY
 */

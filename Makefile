@@ -110,9 +110,9 @@ BIN_GLOBING = glob_parser.o \
 #################		BUILTIN PART 			####################################
 
 SRC_BUILTIN = builtins/echo.c builtins/env.c builtins/setenv.c builtins/unsetenv.c \
-				builtins/cd.c
+				builtins/cd.c builtins/path_converter.c
 
-BIN_BUILTIN = echo.o env.o setenv.o unsetenv.o cd.o
+BIN_BUILTIN = echo.o env.o setenv.o unsetenv.o cd.o path_converter.o
 
 #################		END BUILTIN PART 		####################################
 

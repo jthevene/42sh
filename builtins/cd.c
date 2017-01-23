@@ -53,23 +53,6 @@ int			verif_access(char *path, char *file)
 	return (1);
 }
 
-int			shell_cd(char **commands, char *pwd, char *old_pwd, char *home)
-{
-//	FT_INIT(char*, dir_dest, NULL);
-//	FT_INIT(char*, dir, NULL);
-	if (!commands)
-		return (0);
-
-//	dir_dest = set_dir_dest(commands, data->env);
-
-//	chdir(dir_dest);
-//	ft_strdel(&dir_dest);
-//	free(dir);
-	if (pwd || old_pwd || home)
-		return (1);
-	return (1);
-}
-
 char 		**verif_args_cd(char *line, int *len_tab)
 {
 	FT_INIT(char**, tab_line, lsh_read_line(line));
@@ -105,103 +88,6 @@ void 		set_option_sentence(char **sentence, char **option, int len_tab, char **t
 		*sentence = ft_strdup(tab_line[1]);
 	else
 		*sentence = ft_strdup("");
-//	printf("1sentence =%s,\n", *sentence);
-}
-
-static	char		*set_begining(char *sentence, char *home,
-					char *current_path)
-{
-	FT_INIT(char*, new_path, ft_strnew(ft_strlen(sentence) + 100));
-	if (ft_strlen(sentence) && !ft_strcmp(sentence, "."))
-	{
-		ft_strcpy(new_path, current_path);
-		ft_strcat(new_path, sentence + 1);
-	}
-	else if (sentence[0] == '~')
-	{
-		ft_strcpy(new_path, home);
-		ft_strcat(new_path, sentence + 1);
-	}
-	else if (!ft_strcmp(sentence, ".."))
-	{
-		ft_strncpy(new_path, current_path, ft_strlen(current_path) -
-			ft_strlen(ft_strrchr(current_path, '/')));
-		ft_strcat(new_path, "/");
-	}
-	else
-	{
-		ft_strcpy(new_path, current_path);
-		ft_strcat(new_path, "/");
-		ft_strcat(new_path, sentence);
-	}
-	return (new_path);
-}
-
-static void			remove_last_dir(char **str, char c)
-{
-	if (!str || !c)
-		return ;
-	FT_INIT(int, i, 0);
-	FT_INIT(int, nb_slash, 0);
-	while ((*str)[i])
-	{
-		if ((*str)[i] == c)
-			nb_slash++;
-		i++;
-	}
-	i--;
-	while ((*str)[i] && (*str)[i] == c)
-	{
-		(*str)[i] = '\0';
-		i--;
-	}
-	while ((*str)[i] && (*str)[i] != c)
-	{
-		(*str)[i] = '\0';
-		i--;
-	}
-	if (nb_slash < 1)
-		(*str)[0] = '/';
-}
-
-char 		*convert_path(char *sentence, char *home, char *pwd)
-{
-	FT_INIT(int, i, 0);
-	FT_INIT(char*, str, NULL);
-	FT_INIT(char**, path_tab, NULL);
-	if (sentence[0] != '/')
-		str	= set_begining(sentence, home, pwd);
-	path_tab = ft_strsplit(str ? str : sentence, '/');
-	ft_strdel(&str);
-	str = ft_strnew(ft_strlen(sentence));
-	str[0] = '/';
-	while (path_tab && path_tab[i])
-	{
-		ft_printf("str =%s,\n", str);
-		printf("path[%d] =%s,\n", i, path_tab[i]);
-		if (!ft_strcmp(path_tab[i], "~"))
-			ft_strcat(str, home);
-		else if (!ft_strcmp(path_tab[i], ".."))
-		{
-//			ft_putstr("remove slash\n");
-			printf("str1 =%s,\n", str);
-			remove_last_dir(&str, '/');
-			printf("str2 =%s,\n", str);
-			printf("str3 =%s,\n", str);
-		}
-		else if (!ft_strcmp(path_tab[i], "."))
-			;
-		else
-		{
-			ft_strcat(str, path_tab[i]);
-			if ((path_tab[i + 1] && str[ft_strlen(str) - 1] != '/'))
-				ft_strcat(str, "/");
-		}
-		i++;
-	}
-	ft_printf("str =%s,\n", str);
-//	free_auto_tab(path_tab);
-	return (str);
 }
 
 void 		cd(char *line)
@@ -210,19 +96,23 @@ void 		cd(char *line)
 	FT_INIT(int, len_tab, 0);
 	if (!(tab_line = verif_args_cd(line, &len_tab)))
 		return ;
-	FT_INIT(char*, pwd, getenv("PWD"));
+	FT_INIT(char*, pwd, getcwd(NULL, 1024));
 	FT_INIT(char*, old_pwd, getenv("OLDPWD"));
 	FT_INIT(char*, home, getenv("HOME"));
 	FT_INIT(char*, option, NULL);
 	FT_INIT(char*, sentence, NULL);
 	FT_INIT(char*, path, NULL);
-//	FT_INIT(char**, dirs, NULL);
+	FT_INIT(char*, file, NULL);
 	set_option_sentence(&sentence, &option, len_tab, tab_line);
-//	dirs = ft_strsplit(sentence, '/');
-//	default_sentence(&sentence);
-	path = convert_path(sentence, home, pwd);
+	path = len_tab == 1 ? home : path_converter(sentence, home, pwd);
+	file = ft_strdup(path + (ft_strlen(path) - ft_strlen(ft_strrchr(path, '/')) + 1));
+	printf("1path =%s, file =%s, pwd =%s, len_tab =%d\n", path, file, getcwd(NULL, 1024), len_tab);
+	if (verif_access(path, file))
+		if (chdir(path))
+			ft_putstr("Error chdir\n");
+	printf("2path =%s, file =%s, pwd =%s,\n", path, file, getcwd(NULL, 1024));
 //	printf("sentence =%s, option =%s, len_tab =%d, path =%s\n", sentence, option, len_tab, path);
-	if (old_pwd || home || pwd || path)
+	if (old_pwd || home || pwd || path || file)
 		return ;
 }
 

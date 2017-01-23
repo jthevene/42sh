@@ -85,6 +85,7 @@ void	navigation_hist(int arrow)
 				g_shell.current_line = ft_strdup(g_shell.hist->content);
 			}
 		}
+		g_shell.cursor_x = ft_strlen(g_shell.current_line) + 3;
 	}
 }
 

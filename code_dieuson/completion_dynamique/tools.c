@@ -24,6 +24,16 @@ int				prev_sentence_value(char *sentence)
 	return (val);
 }
 
+char 			*set_copy_sentence(char *sentence)
+{
+	FT_INIT(char*, copy_sentence, NULL);
+	FT_INIT(int, nb_char, 0);
+	nb_char = g_shell.cursor_x - 3;
+	copy_sentence = ft_strnew(nb_char);
+	ft_strncpy(copy_sentence, sentence, nb_char);
+	return (copy_sentence);
+}
+
 int				verif_sentence(char *sentence)
 {
 	FT_INIT(char**, sentence_tab, ft_strsplit(sentence, ' '));

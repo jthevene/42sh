@@ -140,6 +140,7 @@ int 						prev_sentence_value(char *sentence);
 int 						verif_sentence(char *sentence);
 
 char						*set_sentence(char *str, int len_str, char *name);
+char 						*set_copy_sentence(char *sentence);
 char 						*set_end_path(char **new_path, char **sentence);
 
 t_file						*sort_list(t_file *files);

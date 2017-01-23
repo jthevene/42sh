@@ -100,7 +100,7 @@ char			*detect_auto_completion(char *sentence)
 	FT_INIT(static int, check, 0);
 	if (!sentence || !ft_strlen(sentence) || !verif_sentence(sentence))
 		return (sentence);
-	FT_INIT(char*, copy_sentence, ft_strdup(sentence));
+	FT_INIT(char*, copy_sentence, set_copy_sentence(sentence));
 	files = files_list(&copy_sentence);
 	to_search = str_to_search(copy_sentence);
 	if ((match_files = compare_list_sentence(files, to_search)))

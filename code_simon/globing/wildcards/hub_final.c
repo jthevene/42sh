@@ -78,7 +78,7 @@ void		hub_final(t_glob *g)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp, NULL);
-	while (g_shell.line && g_shell.line[i] != ' ')
+	while (g_shell.line[i] && g_shell.line[i] != ' ')
 		i++;
 	i++;
 	rewind_tbracket(g->cbracket ? &g->cbracket->list : NULL);
@@ -98,7 +98,9 @@ void		hub_final(t_glob *g)
 		}
 		else
 			g_parse_expr(tmp, g);
-		free(tmp);
+		ft_memdel((void *)&tmp);
+		if (!g_shell.line[i + 1])
+			break ;
 	}
 	multi_handling(g);
 }

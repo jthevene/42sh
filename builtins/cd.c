@@ -222,7 +222,7 @@ void 		cd(char *line)
 //	default_sentence(&sentence);
 	path = convert_path(sentence, home, pwd);
 //	printf("sentence =%s, option =%s, len_tab =%d, path =%s\n", sentence, option, len_tab, path);
-	if (old_pwd || home || pwd)
+	if (old_pwd || home || pwd || path)
 		return ;
 }
 

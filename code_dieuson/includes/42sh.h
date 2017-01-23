@@ -90,7 +90,7 @@ typedef struct		s_shell
 	int 			len;
 	char			*oldpwd;
 	char 			*clipboard;
-	t_var			*vars;//contenu de ENV
+	t_var			*env; //contenu de ENV
 	int 			start_select;
 	int 			end_select;
 	int 			cursor_x;
@@ -154,8 +154,8 @@ char 						*similarity(t_file *match_files, char *sentence);
 /*
 ** CATCH_KEY
 */
-void 		set_2d_line_val();
-void 		set_2d_cursor_val();
+void 				set_2d_line_val();
+void 				set_2d_cursor_val();
 int					readkey(void);
 /*
 ** CURSOR_MOVE
@@ -185,6 +185,7 @@ void				update_history_file(void);
  */
 int					init_all(void);
 void				init_hist(void);
+int					init_env(void);
 /*
 ** LINE_EDITION
 */
@@ -215,14 +216,23 @@ void 				ft_sigkill(int sig);
 */
 int					init_termios(struct termios my_termios);
 void				ft_reset_termios(struct termios t_back);
-/*
-** VAR
-*/
-char				*get_var(t_shell *g_shell, char *n_var);
-t_var				*new_var(char *v_name, char *v_value);
-void				ft_varappend(t_var *new_element);
 
-// SIMON
+/*
+** SIMON
+*/
 int					glob_parser(void);
+
+/*
+** BUILTINS
+*/
+int					_42sh_echo(char *line);
+
+int					_42sh_env(void);
+void				ft_varappend(t_var **new_element);
+t_var				*new_var(char *v_name, char *v_value);
+char				*get_var(t_shell *g_shell, char *n_var);
+
+int					_42sh_setenv(char *line);
+int					_42sh_unsetenv(char *name);
 
 #endif

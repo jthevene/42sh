@@ -26,6 +26,17 @@ static void 	set_cursor_pos_to_end(int i)
 		ft_putstr("\n");
 }
 
+void	detect_builtins(void)
+{
+	if (ft_strstr(g_shell.line, "echo"))
+		_42sh_echo(g_shell.line);
+	else if (ft_strstr(g_shell.line, "unsetenv"))
+		_42sh_unsetenv(g_shell.line);
+	else if (ft_strstr(g_shell.line, "setenv"))
+		_42sh_setenv(g_shell.line);
+	else if (ft_strstr(g_shell.line, "env"))
+		_42sh_env();
+}
 
 void	return_key(void)
 { 
@@ -35,6 +46,7 @@ void	return_key(void)
 		ft_putchar(10);
 		g_shell.line = ft_strdup(g_shell.current_line);
 		glob_parser();
+		detect_builtins();
 		free(g_shell.line);
 		set_cursor_pos_to_end(g_shell.line_size);
 		if (g_shell.hist->content)

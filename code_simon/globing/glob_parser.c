@@ -103,7 +103,6 @@ int						glob_parser(void)
 {
 	static t_glob		*glob = NULL;
 
-	ft_putstr("\a");
 	if (!g_shell.line)
 		return (0);
 	if (!verif_tokens(g_shell.line))

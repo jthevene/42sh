@@ -12,34 +12,6 @@
 
 #include "../includes/42sh.h"
 
-static int		init_env()
-{
-	int				i;
-	char			*v_name;
-	char			*v_value;
-	t_var			*var;
-	extern char		**environ;
-
-	i = 0;
-	if (!environ[0])
-	{
-		ft_putendl("error : no environ");
-		return (0);
-	}
-	while (environ[i])
-	{
-		v_value = ft_strchr(environ[i], '=') + 1;
-		v_name = ft_strsub(environ[i], 0, v_value - environ[i] - 1);
-		var = new_var(v_name, v_value);
-		ft_varappend(var);
-		free(v_name);
-		i++;
-	}
-	g_shell.oldpwd = get_var(&g_shell, "OLDPWD");
-	g_shell.hist = (t_lst*)ft_memalloc(sizeof(t_lst));
-	return (1);
-}
-
 void	init_hist()
 {
 	char	*filename;

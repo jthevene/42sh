@@ -105,7 +105,15 @@ BIN_GLOBING = glob_parser.o \
 		wildcards_tokens.o hub_final.o wildcards_utils.o\
 		get_path.o wildcards_utils2.o lst_tools.o check_file.o
 		
-################# 		END SIMON PART		####################################
+################# 		END GLOBING PART		####################################
+
+#################		BUILTIN PART 			####################################
+
+SRC_BUILTIN = builtins/echo.c builtins/env.c builtins/setenv.c builtins/unsetenv.c
+
+BIN_BUILTIN = echo.o env.o setenv.o unsetenv.o
+
+#################		END BUILTIN PART 		####################################
 
 INCLUDES 	= -I$(INCLUDE_DIR) -I$(LIBFT_INCLUDE_DIR) \
 			-I$(GLOBING)includes/
@@ -116,11 +124,11 @@ lib:
 	make -C libft
 
 $(NAME):
-	gcc $(C_FLAGS) $(INCLUDES) $(SRC_DIEUSON) $(SRC_GLOBING) -Incurses -c
-	gcc $(C_FLAGS) $(BIN_GLOBING) $(BIN_DIEUSON) $(LIBFT_DIR)/libftprintf.a \
+	gcc $(C_FLAGS) $(INCLUDES) $(SRC_DIEUSON) $(SRC_GLOBING) $(SRC_BUILTIN) -Incurses -c
+	gcc $(C_FLAGS) $(BIN_GLOBING) $(BIN_DIEUSON) $(BIN_BUILTIN) $(LIBFT_DIR)/libftprintf.a \
 			$(LIBFT_DIR)/libft.a -ltermcap -o $(NAME)
 	mkdir bin_folder
-	mv $(BIN_DIEUSON) $(BIN_GLOBING) bin_folder
+	mv $(BIN_DIEUSON) $(BIN_GLOBING) $(BIN_BUILTIN) bin_folder
 
 clean:
 	make -C $(GLOBING) clean

@@ -1,5 +1,3 @@
-2 - Recheck "@ls *{1..9}*"
-3 - Leak quand on fait "@ls {1.9}" (cbracket_errors.c)
 4 - Verifier les pb quand on cherche pluieurs args (@ls M* globing/*.c)
 
 PS : square_brackets/sbracket_utils/get_functions:32:1 Ancien segfault inexplicable

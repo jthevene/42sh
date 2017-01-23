@@ -41,7 +41,7 @@ int		cbracket_errors(char *line, t_glob *glob)
 		tmp = ft_strjoin("42sh: Bad pattern in expression: ", glob->command);
 		ft_putendl_fd(tmp, 2);
 		ft_putendl_fd("Pattern should be of type: \"{,*.c}\","
-			" or \"{*.c,*.h}\"", 2);
+			" \"{*.c,*.h}\" or \"{1..9}\"", 2);
 		free(tmp);
 		free(line);
 		return (0);

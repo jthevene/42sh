@@ -113,7 +113,10 @@ int						glob_parser(void)
 		get_command(g_shell.line, glob);
 		if (ft_strchr(g_shell.line, '{'))
 			if (!hub_cbracket(glob))
+			{
+				free(glob->command ? glob->command : NULL);
 				return (0);
+			}
 		hub_final(glob);
 		print_args(glob);
 		if (glob->command)

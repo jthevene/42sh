@@ -29,7 +29,7 @@
 
 #ifndef GLOBING_H
 # define GLOBING_H
-#  include "../../code_simon/includes/globing.h"
+#  include "globing.h"
 # endif
 
 #ifndef LEXER_H

@@ -52,14 +52,13 @@ BIN_DIEUSON 		=	main.o catch_key.o 	\
 
 ################# 		GLOBING PART		####################################
 
-GLOBING = ./code_simon/
+GLOBING = ./
 REDIR = $(GLOBING)redirections/
 SBRACK = $(GLOBING)globing/square_brackets/
 CBRACK = $(GLOBING)globing/curly_brackets/
 WILDCARDS = $(GLOBING)globing/wildcards/
 UTILS_1 = $(GLOBING)globing/square_brackets/sbracket_utils/
 UTILS_2 = $(GLOBING)globing/curly_brackets/cbracket_utils/
-BIN_DIR_GLOBING = $(GLOBING)bin_folder/
 
 SRC_GLOBING = $(GLOBING)globing/glob_parser.c $(GLOBING)globing/get_path.c \
 		$(GLOBING)globing/verif_tokens.c \
@@ -105,7 +104,7 @@ BIN_GLOBING = glob_parser.o get_path.o verif_tokens.o \
 		imbric_utils.o get_imbric_patterns.o \
 		cbracket_utils.o imbric_utils2.o \
 		double_brck.o expansion_utils.o \
-		wildcards_tokens.o hub_final.o wildcards_utils.o\
+		wildcards_tokens.o hub_final.o wildcards_utils.o \
 		wildcards_utils2.o lst_tools.o check_file.o
 		
 ################# 		END GLOBING PART		####################################
@@ -149,14 +148,12 @@ $(NAME):
 	mv $(BIN_DIEUSON) $(BIN_GLOBING) $(BIN_BUILTIN) $(BIN_PARSER) bin_folder
 
 clean:
-	make -C $(GLOBING) clean
 	rm -rf bin_folder
 
 clean_lib:
 	make -C $(LIBFT_DIR) clean
 
 fclean: clean
-	make -C $(GLOBING) fclean
 	rm -rf $(NAME)
 	sh ./rm_files.sh
 

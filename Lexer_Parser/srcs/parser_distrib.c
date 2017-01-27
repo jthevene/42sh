@@ -1,36 +1,31 @@
 #include "../includes/sh.h"
 
-int		main(void)
+void		lexer_parser(char *line)
 {
 	t_all	*all;
 	int		i;
 
 	if (!(all = (t_all *)malloc(sizeof(t_all))))
 		return (0);
-	while (1)
+	all->line = ft_strdup(line);
+	i = 5;
+	while (i != 0)
 	{
-		i = 5;
-		ft_putstr("$> ");
-		get_next_line(0, &(all->line));
-		while (i != 0)
-		{
-			i = unfinished_quote(all->line);
-			if (i == 1)
-				all->line = finish_the_squote(all->line);
-			else if (i == 2)
-				all->line = finish_the_dquote(all->line);
-		}
-		if ((ft_strcmp(all->line, "\0") == 0) || (isallspace(all->line) == 1))
-			;
-		else
-		{
-			analise_line(all);
-			print_tokens(all->tokens_begin);
-			start_parse(all->tokens_begin);
-		}
-		free(all->line);
+		i = unfinished_quote(all->line);
+		if (i == 1)
+			all->line = finish_the_squote(all->line);
+		else if (i == 2)
+			all->line = finish_the_dquote(all->line);
 	}
-	return (0);
+	if ((ft_strcmp(all->line, "\0") == 0) || (isallspace(all->line) == 1))
+		;
+	else
+	{
+		analise_line(all);
+		print_tokens(all->tokens_begin);
+		start_parse(all->tokens_begin);
+	}
+	free(all->line);
 }
 
 void	analise_line(t_all *all)

@@ -56,7 +56,6 @@ typedef struct 		s_tree
 	struct s_tree	*right;
 } 					t_tree;
 
-void	lexer_parser(char *line);
 int		check_ope(t_token *token, char *line, int pos, int i);
 int		ft_isprintnotope(char c);
 void	print_tokens(t_token *token);

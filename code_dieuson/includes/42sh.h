@@ -27,6 +27,16 @@
 # include <sys/ioctl.h>
 # include <curses.h>
 
+#ifndef GLOBING_H
+# define GLOBING_H
+#  include "../../code_simon/includes/globing.h"
+# endif
+
+#ifndef SH_H
+# define SH_H
+#  include "../../Lexer_Parser/includes/sh.h"
+# endif
+
 # ifndef SH_LIBFT
 #  define SH_LIBFT
 #  include "../../libft/includes/libft.h"

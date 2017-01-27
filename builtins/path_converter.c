@@ -1,4 +1,4 @@
-#include "../code_dieuson/includes/42sh.h"
+#include "../includes/42sh.h"
 
 static	char		*set_begining(char *sentence, char *home,
 					char *current_path)

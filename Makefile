@@ -12,7 +12,7 @@
 
 NAME				=	42sh
 
-DIEUSON 			=	./code_dieuson/
+DIEUSON 			=	./
 SRC_DIR				=	$(DIEUSON)line_edition/
 INCLUDE_DIR			=	$(DIEUSON)includes
 OBJ_DIR				=	./objs

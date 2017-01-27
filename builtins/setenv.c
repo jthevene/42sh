@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../code_dieuson/includes/42sh.h"
+#include "../includes/42sh.h"
 
 char		*recup_name(char *line)
 {

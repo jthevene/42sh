@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../code_dieuson/includes/42sh.h"
+#include "../includes/42sh.h"
 
 int			error_cd(char *type, char *file)
 {

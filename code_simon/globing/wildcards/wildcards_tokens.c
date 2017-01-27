@@ -79,7 +79,7 @@ int			mix_with_star(char *str, t_glob *glob)
 {
 	glob->f_path = get_cmd_path(str);
 	glob->l_path = get_cmd_last_path(str);
-	FT_INIT(char *, token, get_token(str));
+	FT_INIT(char *, token, wild_get_token(str));
 	FT_INIT(t_lst *, files, get_dir_content(glob->f_path));
 	hub_sbracket(glob, token);
 	rewind_tbracket(&glob->sbracket);
@@ -105,7 +105,7 @@ int			mix_token(char *str, t_glob *glob)
 {
 	glob->f_path = get_cmd_path(str);
 	glob->l_path = get_cmd_last_path(str);
-	FT_INIT(char *, token, get_token(str));
+	FT_INIT(char *, token, wild_get_token(str));
 	FT_INIT(t_lst *, files, get_dir_content(glob->f_path));
 	FT_INIT(int, len, get_len_token(token));
 	hub_sbracket(glob, token);

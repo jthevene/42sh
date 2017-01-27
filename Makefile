@@ -110,13 +110,13 @@ BIN_GLOBING = glob_parser.o get_path.o verif_tokens.o\
 ################# 		END GLOBING PART		####################################
 
 ################# 			PARSER PART			####################################
-PARSER = ./Lexer_Parser/
+PARSER = ./Lexer_Parser/srcs/
 
-SRC_PARSER = $(PARSER)backslash_escape.c $(PARSER)free_tree.c $(PARSER)get_next_line.c \
+SRC_PARSER = $(PARSER)backslash_escape.c $(PARSER)free_tree.c \
 			$(PARSER)isallspace.c $(PARSER)lexer_check.c $(PARSER)parser_distrib.c $(PARSER)parse.c \
 			$(PARSER)start_parse.c $(PARSER)tree.c 
 
-BIN_PARSER = backslash_escape.o free_tree.o get_next_line.o isallspace.o lexer_check.o \
+BIN_PARSER = backslash_escape.o free_tree.o isallspace.o lexer_check.o \
 			 parser_distrib.o parse.o start_parse.o tree.o
 
 
@@ -133,7 +133,7 @@ BIN_BUILTIN = echo.o env.o setenv.o unsetenv.o cd.o path_converter.o
 #################		END BUILTIN PART 		####################################
 
 INCLUDES 	= -I$(INCLUDE_DIR) -I$(LIBFT_INCLUDE_DIR) \
-			-I$(GLOBING)includes/ -I$(PARSER)includes/
+			-I$(GLOBING)includes/ -I$(PARSER)includes/sh.h
 
 all: $(NAME)
 
@@ -141,8 +141,8 @@ lib:
 	make -C libft
 
 $(NAME):
-	gcc $(C_FLAGS) $(INCLUDES) $(SRC_DIEUSON) $(SRC_GLOBING) $(SRC_BUILTIN) -Incurses -c
-	gcc $(C_FLAGS) $(BIN_GLOBING) $(BIN_DIEUSON) $(BIN_BUILTIN) $(LIBFT_DIR)/libftprintf.a \
+	gcc $(C_FLAGS) $(INCLUDES) $(SRC_DIEUSON) $(SRC_GLOBING) $(SRC_PARSER) $(SRC_BUILTIN) -Incurses -c
+	gcc $(C_FLAGS) $(BIN_GLOBING) $(BIN_DIEUSON) $(BIN_BUILTIN) $(BIN_PARSER) $(LIBFT_DIR)/libftprintf.a \
 			$(LIBFT_DIR)/libft.a -ltermcap -o $(NAME)
 	mkdir bin_folder
 	mv $(BIN_DIEUSON) $(BIN_GLOBING) $(BIN_BUILTIN) bin_folder

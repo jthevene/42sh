@@ -32,15 +32,12 @@
 #  include "../../code_simon/includes/globing.h"
 # endif
 
-#ifndef SH_H
-# define SH_H
+#ifndef LEXER_H
+# define LEXER_H
 #  include "../../Lexer_Parser/includes/sh.h"
 # endif
 
-# ifndef SH_LIBFT
-#  define SH_LIBFT
-#  include "../../libft/includes/libft.h"
-# endif
+
 
 # define K_PRINT   		1 //caractere imprimable
 # define K_ESCAPE  		2

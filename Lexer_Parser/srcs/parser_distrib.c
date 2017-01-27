@@ -6,7 +6,7 @@ void		lexer_parser(char *line)
 	int		i;
 
 	if (!(all = (t_all *)malloc(sizeof(t_all))))
-		return (0);
+		return ;
 	all->line = ft_strdup(line);
 	i = 5;
 	while (i != 0)

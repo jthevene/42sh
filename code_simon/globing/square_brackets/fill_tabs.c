@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/redir.h"
 #include "../../includes/globing.h"
 
 char			*fill_rng(char *str)

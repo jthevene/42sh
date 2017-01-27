@@ -1,8 +1,6 @@
 #ifndef SH_H
 # define SH_H
 
-# include "../libft/libft.h"
-# include "get_next_line.h"
 # include <unistd.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
@@ -17,6 +15,11 @@
 # include <sys/uio.h>
 # include <signal.h>
 # include <dirent.h>
+
+# ifndef SH_LIBFT
+#  define SH_LIBFT
+#  include "../../libft/includes/libft.h"
+# endif
 
 # define WORDS		0
 # define DQUOTE		1

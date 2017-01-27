@@ -51,6 +51,7 @@ BIN_DIEUSON 		=	main.o catch_key.o 	\
 						tools.o set_path_second_part.o
 
 ################# 		GLOBING PART		####################################
+
 GLOBING = ./code_simon/
 REDIR = $(GLOBING)redirections/
 SBRACK = $(GLOBING)globing/square_brackets/
@@ -83,7 +84,7 @@ SRC_GLOBING = $(GLOBING)globing/glob_parser.c $(GLOBING)globing/get_path.c \
 		$(WILDCARDS)hub_final.c $(WILDCARDS)wildcards_tokens.c $(WILDCARDS)wildcards_utils.c \
 		$(WILDCARDS)wildcards_utils2.c $(WILDCARDS)lst_tools.c $(WILDCARDS)check_file.c \
 
-BIN_GLOBING = glob_parser.o get_path.o verif_tokens.o\
+BIN_GLOBING = glob_parser.o get_path.o verif_tokens.o \
 		\
 		simple_right.o double_right.o \
 		redir_utils.o \

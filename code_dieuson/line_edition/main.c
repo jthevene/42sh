@@ -14,14 +14,15 @@
 
 void		display_prompt(void)
 {
-	ft_putstr("\033[32m$> \033[0m");
+	g_shell.prompt = set_prompt(get_var(&g_shell, "PWD"));
+	ft_putstr(g_shell.prompt);
 	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
 //	g_shell.cursor_x = 3;
 }
 
 void 		set_2d_line_val()
 {
-	FT_INIT(int, ref_x, ft_strlen(g_shell.current_line) + 3);
+	FT_INIT(int, ref_x, ft_strlen(g_shell.current_line) + g_shell.prompt_len);
 	FT_INIT(int, y, 0);
 //	ioctl(0, TIOCGWINSZ, g_shell.win);
 	g_shell.line_size = ref_x;
@@ -59,7 +60,7 @@ static	void	run_shell(void)
 	int 	i;
 
 	i = 0;
-	g_shell.cursor_x = 3;
+	g_shell.cursor_x = g_shell.prompt_len;
 	ioctl(0, TIOCGWINSZ, g_shell.win);
 	while (42)
 	{
@@ -96,7 +97,7 @@ static	void	run_shell(void)
 		{
 			return_key();
 			i = 0;
-			g_shell.cursor_x = 3;
+			g_shell.cursor_x = g_shell.prompt_len;
 			set_2d_line_val();
 			set_2d_cursor_val();
 		}

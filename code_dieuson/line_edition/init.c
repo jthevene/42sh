@@ -84,6 +84,8 @@ int		init_all()
 	g_shell.clipboard = NULL;
 	g_shell.len = 0;
 	g_shell.c = ft_strnew(16);
+	g_shell.prompt = 0;
+	g_shell.prompt_len = 0;
 	tcgetattr(STDIN_FILENO, &g_shell.t_back);// save les données termios d'origine
 	init_termios(g_shell.t_back);
 	return (0);

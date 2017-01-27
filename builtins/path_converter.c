@@ -29,7 +29,7 @@ static	char		*set_begining(char *sentence, char *home,
 	return (new_path);
 }
 
-static void			remove_last_dir(char **str, char c)
+void			remove_last_dir(char **str, char c)
 {
 	if (!str || !c)
 		return ;

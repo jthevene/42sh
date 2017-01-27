@@ -31,13 +31,13 @@ int 			detect_selection_text(char *key, int start ,
 		if (end && end < cursor_x)
 			g_shell.end_select = cursor_x;
 			if (end && end < cursor_x && cursor_x == start + 1)
-				g_shell.end_select = g_shell.end_select > 3 ?
+				g_shell.end_select = g_shell.end_select > g_shell.prompt_len ?
 					g_shell.end_select - 1 : g_shell.end_select;
 			else if (end && end < cursor_x)
-				g_shell.end_select = g_shell.end_select > 3 ?
+				g_shell.end_select = g_shell.end_select > g_shell.prompt_len ?
 					g_shell.end_select - 2 : g_shell.end_select;
 		if (!(end && end < cursor_x))
-			g_shell.end_select = cursor_x > 3 ? cursor_x - 1 : cursor_x;
+			g_shell.end_select = cursor_x > g_shell.prompt_len ? cursor_x - 1 : cursor_x;
 		print_line(g_shell.line_size);
 		return (K_LEFT);
 	}

@@ -63,8 +63,8 @@ void 	reset_cursor_pos()
 void 	display_with_select(char *line)
 {
 	FT_INIT(int, i, 0);
-	FT_INIT(int, start_select, -3);
-	FT_INIT(int, end_select, -3);
+	FT_INIT(int, start_select, - g_shell.prompt_len);
+	FT_INIT(int, end_select, - g_shell.prompt_len);
 	if (!g_shell.start_select || !g_shell.end_select)
 		return ;
 	start_select += g_shell.start_select < g_shell.end_select ? 
@@ -77,7 +77,7 @@ void 	display_with_select(char *line)
 			ft_putstr("\033[47m\033[30m");
 		ft_putchar(line[i]);
 		if (i == end_select || (i == end_select - 1 
-			&& end_select == g_shell.line_size - 3))
+			&& end_select == g_shell.line_size - g_shell.prompt_len))
 			ft_putstr("\033[0m\033[0m");
 		i++;
 	}
@@ -87,7 +87,7 @@ void	clean_line()
 {
 	int i;
 	
-	i = ft_strlen(g_shell.current_line) + 3;
+	i = ft_strlen(g_shell.current_line) + g_shell.prompt_len;
 	g_shell.nb_rows = 1;
 	if (i > g_shell.win->ws_col)
 	{
@@ -132,16 +132,32 @@ int 	set_cursor_start(int len, int ref_cursor)
 	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
-	ft_putstr("\033[32m$> \033[0m");
+	ft_putstr(g_shell.prompt);
 	return (len);
+}
+
+char 	*set_prompt(char *pwd)
+{
+	FT_INIT(char*, head_line, ft_strdup("\033[32m$> \033[0m"));
+	FT_INIT(char*, tmp, NULL);
+	g_shell.prompt_len = 3;
+	if (!pwd)
+		return (head_line);
+	tmp = head_line;
+	head_line = ft_strjoin(pwd, head_line);
+	ft_strdel(&tmp);
+	g_shell.prompt_len += ft_strlen(pwd);
+	if (g_shell.prompt)
+		ft_strdel(&g_shell.prompt);
+	return (head_line);
 }
 
 void	print_line(int i)
 {
+	g_shell.prompt = set_prompt(get_var(&g_shell, "PWD"));
 	set_2d_line_val();
 	set_2d_cursor_val();
 	FT_INIT(int, ref_cursor, g_shell.cursor_x);
-//	monitoring();	
 	if (i)
 		i--;
 	go_to_end();

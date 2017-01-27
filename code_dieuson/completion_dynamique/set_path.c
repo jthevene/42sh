@@ -104,7 +104,7 @@ char				**set_path(char **sentence, char *home, char *current_path)
 		return (ft_strsplit(current_path, '\n'));
 	if (!ft_strchr(*sentence, ' ') && *sentence[0] != '/'
 		&& ft_strlen(current_path))
-		return (ft_strsplit(getenv("PATH"), ':'));
+		return (ft_strsplit(get_var(&g_shell, "PATH"), ':'));
 	else
 		sentence = clear_path(sentence);
 	new_path = set_begining(*sentence, home, *sentence[0] == '/' ? ""

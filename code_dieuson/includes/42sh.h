@@ -90,7 +90,9 @@ typedef struct		s_shell
 	int 			len;
 	char			*oldpwd;
 	char 			*clipboard;
+	char 			*prompt;
 	t_var			*env; //contenu de ENV
+	int 			prompt_len;
 	int 			start_select;
 	int 			end_select;
 	int 			cursor_x;
@@ -156,6 +158,7 @@ char 						*similarity(t_file *match_files, char *sentence);
 ** CD
 */
 void 				cd(char *line);
+void				remove_last_dir(char **str, char c);
 char		 		*path_converter(char *sentence, char *home, char *pwd);
 /*
 ** CATCH_KEY
@@ -198,6 +201,7 @@ int					init_env(void);
 void				fill_current_line(char c);
 void 				copy_cut_line(int key);
 void 				past_line(char *clipboard);
+char			 	*set_prompt(char *pwd);
 /*
 ** MAIN
 */

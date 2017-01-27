@@ -68,10 +68,10 @@ void	return_key(void)
 void	backspace_key(int key)
 {
 	FT_INIT(int, len, ft_strlen(g_shell.current_line));
-	FT_INIT(int, cursor_pos, g_shell.cursor_x - 4);
+	FT_INIT(int, cursor_pos, g_shell.cursor_x - (g_shell.prompt_len + 1));
 	if (!len || !g_shell.current_line || (cursor_pos < 0 && key == K_BACKSP))
 	{
-		g_shell.cursor_x = 3;
+		g_shell.cursor_x = g_shell.prompt_len;
 		return ;
 	}
 	if (key == K_BACKSP)

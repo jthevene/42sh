@@ -16,14 +16,13 @@ static char			*ft_strchr_bslash(char *s, int c)
 {
 	FT_INIT(int, i, 0);
 	while (s[i] && s[i] != (char)c)
-		i++;
-	if (s[i] == (char)c)
 	{
-		if (i > 0 && s[i - 1] == '\\')
-			return (NULL);
-		else
-			return ((char*)&s[i]);
+		if (s[i] == '\\')
+			i++;
+		i++;
 	}
+	if (s[i] == (char)c)
+			return ((char*)&s[i]);
 	return (NULL);
 }
 

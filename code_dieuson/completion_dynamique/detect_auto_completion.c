@@ -39,7 +39,7 @@ t_file 			*get_file_path(char *path, char *sentence)
 		return (NULL);
 	rep = opendir(path);
 	if (rep && !ft_strchr(sentence, ' ') && sentence[0] != '/' &&
-		getenv("PATH"))
+		get_var(&g_shell, "PATH"))
 		files = store_files_dirs(rep, files, path, str_to_search(sentence));
 	else if (rep && path && sentence[ft_strlen(sentence) - 1] != ' ')
 		files = store_files_dirs(rep, files, path, str_to_search(sentence));
@@ -60,7 +60,7 @@ static t_file	*files_list(char **sentence)
 	FT_INIT(t_file*, head, NULL);
 	FT_INIT(int, i, 0);
 	*sentence = default_sentence(sentence);
-	path = set_path(sentence, getenv("HOME"), getenv("PWD"));
+	path = set_path(sentence, get_var(&g_shell, "HOME"), get_var(&g_shell, "PWD"));
 	while (path && path[i])
 	{
 		if (!files)

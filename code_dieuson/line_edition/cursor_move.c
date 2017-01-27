@@ -31,9 +31,9 @@ void 	arrow_moove_left()
 	FT_INIT(int, cursor_x, g_shell.cursor_x);
 	set_2d_line_val();
 	set_2d_cursor_val();
-	if (cursor_x - 1 <= len && cursor_x - 1 >= 3)
+	if (cursor_x - 1 <= len && cursor_x - 1 >= g_shell.prompt_len)
 	{
-		if (g_shell.cursor_2d_x && g_shell.cursor_x > 3)
+		if (g_shell.cursor_2d_x && g_shell.cursor_x > g_shell.prompt_len)
 			tputs(tgetstr("le", NULL), 1, ft_putchar_int);
 		else
 		{
@@ -53,7 +53,7 @@ void 	arrow_moove_right()
 	FT_INIT(int, cursor_x, g_shell.cursor_x);
 	set_2d_line_val();
 	set_2d_cursor_val();
-	if (cursor_x < len && cursor_x >= 3)
+	if (cursor_x < len && cursor_x >= g_shell.prompt_len)
 	{
 		if (g_shell.cursor_2d_x + 1 < g_shell.win->ws_col
 		&& g_shell.cursor_x <= len)
@@ -72,7 +72,7 @@ void 	moove_one_word(int direction)
 
 	function = direction > 0 ? arrow_moove_right : arrow_moove_left;
 	FT_INIT(char *, line, g_shell.current_line);
-	FT_INIT(int, i, g_shell.cursor_x - 3);
+	FT_INIT(int, i, g_shell.cursor_x - g_shell.prompt_len);
 	if (!line || i < 0)
 		return ;
 	if (line[i] != ' ' && direction < 0)

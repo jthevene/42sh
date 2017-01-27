@@ -28,7 +28,8 @@ void		ft_sigwinch(int sig)
 	(void)sig;
 	go_to_end();
  	if (g_shell.current_line)
-		ft_bzero(g_shell.current_line, g_shell.line_size - 3);
+		ft_bzero(g_shell.current_line, g_shell.line_size - 
+				g_shell.prompt_len);
 	ft_putstr("\n");
 	display_prompt();
 }
@@ -37,7 +38,8 @@ void 		ft_sigkill(int sig)
 {
 	(void)sig;
 	if (g_shell.current_line)
-		ft_bzero(g_shell.current_line, g_shell.line_size - 3);
+		ft_bzero(g_shell.current_line, g_shell.line_size - 
+				g_shell.prompt_len);
 	if (g_shell.line_2d_x)
 		ft_putstr("\n");
 	ft_reset_termios(g_shell.t_back);

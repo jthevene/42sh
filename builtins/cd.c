@@ -39,17 +39,29 @@ char		**lsh_read_line(char *line)
 	return (commands);
 }
 
-int			verif_access(char *path, char *file)
+int			verif_access(char **path, char **file)
 {
 	struct stat infos;
+	ssize_t		r;
 
-	lstat(path, &infos);
-	if (access(path, F_OK) != 0)
-		return (error_cd("no such file or directory", file));
-	else if (access(path, X_OK) != 0 || !S_ISDIR(infos.st_mode))
-		return (error_cd("permission denied", file));
+	FT_INIT(char*, link_name, NULL);
+	lstat(*path, &infos);
+	if (access(*path, F_OK) != 0)
+		return (error_cd("no such file or directory", *file));
+	else if (access(*path, X_OK) != 0)
+		return (error_cd("permission denied", *file));
+	else if (S_ISLNK(infos.st_mode))
+	{
+		link_name = ft_strnew(infos.st_size + 1);
+		r = readlink(*path, link_name, infos.st_size + 1);
+		link_name[r] = '\0';
+		ft_strdel(file);
+		*file = link_name;
+		printf("file =%s,\n", link_name);
+		return (-1);
+	}
 	else if (!S_ISDIR(infos.st_mode))
-		return (error_cd("not a directory", file));
+		return (error_cd("not a directory", *file));
 	return (1);
 }
 
@@ -90,15 +102,48 @@ void 		set_option_sentence(char **sentence, char **option, int len_tab, char **t
 		*sentence = ft_strdup("");
 }
 
+void 		go_to_dir(int cas, char *path, char *home, char *file_name)
+{
+	FT_INIT(char*, tmp, NULL);
+	FT_INIT(char*, pwd, get_var(&g_shell, "PWD"));
+	if (!cas)
+		return ;
+	if (cas == -1)
+	{
+		if (file_name[0] != '/')
+		{
+			remove_last_dir(&path, '/');
+			tmp = path;
+			path = ft_strjoin(path, file_name);
+			ft_strdel(&path);
+		}
+		else
+			path = file_name;
+		path = path_converter(path, home, pwd);
+		ft_strdel(&file_name);
+	}
+	if (chdir(path))
+		ft_putstr("Error chdir\n");
+	else
+	{
+		tmp = ft_strjoin("setenv PWD=", path);
+		_42sh_setenv(tmp);
+		ft_strdel(&tmp);
+		tmp = ft_strjoin("setenv OLDPWD=", pwd);
+		_42sh_setenv(tmp);
+		ft_strdel(&tmp);
+	}
+}
+
 void 		cd(char *line)
 {
 	FT_INIT(char**, tab_line, NULL);
 	FT_INIT(int, len_tab, 0);
 	if (!(tab_line = verif_args_cd(line, &len_tab)))
 		return ;
-	FT_INIT(char*, pwd, getcwd(NULL, 1024));
-	FT_INIT(char*, old_pwd, getenv("OLDPWD"));
-	FT_INIT(char*, home, getenv("HOME"));
+	FT_INIT(char*, pwd, get_var(&g_shell, "PWD"));
+	FT_INIT(char*, old_pwd, get_var(&g_shell, "OLDPWD"));
+	FT_INIT(char*, home, get_var(&g_shell, "HOME"));
 	FT_INIT(char*, option, NULL);
 	FT_INIT(char*, sentence, NULL);
 	FT_INIT(char*, path, NULL);
@@ -106,11 +151,10 @@ void 		cd(char *line)
 	set_option_sentence(&sentence, &option, len_tab, tab_line);
 	path = len_tab == 1 ? home : path_converter(sentence, home, pwd);
 	file = ft_strdup(path + (ft_strlen(path) - ft_strlen(ft_strrchr(path, '/')) + 1));
-	printf("1path =%s, file =%s, pwd =%s, len_tab =%d\n", path, file, getcwd(NULL, 1024), len_tab);
-	if (verif_access(path, file))
-		if (chdir(path))
-			ft_putstr("Error chdir\n");
-	printf("2path =%s, file =%s, pwd =%s,\n", path, file, getcwd(NULL, 1024));
+//	printf("1path =%s, file =%s, pwd =%s, len_tab =%d\n", path, file, getcwd(NULL, 1024), len_tab);
+	len_tab = verif_access(&path, &file);
+	go_to_dir(len_tab, path, home, file);
+//	printf("2path =%s, file =%s, pwd =%s,\n", path, file, getcwd(NULL, 1024));
 //	printf("sentence =%s, option =%s, len_tab =%d, path =%s\n", sentence, option, len_tab, path);
 	if (old_pwd || home || pwd || path || file)
 		return ;

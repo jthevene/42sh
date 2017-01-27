@@ -28,7 +28,7 @@ char 			*set_copy_sentence(char *sentence)
 {
 	FT_INIT(char*, copy_sentence, NULL);
 	FT_INIT(int, nb_char, 0);
-	nb_char = g_shell.cursor_x - 3;
+	nb_char = g_shell.cursor_x - g_shell.prompt_len;
 	copy_sentence = ft_strnew(nb_char);
 	ft_strncpy(copy_sentence, sentence, nb_char);
 	return (copy_sentence);

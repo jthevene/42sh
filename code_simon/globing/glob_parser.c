@@ -12,28 +12,6 @@
 
 #include "../includes/globing.h"
 
-static int				verif_tokens(char *str)
-{
-	FT_INIT(int, nb, 0);
-	if (ft_strchr(str, '[') && !ft_strchr(str, ']'))
-		return (0);
-	else if (!count_brackets(str, '['))
-		return (0);
-	else
-		nb++;
-	if (ft_strchr(str, '{') && !ft_strchr(str, '}'))
-		return (0);
-	else if (!count_brackets(str, '{'))
-		return (0);
-	else
-		nb++;
-	if (ft_strchr(str, '*') || ft_strchr(str, '?'))
-		nb++;
-	if (!nb)
-		return (0);
-	return (1);
-}
-
 static int				get_command(char *str, t_glob *glob)
 {
 	FT_INIT(int, i, 0);

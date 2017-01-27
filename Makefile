@@ -109,6 +109,20 @@ BIN_GLOBING = glob_parser.o get_path.o verif_tokens.o\
 		
 ################# 		END GLOBING PART		####################################
 
+################# 			PARSER PART			####################################
+PARSER = ./Lexer_Parser/
+
+SRC_PARSER = $(PARSER)backslash_escape.c $(PARSER)free_tree.c $(PARSER)get_next_line.c \
+			$(PARSER)isallspace.c $(PARSER)lexer_check.c $(PARSER)parser_distrib.c $(PARSER)parse.c \
+			$(PARSER)start_parse.c $(PARSER)tree.c 
+
+BIN_PARSER = backslash_escape.o free_tree.o get_next_line.o isallspace.o lexer_check.o \
+			 parser_distrib.o parse.o start_parse.o tree.o
+
+
+
+################# 		END PARSER PART			####################################
+
 #################		BUILTIN PART 			####################################
 
 SRC_BUILTIN = builtins/echo.c builtins/env.c builtins/setenv.c builtins/unsetenv.c \
@@ -119,7 +133,7 @@ BIN_BUILTIN = echo.o env.o setenv.o unsetenv.o cd.o path_converter.o
 #################		END BUILTIN PART 		####################################
 
 INCLUDES 	= -I$(INCLUDE_DIR) -I$(LIBFT_INCLUDE_DIR) \
-			-I$(GLOBING)includes/
+			-I$(GLOBING)includes/ -I$(PARSER)includes/
 
 all: $(NAME)
 

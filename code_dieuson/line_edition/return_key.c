@@ -43,6 +43,7 @@ void	return_key(void)
 	go_to_end();
 	if (ft_strlen(g_shell.current_line))
 	{
+		lexer_parser(g_shell.current_line);
 		ft_putchar(10);
 		g_shell.line = ft_strdup(g_shell.current_line);
 		glob_parser();

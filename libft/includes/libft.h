@@ -19,6 +19,9 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <stdint.h>
+# include <wchar.h>
+
 
 # include "../ft_printf/includes/ft_printf.h"
 # include "get_next_line.h"
@@ -36,7 +39,9 @@ void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 
 size_t				ft_strlen(const char *s);
+
 int					ft_nbrlen(int i);
+
 char				*ft_strdup(const char *s1);
 char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strncpy(char *dst, const char *src, size_t n);
@@ -124,5 +129,35 @@ char				*ft_strtoupper(char *str);
 
 int					ft_putwchar(wchar_t c);
 int					ft_putwstr(wchar_t *str);
+
+
+void				ft_putendl_fd_exit(char const *src, int fd, int exit_code);
+int					ft_isallspace(char *str);
+char				*ft_epurstr(char *str);
+char				*ft_strjoinfree(char *s1, char *s2, int flag_str_to_free);
+void				ft_putstrtimespace(char const *s);
+void				ft_putstrspace(char const *s);
+void				ft_putstrtime(char const *s);
+char				*ft_strjoinchar(char const *s1, char const *s2, char c);
+int					ft_unbrlen(unsigned long long nbr, unsigned int base);
+char				*ft_ltoa(long int nb);
+char				*ft_realloc(void *str, int sizebase, int size);
+int					size_bin(unsigned int nbr);
+void				ft_putunbrprec(unsigned long long nbr, int *state,
+						unsigned int base, int caps);
+void				ft_putunbrchelou(unsigned long long nbr,
+						unsigned int base, int caps);
+void				ft_putnbrprec(long long nbr, int *state,
+						int base, int caps);
+void				ft_putnbrchelou(long long nbr, int base, int caps);
+
+
+
+int					get_nb(const char *str, int *i);
+void				ft_lstaddback(t_list *alst, t_list *new);
+char				**ft_tabdup(char **tableau);
+int					ft_tablen(char **tableau);
+char				*ft_strdupfree(char *s1);
+char				*ft_strndup(char *str, int n);
 
 #endif

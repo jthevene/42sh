@@ -22,9 +22,15 @@ int				count_brackets(char *str, char bracket)
 	while (str[i])
 	{
 		if (str[i] == bracket)
-			count++;
+		{
+			if ((i > 0 && str[i - 1] != '\\') || i == 0)
+				count++;
+		}
 		else if (str[i] == close)
-			count_close++;
+		{
+			if ((i > 0 && str[i - 1] != '\\') || i == 0)
+				count_close++;
+		}
 		i++;
 	}
 	if (count != count_close)

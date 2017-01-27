@@ -84,7 +84,10 @@ int						glob_parser(void)
 	if (!g_shell.line)
 		return (0);
 	if (!verif_tokens(g_shell.line))
+	{
+		ft_putstr_fd("Verif globing tokens failed\n", 2);
 		return (0);
+	}
 	if (g_shell.line[0] == '@')
 	{
 		glob = !glob ? init_glob() : glob;

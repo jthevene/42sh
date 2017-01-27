@@ -21,7 +21,7 @@ UTILS_1 = ./globing/square_brackets/sbracket_utils/
 UTILS_2 = ./globing/curly_brackets/cbracket_utils/
 WILDCARDS = ./globing/wildcards/
 
-SRCS =  main.c globing/glob_parser.c globing/get_path.c \
+SRCS =  main.c globing/glob_parser.c globing/get_path.c globing/verif_tokens.c \
 		\
 		$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
 		\
@@ -43,7 +43,7 @@ SRCS =  main.c globing/glob_parser.c globing/get_path.c \
 		$(WILDCARDS)hub_final.c $(WILDCARDS)wildcards_tokens.c $(WILDCARDS)wildcards_utils.c\
 		$(WILDCARDS)wildcards_utils2.c $(WILDCARDS)lst_tools.c $(WILDCARDS)check_file.c \
 
-BIN =   main.o glob_parser.o \
+BIN =   main.o glob_parser.o verif_tokens.o\
 		\
 		simple_right.o double_right.o \
 		redir_utils.o \

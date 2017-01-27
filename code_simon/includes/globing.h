@@ -138,6 +138,7 @@ typedef struct			s_glob
 }						t_glob;
 
 int						glob_parser(void);
+int						verif_tokens(char *str);
 void					free_glob(t_glob *glob);
 
 //FONCTIONS SQUARE BRACKETS

@@ -61,6 +61,8 @@ UTILS_2 = $(GLOBING)globing/curly_brackets/cbracket_utils/
 BIN_DIR_GLOBING = $(GLOBING)bin_folder/
 
 SRC_GLOBING = $(GLOBING)globing/glob_parser.c $(GLOBING)globing/get_path.c \
+		$(GLOBING)globing/verif_tokens.c \
+		\
 		$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c \
 		\
 		$(SBRACK)hub_sbracket.c $(SBRACK)fill_tabs.c \
@@ -81,7 +83,7 @@ SRC_GLOBING = $(GLOBING)globing/glob_parser.c $(GLOBING)globing/get_path.c \
 		$(WILDCARDS)hub_final.c $(WILDCARDS)wildcards_tokens.c $(WILDCARDS)wildcards_utils.c \
 		$(WILDCARDS)wildcards_utils2.c $(WILDCARDS)lst_tools.c $(WILDCARDS)check_file.c \
 
-BIN_GLOBING = glob_parser.o \
+BIN_GLOBING = glob_parser.o get_path.o verif_tokens.o\
 		\
 		simple_right.o double_right.o \
 		redir_utils.o \
@@ -103,7 +105,7 @@ BIN_GLOBING = glob_parser.o \
 		cbracket_utils.o imbric_utils2.o \
 		double_brck.o expansion_utils.o \
 		wildcards_tokens.o hub_final.o wildcards_utils.o\
-		get_path.o wildcards_utils2.o lst_tools.o check_file.o
+		wildcards_utils2.o lst_tools.o check_file.o
 		
 ################# 		END GLOBING PART		####################################
 

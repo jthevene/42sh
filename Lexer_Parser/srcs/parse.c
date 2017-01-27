@@ -9,7 +9,7 @@ void	parse(t_tree *tree, t_token *token)
 			if (redirections(tree, token) == 0)
 			{
 				tree->type = token->type;
-				tree->content = ft_strdup(token->lexeme);
+				tree->content = commands_leaf(token);
 				printf("{COMMAND}\n");
 				printf("type : %d\n", tree->type);
 				printf("content : (%s)\n\n", tree->content);
@@ -95,3 +95,20 @@ int		redirections(t_tree *tree, t_token *token)
 	return (1);
 }
 
+char	*commands_leaf(t_token *token)
+{
+	t_token	*tmp;
+	char	*leaf;
+
+	tmp = token;
+	leaf = NULL;
+	while (tmp)
+	{
+		if (!(leaf))
+			leaf = ft_strdup(tmp->lexeme);
+		if (tmp->next)
+			leaf = ft_strjoinchar(leaf, tmp->next->lexeme, ' ');
+		tmp = tmp->next;
+	}
+	return (leaf);
+}

@@ -30,7 +30,7 @@ int		get_len_token(char *str)
 	return (len);
 }
 
-char	*get_token(char *str)
+char	*wild_get_token(char *str)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, i2, 0);

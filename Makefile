@@ -145,7 +145,7 @@ $(NAME):
 	gcc $(C_FLAGS) $(BIN_GLOBING) $(BIN_DIEUSON) $(BIN_BUILTIN) $(BIN_PARSER) $(LIBFT_DIR)/libftprintf.a \
 			$(LIBFT_DIR)/libft.a -ltermcap -o $(NAME)
 	mkdir bin_folder
-	mv $(BIN_DIEUSON) $(BIN_GLOBING) $(BIN_BUILTIN) bin_folder
+	mv $(BIN_DIEUSON) $(BIN_GLOBING) $(BIN_BUILTIN) $(BIN_PARSER) bin_folder
 
 clean:
 	make -C $(GLOBING) clean

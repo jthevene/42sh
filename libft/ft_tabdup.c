@@ -30,7 +30,7 @@ char	**ft_tabdup(char **tableau)
 	int		i;
 
 	i = 0;
-	ret = (char**)malloc(sizeof(char*) * (ft_tableaulen(tableau) + 1));
+	ret = (char**)malloc(sizeof(char*) * (ft_tablen(tableau) + 1));
 	while (tableau && tableau[i])
 	{
 		ret[i] = ft_strdup(tableau[i]);

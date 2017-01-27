@@ -245,7 +245,7 @@ int						mix_with_star(char *str, t_glob *glob);
 int						mix_token(char *str, t_glob *glob);
 
 int						get_len_token(char *str);
-char					*get_token(char *str);
+char					*wild_get_token(char *str);
 
 t_lst					*get_dir_content(char *dir);
 char					*ft_strpathjoin(const char *s1, const char *s2);

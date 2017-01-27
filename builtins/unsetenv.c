@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../code_dieuson/includes/42sh.h"
+#include "../includes/42sh.h"
 
 void		free_node(t_var **to_free)
 {

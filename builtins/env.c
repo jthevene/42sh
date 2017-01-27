@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../code_dieuson/includes/42sh.h"
+#include "../includes/42sh.h"
 
 char		*get_var(t_shell *g_shell, char *n_var)
 {

@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 12:05:57 by jules             #+#    #+#             */
-/*   Updated: 2016/10/17 14:37:48 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/28 14:59:45 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/history.h"
 
 char	*get_var(t_shell *g_shell, char *n_var)
 {

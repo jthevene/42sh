@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 14:38:04 by jules             #+#    #+#             */
-/*   Updated: 2017/01/18 14:51:01 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/28 14:59:51 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/history.h"
 
 t_lst	*ft_newlst(char *content)
 {

@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2016/12/08 14:01:07 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/28 15:03:15 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 
 
 
-# define K_PRINT   		1 //caractere imprimable
+# define K_PRINT   		1
 # define K_ESCAPE  		2
 # define K_UP      		3
 # define K_DOWN    		4
@@ -91,46 +91,59 @@ typedef struct		s_var
 	struct s_var	*next;
 }					t_var;
 
-typedef struct		s_shell
+typedef struct 		s_hist_opt 
 {
-	char 			*c;
-	int 			len;
-	char			*oldpwd;
-	char 			*clipboard;
-	char 			*prompt;
-	t_var			*env; //contenu de ENV
-	int 			prompt_len;
-	int 			start_select;
-	int 			end_select;
-	int 			cursor_x;
-	int 			cursor_2d_x;
-	int 			cursor_2d_y;
-	int 			prev_cursor_x;
-	int 			prev_cursor_2d_x;
-	int 			prev_cursor_2d_y;
-	int 			line_2d_x;
-	int 			line_2d_y;
-	int 			line_size;
-	int 			prev_line_size;
-	int 			prev_line_2d_y;
-	int 			prev_line_2d_x;
-	int 			nb_rows; // 0 = premiere ligne de la commande en cours d'edition
-	struct winsize	*win;
-	struct winsize	*prev_win;
-	int				running;
-	t_lst			*hist;
+	bool			c;
+	bool			d;
+	bool			a;
+	bool			r;
+	bool			w;
+	bool			p;
+	bool			s;
+}					t_hist_opt;
+
+typedef struct			s_shell
+{
+	char 				*c;
+	int 				len;
+	char				*oldpwd;
+	char 				*clipboard;
+	char 				*prompt;
+	t_var				*env; //contenu de ENV
+	int 				prompt_len;
+	int 				start_select;
+	int 				end_select;
+	int 				cursor_x;
+	int 				cursor_2d_x;
+	int 				cursor_2d_y;
+	int 				prev_cursor_x;
+	int 				prev_cursor_2d_x;
+	int 				prev_cursor_2d_y;
+	int 				line_2d_x;
+	int 				line_2d_y;
+	int 				line_size;
+	int 				prev_line_size;
+	int 				prev_line_2d_y;
+	int 				prev_line_2d_x;
+	int 				nb_rows; // 0 = premiere ligne de la commande en cours d'edition
+	struct winsize		*win;
+	struct winsize		*prev_win;
+	int					running;
+	t_lst				*hist;
 	////////////////////////////	JULES PART
-	int 			hist_fd;
-	t_lst			*last_hist; //derniere ligne de l'historique
-	t_lst			*end_hist_file; //derniere ligne du fichier history
-	int 			nav_hist; // 0 = pas encore navigué dans l'historique
+	t_lst				*curr_hist;
+	int 				hist_fd;
+	t_lst				*last_hist; //derniere ligne de l'historique
+	t_lst				*end_hist_file; //derniere ligne du fichier history
+	struct t_hist_opt	hist_opt;
+	int 				nav_hist; // 0 = pas encore navigué dans l'historique
 	///////////////////////////		END JULES
-	struct termios	my_termios;
-	struct termios	t_back;
-	char			*current_line; //ligne en cours d'edition
-	char			buf[8]; //pas sur qu'on en ait besoin en fait
-	char			*line; // VARIABLE SIMON
-}					t_shell;
+	struct termios		my_termios;
+	struct termios		t_back;
+	char				*current_line; //ligne en cours d'edition
+	char				buf[8]; //pas sur qu'on en ait besoin en fait
+	char				*line; // VARIABLE SIMON
+}						t_shell;
 
 t_shell		g_shell;
 
@@ -199,6 +212,7 @@ void				update_history_file(void);
  /*
  ** INIT
  */
+void				init_hist_opt();
 int					init_all(void);
 void				init_hist(void);
 int					init_env(void);

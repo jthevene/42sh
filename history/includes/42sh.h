@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2017/01/27 11:24:16 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/28 14:58:23 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,6 @@
 # include <curses.h>
 # include <errno.h>
 # include "../libft/includes/libft.h"
-
-# define K_PRINT   1 //caractere imprimable
-# define K_ESCAPE  2
-# define K_UP      3
-# define K_DOWN    4
-# define K_RIGHT   5
-# define K_LEFT    6
-# define K_DEL	   7
-# define K_BACKSP  8
-# define K_RETURN  9
-# define K_UNKNOWN 10
 
 typedef struct 		s_lst
 {

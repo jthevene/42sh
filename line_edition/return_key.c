@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 13:12:22 by jules             #+#    #+#             */
-/*   Updated: 2016/12/08 13:51:17 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/28 14:43:40 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	return_key(void)
 		cd(g_shell.line);
 		free(g_shell.line);
 		set_cursor_pos_to_end(g_shell.line_size);
-		if (g_shell.hist->content)
+		// if (g_shell.hist->content)
+		if (g_shell.current_line && !g_shell.hist_opt->)//on ajoute la ligne à l'historique seulement si la ligne est non nulle && si pas history -p
 			ft_newhist(g_shell.current_line);
 		else
 			g_shell.hist->content = ft_strdup(g_shell.current_line);
@@ -62,6 +63,7 @@ void	return_key(void)
 	}
 	else
 		ft_putchar(10);
+	g_shell.curr_hist = g_shell.hist;
 	g_shell.len = 0;
 	display_prompt();
 }

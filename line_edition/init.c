@@ -6,31 +6,36 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:40:03 by jules             #+#    #+#             */
-/*   Updated: 2016/11/04 14:42:54 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/28 14:27:33 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/42sh.h"
 
+void	init_hist_opt()
+{
+	g_shell.hist_opt->c = false;
+	g_shell.hist_opt->d = false;
+	g_shell.hist_opt->a = false;
+	g_shell.hist_opt->r = false;
+	g_shell.hist_opt->w = false;
+	g_shell.hist_opt->p = false;
+	g_shell.hist_opt->s = false;
+}
+
 void	init_hist()
 {
 	char	*filename;
- 
+
 	g_shell.hist_fd = 0;
-	if (!(g_shell.hist = (t_lst*)malloc(sizeof(t_list))))
-	{
-		ft_putstr("g_shell.hist malloc failed");
-		ft_reset_termios(g_shell.t_back);
-		exit(0);
-	}
-	g_shell.hist->content = NULL;
-	g_shell.hist->number = 0;
+	g_shell.hist = NULL;
 	g_shell.nav_hist = 0;
-	g_shell.hist->next = NULL;
-	g_shell.hist->prev = NULL;
-	g_shell.last_hist = g_shell.hist;
+	g_shell.curr_hist = NULL;
+	init_hist_opt();
 	filename = ft_strjoin(get_var(&g_shell, "HOME"), "/.history");
 	g_shell.hist_fd = open(filename, O_RDWR | O_CREAT, 0600);
+	ft_varappend(new_var("HISTSIZE", "4"));
+	ft_varappend(new_var("HISTFILESIZE", "10"));
 	get_hist();
 	close(g_shell.hist_fd);
 }
@@ -63,7 +68,7 @@ int		init_all()
 	ft_signal();
 	if (!init_env())
 		return (1);
-//	init_hist();
+	init_hist();
 	init_win();
 	g_shell.current_line = NULL;
 	g_shell.cursor_x = 3;

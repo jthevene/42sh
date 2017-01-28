@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_path.c                                         :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/05 14:00:47 by jules             #+#    #+#             */
-/*   Updated: 2016/12/12 15:31:08 by jules            ###   ########.fr       */
+/*   Created: 2016/12/15 09:26:40 by jules             #+#    #+#             */
+/*   Updated: 2017/01/28 14:59:06 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/history.h"
 
-t_lst		*get_dir_content(char *dir)
+void	ft_error(char *str)
 {
-	t_lst				*dir_content;
-	DIR 				*ret;
-	struct dirent 		*direntt;
+	ft_putstr("42sh: ");
+	ft_putstr(str);
+	ft_putstr(": ");
+	ft_putendl(strerror(errno));
+}
 
-	dir_content = NULL;
-	if (!(ret = opendir(dir)))
-		return (NULL);
-	while ((direntt = readdir(ret)))
-		ft_append_lst(&dir_content, ft_newlst(direntt->d_name));
-	return (dir_content);
+void	ft_out_of_range(int i)
+{
+	ft_putstr("history: ");
+	ft_putnbr(i);
+	ft_putendl(": history position out of range");
 }

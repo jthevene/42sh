@@ -6,39 +6,14 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2017/01/28 15:03:22 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/28 23:30:39 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HISTORY_H
 # define HISTORY_H
 
-# include <dirent.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <sys/wait.h>
-# include <signal.h>
-# include <termios.h>
-# include <term.h>
-# include <sys/ioctl.h>
-# include <curses.h>
-# include <errno.h>
-# include "../libft/includes/libft.h"
 
-/*
-** CATCH_KEY
-*/
-int					readkey(void);
-/*
-** CURSOR_MOVE
-*/
-void				ft_cursor_right(int i);
-void				ft_cursor_left(int i);
-void				cursor_next_line(void);
 /*
 ** ERROR
 */
@@ -80,18 +55,6 @@ void				update_histfilesize(int histfilesize);
 void				update_histsize(int histsize);
 int 				get_histsize(char *var);
 /*
-** INIT
-*/
-int					init_env();
-int					init_all(void);
-void				init_hist_opt();
-void				init_win();
-void				init_hist(void);
-/*
-** LINE_EDITION
-*/
-void				fill_current_line(char c);
-/*
 ** LST_TOOLS
 */
 t_lst				*ft_newlst(char *content);
@@ -100,33 +63,6 @@ void				ft_print_list_content(t_lst *lst);
 void				ft_lst_rewind_n(t_lst **lst, int n);
 void				ft_lst_rewind(t_lst **lst);
 void				ft_lst_forward(t_lst **lst);
-/*
-** MAIN
-*/
-void				display_prompt(void);
-/*
-** PRINT_LINE
-*/
-void				clean_line(void);
-void				print_line(int i);
-/*
-** QUESTION_MARK
-*/
-t_lst 				*qmark_get_matching_content(t_lst *dir_content, char *target);
-/*
-** RETURN_KEY
-*/
-void				return_key(void);
-void				backspace_key(void);
-/*
-** SIGNAL
-*/
-void				ft_signal(void);
-/*
-** TERMIOS
-*/
-int					init_termios(struct termios my_termios);
-void				ft_reset_termios(struct termios t_back);
 /*
 ** VAR
 */

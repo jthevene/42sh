@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2017/01/28 15:03:15 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/28 23:30:36 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <term.h>
 # include <sys/ioctl.h>
 # include <curses.h>
+# include <errno.h>
 
 #ifndef GLOBING_H
 # define GLOBING_H

@@ -6,13 +6,17 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2017/01/28 23:30:39 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/29 13:37:35 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HISTORY_H
 # define HISTORY_H
 
+# ifndef I_42SH_H
+#  define I_42SH_H
+#  include "./42sh.h"
+# endif
 
 /*
 ** ERROR
@@ -63,11 +67,5 @@ void				ft_print_list_content(t_lst *lst);
 void				ft_lst_rewind_n(t_lst **lst, int n);
 void				ft_lst_rewind(t_lst **lst);
 void				ft_lst_forward(t_lst **lst);
-/*
-** VAR
-*/
-char				*get_var(t_shell *g_shell, char *n_var);
-t_var				*new_var(char *v_name, char *v_value);
-void				ft_varappend(t_var *new_element);
 
 #endif

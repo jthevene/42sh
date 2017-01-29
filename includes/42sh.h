@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2017/01/28 23:30:36 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/29 13:23:27 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@
 #ifndef GLOBING_H
 # define GLOBING_H
 #  include "globing.h"
+# endif
+
+#ifndef HISTORY_H
+# define HISTORY_H
+#  include "history.h"
 # endif
 
 #ifndef LEXER_H
@@ -136,7 +141,7 @@ typedef struct			s_shell
 	int 				hist_fd;
 	t_lst				*last_hist; //derniere ligne de l'historique
 	t_lst				*end_hist_file; //derniere ligne du fichier history
-	struct t_hist_opt	hist_opt;
+	t_hist_opt			hist_opt;
 	int 				nav_hist; // 0 = pas encore navigué dans l'historique
 	///////////////////////////		END JULES
 	struct termios		my_termios;
@@ -196,23 +201,8 @@ void 				arrow_moove_left();
 void 				arrow_moove_right();
 void 				go_to_end();
 /*
-** HISTORY
+** INIT
 */
-void				get_hist(void);
-void				init_hist();
-void				ft_newhist(char *line);
-void				navigation_hist(int arrow);
-void				ft_history(int i);
-/*
-** HISTORY2
-*/
-void				clear_history_list(void);
-void				delete_line_history(int i);
-void				show_hist_list(void);
-void				update_history_file(void);
- /*
- ** INIT
- */
 void				init_hist_opt();
 int					init_all(void);
 void				init_hist(void);
@@ -260,10 +250,6 @@ int					glob_parser(void);
 int					_42sh_echo(char *line);
 
 int					_42sh_env(void);
-void				ft_varappend(t_var **new_element);
-t_var				*new_var(char *v_name, char *v_value);
-char				*get_var(t_shell *g_shell, char *n_var);
-
 int					_42sh_setenv(char *line);
 int					_42sh_unsetenv(char *name);
 

@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:01:40 by jules             #+#    #+#             */
-/*   Updated: 2017/01/28 14:59:13 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/29 13:34:57 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ char 			*event_str(char *str)
 	while (tmp && str)
 	{
 		if (ft_strstr(tmp->content, str))
-			return (ft_strdup(tmp->content))
+			return (ft_strdup(tmp->content));
 		tmp = tmp->prev;
 	}
+	ft_putendl("event not found");
+	return (NULL);
 }
 
 char			*event_n(int n)

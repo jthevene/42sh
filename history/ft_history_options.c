@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 16:55:54 by jules             #+#    #+#             */
-/*   Updated: 2017/01/28 15:00:07 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/29 13:24:13 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@ void	get_history_options(char **src)
 	while (src[i])
 	{
 		if (ft_strchr(src[i], 'c'))
-			g_shell.hist_opt->c = true;
+			g_shell.hist_opt.c = true;
 		if (ft_strchr(src[i], 'd'))
-			g_shell.hist_opt->d = true;
+			g_shell.hist_opt.d = true;
 		if (ft_strchr(src[i], 'a'))
-			g_shell.hist_opt->a = true;
+			g_shell.hist_opt.a = true;
 		if (ft_strchr(src[i], 'r'))
-			g_shell.hist_opt->r = true;
+			g_shell.hist_opt.r = true;
 		if (ft_strchr(src[i], 'w'))
-			g_shell.hist_opt->w = true;
+			g_shell.hist_opt.w = true;
 		if (ft_strchr(src[i], 'p'))
-			g_shell.hist_opt->p = true;
+			g_shell.hist_opt.p = true;
 		if (ft_strchr(src[i], 's'))
-			g_shell.hist_opt->s = true;
+			g_shell.hist_opt.s = true;
 		i++;
 	}
 }

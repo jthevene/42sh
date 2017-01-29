@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:40:03 by jules             #+#    #+#             */
-/*   Updated: 2017/01/28 14:27:33 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/29 13:36:33 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	init_hist_opt()
 {
-	g_shell.hist_opt->c = false;
-	g_shell.hist_opt->d = false;
-	g_shell.hist_opt->a = false;
-	g_shell.hist_opt->r = false;
-	g_shell.hist_opt->w = false;
-	g_shell.hist_opt->p = false;
-	g_shell.hist_opt->s = false;
+	g_shell.hist_opt.c = false;
+	g_shell.hist_opt.d = false;
+	g_shell.hist_opt.a = false;
+	g_shell.hist_opt.r = false;
+	g_shell.hist_opt.w = false;
+	g_shell.hist_opt.p = false;
+	g_shell.hist_opt.s = false;
 }
 
 void	init_hist()
@@ -34,8 +34,8 @@ void	init_hist()
 	init_hist_opt();
 	filename = ft_strjoin(get_var(&g_shell, "HOME"), "/.history");
 	g_shell.hist_fd = open(filename, O_RDWR | O_CREAT, 0600);
-	ft_varappend(new_var("HISTSIZE", "4"));
-	ft_varappend(new_var("HISTFILESIZE", "10"));
+	ft_varappend(new_var("HISTSIZE", "500"));
+	ft_varappend(new_var("HISTFILESIZE", "500"));
 	get_hist();
 	close(g_shell.hist_fd);
 }

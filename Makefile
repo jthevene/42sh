@@ -134,8 +134,8 @@ BIN_BUILTIN = echo.o env.o setenv.o unsetenv.o cd.o path_converter.o
 
 HISTORY 		= ./history/
 
-SRC_HISTORY		= $(HISTORY)error.c $(HISTORY)event.c $(HISTORY)ft_history.c $(HISTORY)ft_history_options.c 
-				$(HISTORY)get_path.c $(HISTORY)historic.c $(HISTORY)histsize.c $(HISTORY)lst_tools.c var.c 
+SRC_HISTORY		= $(HISTORY)error.c $(HISTORY)event.c $(HISTORY)ft_history.c $(HISTORY)ft_history_options.c \
+				$(HISTORY)get_path.c $(HISTORY)historic.c $(HISTORY)histsize.c $(HISTORY)lst_tools.c $(HISTORY)var.c 
 
 BIN_HISTORY		= error.o event.o ft_history.o ft_history_options.o get_path.o historic.o \
 				histsize.o lst_tools.o var.o 

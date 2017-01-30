@@ -20,15 +20,19 @@ int			only_qmark(char *str, int star, t_glob *glob)
 	FT_INIT(size_t, len, get_len_token(str));
 	while (files->next && files->next->content)
 	{
-		if (star == TRUE && ft_strlen(files->content) >= len)
+		if (star == TRUE && ft_strlen(files->content) >= len &&
+			ft_strcmp(files->content, ".") && ft_strcmp(files->content, ".."))
 			push_content_path(&glob->args, ft_strdup(files->content), glob);
-		else if (star == FALSE && len == ft_strlen(files->content))
+		else if (star == FALSE && len == ft_strlen(files->content) &&
+			ft_strcmp(files->content, ".") && ft_strcmp(files->content, ".."))
 			push_content_path(&glob->args, ft_strdup(files->content), glob);
 		files = files->next;
 	}
-	if (star == TRUE && ft_strlen(files->content) >= len)
+	if (star == TRUE && ft_strlen(files->content) >= len &&
+		ft_strcmp(files->content, ".") && ft_strcmp(files->content, ".."))
 		push_content_path(&glob->args, ft_strdup(files->content), glob);
-	else if (star == FALSE && len == ft_strlen(files->content))
+	else if (star == FALSE && len == ft_strlen(files->content) &&
+		ft_strcmp(files->content, ".") && ft_strcmp(files->content, ".."))
 		push_content_path(&glob->args, ft_strdup(files->content), glob);
 	ft_lst_free(&files);
 	free_double_str(&glob->f_path, &glob->l_path);
@@ -85,7 +89,8 @@ int			mix_with_star(char *str, t_glob *glob)
 	rewind_tbracket(&glob->sbracket);
 	while (files)
 	{
-		check_file(ft_strlen(files->content), token, files->content, &glob);
+		if (ft_strcmp(files->content, ".") && ft_strcmp(files->content, ".."))
+			check_file(ft_strlen(files->content), token, files->content, &glob);
 		if (!files->next)
 			break ;
 		files = files->next;

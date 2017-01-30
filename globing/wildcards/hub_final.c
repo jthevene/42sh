@@ -42,7 +42,8 @@ int			only_star(char *str, t_glob *glob)
 	FT_INIT(t_lst *, files, get_dir_content(path));
 	while (files)
 	{
-		pushback_content(&glob->args, ft_strdup(files->content));
+		if (ft_strcmp(files->content, ".") && ft_strcmp(files->content, ".."))
+			pushback_content(&glob->args, ft_strdup(files->content));
 		if (!files->next)
 			break ;
 		files = files->next;

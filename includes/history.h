@@ -18,6 +18,18 @@
 #  include "./42sh.h"
 # endif
 
+# ifndef STRUCT_LST
+#  define STRUCT_LST
+
+typedef struct 		s_lst
+{
+	void			*content;
+	struct s_lst	*prev;
+	struct s_lst	*next;
+	int 			number;
+} 					t_lst;
+
+# endif
 /*
 ** ERROR
 */

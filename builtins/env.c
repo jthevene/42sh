@@ -45,18 +45,18 @@ t_var		*new_var(char *v_name, char *v_value)
 	return (var);
 }
 
-void		ft_varappend(t_var **new_element)
+void		ft_varappend(t_var *new_element)
 {
 	t_var	*tmp;
 
 	if (!g_shell.env)
-		g_shell.env = (*new_element);
+		g_shell.env = new_element;
 	else
 	{
 		tmp = g_shell.env;
 		while (tmp->next)
 			tmp = tmp->next;
-		tmp->next = (*new_element);
+		tmp->next = new_element;
 	}
 }
 
@@ -79,7 +79,7 @@ int			init_env(void)
 		v_value = ft_strchr(environ[i], '=') + 1;
 		v_name = ft_strsub(environ[i], 0, v_value - environ[i] - 1);
 		var = new_var(v_name, v_value);
-		ft_varappend(&var);
+		ft_varappend(var);
 		free(v_name);
 		i++;
 	}

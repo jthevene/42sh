@@ -96,12 +96,3 @@ void	ft_lst_rewind(t_lst **lst)
 			(*lst) = (*lst)->prev;
 	}
 }
-
-void	ft_lst_forward(t_lst **lst)
-{
-	if ((*lst) != NULL)
-	{
-		while ((*lst)->next)
-			(*lst) = (*lst)->next;
-	}
-}

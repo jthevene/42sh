@@ -27,12 +27,11 @@ C_FLAGS				=	-g3 -O3 -Wall -Wextra -Werror
 LFLAGS				=	-L$(LIBFT_DIR) -l$(LIBFT)
 
 SRC_DIEUSON			=	$(SRC_DIR)main.c $(SRC_DIR)catch_key.c 	\
-						$(SRC_DIR)cursor_move.c $(SRC_DIR)history.c \
+						$(SRC_DIR)cursor_move.c \
 						$(SRC_DIR)init.c $(SRC_DIR)copy_cut_past.c \
 						$(SRC_DIR)line_edition.c $(SRC_DIR)print_line.c \
 						$(SRC_DIR)return_key.c $(SRC_DIR)signal.c \
-						$(SRC_DIR)termios.c $(SRC_DIR)var.c \
-						$(SRC_DIR)history2.c \
+						$(SRC_DIR)termios.c \
 						$(DIR_AUTO)detect_auto_completion.c $(DIR_AUTO)get_files.c \
 						$(DIR_AUTO)match_elements.c $(DIR_AUTO)set_path.c \
 						$(DIR_AUTO)display_completion.c $(DIR_AUTO)build_list.c \
@@ -40,11 +39,11 @@ SRC_DIEUSON			=	$(SRC_DIR)main.c $(SRC_DIR)catch_key.c 	\
 						$(DIR_AUTO)tools.c $(DIR_AUTO)set_path_second_part.c
 
 BIN_DIEUSON 		=	main.o catch_key.o 	\
-						cursor_move.o history.o \
+						cursor_move.o \
 						init.o copy_cut_past.o \
 						line_edition.o print_line.o \
 						return_key.o signal.o \
-						termios.o var.o history2.o\
+						termios.o \
 						detect_auto_completion.o get_files.o \
 						match_elements.o set_path.o display_completion.o \
 						build_list.o set_sentence.o free_auto_completion.o \
@@ -81,7 +80,7 @@ SRC_GLOBING = $(GLOBING)globing/glob_parser.c $(GLOBING)globing/get_path.c \
 		$(UTILS_2)imbric_utils2.c $(UTILS_2)double_brck.c $(UTILS_2)expansion_utils.c \
 		\
 		$(WILDCARDS)hub_final.c $(WILDCARDS)wildcards_tokens.c $(WILDCARDS)wildcards_utils.c \
-		$(WILDCARDS)wildcards_utils2.c $(WILDCARDS)lst_tools.c $(WILDCARDS)check_file.c \
+		$(WILDCARDS)wildcards_utils2.c $(WILDCARDS)wild_lst_tools.c $(WILDCARDS)check_file.c \
 
 BIN_GLOBING = glob_parser.o get_path.o verif_tokens.o \
 		\
@@ -105,7 +104,7 @@ BIN_GLOBING = glob_parser.o get_path.o verif_tokens.o \
 		cbracket_utils.o imbric_utils2.o \
 		double_brck.o expansion_utils.o \
 		wildcards_tokens.o hub_final.o wildcards_utils.o \
-		wildcards_utils2.o lst_tools.o check_file.o
+		wildcards_utils2.o wild_lst_tools.o check_file.o
 		
 ################# 		END GLOBING PART		####################################
 
@@ -135,9 +134,9 @@ BIN_BUILTIN = echo.o env.o setenv.o unsetenv.o cd.o path_converter.o
 HISTORY 		= ./history/
 
 SRC_HISTORY		= $(HISTORY)error.c $(HISTORY)event.c $(HISTORY)ft_history.c $(HISTORY)ft_history_options.c \
-				$(HISTORY)get_path.c $(HISTORY)historic.c $(HISTORY)histsize.c $(HISTORY)lst_tools.c
+				$(HISTORY)historic.c $(HISTORY)histsize.c $(HISTORY)lst_tools.c
 
-BIN_HISTORY		= error.o event.o ft_history.o ft_history_options.o get_path.o historic.o \
+BIN_HISTORY		= error.o event.o ft_history.o ft_history_options.o historic.o \
 				histsize.o lst_tools.o
 
 INCLUDES 	= -I$(INCLUDE_DIR) -I$(LIBFT_INCLUDE_DIR) \

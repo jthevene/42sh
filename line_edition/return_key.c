@@ -52,7 +52,7 @@ void	return_key(void)
 		free(g_shell.line);
 		set_cursor_pos_to_end(g_shell.line_size);
 		// if (g_shell.hist->content)
-		if (g_shell.current_line && !g_shell.hist_opt->)//on ajoute la ligne à l'historique seulement si la ligne est non nulle && si pas history -p
+		if (g_shell.current_line && !g_shell.hist_opt.p) //on ajoute la ligne à l'historique seulement si la ligne est non nulle && si pas history -p
 			ft_newhist(g_shell.current_line);
 		else
 			g_shell.hist->content = ft_strdup(g_shell.current_line);

@@ -33,8 +33,8 @@
 #  include "globing.h"
 # endif
 
-#ifndef HISTORY_H
-# define HISTORY_H
+#ifndef HISTORIQUE_H
+# define HISTORIQUE_H
 #  include "history.h"
 # endif
 
@@ -82,6 +82,9 @@ typedef struct				s_completion
 	struct s_completion		*next;
 }							t_completion;
 
+# ifndef STRUCT_LST
+#  define STRUCT_LST
+
 typedef struct 		s_lst
 {
 	void			*content;
@@ -89,6 +92,8 @@ typedef struct 		s_lst
 	struct s_lst	*next;
 	int 			number;
 } 					t_lst;
+
+# endif
 
 typedef struct		s_var
 {
@@ -250,6 +255,10 @@ int					glob_parser(void);
 int					_42sh_echo(char *line);
 
 int					_42sh_env(void);
+char				*get_var(t_shell *g_shell, char *n_var);
+void				ft_varappend(t_var *new_element);
+t_var				*new_var(char *v_name, char *v_value);
+
 int					_42sh_setenv(char *line);
 int					_42sh_unsetenv(char *name);
 

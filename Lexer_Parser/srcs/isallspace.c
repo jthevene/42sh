@@ -51,3 +51,15 @@ char	*epur_str(char *str)
 	free(str);
 	return (tmp);
 }
+
+char	*trim_end(char *line)
+{
+	int		i;
+	char	*ret;
+
+	i = ft_strlen(line) - 1;
+	while (line[i] == ' ' || line[i] == '\t')
+		i--;
+	ret = ft_strndup(line, i + 1);
+	return (ret);
+}

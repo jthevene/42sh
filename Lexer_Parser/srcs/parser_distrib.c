@@ -21,6 +21,7 @@ void		lexer_parser(char *line)
 		;
 	else
 	{
+		all->line = trim_end(all->line);
 		analise_line(all);
 		print_tokens(all->tokens_begin);
 		start_parse(all->tokens_begin);
@@ -44,6 +45,7 @@ void	analise_line(t_all *all)
 		printf("1 token lu\n");
 		if (all->line[pos])
 		{
+			printf("NOP\n");
 			token->next = init_token();
 			token = token->next;
 		}

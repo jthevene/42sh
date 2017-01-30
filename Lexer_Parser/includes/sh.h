@@ -90,5 +90,6 @@ t_token	*get_token_redirections(t_token *token);
 t_token	*copy_token_left(t_token *begin, t_token *ope);
 t_token	*copy_token_right(t_token *ope);
 char	*commands_leaf(t_token *token);
+char	*trim_end(char *line);
 
 #endif

@@ -140,6 +140,7 @@ typedef struct			s_glob
 int						glob_parser(void);
 int						ft_strchr_bslash(char *s, int c);
 int						verif_tokens(char *str);
+char					*recreate_token_string(char *str, t_glob *glob);
 void					free_glob(t_glob *glob);
 
 //FONCTIONS SQUARE BRACKETS

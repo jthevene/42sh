@@ -25,9 +25,9 @@ void		lexer_parser(char *line)
 	else
 	{
 		all->line = trim_end(all->line);
-		o = ft_strlen(line);
-		if (line[o - 1] == '\\')
-			line = finish_line_backslash(line);
+		o = ft_strlen(all->line);
+		if (all->line[o - 1] == '\\')
+			all->line = finish_line_backslash(all->line);
 		analise_line(all);
 		print_tokens(all->tokens_begin);
 		start_parse(all->tokens_begin);

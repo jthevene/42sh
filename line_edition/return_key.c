@@ -25,7 +25,7 @@ static void 	set_cursor_pos_to_end(int i)
 	if (g_shell.cursor_2d_x)
 		ft_putstr("\n");
 }
-
+/*
 void	detect_builtins(void)
 {
 	if (ft_strstr(g_shell.line, "echo"))
@@ -36,7 +36,7 @@ void	detect_builtins(void)
 		_42sh_setenv(g_shell.line);
 	else if (ft_strstr(g_shell.line, "env"))
 		_42sh_env();
-}
+}*/
 
 void	return_key(void)
 { 
@@ -47,8 +47,9 @@ void	return_key(void)
 		ft_putchar(10);
 		g_shell.line = ft_strdup(g_shell.current_line);
 		glob_parser();
-		detect_builtins();
-		cd(g_shell.line);
+		distrib_functions();
+//		detect_builtins();
+//		cd(g_shell.line);
 		free(g_shell.line);
 		set_cursor_pos_to_end(g_shell.line_size);
 		if (g_shell.current_line && !g_shell.hist_opt.p) //on ajoute la ligne à l'historique seulement si la ligne est non nulle && si pas history -p

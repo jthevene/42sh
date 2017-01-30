@@ -131,6 +131,14 @@ BIN_BUILTIN = echo.o env.o setenv.o unsetenv.o cd.o path_converter.o
 
 #################		END BUILTIN PART 		####################################
 
+#################		EXECUTION PART 			####################################
+
+SRC_EXECUTION= ./execution/exec_tree.c ./execution/distrib_functions.c
+
+BIN_EXECUTION= exec_tree.o distrib_functions.o
+
+#################		END EXECUTION PART 		####################################
+
 HISTORY 		= ./history/
 
 SRC_HISTORY		= $(HISTORY)error.c $(HISTORY)event.c $(HISTORY)ft_history.c $(HISTORY)ft_history_options.c \
@@ -148,8 +156,8 @@ lib:
 	make -C libft
 
 $(NAME):
-	gcc $(C_FLAGS) $(INCLUDES) $(SRC_DIEUSON) $(SRC_GLOBING) $(SRC_PARSER) $(SRC_BUILTIN) $(SRC_HISTORY) -Incurses -c
-	gcc $(C_FLAGS) $(BIN_GLOBING) $(BIN_DIEUSON) $(BIN_BUILTIN) $(BIN_PARSER) $(BIN_HISTORY) $(LIBFT_DIR)/libftprintf.a \
+	gcc $(C_FLAGS) $(INCLUDES) $(SRC_DIEUSON) $(SRC_GLOBING) $(SRC_PARSER) $(SRC_BUILTIN) $(SRC_EXECUTION) $(SRC_HISTORY) -Incurses -c
+	gcc $(C_FLAGS) $(BIN_GLOBING) $(BIN_DIEUSON) $(BIN_BUILTIN) $(BIN_PARSER) $(BIN_EXECUTION) $(BIN_HISTORY) $(LIBFT_DIR)/libftprintf.a \
 			$(LIBFT_DIR)/libft.a -ltermcap -o $(NAME)
 	mkdir bin_folder
 	mv $(BIN_DIEUSON) $(BIN_GLOBING) $(BIN_BUILTIN) $(BIN_PARSER) $(BIN_HISTORY) bin_folder

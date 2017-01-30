@@ -44,16 +44,18 @@ int			verif_access_bin_directory(char *path)
 }
 
 
-char		**get_bin_directories(t_var *env)
+char		**get_bin_directories(char **env_tab)
 {
 	FT_INIT(char**, bin_directories, NULL);
-	if (!envp)
+	FT_INIT(char*, tmp, NULL);
+	FT_INIT(int, i, 0);
+	if (!env_tab)
 		return (NULL);
-	while (envp && envp[i])
+	while (env_tab && env_tab[i])
 	{
-		if (envp && !ft_strncmp(envp[i], "PATH=", 5))
+		if (env_tab && !ft_strncmp(env_tab[i], "PATH=", 5))
 		{
-			tmp = ft_strchr(envp[i], '=') + 1;
+			tmp = ft_strchr(env_tab[i], '=') + 1;
 			if (tmp)
 				bin_directories = ft_strsplit(tmp, ':');
 			break ;
@@ -65,21 +67,23 @@ char		**get_bin_directories(t_var *env)
 
 
 
-int			_42sh_launch(char **args, t_sh *data, int i)
+
+int			_42sh_launch(char **args, char **env, char *command)
 {
-	FT_INIT(char*, bin_directories, NULL);
+	FT_INIT(char**, bin_directories, NULL);
 	FT_INIT(char*, cmd, NULL);
 	FT_INIT(char*, tmp, NULL);
+	FT_INIT(int, i, 0);
 	if (!args)
 		return (0);
-	bin_directories = get_bin_directories(g_shell.env);
+	bin_directories = get_bin_directories(env);
 	while (bin_directories && bin_directories[i])
 	{
-		if (verif_access_others(bin_directories[i]))
+		if (verif_access_bin_directory(bin_directories[i]))
 		{
 			cmd = ft_strjoin(bin_directories[i], "/");
 			tmp = cmd;
-			cmd = ft_strjoin(cmd, args[0]);
+			cmd = ft_strjoin(cmd, command);
 			ft_strdel(&tmp);
 			if (execve(cmd, args, env) != -1)
 			{
@@ -90,6 +94,13 @@ int			_42sh_launch(char **args, t_sh *data, int i)
 		}
 		i++;
 	}
+	if (!ft_strcmp(args[0], "exit"))
+	{
+		go_to_end();
+		ft_putstr("\n");
+		ft_reset_termios(g_shell.t_back);
+		exit(0);
+	}
 	ft_putstr("minishell: command not found: ");
 	ft_putendl(args[0]);
 	return (0);
@@ -97,45 +108,37 @@ int			_42sh_launch(char **args, t_sh *data, int i)
 
 void 	distrib_functions()
 {
-	if (detect_builtins)
+	if (detect_builtins())
 		return ;
 	FT_INIT(int, pid, 0);
-	FT_INIT(int, commands, g_shell.line);
+	FT_INIT(char**, args, ft_strsplit(g_shell.line, ' '));
+	FT_INIT(char**, env, lst_to_tab(g_shell.env));
+	FT_INIT(char*, command, args[0]);
 	pid = fork();
 	if (pid == 0)
 	{
-		_42sh_launch(commands, data, 0);
+		_42sh_launch(args, env, command);
 		exit(0);
 	}
-
-
-
-
-
-
-	FT_INIT(char*, line, NULL);
-	FT_INIT(char**, commands, NULL);
-	while (1)
-	{
-		ret = get_next_line(0, &line);
-		if (ret && ft_strlen(line))
-		{
-			commands = lsh_read_line(line);
-			free(line);
-			if (verif_implements(commands[0], data))
-				distrib_functions(commands, data);
-			else
-			{
-				pid = fork();
-				if (pid == 0)
-				{
-					lsh_launch(commands, data, 0);
-					exit(0);
-				}
-			}
-			free_simple_tab(&commands);
-		}
-		wait(&pid);
-		ft_putstr("\n$> ");
-	}
+	wait(&pid);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

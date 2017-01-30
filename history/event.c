@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:01:40 by jules             #+#    #+#             */
-/*   Updated: 2017/01/29 13:34:57 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/30 11:14:30 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int		ft_strisnum(char *str)
 {
-	int 	i;
+	int		i;
 
 	i = 0;
 	if (str[i] == '-' && str[1])
@@ -28,7 +28,7 @@ static int		ft_strisnum(char *str)
 	return (1);
 }
 
-char 			*event_str(char *str)
+char			*event_str(char *str)
 {
 	t_lst	*tmp;
 
@@ -46,12 +46,12 @@ char 			*event_str(char *str)
 char			*event_n(int n)
 {
 	t_lst	*tmp;
-	int 	i;
+	int		i;
 
 	tmp = g_shell.hist;
 	i = n;
 	if (n < 0)
-	{	
+	{
 		while (tmp && ++i < 0)
 			tmp = tmp->prev;
 		if (tmp)
@@ -70,8 +70,8 @@ char			*event_n(int n)
 
 void			check_pattern_event(char *event)
 {
-	char 	*str;
-	int 	len;
+	char	*str;
+	int		len;
 
 	str = NULL;
 	len = ft_strlen(event);

@@ -6,13 +6,12 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 20:33:04 by jules             #+#    #+#             */
-/*   Updated: 2017/01/28 14:59:55 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/30 11:13:08 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/history.h"
 
-//history -a
 void	update_histfilesize(int histfilesize)
 {
 	update_history_file(NULL, histfilesize);
@@ -44,10 +43,10 @@ void	update_histsize(int histsize)
 	}
 }
 
-int 	get_histsize(char *var)
+int		get_histsize(char *var)
 {
 	char	*value;
-	int 	ret;
+	int		ret;
 
 	ret = 0;
 	if (!ft_strcmp(var, "HISTSIZE"))

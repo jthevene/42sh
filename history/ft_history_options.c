@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 16:55:54 by jules             #+#    #+#             */
-/*   Updated: 2017/01/29 13:24:13 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/30 11:09:41 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ void	get_history_options(char **src)
 	}
 }
 
-// history -c
-void	clear_history_list()
+void	clear_history_list(void)
 {
 	while (g_shell.hist != NULL)
 	{
@@ -49,10 +48,9 @@ void	clear_history_list()
 	init_hist();
 }
 
-// history -d
 void	delete_line_history(int i)
 {
-	t_lst 	*tmp;
+	t_lst	*tmp;
 
 	tmp = g_shell.hist;
 	if (!tmp || i < 1 || i > tmp->number)
@@ -73,40 +71,12 @@ void	delete_line_history(int i)
 		g_shell.hist = tmp->prev;
 }
 
-void	show_hist_list()
-{
-	t_lst	*tmp;
-
-	tmp = g_shell.hist;
-	if (!tmp)
-	{
-		ft_putendl("LISTE VIDE");
-		return ;
-	}
-	while (tmp->prev != NULL)
-		tmp = tmp->prev;
-	ft_putendl("---LISTE HISTORY---");
-	while (tmp)
-	{
-		if (tmp == g_shell.end_hist_file)
-			ft_putchar('*');
-		ft_putnbr(tmp->number);
-		ft_putstr("=> ");
-		ft_putendl(tmp->content);
-		tmp = tmp->next;
-	}
-	ft_putendl("--------FIN--------");
-}
-
-// history -a & -w (dans ce cas histfilesize = get_histsize("HISTSIZE"))
 void	update_history_file(char *filename, int histfilesize)
 {
-	char	*line;
 	t_lst	*tmp;
-	int 	i;
 
-	i = 0;
-	line = NULL;
+	FT_INIT(char *, line, NULL);
+	FT_INIT(int, i, 0);
 	if (!(tmp = g_shell.hist))
 		return ;
 	if (!filename)
@@ -130,13 +100,13 @@ void	update_history_file(char *filename, int histfilesize)
 	close(g_shell.hist_fd);
 }
 
-// history -r
 void	histfile_append(char *filename)
 {
 	char	*line;
 
 	FT_INIT(int, ret, 0);
-	line = NULL;if (!filename)
+	line = NULL;
+	if (!filename)
 		filename = ft_strjoin(get_var(&g_shell, "HOME"), "/.history");
 	if ((g_shell.hist_fd = open(filename, O_RDONLY, 0600)) == -1)
 	{

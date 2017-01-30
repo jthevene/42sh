@@ -6,15 +6,15 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 14:38:04 by jules             #+#    #+#             */
-/*   Updated: 2017/01/28 14:59:51 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/30 11:05:46 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/history.h"
 
-t_lst	*ft_newlst(char *content)
+t_lst		*ft_newlst(char *content)
 {
-	t_lst 	*new;
+	t_lst	*new;
 
 	new = (t_lst*)ft_memalloc(sizeof(t_lst));
 	if (new)
@@ -32,7 +32,7 @@ t_lst	*ft_newlst(char *content)
 
 void		ft_append_lst(t_lst **lst, t_lst *new_elem)
 {
-	t_lst 	*tmp;
+	t_lst	*tmp;
 
 	if (!*lst)
 	{
@@ -56,7 +56,6 @@ void		ft_print_list_content(t_lst *lst)
 
 	tmp = lst;
 	i = 1;
-
 	if (tmp && tmp->content)
 	{
 		while (tmp->next && tmp->next->content)
@@ -74,7 +73,7 @@ void		ft_print_list_content(t_lst *lst)
 		ft_putendl("Liste NULL");
 }
 
-void	ft_lst_rewind_n(t_lst **lst, int n)
+void		ft_lst_rewind_n(t_lst **lst, int n)
 {
 	if ((*lst) != NULL)
 	{
@@ -83,12 +82,12 @@ void	ft_lst_rewind_n(t_lst **lst, int n)
 			(*lst) = (*lst)->prev;
 			n--;
 			if (n == 0)
-				break;
+				break ;
 		}
 	}
 }
 
-void	ft_lst_rewind(t_lst **lst)
+void		ft_lst_rewind(t_lst **lst)
 {
 	if ((*lst) != NULL)
 	{

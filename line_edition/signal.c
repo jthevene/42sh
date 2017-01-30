@@ -14,7 +14,6 @@
 
 void		ft_sigwinch(int sig)
 {
-//	printf("\nsig winch=%d\n", sig);
 	(void)sig;
 	if (g_shell.current_line)
 	{
@@ -53,35 +52,7 @@ void 		ft_segfault(int sig)
 	ft_reset_termios(g_shell.t_back);
 	exit(0);
 }
-// static void		ft_sigint(int sig)
-// {
-// 	(void)sig;
-// 	if (!g_shell.running)
-// 	{
-// 		ft_reset_termios(g_shell.t_back);
-// 		signal(SIGTSTP, SIG_DFL);
-// 		ioctl(0, TIOCSTI, "\032");
-// 	}
-// }
 
-/*
- static void		ft_sigtstp(int sig)
- {
- 	(void)sig;
- 	if (!g_shell.running)
- 	{
- 		ft_reset_termios(g_shell.t_back);
- 		signal(SIGTSTP, SIG_DFL);
- 		ioctl(0, TIOCSTI, "\032");
- 	}
- }
-
-static void		ft_sigcont(int sig)
-{
-	(void)sig;
-	init_termios(g_shell.my_termios);
-	signal(SIGTSTP, ft_sigtstp);
-}*/
 void 			distrib_sig(int sig)
 {
 	printf("sig =%d\n", sig);
@@ -104,7 +75,4 @@ void			ft_signal(void)
 	signal(SIGWINCH, ft_sigwinch);
 	signal(SIGINT, ft_sigint);
 	signal(SIGSEGV, ft_segfault);
-//	signal(i, ft_sigkill);
-//	signal(SIGTSTP, ft_sigtstp);
-//	signal(SIGCONT, ft_sigcont);
 }

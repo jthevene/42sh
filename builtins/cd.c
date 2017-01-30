@@ -116,6 +116,9 @@ void 		cd(char *line)
 		ft_strlen(ft_strrchr(path, '/')) + 1));
 	len_tab = verif_access(&path, &file, option);
 	go_to_dir(len_tab, path, home, file);
+	free(path);
+	free(home);
+	free(file);
 }
 
 

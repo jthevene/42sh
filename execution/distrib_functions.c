@@ -12,7 +12,7 @@
 
 #include "../includes/42sh.h"
 
-int		detect_builtins(char* command)
+static int		detect_builtins(char* command)
 {
 	if (!ft_strcmp(command, "echo"))
 		_42sh_echo(command);
@@ -24,12 +24,14 @@ int		detect_builtins(char* command)
 		_42sh_env();
 	else if (!ft_strcmp(command, "cd"))
 		cd(g_shell.line);
+	else if (!ft_strcmp(command, "exit"))
+		ft_exit();
 	else
 		return (0);
 	return (1);
 }
 
-int			verif_access_bin_directory(char *path)
+static int			verif_access_bin_directory(char *path)
 {
 	struct stat infos;
 
@@ -44,7 +46,7 @@ int			verif_access_bin_directory(char *path)
 }
 
 
-char		**get_bin_directories(char **env_tab)
+static char		**get_bin_directories(char **env_tab)
 {
 	FT_INIT(char**, bin_directories, NULL);
 	FT_INIT(char*, tmp, NULL);
@@ -65,10 +67,7 @@ char		**get_bin_directories(char **env_tab)
 	return (bin_directories);
 }
 
-
-
-
-int			_42sh_launch(char **args, char **env, char *command)
+static int			_42sh_launch(char **args, char **env, char *command)
 {
 	FT_INIT(char**, bin_directories, NULL);
 	FT_INIT(char*, cmd, NULL);
@@ -93,13 +92,6 @@ int			_42sh_launch(char **args, char **env, char *command)
 			ft_strdel(&cmd);
 		}
 		i++;
-	}
-	if (!ft_strcmp(args[0], "exit"))
-	{
-		go_to_end();
-		ft_putstr("\n");
-		ft_reset_termios(g_shell.t_back);
-		exit(0);
 	}
 	ft_printf("42sh: command not found: %s\n", args[0]);
 	return (0);

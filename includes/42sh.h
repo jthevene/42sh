@@ -109,16 +109,16 @@ int					verif_access(char **path, char **file, char *option);
 /*
 ** CATCH_KEY
 */
-void 				set_2d_line_val();
-void 				set_2d_cursor_val();
+void 				set_2d_edition_val(void);
 int					readkey(void);
 /*
 ** CURSOR_MOVE
 */
 int					ft_cursor_right(int i);
-int 				distrib_cursor_mooves(int key);
-void 				arrow_moove_left();
-void 				arrow_moove_right();
+int 				distrib_cursor_moves(int key);
+void 				arrow_move_left();
+void 				arrow_move_right();
+void 				move_cursor_n_to_direction(int n, int direction);
 void 				go_to_end();
 /*
 ** INIT
@@ -175,10 +175,7 @@ void 				ft_exit(void);
 char				*get_var(t_shell *g_shell, char *n_var);
 void				ft_varappend(t_var *new_element);
 t_var				*new_var(char *v_name, char *v_value);
-void 				distrib_functions();
 
-
-int					detect_builtins(char* command);
 char				**lst_to_tab(t_var *env);
 int					lenght_list(t_var *env);
 

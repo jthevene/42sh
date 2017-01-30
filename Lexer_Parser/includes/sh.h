@@ -1,29 +1,8 @@
 #ifndef SH_H
 # define SH_H
 
-# include <unistd.h>
-# include <sys/stat.h>
-# include <sys/wait.h>
-# include <sys/ioctl.h>
-# include <sys/time.h>
-# include <sys/resource.h>
-# include <stdlib.h>
-# include <termios.h>
-# include <term.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <signal.h>
-# include <dirent.h>
-
-# ifndef SH_LIBFT
-#  define SH_LIBFT
-#  include "../../libft/includes/libft.h"
-# endif
-
-# ifndef SH_42SH_H
-#  define SH_42SH_H
-#  include "../../includes/42sh.h"
+# ifndef _42SH_H
+#  include "42sh.h"
 # endif
 
 # define WORDS		0

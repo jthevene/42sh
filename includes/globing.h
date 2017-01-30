@@ -13,9 +13,8 @@
 #ifndef GLOBING_H
 # define GLOBING_H
 
-# ifndef I_42SH_H
-#  define I_42SH_H
-#  include "./42sh.h"
+# ifndef _42SH_H
+#  include "42sh.h"
 # endif
 
 # ifndef FT_INIT

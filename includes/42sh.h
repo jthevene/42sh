@@ -28,18 +28,23 @@
 # include <curses.h>
 # include <errno.h>
 
-#ifndef GLOBING_H
-# define GLOBING_H
+# ifndef LIBFT_H
+#  include "../libft/includes/libft.h"
+# endif
+
+# ifndef STRUCTS_H
+#  include "structs.h"
+# endif
+
+# ifndef GLOBING_H
 #  include "globing.h"
 # endif
 
-#ifndef HISTORIQUE_H
-# define HISTORIQUE_H
+# ifndef HISTORIQUE_H
 #  include "history.h"
 # endif
 
-#ifndef LEXER_H
-# define LEXER_H
+# ifndef SH_H
 #  include "../../Lexer_Parser/includes/sh.h"
 # endif
 
@@ -64,97 +69,6 @@
 # define K_PAST	  		19
 # define K_TAB     		20
 
-typedef struct				s_file
-{
-	char					*name;
-	int 					type;
-	int 					len;
-	char 					*absolute_path;
-	int 					nb_elem;
-	struct s_file			*next;
-}							t_file;
-
-typedef struct				s_completion
-{
-	struct s_file 			*elem;
-	struct s_completion		*next;
-}							t_completion;
-
-# ifndef STRUCT_LST
-#  define STRUCT_LST
-
-typedef struct 		s_lst
-{
-	void			*content;
-	struct s_lst	*prev;
-	struct s_lst	*next;
-	int 			number;
-} 					t_lst;
-
-# endif
-
-typedef struct		s_var
-{
-	char			*name;
-	char			*value;
-	struct s_var	*next;
-}					t_var;
-
-typedef struct 		s_hist_opt 
-{
-	bool			c;
-	bool			d;
-	bool			a;
-	bool			r;
-	bool			w;
-	bool			p;
-	bool			s;
-}					t_hist_opt;
-
-typedef struct			s_shell
-{
-	char 				*c;
-	int 				len;
-	char				*oldpwd;
-	char 				*clipboard;
-	char 				*prompt;
-	t_var				*env; //contenu de ENV
-	int 				prompt_len;
-	int 				start_select;
-	int 				end_select;
-	int 				cursor_x;
-	int 				cursor_2d_x;
-	int 				cursor_2d_y;
-	int 				prev_cursor_x;
-	int 				prev_cursor_2d_x;
-	int 				prev_cursor_2d_y;
-	int 				line_2d_x;
-	int 				line_2d_y;
-	int 				line_size;
-	int 				prev_line_size;
-	int 				prev_line_2d_y;
-	int 				prev_line_2d_x;
-	int 				nb_rows; // 0 = premiere ligne de la commande en cours d'edition
-	struct winsize		*win;
-	struct winsize		*prev_win;
-	int					running;
-	t_lst				*hist;
-	////////////////////////////	JULES PART
-	t_lst				*curr_hist;
-	int 				hist_fd;
-	t_lst				*last_hist; //derniere ligne de l'historique
-	t_lst				*end_hist_file; //derniere ligne du fichier history
-	t_hist_opt			hist_opt;
-	int 				nav_hist; // 0 = pas encore navigué dans l'historique
-	///////////////////////////		END JULES
-	struct termios		my_termios;
-	struct termios		t_back;
-	char				*current_line; //ligne en cours d'edition
-	char				buf[8]; //pas sur qu'on en ait besoin en fait
-	char				*line; // VARIABLE SIMON
-}						t_shell;
-
-t_shell		g_shell;
 
 /*
 ** AUTO_COMLETION
@@ -251,13 +165,13 @@ int					glob_parser(void);
 ** BUILTINS
 */
 int					_42sh_echo(char *line);
-
 int					_42sh_env(void);
+int					_42sh_setenv(char *line);
+int					_42sh_unsetenv(char *name);
+
 char				*get_var(t_shell *g_shell, char *n_var);
 void				ft_varappend(t_var *new_element);
 t_var				*new_var(char *v_name, char *v_value);
-
-int					_42sh_setenv(char *line);
-int					_42sh_unsetenv(char *name);
+void				detect_builtins(void);
 
 #endif

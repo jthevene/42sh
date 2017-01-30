@@ -4,6 +4,8 @@ void		lexer_parser(char *line)
 {
 	t_all	*all;
 	int		i;
+	int		u;
+	int		o;
 
 	if (!(all = (t_all *)malloc(sizeof(t_all))))
 		return ;
@@ -22,6 +24,9 @@ void		lexer_parser(char *line)
 	else
 	{
 		all->line = trim_end(all->line);
+		o = ft_strlen(line);
+		if (line[o - 1] == '\\')
+			line = finish_line_backslash(line);
 		analise_line(all);
 		print_tokens(all->tokens_begin);
 		start_parse(all->tokens_begin);

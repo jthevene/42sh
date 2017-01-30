@@ -80,6 +80,16 @@ int		unfinished_quote(char *line)
 	return (0);
 }
 
+char	*finish_line_backslash(char *line)
+{
+	char *myline;
+
+	ft_putstr("> ");
+	get_next_line(0, &myline);
+	myline = ft_strjoin(line, myline);
+	return (myline);
+}
+
 char 	*finish_the_squote(char *line)
 {
 	char *myline;

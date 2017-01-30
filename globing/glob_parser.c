@@ -73,7 +73,6 @@ static void				print_args(t_glob *glob)
 			glob->args = glob->args->next;
 		}
 		printf("Arg : %s\n", glob->args->content);
-		free_tbracket(&glob->args);
 	}
 }
 
@@ -100,6 +99,7 @@ int						glob_parser(void)
 			}
 		hub_final(glob);
 		print_args(glob);
+		g_shell.line = recreate_token_string(ft_strdup(g_shell.line), glob);
 		if (glob->command)
 			free(glob->command);
 	}

@@ -43,8 +43,6 @@
 #  include "../../Lexer_Parser/includes/sh.h"
 # endif
 
-
-
 # define K_PRINT   		1
 # define K_ESCAPE  		2
 # define K_UP      		3

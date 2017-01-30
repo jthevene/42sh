@@ -21,6 +21,11 @@
 #  include "../../libft/includes/libft.h"
 # endif
 
+# ifndef SH_42SH_H
+#  define SH_42SH_H
+#  include "../../includes/42sh.h"
+# endif
+
 # define WORDS		0
 # define DQUOTE		1
 # define SQUOTE		2

@@ -35,9 +35,10 @@ int				g_parse_expr(char *str, t_glob *glob)
 {
 	if (!ft_strchr(str, '?') && !ft_strchr(str, '[') && !ft_strchr(str, '*'))
 		return (g_no_token(str, glob));
-//	else if (!ft_strchr_bslash(str, '?')
-//		|| !ft_strchr_bslash(str, '[') || !ft_strchr_bslash(str, '*'))
-//		return (g_no_token(str, glob));
+	else if ((ft_strchr(str, '?') && !ft_strchr_bslash(str, '?'))
+		|| (ft_strchr(str, '[') && !ft_strchr_bslash(str, '['))
+		|| (ft_strchr(str, '*') && !ft_strchr_bslash(str, '*')))
+		return (g_no_token(str, glob));
 	else if (is_only_qmark_and_star(str))
 		return (only_qmark(str, TRUE, glob));
 	else if (is_only_token('?', str))

@@ -86,7 +86,7 @@ char				**clear_path(char **sentence)
 {
 	FT_INIT(char*, tmp, NULL);
 	tmp = *sentence;
-	if (ft_strrchr(*sentence, ' ') + 1)
+	if (ft_strrchr(*sentence, ' ') && ft_strrchr(*sentence, ' ') + 1)
 	{
 		*sentence = ft_strdup(ft_strrchr(*sentence, ' ') + 1);
 		ft_strdel(&tmp);

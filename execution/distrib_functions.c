@@ -12,17 +12,17 @@
 
 #include "../includes/42sh.h"
 
-int		detect_builtins(void)
+int		detect_builtins(char* command)
 {
-	if (ft_strstr(g_shell.line, "echo"))
-		_42sh_echo(g_shell.line);
-	else if (ft_strstr(g_shell.line, "unsetenv "))
-		_42sh_unsetenv(g_shell.line);
-	else if (ft_strstr(g_shell.line, "setenv "))
-		_42sh_setenv(g_shell.line);
-	else if (ft_strstr(g_shell.line, "env "))
+	if (!ft_strcmp(command, "echo"))
+		_42sh_echo(command);
+	else if (!ft_strcmp(command, "unsetenv"))
+		_42sh_unsetenv(command);
+	else if (!ft_strcmp(command, "setenv"))
+		_42sh_setenv(command);
+	else if (!ft_strcmp(command, "env"))
 		_42sh_env();
-	else if (ft_strstr(g_shell.line, "cd "))
+	else if (!ft_strcmp(command, "cd"))
 		cd(g_shell.line);
 	else
 		return (0);
@@ -101,17 +101,16 @@ int			_42sh_launch(char **args, char **env, char *command)
 		ft_reset_termios(g_shell.t_back);
 		exit(0);
 	}
-	ft_putstr("minishell: command not found: ");
-	ft_putendl(args[0]);
+	ft_printf("42sh: command not found: %s\n", args[0]);
 	return (0);
 }
 
 void 	distrib_functions()
 {
-	if (detect_builtins())
-		return ;
-	FT_INIT(int, pid, 0);
 	FT_INIT(char**, args, ft_strsplit(g_shell.line, ' '));
+	if (detect_builtins(args[0]))
+		return free_auto_tab(args);
+	FT_INIT(int, pid, 0);
 	FT_INIT(char**, env, lst_to_tab(g_shell.env));
 	FT_INIT(char*, command, args[0]);
 	pid = fork();

@@ -140,9 +140,19 @@ char 	*set_prompt(char *pwd)
 {
 	FT_INIT(char*, head_line, ft_strdup("\033[32m$> \033[0m"));
 	FT_INIT(char*, tmp, NULL);
+	FT_INIT(char*, home, get_var(&g_shell, "HOME"));
 	g_shell.prompt_len = 3;
 	if (!pwd)
 		return (head_line);
+	if (!ft_strncmp(pwd, home, ft_strlen(home)))
+	{
+		tmp = pwd;
+		pwd = ft_str_replace(pwd, home, "~");
+		if (pwd)
+			ft_strdel(&tmp);
+		else
+			pwd = tmp;
+	}
 	tmp = head_line;
 	head_line = ft_strjoin(pwd, head_line);
 	ft_strdel(&tmp);

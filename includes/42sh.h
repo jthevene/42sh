@@ -103,6 +103,9 @@ char 						*similarity(t_file *match_files, char *sentence);
 void 				cd(char *line);
 void				remove_last_dir(char **str, char c);
 char		 		*path_converter(char *sentence, char *home, char *pwd);
+int					error_cd(char *type, char *file);
+char				**lsh_read_line(char *line);
+int					verif_access(char **path, char **file, char *option);
 /*
 ** CATCH_KEY
 */
@@ -168,14 +171,14 @@ int					_42sh_echo(char *line);
 int					_42sh_env(void);
 int					_42sh_setenv(char *line);
 int					_42sh_unsetenv(char *name);
-
+void 				ft_exit(void);
 char				*get_var(t_shell *g_shell, char *n_var);
 void				ft_varappend(t_var *new_element);
 t_var				*new_var(char *v_name, char *v_value);
-int					detect_builtins(void);
 void 				distrib_functions();
 
 
+int					detect_builtins(char* command);
 char				**lst_to_tab(t_var *env);
 int					lenght_list(t_var *env);
 

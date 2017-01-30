@@ -36,6 +36,8 @@ char 			*set_copy_sentence(char *sentence)
 
 int				verif_sentence(char *sentence)
 {
+	if (!ft_strchr(sentence, ' '))
+		return (1);
 	FT_INIT(char**, sentence_tab, ft_strsplit(sentence, ' '));
 	FT_INIT(int, i, 0);
 	while (sentence_tab[i])

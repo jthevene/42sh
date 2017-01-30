@@ -17,14 +17,12 @@ void		display_prompt(void)
 	g_shell.prompt = set_prompt(get_var(&g_shell, "PWD"));
 	ft_putstr(g_shell.prompt);
 	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
-//	g_shell.cursor_x = 3;
 }
 
 void 		set_2d_line_val()
 {
 	FT_INIT(int, ref_x, ft_strlen(g_shell.current_line) + g_shell.prompt_len);
 	FT_INIT(int, y, 0);
-//	ioctl(0, TIOCGWINSZ, g_shell.win);
 	g_shell.line_size = ref_x;
 	while (ref_x >= g_shell.win->ws_col)
 	{
@@ -39,7 +37,6 @@ void 		set_2d_cursor_val()
 {
 	FT_INIT(int, ref_x, g_shell.cursor_x);
 	FT_INIT(int, y, 0);
-//	ioctl(0, TIOCGWINSZ, g_shell.win);
 	while (ref_x >= g_shell.win->ws_col)
 	{
 		y++;
@@ -65,8 +62,6 @@ static	void	run_shell(void)
 	while (42)
 	{
 		g_shell.running = 1;
-	//	ft_putstr("shell ok\n");
-//		printf("\n\nnb =%d,\n\n", tgetflag("ms"));
 		key = readkey();
 		if (key == K_PRINT)
 		{
@@ -77,10 +72,6 @@ static	void	run_shell(void)
 			i++;
 
 		}
-		// else if (key == K_RIGHT)
-		// {
-		// 	ft_print_list_content(qmark_get_matching_content(get_dir_content(g_shell.current_line), "????"));
-		// }
 		else if (distrib_cursor_mooves(key))
 			;
 		else if (key == K_BACKSP || key == K_DEL)
@@ -102,12 +93,7 @@ static	void	run_shell(void)
 			set_2d_cursor_val();
 		}
 		else if (key == K_ESCAPE)
-		{
-			go_to_end();
-			ft_putstr("\n");
-			ft_reset_termios(g_shell.t_back);
-			return ;
-		}
+			return (ft_exit());
 		else if (key == K_TAB)
 		{
 			detect_auto_completion(g_shell.current_line);

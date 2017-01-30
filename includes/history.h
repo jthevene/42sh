@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2017/01/29 13:37:35 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/30 11:26:49 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void				ft_out_of_range(int i);
 /*
 ** EVENT
 */
+int 				ft_strisnum(char *nbr);
 char				*event_n(int n);
 void				check_pattern_event(char *event);
 /*

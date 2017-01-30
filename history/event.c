@@ -6,13 +6,13 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:01:40 by jules             #+#    #+#             */
-/*   Updated: 2017/01/30 11:14:30 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/01/30 11:25:53 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/history.h"
 
-static int		ft_strisnum(char *str)
+int		ft_strisnum(char *str)
 {
 	int		i;
 

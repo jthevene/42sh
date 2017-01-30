@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 16:55:54 by jules             #+#    #+#             */
-/*   Updated: 2017/01/30 11:09:41 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/01/30 11:28:22 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	update_history_file(char *filename, int histfilesize)
 {
 	t_lst	*tmp;
 
-	FT_INIT(char *, line, NULL);
 	FT_INIT(int, i, 0);
 	if (!(tmp = g_shell.hist))
 		return ;
@@ -102,10 +101,8 @@ void	update_history_file(char *filename, int histfilesize)
 
 void	histfile_append(char *filename)
 {
-	char	*line;
-
 	FT_INIT(int, ret, 0);
-	line = NULL;
+	FT_INIT(char *, line, NULL);
 	if (!filename)
 		filename = ft_strjoin(get_var(&g_shell, "HOME"), "/.history");
 	if ((g_shell.hist_fd = open(filename, O_RDONLY, 0600)) == -1)

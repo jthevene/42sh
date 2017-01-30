@@ -6,7 +6,8 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 20:33:04 by jules             #+#    #+#             */
-/*   Updated: 2017/01/30 11:13:08 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/01/30 11:18:44 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/01/29 17:50:31 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +64,5 @@ int		get_histsize(char *var)
 		else
 			ret = ft_atoi(value);
 	}
-	if (ret > 0)
-		return (ret);
-	return (0);
+	return (500);
 }

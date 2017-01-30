@@ -6,35 +6,52 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:53:52 by jules             #+#    #+#             */
-/*   Updated: 2017/01/29 13:33:28 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/29 18:44:54 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/history.h"
 
-// void	check_hist_opt()
-// {
-// 	if (g_shell)
+int		check_hist_opt()
+{
+	int		options;
 
-
-// }
+	options = -1;
+	if (g_shell.hist_opt.a)
+		options++;
+	if (g_shell.hist_opt.r)
+		options++;
+	if (g_shell.hist_opt.w)
+		options++;
+	if (g_shell.hist_opt.p)
+		options++;
+	if (g_shell.hist_opt.s)
+		options++;
+	if (g_shell.hist_opt.d)
+		options++;
+	if (options)
+		ft_putendl("cannot use more than one of -adrspw");
+	return (options);
+}
 
 //voir avec le parser_lexer si les arguments sont dans une struct ou envoyé direct en argument
-// void	history_hub()
-// {
-// 	if (g_shell.hist_opt.c)
-// 		clear_history_list();
-// 	else if (g_shell.hist_opt.d)
-// 		delete_line_history(/*argument*/);
-// 	else if (g_shell.hist_opt.a)
-// 		update_history_file(/*filename*/, get_histsize("HISTSIZE"));
-// 	else if (g_shell.hist_opt.r)
-// 		histfile_append(/*filename*/);
-// 	else if (g_shell.hist_opt.w)
-// 		update_history_file(/*filename*/, get_histsize("HISTSIZE"));
-// 	else if (g_shell.hist_opt.s)
-// 		ft_newhist(/*argument*/);
-// }
+void	history_hub()
+{
+	if (check_hist_opt())
+		return ;
+	if (g_shell.hist_opt.c)
+		clear_history_list();
+	if (g_shell.hist_opt.d)
+		delete_line_history(/*argument*/);
+	else if (g_shell.hist_opt.a)
+		update_history_file(/*filename*/, get_histsize("HISTSIZE"));
+	else if (g_shell.hist_opt.r)
+		histfile_append(/*filename*/);
+	else if (g_shell.hist_opt.w)
+		update_history_file(/*filename*/, get_histsize("HISTSIZE"));
+	else if (g_shell.hist_opt.s)
+		ft_newhist(/*argument*/);
+}
 
 void	ft_history_print(t_lst *lst)
 {
@@ -55,6 +72,11 @@ void	ft_history(char *nbr)
 
 	i = 0;
 	tmp = g_shell.hist;
+	if (ft_strisnum(nbr))
+	{
+		ft_putendl("numeric argument required");
+		return ;
+	}
 	if (g_shell.hist)
 	{
 		if (!nbr)

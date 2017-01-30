@@ -85,7 +85,7 @@ int						glob_parser(void)
 		return (0);
 	if (!verif_tokens(g_shell.line))
 	{
-		ft_putstr_fd("Verif globing tokens failed\n", 2);
+		ft_putstr_fd("Verif globing tokens failed, must take the tokens as normal characters.\n", 2);
 		return (0);
 	}
 	if (g_shell.line[0] == '@')

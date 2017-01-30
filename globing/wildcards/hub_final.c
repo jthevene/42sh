@@ -102,5 +102,5 @@ void		hub_final(t_glob *g)
 		if (!g_shell.line[i + 1])
 			break ;
 	}
-	multi_handling(g);
+//	multi_handling(g);
 }

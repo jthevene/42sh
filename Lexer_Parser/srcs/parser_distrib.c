@@ -3,15 +3,13 @@
 void		lexer_parser(char *line)
 {
 	t_all	*all;
-	int		i;
-	int		u;
-	int		o;
+	FT_INIT(int, i, 1);
+	FT_INIT(int, u, 0);
+	FT_INIT(int, o, 0);
 
-	u = 0;
 	if (!(all = (t_all *)malloc(sizeof(t_all))))
 		return ;
 	all->line = ft_strdup(line);
-	i = 5;
 	while (i != 0)
 	{
 		i = unfinished_quote(all->line);
@@ -61,9 +59,7 @@ void	analise_line(t_all *all)
 
 int		lire_lexeme(t_token *token, char *line, int pos)
 {
-	int		i;
-
-	i = 0;
+	FT_INIT(int, i, 0);
 	while (line[pos] == ' ' || line[pos] == '\t')
 		pos++;
 	if (line[pos] == '\'')

@@ -2,13 +2,9 @@
 
 void	backslash_char(t_token *token)
 {
-	int		pos;
-	int		s;
-	int		d;
-
-	pos = 0;
-	s = 0;
-	d = 0;
+	FT_INIT(int, pos, 0);
+	FT_INIT(int, s, 0);
+	FT_INIT(int, d, 0);
 	while (token->lexeme[pos])
 	{
 		if (token->lexeme[pos] == '\'')
@@ -40,13 +36,9 @@ void	backslash_char(t_token *token)
 
 int		unfinished_quote(char *line)
 {
-	int sq;
-	int dq;
-	int i;
-
-	sq = 0;
-	dq = 0;
-	i = 0;
+	FT_INIT(int, sq, 0);
+	FT_INIT(int, dq, 0);
+	FT_INIT(int, i, 0);
 	while (line[i])
 	{
 		if (line[i] == '\'')

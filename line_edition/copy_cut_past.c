@@ -11,7 +11,7 @@ static char 	*store_selection(int start_select, int end_select, int key)
 		nb_del = end_select - start_select;
 		end_select = nb_del;
 		while (g_shell.cursor_x > g_shell.start_select && nb_del--)
-			arrow_moove_left();
+			arrow_move_left();
 		nb_del = end_select;
 		g_shell.cursor_x++;
 		while (nb_del--)

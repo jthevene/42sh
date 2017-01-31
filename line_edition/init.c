@@ -48,12 +48,27 @@ static void		init_win()
 	g_shell.win->ws_xpixel = 0;
 	g_shell.win->ws_ypixel = 0;
 	ioctl(0, TIOCGWINSZ, g_shell.win);
+}
 
-	g_shell.prev_win = ft_memalloc(sizeof(struct winsize));
-	g_shell.prev_win->ws_row = g_shell.win->ws_row;
-	g_shell.prev_win->ws_col = g_shell.win->ws_col;
-	g_shell.prev_win->ws_xpixel = g_shell.win->ws_xpixel;
-	g_shell.prev_win->ws_ypixel = g_shell.win->ws_ypixel;
+static void 	init_edition()
+{
+	g_shell.current_line = NULL;
+	g_shell.line = NULL;
+	g_shell.cursor_x = 3;
+	g_shell.cursor_2d_x = 0;
+	g_shell.cursor_2d_y = 0;
+	g_shell.line_2d_x = 3;
+	g_shell.line_2d_y = 0;
+	g_shell.nb_rows = 0;
+	g_shell.line_size = 0;
+	g_shell.prev_line_2d_y = 0;
+	g_shell.start_select = 0;
+	g_shell.end_select = 0;
+	g_shell.clipboard = NULL;
+	g_shell.len = 0;
+	g_shell.c = ft_strnew(16);
+	g_shell.prompt = 0;
+	g_shell.prompt_len = 0;
 }
 
 int		init_all()
@@ -70,27 +85,7 @@ int		init_all()
 		return (1);
 	init_hist();
 	init_win();
-	g_shell.current_line = NULL;
-	g_shell.cursor_x = 3;
-	g_shell.cursor_2d_x = 0;
-	g_shell.cursor_2d_y = 0;
-	g_shell.prev_cursor_x = 3;
-	g_shell.prev_cursor_2d_x = 0;
-	g_shell.prev_cursor_2d_y = 0;
-	g_shell.line_2d_x = 3;
-	g_shell.line_2d_y = 0;
-	g_shell.nb_rows = 0;
-	g_shell.line_size = 0;
-	g_shell.prev_line_size = 0;
-	g_shell.prev_line_2d_y = 0;
-	g_shell.prev_line_2d_x = 0;
-	g_shell.start_select = 0;
-	g_shell.end_select = 0;
-	g_shell.clipboard = NULL;
-	g_shell.len = 0;
-	g_shell.c = ft_strnew(16);
-	g_shell.prompt = 0;
-	g_shell.prompt_len = 0;
+	init_edition();
 	tcgetattr(STDIN_FILENO, &g_shell.t_back);// save les données termios d'origine
 	init_termios(g_shell.t_back);
 	return (0);

@@ -30,6 +30,7 @@ void		lexer_parser(char *line)
 			all->line = finish_line_backslash(all->line);
 		analise_line(all);
 		print_tokens(all->tokens_begin);
+//		INSERT GLOBING HERE
 		start_parse(all->tokens_begin);
 	}
 	free(all->line);

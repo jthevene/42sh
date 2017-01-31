@@ -105,3 +105,15 @@ int						glob_parser(void)
 	}
 	return (1);
 }
+						
+int						send_token_to_glob(t_all *all)
+{
+	FT_INIT(t_all *, tmp, all->tokens_begin);
+	while (tmp)
+	{
+		if (!tmp->next)
+			break ;
+		tmp = tmp->next
+	}
+	return (0);
+}

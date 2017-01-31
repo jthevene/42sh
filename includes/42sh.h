@@ -100,7 +100,7 @@ char 						*similarity(t_file *match_files, char *sentence);
 /*
 ** CD
 */
-void 				cd(char *line);
+int 				cd(char *line);
 void				remove_last_dir(char **str, char c);
 char		 		*path_converter(char *sentence, char *home, char *pwd);
 int					error_cd(char *type, char *file);

@@ -63,5 +63,7 @@ int		get_histsize(char *var)
 		else
 			ret = ft_atoi(value);
 	}
+	if (ret)
+		return (500);
 	return (500);
 }

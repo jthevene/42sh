@@ -98,12 +98,12 @@ static void 		go_to_dir(int cas, char *path, char *home, char *file_name)
 	in_dir(path, pwd);
 }
 
-void 		cd(char *line)
+int 		cd(char *line)
 {
 	FT_INIT(char**, tab_line, NULL);
 	FT_INIT(int, len_tab, 0);
 	if (!(tab_line = verif_args_cd(line, &len_tab)))
-		return ;
+		return (1);
 	FT_INIT(char*, pwd, get_var(&g_shell, "PWD"));
 	FT_INIT(char*, home, get_var(&g_shell, "HOME"));
 	FT_INIT(char*, option, NULL);
@@ -119,6 +119,9 @@ void 		cd(char *line)
 	free(path);
 	free(home);
 	free(file);
+	if (!len_tab)
+		return (1);
+	return (0);
 }
 
 

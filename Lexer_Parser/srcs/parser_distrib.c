@@ -3,21 +3,12 @@
 void		lexer_parser(char *line)
 {
 	t_all	*all;
-	FT_INIT(int, i, 1);
-//	FT_INIT(int, u, 0);
 	FT_INIT(int, o, 0);
 
 	if (!(all = (t_all *)malloc(sizeof(t_all))))
 		return ;
 	all->line = ft_strdup(line);
-	while (i != 0)
-	{
-		i = unfinished_quote(all->line);
-		if (i == 1)
-			all->line = finish_the_squote(all->line);
-		else if (i == 2)
-			all->line = finish_the_dquote(all->line);
-	}
+	all->line = finish_quotes(all->line);
 	if ((ft_strcmp(all->line, "\0") == 0) || (isallspace(all->line) == 1))
 		;
 	else
@@ -44,6 +35,7 @@ void	analise_line(t_all *all)
 	all->tokens_begin = token;
 	while (all->line[pos])
 	{
+<<<<<<< HEAD
 		//printf("\n***NEW_TOKEN***\n");
 		//printf("pos = %d\n", pos);
 		pos = lire_lexeme(token, all->line , pos);
@@ -55,6 +47,14 @@ void	analise_line(t_all *all)
 			token = token->next;
 		}
 		//printf("next token\n");
+=======
+		pos = lire_lexeme(token, all->line , pos);
+		if (all->line[pos])
+		{
+			token->next = init_token();
+			token = token->next;
+		}
+>>>>>>> 2bf35fa578d2a0a81105d6dfc2c8a2d13f3186e4
 	}
 }
 
@@ -64,6 +64,7 @@ int		lire_lexeme(t_token *token, char *line, int pos)
 	while (line[pos] == ' ' || line[pos] == '\t')
 		pos++;
 	if (line[pos] == '\'')
+<<<<<<< HEAD
 	{
 		//printf("\n***SQUOTE***\n");
 		pos++;
@@ -89,6 +90,13 @@ int		lire_lexeme(t_token *token, char *line, int pos)
 	{
 		//printf("\n***WORDS***\n");
 		//printf("pos = %d\n", pos);
+=======
+		pos = token_squote(token, line, pos, i);
+	else if (line[pos] == '\"')
+		pos = token_dquote(token, line, pos, i);
+	else if (ft_isprintnotope(line[pos]) == 1)
+	{
+>>>>>>> 2bf35fa578d2a0a81105d6dfc2c8a2d13f3186e4
 		token->type = WORDS;
 		i = pos;
 		pos = get_lexeme_pos(line, pos);
@@ -96,19 +104,24 @@ int		lire_lexeme(t_token *token, char *line, int pos)
 		backslash_char(token);
 	}
 	else if (ft_isope(line[pos]) >= 1)
+<<<<<<< HEAD
 	{
 		//printf("\n***OPE***\n");
+=======
+>>>>>>> 2bf35fa578d2a0a81105d6dfc2c8a2d13f3186e4
 		pos = check_ope(token, line, pos, i);
-	}
 	return (pos);
 }
 
 void	add_lexeme(t_token *token, char *line, int pos, int i)
 {
 	token->lexeme = ft_strndup(&(line[i]), pos - i);
+<<<<<<< HEAD
 	//printf("type = %d\n", token->type);
 	//printf("lexeme = %s\n", token->lexeme);
 	//printf("lexeme good\n");
+=======
+>>>>>>> 2bf35fa578d2a0a81105d6dfc2c8a2d13f3186e4
 }
 
 int        ft_isope(char c)

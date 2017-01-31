@@ -93,7 +93,7 @@ PARSER = ./Lexer_Parser/srcs/
 
 FILES_PARSER 	= 	backslash_escape.c free_tree.c \
 					isallspace.c lexer_check.c parser_distrib.c parse.c \
-					start_parse.c tree.c
+					start_parse.c tree.c token_functions.c
 
 SRC_PARSER  	= 	$(addprefix $(PARSER), $(FILES_PARSER))
 
@@ -119,7 +119,7 @@ BIN_BUILTIN 	= 	$(FILES_BUILTIN:.c=.o)
 HISTORY 		= 	./history/
 
 FILES_HISTORY 	= 	error.c event.c ft_history.c ft_history_options.c \
-					historic.c histsize.c lst_tools.c
+					historic.c histsize.c lst_tools.c history_lexing.c
 
 SRC_HISTORY 	= 	$(addprefix $(HISTORY), $(FILES_HISTORY))
 

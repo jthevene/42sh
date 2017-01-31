@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2017/01/30 11:26:49 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/01/31 17:34:41 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@ void				get_hist(void);
 void				ft_newhist(char *line);
 void				put_hist_line(char *content);
 void				navigation_hist(int arrow);
+/*
+** HISTORY_LEXING
+*/
+void				split_line(char *line);
+void				get_argument(int i, char **array);
+int					get_options_str(char **array);
 /*
 ** HISTSIZE
 */

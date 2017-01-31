@@ -112,6 +112,7 @@ void 	distrib_functions(char *command_line)
 		exit(0);
 	}
 	wait(&pid);
+//	ft_putchar('\n');
 }
 
 

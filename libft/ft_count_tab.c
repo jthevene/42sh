@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_count_tab.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 17:57:29 by jthevene          #+#    #+#             */
-/*   Updated: 2015/02/27 18:01:30 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/01/31 17:43:25 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_count_tab(char **tab)
+int		ft_count_tab(char **array)
 {
 	int		i;
 
 	i = 0;
-	while (tab[i])
+	while (array[i])
 		i++;
 	return (i);
 }

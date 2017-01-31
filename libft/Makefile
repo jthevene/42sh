@@ -29,7 +29,7 @@ ft_abs.c ft_print_list.c ft_lstadd_bottom.c ft_itoabase.c ft_putwchar.c \
 ft_atoibase.c ft_recursive_pow.c ft_putwstr.c get_next_line.c ft_putnbrendl.c \
 ft_isspace.c ft_putchar_int.c ft_nbrlen.c ft_lstaddend.c \
 ft_get_nbr.c ft_lstaddback.c ft_ltoa.c ft_putendl_exit.c ft_putendl_fd_exit.c \
-ft_putnbrchelou.c ft_putnbrulong.c ft_putstrspace.c \
+ft_putnbrchelou.c ft_putnbrulong.c ft_putstrspace.c ft_count_tab.c \
 ft_putstrtime.c ft_putstrtimespace.c ft_realloc.c ft_strjoinchar.c \
 ft_strjoinfree.c ft_strdupfree.c ft_tabdup.c size_bin.c ft_strndup.c \
 ft_str_replace.c

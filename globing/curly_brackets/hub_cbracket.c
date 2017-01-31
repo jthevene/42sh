@@ -22,15 +22,15 @@ int				handle_cbracket(char *line, t_glob *glob)
 	return (1);
 }
 
-int				hub_cbracket(t_glob *glob, char *line)
+int				hub_cbracket(t_glob *glob)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp, NULL);
-	while (line[i])
+	while (g_shell.line[i])
 	{
-		if (line[i] == '{')
+		if (g_shell.line[i] == '{')
 		{
-			tmp = ft_strdup(line);
+			tmp = next_expr(g_shell.line, i);
 			i += ft_strlen(tmp);
 			hub_expansion(ft_strdup(tmp), glob);
 			if (glob->exp)

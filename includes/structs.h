@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvirgile <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 16:40:01 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/01/30 16:40:04 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/01/31 17:41:29 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct 		s_hist_opt
 	bool			w;
 	bool			p;
 	bool			s;
+	char			**argument;
+	char			*options;
 }					t_hist_opt;
 
 typedef struct			s_shell

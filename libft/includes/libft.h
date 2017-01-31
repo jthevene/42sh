@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 16:13:11 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/12/05 16:25:57 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/31 17:43:06 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ void				ft_putnbrchelou(long long nbr, int base, int caps);
 
 
 
+int					ft_count_tab(char **array);
 int					get_nb(const char *str, int *i);
 void				ft_lstaddback(t_list *alst, t_list *new);
 char				**ft_tabdup(char **tableau);

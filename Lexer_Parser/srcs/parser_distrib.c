@@ -4,7 +4,7 @@ void		lexer_parser(char *line)
 {
 	t_all	*all;
 	FT_INIT(int, i, 1);
-	FT_INIT(int, u, 0);
+//	FT_INIT(int, u, 0);
 	FT_INIT(int, o, 0);
 
 	if (!(all = (t_all *)malloc(sizeof(t_all))))
@@ -28,7 +28,7 @@ void		lexer_parser(char *line)
 			all->line = finish_line_backslash(all->line);
 		analise_line(all);
 		print_tokens(all->tokens_begin);
-//		INSERT GLOBING HERE
+		send_token_to_glob(all);
 		start_parse(all->tokens_begin);
 	}
 	free(all->line);

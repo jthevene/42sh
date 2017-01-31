@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/globing.h"
-
+/*
 static int				get_command(char *str, t_glob *glob)
 {
 	FT_INIT(int, i, 0);
@@ -33,7 +33,7 @@ static int				get_command(char *str, t_glob *glob)
 	}
 	return (0);
 }
-
+*/
 t_glob					*init_glob(void)
 {
 	t_glob				*glob;
@@ -76,33 +76,32 @@ static void				print_args(t_glob *glob)
 	}
 }
 
-int						glob_parser(void)
+int						glob_parser(char **line)
 {
 	static t_glob		*glob = NULL;
 
-	if (!g_shell.line)
+	if (!(*line))
 		return (0);
-	if (!verif_tokens(g_shell.line))
+	if (!verif_tokens((*line)))
 	{
 		ft_putstr_fd("Verif globing tokens failed, must take the tokens as normal characters.\n", 2);
 		return (0);
 	}
-	if (g_shell.line[0] == '@')
+	glob = !glob ? init_glob() : glob;
+	glob->command = ft_strdup((*line));
+	if (ft_strchr((*line), '{'))
 	{
-		glob = !glob ? init_glob() : glob;
-		get_command(g_shell.line, glob);
-		if (ft_strchr(g_shell.line, '{'))
-			if (!hub_cbracket(glob))
-			{
-				free(glob->command ? glob->command : NULL);
-				return (0);
-			}
-		hub_final(glob);
-		print_args(glob);
-		g_shell.line = recreate_token_string(ft_strdup(g_shell.line), glob);
-		if (glob->command)
-			free(glob->command);
+		if (!hub_cbracket(glob, (*line)))
+		{
+			free(glob->command ? glob->command : NULL);
+			return (0);
+		}
 	}
+	hub_final(glob, (*line));
+	print_args(glob);
+	(*line) = recreate_token_string(ft_strdup((*line)), glob);
+	if (glob->command)
+		free(glob->command);
 	return (1);
 }
 						
@@ -110,15 +109,22 @@ int						send_token_to_glob(t_all *all)
 {
 	FT_INIT(t_token *, tmp, all->tokens_begin);
 	printf("\033[34m/***          GLOBING          ***/\n");
+	if (tmp->next)
+		tmp = tmp->next;
+	else
+		return (0);
 	while (tmp)
 	{
-		printf("gneeeeeeeh\n");
 		if (tmp->lexeme)
-			printf("tmp->line = %s\n", tmp->lexeme);
+		{
+			printf("\nNode before globing = %s\n", tmp->lexeme);
+			glob_parser(&tmp->lexeme);
+			printf("Node after globing = %s\n", tmp->lexeme);
+		}
 		if (!tmp->next)
 			break ;
 		tmp = tmp->next;
 	}
-	ft_putstr("/***         END GLOBING         ***/\033[0m");
+	ft_putstr("\n/***         END GLOBING         ***/\n\033[0m");
 	return (0);
 }

@@ -75,17 +75,14 @@ int			multi_handling(t_glob *glob)
 	return (1);
 }
 
-void		hub_final(t_glob *g)
+void		hub_final(t_glob *g, char *line)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp, NULL);
-	while (g_shell.line[i] && g_shell.line[i] != ' ')
-		i++;
-	i++;
 	rewind_tbracket(g->cbracket ? &g->cbracket->list : NULL);
-	while (g_shell.line[i])
+	while (line[i])
 	{
-		tmp = next_expr(g_shell.line, i);
+		tmp = ft_strdup(line);
 		i += ft_strlen(tmp);
 		if (ft_strchr(tmp, '{') && ft_strchr(tmp, '}') && g->cbracket)
 		{
@@ -100,7 +97,7 @@ void		hub_final(t_glob *g)
 		else
 			g_parse_expr(tmp, g);
 		ft_memdel((void *)&tmp);
-		if (!g_shell.line[i + 1])
+		if (!line[i + 1])
 			break ;
 	}
 	multi_handling(g);

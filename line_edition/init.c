@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:40:03 by jules             #+#    #+#             */
-/*   Updated: 2017/01/31 17:36:03 by jules            ###   ########.fr       */
+/*   Updated: 2017/01/31 18:12:42 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void	init_hist()
 	g_shell.hist_fd = 0;
 	g_shell.hist = NULL;
 	g_shell.nav_hist = 0;
-	g_shell.curr_hist = NULL;
 	init_hist_opt();
 	filename = ft_strjoin(get_var(&g_shell, "HOME"), "/.history");
 	g_shell.hist_fd = open(filename, O_RDWR | O_CREAT, 0600);
 	ft_varappend(new_var("HISTSIZE", "500"));
 	ft_varappend(new_var("HISTFILESIZE", "500"));
 	get_hist();
+	g_shell.curr_hist = g_shell.hist;
 	close(g_shell.hist_fd);
 }
 

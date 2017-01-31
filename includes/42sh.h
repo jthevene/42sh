@@ -176,6 +176,10 @@ char				*get_var(t_shell *g_shell, char *n_var);
 void				ft_varappend(t_var *new_element);
 t_var				*new_var(char *v_name, char *v_value);
 
+/*
+** EXECUTION
+*/
+void			 	distrib_functions(char *command_line);
 char				**lst_to_tab(t_var *env);
 int					lenght_list(t_var *env);
 

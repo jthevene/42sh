@@ -37,7 +37,6 @@ void	return_key(void)
 		ft_putchar(10);
 		lexer_parser(g_shell.current_line);
 		g_shell.line = ft_strdup(g_shell.current_line);
-		glob_parser();
 		reset_line();
 	}
 	else

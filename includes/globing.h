@@ -136,7 +136,7 @@ typedef struct			s_glob
 	char				xdigit[17];
 }						t_glob;
 
-int						glob_parser(void);
+int						glob_parser(char **line);
 int						ft_strchr_bslash(char *s, int c);
 int						verif_tokens(char *str);
 char					*recreate_token_string(char *str, t_glob *glob);
@@ -183,7 +183,7 @@ void					copy_list(t_bracket **src, t_bracket **dest);
 
 // FONCTIONS CURLY BRACKETS
 // Initialisation et gestion de depart
-int						hub_cbracket(t_glob *glob);
+int						hub_cbracket(t_glob *glob, char *line);
 char					**recup_ext_args(char *str);
 int						cbracket_errors(char *line, t_glob *glob);
 int						fill_clist(char *line, t_glob *glob);
@@ -235,7 +235,7 @@ int						is_solo_arg(t_bracket *args);
 void					free_double_str(char **s, char **s2);
 
 // FONCTIONS WILDCARDS
-void					hub_final(t_glob *glob);
+void					hub_final(t_glob *glob, char *line);
 int						is_only_token(char token, char *str);
 int						only_star(char *str, t_glob *glob);
 int						g_parse_expr(char *str, t_glob *glob);

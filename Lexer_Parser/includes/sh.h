@@ -77,4 +77,6 @@ t_token	*copy_token_right(t_token *ope);
 char	*commands_leaf(t_token *token);
 char	*trim_end(char *line);
 
+int		send_token_to_glob(t_all *all);
+
 #endif

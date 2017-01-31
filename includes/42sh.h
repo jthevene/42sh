@@ -162,7 +162,6 @@ void				ft_reset_termios(struct termios t_back);
 /*
 ** SIMON
 */
-int					glob_parser(void);
 
 /*
 ** BUILTINS

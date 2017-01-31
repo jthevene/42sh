@@ -76,6 +76,9 @@ t_token	*copy_token_left(t_token *begin, t_token *ope);
 t_token	*copy_token_right(t_token *ope);
 char	*commands_leaf(t_token *token);
 char	*trim_end(char *line);
+int		token_squote(t_token *token, char *line, int pos, int i);
+int		token_dquote(t_token *token, char *line, int pos, int i);
+char	*finish_quotes(char *line);
 
 int		send_token_to_glob(t_all *all);
 

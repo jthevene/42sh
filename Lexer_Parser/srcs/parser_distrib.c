@@ -4,7 +4,7 @@ void		lexer_parser(char *line)
 {
 	t_all	*all;
 	FT_INIT(int, i, 1);
-	FT_INIT(int, u, 0);
+//	FT_INIT(int, u, 0);
 	FT_INIT(int, o, 0);
 
 	if (!(all = (t_all *)malloc(sizeof(t_all))))
@@ -43,17 +43,17 @@ void	analise_line(t_all *all)
 	all->tokens_begin = token;
 	while (all->line[pos])
 	{
-		printf("\n***NEW_TOKEN***\n");
-		printf("pos = %d\n", pos);
+		//printf("\n***NEW_TOKEN***\n");
+		//printf("pos = %d\n", pos);
 		pos = lire_lexeme(token, all->line , pos);
-		printf("1 token lu\n");
+		//printf("1 token lu\n");
 		if (all->line[pos])
 		{
-			printf("NOP\n");
+			//printf("NOP\n");
 			token->next = init_token();
 			token = token->next;
 		}
-		printf("next token\n");
+		//printf("next token\n");
 	}
 }
 
@@ -64,7 +64,7 @@ int		lire_lexeme(t_token *token, char *line, int pos)
 		pos++;
 	if (line[pos] == '\'')
 	{
-		printf("\n***SQUOTE***\n");
+		//printf("\n***SQUOTE***\n");
 		pos++;
 		token->type = SQUOTE;
 		i = pos;
@@ -75,7 +75,7 @@ int		lire_lexeme(t_token *token, char *line, int pos)
 	}
 	else if (line[pos] == '\"')
 	{
-		printf("\n***DQUOTE***\n");
+		//printf("\n***DQUOTE***\n");
 		pos++;
 		token->type = DQUOTE;
 		i = pos;
@@ -86,8 +86,8 @@ int		lire_lexeme(t_token *token, char *line, int pos)
 	}		
 	else if (ft_isprintnotope(line[pos]) == 1)
 	{
-		printf("\n***WORDS***\n");
-		printf("pos = %d\n", pos);
+		//printf("\n***WORDS***\n");
+		//printf("pos = %d\n", pos);
 		token->type = WORDS;
 		i = pos;
 		pos = get_lexeme_pos(line, pos);
@@ -96,7 +96,7 @@ int		lire_lexeme(t_token *token, char *line, int pos)
 	}
 	else if (ft_isope(line[pos]) >= 1)
 	{
-		printf("\n***OPE***\n");
+		//printf("\n***OPE***\n");
 		pos = check_ope(token, line, pos, i);
 	}
 	return (pos);
@@ -105,9 +105,9 @@ int		lire_lexeme(t_token *token, char *line, int pos)
 void	add_lexeme(t_token *token, char *line, int pos, int i)
 {
 	token->lexeme = ft_strndup(&(line[i]), pos - i);
-	printf("type = %d\n", token->type);
-	printf("lexeme = %s\n", token->lexeme);
-	printf("lexeme good\n");
+	//printf("type = %d\n", token->type);
+	//printf("lexeme = %s\n", token->lexeme);
+	//printf("lexeme good\n");
 }
 
 int        ft_isope(char c)

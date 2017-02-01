@@ -71,6 +71,9 @@ static void 	init_edition()
 	g_shell.c = ft_strnew(16);
 	g_shell.prompt = 0;
 	g_shell.prompt_len = 0;
+
+	g_shell.result_exec = -99;
+	g_shell.all_results = -99;
 }
 
 int		init_all()

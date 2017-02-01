@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:40:03 by jules             #+#    #+#             */
-/*   Updated: 2017/01/31 18:12:42 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/01 12:23:22 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_hist_opt()
 	g_shell.hist_opt.p = false;
 	g_shell.hist_opt.s = false;
 	g_shell.hist_opt.options = NULL;
-	g_shell.hist_opt.argument = NULL;
+	g_shell.hist_opt.arg = NULL;
 }
 
 void	init_hist()

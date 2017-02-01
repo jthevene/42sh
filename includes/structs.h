@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 16:40:01 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/01/31 17:41:29 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/01 15:41:54 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct 		s_hist_opt
 	bool			w;
 	bool			p;
 	bool			s;
-	char			**argument;
+	char			*arg;
 	char			*options;
 }					t_hist_opt;
 

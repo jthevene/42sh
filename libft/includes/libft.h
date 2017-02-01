@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 16:13:11 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/01/31 17:43:06 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/01 19:45:22 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ int					ft_putwchar(wchar_t c);
 int					ft_putwstr(wchar_t *str);
 
 
+void				ft_puttab(char **array);
 void				ft_putendl_fd_exit(char const *src, int fd, int exit_code);
 int					ft_isallspace(char *str);
 char				*ft_epurstr(char *str);

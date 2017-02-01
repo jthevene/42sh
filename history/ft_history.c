@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:53:52 by jules             #+#    #+#             */
-/*   Updated: 2017/02/01 15:44:21 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/01 20:35:37 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,29 @@ void	history_hub(char *line)
 {
 	split_line(line);
 	get_history_options();
-	FT_INIT(char **, arg_tab, ft_strsplit(g_shell.hist_opt.arg, ' '));
 	FT_INIT(int, options, check_hist_opt());
+	// ft_putendl("options : ");
+	// ft_putendl(g_shell.hist_opt.options);
+	// ft_putendl("filename : ");
+	// ft_putendl(g_shell.hist_opt.filename);
+	// ft_putendl("arg : ");
+	// ft_putendl(g_shell.hist_opt.arg);
+	// ft_putendl("_____________");
+	// (void)options;
 	if (options > 0)
 		return ;
 	else if (options < 0 && !g_shell.hist_opt.c)
-		ft_history(arg_tab[0]);
+		ft_history(g_shell.hist_opt.filename);
 	if (g_shell.hist_opt.c)
 		clear_history_list();
 	if (g_shell.hist_opt.d)
-		delete_line_history(ft_atoi(arg_tab[0]));
+		delete_line_history(ft_atoi(g_shell.hist_opt.filename));
 	else if (g_shell.hist_opt.a)
-		update_history_file(arg_tab[0], get_histsize("HISTSIZE"));
+		update_history_file(g_shell.hist_opt.filename, get_histsize("HISTSIZE"));
 	else if (g_shell.hist_opt.r)
-		histfile_append(arg_tab[0]);
+		histfile_append(g_shell.hist_opt.filename);
 	else if (g_shell.hist_opt.w)
-		update_history_file(arg_tab[0], get_histsize("HISTSIZE"));
+		update_history_file(g_shell.hist_opt.filename, get_histsize("HISTSIZE"));
 	else if (g_shell.hist_opt.s)
 		ft_newhist(g_shell.hist_opt.arg);
 }

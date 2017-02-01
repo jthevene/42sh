@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   distrib_functions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvirgile <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:29:42 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/01/30 17:29:43 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/02/01 20:33:05 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static int		detect_builtins(char* to_exec, char *command_line)
 		_42sh_env();
 	else if (!ft_strcmp(to_exec, "cd"))
 		cd(command_line);
+	else if (!ft_strcmp(to_exec, "history"))
+		history_hub(command_line);
 	else if (!ft_strcmp(to_exec, "exit"))
 		ft_exit();
 	else

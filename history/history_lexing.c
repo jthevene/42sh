@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 22:25:24 by jules             #+#    #+#             */
-/*   Updated: 2017/02/01 15:46:56 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/01 20:33:32 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ void	split_line(char *line)
 	i = 1;
 	command_tab = ft_strsplit(line, ' ');
 	i = get_options_str(command_tab);
-	get_argument(i, command_tab);
+	get_arg_filename(i, command_tab);
 }
 
-void	get_argument(int i, char **array)
+void	get_arg_filename(int i, char **array)
 {
+	if (array[i])
+		g_shell.hist_opt.filename = ft_strdup(array[i]);
 	while (array[i])
 	{
 		if (!g_shell.hist_opt.arg)
@@ -34,28 +36,6 @@ void	get_argument(int i, char **array)
 		i++;
 	}
 }
-
-// void	get_argument(int i, char **array)
-// {
-// 	int		tab_len;
-// 	int		j;
-
-// 	tab_len = ft_count_tab(array) - i;
-// 	j = 0;
-// 	if (tab_len > 0)
-// 	{
-// 		g_shell.hist_opt.arg = (char**)malloc(sizeof(char *) * (tab_len + 1));
-// 		if (!g_shell.hist_opt.arg)
-// 			return ;
-// 		while (array[i])
-// 		{
-// 			g_shell.hist_opt.arg[j] = ft_strdup(array[i]);
-// 			i++;
-// 			j++;
-// 		}
-// 		g_shell.hist_opt.arg[j] = NULL;
-// 	}
-// }
 
 int		get_options_str(char **array)
 {

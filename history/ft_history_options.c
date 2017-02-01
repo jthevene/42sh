@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 16:55:54 by jules             #+#    #+#             */
-/*   Updated: 2017/01/31 18:17:53 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/01 19:49:52 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	get_history_options()
 {
+	if (!g_shell.hist_opt.options)
+		return ;
 	if (ft_strchr(g_shell.hist_opt.options, 'c'))
 		g_shell.hist_opt.c = true;
 	if (ft_strchr(g_shell.hist_opt.options, 'd'))

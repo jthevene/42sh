@@ -12,10 +12,9 @@
 
 NAME				=	42sh
 
-DIEUSON 			=	./code_dieuson/
-SRC_DIR				=	$(DIEUSON)srcs/
-INCLUDE_DIR			=	$(DIEUSON)includes
-OBJ_DIR				=	./objs
+INCLUDE_DIR			=	./includes
+EDITION_DIR			=	./line_edition/
+DIR_AUTO 			= 	completion_dynamique/
 
 LIBFT_DIR			=	./libft
 LIBFT_NAME			=	$(LIBFT_DIR)/libft.a
@@ -25,80 +24,126 @@ COMPILER			=	gcc
 C_FLAGS				=	-g3 -O3 -Wall -Wextra -Werror
 LFLAGS				=	-L$(LIBFT_DIR) -l$(LIBFT)
 
-SRC_DIEUSON			=	$(SRC_DIR)main.c $(SRC_DIR)catch_key.c 	\
-						$(SRC_DIR)cursor_move.c $(SRC_DIR)history.c \
-						$(SRC_DIR)init.c $(SRC_DIR)copy_cut_past.c \
-						$(SRC_DIR)line_edition.c $(SRC_DIR)print_line.c \
-						$(SRC_DIR)return_key.c $(SRC_DIR)signal.c \
-						$(SRC_DIR)termios.c $(SRC_DIR)var.c \
-						$(SRC_DIR)history2.c \
 
-BIN_DIEUSON 		=	main.o catch_key.o 	\
-						cursor_move.o history.o \
-						init.o copy_cut_past.o \
-						line_edition.o print_line.o \
-						return_key.o signal.o \
-						termios.o var.o history2.o\
+################# 		COMPLETION EDITION PART 		#######################
 
-################# 		GLOBING PART		####################################
-GLOBING = ./code_simon/
-REDIR = $(GLOBING)redirections/
-SBRACK = $(GLOBING)globing/square_brackets/
-CBRACK = $(GLOBING)globing/curly_brackets/
-WILDCARDS = $(GLOBING)globing/wildcards/
-UTILS_1 = $(GLOBING)globing/square_brackets/sbracket_utils/
-UTILS_2 = $(GLOBING)globing/curly_brackets/cbracket_utils/
-BIN_DIR_GLOBING = $(GLOBING)bin_folder/
+FILES_EDITION 		=	main.c catch_key.c 	cursor_move.c \
+						init.c copy_cut_past.c line_edition.c print_line.c \
+						return_key.c signal.c termios.c free_term.c
 
-SRC_GLOBING = $(GLOBING)globing/glob_parser.c \
-		$(REDIR)simple_right.c $(REDIR)double_right.c $(REDIR)redir_utils.c\
-		\
-		$(SBRACK)hub_sbracket.c $(SBRACK)fill_tabs.c\
-		$(SBRACK)init_tabs.c $(SBRACK)category_bracket.c\
-		$(SBRACK)sbracket_list.c \
-		\
-		$(CBRACK)hub_cbracket.c $(CBRACK)fill_clist.c $(CBRACK)cbracket_list.c \
-		$(CBRACK)cbracket_errors.c $(CBRACK)expansion.c \
-		\
-		$(UTILS_1)catch_dash.c $(UTILS_1)check_rng.c $(UTILS_1)clean_brackets.c\
-		$(UTILS_1)count_brackets.c $(UTILS_1)get_functions.c\
-		$(UTILS_1)str_nodouble.c \
-		\
-		$(UTILS_2)commas_utils.c $(UTILS_2)algo_imbricated.c $(UTILS_2)imbric_utils.c \
-		$(UTILS_2)get_imbric_patterns.c $(UTILS_2)cbracket_utils.c \
-		$(UTILS_2)imbric_utils2.c $(UTILS_2)double_brck.c $(UTILS_2)expansion_utils.c \
-		\
-		$(WILDCARDS)hub_final.c $(WILDCARDS)wildcards_tokens.c $(WILDCARDS)get_len.c\
-		\
-		$(GLOBING)globing/get_path.c \
+FILES_COMPLETION	=	detect_auto_completion.c get_files.c match_elements.c \
+						set_path.c display_completion.c build_list.c \
+						set_sentence.c free_auto_completion.c \
+						tools.c set_path_second_part.c
 
-BIN_GLOBING = glob_parser.o \
-		\
-		simple_right.o double_right.o \
-		redir_utils.o \
-		\
-		hub_sbracket.o fill_tabs.o \
-		init_tabs.o \
-		\
-		category_bracket.o sbracket_list.o \
-		catch_dash.o check_rng.o \
-		clean_brackets.o count_brackets.o \
-		get_functions.o str_nodouble.o \
-		\
-		hub_cbracket.o fill_clist.o \
-		cbracket_list.o cbracket_errors.o \
-		expansion.o \
-		\
-		commas_utils.o algo_imbricated.o \
-		imbric_utils.o get_imbric_patterns.o \
-		cbracket_utils.o imbric_utils2.o \
-		double_brck.o expansion_utils.o \
-		wildcards_tokens.o hub_final.o get_len.o\
-		get_path.o
-################# 		END SIMON PART		####################################
+SRC_COMPLETION_EDIT	=	$(addprefix $(EDITION_DIR), $(FILES_EDITION)) \
+						$(addprefix $(DIR_AUTO), $(FILES_COMPLETION))
 
-INCLUDES 	= -I$(INCLUDE_DIR) -I$(LIBFT_INCLUDE_DIR) \
-			-I$(GLOBING)includes/
+BIN_COMPLETION_EDIT	= 	$(FILES_EDITION:.c=.o) $(FILES_COMPLETION:.c=.o) 
+
+################# 		END COMPLETION EDITION PART 	#######################
+
+################# 		GLOBING PART		###################################
+
+GLOBING = ./globing/
+REDIR = redirections/
+SBRACK = globing/square_brackets/
+CBRACK = globing/curly_brackets/
+WILDCARDS = globing/wildcards/
+UTILS_1 = globing/square_brackets/sbracket_utils/
+UTILS_2 = globing/curly_brackets/cbracket_utils/
+
+FILES_GLOBING	= 	glob_parser.c get_path.c verif_tokens.c recreate_token_string.c
+
+FILES_REDIR 	=	simple_right.c double_right.c redir_utils.c
+
+FILES_SBRACK 	= 	hub_sbracket.c fill_tabs.c init_tabs.c category_bracket.c \
+					sbracket_list.c
+
+FILES_CBRACK 	= 	hub_cbracket.c fill_clist.c cbracket_list.c \
+					cbracket_errors.c expansion.c print_clist.c \
+
+FILES_UTILS_1 	= 	catch_dash.c check_rng.c clean_brackets.c \
+					count_brackets.c get_functions.c str_nodouble.c
+
+FILES_UTILS_2 	= 	commas_utils.c algo_imbricated.c imbric_utils.c \
+					get_imbric_patterns.c cbracket_utils.c \
+					imbric_utils2.c double_brck.c expansion_utils.c
+
+FILES_WILDCARDS = 	hub_final.c wildcards_tokens.c wildcards_utils.c \
+					wildcards_utils2.c wild_lst_tools.c check_file.c \
+
+SRC_GLOBING 	= 	$(addprefix $(GLOBING), $(FILES_GLOBING)) \
+					$(addprefix $(REDIR), $(FILES_REDIR)) \
+					$(addprefix $(SBRACK), $(FILES_SBRACK)) \
+					$(addprefix $(CBRACK), $(FILES_CBRACK)) \
+					$(addprefix $(UTILS_1), $(FILES_UTILS_1)) \
+					$(addprefix $(UTILS_2), $(FILES_UTILS_2)) \
+					$(addprefix $(WILDCARDS), $(FILES_WILDCARDS)) \
+
+BIN_GLOBING 	= 	$(FILES_GLOBING:.c=.o) $(FILES_REDIR:.c=.o) \
+					$(FILES_SBRACK:.c=.o) $(FILES_CBRACK:.c=.o) \
+					$(FILES_UTILS_1:.c=.o) $(FILES_UTILS_2:.c=.o) \
+					$(FILES_WILDCARDS:.c=.o)
+		
+################# 		END GLOBING PART		###############################
+
+################# 			PARSER PART			###############################
+PARSER = ./Lexer_Parser/srcs/
+
+FILES_PARSER 	= 	backslash_escape.c free_tree.c \
+					isallspace.c lexer_check.c parser_distrib.c parse.c \
+					start_parse.c tree.c token_functions.c
+
+SRC_PARSER  	= 	$(addprefix $(PARSER), $(FILES_PARSER))
+
+BIN_PARSER 		= 	$(FILES_PARSER:.c=.o)
+
+################# 		END PARSER PART			###############################
+
+#################		BUILTIN PART 			###############################
+BUILTIN 		= 	./builtins/
+
+FILES_BUILTIN 	= 	echo.c env.c setenv.c unsetenv.c cd.c path_converter.c \
+					exit.c cd_tools.c
+
+SRC_BUILTIN  	= 	$(addprefix $(BUILTIN), $(FILES_BUILTIN))
+
+BIN_BUILTIN 	= 	$(FILES_BUILTIN:.c=.o)
+
+#################		END BUILTIN PART 		###############################
+
+
+#################		HISTORY PART 			###############################
+
+HISTORY 		= 	./history/
+
+FILES_HISTORY 	= 	error.c event.c ft_history.c ft_history_options.c \
+					historic.c histsize.c lst_tools.c history_lexing.c
+
+SRC_HISTORY 	= 	$(addprefix $(HISTORY), $(FILES_HISTORY))
+
+BIN_HISTORY 	= 	$(FILES_HISTORY:.c=.o)
+
+#################		END HISTORY PART 		###############################
+
+#################		EXECUTION PART 			###############################
+
+EXECUTION 		= 	./execution/
+
+FILES_EXECUTION =	distrib_functions.c exec_tree.c binary_tree_parser.c
+
+SRC_EXECUTION 	= 	$(addprefix $(EXECUTION), $(FILES_EXECUTION))
+
+BIN_EXECUTION 	= 	$(FILES_EXECUTION:.c=.o)
+
+#################		END EXECUTION PART 		###############################
+
+
+INCLUDES 	= -I$(LIBFT_INCLUDE_DIR) -I$(INCLUDE_DIR) -I$(PARSER)../includes/
+ALL_SRCS 	= $(SRC_COMPLETION_EDIT) $(SRC_GLOBING) $(SRC_PARSER) $(SRC_BUILTIN) $(SRC_HISTORY) $(SRC_EXECUTION)
+ALL_BINS 	= $(BIN_COMPLETION_EDIT) $(BIN_GLOBING) $(BIN_PARSER) $(BIN_BUILTIN) $(BIN_HISTORY) $(BIN_EXECUTION)
+EXTENSIONS 	= $(LIBFT_DIR)/libft.a $(LIBFT_DIR)/libftprintf.a 
 
 all: $(NAME)
 
@@ -106,20 +151,18 @@ lib:
 	make -C libft
 
 $(NAME):
-	gcc $(C_FLAGS) $(INCLUDES) $(SRC_DIEUSON) $(SRC_GLOBING) -Incurses -c
-	gcc $(C_FLAGS) $(BIN_GLOBING) $(BIN_DIEUSON) $(LIBFT_DIR)/libft.a -ltermcap -o $(NAME)
+	gcc $(C_FLAGS) $(INCLUDES) $(ALL_SRCS) -Incurses -c
+	gcc $(C_FLAGS) $(ALL_BINS) $(EXTENSIONS) -ltermcap -o $(NAME)
 	mkdir bin_folder
-	mv $(BIN_DIEUSON) $(BIN_GLOBING) bin_folder
+	mv $(ALL_BINS) bin_folder
 
 clean:
-	make -C $(GLOBING) clean
 	rm -rf bin_folder
 
 clean_lib:
 	make -C $(LIBFT_DIR) clean
 
 fclean: clean
-	make -C $(GLOBING) fclean
 	rm -rf $(NAME)
 	sh ./rm_files.sh
 

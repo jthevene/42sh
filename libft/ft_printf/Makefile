@@ -20,6 +20,8 @@ S = ./srcs/
 
 C = ./srcs/calls/
 
+FT_PRINTF = ./ft_printf/
+
 LIBSRC = $(L)ftp_putbase.c $(L)ftp_putbase_long.c \
 	$(L)ftp_putchar.c $(L)ftp_putnbr.c $(L)ftp_putnbr_long.c \
 	$(L)ftp_putstr.c $(L)ftp_strlen.c $(L)ftp_putwchar.c \
@@ -78,7 +80,7 @@ all: $(NAME)
 
 $(NAME):
 	@printf "\033[31mCompilation des sources de la libft\n\033[0m"
-	@make -C ../
+#	@make -C ../
 	@printf "\033[31mCompilation de la libftprintf.a\033[0m "
 	@$(CC) -c ../includes/libft.h $(LIBSRC) $(SRC) $(CALLS)
 	@mv $(SRCBIN) $(L)

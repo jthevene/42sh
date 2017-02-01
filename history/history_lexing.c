@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 22:25:24 by jules             #+#    #+#             */
-/*   Updated: 2017/01/31 17:32:47 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/01 15:32:02 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,37 @@ void	split_line(char *line)
 
 void	get_argument(int i, char **array)
 {
-	int		tab_len;
-	int		j;
-
-	tab_len = ft_count_tab(array) - i;
-	j = 0;
-	if (tab_len > 0)
+	while (array[i])
 	{
-		g_shell.hist_opt.argument = (char**)malloc(sizeof(char *) * (tab_len + 1));
-		if (!g_shell.hist_opt.argument)
-			return ;
-		while (array[i])
-		{
-			g_shell.hist_opt.argument[j] = ft_strdup(array[i]);
-			i++;
-			j++;
-		}
-		g_shell.hist_opt.argument[j] = NULL;
+		if (!g_shell.hist_opt.arg)
+			g_shell.hist_opt.arg = ft_strdup(array[i]);
+		else
+			g_shell.hist_opt.arg = ft_strjoin(ft_strjoin(g_shell.hist_opt.arg, " "), argv[i]);
+		i++;
 	}
 }
+
+// void	get_argument(int i, char **array)
+// {
+// 	int		tab_len;
+// 	int		j;
+
+// 	tab_len = ft_count_tab(array) - i;
+// 	j = 0;
+// 	if (tab_len > 0)
+// 	{
+// 		g_shell.hist_opt.arg = (char**)malloc(sizeof(char *) * (tab_len + 1));
+// 		if (!g_shell.hist_opt.arg)
+// 			return ;
+// 		while (array[i])
+// 		{
+// 			g_shell.hist_opt.arg[j] = ft_strdup(array[i]);
+// 			i++;
+// 			j++;
+// 		}
+// 		g_shell.hist_opt.arg[j] = NULL;
+// 	}
+// }
 
 int		get_options_str(char **array)
 {

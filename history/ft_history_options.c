@@ -6,35 +6,28 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 16:55:54 by jules             #+#    #+#             */
-/*   Updated: 2017/01/30 11:28:22 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/01/31 18:17:53 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/history.h"
 
-void	get_history_options(char **src)
+void	get_history_options()
 {
-	int		i;
-
-	i = 0;
-	while (src[i])
-	{
-		if (ft_strchr(src[i], 'c'))
-			g_shell.hist_opt.c = true;
-		if (ft_strchr(src[i], 'd'))
-			g_shell.hist_opt.d = true;
-		if (ft_strchr(src[i], 'a'))
-			g_shell.hist_opt.a = true;
-		if (ft_strchr(src[i], 'r'))
-			g_shell.hist_opt.r = true;
-		if (ft_strchr(src[i], 'w'))
-			g_shell.hist_opt.w = true;
-		if (ft_strchr(src[i], 'p'))
-			g_shell.hist_opt.p = true;
-		if (ft_strchr(src[i], 's'))
-			g_shell.hist_opt.s = true;
-		i++;
-	}
+	if (ft_strchr(g_shell.hist_opt.options, 'c'))
+		g_shell.hist_opt.c = true;
+	if (ft_strchr(g_shell.hist_opt.options, 'd'))
+		g_shell.hist_opt.d = true;
+	if (ft_strchr(g_shell.hist_opt.options, 'a'))
+		g_shell.hist_opt.a = true;
+	if (ft_strchr(g_shell.hist_opt.options, 'r'))
+		g_shell.hist_opt.r = true;
+	if (ft_strchr(g_shell.hist_opt.options, 'w'))
+		g_shell.hist_opt.w = true;
+	if (ft_strchr(g_shell.hist_opt.options, 'p'))
+		g_shell.hist_opt.p = true;
+	if (ft_strchr(g_shell.hist_opt.options, 's'))
+		g_shell.hist_opt.s = true;
 }
 
 void	clear_history_list(void)

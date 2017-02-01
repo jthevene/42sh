@@ -11,29 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/globing.h"
-/*
-static int				get_command(char *str, t_glob *glob)
-{
-	FT_INIT(int, i, 0);
-	FT_INIT(int, j, 0);
-	while (str[i] && str[i] != ' ')
-		i++;
-	i++;
-	j = i;
-	while (str[j] && str[j] != ' ')
-		j++;
-	if (!(glob->command = ft_strnew(j - i)))
-		return (-1);
-	j = 0;
-	while (str[i] && str[i] != ' ')
-	{
-		glob->command[j] = str[i];
-		j++;
-		i++;
-	}
-	return (0);
-}
-*/
+
 t_glob					*init_glob(void)
 {
 	t_glob				*glob;
@@ -108,7 +86,7 @@ int						glob_parser(char **line)
 int						send_token_to_glob(t_all *all)
 {
 	FT_INIT(t_token *, tmp, all->tokens_begin);
-	printf("\033[34m/***          GLOBING          ***/\n");
+	printf("\n\033[34m/***          GLOBING          ***/\n");
 	if (tmp->next)
 		tmp = tmp->next;
 	else

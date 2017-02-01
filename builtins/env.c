@@ -17,6 +17,8 @@ char		*get_var(t_shell *g_shell, char *n_var)
 	char	*val;
 	t_var	*tmp_env;
 
+	if (!g_shell || !n_var)
+		return (NULL);
 	val = NULL;
 	tmp_env = g_shell->env;
 	while (tmp_env)

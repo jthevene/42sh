@@ -32,6 +32,8 @@ void	return_key(void)
 	if (ft_strlen(g_shell.current_line))
 	{
 		ft_putchar(10);
+		g_shell.result_exec = -99;
+		g_shell.all_results = -99;
 		lexer_parser(g_shell.current_line);
 		g_shell.line = ft_strdup(g_shell.current_line);
 		reset_line();

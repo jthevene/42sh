@@ -111,7 +111,7 @@ int 		cd(char *line)
 	FT_INIT(char*, path, NULL);
 	FT_INIT(char*, file, NULL);
 	set_option_sentence(&sentence, &option, len_tab, tab_line);
-	path = len_tab == 1 ? home : path_converter(sentence, home, pwd);
+	path = len_tab == 1 ? ft_strdup(home) : path_converter(sentence, home, pwd);
 	file = ft_strdup(path + (ft_strlen(path) - 
 		ft_strlen(ft_strrchr(path, '/')) + 1));
 	len_tab = verif_access(&path, &file, option);
@@ -119,9 +119,7 @@ int 		cd(char *line)
 	free(path);
 	free(home);
 	free(file);
-	if (!len_tab)
-		return (1);
-	return (0);
+	return (!len_tab ? 1 : 0);
 }
 
 

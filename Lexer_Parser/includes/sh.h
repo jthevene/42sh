@@ -43,6 +43,7 @@ typedef struct 		s_tree
 	struct s_tree	*right;
 } 					t_tree;
 
+int		execute_or_and(t_tree *tree);
 char	*finish_line_backslash(char *line);
 void	lexer_parser(char *line);
 int		check_ope(t_token *token, char *line, int pos, int i);

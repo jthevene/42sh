@@ -73,22 +73,20 @@ typedef struct			s_shell
 	t_var				*env; //contenu de ENV
 	int 				prompt_len;
 	int 				start_select;
+
+	int 				result_exec;
+	int 				all_results;
+
 	int 				end_select;
 	int 				cursor_x;
 	int 				cursor_2d_x;
 	int 				cursor_2d_y;
-//	int 				prev_cursor_x;
-//	int 				prev_cursor_2d_x;
-//	int 				prev_cursor_2d_y;
 	int 				line_2d_x;
 	int 				line_2d_y;
 	int 				line_size;
-//	int 				prev_line_size;
 	int 				prev_line_2d_y;
-//	int 				prev_line_2d_x;
 	int 				nb_rows; // 0 = premiere ligne de la commande en cours d'edition
 	struct winsize		*win;
-//	struct winsize		*prev_win;
 	int					running;
 	t_lst				*hist;
 	////////////////////////////	JULES PART
@@ -101,7 +99,6 @@ typedef struct			s_shell
 	///////////////////////////		END JULES
 	struct termios		my_termios;
 	struct termios		t_back;
-//	char				buf[8]; //pas sur qu'on en ait besoin en fait
 	char				*line; // VARIABLE SIMON
 }						t_shell;
 

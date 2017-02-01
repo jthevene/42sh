@@ -11,6 +11,17 @@ void	parse(t_tree *tree, t_token *token)
 	{
 		if (and_or(tree, token) == 0)
 		{
+			
+/*			if (tree->type == OR && g_shell.all_results)
+				if (!verif_content(tree->right->content))
+					distrib_functions(tree->right->content);
+
+
+			if (tree->type == AND && !g_shell.all_results)
+				if (!verif_content(tree->right->content))
+					distrib_functions(tree->right->content);
+*/
+
 			if (redirections(tree, token) == 0)
 			{
 				tree->type = token->type;
@@ -38,23 +49,24 @@ void	parse(t_tree *tree, t_token *token)
 			//printf("content : (%s)\n", tree->content);
 			//printf("left : (%s)\n", tree->left->content);
 			//printf("right : (%s)\n\n", tree->right->content);
+			execute_or_and(tree);
 		}
-		printf("direct content : (%s)\n\n", tree->content);
-		if (!verif_content(tree->content))
-			distrib_functions(tree->content);
+		ft_printf("direct content : (%s)\n\n", tree->content);
+//		if (!verif_content(tree->content))
+//			distrib_functions(tree->content);
 	}
 	else
 	{
-		//printf("{SEMICOLON}\n");
+		printf("{SEMICOLON}\n");
 //		printf("type : %d\n", tree->type);
 //		printf("content : (%s)\n", tree->content);
 //		printf("left : (%s)\n", tree->left->content);
 //		printf("right : (%s)\n\n", tree->right->content);
 //	printf("direct content : (%s)\n", tree->content);
-//		if (!verif_content(tree->left->content))
-//			distrib_functions(tree->left->content);
-//		if (!verif_content(tree->right->content))
-//			distrib_functions(tree->right->content);
+		if (!verif_content(tree->left->content))
+			distrib_functions(tree->left->content);
+		if (!verif_content(tree->right->content))
+			distrib_functions(tree->right->content);
 	}
 }
 

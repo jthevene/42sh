@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 22:25:24 by jules             #+#    #+#             */
-/*   Updated: 2017/02/01 15:32:02 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/01 15:46:56 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	get_argument(int i, char **array)
 		if (!g_shell.hist_opt.arg)
 			g_shell.hist_opt.arg = ft_strdup(array[i]);
 		else
-			g_shell.hist_opt.arg = ft_strjoin(ft_strjoin(g_shell.hist_opt.arg, " "), argv[i]);
+			g_shell.hist_opt.arg = ft_strjoin(ft_strjoin(g_shell.hist_opt.arg, " "), array[i]);
 		i++;
 	}
 }

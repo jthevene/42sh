@@ -123,8 +123,10 @@ void 	distrib_functions(char *command_line)
 	FT_INIT(char**, env, lst_to_tab(g_shell.env));
 	FT_INIT(char*, command, args[0]);
 //	ft_putstr("lol");
-	pipe(descripteurTube);
-	pipe(descripteurError);
+	if (pipe(descripteurTube) != 0)
+		return ;
+	if (pipe(descripteurError) != 0)
+		return ;
 	pid = fork();
 	if (pid == 0 && args)
 	{

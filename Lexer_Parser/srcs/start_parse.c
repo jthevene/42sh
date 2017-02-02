@@ -9,21 +9,6 @@ void	start_parse(t_token *token)
 	free_tree(tree);
 }
 
-
-t_token	*get_token(t_token *token, int type)
-{
-	t_token	*tmp;
-
-	tmp = token;
-	while (tmp)
-	{
-		if (tmp->type == type)
-			break ;
-		tmp = tmp->next;
-	}
-	return (tmp);
-}
-
 t_token	*get_token_and_or(t_token *token)
 {
 	t_token	*tmp;

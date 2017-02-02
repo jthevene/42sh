@@ -59,7 +59,7 @@ int		lire_lexeme(t_token *token, char *line, int pos)
 		i = pos;
 		pos = get_lexeme_pos(line, pos);
 		add_lexeme(token, line, pos, i);
-		backslash_char(token);
+		//backslash_char(token);
 	}
 	else if (ft_isope(line[pos]) >= 1)
 		pos = check_ope(token, line, pos, i);

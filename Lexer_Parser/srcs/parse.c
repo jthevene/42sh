@@ -57,7 +57,7 @@ void	parse(t_tree *tree, t_token *token)
 	}
 	else
 	{
-		printf("{SEMICOLON}\n");
+//		printf("{SEMICOLON}\n");
 //		printf("type : %d\n", tree->type);
 //		printf("content : (%s)\n", tree->content);
 //		printf("left : (%s)\n", tree->left->content);

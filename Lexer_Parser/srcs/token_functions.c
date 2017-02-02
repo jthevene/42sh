@@ -37,3 +37,17 @@ char	*finish_quotes(char *line)
 	}
 	return (line);
 }
+
+t_token	*get_token(t_token *token, int type)
+{
+	t_token	*tmp;
+
+	tmp = token;
+	while (tmp)
+	{
+		if (tmp->type == type)
+			break ;
+		tmp = tmp->next;
+	}
+	return (tmp);
+}

@@ -40,20 +40,6 @@ t_glob					*init_glob(void)
 	return (glob);
 }
 
-static void				print_args(t_glob *glob)
-{
-	if (glob->args)
-	{
-		rewind_tbracket(&glob->args);
-		while (glob->args->next)
-		{
-			printf("Arg : %s\n", glob->args->content);
-			glob->args = glob->args->next;
-		}
-		printf("Arg : %s\n", glob->args->content);
-	}
-}
-
 int						glob_parser(char **line)
 {
 	static t_glob		*glob = NULL;
@@ -78,17 +64,14 @@ int						glob_parser(char **line)
 		}
 	}
 	hub_final(glob, (*line));
-	print_args(glob);
 	(*line) = recreate_token_string(ft_strdup((*line)), glob);
-	if (glob->command)
-		free(glob->command);
+	free(glob->command ? glob->command : NULL);
 	return (1);
 }
-						
+
 int						send_token_to_glob(t_all *all)
 {
 	FT_INIT(t_token *, tmp, all->tokens_begin);
-//	printf("\n\033[34m/***          GLOBING          ***/\n");
 	if (tmp->next)
 		tmp = tmp->next;
 	else
@@ -96,15 +79,10 @@ int						send_token_to_glob(t_all *all)
 	while (tmp)
 	{
 		if (tmp->lexeme)
-		{
-//			printf("\nNode before globing = %s\n", tmp->lexeme);
 			glob_parser(&tmp->lexeme);
-//			printf("Node after globing = %s\n", tmp->lexeme);
-		}
 		if (!tmp->next)
 			break ;
 		tmp = tmp->next;
 	}
-//	ft_putstr("\n/***         END GLOBING         ***/\n\033[0m");
 	return (0);
 }

@@ -12,18 +12,27 @@
 
 #include "../includes/globing.h"
 
+static int		start_recreate(char **str, t_glob *glob)
+{
+	rewind_tbracket(&glob->args);
+	free((*str));
+	(*str) = ft_strdup(glob->args->content);
+	if (glob->args->next)
+	{
+		glob->args = glob->args->next ? glob->args->next : glob->args;
+		return (1);
+	}
+	else
+		return (0);
+}
+
 char			*recreate_token_string(char *str, t_glob *glob)
 {
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(char *, tmp2, NULL);
 	if (!str || !glob->args)
 		return (NULL);
-	rewind_tbracket(&glob->args);
-	free(str);
-	str = ft_strdup(glob->args->content);
-	if (glob->args->next)
-		glob->args = glob->args->next;
-	else
+	if (!start_recreate(&str, glob))
 	{
 		free_tbracket(&glob->args);
 		return (str);
@@ -40,7 +49,6 @@ char			*recreate_token_string(char *str, t_glob *glob)
 			break ;
 		glob->args = glob->args->next;
 	}
-//	printf("\033[31mLine after globing = \n%s\033[0m\n", str);
 	free_tbracket(&glob->args);
 	return (str);
 }

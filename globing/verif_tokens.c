@@ -65,7 +65,7 @@ int					verif_tokens(char *str)
 	else if (!ft_strchr_bslash(str, '[') && ft_strchr_bslash(str, ']'))
 		return (0);
 	else if (!count_brackets(str, '['))
-		return (0); 
+		return (0);
 	else if (ft_strchr_bslash(str, '[') && ft_strchr_bslash(str, ']'))
 		nb++;
 	if (ft_strchr_bslash(str, '{') && !ft_strchr_bslash(str, '}'))

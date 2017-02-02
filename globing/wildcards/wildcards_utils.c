@@ -78,10 +78,8 @@ int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 	FT_INIT(int, j, 0);
 	FT_INIT(int, ret, 0);
 	FT_INIT(int, taille, ft_strlen(s2));
-	if (!taille || !g)
-		return (0);
-	else if (taille == 1 && s1[0] == s2[0])
-		return (-1);
+	if (!taille || !g || (taille == 1 && s1[0] == s2[0]))
+		return (!taille || !g ? 0 : -1);
 	i = s2[j] == '?' ? i + 1 : i;
 	while (s1[i])
 	{
@@ -93,7 +91,7 @@ int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 				ret = ft_check_bracket(s1, i + j
 				, j + next_bracket(s2, '[', j) == taille - 1 ? FALSE : TRUE, g);
 			j += s2[j] == '[' ? next_bracket(s2, '[', j) : 0;
-			if (j == taille - 1 && ret != 0)
+			if (j == taille - 1 && ret != 0 && !ft_istrstr(s1, s2, i + 1, g))
 				return (ret);
 			j++;
 			ret++;

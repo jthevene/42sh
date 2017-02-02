@@ -30,9 +30,17 @@ static char	*recup_varname(char **line, int i)
 	return (value);
 }
 
-static void	reform2(char **line, char *tmp_begin, char *tmp_mid, char *tmp_end)
+static void	reform3(char **line, char *tmp_end)
 {
 	FT_INIT(char *, tmp2, NULL);
+	tmp2 = ft_strdup((*line));
+	free((*line));
+	(*line) = ft_strjoin(tmp2, tmp_end);
+	free(tmp2);
+}
+
+static void	reform2(char **line, char *tmp_begin, char *tmp_mid, char *tmp_end)
+{
 	free((*line));
 	if (tmp_begin)
 	{
@@ -41,10 +49,7 @@ static void	reform2(char **line, char *tmp_begin, char *tmp_mid, char *tmp_end)
 			(*line) = ft_strjoin(tmp_begin, tmp_mid);
 			if (tmp_end)
 			{
-				tmp2 = ft_strdup((*line));
-				free((*line));
-				(*line) = ft_strjoin(tmp2, tmp_end);
-				free(tmp2);
+				reform3(line, tmp_end);
 				return ;
 			}
 		}
@@ -61,13 +66,14 @@ static void	reform2(char **line, char *tmp_begin, char *tmp_mid, char *tmp_end)
 	else
 		(*line) = NULL;
 }
+
 static void	reform_line_var(char **line, char *value, int i)
 {
 	FT_INIT(char *, tmp_begin, i > 0 ? ft_strsub((*line), 0, i) : NULL);
 	FT_INIT(char *, tmp_mid, NULL);
 	FT_INIT(char *, tmp_end, NULL);
 	i++;
-	while ((*line)[i] && (*line)[i] != '\\' && (*line)[i] != '\'' 
+	while ((*line)[i] && (*line)[i] != '\\' && (*line)[i] != '\''
 		&& (*line)[i] != '\"' && (*line)[i] != '$')
 		i++;
 	if ((*line)[i] != '\0')
@@ -82,7 +88,7 @@ static void	reform_line_var(char **line, char *value, int i)
 	free(tmp_end ? tmp_end : NULL);
 }
 
-void	replace_env_var(char **line)
+void		replace_env_var(char **line)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp, NULL);

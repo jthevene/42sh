@@ -40,7 +40,7 @@ char			*recreate_token_string(char *str, t_glob *glob)
 			break ;
 		glob->args = glob->args->next;
 	}
-	printf("\033[31mLine after globing = \n%s\033[34m\n", str);
+//	printf("\033[31mLine after globing = \n%s\033[0m\n", str);
 	free_tbracket(&glob->args);
 	return (str);
 }

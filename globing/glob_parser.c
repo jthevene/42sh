@@ -62,7 +62,9 @@ int						glob_parser(char **line)
 		return (0);
 	if (!verif_tokens((*line)))
 	{
-		ft_putstr_fd("Verif globing tokens failed, must take the tokens as normal characters.\n", 2);
+		ft_putstr_fd((*line), 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd("Verif globing failed, not a token.\n", 2);
 		return (0);
 	}
 	glob = !glob ? init_glob() : glob;
@@ -86,7 +88,7 @@ int						glob_parser(char **line)
 int						send_token_to_glob(t_all *all)
 {
 	FT_INIT(t_token *, tmp, all->tokens_begin);
-	printf("\n\033[34m/***          GLOBING          ***/\n");
+//	printf("\n\033[34m/***          GLOBING          ***/\n");
 	if (tmp->next)
 		tmp = tmp->next;
 	else
@@ -95,14 +97,14 @@ int						send_token_to_glob(t_all *all)
 	{
 		if (tmp->lexeme)
 		{
-			printf("\nNode before globing = %s\n", tmp->lexeme);
+//			printf("\nNode before globing = %s\n", tmp->lexeme);
 			glob_parser(&tmp->lexeme);
-			printf("Node after globing = %s\n", tmp->lexeme);
+//			printf("Node after globing = %s\n", tmp->lexeme);
 		}
 		if (!tmp->next)
 			break ;
 		tmp = tmp->next;
 	}
-	ft_putstr("\n/***         END GLOBING         ***/\n\033[0m");
+//	ft_putstr("\n/***         END GLOBING         ***/\n\033[0m");
 	return (0);
 }

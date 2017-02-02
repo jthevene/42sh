@@ -16,7 +16,7 @@ int			only_qmark(char *str, int star, t_glob *glob)
 {
 	glob->f_path = get_cmd_path(str);
 	glob->l_path = get_cmd_last_path(str);
-	FT_INIT(t_lst *, files, get_dir_content(glob->f_path));
+	FT_INIT(t_lst *, files, get_dir_content(!glob->f_path ? "./" : glob->f_path));
 	FT_INIT(size_t, len, get_len_token(str));
 	while (files->next && files->next->content)
 	{
@@ -53,7 +53,7 @@ int			only_cbrkt(char *str, t_glob *g)
 	g->f_path = get_cmd_path(str);
 	g->l_path = get_cmd_last_path(str);
 	FT_INIT(int, len, get_len_token(str));
-	FT_INIT(t_lst *, f, get_dir_content(g->f_path));
+	FT_INIT(t_lst *, f, get_dir_content(!g->f_path ? "./" : g->f_path));
 	FT_INIT(int, i, -1);
 	hub_sbracket(g, str);
 	rewind_tbracket(&g->sbracket);
@@ -80,7 +80,7 @@ int			mix_with_star(char *str, t_glob *glob)
 	glob->f_path = get_cmd_path(str);
 	glob->l_path = get_cmd_last_path(str);
 	FT_INIT(char *, token, wild_get_token(str));
-	FT_INIT(t_lst *, files, get_dir_content(glob->f_path));
+	FT_INIT(t_lst *, files, get_dir_content(!glob->f_path ? "./" : glob->f_path));
 	hub_sbracket(glob, token);
 	rewind_tbracket(&glob->sbracket);
 	while (files)
@@ -107,7 +107,7 @@ int			mix_token(char *str, t_glob *glob)
 	glob->f_path = get_cmd_path(str);
 	glob->l_path = get_cmd_last_path(str);
 	FT_INIT(char *, token, wild_get_token(str));
-	FT_INIT(t_lst *, files, get_dir_content(glob->f_path));
+	FT_INIT(t_lst *, files, get_dir_content(!glob->f_path ? "./" : glob->f_path));
 	FT_INIT(int, len, get_len_token(token));
 	hub_sbracket(glob, token);
 	rewind_tbracket(&glob->sbracket);

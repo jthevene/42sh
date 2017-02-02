@@ -53,7 +53,8 @@ WILDCARDS = globing/wildcards/
 UTILS_1 = globing/square_brackets/sbracket_utils/
 UTILS_2 = globing/curly_brackets/cbracket_utils/
 
-FILES_GLOBING	= 	glob_parser.c get_path.c verif_tokens.c recreate_token_string.c
+FILES_GLOBING	= 	glob_parser.c get_path.c verif_tokens.c recreate_token_string.c \
+					replace_env_var.c
 
 FILES_REDIR 	=	simple_right.c double_right.c redir_utils.c
 

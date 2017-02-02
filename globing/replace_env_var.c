@@ -12,7 +12,7 @@
 
 #include "../includes/globing.h"
 
-char		*recup_varname(char **line, int i)
+static char	*recup_varname(char **line, int i)
 {
 	FT_INIT(int, j, i);
 	FT_INIT(char *, varname, NULL);
@@ -30,7 +30,7 @@ char		*recup_varname(char **line, int i)
 	return (value);
 }
 
-void		reform2(char **line, char *tmp_begin, char *tmp_mid, char *tmp_end)
+static void	reform2(char **line, char *tmp_begin, char *tmp_mid, char *tmp_end)
 {
 	FT_INIT(char *, tmp2, NULL);
 	free((*line));
@@ -61,12 +61,11 @@ void		reform2(char **line, char *tmp_begin, char *tmp_mid, char *tmp_end)
 	else
 		(*line) = NULL;
 }
-void		reform_line_var(char **line, char *value, int i)
+static void	reform_line_var(char **line, char *value, int i)
 {
 	FT_INIT(char *, tmp_begin, i > 0 ? ft_strsub((*line), 0, i) : NULL);
 	FT_INIT(char *, tmp_mid, NULL);
 	FT_INIT(char *, tmp_end, NULL);
-	FT_INIT(int, j, 0);
 	i++;
 	while ((*line)[i] && (*line)[i] != '\\' && (*line)[i] != '\'' 
 		&& (*line)[i] != '\"' && (*line)[i] != '$')
@@ -83,7 +82,7 @@ void		reform_line_var(char **line, char *value, int i)
 	free(tmp_end ? tmp_end : NULL);
 }
 
-void		replace_env_var(char **line)
+void	replace_env_var(char **line)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp, NULL);
@@ -95,12 +94,12 @@ void		replace_env_var(char **line)
 			while ((*line)[i] && (*line)[i] != '\'')
 				i++;
 		else if ((*line)[i] == '\"')
-			while ((*line)[i] && (*line)[i] ! '\"')
+			while ((*line)[i] && (*line)[i] != '\"')
 				i++;
 		else if ((*line)[i] == '$')
 		{
-			tmp = fonction(line);
-			reform_line_var(line, tmp);
+			tmp = recup_varname(line, i);
+			reform_line_var(line, tmp, i);
 		}
 		i++;
 	}

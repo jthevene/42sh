@@ -37,7 +37,7 @@ char			*get_cmd_path(char *str)
 	while (str[i] && str[i] != '/')
 		i--;
 	if (!str[i])
-		return (ft_strdup("./"));
+		return (NULL);
 	else
 	{
 		tmp = ft_strsub(str, 0, i);

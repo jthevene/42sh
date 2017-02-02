@@ -39,7 +39,7 @@ int			g_no_token(char *str, t_glob *glob)
 int			only_star(char *str, t_glob *glob)
 {
 	FT_INIT(char *, path, get_cmd_path(str));
-	FT_INIT(t_lst *, files, get_dir_content(path));
+	FT_INIT(t_lst *, files, get_dir_content(!path ? "./" : path));
 	while (files)
 	{
 		if (ft_strcmp(files->content, ".") && ft_strcmp(files->content, ".."))

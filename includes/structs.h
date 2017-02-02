@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 16:40:01 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/02/01 19:56:33 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/02 21:45:39 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ typedef struct			s_shell
 	////////////////////////////	JULES PART
 	t_lst				*curr_hist;
 	int 				hist_fd;
-	t_lst				*last_hist; //derniere ligne de l'historique
 	t_lst				*end_hist_file; //derniere ligne du fichier history
 	t_hist_opt			hist_opt;
 	int 				nav_hist; // 0 = pas encore navigué dans l'historique

@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 13:12:22 by jules             #+#    #+#             */
-/*   Updated: 2017/01/31 17:40:26 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/02 19:14:45 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void 	reset_line(void)
 		ft_newhist(g_shell.current_line);
 	g_shell.current_line = NULL;
 	g_shell.nav_hist = 0;
+	free_hist_opt();
 	ft_bzero(g_shell.current_line, ft_strlen(g_shell.current_line));
 	init_hist_opt();
 }

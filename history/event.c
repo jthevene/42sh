@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:01:40 by jules             #+#    #+#             */
-/*   Updated: 2017/02/02 09:47:25 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/02/02 21:01:39 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	check_pattern_event(char *event)
 		else if (ft_strisnum(str))
 			event_n(ft_atoi(str));
 		else
-			ft_putendl("else");
+			event_str(str);
 	}
+	free(str);
 }

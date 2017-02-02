@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 22:25:24 by jules             #+#    #+#             */
-/*   Updated: 2017/02/01 20:33:32 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/02 09:49:43 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	get_arg_filename(int i, char **array)
 		if (!g_shell.hist_opt.arg)
 			g_shell.hist_opt.arg = ft_strdup(array[i]);
 		else
-			g_shell.hist_opt.arg = ft_strjoin(ft_strjoin(g_shell.hist_opt.arg, " "), array[i]);
+			g_shell.hist_opt.arg = \
+			ft_strjoin(ft_strjoin(g_shell.hist_opt.arg, " "), array[i]);
 		i++;
 	}
 }
@@ -49,7 +50,8 @@ int		get_options_str(char **array)
 		if (i == 1)
 			g_shell.hist_opt.options = ft_strdup(array[i]);
 		else
-			g_shell.hist_opt.options = ft_strjoin(g_shell.hist_opt.options, array[i]);
+			g_shell.hist_opt.options = \
+				ft_strjoin(g_shell.hist_opt.options, array[i]);
 		i++;
 	}
 	return (i);

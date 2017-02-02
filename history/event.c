@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:01:40 by jules             #+#    #+#             */
-/*   Updated: 2017/01/30 11:25:53 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/02/02 09:47:25 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_strisnum(char *str)
 	return (1);
 }
 
-char			*event_str(char *str)
+char	*event_str(char *str)
 {
 	t_lst	*tmp;
 
@@ -43,7 +43,7 @@ char			*event_str(char *str)
 	return (NULL);
 }
 
-char			*event_n(int n)
+char	*event_n(int n)
 {
 	t_lst	*tmp;
 	int		i;
@@ -68,7 +68,7 @@ char			*event_n(int n)
 	return (NULL);
 }
 
-void			check_pattern_event(char *event)
+void	check_pattern_event(char *event)
 {
 	char	*str;
 	int		len;

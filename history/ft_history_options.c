@@ -6,13 +6,13 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 16:55:54 by jules             #+#    #+#             */
-/*   Updated: 2017/02/01 19:49:52 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/02 09:51:41 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/history.h"
 
-void	get_history_options()
+void	get_history_options(void)
 {
 	if (!g_shell.hist_opt.options)
 		return ;

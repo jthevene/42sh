@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2017/02/01 20:00:10 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/02 09:52:26 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void				ft_out_of_range(int i);
 /*
 ** EVENT
 */
-int 				ft_strisnum(char *nbr);
+int					ft_strisnum(char *nbr);
 char				*event_n(int n);
 void				check_pattern_event(char *event);
 /*
@@ -66,7 +66,7 @@ int					get_options_str(char **array);
 */
 void				update_histfilesize(int histfilesize);
 void				update_histsize(int histsize);
-int 				get_histsize(char *var);
+int					get_histsize(char *var);
 /*
 ** LST_TOOLS
 */

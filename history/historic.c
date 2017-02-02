@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 10:57:09 by jules             #+#    #+#             */
-/*   Updated: 2017/01/31 18:07:27 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/02 09:47:44 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	navigation_hist(int arrow)
 				g_shell.current_line = ft_strdup(g_shell.curr_hist->content);
 			}
 		}
-		g_shell.cursor_x = ft_strlen(g_shell.current_line) 
+		g_shell.cursor_x = ft_strlen(g_shell.current_line)
 			+ g_shell.prompt_len;
 	}
 }

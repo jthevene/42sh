@@ -12,7 +12,7 @@
 
 #include "../includes/42sh.h"
 
-int		exec_function(char *content)
+int				exec_function(char *content)
 {
 	if (content)
 		return (1);
@@ -20,8 +20,9 @@ int		exec_function(char *content)
 		return (0);
 }
 
-int		exec_pipe(t_tree *left, t_tree *right)
+int				exec_pipe(t_tree *left, t_tree *right)
 {
+/*
 	if (left)
 	{
 		if (right)
@@ -31,9 +32,27 @@ int		exec_pipe(t_tree *left, t_tree *right)
 	}
 	else
 		return (0);
+*/
+	int			fd[2];
+	pid_t		pid;
+
+	pipe(fd);
+	if ((pid = fork()) == -1)
+		return (0);
+	else if (pid == 0)
+	{
+		close(fd[1]);
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[0]);
+		execve()
+	}
+	if (exec_function(left->content))
+		;
+	else
+		return (0);
 }
 
-int		exec_tree(t_tree *tree)
+int				exec_tree(t_tree *tree)
 {
 	if (!tree)
 		return (0);

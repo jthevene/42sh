@@ -61,5 +61,6 @@ char	*trim_end(char *line)
 	while (line[i] == ' ' || line[i] == '\t')
 		i--;
 	ret = ft_strndup(line, i + 1);
+	free(line);
 	return (ret);
 }

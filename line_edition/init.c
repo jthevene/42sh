@@ -40,6 +40,7 @@ void	init_hist()
 	ft_varappend(new_var("HISTFILESIZE", "500"));
 	get_hist();
 	g_shell.curr_hist = g_shell.hist;
+	free(filename);
 	close(g_shell.hist_fd);
 }
 

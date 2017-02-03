@@ -28,8 +28,6 @@ typedef struct			s_token
 typedef struct			s_all
 {
 	char				*line;
-	char				*epured_line;
-	t_token				*token;
 	t_token				*tokens_begin;
 }						t_all;
 
@@ -87,5 +85,6 @@ int		unfinished_squote(char *line, int i);
 int		unfinished_dquote(char *line, int i);
 char	*prompt_dquote(char *quote_type);
 int		send_token_to_glob(t_all *all);
+void	free_token(t_token *token);
 
 #endif

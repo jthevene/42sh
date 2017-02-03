@@ -4,6 +4,7 @@ void	free_tree(t_tree *tree)
 {
 	if (tree)
 	{
+		free(tree->content);
 		if (tree->left)
 			free_tree(tree->left);
 		if (tree->right)
@@ -23,4 +24,19 @@ void	free_tab(char **tabl)
 		i++;
 	}
 	free(tabl);
+}
+
+void	free_token(t_token *token)
+{
+	t_token	*tmp;
+
+	while (token->next)
+	{
+		tmp = token;
+		free(tmp->lexeme);
+		token = token->next;
+		free(tmp);
+	}
+	free(token->lexeme);
+	free(token);
 }

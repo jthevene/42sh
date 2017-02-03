@@ -8,6 +8,7 @@ char	*finish_line_backslash(char *line)
 	ft_putstr("\n");
 	myline = prompt_dquote("> ");
 	myline = ft_strjoin(line, myline);
+	free(line);
 	return (myline);
 }
 

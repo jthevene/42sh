@@ -165,9 +165,12 @@ void 	distrib_functions(char *command_line)
 		if (len_ERROR && !len_STDOUT)
 			ft_printf(buff);
 		g_shell.result_exec = len_STDOUT ? 1 : 0;
+		ft_strdel(&buff);
 //		ft_printf("len_stdout =%d, len_error =%d,\n", len_STDOUT, len_ERROR);
 //		ft_printf("g_shell.result_exec =%d,\n", g_shell.result_exec);	
+		free_tab(args);
 	}
+	free_tab(env);
 	wait(&pid);
 //	ft_putchar('\n');
 }

@@ -23,6 +23,8 @@ void		lexer_parser(char *line)
 		start_parse(all->tokens_begin);
 	}
 	free(all->line);
+	free(all);
+	ft_strdel(&line);
 }
 
 void	analise_line(t_all *all)

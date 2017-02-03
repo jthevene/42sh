@@ -133,8 +133,12 @@ BIN_HISTORY 	= 	$(FILES_HISTORY:.c=.o)
 
 EXECUTION 		= 	./execution/
 
+<<<<<<< HEAD
 FILES_EXECUTION =	distrib_functions.c exec_tree.c binary_tree_parser.c and_or_exec.c \
 					ft_pip.c
+=======
+FILES_EXECUTION =	distrib_functions.c env_to_tab.c binary_tree_parser.c and_or_exec.c
+>>>>>>> f54d6e9a69edd3872dc315f7f66574fe52a2cbe1
 
 SRC_EXECUTION 	= 	$(addprefix $(EXECUTION), $(FILES_EXECUTION))
 

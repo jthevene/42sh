@@ -42,6 +42,7 @@ static void	reform3(char **line, char *tmp_end)
 static void	reform2(char **line, char *tmp_begin, char *tmp_mid, char *tmp_end)
 {
 	free((*line));
+	(*line) = NULL;
 	if (tmp_begin)
 	{
 		if (tmp_mid)
@@ -77,17 +78,9 @@ static void	reform_line_var(char **line, char *value, int i)
 		&& (*line)[i] != '\"' && (*line)[i] != '$')
 		i++;
 	if ((*line)[i] != '\0')
-	{
 		tmp_end = ft_strsub((*line), i, ft_strlen((*line)) - i);
-	}
 	if (value != NULL)
 		tmp_mid = ft_strdup(value);
-	if (tmp_begin)
-		printf("tmp_begin = %s\n", tmp_begin);
-	if (tmp_mid)
-		printf("tmp_mid = %s\n", tmp_mid);
-	if (tmp_end)
-		printf("tmp_end = %s\n", tmp_end);
 	reform2(line, tmp_begin, tmp_mid, tmp_end);
 	free(tmp_begin ? tmp_begin : NULL);
 	free(tmp_mid ? tmp_mid : NULL);
@@ -110,10 +103,9 @@ void		replace_env_var(char **line)
 				i++;
 		else if ((*line)[i] == '$')
 		{
-			printf("\n/*****     REPLACE ENV VAR     *****/\n\n");
 			tmp = recup_varname(line, i + 1);
 			reform_line_var(line, tmp, i);
-			printf("\n/*****     REPLACE ENV VAR     *****/\n\n");
+			free(tmp ? tmp : NULL);
 		}
 		i++;
 	}

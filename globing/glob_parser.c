@@ -64,7 +64,8 @@ int						glob_parser(char **line)
 		}
 	}
 	hub_final(glob, (*line));
-	(*line) = recreate_token_string(ft_strdup((*line)), glob);
+	free((*line));
+	(*line) = recreate_token_string(glob);
 	free(glob->command ? glob->command : NULL);
 	return (1);
 }
@@ -73,9 +74,15 @@ int						send_token_to_glob(t_all *all)
 {
 	FT_INIT(t_token *, tmp, all->tokens_begin);
 	if (tmp->next)
+	{
+		replace_env_var(&tmp->lexeme);
 		tmp = tmp->next;
+	}
 	else
+	{
+		replace_env_var(&tmp->lexeme);
 		return (0);
+	}
 	while (tmp)
 	{
 		if (tmp->lexeme)

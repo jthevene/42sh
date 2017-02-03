@@ -73,7 +73,7 @@ int			init_env(void)
 	i = 0;
 	if (!environ[0])
 	{
-		ft_putendl("error : no environ");
+		ft_putendl("error : no environ ; need to create basic env var");
 		return (0);
 	}
 	while (environ[i])

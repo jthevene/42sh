@@ -33,13 +33,13 @@ typedef struct			s_all
 	t_token				*tokens_begin;
 }						t_all;
 
-typedef struct		s_tree
+typedef struct			s_tree
 {
-	int				type;
-	char			*content;
-	struct s_tree	*left;
-	struct s_tree	*right;
-}					t_tree;
+	int					type;
+	char				*content;
+	struct s_tree		*left;
+	struct s_tree		*right;
+}						t_tree;
 
 int		execute_or_and(t_tree *tree);
 char	*finish_line_backslash(char *line);

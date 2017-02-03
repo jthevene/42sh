@@ -65,6 +65,7 @@ void	clean_line()
 		tputs(tgetstr("dl", NULL), 1, ft_putchar_int);
 		tputs(tgetstr("up", NULL), 1, ft_putchar_int);
 	}
+	tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
 }
 
 void 	go_to_end()
@@ -129,7 +130,6 @@ char 	*set_prompt(char *pwd)
 
 void	print_line(int i)
 {
-	g_shell.prompt = set_prompt(get_var(&g_shell, "PWD"));
 	set_2d_edition_val();
 	FT_INIT(int, ref_cursor, g_shell.cursor_x);
 	if (i)

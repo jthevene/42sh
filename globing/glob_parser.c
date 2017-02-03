@@ -66,7 +66,6 @@ int						glob_parser(char **line)
 	hub_final(glob, (*line));
 	free((*line));
 	(*line) = recreate_token_string(glob);
-	printf("glob->command = %p\n", glob->command);
 	free(glob->command ? glob->command : NULL);
 	return (1);
 }

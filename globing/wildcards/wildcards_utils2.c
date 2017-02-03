@@ -57,7 +57,10 @@ int				push_content_path(t_bracket **l, char *s, t_glob *g)
 {
 	FT_INIT(char *, tmp, NULL);
 	if (s[0] == '.')
+	{
+		free(s);
 		return (0);
+	}
 	if (!bracket_pushback(l))
 		return (0);
 	if (g->f_path)

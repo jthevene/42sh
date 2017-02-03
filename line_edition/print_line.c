@@ -119,6 +119,8 @@ char 	*set_prompt(char *pwd)
 	tmp = head_line;
 	head_line = ft_strjoin(pwd, head_line);
 	ft_strdel(&tmp);
+	ft_strdel(&home);
+	ft_strdel(&pwd);
 	g_shell.prompt_len += ft_strlen(pwd);
 	if (g_shell.prompt)
 		ft_strdel(&g_shell.prompt);

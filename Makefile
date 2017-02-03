@@ -94,7 +94,7 @@ PARSER = ./Lexer_Parser/srcs/
 
 FILES_PARSER 	= 	backslash_escape.c free_tree.c \
 					isallspace.c lexer_check.c parser_distrib.c parse.c \
-					start_parse.c tree.c token_functions.c \
+					start_parse.c tree.c token_functions.c prompt_quote.c \
 					quote_functions.c quote_functions_2.c
 
 SRC_PARSER  	= 	$(addprefix $(PARSER), $(FILES_PARSER))
@@ -133,7 +133,8 @@ BIN_HISTORY 	= 	$(FILES_HISTORY:.c=.o)
 
 EXECUTION 		= 	./execution/
 
-FILES_EXECUTION =	distrib_functions.c exec_tree.c binary_tree_parser.c and_or_exec.c
+FILES_EXECUTION =	distrib_functions.c exec_tree.c binary_tree_parser.c and_or_exec.c \
+					ft_pip.c
 
 SRC_EXECUTION 	= 	$(addprefix $(EXECUTION), $(FILES_EXECUTION))
 

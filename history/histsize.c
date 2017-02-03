@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 20:33:04 by jules             #+#    #+#             */
-/*   Updated: 2017/02/02 19:57:14 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/03 10:27:30 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@ void	update_histsize(int histsize)
 				free(tmp);
 				tmp = tmp->prev;
 			}
+			lst->prev = NULL;
 		}
-		lst->prev = NULL;
 	}
 }
 
 int		get_histsize(char *var)
 {
-	char	*value;
 	FT_INIT(int, ret, 500);
 	FT_INIT(char *, histsize, get_var(&g_shell, "HISTSIZE"));
 	FT_INIT(char *, histfilesize, get_var(&g_shell, "HISTFILESIZE"));
@@ -54,14 +53,14 @@ int		get_histsize(char *var)
 		if (!histsize)
 			ret = 500;
 		else
-			ret = ft_atoi(value);
+			ret = ft_atoi(histsize);
 	}
 	else if (!ft_strcmp(var, "HISTFILESIZE"))
 	{
 		if (!histfilesize)
 			ret = (500);
 		else
-			ret = ft_atoi(value);
+			ret = ft_atoi(histfilesize);
 	}
 	free(histfilesize);
 	free(histsize);

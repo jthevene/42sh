@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:53:52 by jules             #+#    #+#             */
-/*   Updated: 2017/02/03 09:35:24 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/03 09:55:33 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,29 @@ void	ft_history(char *nbr)
 			}
 		}
 	}
+}
+
+void	show_hist_list()
+{
+	t_lst	*tmp;
+
+	tmp = g_shell.hist;
+	if (!tmp)
+	{
+		ft_putendl("LISTE VIDE");
+		return ;
+	}
+	while (tmp->prev != NULL)
+		tmp = tmp->prev;
+	ft_putendl("---LISTE HISTORY---");
+	while (tmp)
+	{
+		if (tmp == g_shell.end_hist_file)
+			ft_putchar('*');
+		ft_putnbr(tmp->number);
+		ft_putstr("=> ");
+		ft_putendl(tmp->content);
+		tmp = tmp->next;
+	}
+	ft_putendl("--------FIN--------");
 }

@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 10:57:09 by jules             #+#    #+#             */
-/*   Updated: 2017/02/02 21:44:52 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/03 09:49:48 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ void	navigation_hist(int arrow)
 {
 	if (g_shell.curr_hist)
 	{
-		free(g_shell.curr_hist->content);
-		free(g_shell.curr_hist);
 		if (arrow == K_UP)
 		{
 			if (g_shell.curr_hist->prev && g_shell.curr_hist->prev->content)

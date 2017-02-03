@@ -7,6 +7,9 @@ static int verif_content(char *content)
 
 int 	execute_or_and(t_tree *tree)
 {
+	if (!tree || !tree->content || !tree->left || !tree->left->content 
+		|| !tree->right || !tree->right->content)
+		return (0);
 	distrib_functions(tree->left->content);
 	if (g_shell.all_results == -99)
 		g_shell.all_results = g_shell.result_exec;

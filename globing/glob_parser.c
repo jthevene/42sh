@@ -79,7 +79,10 @@ int						send_token_to_glob(t_all *all)
 	while (tmp)
 	{
 		if (tmp->lexeme)
+		{
+			replace_env_var(&tmp->lexeme);
 			glob_parser(&tmp->lexeme);
+		}
 		if (!tmp->next)
 			break ;
 		tmp = tmp->next;

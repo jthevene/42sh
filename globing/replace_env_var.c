@@ -24,7 +24,7 @@ static char	*recup_varname(char **line, int i)
 			break ;
 		j++;
 	}
-	varname = ft_strsub((*line), i + 1, j - i - 1);
+	varname = ft_strsub((*line), i, j - i);
 	value = get_var(&g_shell, varname);
 	free(varname);
 	return (value);
@@ -77,11 +77,17 @@ static void	reform_line_var(char **line, char *value, int i)
 		&& (*line)[i] != '\"' && (*line)[i] != '$')
 		i++;
 	if ((*line)[i] != '\0')
-		tmp_end = ft_strsub((*line), i, ft_strlen((*line) - i));
-	if (tmp_begin)
-		tmp_mid = ft_strjoin(tmp_begin, value);
-	else if (value != NULL)
+	{
+		tmp_end = ft_strsub((*line), i, ft_strlen((*line)) - i);
+	}
+	if (value != NULL)
 		tmp_mid = ft_strdup(value);
+	if (tmp_begin)
+		printf("tmp_begin = %s\n", tmp_begin);
+	if (tmp_mid)
+		printf("tmp_mid = %s\n", tmp_mid);
+	if (tmp_end)
+		printf("tmp_end = %s\n", tmp_end);
 	reform2(line, tmp_begin, tmp_mid, tmp_end);
 	free(tmp_begin ? tmp_begin : NULL);
 	free(tmp_mid ? tmp_mid : NULL);
@@ -92,7 +98,7 @@ void		replace_env_var(char **line)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp, NULL);
-	while ((*line)[i])
+	while (i < (int)ft_strlen((*line)) && (*line)[i])
 	{
 		if ((*line)[i] == '\\')
 			i++;
@@ -104,8 +110,10 @@ void		replace_env_var(char **line)
 				i++;
 		else if ((*line)[i] == '$')
 		{
-			tmp = recup_varname(line, i);
+			printf("\n/*****     REPLACE ENV VAR     *****/\n\n");
+			tmp = recup_varname(line, i + 1);
 			reform_line_var(line, tmp, i);
+			printf("\n/*****     REPLACE ENV VAR     *****/\n\n");
 		}
 		i++;
 	}

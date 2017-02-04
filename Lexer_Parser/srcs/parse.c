@@ -11,17 +11,6 @@ void	parse(t_tree *tree, t_token *token)
 	{
 		if (and_or(tree, token) == 0)
 		{
-			
-/*			if (tree->type == OR && g_shell.all_results)
-				if (!verif_content(tree->right->content))
-					distrib_functions(tree->right->content);
-
-
-			if (tree->type == AND && !g_shell.all_results)
-				if (!verif_content(tree->right->content))
-					distrib_functions(tree->right->content);
-*/
-
 			if (redirections(tree, token) == 0)
 			{
 				tree->type = token->type;
@@ -52,8 +41,6 @@ void	parse(t_tree *tree, t_token *token)
 			execute_or_and(tree);
 		}
 		ft_printf("direct content : (%s)\n\n", tree->content);
-//		if (!verif_content(tree->content))
-//			distrib_functions(tree->content);
 	}
 	else
 	{
@@ -82,21 +69,12 @@ int		dotcoma(t_tree *tree, t_token *token)
 	tree->right = create_node();
 	tree->type = tmp->type;
 	tree->content = ft_strdup(tmp->lexeme);
-
-//	if (!verif_content(tree->content))
-//		distrib_functions(tree->content);
-
-	parse(tree->left, copy_token_left(begin, tmp));
-	parse(tree->right, copy_token_right(tmp));
-
-//	if (!verif_content(tree->left->content))
-//		distrib_functions(tree->left->content);
-//	if (!verif_content(tree->right->content))
-//		distrib_functions(tree->right->content);
-
-//	if (!verif_content(tree->content))
-//		distrib_functions(tree->content);
-
+	FT_INIT(t_token*, left_token, copy_token_left(begin, tmp));
+	FT_INIT(t_token*, right_token, copy_token_right(tmp));
+	parse(tree->left, left_token);
+	parse(tree->right, right_token);
+	free_token(left_token);
+	free_token(right_token);
 	return (1);
 }
 
@@ -112,8 +90,12 @@ int		and_or(t_tree *tree, t_token *token)
 	tree->right = create_node();
 	tree->type = tmp->type;
 	tree->content = ft_strdup(tmp->lexeme);
-	parse(tree->left, copy_token_left(begin, tmp));
-	parse(tree->right, copy_token_right(tmp));
+	FT_INIT(t_token*, left_token, copy_token_left(begin, tmp));
+	FT_INIT(t_token*, right_token, copy_token_right(tmp));
+	parse(tree->left, left_token);
+	parse(tree->right, right_token);
+	free_token(left_token);
+	free_token(right_token);
 	return (1);
 }
 
@@ -129,8 +111,12 @@ int		redirections(t_tree *tree, t_token *token)
 	tree->right = create_node();
 	tree->type = tmp->type;
 	tree->content = ft_strdup(tmp->lexeme);
-	parse(tree->left, copy_token_left(begin, tmp));
-	parse(tree->right, copy_token_right(tmp));
+	FT_INIT(t_token*, left_token, copy_token_left(begin, tmp));
+	FT_INIT(t_token*, right_token, copy_token_right(tmp));
+	parse(tree->left, left_token);
+	parse(tree->right, right_token);
+	free_token(left_token);
+	free_token(right_token);
 	return (1);
 }
 

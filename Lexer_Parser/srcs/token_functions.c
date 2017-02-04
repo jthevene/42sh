@@ -27,15 +27,17 @@ int		token_dquote(t_token *token, char *line, int pos, int i)
 char	*finish_quotes(char *line)
 {
 	FT_INIT(int, i, 1);
+	FT_INIT(char*, tmp, NULL);
 	while (i != 0)
 	{
 		i = unfinished_quote(line);
 		if (i == 1)
-			line = finish_the_squote(line);
+			tmp = finish_the_squote(line);
 		else if (i == 2)
-			line = finish_the_dquote(line);
+			tmp = finish_the_dquote(line);
 	}
-	return (line);
+	free(line);
+	return (tmp);
 }
 
 t_token	*get_token(t_token *token, int type)

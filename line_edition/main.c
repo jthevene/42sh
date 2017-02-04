@@ -81,6 +81,7 @@ static	void	run_shell(void)
 		if (key == K_PRINT)
 		{
 			MULTI(g_shell.start_select, g_shell.end_select, 0);
+			g_shell.prompt = set_prompt(get_var(&g_shell, "PWD"));
 			fill_current_line(g_shell.c[0]);
 			g_shell.cursor_x++;
 			print_line(1);

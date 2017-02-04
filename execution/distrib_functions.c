@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:29:42 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/02/02 10:46:55 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/03 10:52:36 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ void 	distrib_functions(char *command_line)
 	char *buff;
 
 	buff = ft_strnew(1024);
-
 
 	FT_INIT(char**, args, ft_strsplit(command_line, ' '));
 	FT_INIT(int, result, 0);

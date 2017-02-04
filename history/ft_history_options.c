@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 16:55:54 by jules             #+#    #+#             */
-/*   Updated: 2017/02/02 21:11:12 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/03 19:09:47 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,20 @@ void	clear_history_list(void)
 		free(g_shell.hist);
 		g_shell.hist = g_shell.hist->prev;
 	}
-	init_hist();
+	g_shell.hist = NULL;
+	g_shell.nav_hist = 0;
+	g_shell.curr_hist = NULL;
 }
 
-void	delete_line_history(int i)
+void	delete_line_history(char *nbr)
 {
-	t_lst	*tmp;
-
-	tmp = g_shell.hist;
+	FT_INIT(t_lst *, tmp, g_shell.hist);
+	if (!nbr)
+	{
+		ft_putendl("history -d argument must be a positive number");
+		return;
+	}
+	FT_INIT(int, i, ft_atoi(nbr));
 	if (!tmp || i < 1 || i > tmp->number)
 	{
 		ft_out_of_range(i);
@@ -66,18 +72,19 @@ void	delete_line_history(int i)
 		g_shell.hist = tmp->prev;
 }
 
-void	update_history_file(char *filename, int histfilesize)
+void	update_history_file(int histfilesize)
 {
 	FT_INIT(t_lst *, tmp, g_shell.hist);
 	FT_INIT(int, i, 0);
 	if (!tmp)
 		return ;
-	if (!filename)
-		filename = ft_strjoin(get_var(&g_shell, "HOME"), "/.history");
-	if ((g_shell.hist_fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0600)) \
-		== -1)
+	if (!g_shell.hist_opt.filename)
+		g_shell.hist_opt.filename = ft_strjoin(get_var(&g_shell, 
+			"HOME"), "/.history");
+	if ((g_shell.hist_fd = open(g_shell.hist_opt.filename, O_RDWR | O_CREAT |
+	 O_TRUNC, 0600)) == -1)
 	{
-		ft_error(filename);
+		ft_error(g_shell.hist_opt.filename);
 		return ;
 	}
 	while (i < histfilesize && i < get_histsize("HISTSIZE") && tmp->prev)
@@ -91,7 +98,6 @@ void	update_history_file(char *filename, int histfilesize)
 		tmp = tmp->next;
 	}
 	close(g_shell.hist_fd);
-	free(filename);
 }
 
 void	histfile_append(char *filename)

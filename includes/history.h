@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2017/02/03 09:55:47 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/03 17:56:21 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void				show_hist_list();
 */
 void				get_history_options();
 void				clear_history_list(void);
-void				delete_line_history(int i);
+void				delete_line_history(char *nbr);
 void				show_hist_list(void);
-void				update_history_file(char *filename, int histfilesize);
+void				update_history_file(int histfilesize);
 void				histfile_append(char *filename);
 /*
 ** GET_PATH

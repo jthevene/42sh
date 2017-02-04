@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 13:12:22 by jules             #+#    #+#             */
-/*   Updated: 2017/02/03 10:28:02 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/03 11:29:28 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ static void 	reset_line(void)
 	move_cursor_n_to_direction(g_shell.line_size, 1);
 	if (g_shell.cursor_2d_x)
 		ft_putchar('\n');
-	if (g_shell.current_line && !g_shell.hist_opt.p) //on ajoute la ligne à l'historique seulement si la ligne est non nulle && si pas history -p
+	if (g_shell.current_line && !g_shell.hist_opt.p)
 		ft_newhist(g_shell.current_line);
+	if (!ft_strncmp(g_shell.current_line, "history", 7)) //à supprimer
+		history_hub(g_shell.current_line);
 	g_shell.current_line = NULL;
 	g_shell.nav_hist = 0;
 	free_hist_opt();

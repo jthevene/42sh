@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:53:52 by jules             #+#    #+#             */
-/*   Updated: 2017/02/03 09:55:33 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/03 17:55:29 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		check_hist_opt(void)
 		options++;
 	if (g_shell.hist_opt.d)
 		options++;
-	if (options)
+	if (options > 0)
 		ft_putendl("cannot use more than one of -adrspw");
 	return (options);
 }
@@ -39,6 +39,12 @@ void	history_hub(char *line)
 	split_line(line);
 	get_history_options();
 	FT_INIT(int, options, check_hist_opt());
+	// ft_putstr("options : ");
+	// ft_putendl(g_shell.hist_opt.options);
+	// ft_putstr("arg : ");
+	// ft_putendl(g_shell.hist_opt.arg);
+	// ft_putstr("filename : ");
+	// ft_putendl(g_shell.hist_opt.filename);
 	if (options > 0)
 		return ;
 	else if (options < 0 && !g_shell.hist_opt.c)
@@ -46,15 +52,13 @@ void	history_hub(char *line)
 	if (g_shell.hist_opt.c)
 		clear_history_list();
 	if (g_shell.hist_opt.d)
-		delete_line_history(ft_atoi(g_shell.hist_opt.filename));
+		delete_line_history(g_shell.hist_opt.filename);
 	else if (g_shell.hist_opt.a)
-		update_history_file(g_shell.hist_opt.filename, \
-				get_histsize("HISTSIZE"));
+		update_history_file(get_histsize("HISTSIZE"));
 	else if (g_shell.hist_opt.r)
 		histfile_append(g_shell.hist_opt.filename);
 	else if (g_shell.hist_opt.w)
-		update_history_file(g_shell.hist_opt.filename, \
-				get_histsize("HISTSIZE"));
+		update_history_file(get_histsize("HISTSIZE"));
 	else if (g_shell.hist_opt.s)
 		ft_newhist(g_shell.hist_opt.arg);
 }

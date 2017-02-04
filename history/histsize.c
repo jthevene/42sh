@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 20:33:04 by jules             #+#    #+#             */
-/*   Updated: 2017/02/03 10:27:30 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/03 12:05:18 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	update_histfilesize(int histfilesize)
 {
-	update_history_file(NULL, histfilesize);
+	update_history_file(histfilesize);
 }
 
 void	update_histsize(int histsize)

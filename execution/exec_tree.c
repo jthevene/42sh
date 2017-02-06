@@ -14,10 +14,6 @@
 
 static int		exec_function_execve(char *cmd, char **args)
 {
-	pid_t		pid;
-
-	if ((pid = fork) == -1)
-		return (0);
 	FT_INIT(char **, env_tab, lst_to_tab(g_shell.env));
 	if (execve(cmd, args, env_tab) == -1)
 	{
@@ -35,23 +31,62 @@ static int		exec_function_execve(char *cmd, char **args)
 
 int				exec_function(char *content)
 {
+	pid_t		pid;
+	int descripteurTube[2];
+	int descripteurError[2];
+
 	FT_INIT(char **, bin_dir, get_bin_directories());
 	FT_INIT(char *, cmd, NULL);
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(char **, args, get_args(content));
 	FT_INIT(int, i, 0);
-	while (bin_dir && bin_dir[i])
+	FT_INIT(char*, buff, ft_strnew(1024));
+
+	if (pipe(descripteurTube) != 0)
+		return (0);
+	if (pipe(descripteurError) != 0)
+		return (0);
+
+	if ((pid = fork()) == -1)
+		return (0);
+	if (pid == 0 && args)
 	{
-		if (verif_access_others(bin_dir[i]))
+		close(descripteurTube[0]);
+		descripteurTube[1] = dup(1);
+
+		close(descripteurError[0]);
+		descripteurError[1] = dup(2);
+
+		while (bin_dir && bin_dir[i])
 		{
-			cmd = ft_strjoin(bin_dir[i], "/");
-			tmp = cmd;
-			cmd = ft_strjoin(cmd, args[0]);
-			ft_strdel(&tmp);
-			return (exec_function_execve(cmd, args));
-		}
-		i++;
-	} //METTRE ICI LA GESTION D'ERREUR COMMAND NOT FOUND
+			if (verif_access_others(bin_dir[i]))
+			{
+				cmd = ft_strjoin(bin_dir[i], "/");
+				tmp = cmd;
+				cmd = ft_strjoin(cmd, args[0]);
+				ft_strdel(&tmp);
+				printf("GO EXECVE\n");
+				if (exec_function_execve(cmd, args))
+					exit(0);
+			}
+			i++;
+		} //METTRE ICI LA GESTION D'ERREUR COMMAND NOT FOUND
+	}
+	else
+	{
+		close(descripteurTube[1]);
+		FT_INIT(int, len_STDOUT, read(descripteurTube[0], buff, 1024));
+		ft_printf("buf =%s,\n", buff);
+		ft_bzero(&buff, ft_strlen(buff));
+		close(descripteurError[1]);
+		FT_INIT(int, len_ERROR, read(descripteurError[0], buff, 1024));
+		if (len_ERROR)
+			return (0);
+		else if (len_STDOUT)
+			return (1);
+	}
+
+
 	return (0);
 }
 
@@ -60,7 +95,8 @@ int				exec_pipe(t_tree *left, t_tree *right)
 	int			fd[2];
 	pid_t		pid;
 
-	pipe(fd);
+	if (pipe(fd) != 0)
+		return (0);
 	if (!left || !left->content || !right || !right->content 
 		|| (pid = fork()) == -1)
 		return (0);

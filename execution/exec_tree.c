@@ -29,72 +29,54 @@ static int		exec_function_execve(char *cmd, char **args)
 	}
 }
 
-int				exec_function(char *content)
-{
-	pid_t		pid;
-	int descripteurTube[2];
-	int descripteurError[2];
 
-	FT_INIT(char **, bin_dir, get_bin_directories());
+static int 		parse_bin_directories(char ** bin_dir, char **args)
+{
+	FT_INIT(int, i, 0);
 	FT_INIT(char *, cmd, NULL);
 	FT_INIT(char *, tmp, NULL);
-	FT_INIT(char **, args, get_args(content));
-	FT_INIT(int, i, 0);
-	FT_INIT(char*, buff, ft_strnew(1024));
-
-	if (pipe(descripteurTube) != 0)
-		return (0);
-	if (pipe(descripteurError) != 0)
-		return (0);
-
-	if ((pid = fork()) == -1)
-		return (0);
-	if (pid == 0 && args)
+	while (bin_dir && bin_dir[i])
 	{
-		close(descripteurTube[0]);
-		descripteurTube[1] = dup(1);
-
-		close(descripteurError[0]);
-		descripteurError[1] = dup(2);
-
-		while (bin_dir && bin_dir[i])
+		if (verif_access_others(bin_dir[i]))
 		{
-			if (verif_access_others(bin_dir[i]))
-			{
-				cmd = ft_strjoin(bin_dir[i], "/");
-				tmp = cmd;
-				cmd = ft_strjoin(cmd, args[0]);
-				ft_strdel(&tmp);
-				printf("GO EXECVE\n");
-				if (exec_function_execve(cmd, args))
-					exit(0);
-			}
-			i++;
-		} //METTRE ICI LA GESTION D'ERREUR COMMAND NOT FOUND
+			cmd = ft_strjoin(bin_dir[i], "/");
+			tmp = cmd;
+			cmd = ft_strjoin(cmd, args[0]);
+			ft_strdel(&tmp);
+			exec_function_execve(cmd, args);
+		}
+		i++;
 	}
-	else
-	{
-		close(descripteurTube[1]);
-		FT_INIT(int, len_STDOUT, read(descripteurTube[0], buff, 1024));
-		ft_printf("buf =%s,\n", buff);
-		ft_bzero(&buff, ft_strlen(buff));
-		close(descripteurError[1]);
-		FT_INIT(int, len_ERROR, read(descripteurError[0], buff, 1024));
-		if (len_ERROR)
-			return (0);
-		else if (len_STDOUT)
-			return (1);
-	}
-
-	wait(&pid);
 	return (0);
 }
 
+int				exec_function(char *content)
+{
+	pid_t		pid;
+
+	FT_INIT(char **, bin_dir, get_bin_directories());
+	FT_INIT(char **, args, get_args(content));
+	FT_INIT(int, return_value, 0);
+	if ((pid = fork()) == -1)
+		return (0);
+	if (pid == 0)
+		exit(parse_bin_directories(bin_dir, args));
+	else
+	{
+		wait(&pid);
+		if (WEXITSTATUS(pid) == 0)
+			return_value = 1;	
+		else
+			return_value = 0;
+	}
+	return (return_value);
+}
 int				exec_pipe(t_tree *left, t_tree *right)
 {
 	int			fd[2];
 	pid_t		pid;
 
+	ft_printf("EXECUTION PIPE GOO\n");
 	if (pipe(fd) != 0)
 		return (0);
 	if (!left || !left->content || !right || !right->content 
@@ -102,16 +84,33 @@ int				exec_pipe(t_tree *left, t_tree *right)
 		return (0);
 	if (pid == 0)
 	{
-		dup2(fd[1], STDOUT_FILENO);
+//		ft_putstr("EXECUTION left\n");
 		close(fd[0]);
-	if (!exec_function(left->content))
-		return (0);
+		dup2(fd[1], STDOUT_FILENO);
+		if (!exec_function(left->content))
+		{
+//			ft_putstr("ERROR PIPE LEFT\n");
+			return (0);
+		}
+		exit(0);
 	}
-	dup2(fd[0], STDIN_FILENO);
-	close(fd[1]);
-	if (!exec_function(right->content))
-		return (0);
-	wait(NULL);
+	else
+	{
+	//	dup2(STDOUT_FILENO, fd[1]);
+		wait(&pid);
+		close(fd[1]);
+		fd[0] = dup(STDIN_FILENO);
+//		dup2(fd[0], STDIN_FILENO);
+//		ft_putstr("EXECUTION right\n");
+		if (!exec_function(right->content))
+		{
+//			ft_putstr("ERROR RIGHT\n");
+	//		exit(0);
+			return (0);
+
+		}
+	}
+//	wait(&pid);
 	return (1);
 }
 
@@ -119,6 +118,7 @@ int				exec_tree(t_tree *tree)
 {
 	if (!tree)
 		return (0);
+	FT_INIT(int, test, 0);
 	if (tree->type == SEMICOLON)
 	{
 		exec_tree(tree->left);
@@ -136,13 +136,21 @@ int				exec_tree(t_tree *tree)
 	}
 	else if (tree->type == PIPE)
 		return (exec_pipe(tree->left, tree->right));
-	if (tree->left && tree->left->type != WORDS)
+	else if (tree->left && tree->left->type != WORDS)
 		exec_tree(tree->left);
 	else if (tree->left && tree->left->type == WORDS)
 		return (exec_function(tree->left->content));
-	if (tree->right && tree->right->type != WORDS)
+	else if (tree->right && tree->right->type != WORDS)
 		exec_tree(tree->right);
 	else if (tree->right && tree->right->type == WORDS)
 		return (exec_function(tree->right->content));
+	else if (!tree->right && !tree->left && tree->content && tree->type == WORDS)
+	{
+		test = exec_function(tree->content);
+		ft_printf("TREE CONTENT TEST =%d,\n", test);
+		return (test);
+	}
+//		ft_printf("YOUPIIIIIIIIIIIII\n");
+//	ft_printf("EXEC TREE RETURN bien 0 left =%s, type =%d\n", tree->content, tree->type);
 	return (0);
 }

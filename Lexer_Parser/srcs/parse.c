@@ -38,9 +38,10 @@ void	parse(t_tree *tree, t_token *token)
 			//printf("content : (%s)\n", tree->content);
 			//printf("left : (%s)\n", tree->left->content);
 			//printf("right : (%s)\n\n", tree->right->content);
-			execute_or_and(tree);
+//			execute_or_and(tree);
 		}
-		ft_printf("direct content : (%s)\n\n", tree->content);
+		if (verif_content(tree->content))
+			ft_printf("direct content : (%s)\n\n", tree->content);
 	}
 	else
 	{
@@ -50,10 +51,10 @@ void	parse(t_tree *tree, t_token *token)
 //		printf("left : (%s)\n", tree->left->content);
 //		printf("right : (%s)\n\n", tree->right->content);
 //	printf("direct content : (%s)\n", tree->content);
-		if (!verif_content(tree->left->content))
-			distrib_functions(tree->left->content);
-		if (!verif_content(tree->right->content))
-			distrib_functions(tree->right->content);
+//		if (!verif_content(tree->left->content))
+//			distrib_functions(tree->left->content);
+//		if (!verif_content(tree->right->content))
+//			distrib_functions(tree->right->content);
 	}
 }
 

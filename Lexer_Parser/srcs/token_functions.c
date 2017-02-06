@@ -56,3 +56,18 @@ t_token	*get_token(t_token *token, int type)
 	}
 	return (tmp);
 }
+
+int		compare_end(char *str1, char *str2)
+{
+	FT_INIT(int, i, ft_strlen(str1));
+	FT_INIT(int, e, i - 2);
+	FT_INIT(int, x, 0);
+	while(str2[x] == str1[e] && str1 && str2)
+	{
+		x++;
+		e++;
+	}
+	if (e == i)
+		return (1);
+	return (0);
+}

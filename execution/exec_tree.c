@@ -14,14 +14,20 @@
 
 static int		exec_function_execve(char *cmd, char **args)
 {
+	pid_t		pid;
+
+	if ((pid = fork) == -1)
+		return (0);
 	FT_INIT(char **, env_tab, lst_to_tab(g_shell.env));
 	if (execve(cmd, args, env_tab) == -1)
 	{
-			ft_strdel(&cmd);
+		free_tab(env_tab);
+		ft_strdel(&cmd);
 		return (0);
 	}
 	else
 	{
+		free_tab(env_tab);
 		ft_strdel(&cmd);
 		return (1);
 	}

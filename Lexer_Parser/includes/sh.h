@@ -87,4 +87,6 @@ char	*prompt_dquote(char *quote_type);
 int		send_token_to_glob(t_all *all);
 void	free_token(t_token *token);
 
+int		exec_tree(t_tree *tree);
+
 #endif

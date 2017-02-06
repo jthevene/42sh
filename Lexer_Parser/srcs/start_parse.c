@@ -6,6 +6,7 @@ void	start_parse(t_token *token)
 
 	tree = create_node();
 	parse(tree, token);
+	exec_tree(tree);
 	free_token(token);
 	free_tree(tree);
 }

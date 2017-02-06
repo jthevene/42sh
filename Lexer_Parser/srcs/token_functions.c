@@ -36,7 +36,10 @@ char	*finish_quotes(char *line)
 		else if (i == 2)
 			tmp = finish_the_dquote(line);
 	}
-	free(line);
+	if (!tmp)
+		tmp = line;
+	else
+		free(line);
 	return (tmp);
 }
 

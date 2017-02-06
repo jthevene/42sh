@@ -95,7 +95,7 @@ PARSER = ./Lexer_Parser/srcs/
 FILES_PARSER 	= 	backslash_escape.c free_tree.c \
 					isallspace.c lexer_check.c parser_distrib.c parse.c \
 					start_parse.c tree.c token_functions.c prompt_quote.c \
-					quote_functions.c quote_functions_2.c
+					quote_functions.c quote_functions_2.c error_parse.c
 
 SRC_PARSER  	= 	$(addprefix $(PARSER), $(FILES_PARSER))
 

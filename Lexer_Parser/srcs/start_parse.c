@@ -5,10 +5,13 @@ void	start_parse(t_token *token)
 	t_tree	*tree;
 
 	tree = create_node();
-	parse(tree, token);
-	exec_tree(tree);
+	if (error_parse(token))
+	{
+		parse(tree, token);
+		exec_tree(tree);
+		free_tree(tree);
+	}
 	free_token(token);
-	free_tree(tree);
 }
 
 t_token	*get_token_and_or(t_token *token)

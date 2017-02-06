@@ -153,6 +153,7 @@ void				backspace_key(int key);
 */
 void				ft_signal(void);
 void 				ft_sigkill(int sig);
+void				ft_sigint(int sig);
 /*
 ** TERMIOS
 */

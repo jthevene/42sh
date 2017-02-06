@@ -22,7 +22,7 @@ void		ft_sigwinch(int sig)
 	}
 }
 
- void		ft_sigint(int sig)  // ctrl + c
+void		ft_sigint(int sig)  // ctrl + c
 {
 	(void)sig;
 	go_to_end();

@@ -12,75 +12,95 @@
 
 #include "../includes/42sh.h"
 
-// int				exec_function(char *content)
-// {
-// 	if (content)
-// 		return (1);
-// 	else
-// 		return (0);
-// }
+static int		exec_function_execve(char *cmd, char **args)
+{
+	FT_INIT(char **, env_tab, lst_to_tab(g_shell.env));
+	if (execve(cmd, args, env_tab) == -1)
+	{
+			ft_strdel(&cmd);
+		return (0);
+	}
+	else
+	{
+		ft_strdel(&cmd);
+		return (1);
+	}
+}
 
-// int				exec_pipe(t_tree *left, t_tree *right)
-// {
-// /*
-// 	if (left)
-// 	{
-// 		if (right)
-// 			return (1);
-// 		else
-// 			return (0);
-// 	}
-// 	else
-// 		return (0);
-// */
-// 	int			fd[2];
-// 	pid_t		pid;
+int				exec_function(char *content)
+{
+	FT_INIT(char **, bin_dir, get_bin_directories());
+	FT_INIT(char *, cmd, NULL);
+	FT_INIT(char *, tmp, NULL);
+	FT_INIT(char **, args, get_args(content));
+	FT_INIT(int, i, 0);
+	while (bin_dir && bin_dir[i])
+	{
+		if (verif_access_others(bin_dir[i]))
+		{
+			cmd = ft_strjoin(bin_dir[i], "/");
+			tmp = cmd;
+			cmd = ft_strjoin(cmd, args[0]);
+			ft_strdel(&tmp);
+			return (exec_function_execve(cmd, args));
+		}
+		i++;
+	} //METTRE ICI LA GESTION D'ERREUR COMMAND NOT FOUND
+	return (0);
+}
 
-// 	pipe(fd);
-// 	if ((pid = fork()) == -1)
-// 		return (0);
-// 	else if (pid == 0)
-// 	{
-// 		close(fd[1]);
-// 		dup2(fd[0], STDIN_FILENO);
-// 		close(fd[0]);
-// 		execve()
-// 	}
-// 	if (exec_function(left->content))
-// 		;
-// 	else
-// 		return (0);
-// }
+int				exec_pipe(t_tree *left, t_tree *right)
+{
+	int			fd[2];
+	pid_t		pid;
 
-// int				exec_tree(t_tree *tree)
-// {
-// 	if (!tree)
-// 		return (0);
-// 	if (tree->type == SEMICOLON)
-// 	{
-// 		exec_tree(tree->left);
-// 		exec_tree(tree->right);
-// 	}
-// 	else if (tree->type == AND)
-// 	{
-// 		if (exec_tree(tree->left))
-// 			exec_tree(tree->right);
-// 	}
-// 	else if (tree->type == OR)
-// 	{
-// 		if (!exec_tree(tree->left))
-// 			exec_tree(tree->right);
-// 	}
-// 	else if (tree->type == PIPE)
-// 		return (exec_pipe(tree->left, tree->right));
+	pipe(fd);
+	if (!left || !left->content || !right || !right->content 
+		|| (pid = fork()) == -1)
+		return (0);
+	if (pid == 0)
+	{
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[0]);
+	if (!exec_function(left->content))
+		return (0);
+	}
+	dup2(fd[0], STDIN_FILENO);
+	close(fd[1]);
+	if (!exec_function(right->content))
+		return (0);
+	wait(NULL);
+	return (1);
+}
 
-// 	if (tree->left && tree->left->type != WORDS)
-// 		exec_tree(tree->left);
-// 	else if (tree->left && tree->left->type == WORDS)
-// 		return (exec_function(tree->left->content));
-// 	if (tree->right && tree->right->type != WORDS)
-// 		exec_tree(tree->right);
-// 	else if (tree->right && tree->right->type == WORDS)
-// 		return (exec_function(tree->right->content));
-// 	return (0);
-// }
+int				exec_tree(t_tree *tree)
+{
+	if (!tree)
+		return (0);
+	if (tree->type == SEMICOLON)
+	{
+		exec_tree(tree->left);
+		exec_tree(tree->right);
+	}
+	else if (tree->type == AND)
+	{
+		if (exec_tree(tree->left))
+			exec_tree(tree->right);
+	}
+	else if (tree->type == OR)
+	{
+		if (!exec_tree(tree->left))
+			exec_tree(tree->right);
+	}
+	else if (tree->type == PIPE)
+		return (exec_pipe(tree->left, tree->right));
+	if (tree->left && tree->left->type != WORDS)
+		exec_tree(tree->left);
+	else if (tree->left && tree->left->type == WORDS)
+		return (exec_function(tree->left->content));
+	if (tree->right && tree->right->type != WORDS)
+		exec_tree(tree->right);
+	else if (tree->right && tree->right->type == WORDS)
+		return (exec_function(tree->right->content));
+	return (0);
+}

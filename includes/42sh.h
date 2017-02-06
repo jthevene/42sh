@@ -177,6 +177,9 @@ t_var				*new_var(char *v_name, char *v_value);
 /*
 ** EXECUTION
 */
+char				**get_bin_directories(void);
+int					verif_access_others(char *path);
+char				**get_args(char *content);
 void			 	distrib_functions(char *command_line);
 char				**lst_to_tab(t_var *env);
 int					lenght_list(t_var *env);

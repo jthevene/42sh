@@ -48,28 +48,6 @@ static int			verif_access_bin_directory(char *path)
 	return (1);
 }
 
-
-static char		**get_bin_directories(char **env_tab)
-{
-	FT_INIT(char**, bin_directories, NULL);
-	FT_INIT(char*, tmp, NULL);
-	FT_INIT(int, i, 0);
-	if (!env_tab)
-		return (NULL);
-	while (env_tab && env_tab[i])
-	{
-		if (env_tab && !ft_strncmp(env_tab[i], "PATH=", 5))
-		{
-			tmp = ft_strchr(env_tab[i], '=') + 1;
-			if (tmp)
-				bin_directories = ft_strsplit(tmp, ':');
-			break ;
-		}
-		i++;
-	}
-	return (bin_directories);
-}
-
 static int			_42sh_launch(char **args, char **env, char *command)
 {
 	FT_INIT(char**, bin_directories, NULL);
@@ -80,7 +58,7 @@ static int			_42sh_launch(char **args, char **env, char *command)
 		&& (execve(command, args, env) != -1))
 		return (1);
 	else
-		bin_directories = get_bin_directories(env);
+		bin_directories = get_bin_directories();
 	while (bin_directories && bin_directories[i])
 	{
 		if (verif_access_bin_directory(bin_directories[i]))
@@ -242,23 +220,3 @@ void 	distrib_functions(char *command_line)
 //	ft_putchar('\n');
 }
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

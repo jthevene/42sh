@@ -33,74 +33,74 @@ typedef struct				s_completion
 	struct s_completion		*next;
 }							t_completion;
 
-typedef struct 		s_lst
+typedef struct 				s_lst
 {
-	void			*content;
-	struct s_lst	*prev;
-	struct s_lst	*next;
-	int 			number;
-} 					t_lst;
+	void					*content;
+	struct s_lst			*prev;
+	struct s_lst			*next;
+	int 					number;
+} 							t_lst;
 
-typedef struct		s_var
+typedef struct				s_var
 {
-	char			*name;
-	char			*value;
-	struct s_var	*next;
-}					t_var;
+	char					*name;
+	char					*value;
+	struct s_var			*next;
+}							t_var;
 
-typedef struct 		s_hist_opt
+typedef struct 				s_hist_opt
 {
-	bool			c;
-	bool			d;
-	bool			a;
-	bool			r;
-	bool			w;
-	bool			p;
-	bool			s;
-	char			*filename;
-	char			*arg;
-	char			*options;
-}					t_hist_opt;
+	bool					c;
+	bool					d;
+	bool					a;
+	bool					r;
+	bool					w;
+	bool					p;
+	bool					s;
+	char					*filename;
+	char					*arg;
+	char					*options;
+}							t_hist_opt;
 
-typedef struct			s_shell
+typedef struct				s_shell
 {
-	int 				len;
-	char 				*c;
-	char				*oldpwd;
-	char 				*clipboard;
-	char 				*prompt;
-	char				*current_line; //ligne en cours d'edition
-	t_var				*env; //contenu de ENV
-	int 				prompt_len;
-	int 				start_select;
+	int 					len;
+	char 					*c;
+	char					*oldpwd;
+	char 					*clipboard;
+	char 					*prompt;
+	char					*current_line; //ligne en cours d'edition
+	t_var					*env; //contenu de ENV
+	int 					prompt_len;
+	int 					start_select;
 
-	int 				result_exec;
-	int 				all_results;
+	int 					result_exec;
+	int 					all_results;
 
-	int 				end_select;
-	int 				cursor_x;
-	int 				cursor_2d_x;
-	int 				cursor_2d_y;
-	int 				line_2d_x;
-	int 				line_2d_y;
-	int 				line_size;
-	int 				prev_line_2d_y;
-	int 				nb_rows; // 0 = premiere ligne de la commande en cours d'edition
-	struct winsize		*win;
-	int					running;
-	t_lst				*hist;
+	int 					end_select;
+	int 					cursor_x;
+	int 					cursor_2d_x;
+	int 					cursor_2d_y;
+	int 					line_2d_x;
+	int 					line_2d_y;
+	int 					line_size;
+	int 					prev_line_2d_y;
+	int 					nb_rows; // 0 = premiere ligne de la commande en cours d'edition
+	struct winsize			*win;
+	int						running;
+	t_lst					*hist;
 	////////////////////////////	JULES PART
-	t_lst				*curr_hist;
-	int 				hist_fd;
-	t_lst				*end_hist_file; //derniere ligne du fichier history
-	t_hist_opt			hist_opt;
-	int 				nav_hist; // 0 = pas encore navigué dans l'historique
+	t_lst					*curr_hist;
+	int 					hist_fd;
+	t_lst					*end_hist_file; //derniere ligne du fichier history
+	t_hist_opt				hist_opt;
+	int 					nav_hist; // 0 = pas encore navigué dans l'historique
 	///////////////////////////		END JULES
-	struct termios		my_termios;
-	struct termios		t_back;
-	char				*line; // VARIABLE SIMON
-}						t_shell;
+	struct termios			my_termios;
+	struct termios			t_back;
+	char					*line; // VARIABLE SIMON
+}							t_shell;
 
-t_shell		g_shell;
+t_shell						g_shell;
 
 # endif

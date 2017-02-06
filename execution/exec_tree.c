@@ -86,7 +86,7 @@ int				exec_function(char *content)
 			return (1);
 	}
 
-
+	wait(&pid);
 	return (0);
 }
 

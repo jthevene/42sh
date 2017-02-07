@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/18 13:12:22 by jules             #+#    #+#             */
-/*   Updated: 2017/02/04 20:45:05 by jules            ###   ########.fr       */
+/*   Created: 2017/02/07 09:11:45 by jules             #+#    #+#             */
+/*   Updated: 2017/02/07 09:13:34 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void	return_key(void)
 		ft_putchar(10);
 		g_shell.result_exec = -99;
 		g_shell.all_results = -99;
-		lexer_parser(g_shell.current_line);
-		g_shell.line = ft_strdup(g_shell.current_line);
+		lexer_parser(ft_strdup(g_shell.current_line));
 		reset_line();
 	}
 	else

@@ -36,24 +36,27 @@ int				exec_pipe(t_tree *left, t_tree *right)
 		close(fd[0]);
 		close(fd[1]);
 	}
-	else if (pid == 0)
+	if (pid == 0)
 	{
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[0]);
 		printf("exec_pipe 2\n");
 		execve_pipe(left->content);
 	}
-	dup2(fd[0], STDIN_FILENO);
-	close(fd[1]);
-	printf("exec_pipe 3\n");
-	wait(&pid);
-	ret1 = WEXITSTATUS(pid) == 0 ? 1 : 0;
-	printf("exec_pipe 4\n");
-	if (!ret1)
-		return (0);
-	printf("exec_pipe 5\n");
-	ret2 = execve_pipe(right->content);
-	printf("lel %d\n", ret1 & ret2);
+	else
+	{
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[1]);
+		printf("exec_pipe 3\n");
+		wait(&pid);
+		ret1 = WEXITSTATUS(pid) == 0 ? 1 : 0;
+		printf("exec_pipe 4\n");
+		if (!ret1)
+			return (0);
+		printf("exec_pipe 5\n");
+		ret2 = execve_pipe(right->content);
+		printf("lel %d\n", ret1 & ret2);
+	}
 	return (ret1 & ret2);
 }
 

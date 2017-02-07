@@ -12,7 +12,7 @@
 
 #include "../includes/42sh.h"
 
-static int		exec_function_execve(char *cmd, char **args)
+int				exec_function_execve(char *cmd, char **args)
 {
 	FT_INIT(char **, env_tab, lst_to_tab(g_shell.env));
 	if (execve(cmd, args, env_tab) == -1)
@@ -29,8 +29,7 @@ static int		exec_function_execve(char *cmd, char **args)
 	}
 }
 
-
-static int 		parse_bin_directories(char ** bin_dir, char **args)
+int 			parse_bin_directories(char **bin_dir, char **args)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, cmd, NULL);
@@ -43,14 +42,18 @@ static int 		parse_bin_directories(char ** bin_dir, char **args)
 			tmp = cmd;
 			cmd = ft_strjoin(cmd, args[0]);
 			ft_strdel(&tmp);
-			exec_function_execve(cmd, args);
+			return (exec_function_execve(cmd, args));
 		}
 		i++;
 	}
 	return (0);
 }
 
+<<<<<<< HEAD
 int			exec_function(char *content)
+=======
+static int		exec_function(char *content)
+>>>>>>> 3a57e48b64baed2a2ed602b79fe575bb2d37189b
 {
 	pid_t		pid;
 
@@ -71,6 +74,7 @@ int			exec_function(char *content)
 	}
 	return (return_value);
 }
+<<<<<<< HEAD
 int				exec_pipe(t_tree *left, t_tree *right)
 {
 	int			fd[2];
@@ -113,6 +117,8 @@ int				exec_pipe(t_tree *left, t_tree *right)
 	wait(&pid);
 	return (1);
 }
+=======
+>>>>>>> 3a57e48b64baed2a2ed602b79fe575bb2d37189b
 
 int				exec_tree(t_tree *tree)
 {
@@ -135,7 +141,7 @@ int				exec_tree(t_tree *tree)
 			exec_tree(tree->right);
 	}
 	else if (tree->type == PIPE)
-		return (exec_pipe(tree->left, tree->right));
+		return (run_pipe(tree->left, tree->right));
 	else if (tree->left && tree->left->type != WORDS)
 		exec_tree(tree->left);
 	else if (tree->left && tree->left->type == WORDS)

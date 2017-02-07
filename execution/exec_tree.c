@@ -15,13 +15,10 @@
 int				exec_function_execve(char *cmd, char **args)
 {
 	FT_INIT(char **, env_tab, lst_to_tab(g_shell.env));
-<<<<<<< HEAD
 	FT_INIT(int, result, 0);
 	if ((result = detect_builtins(args[0], cmd)))
 		return (result);
-=======
 	printf("about to execve\n");
->>>>>>> baebdedeb072b75616a82763cee52ad48fc49cd7
 	if (execve(cmd, args, env_tab) == -1)
 	{
 		printf("didn't work\n");
@@ -60,11 +57,7 @@ int 			parse_bin_directories(char **bin_dir, char **args)
 	return (0);
 }
 
-<<<<<<< HEAD
 int			exec_function(char *content)
-=======
-static int		exec_function(char *content)
->>>>>>> baebdedeb072b75616a82763cee52ad48fc49cd7
 {
 	pid_t		pid;
 

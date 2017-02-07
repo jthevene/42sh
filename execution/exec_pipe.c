@@ -16,6 +16,9 @@ static int		execve_pipe(char *content)
 {
 	FT_INIT(char **, bin_dir, get_bin_directories());
 	FT_INIT(char **, args, get_args(content));
+	FT_INIT(int, return_builtins, 0);
+	if ((return_builtins = detect_builtins(args[0], content) != -1))
+		return (return_builtins);
 	return (parse_bin_directories(bin_dir, args));
 }
 

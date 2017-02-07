@@ -15,6 +15,9 @@
 int				exec_function_execve(char *cmd, char **args)
 {
 	FT_INIT(char **, env_tab, lst_to_tab(g_shell.env));
+	FT_INIT(int, result, 0);
+	if ((result = detect_builtins(args[0], cmd)))
+		return (result);
 	if (execve(cmd, args, env_tab) == -1)
 	{
 		free_tab(env_tab);
@@ -49,7 +52,7 @@ int 			parse_bin_directories(char **bin_dir, char **args)
 	return (0);
 }
 
-static int		exec_function(char *content)
+int			exec_function(char *content)
 {
 	pid_t		pid;
 

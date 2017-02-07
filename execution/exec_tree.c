@@ -18,17 +18,14 @@ int				exec_function_execve(char *cmd, char **args)
 	FT_INIT(int, result, 0);
 	if ((result = detect_builtins(args[0], cmd)))
 		return (result);
-	printf("about to execve\n");
 	if (execve(cmd, args, env_tab) == -1)
 	{
-		printf("didn't work\n");
 		free_tab(env_tab);
 		ft_strdel(&cmd);
 		return (0);
 	}
 	else
 	{
-		printf("worked\n");
 		free_tab(env_tab);
 		ft_strdel(&cmd);
 		return (1);
@@ -42,15 +39,13 @@ int 			parse_bin_directories(char **bin_dir, char **args)
 	FT_INIT(char *, tmp, NULL);
 	while (bin_dir && bin_dir[i])
 	{
-		printf("parsing_bin_dir\n");
 		if (verif_access_others(bin_dir[i]))
 		{
 			cmd = ft_strjoin(bin_dir[i], "/");
 			tmp = cmd;
 			cmd = ft_strjoin(cmd, args[0]);
 			ft_strdel(&tmp);
-			printf("found bin_dir\n");
-			return (exec_function_execve(cmd, args));
+			exec_function_execve(cmd, args);
 		}
 		i++;
 	}

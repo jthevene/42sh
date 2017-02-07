@@ -153,24 +153,25 @@ all: $(NAME)
 lib:
 	make -C libft
 
-$(NAME):
+$(NAME): lib
 	gcc $(C_FLAGS) $(INCLUDES) $(ALL_SRCS) -Incurses -c
 	gcc $(C_FLAGS) $(ALL_BINS) $(EXTENSIONS) -ltermcap -o $(NAME)
 	mkdir bin_folder
 	mv $(ALL_BINS) bin_folder
 
-clean:
-	rm -rf bin_folder
-
 clean_lib:
 	make -C $(LIBFT_DIR) clean
 
-fclean: clean
-	rm -rf $(NAME)
-	sh ./rm_files.sh
+clean: clean_lib
+	rm -rf bin_folder
 
 fclean_lib: clean_lib
 	make -C $(LIBFT_DIR) fclean
+
+fclean: clean fclean_lib
+	rm -rf $(NAME)
+	sh ./rm_files.sh
+
 
 re: fclean all
 

@@ -12,7 +12,7 @@
 
 #include "../includes/42sh.h"
 
-static int		detect_builtins(char* to_exec, char *command_line)
+int		detect_builtins(char* to_exec, char *command_line)
 {
 	if (!ft_strcmp(to_exec, "echo"))
 		return (_42sh_echo(to_exec));
@@ -96,10 +96,8 @@ void 	distrib_functions(char *command_line)
 		return (free_auto_tab(args));
 	}
 	FT_INIT(int, pid, 0);
-//	FT_INIT(int, pid2, 0);
 	FT_INIT(char**, env, lst_to_tab(g_shell.env));
 	FT_INIT(char*, command, args[0]);
-//	ft_putstr("lol");
 	if (pipe(descripteurTube) != 0)
 		return ;
 	if (pipe(descripteurError) != 0)
@@ -109,29 +107,13 @@ void 	distrib_functions(char *command_line)
 	{
 		close(descripteurTube[0]);
 		descripteurTube[1] = dup(1);
-//		dup2(descripteurTube[1], dup(1));
-
 		close(descripteurError[0]);
 		descripteurError[1] = dup(2);
-//		dup2(descripteurError[1], dup(2));
-//		if (buff)
-//			buff = "fd";
-
-//		pid2 = fork();
-//		if (pid2 == 0)
-//		{
-			_42sh_launch(args, env, command);
-//			exit(0);
-//		}
-//		else if (!read(1, buff, 1024))
-//			ft_putstr("toot");
-//		read(descripteurTube[1], buff, 1024);
-//		printf("Message envoyer =%s,\n", buff);
+		_42sh_launch(args, env, command);
 		exit(0);
 	}
 	else
 	{
-//		FT_INIT(char* ,message_fils, ft_strdup("HELLO EVERY"));
 		close(descripteurTube[1]);
 		FT_INIT(int, len_STDOUT, read(descripteurTube[0], buff, 1024));
 		ft_printf(buff);

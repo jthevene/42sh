@@ -31,6 +31,7 @@ void 		set_2d_edition_val(void)
 	}
 	g_shell.line_2d_y = y;
 	g_shell.line_2d_x = ref_x;
+//	ft_printf("line_2d_x =%d, line_2d_y =%d,\n", g_shell.line_2d_x, g_shell.line_2d_y);
 	ref_x = g_shell.cursor_x;
 	y = 0;
 	while (ref_x >= g_shell.win->ws_col)
@@ -45,6 +46,7 @@ void 		set_2d_edition_val(void)
 	}
 	g_shell.cursor_2d_y = y;
 	g_shell.cursor_2d_x = ref_x;
+//	ft_printf("\n\ncursor_2d_x =%d, cursor_2d_y =%d,\n", g_shell.cursor_2d_x, g_shell.cursor_2d_y);
 }
 
 static 	void 	parse_capabilities(int key)

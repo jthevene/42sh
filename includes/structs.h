@@ -85,6 +85,7 @@ typedef struct				s_shell
 	int 					line_2d_y;
 	int 					line_size;
 	int 					prev_line_2d_y;
+	int 					prev_cursor_2d_y;
 	int 					nb_rows; // 0 = premiere ligne de la commande en cours d'edition
 	struct winsize			*win;
 	int						running;

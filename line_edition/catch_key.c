@@ -63,9 +63,10 @@ int 			arrow_combo(char *key)
 
 int 			detect_arrow(char *key)
 {
-	if (!(key[4] == 50 && (key[5] == 67 || key[5] == 68 ||
+	if (g_shell.start_select && g_shell.end_select && !(key[4] == 50 && (key[5] == 67 || key[5] == 68 ||
 		key[5] == 65 || key[5] == 66)))
 	{
+		ft_printf("\nTEST\n");
 		MULTI(g_shell.start_select, g_shell.end_select, 0); // On remet a zero la zone de selection
 		print_line(g_shell.line_size);
 	}

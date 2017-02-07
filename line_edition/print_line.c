@@ -71,7 +71,12 @@ void	clean_line()
 void 	go_to_end()
 {
 	FT_INIT(int, nb_col, 0);
+	FT_INIT(int, test, 0);
+	if (g_shell.cursor_x != g_shell.line_size && g_shell.prev_cursor_2d_y > g_shell.cursor_2d_y)
+		test = 1;
 	nb_col = g_shell.line_size - g_shell.cursor_x;
+	if (test)	
+		tputs(tgetstr("up", NULL), 1, ft_putchar_int);
 	if (nb_col <= 0)
 		return ;
 	while (nb_col--)
@@ -83,6 +88,7 @@ int 	set_cursor_start(int len, int ref_cursor)
 	FT_INIT(int, go_up, g_shell.line_2d_y);
 	if (go_up - g_shell.prev_line_2d_y > 1)
 		go_up = g_shell.prev_line_2d_y + 1;
+
 	if (len < g_shell.line_2d_y)
 	{
 		if (ref_cursor == g_shell.line_size)
@@ -107,7 +113,13 @@ char 	*set_prompt(char *pwd)
 	FT_INIT(char*, home, get_var(&g_shell, "HOME"));
 	g_shell.prompt_len = 3;
 	if (!pwd)
+	{
+		if (g_shell.prompt)
+			ft_strdel(&g_shell.prompt);
+		if (home)
+			ft_strdel(&home);
 		return (head_line);
+	}
 	if (!ft_strncmp(pwd, home, ft_strlen(home)))
 	{
 		tmp = pwd;
@@ -119,10 +131,10 @@ char 	*set_prompt(char *pwd)
 	}
 	tmp = head_line;
 	head_line = ft_strjoin(pwd, head_line);
+	g_shell.prompt_len += ft_strlen(pwd);
 	ft_strdel(&tmp);
 	ft_strdel(&home);
 	ft_strdel(&pwd);
-	g_shell.prompt_len += ft_strlen(pwd);
 	if (g_shell.prompt)
 		ft_strdel(&g_shell.prompt);
 	return (head_line);
@@ -130,8 +142,11 @@ char 	*set_prompt(char *pwd)
 
 void	print_line(int i)
 {
+//	ft_printf("Print line call");
+//	usleep(30000);
 	set_2d_edition_val();
 	FT_INIT(int, ref_cursor, g_shell.cursor_x);
+//	ft_printf("ref_cursor =%d,\n", ref_cursor);
 	if (i)
 		i--;
 	go_to_end();
@@ -145,5 +160,6 @@ void	print_line(int i)
 	g_shell.cursor_x = ref_cursor;
 	reset_cursor_pos();
 	g_shell.prev_line_2d_y = g_shell.line_2d_y;
+	g_shell.prev_cursor_2d_y = g_shell.cursor_2d_y;
 	return ;
 }

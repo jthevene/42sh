@@ -43,7 +43,9 @@ void 	arrow_move_left()
 		{
 			tputs(tgetstr("up", NULL), 1, ft_putchar_int);
 			tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
-			move_cursor_n_to_direction(g_shell.win->ws_col, 1);
+			FT_INIT(int, nb_col, g_shell.win->ws_col);
+			while (nb_col-- > 0)
+				tputs(tgetstr("nd", NULL), 1, ft_putchar_int);
 		}
 		cursor_x--;
 		g_shell.cursor_x = cursor_x;

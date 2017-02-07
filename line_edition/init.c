@@ -66,6 +66,7 @@ static void 	init_edition()
 	g_shell.nb_rows = 0;
 	g_shell.line_size = 0;
 	g_shell.prev_line_2d_y = 0;
+	g_shell.prev_cursor_2d_y = 0;
 	g_shell.start_select = 0;
 	g_shell.end_select = 0;
 	g_shell.clipboard = NULL;

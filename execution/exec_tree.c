@@ -12,7 +12,7 @@
 
 #include "../includes/42sh.h"
 
-static int		exec_function_execve(char *cmd, char **args)
+int				exec_function_execve(char *cmd, char **args)
 {
 	FT_INIT(char **, env_tab, lst_to_tab(g_shell.env));
 	if (execve(cmd, args, env_tab) == -1)
@@ -29,8 +29,7 @@ static int		exec_function_execve(char *cmd, char **args)
 	}
 }
 
-
-static int 		parse_bin_directories(char ** bin_dir, char **args)
+int 			parse_bin_directories(char **bin_dir, char **args)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, cmd, NULL);
@@ -43,14 +42,14 @@ static int 		parse_bin_directories(char ** bin_dir, char **args)
 			tmp = cmd;
 			cmd = ft_strjoin(cmd, args[0]);
 			ft_strdel(&tmp);
-			exec_function_execve(cmd, args);
+			return (exec_function_execve(cmd, args));
 		}
 		i++;
 	}
 	return (0);
 }
 
-int				exec_function(char *content)
+static int		exec_function(char *content)
 {
 	pid_t		pid;
 
@@ -70,48 +69,6 @@ int				exec_function(char *content)
 			return_value = 0;
 	}
 	return (return_value);
-}
-int				exec_pipe(t_tree *left, t_tree *right)
-{
-	int			fd[2];
-	pid_t		pid;
-
-	ft_printf("EXECUTION PIPE GOO\n");
-	if (pipe(fd) != 0)
-		return (0);
-	if (!left || !left->content || !right || !right->content 
-		|| (pid = fork()) == -1)
-		return (0);
-	if (pid == 0)
-	{
-//		ft_putstr("EXECUTION left\n");
-		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		if (!exec_function(left->content))
-		{
-//			ft_putstr("ERROR PIPE LEFT\n");
-			return (0);
-		}
-		exit(0);
-	}
-	else
-	{
-	//	dup2(STDOUT_FILENO, fd[1]);
-		wait(&pid);
-		close(fd[1]);
-		fd[0] = dup(STDIN_FILENO);
-//		dup2(fd[0], STDIN_FILENO);
-//		ft_putstr("EXECUTION right\n");
-		if (!exec_function(right->content))
-		{
-//			ft_putstr("ERROR RIGHT\n");
-	//		exit(0);
-			return (0);
-
-		}
-	}
-//	wait(&pid);
-	return (1);
 }
 
 int				exec_tree(t_tree *tree)
@@ -135,7 +92,7 @@ int				exec_tree(t_tree *tree)
 			exec_tree(tree->right);
 	}
 	else if (tree->type == PIPE)
-		return (exec_pipe(tree->left, tree->right));
+		return (run_pipe(tree->left, tree->right));
 	else if (tree->left && tree->left->type != WORDS)
 		exec_tree(tree->left);
 	else if (tree->left && tree->left->type == WORDS)

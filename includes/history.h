@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2017/02/04 20:02:11 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/07 11:20:14 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void				check_pattern_event(char *event);
 ** FT_HISTORY
 */
 int					check_hist_opt();
-void				history_hub(char *line);
+int					history_hub(char *line);
 void				ft_history_print(t_lst *lst);
 void				ft_history(char *nbr);
 void				show_hist_list();
@@ -52,6 +52,7 @@ t_lst				*get_dir_content(char *dir);
 /*
 ** HISTORIC
 */
+void				show_hist_list();
 void				get_hist(void);
 void				ft_newhist(char *line);
 void				put_hist_line(char *content);

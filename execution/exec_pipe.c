@@ -46,10 +46,8 @@ int				exec_pipe(t_tree *left, t_tree *right)
 	close(fd[1]);
 	wait(&pid);
 	ret1 = WEXITSTATUS(pid) == 0 ? 1 : 0;
-	if (!ret1)
-		return (0);
 	ret2 = execve_pipe(right->content);
-	return (ret1 & ret2);
+	return (!ret1 || !ret2 ? 0 : 1);
 }
 
 int				run_pipe(t_tree *left, t_tree *right)

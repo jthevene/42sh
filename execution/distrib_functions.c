@@ -31,7 +31,7 @@ int		detect_builtins(char* to_exec, char *command_line)
 	return (-1);
 }
 
-static int			verif_access_bin_directory(char *path)
+int			verif_access_bin_directory_(char *path)
 {
 	struct stat infos;
 

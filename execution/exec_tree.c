@@ -15,9 +15,6 @@
 int				exec_function_execve(char *cmd, char **args)
 {
 	FT_INIT(char **, env_tab, lst_to_tab(g_shell.env));
-	FT_INIT(int, result, 0);
-	if ((result = detect_builtins(args[0], cmd)))
-		return (result);
 	if (execve(cmd, args, env_tab) == -1)
 	{
 		free_tab(env_tab);
@@ -59,6 +56,9 @@ int			exec_function(char *content)
 	FT_INIT(char **, bin_dir, get_bin_directories());
 	FT_INIT(char **, args, get_args(content));
 	FT_INIT(int, return_value, 0);
+	FT_INIT(int, return_builtins, 0);
+	if ((return_builtins = detect_builtins(args[0], content) != -1))
+		return (return_builtins);
 	if ((pid = fork()) == -1)
 		return (0);
 	if (pid == 0)

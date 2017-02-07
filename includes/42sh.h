@@ -182,7 +182,6 @@ int					detect_builtins(char* to_exec, char *command_line);
 char				**get_bin_directories(void);
 int					verif_access_others(char *path);
 char				**get_args(char *content);
-void			 	distrib_functions(char *command_line);
 char				**lst_to_tab(t_var *env);
 int					lenght_list(t_var *env);
 

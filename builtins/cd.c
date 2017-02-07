@@ -121,11 +121,3 @@ int 		cd(char *line)
 	free(file);
 	return (!len_tab ? 1 : 0);
 }
-
-
-
-
-
-
-
-

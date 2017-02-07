@@ -134,7 +134,7 @@ BIN_HISTORY 	= 	$(FILES_HISTORY:.c=.o)
 EXECUTION 		= 	./execution/
 
 FILES_EXECUTION =	distrib_functions.c exec_tree.c binary_tree_parser.c and_or_exec.c \
-					ft_pip.c env_to_tab.c exec_utils.c
+					env_to_tab.c exec_utils.c exec_pipe.c
 
 SRC_EXECUTION 	= 	$(addprefix $(EXECUTION), $(FILES_EXECUTION))
 
@@ -153,24 +153,25 @@ all: $(NAME)
 lib:
 	make -C libft
 
-$(NAME):
+$(NAME): lib
 	gcc $(C_FLAGS) $(INCLUDES) $(ALL_SRCS) -Incurses -c
 	gcc $(C_FLAGS) $(ALL_BINS) $(EXTENSIONS) -ltermcap -o $(NAME)
 	mkdir bin_folder
 	mv $(ALL_BINS) bin_folder
 
-clean:
-	rm -rf bin_folder
-
 clean_lib:
 	make -C $(LIBFT_DIR) clean
 
-fclean: clean
-	rm -rf $(NAME)
-	sh ./rm_files.sh
+clean: clean_lib
+	rm -rf bin_folder
 
 fclean_lib: clean_lib
 	make -C $(LIBFT_DIR) fclean
+
+fclean: clean fclean_lib
+	rm -rf $(NAME)
+	sh ./rm_files.sh
+
 
 re: fclean all
 

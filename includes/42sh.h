@@ -178,6 +178,7 @@ t_var				*new_var(char *v_name, char *v_value);
 /*
 ** EXECUTION
 */
+int					detect_builtins(char* to_exec, char *command_line);
 char				**get_bin_directories(void);
 int					verif_access_others(char *path);
 char				**get_args(char *content);

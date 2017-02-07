@@ -1,9 +1,6 @@
 #include "../includes/sh.h"
 
-static int verif_content(char *content)
-{
-	return(ft_isope(content[0]));
-}
+
 
 void	parse(t_tree *tree, t_token *token)
 {
@@ -40,8 +37,8 @@ void	parse(t_tree *tree, t_token *token)
 			//printf("right : (%s)\n\n", tree->right->content);
 //			execute_or_and(tree);
 		}
-		if (verif_content(tree->content))
-			ft_printf("direct content : (%s)\n\n", tree->content);
+	//	if (verif_content(tree->content))
+	//		ft_printf("direct content : (%s)\n\n", tree->content);
 	}
 	else
 	{

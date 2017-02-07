@@ -50,7 +50,7 @@ static int 		parse_bin_directories(char ** bin_dir, char **args)
 	return (0);
 }
 
-int				exec_function(char *content)
+int			exec_function(char *content)
 {
 	pid_t		pid;
 
@@ -97,9 +97,9 @@ int				exec_pipe(t_tree *left, t_tree *right)
 	else
 	{
 	//	dup2(STDOUT_FILENO, fd[1]);
-		wait(&pid);
+//		wait(&pid);
 		close(fd[1]);
-		fd[0] = dup(STDIN_FILENO);
+		dup2(fd[0], STDIN_FILENO);
 //		dup2(fd[0], STDIN_FILENO);
 //		ft_putstr("EXECUTION right\n");
 		if (!exec_function(right->content))
@@ -110,7 +110,7 @@ int				exec_pipe(t_tree *left, t_tree *right)
 
 		}
 	}
-//	wait(&pid);
+	wait(&pid);
 	return (1);
 }
 

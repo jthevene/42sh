@@ -15,6 +15,9 @@
 int				exec_function_execve(char *cmd, char **args)
 {
 	FT_INIT(char **, env_tab, lst_to_tab(g_shell.env));
+	FT_INIT(int, result, 0);
+	if ((result = detect_builtins(args[0], cmd)))
+		return (result);
 	if (execve(cmd, args, env_tab) == -1)
 	{
 		free_tab(env_tab);
@@ -49,11 +52,7 @@ int 			parse_bin_directories(char **bin_dir, char **args)
 	return (0);
 }
 
-<<<<<<< HEAD
 int			exec_function(char *content)
-=======
-static int		exec_function(char *content)
->>>>>>> 3a57e48b64baed2a2ed602b79fe575bb2d37189b
 {
 	pid_t		pid;
 
@@ -74,51 +73,6 @@ static int		exec_function(char *content)
 	}
 	return (return_value);
 }
-<<<<<<< HEAD
-int				exec_pipe(t_tree *left, t_tree *right)
-{
-	int			fd[2];
-	pid_t		pid;
-
-	ft_printf("EXECUTION PIPE GOO\n");
-	if (pipe(fd) != 0)
-		return (0);
-	if (!left || !left->content || !right || !right->content 
-		|| (pid = fork()) == -1)
-		return (0);
-	if (pid == 0)
-	{
-//		ft_putstr("EXECUTION left\n");
-		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		if (!exec_function(left->content))
-		{
-//			ft_putstr("ERROR PIPE LEFT\n");
-			return (0);
-		}
-		exit(0);
-	}
-	else
-	{
-	//	dup2(STDOUT_FILENO, fd[1]);
-//		wait(&pid);
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-//		dup2(fd[0], STDIN_FILENO);
-//		ft_putstr("EXECUTION right\n");
-		if (!exec_function(right->content))
-		{
-//			ft_putstr("ERROR RIGHT\n");
-	//		exit(0);
-			return (0);
-
-		}
-	}
-	wait(&pid);
-	return (1);
-}
-=======
->>>>>>> 3a57e48b64baed2a2ed602b79fe575bb2d37189b
 
 int				exec_tree(t_tree *tree)
 {

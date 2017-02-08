@@ -18,15 +18,18 @@ void	replace_hdoc(t_token *token)
 	char *myline;
 	char *heredoc;
 
-	myline = NULL;
+	heredoc = ft_strdup("");
 	ft_strdel(&g_shell.prompt);
 	myline = prompt_dquote("> ");
-	while (strcmp(myline, token->lexeme) != 0)
+	if (ft_strcmp(myline, token->lexeme) != 0)
+		heredoc = ft_strjoinchar(heredoc, myline, '\n');
+	while (ft_strcmp(myline, token->lexeme) != 0)
 	{
 		ft_strdel(&g_shell.prompt);
 		ft_putstr("\n");
 		myline = prompt_dquote("> ");
-		heredoc = ft_strjoinchar(heredoc, myline, '\n');
+		if (ft_strcmp(myline, token->lexeme) != 0)
+			heredoc = ft_strjoinchar(heredoc, myline, '\n');
 	}
 	ft_strdel(&(token->lexeme));
 	token->lexeme = ft_strdup(heredoc);

@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 09:11:45 by jules             #+#    #+#             */
-/*   Updated: 2017/02/07 09:13:34 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/08 14:44:22 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static void 	reset_line(void)
 	move_cursor_n_to_direction(g_shell.line_size, 1);
 	if (g_shell.cursor_2d_x)
 		ft_putchar('\n');
-	if (ft_strlen(g_shell.current_line) && !g_shell.hist_opt.p)
-		ft_newhist(g_shell.current_line);
 	g_shell.current_line = NULL;
 	g_shell.nav_hist = 0;
 	free_hist_opt();
@@ -35,6 +33,8 @@ void	return_key(void)
 		ft_putchar(10);
 		g_shell.result_exec = -99;
 		g_shell.all_results = -99;
+		if (!g_shell.hist_opt.p)
+			ft_newhist(g_shell.current_line);
 		lexer_parser(ft_strdup(g_shell.current_line));
 		reset_line();
 	}

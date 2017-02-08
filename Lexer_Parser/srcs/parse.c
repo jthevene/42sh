@@ -1,7 +1,5 @@
 #include "../includes/sh.h"
 
-
-
 void	parse(t_tree *tree, t_token *token)
 {
 	if (dotcoma(tree, token) == 0)

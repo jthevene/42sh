@@ -32,7 +32,7 @@ int		unfinished_quote(char *line)
 int		unfinished_squote(char *line, int i)
 {
 	i++;
-	while (line[i] != '\'' && line[i] != '\0')
+	while (line[i] != '\'' && line[i])
 		i++;
 	return (i);
 }
@@ -40,7 +40,7 @@ int		unfinished_squote(char *line, int i)
 int		unfinished_dquote(char *line, int i)
 {
 	i++;
-	while (line[i] != '\"' && line[i] != '\0')
+	while (line[i] != '\"' && line[i])
 		i++;
 	return (i);
 }

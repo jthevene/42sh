@@ -1,58 +1,14 @@
 #include "../includes/sh.h"
 
-
-
 void	parse(t_tree *tree, t_token *token)
 {
 	if (dotcoma(tree, token) == 0)
-	{
 		if (and_or(tree, token) == 0)
-		{
 			if (redirections(tree, token) == 0)
 			{
 				tree->type = token->type;
 				tree->content = commands_leaf(token);
-				//printf("{COMMAND}\n");
-				//printf("type : %d\n", tree->type);
-				//printf("content : (%s)\n\n", tree->content);
-				
-				//printf("left : (%s)\n", tree->left->content);
-				//printf("right : (%s)\n", tree->right->content);
 			}
-			else
-			{
-				//printf("{REDIRECTIONS}\n");
-				//printf("type : %d\n", tree->type);
-				//printf("content : (%s)\n", tree->content);
-				//printf("left : (%s)\n", tree->left->content);
-				//printf("right : (%s)\n\n", tree->right->content);
-			}
-		}
-		else
-		{
-			//printf("{AND_OR}\n");
-			//printf("type : %d\n", tree->type);
-			//printf("content : (%s)\n", tree->content);
-			//printf("left : (%s)\n", tree->left->content);
-			//printf("right : (%s)\n\n", tree->right->content);
-//			execute_or_and(tree);
-		}
-	//	if (verif_content(tree->content))
-	//		ft_printf("direct content : (%s)\n\n", tree->content);
-	}
-	else
-	{
-//		printf("{SEMICOLON}\n");
-//		printf("type : %d\n", tree->type);
-//		printf("content : (%s)\n", tree->content);
-//		printf("left : (%s)\n", tree->left->content);
-//		printf("right : (%s)\n\n", tree->right->content);
-//	printf("direct content : (%s)\n", tree->content);
-//		if (!verif_content(tree->left->content))
-//			distrib_functions(tree->left->content);
-//		if (!verif_content(tree->right->content))
-//			distrib_functions(tree->right->content);
-	}
 }
 
 int		dotcoma(t_tree *tree, t_token *token)

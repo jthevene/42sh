@@ -71,6 +71,7 @@ int			exec_function(char *content)
 		else
 			return_value = 0;
 	}
+	free_tab(bin_dir);
 	return (return_value);
 }
 

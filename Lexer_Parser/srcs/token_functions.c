@@ -27,14 +27,14 @@ int		token_dquote(t_token *token, char *line, int pos, int i)
 char	*finish_quotes(char *line)
 {
 	FT_INIT(int, i, 1);
-	FT_INIT(char*, tmp, NULL);
+	FT_INIT(char*, tmp, ft_strdup(line));
 	while (i != 0)
 	{
-		i = unfinished_quote(line);
+		i = unfinished_quote(tmp);
 		if (i == 1)
-			tmp = finish_the_squote(line);
+			tmp = finish_the_squote(tmp);
 		else if (i == 2)
-			tmp = finish_the_dquote(line);
+			tmp = finish_the_dquote(tmp);
 	}
 	if (!tmp)
 		tmp = line;

@@ -26,8 +26,9 @@ void				ft_out_of_range(int i);
 ** EVENT
 */
 int					ft_strisnum(char *nbr);
-char				*event_n(int n);
-void				check_pattern_event(char *event);
+char				*event_n(int n, char *type);
+char				*event_str(char *str, char *type);
+int					history_event(char *event);
 /*
 ** FT_HISTORY
 */

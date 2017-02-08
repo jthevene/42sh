@@ -121,7 +121,8 @@ BIN_BUILTIN 	= 	$(FILES_BUILTIN:.c=.o)
 HISTORY 		= 	./history/
 
 FILES_HISTORY 	= 	error.c event.c ft_history.c ft_history_options.c \
-					historic.c histsize.c lst_tools.c history_lexing.c
+					historic.c histsize.c lst_tools.c history_lexing.c \
+					event_tools.c
 
 SRC_HISTORY 	= 	$(addprefix $(HISTORY), $(FILES_HISTORY))
 

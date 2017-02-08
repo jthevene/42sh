@@ -39,6 +39,8 @@ typedef struct			s_tree
 	struct s_tree		*right;
 }						t_tree;
 
+void	check_for_hdoc(t_token *token);
+void	replace_hdoc(t_token *token);
 int		execute_or_and(t_tree *tree);
 char	*finish_line_backslash(char *line);
 void	lexer_parser(char *line);

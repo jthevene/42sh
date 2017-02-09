@@ -69,6 +69,7 @@ int	history_event(char *event)
 	FT_INIT(char*, target, get_target(str_to_replace));
 	FT_INIT(int, digit, 0);
 	FT_INIT(int, alnum, 0);
+	FT_INIT(int, mult_ret, ft_strlen(str_to_replace) != ft_strlen(event) ? 0 : 1);
 	while (target && target[digit] && 
 		(ft_isdigit(target[digit]) || target[0] == '-'))
 		digit++;
@@ -81,5 +82,5 @@ int	history_event(char *event)
 	else if (alnum && alnum == (int)ft_strlen(target))
 		replace_by = event_str(target, str_to_replace);
 	ft_strdel(&target);
-	return (exec_match(event, str_to_replace, replace_by));
+	return (exec_match(event, str_to_replace, replace_by) * mult_ret);
 }

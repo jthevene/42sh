@@ -47,12 +47,7 @@ int						glob_parser(char **line)
 	if (!(*line))
 		return (0);
 	if (!verif_tokens((*line)))
-	{
-		ft_putstr_fd((*line), 2);
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd("Verif globing failed, not a token.\n", 2);
 		return (0);
-	}
 	glob = !glob ? init_glob() : glob;
 	glob->command = ft_strdup((*line));
 	if (ft_strchr((*line), '{'))

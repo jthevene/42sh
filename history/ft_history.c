@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:53:52 by jules             #+#    #+#             */
-/*   Updated: 2017/02/10 15:29:51 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/10 15:40:06 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		history_hub(char *line)
 	else if (g_shell.hist_opt.s)
 		ft_newhist(g_shell.hist_opt.arg);
 	else if (g_shell.hist_opt.p)
-		delete_line_history(ft_itoa(g_shell.hist->number));
+		ft_putendl(line);
 	return (1);
 }
 

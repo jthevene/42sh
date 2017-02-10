@@ -98,5 +98,6 @@ int 	parse_bin_directories(char **bin_dir, char **args);
 int		exec_function_execve(char *cmd, char **args);
 int		run_pipe(t_tree *left, t_tree *right);
 int		run_redir(t_tree *left, t_tree *right, int current_type);
+int 	simple_left(char *cmd, char *filename);
 
 #endif

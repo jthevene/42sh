@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 18:56:17 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/11/15 18:56:18 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/10 11:45:24 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct		s_fdlist
 
 int					simple_right();
 int					double_right();
-
+int 				simple_left();
 int					detect_out();
 void				exec_redir_right(int fd/*, int fd_out*/);
 int					create_file(char *filename, t_fdlist **fdlist, int type);

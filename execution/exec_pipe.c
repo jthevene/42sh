@@ -58,7 +58,7 @@ int				run_pipe(t_tree *left, t_tree *right)
 	if ((int)pid == -1)
 		ret = 0;
 	else if ((int)pid == 0)
-		ret = exec_pipe(left, right);
+		exit (ret = exec_pipe(left, right));
 	wait(NULL);
 	return (ret);
 }

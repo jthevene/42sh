@@ -109,6 +109,7 @@ typedef struct				s_shell
 	char					*line;
 	int						redir_fd;
 	int						redir_fd_out;
+	int						left_redir_fd;
 }							t_shell;
 
 t_shell						g_shell;

@@ -29,8 +29,6 @@ void	init_hist_opt()
 void	init_hist()
 {
 	FT_INIT(char *, filename, NULL);
-	g_shell.redir_fd = 0;
-	g_shell.redir_fd_out = 0;
 	g_shell.hist_fd = 0;
 	g_shell.hist = NULL;
 	g_shell.nav_hist = 0;
@@ -95,6 +93,9 @@ int		init_all()
 	init_hist();
 	init_win();
 	init_edition();
+	g_shell.redir_fd = 0;
+	g_shell.redir_fd_out = 0;
+	g_shell.left_redir_fd = 0;
 	tcgetattr(STDIN_FILENO, &g_shell.t_back);// save les données termios d'origine
 	init_termios(g_shell.t_back);
 	return (0);

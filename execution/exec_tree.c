@@ -20,6 +20,11 @@ int				exec_function_execve(char *cmd, char **args)
 		dup2(g_shell.redir_fd, STDOUT_FILENO);
 		close(g_shell.redir_fd);
 	}
+	if (g_shell.left_redir_fd)
+	{
+		dup2(g_shell.left_redir_fd, STDIN_FILENO);
+		close(g_shell.left_redir_fd);
+	}
 	if (execve(cmd, args, env_tab) == -1)
 	{
 		free_tab(env_tab);

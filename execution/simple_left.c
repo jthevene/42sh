@@ -15,21 +15,13 @@
 int 		simple_left(char *cmd, char *filename)
 {
 	FT_INIT(int, new_fd, 0);
-	FT_INIT(char **, env_tab, lst_to_tab(g_shell.env));
 	if ((new_fd = open(filename, O_RDONLY, 0600)) == -1)
 	{
 		ft_error(filename);
-		return (1);
+		return (0);
 	}
-	if ((new_fd = dup2(STDIN, new_fd)) == -1)
-	{
-		ft_error(filename);
-		return (1);
-	}
-	if ((execve(cmd, filename, env_tab)) == -1)
-	{
-		ft_error(cmd);
-		return (1);
-	}
-	close(new_fd);
+	g_shell.left_redir_fd = new_fd;
+	exec_function(cmd);
+	g_shell.left_redir_fd = 0;
+	return (1);
 }

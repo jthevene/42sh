@@ -18,6 +18,7 @@ void		lexer_parser(char *line)
 		if ((all->line[o - 1] == '\\') || (compare_end(all->line, "||")) \
 			|| (all->line[o - 1] == '|') || (compare_end(all->line, "&&")))
 			all->line = finish_line_backslash(all->line);
+		ft_newhist(all->line);
 		analise_line(all);
 		check_for_hdoc(all->tokens_begin);
 		send_token_to_glob(all);

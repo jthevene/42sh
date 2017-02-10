@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:53:52 by jules             #+#    #+#             */
-/*   Updated: 2017/02/07 11:19:51 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/10 15:29:51 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int		history_hub(char *line)
 	get_history_options();
 	FT_INIT(int, options, check_hist_opt());
 
+	ft_putstr("g_shell.current_line = ");
+	ft_putendl(g_shell.current_line);
 	ft_putstr("line = ");
 	ft_putendl(line);
 	ft_putstr("filename = ");
@@ -65,6 +67,8 @@ int		history_hub(char *line)
 		update_history_file(get_histsize("HISTSIZE"));
 	else if (g_shell.hist_opt.s)
 		ft_newhist(g_shell.hist_opt.arg);
+	else if (g_shell.hist_opt.p)
+		delete_line_history(ft_itoa(g_shell.hist->number));
 	return (1);
 }
 

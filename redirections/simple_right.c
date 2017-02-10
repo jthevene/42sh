@@ -47,15 +47,10 @@ static int		get_filename(int i, int last_fd, t_fdlist **fdlist)
 
 int				simple_right(void)
 {
-	int			fd;
-	int			fd_out;
-	t_fdlist	*fdlist;
-
-	fdlist = NULL;
+	FT_INIT(int, fd, 0);
+	FT_INIT(int, fd_out, 0);
+	FT_INIT(t_fdlist, *fdlist, NULL);
 	printf("Entrée dans simple_right\n");
-	if (!ft_strchr(g_shell.line, '>'))
-		return (0);
-	printf("Redirection détectée\n");
 	fd_out = detect_out();
 	if (!(fd = get_filename(1, 0, &fdlist))) // Fonction qui récupère tous les fd à ouvrir, créé les fichiers, et stocke tous les fd dans une liste.
 		return (0);

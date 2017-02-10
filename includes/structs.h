@@ -62,6 +62,13 @@ typedef struct 				s_hist_opt
 	char					*options;
 }							t_hist_opt;
 
+typedef struct				s_fdlist
+{
+	int						key;
+	struct s_fdlist			*prev;
+	struct s_fdlist			*next;
+}							t_fdlist;
+
 typedef struct				s_shell
 {
 	int 					len;
@@ -99,7 +106,9 @@ typedef struct				s_shell
 	///////////////////////////		END JULES
 	struct termios			my_termios;
 	struct termios			t_back;
-	char					*line; // VARIABLE SIMON
+	char					*line;
+	int						redir_fd;
+	int						redir_fd_out;
 }							t_shell;
 
 t_shell						g_shell;

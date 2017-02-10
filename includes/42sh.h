@@ -68,6 +68,8 @@
 # define K_CUT	  		18
 # define K_PAST	  		19
 # define K_TAB     		20
+# define SIMPLE 1
+# define DOUBLE 2
 
 
 /*
@@ -161,9 +163,6 @@ int					init_termios(struct termios my_termios);
 void				ft_reset_termios(struct termios t_back);
 
 /*
-** SIMON
-*/
-/*
 ** BUILTINS
 */
 int					_42sh_echo(char *line);
@@ -184,5 +183,12 @@ int					verif_access_others(char *path);
 char				**get_args(char *content);
 char				**lst_to_tab(t_var *env);
 int					lenght_list(t_var *env);
+int					exec_function(char *content);
+
+/*
+** REDIRECTIONS
+*/
+void 				free_fdlist(t_fdlist **fdlist);
+int					fdlist_pushback(t_fdlist **fdlist, int key);
 
 #endif

@@ -21,16 +21,6 @@
 #  define FT_INIT(type, name, value) type name = value
 # endif
 
-# define SIMPLE 1
-# define DOUBLE 2
-
-typedef struct		s_fdlist
-{
-	int				key;
-	struct s_fdlist	*prev;
-	struct s_fdlist	*next;
-}					t_fdlist;
-
 int					simple_right();
 int					double_right();
 

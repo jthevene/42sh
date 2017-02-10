@@ -56,8 +56,6 @@ UTILS_2 = globing/curly_brackets/cbracket_utils/
 FILES_GLOBING	= 	glob_parser.c get_path.c verif_tokens.c recreate_token_string.c \
 					replace_env_var.c
 
-FILES_REDIR 	=	simple_right.c double_right.c redir_utils.c
-
 FILES_SBRACK 	= 	hub_sbracket.c fill_tabs.c init_tabs.c category_bracket.c \
 					sbracket_list.c
 
@@ -75,7 +73,6 @@ FILES_WILDCARDS = 	hub_final.c wildcards_tokens.c wildcards_utils.c \
 					wildcards_utils2.c wild_lst_tools.c check_file.c \
 
 SRC_GLOBING 	= 	$(addprefix $(GLOBING), $(FILES_GLOBING)) \
-					$(addprefix $(REDIR), $(FILES_REDIR)) \
 					$(addprefix $(SBRACK), $(FILES_SBRACK)) \
 					$(addprefix $(CBRACK), $(FILES_CBRACK)) \
 					$(addprefix $(UTILS_1), $(FILES_UTILS_1)) \
@@ -136,7 +133,8 @@ BIN_HISTORY 	= 	$(FILES_HISTORY:.c=.o)
 EXECUTION 		= 	./execution/
 
 FILES_EXECUTION =	distrib_functions.c exec_tree.c binary_tree_parser.c \
-					env_to_tab.c exec_utils.c exec_pipe.c
+					env_to_tab.c exec_utils.c exec_pipe.c exec_redir.c \
+					redir_utils.c
 
 SRC_EXECUTION 	= 	$(addprefix $(EXECUTION), $(FILES_EXECUTION))
 

@@ -28,8 +28,9 @@ void	init_hist_opt()
 
 void	init_hist()
 {
-	char	*filename;
-
+	FT_INIT(char *, filename, NULL);
+	g_shell.redir_fd = 0;
+	g_shell.redir_fd_out = 0;
 	g_shell.hist_fd = 0;
 	g_shell.hist = NULL;
 	g_shell.nav_hist = 0;

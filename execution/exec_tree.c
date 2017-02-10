@@ -15,6 +15,9 @@
 int				exec_function_execve(char *cmd, char **args)
 {
 	FT_INIT(char **, env_tab, lst_to_tab(g_shell.env));
+	if (g_shell.redir_fd && g_shell.redir_fd_out)
+		dup2(g_shell.redir_fd, STDOUT_FILENO);
+	close(g_shell.redir_fd);
 	if (execve(cmd, args, env_tab) == -1)
 	{
 		free_tab(env_tab);
@@ -97,6 +100,8 @@ int				exec_tree(t_tree *tree)
 	}
 	else if (tree->type == PIPE)
 		return (run_pipe(tree->left, tree->right));
+	else if (tree->type == MORE || tree->type == DMORE)
+		return (run_redir(tree->left, tree->right, tree->type));
 	else if (tree->left && tree->left->type != WORDS)
 		exec_tree(tree->left);
 	else if (tree->left && tree->left->type == WORDS)

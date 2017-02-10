@@ -57,6 +57,10 @@ int		lire_lexeme(t_token *token, char *line, int pos)
 		pos = token_squote(token, line, pos, i);
 	else if (line[pos] == '\"')
 		pos = token_dquote(token, line, pos, i);
+	else if (ft_isdigit(line[pos]))
+		pos = check_for_aggreg_fd(token, line, pos);
+	else if (ft_isope(line[pos]) == 2 || ft_isope(line[pos]) == 3)
+		pos = check_for_aggreg(token, line, pos);
 	else if (ft_isprintnotope(line[pos]) == 1)
 	{
 		token->type = WORDS;

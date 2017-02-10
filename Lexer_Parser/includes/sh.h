@@ -5,18 +5,20 @@
 #  include "42sh.h"
 # endif
 
-# define WORDS		0
-# define DQUOTE		1
-# define SQUOTE		2
-# define OR			3
-# define AND		4
-# define PIPE		5
-# define DLESS		6
-# define DMORE		7
-# define LESS		8
-# define MORE		9
-# define SEMICOLON	10
-# define END_LINE	11
+# define WORDS			0
+# define DQUOTE			1
+# define SQUOTE			2
+# define OR				3
+# define AND			4
+# define PIPE			5
+# define DLESS			6
+# define DMORE			7
+# define LESS			8
+# define MORE			9
+# define SEMICOLON		10
+# define END_LINE		11
+# define AGGREG_RIGHT	12
+# define AGGREG_LEFT	13
 
 typedef struct			s_token
 {
@@ -92,6 +94,8 @@ int		compare_end(char *str1, char *str2);
 int		error_parse(t_token *token);
 int		check_type_ope(int type);
 void	leave_error(void);
+int		check_for_aggreg_fd(t_token *token, char *line, int pos);
+int		check_for_aggreg(t_token *token, char *line, int pos);
 
 int		exec_tree(t_tree *tree);
 int 	parse_bin_directories(char **bin_dir, char **args);

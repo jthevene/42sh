@@ -23,7 +23,7 @@
 # include "../ft_printf/includes/ft_printf.h"
 
 # ifndef FT_INIT
-	# define FT_INIT(t, n, v) t n = v
+#  define FT_INIT(t, n, v) t n = v
 # endif
 
 void				ft_bzero(void *s, size_t n);

@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_distrib.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/12 15:24:36 by sgaudin           #+#    #+#             */
+/*   Updated: 2017/02/12 15:24:38 by sgaudin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/sh.h"
 
-void		lexer_parser(char *line)
+void	lexer_parser(char *line)
 {
 	t_all	*all;
-	FT_INIT(int, o, 0);
 
+	FT_INIT(int, o, 0);
 	if (!(all = (t_all *)malloc(sizeof(t_all))))
 		return ;
 	all->line = ft_strdup(line);
@@ -39,7 +51,7 @@ void	analise_line(t_all *all)
 	all->tokens_begin = token;
 	while (all->line[pos])
 	{
-		pos = lire_lexeme(token, all->line , pos);
+		pos = lire_lexeme(token, all->line, pos);
 		if (all->line[pos])
 		{
 			token->next = init_token();
@@ -79,17 +91,17 @@ void	add_lexeme(t_token *token, char *line, int pos, int i)
 	token->lexeme = ft_strndup(&(line[i]), pos - i);
 }
 
-int        ft_isope(char c)
+int		ft_isope(char c)
 {
-    if (c == '&')
-        return (1);
-    else if (c == '<')
-        return (2);
-    else if (c == '>')
-        return (3);
-    else if (c == '|')
-        return (4);
-    else if (c == ';')
-        return (5);
-    return (0);
+	if (c == '&')
+		return (1);
+	else if (c == '<')
+		return (2);
+	else if (c == '>')
+		return (3);
+	else if (c == '|')
+		return (4);
+	else if (c == ';')
+		return (5);
+	return (0);
 }

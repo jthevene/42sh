@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   copy_cut_past.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/12 17:38:49 by sgaudin           #+#    #+#             */
+/*   Updated: 2017/02/12 17:38:51 by sgaudin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/42sh.h"
 
-static char 	*store_selection(int start_select, int end_select, int key)
+static char		*store_selection(int start_select, int end_select, int key)
 {
 	FT_INIT(char*, clipboard, NULL);
 	FT_INIT(int, nb_del, 0);
@@ -25,7 +37,7 @@ static char 	*store_selection(int start_select, int end_select, int key)
 	return (clipboard);
 }
 
-void 	copy_cut_line(int key)
+void			copy_cut_line(int key)
 {
 	FT_INIT(int, start_select, -g_shell.prompt_len);
 	FT_INIT(int, end_select, -g_shell.prompt_len);
@@ -41,7 +53,7 @@ void 	copy_cut_line(int key)
 	g_shell.clipboard = store_selection(start_select, end_select, key);
 }
 
-void 	past_line(char *clipboard)
+void			past_line(char *clipboard)
 {
 	FT_INIT(int, i, 0);
 	if (!clipboard)

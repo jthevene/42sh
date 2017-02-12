@@ -22,12 +22,11 @@
 # include <stdint.h>
 # include <wchar.h>
 
-
 # include "../ft_printf/includes/ft_printf.h"
 # include "get_next_line.h"
 
 # ifndef FT_INIT
-	# define FT_INIT(t, n, v) t n = v
+#  define FT_INIT(t, n, v) t n = v
 # endif
 
 void				ft_bzero(void *s, size_t n);
@@ -51,7 +50,8 @@ size_t				ft_strlcat(char *dst, const char *src, size_t size);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strstr(const char *s1, const char *s2);
-char 				*ft_str_replace(char *str, char *to_search, char *to_replace);
+char				*ft_str_replace(char *str, char *to_search,
+					char *to_replace);
 char				*ft_strnstr(const char *s1, const char *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -131,7 +131,6 @@ char				*ft_strtoupper(char *str);
 int					ft_putwchar(wchar_t c);
 int					ft_putwstr(wchar_t *str);
 
-
 void				ft_puttab(char **array);
 void				ft_putendl_fd_exit(char const *src, int fd, int exit_code);
 int					ft_isallspace(char *str);
@@ -152,8 +151,6 @@ void				ft_putunbrchelou(unsigned long long nbr,
 void				ft_putnbrprec(long long nbr, int *state,
 						int base, int caps);
 void				ft_putnbrchelou(long long nbr, int base, int caps);
-
-
 
 int					ft_count_tab(char **array);
 int					get_nb(const char *str, int *i);

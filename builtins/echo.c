@@ -39,7 +39,7 @@ static int	echo_is_option(char *line)
 	return (0);
 }
 
-int			_42sh_echo(char *line)
+int			ft_echo(char *line)
 {
 	FT_INIT(int, i, 1);
 	FT_INIT(int, option, echo_is_option(line));

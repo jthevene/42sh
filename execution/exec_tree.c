@@ -25,7 +25,7 @@ int				exec_function_execve(char *cmd, char **args)
 		dup2(g_shell.left_redir_fd, STDIN_FILENO);
 		close(g_shell.left_redir_fd);
 	}
-	if (execve(cmd, args, env_tab) == -1)
+	if (execve(cmd, args, g_shell.env_opt == FALSE ? env_tab : NULL) == -1)
 	{
 		free_tab(env_tab);
 		ft_strdel(&cmd);
@@ -39,7 +39,7 @@ int				exec_function_execve(char *cmd, char **args)
 	}
 }
 
-int 			parse_bin_directories(char **bin_dir, char **args)
+int				parse_bin_directories(char **bin_dir, char **args)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, cmd, NULL);
@@ -59,7 +59,7 @@ int 			parse_bin_directories(char **bin_dir, char **args)
 	return (0);
 }
 
-int			exec_function(char *content)
+int				exec_function(char *content)
 {
 	pid_t		pid;
 
@@ -77,7 +77,7 @@ int			exec_function(char *content)
 	{
 		wait(&pid);
 		if (WEXITSTATUS(pid) == 0)
-			return_value = 1;	
+			return_value = 1;
 		else
 			return_value = 0;
 	}
@@ -85,11 +85,32 @@ int			exec_function(char *content)
 	return (return_value);
 }
 
+static int		exec_tree2(t_tree *tree)
+{
+	if (tree->type == PIPE)
+		return (run_pipe(tree->left, tree->right));
+	else if (tree->type == MORE || tree->type == DMORE)
+		return (run_redir(tree->left, tree->right, tree->type));
+	else if (tree->type == LESS)
+		return (simple_left(tree->left->content, tree->right->content));
+	else if (tree->left && tree->left->type != WORDS)
+		exec_tree(tree->left);
+	else if (tree->left && tree->left->type == WORDS)
+		return (exec_function(tree->left->content));
+	else if (tree->right && tree->right->type != WORDS)
+		exec_tree(tree->right);
+	else if (tree->right && tree->right->type == WORDS)
+		return (exec_function(tree->right->content));
+	else if (!tree->right && !tree->left && tree->content
+			&& tree->type == WORDS)
+		return (exec_function(tree->content));
+	return (0);
+}
+
 int				exec_tree(t_tree *tree)
 {
 	if (!tree)
 		return (0);
-	FT_INIT(int, test, 0);
 	if (tree->type == SEMICOLON)
 	{
 		exec_tree(tree->left);
@@ -105,27 +126,7 @@ int				exec_tree(t_tree *tree)
 		if (!exec_tree(tree->left))
 			exec_tree(tree->right);
 	}
-	else if (tree->type == PIPE)
-		return (run_pipe(tree->left, tree->right));
-	else if (tree->type == MORE || tree->type == DMORE)
-		return (run_redir(tree->left, tree->right, tree->type));
-	else if (tree->type == LESS)
-		return (simple_left(tree->left->content, tree->right->content));
-	else if (tree->left && tree->left->type != WORDS)
-		exec_tree(tree->left);
-	else if (tree->left && tree->left->type == WORDS)
-		return (exec_function(tree->left->content));
-	else if (tree->right && tree->right->type != WORDS)
-		exec_tree(tree->right);
-	else if (tree->right && tree->right->type == WORDS)
-		return (exec_function(tree->right->content));
-	else if (!tree->right && !tree->left && tree->content && tree->type == WORDS)
-	{
-		test = exec_function(tree->content);
-		ft_printf("TREE CONTENT TEST =%d,\n", test);
-		return (test);
-	}
-//		ft_printf("YOUPIIIIIIIIIIIII\n");
-//	ft_printf("EXEC TREE RETURN bien 0 left =%s, type =%d\n", tree->content, tree->type);
+	else
+		return (exec_tree2(tree));
 	return (0);
 }

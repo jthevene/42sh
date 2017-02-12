@@ -38,7 +38,7 @@ int			fdlist_pushback(t_fdlist **fdlist, int key)
 	return (1);
 }
 
-void		free_fdlist(t_fdlist **fdlist)
+void 		free_fdlist(t_fdlist **fdlist)
 {
 	t_fdlist	*tmp;
 	t_fdlist	*tmp_n;

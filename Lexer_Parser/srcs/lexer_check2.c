@@ -1,22 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   lexer_check2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/12 16:49:40 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/12 16:49:43 by sgaudin          ###   ########.fr       */
+/*   Created: 2017/02/12 15:37:02 by sgaudin           #+#    #+#             */
+/*   Updated: 2017/02/12 15:37:03 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/sh.h"
 
-void		ft_exit(void)
+void		print_tokens(t_token *token)
 {
-	go_to_end();
-	ft_putstr("\n");
-	ft_reset_termios(g_shell.t_back);
-	update_history_file(get_histsize("HISTFILESIZE"));
-	exit(0);
+	int		i;
+
+	i = 1;
+	printf("\n***TOKEN_LIST***\n");
+	while (token)
+	{
+		printf("TOKEN %d\n", i);
+		printf("type : (%d)\n", token->type);
+		printf("lexeme : (%s)\n", token->lexeme);
+		token = token->next;
+		i++;
+	}
+}
+
+t_token		*init_token(void)
+{
+	t_token	*token;
+
+	token = malloc(sizeof(t_token));
+	token->next = NULL;
+	return (token);
 }

@@ -12,7 +12,7 @@
 
 #include "../includes/42sh.h"
 
-int			simple_left(char *cmd, char *filename)
+int 		simple_left(char *cmd, char *filename)
 {
 	FT_INIT(int, new_fd, 0);
 	if ((new_fd = open(filename, O_RDONLY, 0600)) == -1)

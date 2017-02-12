@@ -24,14 +24,14 @@ static int		execve_pipe(char *content)
 
 int				exec_pipe(t_tree *left, t_tree *right)
 {
+	int			fd[2];
+
 	FT_INIT(pid_t, pid, 0);
-	FT_INIT(int, fd[2], {0});
 	FT_INIT(int, ret1, 0);
 	FT_INIT(int, ret2, 0);
 	if (pipe(fd) == -1)
 		return (0);
-	pid = fork();
-	if ((int)pid == -1)
+	if ((pid = fork()) == -1)
 	{
 		close(fd[0]);
 		close(fd[1]);
@@ -42,9 +42,9 @@ int				exec_pipe(t_tree *left, t_tree *right)
 		close(fd[0]);
 		exit(execve_pipe(left->content));
 	}
+	wait(&pid);
 	dup2(fd[0], STDIN_FILENO);
 	close(fd[1]);
-	wait(&pid);
 	ret1 = WEXITSTATUS(pid) == 0 ? 1 : 0;
 	ret2 = execve_pipe(right->content);
 	return (!ret1 || !ret2 ? 0 : 1);
@@ -58,7 +58,7 @@ int				run_pipe(t_tree *left, t_tree *right)
 	if ((int)pid == -1)
 		ret = 0;
 	else if ((int)pid == 0)
-		exit (ret = exec_pipe(left, right));
+		exit(ret = exec_pipe(left, right));
 	wait(NULL);
 	return (ret);
 }

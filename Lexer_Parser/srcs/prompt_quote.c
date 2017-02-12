@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prompt_quote.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/12 15:24:44 by sgaudin           #+#    #+#             */
+/*   Updated: 2017/02/12 15:24:46 by sgaudin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/sh.h"
 
-static void 	modif_prompt(char *modif_by)
+static void		modif_prompt(char *modif_by)
 {
 	if (g_shell.prompt)
 		ft_strdel(&g_shell.prompt);
 	g_shell.prompt = ft_strdup(modif_by);
-	g_shell.prompt_len = ft_strlen(g_shell.prompt);	
+	g_shell.prompt_len = ft_strlen(g_shell.prompt);
 }
 
-static int 		detect_input_type(int key, char *quote_type)
+static int		detect_input_type(int key, char *quote_type)
 {
 	if (key == K_DEL)
 		backspace_key(K_DEL);
@@ -25,7 +37,6 @@ static int 		detect_input_type(int key, char *quote_type)
 		return (1);
 	return (0);
 }
-
 
 char			*prompt_dquote(char *quote_type)
 {

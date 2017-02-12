@@ -51,7 +51,7 @@ static int		create_file(char *filename, t_fdlist **fdlist, int type)
 	return (fd);
 }
 
-static int		get_filename(t_tree *r, t_fdlist **fdl, int type)
+static int		get_filename(t_tree *r, t_fdlist **fdl, int type) 
 {
 	FT_INIT(int, ret, 0);
 	ret = create_file(r->content, fdl, type == MORE ? SIMPLE : DOUBLE);

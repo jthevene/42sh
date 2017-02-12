@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_to_tab.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/12 17:06:30 by sgaudin           #+#    #+#             */
+/*   Updated: 2017/02/12 17:06:32 by sgaudin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/42sh.h"
 
-char	**lst_to_tab(t_var *env)
+char			**lst_to_tab(t_var *env)
 {
-	t_var	*tmp;
+	t_var		*tmp;
 	char		**tableau;
 	int			i;
 
@@ -19,10 +31,10 @@ char	**lst_to_tab(t_var *env)
 	return (tableau);
 }
 
-int		lenght_list(t_var *env)
+int				lenght_list(t_var *env)
 {
-	t_var	*tmp;
-	int		lenght;
+	t_var		*tmp;
+	int			lenght;
 
 	lenght = 0;
 	tmp = env;

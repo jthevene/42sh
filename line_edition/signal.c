@@ -26,18 +26,18 @@ void		ft_sigint(int sig)  // ctrl + c
 {
 	(void)sig;
 	go_to_end();
- 	if (g_shell.current_line)
-		ft_bzero(g_shell.current_line, g_shell.line_size - 
+	if (g_shell.current_line)
+		ft_bzero(g_shell.current_line, g_shell.line_size -
 				g_shell.prompt_len);
 	ft_putstr("\n");
 	display_prompt();
 }
 
-void 		ft_sigkill(int sig)
+void		ft_sigkill(int sig)
 {
 	(void)sig;
 	if (g_shell.current_line)
-		ft_bzero(g_shell.current_line, g_shell.line_size - 
+		ft_bzero(g_shell.current_line, g_shell.line_size -
 				g_shell.prompt_len);
 	if (g_shell.line_2d_x)
 		ft_putstr("\n");
@@ -45,7 +45,7 @@ void 		ft_sigkill(int sig)
 	exit(0);
 }
 
-void 		ft_segfault(int sig)
+void		ft_segfault(int sig)
 {
 	(void)sig;
 	ft_putstr("Error segfault\nFin du programme\n");
@@ -53,25 +53,8 @@ void 		ft_segfault(int sig)
 	exit(0);
 }
 
-void 			distrib_sig(int sig)
+void		ft_signal(void)
 {
-	printf("sig =%d\n", sig);
-//	if (sig == SIGQUIT)
-//		return ;
-/*	if (sig == SIGINT)
-		ft_sigint(sig);
-	else if (sig == SIGWINCH)
-		ft_sigwinch(sig);*/
-}
-
-void			ft_signal(void)
-{
-/*	FT_INIT(int, i, 1);
-	while (i < 32)
-	{
-		signal(i, distrib_sig);
-		i++;	
-	}*/
 	signal(SIGWINCH, ft_sigwinch);
 	signal(SIGINT, ft_sigint);
 	signal(SIGSEGV, ft_segfault);

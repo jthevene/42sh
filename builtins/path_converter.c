@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path_converter.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/12 16:53:18 by sgaudin           #+#    #+#             */
+/*   Updated: 2017/02/12 16:53:20 by sgaudin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/42sh.h"
 
 static	char		*set_begining(char *sentence, char *home,
@@ -29,7 +41,7 @@ static	char		*set_begining(char *sentence, char *home,
 	return (new_path);
 }
 
-void			remove_last_dir(char **str, char c)
+void				remove_last_dir(char **str, char c)
 {
 	if (!str || !c)
 		return ;
@@ -56,7 +68,7 @@ void			remove_last_dir(char **str, char c)
 		(*str)[0] = '/';
 }
 
-static char 		*parse_dirs(char **dirs_tab, char *home, int len_sentence)
+static char			*parse_dirs(char **dirs_tab, char *home, int len_sentence)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char*, str, ft_strcpy(ft_strnew(len_sentence + 100), "/"));
@@ -79,12 +91,12 @@ static char 		*parse_dirs(char **dirs_tab, char *home, int len_sentence)
 	return (str);
 }
 
-char 		*path_converter(char *sentence, char *home, char *pwd)
+char				*path_converter(char *sentence, char *home, char *pwd)
 {
 	FT_INIT(char*, str, NULL);
 	FT_INIT(char**, dirs_tab, NULL);
 	if (sentence[0] != '/')
-		str	= set_begining(sentence, home, pwd);
+		str = set_begining(sentence, home, pwd);
 	dirs_tab = ft_strsplit(str ? str : sentence, '/');
 	ft_strdel(&str);
 	str = parse_dirs(dirs_tab, home, ft_strlen(sentence));

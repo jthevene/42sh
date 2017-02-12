@@ -30,9 +30,9 @@ static char		*str_to_search(char *sentence)
 	return (new_sentence);
 }
 
-t_file 			*get_file_path(char *path, char *sentence)
+t_file			*get_file_path(char *path, char *sentence)
 {
-	DIR 		*rep;
+	DIR			*rep;
 
 	FT_INIT(t_file*, files, NULL);
 	if (!path || !sentence)
@@ -60,7 +60,7 @@ static t_file	*files_list(char **sentence)
 	FT_INIT(t_file*, head, NULL);
 	FT_INIT(int, i, 0);
 	*sentence = default_sentence(sentence);
-	path = set_path(sentence, get_var(&g_shell, "HOME"), 
+	path = set_path(sentence, get_var(&g_shell, "HOME"),
 							get_var(&g_shell, "PWD"));
 	while (path && path[i])
 	{
@@ -77,8 +77,8 @@ static t_file	*files_list(char **sentence)
 	return (head);
 }
 
-static char 	*if_new_sentence(char *sentence, t_file *files
-					, char *new_sentence)
+static char		*if_new_sentence(char *sentence, t_file *files,
+								char *new_sentence)
 {
 	FT_INIT(int, i, 0);
 	ft_strdel(&sentence);
@@ -94,11 +94,12 @@ static char 	*if_new_sentence(char *sentence, t_file *files
 
 char			*detect_auto_completion(char *sentence)
 {
+	static int check = 0;
+
 	FT_INIT(t_file*, files, NULL);
 	FT_INIT(t_file*, match_files, NULL);
 	FT_INIT(char*, new_sentence, NULL);
 	FT_INIT(char*, to_search, NULL);
-	FT_INIT(static int, check, 0);
 	if (!sentence || !ft_strlen(sentence) || !verif_sentence(sentence))
 		return (sentence);
 	FT_INIT(char*, copy_sentence, set_copy_sentence(sentence));

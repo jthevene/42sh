@@ -12,7 +12,7 @@
 
 #include "../includes/42sh.h"
 
-void 	arrow_move_right()
+void			arrow_move_right(void)
 {
 	FT_INIT(int, len, g_shell.line_size);
 	FT_INIT(int, cursor_x, g_shell.cursor_x);
@@ -30,7 +30,7 @@ void 	arrow_move_right()
 	set_2d_edition_val();
 }
 
-void 	arrow_move_left()
+void			arrow_move_left(void)
 {
 	FT_INIT(int, len, g_shell.line_size);
 	FT_INIT(int, cursor_x, g_shell.cursor_x);
@@ -53,7 +53,7 @@ void 	arrow_move_left()
 	set_2d_edition_val();
 }
 
-void 	move_one_word(int direction)
+void			move_one_word(int direction)
 {
 	void (*function)(void);
 
@@ -79,7 +79,7 @@ void 	move_one_word(int direction)
 		arrow_move_right();
 }
 
-void 	move_cursor_n_to_direction(int n, int direction)
+void			move_cursor_n_to_direction(int n, int direction)
 {
 	void (*function)(void);
 
@@ -91,7 +91,7 @@ void 	move_cursor_n_to_direction(int n, int direction)
 	}
 }
 
-int 	distrib_cursor_moves(int key)
+int				distrib_cursor_moves(int key)
 {
 	if (key == K_UP || key == K_DOWN)
 	{

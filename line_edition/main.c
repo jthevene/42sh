@@ -12,14 +12,14 @@
 
 #include "../includes/42sh.h"
 
-void		display_prompt(void)
+void			display_prompt(void)
 {
 	g_shell.prompt = set_prompt(get_var(&g_shell, "PWD"));
 	ft_putstr(g_shell.prompt);
 	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
 }
 
-void 		set_2d_edition_val(void)
+void			set_2d_edition_val(void)
 {
 	FT_INIT(int, ref_x, ft_strlen(g_shell.current_line) + g_shell.prompt_len);
 	FT_INIT(int, y, 0);
@@ -31,7 +31,6 @@ void 		set_2d_edition_val(void)
 	}
 	g_shell.line_2d_y = y;
 	g_shell.line_2d_x = ref_x;
-//	ft_printf("line_2d_x =%d, line_2d_y =%d,\n", g_shell.line_2d_x, g_shell.line_2d_y);
 	ref_x = g_shell.cursor_x;
 	y = 0;
 	while (ref_x >= g_shell.win->ws_col)
@@ -46,10 +45,9 @@ void 		set_2d_edition_val(void)
 	}
 	g_shell.cursor_2d_y = y;
 	g_shell.cursor_2d_x = ref_x;
-//	ft_printf("\n\ncursor_2d_x =%d, cursor_2d_y =%d,\n", g_shell.cursor_2d_x, g_shell.cursor_2d_y);
 }
 
-static 	void 	parse_capabilities(int key)
+static void		parse_capabilities(int key)
 {
 	if (distrib_cursor_moves(key))
 		;
@@ -63,8 +61,6 @@ static 	void 	parse_capabilities(int key)
 		g_shell.cursor_x = g_shell.prompt_len;
 		set_2d_edition_val();
 	}
-	else if (key == K_ESCAPE)
-		return (ft_exit());
 	else if (key == K_TAB)
 	{
 		detect_auto_completion(g_shell.current_line);
@@ -72,7 +68,7 @@ static 	void 	parse_capabilities(int key)
 	}
 }
 
-static	void	run_shell(void)
+static void		run_shell(void)
 {
 	FT_INIT(int, key, 0);
 	g_shell.cursor_x = g_shell.prompt_len;
@@ -93,7 +89,7 @@ static	void	run_shell(void)
 	}
 }
 
-int		main(void)
+int				main(void)
 {
 	if (init_all())
 		return (0);

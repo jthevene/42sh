@@ -12,16 +12,16 @@
 
 #include "../includes/42sh.h"
 
-int		detect_builtins(char* to_exec, char *command_line)
+int			detect_builtins(char *to_exec, char *command_line)
 {
 	if (!ft_strcmp(to_exec, "echo"))
-		return (_42sh_echo(command_line));
+		return (ft_echo(command_line));
 	else if (!ft_strcmp(to_exec, "unsetenv"))
-		return (_42sh_unsetenv(command_line));
+		return (ft_unsetenv(command_line));
 	else if (!ft_strcmp(to_exec, "setenv"))
-		return (_42sh_setenv(command_line));
+		return (ft_setenv(command_line));
 	else if (!ft_strcmp(to_exec, "env"))
-		return (_42sh_env());
+		return (ft_env(command_line));
 	else if (!ft_strcmp(to_exec, "cd"))
 		return (cd(command_line));
 	else if (!ft_strcmp(to_exec, "history"))

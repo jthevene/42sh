@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   aggreg_file.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/12 15:23:08 by sgaudin           #+#    #+#             */
+/*   Updated: 2017/02/12 15:23:10 by sgaudin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/sh.h"
 
 int		check_for_aggreg_fd(t_token *token, char *line, int pos)
@@ -8,7 +20,8 @@ int		check_for_aggreg_fd(t_token *token, char *line, int pos)
 		i++;
 	if (line[pos + i] == '<')
 		if (line[pos + i + 1] == '&')
-			if (line[pos + i + 2] == '-' || ft_isdigit((unsigned char)line[pos + i + 2]))
+			if (line[pos + i + 2] == '-'
+				|| ft_isdigit((unsigned char)line[pos + i + 2]))
 			{
 				pos = pos + i + 3;
 				token->type = AGGREG_LEFT;
@@ -17,7 +30,8 @@ int		check_for_aggreg_fd(t_token *token, char *line, int pos)
 			}
 	if (line[pos + i] == '>')
 		if (line[pos + i + 1] == '&')
-			if (line[pos + i + 2] == '-' || ft_isdigit((unsigned char)line[pos + i + 2]))
+			if (line[pos + i + 2] == '-'
+				|| ft_isdigit((unsigned char)line[pos + i + 2]))
 			{
 				pos = pos + i + 3;
 				token->type = AGGREG_RIGHT;
@@ -32,7 +46,8 @@ int		check_for_aggreg(t_token *token, char *line, int pos)
 	FT_INIT(int, i, pos);
 	if (line[pos] == '<')
 		if (line[pos + 1] == '&')
-			if (line[pos + 2] == '-' || ft_isdigit((unsigned char)line[pos + 2]))
+			if (line[pos + 2] == '-'
+				|| ft_isdigit((unsigned char)line[pos + 2]))
 			{
 				pos = pos + 3;
 				token->type = AGGREG_LEFT;
@@ -41,7 +56,8 @@ int		check_for_aggreg(t_token *token, char *line, int pos)
 			}
 	if (line[pos] == '>')
 		if (line[pos + 1] == '&')
-			if (line[pos + 2] == '-' || ft_isdigit((unsigned char)line[pos + 2]))
+			if (line[pos + 2] == '-'
+				|| ft_isdigit((unsigned char)line[pos + 2]))
 			{
 				pos = pos + 3;
 				token->type = AGGREG_RIGHT;

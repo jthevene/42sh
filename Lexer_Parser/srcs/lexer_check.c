@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer_check.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/12 15:24:18 by sgaudin           #+#    #+#             */
+/*   Updated: 2017/02/12 15:24:20 by sgaudin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/sh.h"
 
-int		check_ope(t_token *token, char *line, int pos, int i)
+int			check_ope(t_token *token, char *line, int pos, int i)
 {
 	if (ft_isope(line[pos]) == 1)
 	{
@@ -82,46 +94,21 @@ int			pipe_or_token(t_token *token, char *line, int pos, int i)
 	return (pos);
 }
 
-int        ft_isprintnotope(char c)
+int			ft_isprintnotope(char c)
 {
 	if (ft_isope(c) >= 1)
-        return (0);
-    else if (c == ' ')
-        return (0);
-    else if (c == '\t')
-        return (0);
-    else if (c == '\n')
-        return (0);
-    else if (c == '\"')
-    	return (0);
-    else if (c == '\'')
-    	return (0);
-    else if (ft_isprint(c) == 1)
-        return (1);
-    return (0);
-}
-
-void	print_tokens(t_token *token)
-{
-	int		i;
-
-	i = 1;
-	printf("\n***TOKEN_LIST***\n");
-	while (token)
-	{
-		printf("TOKEN %d\n", i);
-		printf("type : (%d)\n", token->type);
-		printf("lexeme : (%s)\n", token->lexeme);
-		token = token->next;
-		i++;
-	}
-}
-
-t_token	*init_token(void)
-{
-	t_token	*token;
-
-	token = malloc(sizeof(t_token));
-	token->next = NULL;
-	return (token);
+		return (0);
+	else if (c == ' ')
+		return (0);
+	else if (c == '\t')
+		return (0);
+	else if (c == '\n')
+		return (0);
+	else if (c == '\"')
+		return (0);
+	else if (c == '\'')
+		return (0);
+	else if (ft_isprint(c) == 1)
+		return (1);
+	return (0);
 }

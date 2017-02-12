@@ -12,7 +12,7 @@
 
 #include "../includes/42sh.h"
 
-static void 	reset_line()
+static void			reset_line(void)
 {
 	free(g_shell.line);
 	move_cursor_n_to_direction(g_shell.line_size, 1);
@@ -25,8 +25,8 @@ static void 	reset_line()
 	init_hist_opt();
 }
 
-void	return_key(void)
-{ 
+void				return_key(void)
+{
 	go_to_end();
 	FT_INIT(int, add_hist, 0);
 	if (ft_strlen(g_shell.current_line))
@@ -36,8 +36,6 @@ void	return_key(void)
 		ft_putchar(10);
 		g_shell.result_exec = -99;
 		g_shell.all_results = -99;
-		// if (!add_hist && !g_shell.hist_opt.p)
-			// ft_newhist(g_shell.current_line);
 		lexer_parser(ft_strdup(g_shell.current_line));
 		reset_line();
 	}

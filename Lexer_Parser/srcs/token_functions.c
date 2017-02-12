@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token_functions.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/12 15:25:23 by sgaudin           #+#    #+#             */
+/*   Updated: 2017/02/12 15:25:25 by sgaudin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/sh.h"
 
 int		token_squote(t_token *token, char *line, int pos, int i)
@@ -62,7 +74,7 @@ int		compare_end(char *str1, char *str2)
 	FT_INIT(int, i, ft_strlen(str1));
 	FT_INIT(int, e, i - 2);
 	FT_INIT(int, x, 0);
-	while(str2[x] == str1[e] && str1[e] && str2[x])
+	while (str2[x] == str1[e] && str1[e] && str2[x])
 	{
 		x++;
 		e++;

@@ -42,18 +42,24 @@ char		*recup_value(char *line)
 	return (NULL);
 }
 
-int			_42sh_setenv(char *line)
+int			check_setenv(char **name, char **value)
+{
+	if (!(*name) || !(*value))
+	{
+		free((*name) ? (*name) : NULL);
+		free((*value) ? (*value) : NULL);
+		return (0);
+	}
+	return (1);
+}
+
+int			ft_setenv(char *line)
 {
 	FT_INIT(t_var *, tmp, g_shell.env);
 	FT_INIT(char *, name, recup_name(line));
 	FT_INIT(char *, value, recup_value(line));
-	FT_INIT(t_var *, new, NULL);
-	if (!name || !value)
-	{
-		free(name ? name : NULL);
-		free(value ? value : NULL);
+	if (!check_setenv(&name, &value))
 		return (0);
-	}
 	while (tmp)
 	{
 		if (!ft_strcmp(name, tmp->name))
@@ -65,7 +71,7 @@ int			_42sh_setenv(char *line)
 		}
 		if (!tmp->next)
 		{
-			new = new_var(name, value);
+			FT_INIT(t_var *, new, new_var(name, value));
 			free(name);
 			free(value);
 			tmp->next = new;

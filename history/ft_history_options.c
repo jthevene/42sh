@@ -51,7 +51,7 @@ void	delete_line_history(char *nbr)
 	if (!nbr)
 	{
 		ft_putendl("history -d argument must be a positive number");
-		return;
+		return ;
 	}
 	FT_INIT(int, i, ft_atoi(nbr));
 	if (!tmp || i < 1 || i > tmp->number)
@@ -79,10 +79,10 @@ void	update_history_file(int histfilesize)
 	if (!tmp)
 		return ;
 	if (!g_shell.hist_opt.filename)
-		g_shell.hist_opt.filename = ft_strjoin(get_var(&g_shell, 
+		g_shell.hist_opt.filename = ft_strjoin(get_var(&g_shell,
 			"HOME"), "/.history");
 	if ((g_shell.hist_fd = open(g_shell.hist_opt.filename, O_RDWR | O_CREAT |
-	 O_TRUNC, 0600)) == -1)
+	O_TRUNC, 0600)) == -1)
 	{
 		ft_error(g_shell.hist_opt.filename);
 		return ;
@@ -106,9 +106,9 @@ void	histfile_append(void)
 	FT_INIT(char *, line, NULL);
 	if (!g_shell.hist_opt.filename)
 		g_shell.hist_opt.filename = ft_strjoin(get_var(&g_shell,
-		 "HOME"), "/.history");
+		"HOME"), "/.history");
 	if ((g_shell.hist_fd = open(g_shell.hist_opt.filename, O_RDONLY, 0600))
-	 == -1)
+	== -1)
 	{
 		ft_error(g_shell.hist_opt.filename);
 		return ;

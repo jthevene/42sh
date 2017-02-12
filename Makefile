@@ -29,7 +29,8 @@ LFLAGS				=	-L$(LIBFT_DIR) -l$(LIBFT)
 
 FILES_EDITION 		=	main.c catch_key.c 	cursor_move.c \
 						init.c copy_cut_past.c line_edition.c print_line.c \
-						return_key.c signal.c termios.c free_term.c
+						return_key.c signal.c termios.c free_term.c \
+						detect_arrows.c print_line_tools.c
 
 FILES_COMPLETION	=	detect_auto_completion.c get_files.c match_elements.c \
 						set_path.c display_completion.c build_list.c \
@@ -90,7 +91,7 @@ BIN_GLOBING 	= 	$(FILES_GLOBING:.c=.o) $(FILES_REDIR:.c=.o) \
 PARSER = ./Lexer_Parser/srcs/
 
 FILES_PARSER 	= 	backslash_escape.c free_tree.c \
-					isallspace.c lexer_check.c parser_distrib.c parse.c \
+					isallspace.c lexer_check.c lexer_check2.c parser_distrib.c parse.c \
 					start_parse.c tree.c token_functions.c prompt_quote.c \
 					quote_functions.c quote_functions_2.c error_parse.c \
 					check_heredoc.c aggreg_file.c
@@ -105,7 +106,7 @@ BIN_PARSER 		= 	$(FILES_PARSER:.c=.o)
 BUILTIN 		= 	./builtins/
 
 FILES_BUILTIN 	= 	echo.c env.c setenv.c unsetenv.c cd.c path_converter.c \
-					exit.c cd_tools.c
+					exit.c cd_tools.c init_env.c
 
 SRC_BUILTIN  	= 	$(addprefix $(BUILTIN), $(FILES_BUILTIN))
 
@@ -132,7 +133,7 @@ BIN_HISTORY 	= 	$(FILES_HISTORY:.c=.o)
 
 EXECUTION 		= 	./execution/
 
-FILES_EXECUTION =	distrib_functions.c exec_tree.c binary_tree_parser.c \
+FILES_EXECUTION =	distrib_functions.c exec_tree.c \
 					env_to_tab.c exec_utils.c exec_pipe.c exec_redir.c \
 					redir_utils.c simple_left.c
 
@@ -141,7 +142,6 @@ SRC_EXECUTION 	= 	$(addprefix $(EXECUTION), $(FILES_EXECUTION))
 BIN_EXECUTION 	= 	$(FILES_EXECUTION:.c=.o)
 
 #################		END EXECUTION PART 		###############################
-
 
 INCLUDES 	= -I$(LIBFT_INCLUDE_DIR) -I$(INCLUDE_DIR) -I$(PARSER)../includes/
 ALL_SRCS 	= $(SRC_COMPLETION_EDIT) $(SRC_GLOBING) $(SRC_PARSER) $(SRC_BUILTIN) $(SRC_HISTORY) $(SRC_EXECUTION)

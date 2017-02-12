@@ -35,7 +35,27 @@ char		*unsetenv_get_name(char *line)
 	return (ft_strsub(line, j, len));
 }
 
-int			_42sh_unsetenv(char *line)
+int			ft_unsetenv_suite(t_var **tmp, t_var **tmp_prev,
+								t_var **tmp_free, char **name)
+{
+	if (!(*tmp_prev))
+	{
+		free_node(&(*tmp_free));
+		g_shell.env = (*tmp);
+		free((*name));
+		return (1);
+	}
+	else
+	{
+		free_node(&(*tmp_free));
+		(*tmp_prev)->next = NULL;
+		free((*name));
+		return (1);
+	}
+	return (0);
+}
+
+int			ft_unsetenv(char *line)
 {
 	FT_INIT(t_var *, tmp, g_shell.env);
 	FT_INIT(t_var *, tmp_free, NULL);
@@ -49,24 +69,12 @@ int			_42sh_unsetenv(char *line)
 		{
 			tmp_free = tmp;
 			tmp = tmp->next;
-			if (!tmp_prev)
-			{
-				free_node(&tmp_free);
-				g_shell.env = tmp;
-				free(name);
+			if (ft_unsetenv_suite(&tmp, &tmp_prev, &tmp_free, &name) == 1)
 				return (1);
-			}
-			else
-			{
-				free_node(&tmp_free);
-				tmp_prev->next = NULL;
-				free(name);
-				return (1);
-			}
 		}
 		tmp_prev = tmp;
 		tmp = tmp->next;
 	}
-	free(name);	
+	free(name);
 	return (0);
 }

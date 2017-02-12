@@ -12,7 +12,7 @@
 
 #include "./includes/libft.h"
 
-char 	*ft_str_replace(char *str, char *to_search, char *to_replace)
+char		*ft_str_replace(char *str, char *to_search, char *to_replace)
 {
 	FT_INIT(char*, str_replaced, NULL);
 	FT_INIT(int, len_str, 0);

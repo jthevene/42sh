@@ -112,6 +112,7 @@ int					verif_access(char **path, char **file, char *option);
 ** CATCH_KEY
 */
 void 				set_2d_edition_val(void);
+int					detect_arrow(char *key);
 int					readkey(void);
 /*
 ** CURSOR_MOVE
@@ -145,6 +146,8 @@ void				display_prompt(void);
 */
 void				clean_line();
 void				print_line(int i);
+void 				reset_cursor_pos(void);
+int 				set_cursor_start(int len, int ref_cursor);
 /*
 ** RETURN_KEY
 */
@@ -165,10 +168,10 @@ void				ft_reset_termios(struct termios t_back);
 /*
 ** BUILTINS
 */
-int					_42sh_echo(char *line);
-int					_42sh_env(void);
-int					_42sh_setenv(char *line);
-int					_42sh_unsetenv(char *name);
+int					ft_echo(char *line);
+int					ft_env(char *cmd);
+int					ft_setenv(char *line);
+int					ft_unsetenv(char *name);
 void 				ft_exit(void);
 char				*get_var(t_shell *g_shell, char *n_var);
 void				ft_varappend(t_var *new_element);
@@ -188,7 +191,5 @@ int					exec_function(char *content);
 /*
 ** REDIRECTIONS
 */
-void 				free_fdlist(t_fdlist **fdlist);
-int					fdlist_pushback(t_fdlist **fdlist, int key);
 
 #endif

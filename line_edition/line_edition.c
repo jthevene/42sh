@@ -12,7 +12,7 @@
 
 #include "../includes/42sh.h"
 
-void 	add_char(char c)
+void			add_char(char c)
 {
 	FT_INIT(int, pos_x, g_shell.cursor_x - g_shell.prompt_len);
 	FT_INIT(int, i, 0);
@@ -31,7 +31,7 @@ void 	add_char(char c)
 	g_shell.current_line[pos_x] = '\0';
 }
 
-void	backspace_key(int key)
+void			backspace_key(int key)
 {
 	FT_INIT(int, len, ft_strlen(g_shell.current_line));
 	FT_INIT(int, cursor_pos, g_shell.cursor_x - (g_shell.prompt_len + 1));
@@ -46,7 +46,7 @@ void	backspace_key(int key)
 		cursor_pos++;
 	while (cursor_pos < len)
 	{
-		g_shell.current_line[cursor_pos] = g_shell.current_line[cursor_pos + 1];	
+		g_shell.current_line[cursor_pos] = g_shell.current_line[cursor_pos + 1];
 		cursor_pos++;
 	}
 	g_shell.current_line[cursor_pos] = '\0';
@@ -54,8 +54,7 @@ void	backspace_key(int key)
 		print_line(-1);
 }
 
-
-void 	fill_btwn_char(char c)
+void			fill_btwn_char(char c)
 {
 	FT_INIT(int, len, ft_strlen(g_shell.current_line));
 	FT_INIT(char*, tmp, NULL);
@@ -69,10 +68,10 @@ void 	fill_btwn_char(char c)
 	add_char(c);
 }
 
-void	fill_current_line(char c)
+void			fill_current_line(char c)
 {
 	char	*tmp;
-	int 	len;
+	int		len;
 
 	tmp = NULL;
 	len = 0;

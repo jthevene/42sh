@@ -39,7 +39,7 @@ int		history_hub(char *line)
 	split_line(line);
 	get_history_options();
 	FT_INIT(int, options, check_hist_opt());
-
+/*
 	ft_putstr("g_shell.current_line = ");
 	ft_putendl(g_shell.current_line);
 	ft_putstr("line = ");
@@ -50,7 +50,7 @@ int		history_hub(char *line)
 	ft_putendl(g_shell.hist_opt.arg);
 	ft_putstr("options = ");
 	ft_putendl(g_shell.hist_opt.options);
-
+*/
 	if (options > 0)
 		return (1);
 	else if (options < 0 && !g_shell.hist_opt.c)
@@ -113,7 +113,7 @@ void	ft_history(char *nbr)
 	}
 }
 
-void	show_hist_list()
+void	show_hist_list(void)
 {
 	t_lst	*tmp;
 

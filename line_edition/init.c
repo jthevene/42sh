@@ -12,7 +12,7 @@
 
 #include "../includes/42sh.h"
 
-void	init_hist_opt()
+void			init_hist_opt(void)
 {
 	g_shell.hist_opt.c = false;
 	g_shell.hist_opt.d = false;
@@ -26,7 +26,7 @@ void	init_hist_opt()
 	g_shell.hist_opt.filename = NULL;
 }
 
-void	init_hist()
+void			init_hist(void)
 {
 	FT_INIT(char *, filename, NULL);
 	g_shell.hist_fd = 0;
@@ -43,7 +43,7 @@ void	init_hist()
 	close(g_shell.hist_fd);
 }
 
-static void		init_win()
+static void		init_win(void)
 {
 	g_shell.win = ft_memalloc(sizeof(struct winsize));
 	g_shell.win->ws_row = 0;
@@ -53,7 +53,7 @@ static void		init_win()
 	ioctl(0, TIOCGWINSZ, g_shell.win);
 }
 
-static void 	init_edition()
+static void		init_edition(void)
 {
 	g_shell.current_line = NULL;
 	g_shell.line = NULL;
@@ -73,20 +73,19 @@ static void 	init_edition()
 	g_shell.c = ft_strnew(16);
 	g_shell.prompt = 0;
 	g_shell.prompt_len = 0;
-
 	g_shell.result_exec = -99;
 	g_shell.all_results = -99;
 }
 
-int		init_all()
+int				init_all(void)
 {
- 	t_shell		*shell;
+	t_shell		*shell;
 
- 	if (!(shell = (t_shell *)malloc(sizeof(t_shell))))
- 	{
- 		ft_putendl("ft_init_shell Initialisation shell -> try again");
- 		exit(0);
- 	}
+	if (!(shell = (t_shell *)malloc(sizeof(t_shell))))
+	{
+		ft_putendl("ft_init_shell Initialisation shell -> try again");
+		exit(0);
+	}
 	ft_signal();
 	if (!init_env())
 		return (1);

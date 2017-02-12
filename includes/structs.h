@@ -77,6 +77,7 @@ typedef struct				s_shell
 	char 					*clipboard;
 	char 					*prompt;
 	char					*current_line; //ligne en cours d'edition
+	int						env_opt;
 	t_var					*env; //contenu de ENV
 	int 					prompt_len;
 	int 					start_select;

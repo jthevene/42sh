@@ -24,7 +24,7 @@ int				prev_sentence_value(char *sentence)
 	return (val);
 }
 
-char 			*set_copy_sentence(char *sentence)
+char			*set_copy_sentence(char *sentence)
 {
 	FT_INIT(char*, copy_sentence, NULL);
 	FT_INIT(int, nb_char, 0);

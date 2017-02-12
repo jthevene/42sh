@@ -62,45 +62,49 @@ void		ft_varappend(t_var *new_element)
 	}
 }
 
-int			init_env(void)
+char		*get_cmd_to_exec(char *cmd)
 {
-	int				i;
-	char			*v_name;
-	char			*v_value;
-	t_var			*var;
-	extern char		**environ;
-
-	i = 0;
-	if (!environ[0])
-	{
-		ft_putendl("error : no environ ; need to create basic env var");
-		return (0);
-	}
-	while (environ[i])
-	{
-		v_value = ft_strchr(environ[i], '=') + 1;
-		v_name = ft_strsub(environ[i], 0, v_value - environ[i] - 1);
-		var = new_var(v_name, v_value);
-		ft_varappend(var);
-		free(v_name);
+	FT_INIT(int, i, 0);
+	while (cmd[i] == ' ')
 		i++;
+	while (cmd[i] && cmd[i] != ' ')
+		i++;
+	while (cmd[i] && cmd[i] == ' ')
+		i++;
+	if (cmd[i] == '-' && cmd[i + 1] == 'i' && cmd[i + 2] == ' ')
+	{
+		while (cmd[i] != ' ')
+			i++;
+		while (cmd[i] == ' ')
+			i++;
+		return (ft_strsub(cmd, i, ft_strlen(cmd) - i));
 	}
-	g_shell.oldpwd = get_var(&g_shell, "OLDPWD");
-	g_shell.hist = (t_lst*)ft_memalloc(sizeof(t_lst));
-	return (1);
+	else if (cmd[i] == '-' && cmd[i + 1] == 'i' && !cmd[i + 2])
+		return (NULL);
+	else if (cmd[i] && cmd[i] != ' ')
+		return (ft_strsub(cmd, i, ft_strlen(cmd) - i));
+	return (NULL);
 }
 
-int			_42sh_env(void)
+int			ft_env(char *cmd)
 {
+	FT_INIT(char **, tmp, ft_strsplit(cmd, ' '));
 	FT_INIT(t_var *, tmp_env, g_shell.env);
+	FT_INIT(char *, to_exec, get_cmd_to_exec(cmd));
 	if (!g_shell.env)
 		return (1);
-	while (tmp_env)
+	if (tmp && tmp[1] && !ft_strcmp(tmp[1], "-i"))
+		g_shell.env_opt = TRUE;
+	if (to_exec != NULL)
+		exec_function(to_exec);
+	while (!to_exec && g_shell.env_opt == FALSE && tmp_env)
 	{
 		ft_putstr(tmp_env->name);
 		ft_putchar('=');
 		ft_putendl(tmp_env->value);
 		tmp_env = tmp_env->next;
 	}
+	g_shell.env_opt = FALSE;
+	free_tab(tmp);
 	return (0);
 }

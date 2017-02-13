@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 16:49:40 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:55 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/13 20:10:00 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@ void		ft_exit(void)
 	ft_putstr("\n");
 	ft_reset_termios(g_shell.t_back);
 	update_history_file(get_histsize("HISTFILESIZE"));
+	free_hist();
 	exit(0);
 }

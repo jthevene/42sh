@@ -6,11 +6,26 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 10:57:09 by jules             #+#    #+#             */
-/*   Updated: 2017/02/07 09:08:01 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/13 20:15:06 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/history.h"
+
+void	free_hist(void)
+{
+	if (g_shell.hist)
+	{
+		while (g_shell.hist->prev)
+		{
+			free(g_shell.hist->content);
+			g_shell.hist = g_shell.hist->prev;
+		}
+		free(g_shell.hist->content);
+		g_shell.hist = g_shell.hist->prev;
+		g_shell.hist = NULL;
+	}
+}
 
 void	get_hist(void)
 {
@@ -29,6 +44,8 @@ void	get_hist(void)
 		ft_newhist(line);
 		free(line);
 	}
+	if (line)
+		free(line);
 	g_shell.end_hist_file = g_shell.hist;
 	free(filename);
 }

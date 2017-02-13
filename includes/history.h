@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:13 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/13 20:10:47 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_lst				*get_dir_content(char *dir);
 /*
 ** HISTORIC
 */
-void				show_hist_list();
+void				free_hist();
 void				get_hist(void);
 void				ft_newhist(char *line);
 void				put_hist_line(char *content);

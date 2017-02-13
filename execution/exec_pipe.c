@@ -26,6 +26,11 @@ int				exec_pipe(t_tree *left, t_tree *right)
 {
 	int			fd[2];
 
+	if (right->type == PIPE)
+	{
+		printf("right->content = %s, right->left->content = %s, right->right->content = %s\n", right->content, right->left->content, right->right->content);
+		ft_exit();
+	}
 	FT_INIT(pid_t, pid, 0);
 	FT_INIT(int, ret1, 0);
 	FT_INIT(int, ret2, 0);

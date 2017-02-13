@@ -67,13 +67,13 @@ int		lire_lexeme(t_token *token, char *line, int pos)
 		pos++;
 	if (line[pos] == '\'')
 		pos = token_squote(token, line, pos, i);
-	else if (line[pos] == '\"')
+	if (line[pos] == '\"')
 		pos = token_dquote(token, line, pos, i);
-	else if (ft_isdigit(line[pos]))
+	if (ft_isdigit(line[pos]))
 		pos = check_for_aggreg_fd(token, line, pos);
-	else if (ft_isope(line[pos]) == 2 || ft_isope(line[pos]) == 3)
+	if (ft_isope(line[pos]) == 2 || ft_isope(line[pos]) == 3)
 		pos = check_for_aggreg(token, line, pos);
-	else if (ft_isprintnotope(line[pos]) == 1)
+	if (ft_isprintnotope(line[pos]) == 1)
 	{
 		token->type = WORDS;
 		i = pos;
@@ -81,7 +81,7 @@ int		lire_lexeme(t_token *token, char *line, int pos)
 		add_lexeme(token, line, pos, i);
 		//backslash_char(token);
 	}
-	else if (ft_isope(line[pos]) >= 1)
+	if (ft_isope(line[pos]) >= 1)
 		pos = check_ope(token, line, pos, i);
 	return (pos);
 }

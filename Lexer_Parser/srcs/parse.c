@@ -18,8 +18,10 @@ void	parse(t_tree *tree, t_token *token)
 		if (and_or(tree, token) == 0)
 			if (redirections(tree, token) == 0)
 			{
-				tree->type = token->type;
+				tree->type = WORDS;
 				tree->content = commands_leaf(token);
+				printf("Type : (%d)\n", tree->type);
+				printf("Content : (%s)\n", tree->content);
 			}
 }
 

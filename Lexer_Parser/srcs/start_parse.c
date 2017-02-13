@@ -47,9 +47,7 @@ t_token	*get_token_redirections(t_token *token)
 	tmp = token;
 	while (tmp)
 	{
-		if (tmp->type == PIPE || tmp->type == DLESS \
-			|| tmp->type == DMORE || tmp->type == LESS \
-			|| tmp->type == MORE)
+		if (tmp->type == PIPE)
 			break ;
 		tmp = tmp->next;
 	}

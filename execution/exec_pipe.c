@@ -22,14 +22,26 @@ static int		execve_pipe(char *content)
 	return (parse_bin_directories(bin_dir, args));
 }
 
+char 			*content_to_exec(t_tree *left, t_tree *right)
+{
+	FT_INIT(char*, content, right->content);
+	if (!ft_strcmp(right->content, "|") && left)
+	{
+		if (right->left && right->right)
+			exit(exec_pipe(right->left, right->right));
+	}
+	return (content);
+}
+
+
 int				exec_pipe(t_tree *left, t_tree *right)
 {
 	int			fd[2];
 
 	if (right->type == PIPE)
 	{
-		printf("right->content = %s, right->left->content = %s, right->right->content = %s\n", right->content, right->left->content, right->right->content);
-		ft_exit();
+//		printf("right->content = %s, right->left->content = %s, right->right->content = %s\n", right->content, right->left->content, right->right->content);
+//		ft_exit();
 	}
 	FT_INIT(pid_t, pid, 0);
 	FT_INIT(int, ret1, 0);
@@ -51,7 +63,7 @@ int				exec_pipe(t_tree *left, t_tree *right)
 	dup2(fd[0], STDIN_FILENO);
 	close(fd[1]);
 	ret1 = WEXITSTATUS(pid) == 0 ? 1 : 0;
-	ret2 = execve_pipe(right->content);
+	ret2 = execve_pipe(content_to_exec(left, right));
 	return (!ret1 || !ret2 ? 0 : 1);
 }
 

@@ -107,4 +107,6 @@ int 	simple_left(char *cmd, char *filename);
 void	free_fdlist(t_fdlist **fdlist);
 int		fdlist_pushback(t_fdlist **fdlist, int key);
 
+int		exec_pipe(t_tree *left, t_tree *right);
+
 #endif

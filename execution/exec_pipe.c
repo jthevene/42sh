@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 09:28:00 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/07 09:28:01 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/13 12:38:38 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/21sh.h"
 
 static int		execve_pipe(char *content)
 {

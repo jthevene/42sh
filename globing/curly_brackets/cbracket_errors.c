@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cbracket_errors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 15:37:23 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/11/21 15:37:24 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/13 12:38:34 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		cbracket_errors(char *line, t_glob *glob)
 	FT_INIT(char *, tmp, NULL);
 	if (ft_strchr(line, ' '))
 	{
-		tmp = ft_strjoin("42sh: Spaces are forbidden in expression: "
+		tmp = ft_strjoin("21sh: Spaces are forbidden in expression: "
 			, glob->command);
 		ft_putendl_fd(tmp, 2);
 		free(tmp);
@@ -38,7 +38,7 @@ int		cbracket_errors(char *line, t_glob *glob)
 	}
 	else if (!check_commas(line, 0) && !(is_expansion(line)))
 	{
-		tmp = ft_strjoin("42sh: Bad pattern in expression: ", glob->command);
+		tmp = ft_strjoin("21sh: Bad pattern in expression: ", glob->command);
 		ft_putendl_fd(tmp, 2);
 		ft_putendl_fd("Pattern should be of type: \"{,*.c}\","
 			" \"{*.c,*.h}\" or \"{1..9}\"", 2);

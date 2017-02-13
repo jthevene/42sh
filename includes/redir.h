@@ -6,15 +6,15 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 18:56:17 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/10 11:45:24 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/13 12:38:09 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REDIR_H
 # define REDIR_H
 
-# ifndef _42SH_H
-#  include "42sh.h"
+# ifndef _21SH_H
+#  include "21sh.h"
 # endif
 
 # ifndef FT_INIT

@@ -10,7 +10,7 @@
 #                                                                              #
 #******************************************************************************#
 
-NAME				=	42sh
+NAME				=	21sh
 
 INCLUDE_DIR			=	./includes
 EDITION_DIR			=	./line_edition/

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_sentence.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvirgile <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 17:19:59 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/01/16 17:20:05 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/02/13 12:38:41 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/21sh.h"
 
 void		free_simple_tab(char ***tab_to_del)
 {

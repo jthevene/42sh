@@ -1,8 +1,8 @@
 #ifndef SH_H
 # define SH_H
 
-# ifndef _42SH_H
-#  include "42sh.h"
+# ifndef _21SH_H
+#  include "21sh.h"
 # endif
 
 # define WORDS			0

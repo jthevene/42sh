@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 13:23:43 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/01/23 13:23:44 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/13 12:38:57 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/21sh.h"
 
 static void	free_commands(char **commands)
 {

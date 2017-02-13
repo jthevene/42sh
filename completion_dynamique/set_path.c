@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvirgile <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 17:19:24 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/01/16 17:19:37 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/02/13 12:38:43 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/21sh.h"
 
 static	char		*set_begining(char *sentence, char *home,
 					char *current_path)

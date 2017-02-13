@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 17:27:22 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/12 17:27:25 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/13 12:38:28 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*event_str(char *str, char *type)
 			return (ft_strdup(tmp->content));
 		tmp = tmp->prev;
 	}
-	ft_printf("\n42sh: %s: event not found", type);
+	ft_printf("\n21sh: %s: event not found", type);
 	return (NULL);
 }
 
@@ -64,6 +64,6 @@ char	*event_n(int n, char *type)
 		if (tmp)
 			return (ft_strdup(tmp->content));
 	}
-	ft_printf("\n42sh: %s: event not found", type);
+	ft_printf("\n21sh: %s: event not found", type);
 	return (NULL);
 }

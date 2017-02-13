@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   detect_arrows.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 17:59:34 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/12 17:59:35 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/13 12:37:36 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/21sh.h"
 
 static int				detect_selection_text(char *key, int start,
 												int end, int cursor_x)

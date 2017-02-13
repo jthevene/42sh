@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   catch_key.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvirgile <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 17:16:00 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/01/16 17:16:00 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/02/13 12:37:39 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/21sh.h"
 
 int				is_arrow(char *key)
 {

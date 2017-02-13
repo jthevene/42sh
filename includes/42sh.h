@@ -6,12 +6,12 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2017/01/29 13:23:27 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/13 12:38:25 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _42SH_H
-# define _42SH_H
+#ifndef _21SH_H
+# define _21SH_H
 
 # include <dirent.h>
 # include <stdlib.h>

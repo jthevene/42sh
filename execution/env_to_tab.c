@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_to_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 17:06:30 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/12 17:06:32 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/13 12:38:38 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/21sh.h"
 
 char			**lst_to_tab(t_var *env)
 {

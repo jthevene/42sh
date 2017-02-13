@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   copy_cut_past.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 17:38:49 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/12 17:38:51 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/13 12:37:38 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/21sh.h"
 
 static char		*store_selection(int start_select, int end_select, int key)
 {

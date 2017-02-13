@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 14:01:40 by jules             #+#    #+#             */
-/*   Updated: 2017/02/02 21:01:39 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/13 12:38:31 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int			exec_match(char *event, char *str_to_replace,
 	tmp = ft_str_replace(event, str_to_replace, replace_by);
 	if (!replace_by)
 	{
-		ft_putstr_fd("\n42sh: ", 2);
+		ft_putstr_fd("\n21sh: ", 2);
 		ft_putstr_fd(str_to_replace, 2);
 		ft_putstr_fd(": event not found", 2);
 		free(str_to_replace ? str_to_replace : NULL);

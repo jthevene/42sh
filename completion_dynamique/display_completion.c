@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   display_completion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvirgile <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 17:18:06 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/01/16 17:18:25 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/02/13 12:38:48 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/21sh.h"
 
 static	int		if_col(t_file *col, char *tmp,
 								int len_str, t_completion *all_col)

@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:29:42 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/02/07 10:57:31 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/13 12:38:40 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/21sh.h"
 
 int			detect_builtins(char *to_exec, char *command_line)
 {

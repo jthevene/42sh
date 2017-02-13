@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   setenv.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 15:37:25 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/01/23 15:37:27 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/13 12:38:52 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/21sh.h"
 
 char		*recup_name(char *line)
 {

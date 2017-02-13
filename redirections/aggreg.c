@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   aggreg.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 13:01:44 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/12 13:01:44 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/13 12:37:19 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "GitPerso/42sh/libft/includes/libft.h"
+#include "GitPerso/21sh/libft/includes/libft.h"
 
 int			detect_numbers(char *cmd, int i)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cursor_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvirgile <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 17:16:09 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/01/16 17:16:10 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/02/13 12:37:37 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/21sh.h"
 
 void			arrow_move_right(void)
 {

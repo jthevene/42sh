@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_term.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 17:38:34 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/12 17:38:37 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/13 12:37:35 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/21sh.h"
 
 static void			free_edition_line(void)
 {

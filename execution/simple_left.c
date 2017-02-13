@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 11:06:16 by jules             #+#    #+#             */
-/*   Updated: 2017/02/10 11:43:01 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/13 12:38:35 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/42sh.h"
+#include "../includes/21sh.h"
 
 int			simple_left(char *cmd, char *filename)
 {

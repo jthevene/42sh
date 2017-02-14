@@ -23,7 +23,7 @@ static int		detect_out(void)
 	else
 		return (1);
 }
-*/
+
 
 static int		exec_redir(t_tree *left, int fd_out, t_fdlist *fdlist)
 {
@@ -66,7 +66,8 @@ int				run_redir(t_tree *left, t_tree *right, int current_type)
 {
 	FT_INIT(int, fd_out, 0);
 	FT_INIT(t_fdlist, *fdlist, NULL);
-	fd_out = 1; /*detect_out();*/
+//	fd_out = detect_out();
+	fd_out = 1;
 	if (!(get_filename(right, &fdlist, current_type)))
 		return (0);
 	if (!(exec_redir(left, fd_out, fdlist)))
@@ -76,3 +77,5 @@ int				run_redir(t_tree *left, t_tree *right, int current_type)
 	g_shell.redir_fd_out = 0;
 	return (1);
 }
+
+*/

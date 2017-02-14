@@ -64,7 +64,10 @@ typedef struct 				s_hist_opt
 
 typedef struct				s_fdlist
 {
-	int						key;
+	int						type;
+	int						fd_in;
+	int						fd_file;
+	char					*filename;
 	struct s_fdlist			*prev;
 	struct s_fdlist			*next;
 }							t_fdlist;

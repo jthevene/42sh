@@ -63,6 +63,7 @@ int				exec_function(char *content)
 {
 	pid_t		pid;
 
+	hub_right_redir(&content);
 	FT_INIT(char **, bin_dir, get_bin_directories());
 	FT_INIT(char **, args, get_args(content));
 	FT_INIT(int, return_value, 0);
@@ -89,8 +90,8 @@ static int		exec_tree2(t_tree *tree)
 {
 	if (tree->type == PIPE)
 		return (run_pipe(tree->left, tree->right));
-	else if (tree->type == MORE || tree->type == DMORE)
-		return (run_redir(tree->left, tree->right, tree->type));
+//	else if (tree->type == MORE || tree->type == DMORE)
+//		return (run_redir(tree->left, tree->right, tree->type));
 	else if (tree->type == LESS)
 		return (simple_left(tree->left->content, tree->right->content));
 	else if (tree->left && tree->left->type != WORDS)

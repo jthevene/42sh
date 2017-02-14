@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../Lexer_Parser/includes/sh.h"
-
+/*
 int			fdlist_pushback(t_fdlist **fdlist, int key)
 {
 	FT_INIT(t_fdlist, *tmp, NULL);
@@ -58,3 +58,5 @@ void		free_fdlist(t_fdlist **fdlist)
 	tmp = NULL;
 	fdlist = NULL;
 }
+
+*/

@@ -191,5 +191,11 @@ int					exec_function(char *content);
 /*
 ** REDIRECTIONS
 */
+void				hub_right_redir(char **line);
+int					get_fd_in(char *line, int i);
+void				delete_redirs_str(char **str);
+char				*get_filename(char *line, int i);
+t_fdlist			*new_node_fdlist(char *filename, int fd_in, int type);
+void				free_fdlist(t_fdlist **fdlist);
 
 #endif

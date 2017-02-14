@@ -129,13 +129,25 @@ BIN_HISTORY 	= 	$(FILES_HISTORY:.c=.o)
 
 #################		END HISTORY PART 		###############################
 
+#################		REDIRECTIONS PART		###############################
+
+REDIRS			= 	./redirections/
+
+FILES_REDIRS 	=	hub_right_redir.c redir_utils.c
+
+SRC_REDIRS 		= 	$(addprefix $(REDIRS), $(FILES_REDIRS))
+
+BIN_REDIRS 		= 	$(FILES_REDIRS:.c=.o)
+
+#################		END EXECUTION PART 		###############################
+
 #################		EXECUTION PART 			###############################
 
 EXECUTION 		= 	./execution/
 
 FILES_EXECUTION =	distrib_functions.c exec_tree.c \
-					env_to_tab.c exec_utils.c exec_pipe.c exec_redir.c \
-					redir_utils.c simple_left.c
+					env_to_tab.c exec_utils.c exec_pipe.c \
+					simple_left.c 
 
 SRC_EXECUTION 	= 	$(addprefix $(EXECUTION), $(FILES_EXECUTION))
 
@@ -144,8 +156,8 @@ BIN_EXECUTION 	= 	$(FILES_EXECUTION:.c=.o)
 #################		END EXECUTION PART 		###############################
 
 INCLUDES 	= -I$(LIBFT_INCLUDE_DIR) -I$(INCLUDE_DIR) -I$(PARSER)../includes/
-ALL_SRCS 	= $(SRC_COMPLETION_EDIT) $(SRC_GLOBING) $(SRC_PARSER) $(SRC_BUILTIN) $(SRC_HISTORY) $(SRC_EXECUTION)
-ALL_BINS 	= $(BIN_COMPLETION_EDIT) $(BIN_GLOBING) $(BIN_PARSER) $(BIN_BUILTIN) $(BIN_HISTORY) $(BIN_EXECUTION)
+ALL_SRCS 	= $(SRC_COMPLETION_EDIT) $(SRC_GLOBING) $(SRC_PARSER) $(SRC_BUILTIN) $(SRC_HISTORY) $(SRC_REDIRS) $(SRC_EXECUTION)
+ALL_BINS 	= $(BIN_COMPLETION_EDIT) $(BIN_GLOBING) $(BIN_PARSER) $(BIN_BUILTIN) $(BIN_HISTORY) $(BIN_REDIRS) $(BIN_EXECUTION)
 EXTENSIONS 	= $(LIBFT_DIR)/libft.a $(LIBFT_DIR)/libftprintf.a 
 
 all: $(NAME)

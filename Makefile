@@ -121,7 +121,7 @@ HISTORY 		= 	./history/
 
 FILES_HISTORY 	= 	error.c event.c ft_history.c ft_history_options.c \
 					historic.c histsize.c lst_tools.c history_lexing.c \
-					event_tools.c
+					event_tools.c navigation_hist.c
 
 SRC_HISTORY 	= 	$(addprefix $(HISTORY), $(FILES_HISTORY))
 

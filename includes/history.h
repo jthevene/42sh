@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2017/02/13 20:10:47 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/14 12:43:10 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,10 @@ t_lst				*get_dir_content(char *dir);
 /*
 ** HISTORIC
 */
-void				free_hist();
+void				free_hist(void);
 void				get_hist(void);
 void				ft_newhist(char *line);
 void				put_hist_line(char *content);
-void				navigation_hist(int arrow);
 /*
 ** HISTORY_LEXING
 */
@@ -80,5 +79,10 @@ void				ft_print_list_content(t_lst *lst);
 void				ft_lst_rewind_n(t_lst **lst, int n);
 void				ft_lst_rewind(t_lst **lst);
 void				ft_lst_forward(t_lst **lst);
-
+/*
+** NAVIGATION_HIST
+*/
+void				navigation_hist(int arrow);
+void				nav_hist_up(void);
+void				nav_hist_down(void);
 #endif

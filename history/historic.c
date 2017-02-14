@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 10:57:09 by jules             #+#    #+#             */
-/*   Updated: 2017/02/13 20:15:06 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/14 13:10:17 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,33 +77,4 @@ void	put_hist_line(char *content)
 	clean_line();
 	display_prompt();
 	ft_putstr(content);
-}
-
-void	navigation_hist(int arrow)
-{
-	if (g_shell.curr_hist)
-	{
-		if (arrow == K_UP)
-		{
-			if (g_shell.curr_hist->prev && g_shell.curr_hist->prev->content)
-			{
-				if (g_shell.nav_hist == 1)
-					g_shell.curr_hist = g_shell.curr_hist->prev;
-				g_shell.nav_hist = 1;
-				put_hist_line(g_shell.curr_hist->content);
-				g_shell.current_line = ft_strdup(g_shell.curr_hist->content);
-			}
-		}
-		else
-		{
-			if (g_shell.curr_hist->next)
-			{
-				g_shell.curr_hist = g_shell.curr_hist->next;
-				put_hist_line(g_shell.curr_hist->content);
-				g_shell.current_line = ft_strdup(g_shell.curr_hist->content);
-			}
-		}
-		g_shell.cursor_x = ft_strlen(g_shell.current_line)
-			+ g_shell.prompt_len;
-	}
 }

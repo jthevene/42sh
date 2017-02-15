@@ -61,7 +61,8 @@ void			fill_btwn_char(char c)
 	if (len % 256 == 255)
 	{
 		tmp = g_shell.current_line;
-		g_shell.current_line = (char*)malloc(sizeof(char) * (len + 1 + 256));
+		g_shell.current_line = ft_strnew(len + 1 + 256);
+//		g_shell.current_line = (char*)malloc(sizeof(char) * (len + 1 + 256));
 		ft_strcpy(g_shell.current_line, tmp);
 		ft_strdel(&tmp);
 	}
@@ -85,8 +86,9 @@ void			fill_current_line(char c)
 		if (len % 256 == 255)
 		{
 			tmp = g_shell.current_line;
-			g_shell.current_line = (char*)malloc(sizeof(char) *
-				(len + 1 + 256));
+			g_shell.current_line = ft_strnew(len + 1 + 256);
+//			g_shell.current_line = (char*)malloc(sizeof(char) *
+//				(len + 1 + 256));
 			ft_strcpy(g_shell.current_line, tmp);
 			ft_strdel(&tmp);
 		}

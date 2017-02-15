@@ -20,9 +20,25 @@ void	navigation_hist(int arrow)
 			nav_hist_up();
 		else
 			nav_hist_down();
-		g_shell.cursor_x = ft_strlen(g_shell.current_line)
-			+ g_shell.prompt_len;
 	}
+}
+
+static void 	replace_current_line(char *content)
+{
+	FT_INIT(int, i, 0);
+	if (!content)
+		return ;
+	g_shell.cursor_x = g_shell.prompt_len;
+	if (g_shell.current_line)
+		ft_strdel(&g_shell.current_line);
+	while (content && content[i])
+	{
+		fill_current_line(content[i]);
+		g_shell.cursor_x++;
+		i++;
+	}
+	g_shell.line_size = g_shell.cursor_x;
+
 }
 
 void	nav_hist_up(void)
@@ -33,12 +49,7 @@ void	nav_hist_up(void)
 			g_shell.curr_hist = g_shell.curr_hist->prev;
 		g_shell.nav_hist = 1;
 		put_hist_line(g_shell.curr_hist->content);
-		if (g_shell.current_line)
-		{
-			free(g_shell.current_line);
-			g_shell.current_line = NULL;
-		}
-		g_shell.current_line = ft_strdup(g_shell.curr_hist->content);
+		replace_current_line(g_shell.curr_hist->content);
 	}
 }
 
@@ -48,11 +59,6 @@ void	nav_hist_down(void)
 	{
 		g_shell.curr_hist = g_shell.curr_hist->next;
 		put_hist_line(g_shell.curr_hist->content);
-		if (g_shell.current_line)
-		{
-			free(g_shell.current_line);
-			g_shell.current_line = NULL;
-		}
-		g_shell.current_line = ft_strdup(g_shell.curr_hist->content);
+		replace_current_line(g_shell.curr_hist->content);
 	}
 }

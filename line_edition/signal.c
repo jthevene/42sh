@@ -25,10 +25,9 @@ void		ft_sigwinch(int sig)
 void		ft_sigint(int sig)  // ctrl + c
 {
 	(void)sig;
-	go_to_end();
-	if (g_shell.current_line)
-		ft_bzero(g_shell.current_line, g_shell.line_size -
-				g_shell.prompt_len);
+	reset_line();
+	g_shell.curr_hist = g_shell.hist;
+	g_shell.len = 0;
 	ft_putstr("\n");
 	display_prompt();
 }
@@ -42,7 +41,7 @@ void		ft_sigkill(int sig)
 	if (g_shell.line_2d_x)
 		ft_putstr("\n");
 	ft_reset_termios(g_shell.t_back);
-	exit(0);
+	ft_exit();
 }
 
 void		ft_segfault(int sig)
@@ -50,12 +49,26 @@ void		ft_segfault(int sig)
 	(void)sig;
 	ft_putstr("Error segfault\nFin du programme\n");
 	ft_reset_termios(g_shell.t_back);
-	exit(0);
+	ft_exit();
+}
+
+void 		distrib_signals(int sig)
+{
+	if (sig == SIGWINCH)
+		ft_sigwinch(sig);
+	else if (sig == SIGINT)
+		ft_sigint(sig);
+	else if (sig == SIGSEGV)
+		ft_segfault(sig);
 }
 
 void		ft_signal(void)
 {
-	signal(SIGWINCH, ft_sigwinch);
-	signal(SIGINT, ft_sigint);
-	signal(SIGSEGV, ft_segfault);
+	FT_INIT(int, sig, 2);
+	while (sig < 32)
+	{
+		signal(sig, distrib_signals);
+		sig++;
+	}
+	
 }

@@ -74,11 +74,17 @@ int				exec_function(char **content)
 		return (return_builtins);
 	if ((pid = fork()) == -1)
 		return (0);
+	else
+	{
+		g_shell.t_back.c_lflag |= (ICANON | ECHO);
+		tcsetattr(0, 0, &(g_shell.t_back));
+	}
 	if (pid == 0)
 		exit(parse_bin_directories(bin_dir, args));
 	else
 	{
 		wait(&pid);
+		init_termios(g_shell.t_back);
 		if (WEXITSTATUS(pid) == 0)
 			return_value = 1;
 		else

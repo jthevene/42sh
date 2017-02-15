@@ -96,7 +96,10 @@ int			ft_env(char *cmd)
 	if (tmp && tmp[1] && !ft_strcmp(tmp[1], "-i"))
 		g_shell.env_opt = TRUE;
 	if (to_exec != NULL)
-		exec_function(to_exec);
+	{
+		exec_function(&to_exec);
+		ft_strdel(&to_exec);
+	}
 	while (!to_exec && g_shell.env_opt == FALSE && tmp_env)
 	{
 		ft_putstr(tmp_env->name);

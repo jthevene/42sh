@@ -186,14 +186,14 @@ int					verif_access_others(char *path);
 char				**get_args(char *content);
 char				**lst_to_tab(t_var *env);
 int					lenght_list(t_var *env);
-int					exec_function(char *content);
+int					exec_function(char **content);
 
 /*
 ** REDIRECTIONS
 */
-void				hub_right_redir(char **line);
+char				*hub_right_redir(char *line);
 int					get_fd_in(char *line, int i);
-void				delete_redirs_str(char **str);
+char				*delete_redirs_str(char *str);
 char				*get_filename(char *line, int i);
 t_fdlist			*new_node_fdlist(char *filename, int fd_in, int type);
 void				free_fdlist(t_fdlist **fdlist);

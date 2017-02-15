@@ -59,16 +59,18 @@ int				parse_bin_directories(char **bin_dir, char **args)
 	return (0);
 }
 
-int				exec_function(char *content)
+int				exec_function(char **content)
 {
-	pid_t		pid;
-
-	hub_right_redir(&content);
+	FT_INIT(pid_t, pid, 0);
+	FT_INIT(char *, tmp, hub_right_redir(ft_strdup((*content))));
+	ft_strdel(&(*content));
+	(*content) = ft_strdup(tmp);
+	ft_strdel(&tmp);
 	FT_INIT(char **, bin_dir, get_bin_directories());
-	FT_INIT(char **, args, get_args(content));
+	FT_INIT(char **, args, get_args((*content)));
 	FT_INIT(int, return_value, 0);
 	FT_INIT(int, return_builtins, 0);
-	if ((return_builtins = detect_builtins(args[0], content) != -1))
+	if ((return_builtins = detect_builtins(args[0], (*content)) != -1))
 		return (return_builtins);
 	if ((pid = fork()) == -1)
 		return (0);
@@ -97,14 +99,14 @@ static int		exec_tree2(t_tree *tree)
 	else if (tree->left && tree->left->type != WORDS)
 		exec_tree(tree->left);
 	else if (tree->left && tree->left->type == WORDS)
-		return (exec_function(tree->left->content));
+		return (exec_function(&tree->left->content));
 	else if (tree->right && tree->right->type != WORDS)
 		exec_tree(tree->right);
 	else if (tree->right && tree->right->type == WORDS)
-		return (exec_function(tree->right->content));
+		return (exec_function(&tree->right->content));
 	else if (!tree->right && !tree->left && tree->content
 			&& tree->type == WORDS)
-		return (exec_function(tree->content));
+		return (exec_function(&tree->content));
 	return (0);
 }
 

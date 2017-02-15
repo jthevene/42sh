@@ -87,12 +87,13 @@ static t_fdlist		*get_right_redirs(char *line)
 	return (fdlist);
 }
 
-void				hub_right_redir(char **line)
+char				*hub_right_redir(char *line)
 {
-	FT_INIT(t_fdlist, *fdlist, get_right_redirs((*line)));
+	FT_INIT(t_fdlist, *fdlist, get_right_redirs(line));
+	FT_INIT(char *, ret, NULL);
 	if (!fdlist)
-		return ;
-/*	else
+		return (line);
+	else
 	{
 		while (fdlist->prev)
 			fdlist = fdlist->prev;
@@ -105,8 +106,10 @@ void				hub_right_redir(char **line)
 		printf("~***\ntype = %d\nfd_in = %d\nfd_file = %d\nfilename = %s\n***~\n", fdlist->type, fdlist->fd_in, fdlist->fd_file, fdlist->filename);
 		printf("\nENDING OF PRINTING FDLIST NODES\n");
 		printf("\nNOW REPLACING STR\n");
-		delete_redirs_str(line);
-		printf("REDIRS DELETED : %s\n\n", (*line));
+		ret = delete_redirs_str(ft_strdup(line));
+		ft_strdel(&line);
+		printf("REDIRS DELETED : %s\n\n", ret);
 	}
-*/
+	free_fdlist(&fdlist);
+	return (ret);
 }

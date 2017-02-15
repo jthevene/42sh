@@ -12,7 +12,7 @@
 
 #include "../includes/21sh.h"
 
-static void			reset_line(void)
+void			reset_line(void)
 {
 	free(g_shell.line);
 	move_cursor_n_to_direction(g_shell.line_size, 1);
@@ -21,7 +21,6 @@ static void			reset_line(void)
 	g_shell.current_line = NULL;
 	g_shell.nav_hist = 0;
 	free_hist_opt();
-	ft_bzero(g_shell.current_line, ft_strlen(g_shell.current_line));
 	init_hist_opt();
 }
 

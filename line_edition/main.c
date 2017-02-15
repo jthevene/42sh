@@ -66,6 +66,8 @@ static void		parse_capabilities(int key)
 		detect_auto_completion(g_shell.current_line);
 		print_line(1);
 	}
+	else if (key == K_ESCAPE)
+		ft_exit();
 }
 
 static void		run_shell(void)

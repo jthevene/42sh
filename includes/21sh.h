@@ -153,6 +153,7 @@ int 				set_cursor_start(int len, int ref_cursor);
 */
 void				return_key(void);
 void				backspace_key(int key);
+void				reset_line(void);
 /*
 ** SIGNAL
 */

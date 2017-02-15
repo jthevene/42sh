@@ -28,8 +28,8 @@ void		ft_sigint(int sig)  // ctrl + c
 	reset_line();
 	g_shell.curr_hist = g_shell.hist;
 	g_shell.len = 0;
-//	ft_putstr("\n");
-//	display_prompt();
+	ft_putstr("\n");
+	display_prompt();
 }
 
 void		ft_sigkill(int sig)

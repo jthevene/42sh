@@ -15,16 +15,7 @@
 int				exec_function_execve(char *cmd, char **args)
 {
 	FT_INIT(char **, env_tab, lst_to_tab(g_shell.env));
-	if (g_shell.redir_fd && g_shell.redir_fd_out)
-	{
-		dup2(g_shell.redir_fd, STDOUT_FILENO);
-		close(g_shell.redir_fd);
-	}
-	if (g_shell.left_redir_fd)
-	{
-		dup2(g_shell.left_redir_fd, STDIN_FILENO);
-		close(g_shell.left_redir_fd);
-	}
+	handle_redirections();
 	if (execve(cmd, args, g_shell.env_opt == FALSE ? env_tab : NULL) == -1)
 	{
 		free_tab(env_tab);

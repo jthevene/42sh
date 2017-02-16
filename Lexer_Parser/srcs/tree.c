@@ -24,3 +24,15 @@ t_tree		*create_node(void)
 	tree->content = NULL;
 	return (tree);
 }
+
+int			str_is_digit(char *str)
+{
+	unsigned int		i;
+
+	i = 0;
+	while (ft_isdigit((unsigned char)str[i]))
+		i++;
+	if (i == ft_strlen(str))
+		return (1);
+	return (0);
+}

@@ -19,6 +19,7 @@
 # define END_LINE		11
 # define AGGREG_RIGHT	12
 # define AGGREG_LEFT	13
+# define FDIGIT			14
 
 typedef struct			s_token
 {
@@ -96,6 +97,7 @@ int		check_type_ope(int type);
 void	leave_error(void);
 int		check_for_aggreg_fd(t_token *token, char *line, int pos);
 int		check_for_aggreg(t_token *token, char *line, int pos);
+int		str_is_digit(char *str);
 
 int		exec_tree(t_tree *tree);
 int 	parse_bin_directories(char **bin_dir, char **args);

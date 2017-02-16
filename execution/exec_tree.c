@@ -25,7 +25,6 @@ int				exec_function_execve(char *cmd, char **args)
 		dup2(g_shell.left_redir_fd, STDIN_FILENO);
 		close(g_shell.left_redir_fd);
 	}
-	ft_putstr("TEST\n");
 	if (execve(cmd, args, g_shell.env_opt == FALSE ? env_tab : NULL) == -1)
 	{
 		free_tab(env_tab);

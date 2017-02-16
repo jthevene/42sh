@@ -111,8 +111,7 @@ typedef struct				s_shell
 	struct termios			my_termios;
 	struct termios			t_back;
 	char					*line;
-	int						redir_fd;
-	int						redir_fd_out;
+	t_fdlist				*right_redirs;
 	int						left_redir_fd;
 }							t_shell;
 

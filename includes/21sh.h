@@ -182,6 +182,7 @@ t_var				*new_var(char *v_name, char *v_value);
 ** EXECUTION
 */
 int					detect_builtins(char* to_exec, char *command_line);
+void				handle_redirections(void);
 char				**get_bin_directories(void);
 int					verif_access_others(char *path);
 char				**get_args(char *content);
@@ -196,7 +197,9 @@ char				*hub_right_redir(char *line);
 int					get_fd_in(char *line, int i);
 char				*delete_redirs_str(char *str);
 char				*get_filename(char *line, int i);
+int					push_right_redir(char *f, int fdin, int type, t_fdlist **flist);
 t_fdlist			*new_node_fdlist(char *filename, int fd_in, int type);
-void				free_fdlist(t_fdlist **fdlist);
+void				stock_redirs_in_gshell(t_fdlist *fdlist);
+void				free_fdlist(t_fdlist **fdlist, int close);
 
 #endif

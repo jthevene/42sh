@@ -15,6 +15,7 @@
 void			reset_line(void)
 {
 	free(g_shell.line);
+	free_fdlist(&g_shell.right_redirs, 1);
 	move_cursor_n_to_direction(g_shell.line_size, 1);
 	if (g_shell.cursor_2d_x)
 		ft_putchar('\n');

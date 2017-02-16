@@ -26,6 +26,5 @@ int					double_right();
 int					detect_out();
 void				exec_redir_right(int fd/*, int fd_out*/);
 int					create_file(char *filename, t_fdlist **fdlist, int type);
-void				free_fdlist(t_fdlist **fdlist);
 
 #endif

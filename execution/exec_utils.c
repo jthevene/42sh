@@ -12,6 +12,32 @@
 
 #include "../includes/21sh.h"
 
+void		handle_redirections(void)
+{
+	if (g_shell.right_redirs)
+	{
+		while (g_shell.right_redirs->prev)
+			g_shell.right_redirs = g_shell.right_redirs->prev;
+		while (g_shell.right_redirs->next)
+		{
+			dup2(g_shell.right_redirs->fd_file, g_shell.right_redirs->fd_in);
+			close(g_shell.right_redirs->fd_file);
+			g_shell.right_redirs = g_shell.right_redirs->next;
+		}
+		if (dup2(g_shell.right_redirs->fd_file,
+		g_shell.right_redirs->fd_in == 1 ? STDOUT_FILENO :
+		FT_TER(g_shell.right_redirs->fd_in == 2, STDERR_FILENO,
+		g_shell.right_redirs->fd_in)) == -1)
+			perror("SAMER");
+		close(g_shell.right_redirs->fd_file);
+	}
+	if (g_shell.left_redir_fd)
+	{
+		dup2(g_shell.left_redir_fd, STDIN_FILENO);
+		close(g_shell.left_redir_fd);
+	}
+}
+
 int			verif_access_others(char *path)
 {
 	struct stat infos;

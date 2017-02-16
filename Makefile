@@ -133,7 +133,7 @@ BIN_HISTORY 	= 	$(FILES_HISTORY:.c=.o)
 
 REDIRS			= 	./redirections/
 
-FILES_REDIRS 	=	hub_right_redir.c redir_utils.c
+FILES_REDIRS 	=	hub_right_redir.c redir_utils.c stock_redirs_in_gshell.c
 
 SRC_REDIRS 		= 	$(addprefix $(REDIRS), $(FILES_REDIRS))
 

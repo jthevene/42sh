@@ -18,6 +18,7 @@ void		ft_exit(void)
 	ft_putstr("\n");
 	ft_reset_termios(g_shell.t_back);
 	update_history_file(get_histsize("HISTFILESIZE"));
+	free_fdlist(&g_shell.right_redirs, 1);
 	free_hist();
 	exit(0);
 }

@@ -92,8 +92,6 @@ int				init_all(void)
 	init_hist();
 	init_win();
 	init_edition();
-	g_shell.redir_fd = 0;
-	g_shell.redir_fd_out = 0;
 	g_shell.left_redir_fd = 0;
 	tcgetattr(STDIN_FILENO, &g_shell.t_back);// save les données termios d'origine
 	init_termios(g_shell.t_back);

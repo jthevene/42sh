@@ -25,6 +25,7 @@ int				exec_function_execve(char *cmd, char **args)
 		dup2(g_shell.left_redir_fd, STDIN_FILENO);
 		close(g_shell.left_redir_fd);
 	}
+	ft_putstr("TEST\n");
 	if (execve(cmd, args, g_shell.env_opt == FALSE ? env_tab : NULL) == -1)
 	{
 		free_tab(env_tab);
@@ -37,6 +38,16 @@ int				exec_function_execve(char *cmd, char **args)
 		ft_strdel(&cmd);
 		return (1);
 	}
+}
+
+int			verif_access_bin(char *path)
+{
+	struct stat infos;
+
+	lstat(path, &infos);
+	if (access(path, F_OK) != 0)
+		return (0);
+	return (1);
 }
 
 int				parse_bin_directories(char **bin_dir, char **args)
@@ -52,7 +63,8 @@ int				parse_bin_directories(char **bin_dir, char **args)
 			tmp = cmd;
 			cmd = ft_strjoin(cmd, args[0]);
 			ft_strdel(&tmp);
-			exec_function_execve(cmd, args);
+			if (verif_access_bin(cmd))
+				exec_function_execve(cmd, args);
 		}
 		i++;
 	}
@@ -71,7 +83,11 @@ int				exec_function(char **content)
 	FT_INIT(int, return_value, 0);
 	FT_INIT(int, return_builtins, 0);
 	if ((return_builtins = detect_builtins(args[0], (*content)) != -1))
+	{
+		free_tab(bin_dir);
+		free_tab(args);
 		return (return_builtins);
+	}
 	if ((pid = fork()) == -1)
 		return (0);
 	else
@@ -91,6 +107,7 @@ int				exec_function(char **content)
 			return_value = 0;
 	}
 	free_tab(bin_dir);
+	free_tab(args);
 	return (return_value);
 }
 

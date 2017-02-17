@@ -6,17 +6,39 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 22:25:24 by jules             #+#    #+#             */
-/*   Updated: 2017/02/02 21:24:08 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/17 17:27:24 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/history.h"
 
+int		invalid_option(void)
+{
+	FT_INIT(int, i, 0);
+	FT_INIT(char, c, 0);
+	while (g_shell.hist_opt.options[i])
+	{
+		c = g_shell.hist_opt.options[i];
+		if (ft_isalpha(c) && c != 'a' && c != 'r' && c != 'w' && c != 'p' && 
+			c != 's' && c != 'd' && c != 'c')
+		{
+			ft_putendl("history : invalid option");
+			ft_putendl("usage: history [-cdawrps]");
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 void	free_hist_opt(void)
 {
-	free(g_shell.hist_opt.options);
-	free(g_shell.hist_opt.arg);
-	free(g_shell.hist_opt.filename);
+	if (g_shell.hist_opt.options)
+		free(g_shell.hist_opt.options);
+	if (g_shell.hist_opt.arg)
+		free(g_shell.hist_opt.arg);
+	if (g_shell.hist_opt.filename)
+		free(g_shell.hist_opt.filename);
 }
 
 void	split_line(char *line)
@@ -67,9 +89,11 @@ int		get_options_str(char **array)
 		else
 		{
 			tmp = ft_strdup(g_shell.hist_opt.options);
-			free(g_shell.hist_opt.options);
+			if (g_shell.hist_opt.options)
+				free(g_shell.hist_opt.options);
 			g_shell.hist_opt.options = ft_strjoin(tmp, array[i]);
-			free(tmp);
+			if (tmp)
+				free(tmp);
 		}
 		i++;
 	}

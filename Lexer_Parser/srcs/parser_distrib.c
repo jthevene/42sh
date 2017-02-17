@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_distrib.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 15:24:36 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/12 15:24:38 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/17 18:34:45 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ void	lexer_parser(char *line)
 		send_token_to_glob(all);
 		start_parse(all->tokens_begin);
 	}
-	free(all->line);
-	free(all);
+	if (all->line)
+		free(all->line);
+	if (all)
+		free(all);
 	ft_strdel(&line);
 }
 

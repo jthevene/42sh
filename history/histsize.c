@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 20:33:04 by jules             #+#    #+#             */
-/*   Updated: 2017/02/03 12:05:18 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/17 16:41:46 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ int		get_histsize(char *var)
 		else
 			ret = ft_atoi(histfilesize);
 	}
-	free(histfilesize);
-	free(histsize);
+	if (histfilesize)
+		free(histfilesize);
+	if (histsize)
+		free(histsize);
 	return (ret);
 }

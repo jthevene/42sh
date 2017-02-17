@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 16:55:54 by jules             #+#    #+#             */
-/*   Updated: 2017/02/13 20:12:12 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/17 16:48:16 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	clear_history_list(void)
 	{
 		tmp = g_shell.hist;
 		if (g_shell.hist->content)
-				free(g_shell.hist->content);
+			free(g_shell.hist->content);
 		g_shell.hist = g_shell.hist->prev;
 		free(tmp);
 	}
@@ -84,7 +84,8 @@ void	update_history_file(int histfilesize)
 		return ;
 	if (!g_shell.hist_opt.filename)
 		g_shell.hist_opt.filename = ft_strjoin(histfile, "/.history");
-	free(histfile);
+	if (histfile)
+		free(histfile);
 	if ((g_shell.hist_fd = open(g_shell.hist_opt.filename, O_RDWR | O_CREAT |
 	O_TRUNC, 0600)) == -1)
 	{
@@ -111,7 +112,8 @@ void	histfile_append(void)
 	FT_INIT(char *, home, get_var(&g_shell, "HOME"));
 	if (!g_shell.hist_opt.filename)
 		g_shell.hist_opt.filename = ft_strjoin(home, "/.history");
-	free(home);
+	if (home)
+		free(home);
 	if ((g_shell.hist_fd = open(g_shell.hist_opt.filename, O_RDONLY, 0600))
 	== -1)
 	{

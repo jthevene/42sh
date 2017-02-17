@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:53:52 by jules             #+#    #+#             */
-/*   Updated: 2017/02/10 15:40:06 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/17 17:24:08 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,19 @@ int		history_hub(char *line)
 	split_line(line);
 	get_history_options();
 	FT_INIT(int, options, check_hist_opt());
-/*
-	ft_putstr("g_shell.current_line = ");
-	ft_putendl(g_shell.current_line);
-	ft_putstr("line = ");
-	ft_putendl(line);
-	ft_putstr("filename = ");
-	ft_putendl(g_shell.hist_opt.filename);
-	ft_putstr("arg = ");
-	ft_putendl(g_shell.hist_opt.arg);
-	ft_putstr("options = ");
-	ft_putendl(g_shell.hist_opt.options);
-*/
-	if (options > 0)
+
+	// ft_putstr("g_shell.current_line = ");
+	// ft_putendl(g_shell.current_line);
+	// ft_putstr("line = ");
+	// ft_putendl(line);
+	// ft_putstr("filename = ");
+	// ft_putendl(g_shell.hist_opt.filename);
+	// ft_putstr("arg = ");
+	// ft_putendl(g_shell.hist_opt.arg);
+	// ft_putstr("options = ");
+	// ft_putendl(g_shell.hist_opt.options);
+
+	if (options > 0 || invalid_option())
 		return (1);
 	else if (options < 0 && !g_shell.hist_opt.c)
 		ft_history(g_shell.hist_opt.filename);
@@ -84,7 +84,8 @@ void	ft_history_print(t_lst *lst)
 	ft_putstr(nbr);
 	ft_putchar(' ');
 	ft_putendl(lst->content);
-	free(nbr);
+	if (nbr)
+		free(nbr);
 }
 
 void	ft_history(char *nbr)

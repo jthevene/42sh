@@ -108,9 +108,10 @@ void	histfile_append(void)
 {
 	FT_INIT(int, ret, 0);
 	FT_INIT(char *, line, NULL);
+	FT_INIT(char *, home, get_var(&g_shell, "HOME"));
 	if (!g_shell.hist_opt.filename)
-		g_shell.hist_opt.filename = ft_strjoin(get_var(&g_shell,
-		"HOME"), "/.history");
+		g_shell.hist_opt.filename = ft_strjoin(home, "/.history");
+	free(home);
 	if ((g_shell.hist_fd = open(g_shell.hist_opt.filename, O_RDONLY, 0600))
 	== -1)
 	{

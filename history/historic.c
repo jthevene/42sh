@@ -24,6 +24,7 @@ void	free_hist(void)
 		free(g_shell.hist->content);
 		g_shell.hist = g_shell.hist->prev;
 		g_shell.hist = NULL;
+		free(g_shell.hist);
 	}
 }
 
@@ -31,7 +32,7 @@ void	get_hist(void)
 {
 	FT_INIT(char *, filename, NULL);
 	FT_INIT(char *, line, NULL);
-	FT_INIT(char *, home, get_var(&g_shell, "HOME"));
+	FT_INIT(char*, home, get_var(&g_shell, "HOME"));
 	FT_INIT(int, ret, 0);
 	filename = ft_strjoin(home, "/.history");
 	free(home);

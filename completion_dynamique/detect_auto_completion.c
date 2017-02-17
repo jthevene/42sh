@@ -37,9 +37,9 @@ t_file			*get_file_path(char *path, char *sentence)
 	FT_INIT(t_file*, files, NULL);
 	if (!path || !sentence)
 		return (NULL);
+	FT_INIT(char*, var_path, get_var(&g_shell, "PATH"));
 	rep = opendir(path);
-	if (rep && !ft_strchr(sentence, ' ') && sentence[0] != '/' &&
-		get_var(&g_shell, "PATH"))
+	if (rep && !ft_strchr(sentence, ' ') && sentence[0] != '/' && var_path)
 		files = store_files_dirs(rep, files, path, str_to_search(sentence));
 	else if (rep && path && sentence[ft_strlen(sentence) - 1] != ' ')
 		files = store_files_dirs(rep, files, path, str_to_search(sentence));
@@ -50,6 +50,7 @@ t_file			*get_file_path(char *path, char *sentence)
 		files = store_files_dirs(rep, files, path, str_to_search(sentence));
 	}
 	closedir(rep);
+	free(var_path);
 	return (files);
 }
 
@@ -59,9 +60,10 @@ static t_file	*files_list(char **sentence)
 	FT_INIT(t_file*, files, NULL);
 	FT_INIT(t_file*, head, NULL);
 	FT_INIT(int, i, 0);
+	FT_INIT(char*, home, get_var(&g_shell, "HOME"));
+	FT_INIT(char*, pwd, get_var(&g_shell, "PWD"));
 	*sentence = default_sentence(sentence);
-	path = set_path(sentence, get_var(&g_shell, "HOME"),
-							get_var(&g_shell, "PWD"));
+	path = set_path(sentence, home, pwd);
 	while (path && path[i])
 	{
 		if (!files)
@@ -72,7 +74,9 @@ static t_file	*files_list(char **sentence)
 			files = files->next;
 		i++;
 	}
-	free_auto_tab(path);
+	free_tab(path);
+	free(home);
+	free(pwd);
 	head = sort_list(head);
 	return (head);
 }

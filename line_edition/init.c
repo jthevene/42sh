@@ -29,7 +29,7 @@ void			init_hist_opt(void)
 void			init_hist(void)
 {
 	FT_INIT(char *, filename, NULL);
-	FT_INIT(char *, home, get_var(&g_shell, "HOME"));
+	FT_INIT(char*, home, get_var(&g_shell, "HOME"));
 	g_shell.hist_fd = 0;
 	g_shell.hist = NULL;
 	g_shell.nav_hist = 0;

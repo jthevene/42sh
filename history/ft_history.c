@@ -76,12 +76,15 @@ void	ft_history_print(t_lst *lst)
 {
 	int		space;
 
+	FT_INIT(char*, number, NULL);
 	space = 5 - ft_nbrlen(lst->number);
 	while (space-- > 0)
 		ft_putchar(' ');
-	ft_putstr(ft_itoa(lst->number));
+	number = ft_itoa(lst->number);
+	ft_putstr(number);
 	ft_putchar(' ');
 	ft_putendl(lst->content);
+	free(number);
 }
 
 void	ft_history(char *nbr)

@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 15:24:36 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/17 18:34:45 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/17 18:39:52 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,8 @@ void	lexer_parser(char *line)
 		send_token_to_glob(all);
 		start_parse(all->tokens_begin);
 	}
-	if (all->line)
-		free(all->line);
-	if (all)
-		free(all);
+	free(all->line);
+	free(all);
 	ft_strdel(&line);
 }
 

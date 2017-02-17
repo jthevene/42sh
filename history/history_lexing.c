@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 22:25:24 by jules             #+#    #+#             */
-/*   Updated: 2017/02/17 17:27:24 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/17 18:59:08 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int		invalid_option(void)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char, c, 0);
+	if (!g_shell.hist_opt.options)
+		return (0);
 	while (g_shell.hist_opt.options[i])
 	{
 		c = g_shell.hist_opt.options[i];

@@ -15,16 +15,7 @@
 int				exec_function_execve(char *cmd, char **args)
 {
 	FT_INIT(char **, env_tab, lst_to_tab(g_shell.env));
-	if (g_shell.redir_fd && g_shell.redir_fd_out)
-	{
-		dup2(g_shell.redir_fd, STDOUT_FILENO);
-		close(g_shell.redir_fd);
-	}
-	if (g_shell.left_redir_fd)
-	{
-		dup2(g_shell.left_redir_fd, STDIN_FILENO);
-		close(g_shell.left_redir_fd);
-	}
+	handle_redirections();
 	if (execve(cmd, args, g_shell.env_opt == FALSE ? env_tab : NULL) == -1)
 	{
 		free_tab(env_tab);
@@ -39,11 +30,28 @@ int				exec_function_execve(char *cmd, char **args)
 	}
 }
 
+int			verif_access_bin(char *path)
+{
+	struct stat infos;
+
+	lstat(path, &infos);
+	if (access(path, F_OK) != 0)
+		return (0);
+	return (1);
+}
+
 int				parse_bin_directories(char **bin_dir, char **args)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, cmd, NULL);
 	FT_INIT(char *, tmp, NULL);
+	if (args[0][0] == '/')
+	{
+		if (verif_access_bin(args[0]))
+			exec_function_execve(args[0], args);
+		else
+			return (ft_printf("21sh: %s: No such file or directory\n", args[0]));
+	}
 	while (bin_dir && bin_dir[i])
 	{
 		if (verif_access_others(bin_dir[i]))
@@ -52,7 +60,8 @@ int				parse_bin_directories(char **bin_dir, char **args)
 			tmp = cmd;
 			cmd = ft_strjoin(cmd, args[0]);
 			ft_strdel(&tmp);
-			exec_function_execve(cmd, args);
+			if (verif_access_bin(cmd))
+				exec_function_execve(cmd, args);
 		}
 		i++;
 	}
@@ -71,7 +80,11 @@ int				exec_function(char **content)
 	FT_INIT(int, return_value, 0);
 	FT_INIT(int, return_builtins, 0);
 	if ((return_builtins = detect_builtins(args[0], (*content)) != -1))
+	{
+		free_tab(bin_dir);
+		free_tab(args);
 		return (return_builtins);
+	}
 	if ((pid = fork()) == -1)
 		return (0);
 	else
@@ -91,6 +104,7 @@ int				exec_function(char **content)
 			return_value = 0;
 	}
 	free_tab(bin_dir);
+	free_tab(args);
 	return (return_value);
 }
 

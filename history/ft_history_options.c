@@ -34,11 +34,14 @@ void	get_history_options(void)
 
 void	clear_history_list(void)
 {
+	FT_INIT(t_lst *, tmp, NULL);
 	while (g_shell.hist != NULL)
 	{
-		free(g_shell.hist->content);
-		free(g_shell.hist);
+		tmp = g_shell.hist;
+		if (g_shell.hist->content)
+				free(g_shell.hist->content);
 		g_shell.hist = g_shell.hist->prev;
+		free(tmp);
 	}
 	g_shell.hist = NULL;
 	g_shell.nav_hist = 0;
@@ -105,9 +108,10 @@ void	histfile_append(void)
 {
 	FT_INIT(int, ret, 0);
 	FT_INIT(char *, line, NULL);
+	FT_INIT(char *, home, get_var(&g_shell, "HOME"));
 	if (!g_shell.hist_opt.filename)
-		g_shell.hist_opt.filename = ft_strjoin(get_var(&g_shell,
-		"HOME"), "/.history");
+		g_shell.hist_opt.filename = ft_strjoin(home, "/.history");
+	free(home);
 	if ((g_shell.hist_fd = open(g_shell.hist_opt.filename, O_RDONLY, 0600))
 	== -1)
 	{

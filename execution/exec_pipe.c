@@ -12,25 +12,29 @@
 
 #include "../includes/21sh.h"
 
-static int		execve_pipe(char *content)
+static int		execve_pipe(char **content)
 {
+	FT_INIT(char *, tmp, hub_right_redir(ft_strdup((*content))));
+	ft_strdel(&(*content));
+	(*content) = ft_strdup(tmp);
+	ft_strdel(&tmp);
 	FT_INIT(char **, bin_dir, get_bin_directories());
-	FT_INIT(char **, args, get_args(content));
+	FT_INIT(char **, args, get_args((*content)));
 	FT_INIT(int, return_builtins, 0);
-	if ((return_builtins = detect_builtins(args[0], content) != -1))
+	if ((return_builtins = detect_builtins(args[0], (*content)) != -1))
 		exit(return_builtins);
 	return (parse_bin_directories(bin_dir, args));
 }
 
-char 			*content_to_exec(t_tree *left, t_tree *right)
+char 			**content_to_exec(t_tree *left, t_tree *right)
 {
-	FT_INIT(char*, content, right->content);
+//	FT_INIT(char *, content, right->content);
 	if (!ft_strcmp(right->content, "|") && left)
 	{
 		if (right->left && right->right)
 			exit(exec_pipe(right->left, right->right));
 	}
-	return (content);
+	return (&right->content);
 }
 
 
@@ -57,7 +61,7 @@ int				exec_pipe(t_tree *left, t_tree *right)
 	{
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[0]);
-		exit(execve_pipe(left->content));
+		exit(execve_pipe(&left->content));
 	}
 	wait(&pid);
 	dup2(fd[0], STDIN_FILENO);

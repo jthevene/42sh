@@ -29,17 +29,19 @@ void			init_hist_opt(void)
 void			init_hist(void)
 {
 	FT_INIT(char *, filename, NULL);
+	FT_INIT(char*, home, get_var(&g_shell, "HOME"));
 	g_shell.hist_fd = 0;
 	g_shell.hist = NULL;
 	g_shell.nav_hist = 0;
 	init_hist_opt();
-	filename = ft_strjoin(get_var(&g_shell, "HOME"), "/.history");
+	filename = ft_strjoin(home, "/.history");
 	g_shell.hist_fd = open(filename, O_RDWR | O_CREAT, 0600);
 	ft_varappend(new_var("HISTSIZE", "500"));
 	ft_varappend(new_var("HISTFILESIZE", "500"));
 	get_hist();
 	g_shell.curr_hist = g_shell.hist;
 	free(filename);
+	free(home);
 	close(g_shell.hist_fd);
 }
 
@@ -79,21 +81,12 @@ static void		init_edition(void)
 
 int				init_all(void)
 {
-	t_shell		*shell;
-
-	if (!(shell = (t_shell *)malloc(sizeof(t_shell))))
-	{
-		ft_putendl("ft_init_shell Initialisation shell -> try again");
-		exit(0);
-	}
 	ft_signal();
 	if (!init_env())
 		return (1);
 	init_hist();
 	init_win();
 	init_edition();
-	g_shell.redir_fd = 0;
-	g_shell.redir_fd_out = 0;
 	g_shell.left_redir_fd = 0;
 	tcgetattr(STDIN_FILENO, &g_shell.t_back);// save les données termios d'origine
 	init_termios(g_shell.t_back);

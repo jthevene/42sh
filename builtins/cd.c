@@ -32,6 +32,8 @@ static char			**verif_args_cd(char *line, int *len_tab)
 		ft_putstr("-P	use the physical directory structure ");
 		ft_putendl("without following symbolic");
 		ft_putendl("links");
+		free_tab(tab_line);
+		return (NULL);
 	}
 	if ((*len_tab) > 3)
 		ft_putendl("cd: too many arguments");
@@ -79,9 +81,9 @@ static void			in_dir(char *path, char *pwd)
 static void			go_to_dir(int cas, char *path, char *home, char *file_name)
 {
 	FT_INIT(char*, tmp, NULL);
-	FT_INIT(char*, pwd, get_var(&g_shell, "PWD"));
 	if (!cas)
 		return ;
+	FT_INIT(char*, pwd, get_var(&g_shell, "PWD"));
 	if (cas == -1)
 	{
 		if (file_name[0] != '/')
@@ -97,6 +99,7 @@ static void			go_to_dir(int cas, char *path, char *home, char *file_name)
 		ft_strdel(&file_name);
 	}
 	in_dir(path, pwd);
+	free(pwd);
 }
 
 int					cd(char *line)
@@ -117,8 +120,11 @@ int					cd(char *line)
 		ft_strlen(ft_strrchr(path, '/')) + 1));
 	len_tab = verif_access(&path, &file, option);
 	go_to_dir(len_tab, path, home, file);
+	free_tab(tab_line);
 	free(path);
 	free(home);
+	free(sentence);
 	free(file);
+	free(pwd);
 	return (!len_tab ? 1 : 0);
 }

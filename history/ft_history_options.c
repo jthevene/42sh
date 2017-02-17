@@ -34,11 +34,14 @@ void	get_history_options(void)
 
 void	clear_history_list(void)
 {
+	FT_INIT(t_lst *, tmp, NULL);
 	while (g_shell.hist != NULL)
 	{
-		free(g_shell.hist->content);
-		free(g_shell.hist);
+		tmp = g_shell.hist;
+		if (g_shell.hist->content)
+				free(g_shell.hist->content);
 		g_shell.hist = g_shell.hist->prev;
+		free(tmp);
 	}
 	g_shell.hist = NULL;
 	g_shell.nav_hist = 0;

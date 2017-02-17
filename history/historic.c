@@ -31,8 +31,10 @@ void	get_hist(void)
 {
 	FT_INIT(char *, filename, NULL);
 	FT_INIT(char *, line, NULL);
+	FT_INIT(char *, home, get_var(&g_shell, "HOME"));
 	FT_INIT(int, ret, 0);
-	filename = ft_strjoin(get_var(&g_shell, "HOME"), "/.history");
+	filename = ft_strjoin(home, "/.history");
+	free(home);
 	if ((g_shell.hist_fd = open(filename, O_RDWR, 0600)) == -1)
 	{
 		ft_error(filename);

@@ -56,9 +56,10 @@ char		*default_sentence(char **sentence)
 	FT_INIT(char **, path, NULL);
 	FT_INIT(int, i, 0);
 	FT_INIT(char*, tmp, NULL);
-	FT_INIT(char*, str, ft_strdup(""));
+	FT_INIT(char*, str, NULL);
 	if (!ft_strchr(*sentence, ' '))
 		return (*sentence);
+	str = ft_strdup("");
 	path = ft_strsplit(*sentence, ' ');
 	while (path && path[i])
 	{

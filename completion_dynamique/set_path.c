@@ -102,9 +102,13 @@ char				**set_path(char **sentence, char *home, char *current_path)
 	current_path = !current_path ? "" : current_path;
 	if ((*sentence)[ft_strlen(*sentence) - 1] == ' ')
 		return (ft_strsplit(current_path, '\n'));
-	if (!ft_strchr(*sentence, ' ') && *sentence[0] != '/'
-		&& ft_strlen(current_path))
-		return (ft_strsplit(get_var(&g_shell, "PATH"), ':'));
+	if (!ft_strchr(*sentence, ' ') && *sentence[0] != '/' && ft_strlen(current_path))
+	{
+		new_path = get_var(&g_shell, "PATH");
+		dirs = ft_strsplit(new_path, ':');
+		ft_strdel(&new_path);
+		return (dirs);
+	}
 	else
 		sentence = clear_path(sentence);
 	new_path = set_begining(*sentence, home, *sentence[0] == '/' ? ""

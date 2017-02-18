@@ -87,20 +87,6 @@ static t_fdlist	*get_right_redirs(char *line)
 	return (fdlist);
 }
 
-void			print_fdlist_calice(t_fdlist *fdlist)
-{
-	while (fdlist->prev)
-		fdlist = fdlist->prev;
-	printf("PRINTING FDLIST NODES\n\n");
-	while (fdlist->next)
-	{
-		printf("~***\ntype = %d\nfd_in = %d\nfd_file = %d\nfilename = %s\n***~\n", fdlist->type, fdlist->fd_in, fdlist->fd_file, fdlist->filename);
-		fdlist = fdlist->next;
-	}
-	printf("~***\ntype = %d\nfd_in = %d\nfd_file = %d\nfilename = %s\n***~\n", fdlist->type, fdlist->fd_in, fdlist->fd_file, fdlist->filename);
-	printf("\nENDING OF PRINTING FDLIST NODES\n");
-}
-
 char			*hub_right_redir(char *line)
 {
 	FT_INIT(t_fdlist, *fdlist, get_right_redirs(line));
@@ -109,16 +95,10 @@ char			*hub_right_redir(char *line)
 		return (line);
 	else
 	{
-//		printf("\033[31m$$$$$$$$ PRINTING FDLIST $$$$$$$$$\033[0m\n");
-//		print_fdlist_calice(fdlist);
-		printf("\nNOW REPLACING STR\n");
 		ret = delete_redirs_str(ft_strdup(line));
 		ft_strdel(&line);
-		printf("REDIRS DELETED : %s\n\n", ret);
 	}
 	stock_redirs_in_gshell(fdlist);
-//	printf("\n\033[32m$$$$$$$$ PRINTING G_SHELL->RIGHT_REDIRS $$$$$$$$$\033[0m\n");
-//	print_fdlist_calice(g_shell.right_redirs);
 	free_fdlist(&fdlist, 0);
 	return (ret);
 }

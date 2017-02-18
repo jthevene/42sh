@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 22:25:24 by jules             #+#    #+#             */
-/*   Updated: 2017/02/17 18:59:08 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/18 15:44:50 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int		invalid_option(void)
 		if (ft_isalpha(c) && c != 'a' && c != 'r' && c != 'w' && c != 'p' && 
 			c != 's' && c != 'd' && c != 'c')
 		{
-			ft_putendl("history : invalid option");
-			ft_putendl("usage: history [-cdawrps]");
+			ft_putendl_fd("history : invalid option", 2);
+			ft_putendl_fd("usage: history [-cdawrps]", 2);
 			return (1);
 		}
 		i++;

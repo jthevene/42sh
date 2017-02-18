@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:53:52 by jules             #+#    #+#             */
-/*   Updated: 2017/02/17 19:00:23 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/18 15:44:03 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		check_hist_opt(void)
 	if (g_shell.hist_opt.d)
 		options++;
 	if (options > 0)
-		ft_putendl("cannot use more than one of -adrspw");
+		ft_putendl_fd("cannot use more than one of -adrspw", 2);
 	return (options);
 }
 
@@ -100,8 +100,8 @@ void	ft_history(char *nbr)
 		i = ft_atoi(nbr);
 	if (nbr && !ft_strisnum(nbr))
 	{
-		ft_putstr(nbr);
-		ft_putendl(" : numeric argument required");
+		ft_putstr_fd(nbr, 2);
+		ft_putendl_fd(" : numeric argument required", 2);
 		return ;
 	}
 	if (g_shell.hist)

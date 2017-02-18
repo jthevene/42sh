@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_history_options.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 16:55:54 by jules             #+#    #+#             */
-/*   Updated: 2017/02/18 14:21:15 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/02/18 15:44:14 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	delete_line_history(char *nbr)
 	FT_INIT(t_lst *, tmp, g_shell.hist);
 	if (!nbr)
 	{
-		ft_putendl("history -d argument must be a positive number");
+		ft_putendl_fd("history -d argument must be a positive number", 2);
 		return ;
 	}
 	FT_INIT(int, i, ft_atoi(nbr));

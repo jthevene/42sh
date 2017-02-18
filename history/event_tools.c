@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 17:27:22 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:28 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/18 15:47:06 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ char	*event_str(char *str, char *type)
 			return (ft_strdup(tmp->content));
 		tmp = tmp->prev;
 	}
-	ft_printf("\n21sh: %s: event not found", type);
+	(void)type;
+	ft_putendl_fd("21sh: event not found", 2);
 	return (NULL);
 }
 
@@ -64,6 +65,7 @@ char	*event_n(int n, char *type)
 		if (tmp)
 			return (ft_strdup(tmp->content));
 	}
-	ft_printf("\n21sh: %s: event not found", type);
+	(void)type;
+	ft_putendl_fd("21sh: event not found", 2);
 	return (NULL);
 }

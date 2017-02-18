@@ -22,7 +22,7 @@ char	*ft_strmap(char const *s, char (*f)(char))
 	if (!s || !f)
 		return (NULL);
 	size = ft_strlen(s);
-	string = (char*)malloc(sizeof(string) * size + 1);
+	string = (char*)malloc(sizeof(string) * (size + 1));
 	if (string == NULL)
 		return (NULL);
 	while (s[i])

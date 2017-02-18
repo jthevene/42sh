@@ -49,7 +49,7 @@ char		*ft_strtrim(char const *s)
 	spaces = count_spaces(s);
 	i = 0;
 	j = 0;
-	new_string = (char*)malloc(sizeof(new_string) * (ft_strlen(s) - spaces));
+	new_string = (char*)malloc(sizeof(char) * (ft_strlen(s) - spaces));
 	if (new_string == NULL)
 		return (NULL);
 	if (spaces == 0)

@@ -19,10 +19,12 @@ int			exp_type(char *str)
 	FT_INIT(int, digit, 0);
 	while (str[i])
 	{
-		if (str[i] >= '0' && str[i] <= '9')
+		if (ft_isdigit(str[i]))
 			digit = 1;
-		else
+		else if (ft_isalpha(str[i]))
 			chars = 1;
+		else
+			chars = 0;
 		i++;
 	}
 	if (digit && chars)

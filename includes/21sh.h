@@ -190,7 +190,7 @@ char				**get_args(char *content);
 char				**lst_to_tab(t_var *env);
 int					lenght_list(t_var *env);
 int					exec_function(char **content);
-void				error_exec(char **args);
+void				error_exec(char **args, char **cmd);
 
 /*
 ** REDIRECTIONS

@@ -55,7 +55,7 @@ int				parse_bin_directories(char **bin_dir, char **args)
 		}
 		i++;
 	}
-	error_exec(args);
+	error_exec(args, &cmd);
 	return (0);
 }
 

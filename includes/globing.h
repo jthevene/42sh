@@ -236,7 +236,7 @@ int						is_solo_arg(t_bracket *args);
 void					free_double_str(char **s, char **s2);
 
 // FONCTIONS WILDCARDS
-void					hub_final(t_glob *glob, char *line);
+int						hub_final(t_glob *glob, char *line);
 int						is_only_token(char token, char *str);
 int						only_star(char *str, t_glob *glob);
 int						g_parse_expr(char *str, t_glob *glob);

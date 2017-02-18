@@ -58,7 +58,11 @@ int						glob_parser(char **line)
 			return (0);
 		}
 	}
-	hub_final(glob, (*line));
+	if (!hub_final(glob, (*line)))
+	{
+		free(glob->command ? glob->command : NULL);
+		return (0);
+	}
 	free((*line));
 	(*line) = recreate_token_string(glob);
 	free(glob->command ? glob->command : NULL);
@@ -68,6 +72,8 @@ int						glob_parser(char **line)
 int						send_token_to_glob(t_all *all)
 {
 	FT_INIT(t_token *, tmp, all->tokens_begin);
+	FT_INIT(int, nb_error, 0);
+	FT_INIT(int, nb_all, 0);
 	if (tmp->next)
 	{
 		replace_env_var(&tmp->lexeme);
@@ -83,7 +89,9 @@ int						send_token_to_glob(t_all *all)
 		if (tmp->lexeme)
 		{
 			replace_env_var(&tmp->lexeme);
-			glob_parser(&tmp->lexeme);
+			if (!glob_parser(&tmp->lexeme))
+				nb_error++;
+			nb_all++;
 		}
 		if (!tmp->next)
 			break ;

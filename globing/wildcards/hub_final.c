@@ -75,7 +75,7 @@ int			multi_handling(t_glob *glob)
 	return (1);
 }
 
-void		hub_final(t_glob *g, char *line)
+int			hub_final(t_glob *g, char *line)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp, NULL);
@@ -100,5 +100,8 @@ void		hub_final(t_glob *g, char *line)
 		if (!line[i + 1])
 			break ;
 	}
+	if (!g->args)
+		return (0);
 	multi_handling(g);
+	return (1);
 }

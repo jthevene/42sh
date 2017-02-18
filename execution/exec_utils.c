@@ -28,13 +28,14 @@ void		handle_redirections(void)
 		g_shell.right_redirs->fd_in == 1 ? STDOUT_FILENO :
 		FT_TER(g_shell.right_redirs->fd_in == 2, STDERR_FILENO,
 		g_shell.right_redirs->fd_in)) == -1)
-			perror("SAMER");
+			return ;
 		close(g_shell.right_redirs->fd_file);
 	}
 	if (g_shell.left_redir_fd)
 	{
 		dup2(g_shell.left_redir_fd, STDIN_FILENO);
 		close(g_shell.left_redir_fd);
+		g_shell.left_redir_fd = 0;
 	}
 }
 

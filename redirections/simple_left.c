@@ -21,7 +21,7 @@ int 		simple_left(char *cmd, char *filename)
 		return (0);
 	}
 	g_shell.left_redir_fd = new_fd;
-	exec_function(cmd);
-	g_shell.left_redir_fd = 0;
+//	exec_function(cmd);
+//	g_shell.left_redir_fd = 0;
 	return (1);
 }

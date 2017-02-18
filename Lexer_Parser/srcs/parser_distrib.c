@@ -78,7 +78,6 @@ int		lire_lexeme(t_token *token, char *line, int pos)
 		token->type = WORDS;
 		i = pos;
 		pos = get_lexeme_pos(line, pos);
-		printf("i = %d\npos = %d\n", i, pos);
 		add_lexeme(token, line, pos, i);
 		if (str_is_digit(token->lexeme) == 1)
 			token->type = FDIGIT;

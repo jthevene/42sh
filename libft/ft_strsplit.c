@@ -12,67 +12,88 @@
 
 #include "includes/libft.h"
 
-static int	ft_countwords(char const *s, char c)
+static size_t		ft_tab_len(const char *s, char c)
 {
-	int i;
-	int words;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	words = 0;
-	if (s[i] != c)
-		words++;
-	while (s[i] == c && s[i] != '\0')
-		i++;
-	while (s[i] != '\0')
+	j = 0;
+	while (s[i])
 	{
-		if (s[i - 1] == c && s[i] != c)
-			words++;
-		i++;
-	}
-	return (words);
-}
-
-static int	ft_length(char const *s, char c)
-{
-	int length;
-	int i;
-
-	length = 0;
-	i = 0;
-	while (s[i] != '\0' && s[i] != c)
-	{
-		length++;
-		i++;
-	}
-	if (length == 0)
-		length++;
-	return (length);
-}
-
-char		**ft_strsplit(char const *s, char c)
-{
-	char	**tab;
-	int		i;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	tab = (char**)malloc(sizeof(char *) * (ft_countwords(s, c) + 1));
-	if (tab == NULL)
-		return (NULL);
-	while (*s)
-	{
-		if (*s == c)
-			s++;
-		else
-		{
-			tab[i] = ft_strsub(s, 0, ft_length(s, c));
-			if (tab[i] == NULL)
-				return (NULL);
-			s = s + ft_length(s, c);
+		while (s[i] == c)
 			i++;
-		}
+		if (s[i])
+			j++;
+		while (s[i] && s[i] != c)
+			i++;
+		while (s[i] && s[i] == c)
+			i++;
 	}
-	tab[i] = NULL;
-	return (tab);
+	return (j);
+}
+
+static size_t		ft_wi(size_t index, const char *s, char c)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (s[i])
+	{
+		while (s[i] == c)
+			i++;
+		if (s[i])
+			j++;
+		if (j == index + 1)
+			return (i);
+		while (s[i] && s[i] != c)
+			i++;
+	}
+	return (0);
+}
+
+static size_t		ft_wl(size_t index, const char *s, char c)
+{
+	size_t	i;
+	size_t	ret;
+
+	i = ft_wi(index, s, c);
+	ret = 0;
+	while (s[i] && s[i] != c)
+	{
+		i++;
+		ret++;
+	}
+	return (ret);
+}
+
+char				**ft_strsplit(char const *s, char c)
+{
+	char	**ret;
+	size_t	i;
+	size_t	j;
+	size_t	l;
+
+	ret = (char **)ft_memalloc(sizeof(char *) * (ft_tab_len(s, c) + 1));
+	if (ret)
+	{
+		j = 0;
+		while (j < ft_tab_len(s, c))
+		{
+			ret[j] = (char *)ft_memalloc(ft_wl(j, s, c) + 1);
+			if (ret[j])
+			{
+				i = ft_wi(j, s, c);
+				l = 0;
+				while (i - ft_wi(j, s, c) < ft_wl(j, s, c))
+					ret[j][l++] = s[i++];
+				ret[j][l] = 0;
+			}
+			j++;
+		}
+		ret[j] = NULL;
+	}
+	return (ret);
 }

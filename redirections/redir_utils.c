@@ -104,6 +104,8 @@ char		*delete_redirs_str(char *str)
 			j = i;
 			while (str[j] && str[j - 1] != '>')
 				j++;
+			if (str[j] == '>')
+				j++;
 			if (str[j] == ' ')
 				j++;
 			while (str[j] && str[j] != ' ')

@@ -51,7 +51,8 @@ static int		check_right_redir(char *line, int i, t_fdlist **fdlist)
 	}
 	else if (line[i + 1] != ' ' && !ft_isalnum(line[i + 1]))
 		return (0);
-	i += line[i + 1] == ' ' ? 2 : 1;
+	else
+		i += line[i + 1] == ' ' ? 2 : 1;
 	if (!(filename = get_filename(line, i)))
 		return (0);
 	if (!(push_right_redir(filename, fd_in, type, fdlist)))

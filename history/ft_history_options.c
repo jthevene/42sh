@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_history_options.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 16:55:54 by jules             #+#    #+#             */
-/*   Updated: 2017/02/17 16:48:16 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/18 14:21:15 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	delete_line_history(char *nbr)
 		tmp->next->prev = tmp->prev;
 	if (g_shell.hist == tmp)
 		g_shell.hist = tmp->prev;
+	free(tmp->content);
+	free(tmp);
 }
 
 void	update_history_file(int histfilesize)

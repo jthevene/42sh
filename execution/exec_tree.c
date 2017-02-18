@@ -40,6 +40,13 @@ int			verif_access_bin(char *path)
 	return (1);
 }
 
+void			error_exec(char **args)
+{
+	ft_putstr_fd("21sh: ", 2);
+	ft_putstr_fd(args[0], 2);
+	ft_putstr_fd(": command not found\n", 2);
+}
+
 int				parse_bin_directories(char **bin_dir, char **args)
 {
 	FT_INIT(int, i, 0);
@@ -65,6 +72,7 @@ int				parse_bin_directories(char **bin_dir, char **args)
 		}
 		i++;
 	}
+	error_exec(args);
 	return (0);
 }
 

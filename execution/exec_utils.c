@@ -91,5 +91,5 @@ void		error_exec(char **args, char **cmd)
 	ft_putstr_fd("21sh: ", 2);
 	ft_putstr_fd(args[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
-	ft_strdel(cmd);
+	ft_strdel(&(*cmd));
 }

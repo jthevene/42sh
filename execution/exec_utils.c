@@ -85,3 +85,10 @@ char		**get_args(char *content)
 	}
 	return (args);
 }
+
+void		error_exec(char **args)
+{
+	ft_putstr_fd("21sh: ", 2);
+	ft_putstr_fd(args[0], 2);
+	ft_putstr_fd(": command not found\n", 2);
+}

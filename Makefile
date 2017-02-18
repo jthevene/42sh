@@ -133,7 +133,8 @@ BIN_HISTORY 	= 	$(FILES_HISTORY:.c=.o)
 
 REDIRS			= 	./redirections/
 
-FILES_REDIRS 	=	hub_right_redir.c redir_utils.c stock_redirs_in_gshell.c
+FILES_REDIRS 	=	hub_right_redir.c hub_simple_left_redir.c redir_utils.c \
+					stock_redirs_in_gshell.c
 
 SRC_REDIRS 		= 	$(addprefix $(REDIRS), $(FILES_REDIRS))
 
@@ -146,7 +147,7 @@ BIN_REDIRS 		= 	$(FILES_REDIRS:.c=.o)
 EXECUTION 		= 	./execution/
 
 FILES_EXECUTION =	distrib_functions.c exec_tree.c \
-					env_to_tab.c exec_utils.c exec_pipe.c \
+					env_to_tab.c exec_utils.c exec_utils2.c exec_pipe.c \
 					simple_left.c 
 
 SRC_EXECUTION 	= 	$(addprefix $(EXECUTION), $(FILES_EXECUTION))

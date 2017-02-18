@@ -14,10 +14,7 @@
 
 static int		execve_pipe(char **content)
 {
-	FT_INIT(char *, tmp, hub_right_redir(ft_strdup((*content))));
-	ft_strdel(&(*content));
-	(*content) = ft_strdup(tmp);
-	ft_strdel(&tmp);
+	call_redirections(content);
 	FT_INIT(char **, bin_dir, get_bin_directories());
 	FT_INIT(char **, args, get_args((*content)));
 	FT_INIT(int, return_builtins, 0);

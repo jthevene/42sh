@@ -30,23 +30,6 @@ int				exec_function_execve(char *cmd, char **args)
 	}
 }
 
-int			verif_access_bin(char *path)
-{
-	struct stat infos;
-
-	lstat(path, &infos);
-	if (access(path, F_OK) != 0)
-		return (0);
-	return (1);
-}
-
-void			error_exec(char **args)
-{
-	ft_putstr_fd("21sh: ", 2);
-	ft_putstr_fd(args[0], 2);
-	ft_putstr_fd(": command not found\n", 2);
-}
-
 int				parse_bin_directories(char **bin_dir, char **args)
 {
 	FT_INIT(int, i, 0);
@@ -79,10 +62,7 @@ int				parse_bin_directories(char **bin_dir, char **args)
 int				exec_function(char **content)
 {
 	FT_INIT(pid_t, pid, 0);
-	FT_INIT(char *, tmp, hub_right_redir(ft_strdup((*content))));
-	ft_strdel(&(*content));
-	(*content) = ft_strdup(tmp);
-	ft_strdel(&tmp);
+	call_redirections(content);
 	FT_INIT(char **, bin_dir, get_bin_directories());
 	FT_INIT(char **, args, get_args((*content)));
 	FT_INIT(int, return_value, 0);
@@ -120,10 +100,6 @@ static int		exec_tree2(t_tree *tree)
 {
 	if (tree->type == PIPE)
 		return (run_pipe(tree->left, tree->right));
-//	else if (tree->type == MORE || tree->type == DMORE)
-//		return (run_redir(tree->left, tree->right, tree->type));
-	else if (tree->type == LESS)
-		return (simple_left(tree->left->content, tree->right->content));
 	else if (tree->left && tree->left->type != WORDS)
 		exec_tree(tree->left);
 	else if (tree->left && tree->left->type == WORDS)

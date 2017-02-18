@@ -89,7 +89,7 @@ void		free_fdlist(t_fdlist **fdlist, int go_close)
 	(*fdlist) = NULL;
 }
 
-char		*delete_redirs_str(char *str)
+char		*delete_right_redirs_str(char *str)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, 0);

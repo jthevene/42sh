@@ -95,7 +95,7 @@ char			*hub_right_redir(char *line)
 		return (line);
 	else
 	{
-		ret = delete_redirs_str(ft_strdup(line));
+		ret = delete_right_redirs_str(ft_strdup(line));
 		ft_strdel(&line);
 	}
 	stock_redirs_in_gshell(fdlist);

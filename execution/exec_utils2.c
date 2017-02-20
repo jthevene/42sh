@@ -22,7 +22,11 @@ void		restablish_fd(t_save_fd **save_list)
 		dup2((*save_list)->save_stdout, STDOUT_FILENO);
 	if ((*save_list)->save_stderr != -1)
 		dup2((*save_list)->save_stderr, STDERR_FILENO);
-	free((*save_list));
+	(*save_list)->save_stdin = -1;
+	(*save_list)->save_stdout = -1;
+	(*save_list)->save_stderr = -1;
+	free_aggreg();
+	free_right_redir();
 }
 
 static void	go_save_fd(t_save_fd **save_list, int fd_to_save)
@@ -43,34 +47,29 @@ static void	go_save_fd(t_save_fd **save_list, int fd_to_save)
 
 void		handle_aggreg(t_save_fd **save_list)
 {
-	if (g_shell.aggreg)
+	if (g_shell.aggreg != NULL)
 	{
 		while (g_shell.aggreg->prev)
 			g_shell.aggreg = g_shell.aggreg->prev;
 		while (g_shell.aggreg->next)
 		{
+			go_save_fd(&(*save_list), g_shell.aggreg->fd_in);
 			if (g_shell.aggreg->fd_file == -1)
 				close(g_shell.aggreg->fd_in);
 			else
-			{
-				go_save_fd(&(*save_list), g_shell.aggreg->fd_in);
 				dup2(g_shell.aggreg->fd_in, g_shell.aggreg->fd_file);
-			}
 			g_shell.aggreg = g_shell.aggreg->next;
 		}
+		go_save_fd(&(*save_list), g_shell.aggreg->fd_in);
 		if (g_shell.aggreg->fd_file == -1)
 			close(g_shell.aggreg->fd_in);
 		else
-		{
-			go_save_fd(&(*save_list), g_shell.aggreg->fd_in);
 			dup2(g_shell.aggreg->fd_in, g_shell.aggreg->fd_file);
-		}
 	}
 }
 
 void		handle_redirections(void)
 {
-	g_shell.save_list = (t_save_fd *)malloc(sizeof(t_save_fd));
 	handle_aggreg(&g_shell.save_list);
 	if (g_shell.right_redirs)
 	{

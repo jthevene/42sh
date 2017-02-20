@@ -90,7 +90,10 @@ int				init_all(void)
 	g_shell.left_redir_fd = 0;
 	g_shell.right_redirs = NULL;
 	g_shell.aggreg = NULL;
-	g_shell.save_list = NULL;
+	g_shell.save_list = (t_save_fd *)malloc(sizeof(t_save_fd));
+	g_shell.save_list->save_stdin = -1;
+	g_shell.save_list->save_stdout = -1;
+	g_shell.save_list->save_stderr = -1;
 	tcgetattr(STDIN_FILENO, &g_shell.t_back);// save les données termios d'origine
 	init_termios(g_shell.t_back);
 	return (0);

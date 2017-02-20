@@ -147,7 +147,7 @@ BIN_REDIRS 		= 	$(FILES_REDIRS:.c=.o)
 EXECUTION 		= 	./execution/
 
 FILES_EXECUTION =	distrib_functions.c exec_tree.c \
-					env_to_tab.c exec_utils.c exec_utils2.c exec_pipe.c \
+					env_to_tab.c exec_utils.c exec_utils2.c exec_pipe.c free_redirs.c \
 
 SRC_EXECUTION 	= 	$(addprefix $(EXECUTION), $(FILES_EXECUTION))
 

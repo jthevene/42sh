@@ -72,6 +72,13 @@ typedef struct				s_fdlist
 	struct s_fdlist			*next;
 }							t_fdlist;
 
+typedef struct				s_save_fd
+{
+	int						save_stdin;
+	int						save_stdout;
+	int						save_stderr;
+}							t_save_fd;
+
 typedef struct				s_shell
 {
 	int 					len;

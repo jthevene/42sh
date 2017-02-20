@@ -47,12 +47,12 @@ int				parse_bin_directories(char **bin_dir, char **args)
 		if (verif_access_others(bin_dir[i]))
 		{
 			cmd = ft_strjoin(bin_dir[i], "/");
-			tmp = ft_strdup(cmd);
-			ft_strdel(&cmd);
+			tmp = cmd;
 			cmd = ft_strjoin(tmp, args[0]);
 			ft_strdel(&tmp);
 			if (verif_access_bin(cmd))
 				exec_function_execve(cmd, args);
+			ft_strdel(&cmd);
 		}
 		i++;
 	}

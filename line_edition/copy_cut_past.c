@@ -42,14 +42,14 @@ void			copy_cut_line(int key)
 	FT_INIT(int, start_select, -g_shell.prompt_len);
 	FT_INIT(int, end_select, -g_shell.prompt_len);
 	if (!g_shell.start_select || !g_shell.end_select)
-		return (ft_putstr("Error Copy/Cut no selection"));
+		return ;
 	start_select += g_shell.start_select < g_shell.end_select ?
 		g_shell.start_select : g_shell.end_select;
 	end_select += g_shell.end_select > g_shell.start_select ?
 		g_shell.end_select : g_shell.start_select;
 	end_select++;
 	if (end_select - start_select <= 0)
-		return (ft_putstr("Error selections <= 0\n"));
+		return ;
 	g_shell.clipboard = store_selection(start_select, end_select, key);
 }
 
@@ -57,7 +57,7 @@ void			past_line(char *clipboard)
 {
 	FT_INIT(int, i, 0);
 	if (!clipboard)
-		return (ft_putstr("ERROR: No clipboard\n"));
+		return ;
 	while (clipboard[i])
 	{
 		fill_current_line(clipboard[i]);

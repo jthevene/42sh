@@ -106,7 +106,7 @@ char		*delete_right_redirs_str(char *str)
 				j++;
 			if (str[j] == '>')
 				j++;
-			if (str[j] == ' ')
+			while (str[j] && str[j] == ' ')
 				j++;
 			while (str[j] && str[j] != ' ')
 				j++;
@@ -116,6 +116,7 @@ char		*delete_right_redirs_str(char *str)
 			ft_strdel(&str);
 			str = ft_strdup(tmp);
 			ft_strdel(&tmp);
+			i = j;
 		}
 		i++;
 	}

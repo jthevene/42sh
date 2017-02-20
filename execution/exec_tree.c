@@ -19,13 +19,13 @@ int				exec_function_execve(char *cmd, char **args)
 	if (execve(cmd, args, g_shell.env_opt == FALSE ? env_tab : NULL) == -1)
 	{
 		free_tab(env_tab);
-		ft_strdel(&cmd);
+//		ft_strdel(&cmd);
 		return (0);
 	}
 	else
 	{
 		free_tab(env_tab);
-		ft_strdel(&cmd);
+//		ft_strdel(&cmd);
 		return (1);
 	}
 }

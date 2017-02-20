@@ -12,8 +12,29 @@
 
 #include "../includes/21sh.h"
 
+static int 	verif_buitins(char *to_exec)
+{
+	if (!ft_strcmp(to_exec, "echo"))
+		return (1);
+	else if (!ft_strcmp(to_exec, "unsetenv"))
+		return (1);
+	else if (!ft_strcmp(to_exec, "setenv"))
+		return (1);
+	else if (!ft_strcmp(to_exec, "env"))
+		return (1);
+	else if (!ft_strcmp(to_exec, "cd"))
+		return (1);
+	else if (!ft_strcmp(to_exec, "history"))
+		return (1);
+	else if (!ft_strcmp(to_exec, "exit"))
+		return (1);
+	return (0);
+}
+
 int			detect_builtins(char *to_exec, char *command_line)
 {
+	if (verif_buitins(to_exec))
+		handle_redirections();
 	if (!ft_strcmp(to_exec, "echo"))
 		return (ft_echo(command_line));
 	else if (!ft_strcmp(to_exec, "unsetenv"))

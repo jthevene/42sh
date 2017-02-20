@@ -33,9 +33,6 @@ static int 	verif_buitins(char *to_exec)
 
 int			detect_builtins(char *to_exec, char *command_line)
 {
-	FT_INIT(int, stdin, dup(STDIN_FILENO));
-	FT_INIT(int, stdout, dup(STDOUT_FILENO));
-	FT_INIT(int, stderr, dup(STDERR_FILENO));
 	if (!verif_buitins(to_exec))
 		return (-1);
 	FT_INIT(int, ret, -1);
@@ -54,18 +51,7 @@ int			detect_builtins(char *to_exec, char *command_line)
 		ret = history_hub(command_line);
 	else if (!ft_strcmp(to_exec, "exit"))
 		ft_exit();
-	if (ret != -1)
-	{
-		while (g_shell.right_redirs)
-		{
-			close(g_shell.right_redirs->fd_in);
-			close(g_shell.right_redirs->fd_file);
-			g_shell.right_redirs = g_shell.right_redirs->next;
-		}
-		dup2(stdin, STDIN_FILENO);
-		dup2(stderr, STDERR_FILENO);
-		dup2(stdout, STDOUT_FILENO);
-	}
+	restablish_fd(&g_shell.save_list);
 	return (ret);
 }
 

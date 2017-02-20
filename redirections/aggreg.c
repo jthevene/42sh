@@ -12,7 +12,7 @@
 
 #include "../includes/21sh.h"
 
-int			detect_numbers(char *cmd, int i)
+static int	detect_numbers(char *cmd, int i)
 {
 	FT_INIT(int, start, i);
 	FT_INIT(char *, number, NULL);
@@ -25,7 +25,7 @@ int			detect_numbers(char *cmd, int i)
 	return (ret);
 }
 
-int		replace_cmd_aggreg(char **cmd, int i, int j)
+static int	replace_cmd_aggreg(char **cmd, int i, int j)
 {
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(char *, tmp_replace, NULL);
@@ -42,7 +42,7 @@ int		replace_cmd_aggreg(char **cmd, int i, int j)
 	return (1);
 }
 
-int			detect_aggreg(char **cmd, int *fd_in, int *fd_out)
+static int	detect_aggreg(char **cmd, int *fd_in, int *fd_out)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, 0);
@@ -58,6 +58,7 @@ int			detect_aggreg(char **cmd, int *fd_in, int *fd_out)
 					j--;
 				(*fd_in) = detect_numbers((*cmd), ++j);
 			}
+			(*fd_in) = !(*fd_in) ? 1 : (*fd_in);
 			(*fd_out) = ft_isdigit((*cmd)[i + 2]) ? detect_numbers((*cmd), i + 2) : -1;
 			return (replace_cmd_aggreg(cmd, i + 2, j));
 		}
@@ -69,10 +70,64 @@ int			detect_aggreg(char **cmd, int *fd_in, int *fd_out)
 	return (1);
 }
 
+static int	pushback_aggreg(t_fdlist **flist, int fd_in, int fd_out)
+{
+	FT_INIT(t_fdlist *, new, NULL);
+	FT_INIT(t_fdlist *, tmp, NULL);
+	if (!(*flist))
+	{
+		if (!((*flist) = (t_fdlist *)malloc(sizeof(t_fdlist))))
+			return (0);
+		(*flist)->fd_in = fd_in;
+		(*flist)->fd_file = fd_out;
+		(*flist)->prev = NULL;
+		(*flist)->next = NULL;
+		return (1);
+	}
+	if (!(new = (t_fdlist *)malloc(sizeof(t_fdlist))))
+		return (0);
+	new->prev = NULL;
+	new->next = NULL;
+	new->fd_in = fd_in;
+	new->fd_file = fd_out;
+	while ((*flist)->next)
+		(*flist) = (*flist)->next;
+	tmp = (*flist);
+	tmp->next = new;
+	new->prev = tmp;
+	return (1);
+}
+
 int			hub_aggreg(char **cmd)
 {
-	if (!detect_aggreg(&(*cmd), &g_shell.aggreg_fd_in,
-		&g_shell.aggreg_fd_out))
+	FT_INIT(int, fd_in, 0);
+	FT_INIT(int, fd_out, 0);
+	FT_INIT(t_fdlist *, tmp, NULL);
+	while (ft_strstr((*cmd), ">&") || ft_strstr((*cmd), "<&"))
+	{
+		if (!detect_aggreg(&(*cmd), &fd_in, &fd_out))
+			return (0);
+		if (!pushback_aggreg(&tmp, fd_in, fd_out))
+			return (0);
+		fd_in = 0;
+		fd_out = 0;
+	}
+	while (tmp->next)
+		tmp = tmp->next;
+	if (!pushback_aggreg(&g_shell.aggreg, tmp->fd_in, tmp->fd_file))
 		return (0);
+	if (tmp->prev)
+		tmp = tmp->prev;
+	else
+		return (0);
+	while (tmp)
+	{
+		if (!fd_already_in_fdlist(&g_shell.aggreg, tmp->fd_in))
+			if (!pushback_aggreg(&g_shell.aggreg, tmp->fd_in, tmp->fd_file))
+				return (0);
+		if (!tmp->prev)
+			break ;
+		tmp = tmp->prev;
+	}
 	return (1);
 }

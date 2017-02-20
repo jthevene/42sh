@@ -12,42 +12,6 @@
 
 #include "../includes/21sh.h"
 
-void		handle_redirections(void)
-{
-	if (g_shell.right_redirs)
-	{
-		while (g_shell.right_redirs->prev)
-			g_shell.right_redirs = g_shell.right_redirs->prev;
-		while (g_shell.right_redirs->next)
-		{
-			dup2(g_shell.right_redirs->fd_file, g_shell.right_redirs->fd_in);
-			close(g_shell.right_redirs->fd_file);
-			g_shell.right_redirs = g_shell.right_redirs->next;
-		}
-		if (dup2(g_shell.right_redirs->fd_file,
-		g_shell.right_redirs->fd_in == 1 ? STDOUT_FILENO :
-		FT_TER(g_shell.right_redirs->fd_in == 2, STDERR_FILENO,
-		g_shell.right_redirs->fd_in)) == -1)
-			return ;
-		close(g_shell.right_redirs->fd_file);
-	}
-	if (g_shell.left_redir_fd)
-	{
-		dup2(g_shell.left_redir_fd, STDIN_FILENO);
-		close(g_shell.left_redir_fd);
-		g_shell.left_redir_fd = 0;
-	}
-	if (g_shell.aggreg_fd_in && g_shell.aggreg_fd_out)
-	{
-		if (g_shell.aggreg_fd_out == -1)
-			close(g_shell.aggreg_fd_in);
-		else
-			dup2(g_shell.aggreg_fd_in, g_shell.aggreg_fd_out);
-		g_shell.aggreg_fd_in = 0;
-		g_shell.aggreg_fd_out = 0;
-	}
-}
-
 int			verif_access_others(char *path)
 {
 	struct stat infos;

@@ -112,10 +112,9 @@ typedef struct				s_shell
 	struct termios			t_back;
 	char					*line;
 	///////////////////////////		Redirections
+	t_fdlist				*aggreg;
 	t_fdlist				*right_redirs;
 	int						left_redir_fd;
-	int						aggreg_fd_in;
-	int						aggreg_fd_out;
 	///////////////////////////		End redirections
 }							t_shell;
 

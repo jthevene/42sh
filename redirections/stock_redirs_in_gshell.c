@@ -12,7 +12,7 @@
 
 #include "../includes/21sh.h"
 
-static int			fd_already_in_fdlist(t_fdlist **fdlist, int fd)
+int					fd_already_in_fdlist(t_fdlist **fdlist, int fd)
 {
 	while ((*fdlist)->prev)
 		(*fdlist) = (*fdlist)->prev;
@@ -35,7 +35,6 @@ void				stock_redirs_in_gshell(t_fdlist *fdlist)
 		fdlist = fdlist->next;
 	if (!push_right_redir(fdlist->filename, fdlist->fd_in, fdlist->fd_file, &g_shell.right_redirs))
 		return ;
-//	printf("coucou : g_shell.right_redirs->filename = %s\n", g_shell.right_redirs->filename);
 	if (fdlist->prev)
 		fdlist = fdlist->prev;
 	else

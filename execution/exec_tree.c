@@ -89,6 +89,7 @@ int				exec_function(char **content)
 			return_value = 1;
 		else
 			return_value = 0;
+		restablish_fd(&g_shell.save_list);
 	}
 	free_tab(bin_dir);
 	free_tab(args);

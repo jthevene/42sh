@@ -207,5 +207,6 @@ t_fdlist			*new_node_fdlist(char *filename, int fd_in, int type);
 void				stock_redirs_in_gshell(t_fdlist *fdlist);
 int					fd_already_in_fdlist(t_fdlist **fdlist, int fd);
 void				free_fdlist(t_fdlist **fdlist, int close);
+void				restablish_fd(t_save_fd **save_list);
 
 #endif

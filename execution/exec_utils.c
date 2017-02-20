@@ -12,6 +12,16 @@
 
 #include "../includes/21sh.h"
 
+int			verif_access_bin(char *path)
+{
+	struct stat infos;
+
+	lstat(path, &infos);
+	if (access(path, F_OK) != 0)
+		return (0);
+	return (1);
+}
+
 int			verif_access_others(char *path)
 {
 	struct stat infos;

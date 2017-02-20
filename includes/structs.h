@@ -122,6 +122,7 @@ typedef struct				s_shell
 	t_fdlist				*aggreg;
 	t_fdlist				*right_redirs;
 	int						left_redir_fd;
+	t_save_fd				*save_list;
 	///////////////////////////		End redirections
 }							t_shell;
 

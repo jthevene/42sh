@@ -25,7 +25,9 @@ int			verif_access_bin(char *path)
 void		call_redirections(char **content)
 {
 	FT_INIT(char *, tmp, NULL);
-	if (ft_strchr((*content), '>'))
+	if (ft_strstr((*content), ">&"))
+		hub_aggreg(&(*content));
+	else if (ft_strchr((*content), '>'))
 	{
 		tmp = hub_right_redir(ft_strdup((*content)));
 		ft_strdel(&(*content));

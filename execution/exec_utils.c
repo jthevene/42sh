@@ -37,6 +37,15 @@ void		handle_redirections(void)
 		close(g_shell.left_redir_fd);
 		g_shell.left_redir_fd = 0;
 	}
+	if (g_shell.aggreg_fd_in && g_shell.aggreg_fd_out)
+	{
+		if (g_shell.aggreg_fd_out == -1)
+			close(g_shell.aggreg_fd_in);
+		else
+			dup2(g_shell.aggreg_fd_in, g_shell.aggreg_fd_out);
+		g_shell.aggreg_fd_in = 0;
+		g_shell.aggreg_fd_out = 0;
+	}
 }
 
 int			verif_access_others(char *path)

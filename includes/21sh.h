@@ -198,6 +198,7 @@ void				error_exec(char **args, char **cmd);
 void				call_redirections(char **content);
 char				*hub_right_redir(char *line);
 char				*hub_simple_left_redir(char *line);
+int					hub_aggreg(char **cmd);
 int					get_fd_in(char *line, int i);
 char				*delete_right_redirs_str(char *str);
 char				*get_filename(char *line, int i);

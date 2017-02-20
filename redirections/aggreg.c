@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include "GitPerso/21sh/libft/includes/libft.h"
+#include "../includes/21sh.h"
 
 int			detect_numbers(char *cmd, int i)
 {
@@ -24,7 +21,6 @@ int			detect_numbers(char *cmd, int i)
 		i++;
 	number = ft_strsub(cmd, start, i - start);
 	ret = atoi(number);
-	printf("number = %s, ret = %d\n", number, ret);
 	free(number ? number : NULL);
 	return (ret);
 }
@@ -33,16 +29,16 @@ int		replace_cmd_aggreg(char **cmd, int i, int j)
 {
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(char *, tmp_replace, NULL);
-	while ((*cmd)[i] && ft_isdigit((*cmd)[i]))
+	while ((*cmd)[i] && (*cmd)[i + 1] && ft_isdigit((*cmd)[i]))
 		i++;
 	if ((*cmd)[i] && !ft_isdigit((*cmd)[i]) && (*cmd)[i] != '-')
 		i--;
 	tmp = ft_strsub((*cmd), j, i - j + 1);
 	tmp_replace = ft_str_replace((*cmd), tmp, "");
-	free((*cmd));
+	ft_strdel(&(*cmd));
 	(*cmd) = ft_strdup(tmp_replace);
-	free(tmp);
-	free(tmp_replace);
+	ft_strdel(&tmp);
+	ft_strdel(&tmp_replace);
 	return (1);
 }
 
@@ -73,47 +69,10 @@ int			detect_aggreg(char **cmd, int *fd_in, int *fd_out)
 	return (1);
 }
 
-int			exec_aggreg(char **cmd, char **env)
+int			hub_aggreg(char **cmd)
 {
-	FT_INIT(int, fd_in, 0);
-	FT_INIT(int, fd_out, 0);
-	if (!env)
+	if (!detect_aggreg(&(*cmd), &g_shell.aggreg_fd_in,
+		&g_shell.aggreg_fd_out))
 		return (0);
-	printf("Before : cmd = %s\n", (*cmd));
-	if (!detect_aggreg(&(*cmd), &fd_in, &fd_out))
-		return (0);
-	printf("After : (*cmd) = %s\n", (*cmd));
-	if (fd_out == -1)
-	{
-		if (close(fd_in) == -1)
-		{
-			printf("Failed to close fd_in\n");
-			return (0);
-		}
-	}
-	else
-	{
-		if (dup2(fd_in, fd_out) == -1)
-		{
-			printf("Failed to dup2\n");
-			return (0);
-		}
-	}
 	return (1);
-}
-
-int			main(int ac, char **av, char **env)
-{
-	FT_INIT(char *, cmd, ft_strdup("ls -l coucou 1>&-"));
-	if (!ac || !av || !env)
-		return (0);
-	if (!exec_aggreg(&cmd, env))
-	{
-		printf("Error\n");
-		return (0);
-	}
-	else
-		printf("SUCCESS\n");
-	free(cmd);
-	return (0);
 }

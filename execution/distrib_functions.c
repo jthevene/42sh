@@ -33,23 +33,40 @@ static int 	verif_buitins(char *to_exec)
 
 int			detect_builtins(char *to_exec, char *command_line)
 {
-	if (verif_buitins(to_exec))
-		handle_redirections();
+	FT_INIT(int, stdin, dup(STDIN_FILENO));
+	FT_INIT(int, stdout, dup(STDOUT_FILENO));
+	FT_INIT(int, stderr, dup(STDERR_FILENO));
+	if (!verif_buitins(to_exec))
+		return (-1);
+	FT_INIT(int, ret, -1);
+	handle_redirections();
 	if (!ft_strcmp(to_exec, "echo"))
-		return (ft_echo(command_line));
+		ret = ft_echo(command_line);
 	else if (!ft_strcmp(to_exec, "unsetenv"))
-		return (ft_unsetenv(command_line));
+		ret = ft_unsetenv(command_line);
 	else if (!ft_strcmp(to_exec, "setenv"))
-		return (ft_setenv(command_line));
+		ret = ft_setenv(command_line);
 	else if (!ft_strcmp(to_exec, "env"))
-		return (ft_env(command_line));
+		ret = ft_env(command_line);
 	else if (!ft_strcmp(to_exec, "cd"))
-		return (cd(command_line));
+		ret = cd(command_line);
 	else if (!ft_strcmp(to_exec, "history"))
-		return (history_hub(command_line));
+		ret = history_hub(command_line);
 	else if (!ft_strcmp(to_exec, "exit"))
 		ft_exit();
-	return (-1);
+	if (ret != -1)
+	{
+		while (g_shell.right_redirs)
+		{
+			close(g_shell.right_redirs->fd_in);
+			close(g_shell.right_redirs->fd_file);
+			g_shell.right_redirs = g_shell.right_redirs->next;
+		}
+		dup2(stdin, STDIN_FILENO);
+		dup2(stderr, STDERR_FILENO);
+		dup2(stdout, STDOUT_FILENO);
+	}
+	return (ret);
 }
 
 int			verif_access_bin_directory_(char *path)

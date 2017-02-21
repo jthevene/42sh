@@ -20,7 +20,6 @@ void	parse(t_tree *tree, t_token *token)
 			{
 				tree->type = WORDS;
 				tree->content = commands_leaf(token);
-				printf("Content : (%s)\n", tree->content);
 			}
 }
 

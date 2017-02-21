@@ -54,4 +54,5 @@ void	replace_hdoc(t_token *token)
 	ft_strdel(&(token->lexeme));
 	token->lexeme = ft_strdup("/tmp/heredoc.txt");
 	free(heredoc);
+	close(fd_file);
 }

@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 18:56:07 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:17 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/21 13:34:23 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,38 +18,37 @@
 # endif
 
 # ifndef FT_INIT
-#  define FT_INIT(t, n, v) t n = v // Macro d'initialisation de variable
+#  define FT_INIT(t, n, v) t n = v
 # endif
 
 # ifndef FT_MULTI4
-#  define FT_MULTI4(a, b, c, d) a = b = c = d // Macro de multi assignation
+#  define FT_MULTI4(a, b, c, d) a = b = c = d
 # endif
 
 # ifndef FT_MULTI3
-#  define FT_MULTI3(a, b, c) a = b = c // Macro de multi assignation
+#  define FT_MULTI3(a, b, c) a = b = c
 # endif
 
 # ifndef FT_TER
-#  define FT_TER(si, alors, sinon) si ? alors : sinon // Macro de ternaire
+#  define FT_TER(si, alors, sinon) si ? alors : sinon
 # endif
 
 # ifndef MULT
-#  define MULT 1 // [abc]
+#  define MULT 1
 # endif
 # ifndef RNG
-#  define RNG 2 // [a-c]
+#  define RNG 2
 # endif
 # ifndef NOMULT
-#  define NOMULT 3 // [!abc]
+#  define NOMULT 3
 # endif
 # ifndef NORNG
-#  define NORNG 4 // [!a-c]
+#  define NORNG 4
 # endif
 # ifndef MIX
-#  define MIX 5 // [abc-fE-W] || [!abc-fE-W]
+#  define MIX 5
 # endif
 
-// Macros pour algo_imbricated, dans c_bracket
 # ifndef ARG
 #  define ARG 1
 # endif
@@ -77,7 +76,6 @@
 #  define FALSE 0
 # endif
 
-// Struct qui stocke le resultat d'une commande avec des []
 typedef struct			s_bracket
 {
 	char				*content;
@@ -85,7 +83,6 @@ typedef struct			s_bracket
 	struct s_bracket	*prev;
 }						t_bracket;
 
-// Struct qui stocke le resultat d'une commande avec des {}
 typedef struct			s_clist
 {
 	t_bracket			*list;
@@ -95,7 +92,6 @@ typedef struct			s_clist
 	struct s_clist		*prev;
 }						t_clist;
 
-// Struct pour le fichier globing/wildcards/check_file.c
 typedef	struct			s_checkfile
 {
 	int					*i;
@@ -144,14 +140,11 @@ int						backslash_char_globing(char **line);
 char					*recreate_token_string(t_glob *glob);
 void					free_glob(t_glob *glob);
 
-//FONCTIONS SQUARE BRACKETS
-// Initialisation et gestion de depart
 void					hub_sbracket(t_glob *glob, char *line);
 void					init_tabs1(t_glob *glob, int i, int j);
 void					init_tabs2(t_glob *glob);
 void					init_tabs3(t_glob *glob);
 
-// Traitement de la commande
 char					*fill_mult(char *str);
 char					*fill_rng(char *str);
 char					*fill_nomult(char *str);
@@ -160,7 +153,6 @@ char					*fill_mix(char *str);
 char					*handle_categories(char *str, t_glob *glob);
 int						detect_category(char *str);
 
-// Fonctions utilitaires
 char					*clean_brackets(char *str);
 int						get_len_mix(char *str);
 int						get_letters(char **ret, char *str);
@@ -171,26 +163,21 @@ int						catch_dash(int i);
 int						count_brackets(char *str, char bracket);
 int						next_bracket(char *str, char c, int i);
 
-// Fonctions enlevant les doublons d'une chaine
 char					*strjoin_nodouble(char *s1, char *s2);
 char					*strdup_nodouble(char *str);
 char					*mult_nodouble(char *str);
 
-// Fonctions de liste chainee
 int						bracket_pushback(t_bracket **list);
 int						pushback_content(t_bracket **list, char *content);
 void					rewind_tbracket(t_bracket **list);
 int						free_tbracket(t_bracket **list);
 void					copy_list(t_bracket **src, t_bracket **dest);
 
-// FONCTIONS CURLY BRACKETS
-// Initialisation et gestion de depart
 int						hub_cbracket(t_glob *glob, char *line);
 char					**recup_ext_args(char *str);
 int						cbracket_errors(char *line, t_glob *glob);
 int						fill_clist(char *line, t_glob *glob);
 
-// Fonctions de liste chainee
 int						clist_pushback(t_clist **clist);
 int						clist_list_pushback(t_clist **clist);
 void					rewind_tclist(t_clist **clist);
@@ -199,7 +186,6 @@ void					print_clist(t_clist **clist);
 void					free_tclist(t_clist **list);
 char					*next_expr(char *str, int i);
 
-// Fonctions utilitaires "cbracket"
 int						next_comma(char *str, int i);
 int						end_bracket(char *str, int i);
 int						is_bracket_in_exp(char *str, int i);
@@ -210,7 +196,6 @@ int						count_imbric(char *str);
 void					free_double_tab(char ***tabl);
 char					*expand_pattern(char *pat, t_glob *glob);
 
-// Fonctions utilitaires servant pour les algos imbriqués
 int						i_recup_lastb(char *str, t_glob *glob);
 int						i_get_arg_len(char *str, int i, int type, t_glob *glob);
 int						i_algo_imbricated(char *str, t_glob *glob);
@@ -223,20 +208,16 @@ t_clist					*i_recup_multi_patterns(char *str, int i, int j);
 char					*i_multi_patterns(t_clist **multi, int index);
 void					rewind_index(t_clist **list, int index);
 
-// Fonctions de gestion des algos imbriqués
 void					i2_hub_imbric(char *str, int i, t_glob *glob);
 void					i_hub_patterns(char *str, t_glob *glob);
 
-// Fonctions de gestion des expansions
 void					hub_expansion(char *str, t_glob *glob);
 
-// Fonctions utilitaires des expansions
 int						exp_type(char *str);
 char					*ft_cdup(char c);
 int						is_solo_arg(t_bracket *args);
 void					free_double_str(char **s, char **s2);
 
-// FONCTIONS WILDCARDS
 int						hub_final(t_glob *glob, char *line);
 int						is_only_token(char token, char *str);
 int						only_star(char *str, t_glob *glob);

@@ -6,7 +6,7 @@
 /*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 14:52:21 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/10/13 10:56:00 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/21 13:17:52 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ void		free_fdlist(t_fdlist **fdlist, int go_close)
 		if (go_close == 1)
 			close((*fdlist)->fd_file);
 		tmp = (*fdlist);
-		(*fdlist) =(*fdlist)->next;
+		(*fdlist) = (*fdlist)->next;
 		free(tmp);
 	}
 	if ((*fdlist)->filename)
-			ft_strdel(&(*fdlist)->filename);
+		ft_strdel(&(*fdlist)->filename);
 	if (go_close == 1)
 		close((*fdlist)->fd_file);
 	free((*fdlist));

@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 13:01:44 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/13 12:37:19 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/21 13:19:05 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static int	detect_aggreg(char **cmd, int *fd_in, int *fd_out)
 	FT_INIT(int, j, 0);
 	while ((*cmd)[i])
 	{
-		if (((*cmd)[i] == '>' || (*cmd)[i] == '<') && (*cmd)[i + 1] && (*cmd)[i + 1] == '&' && (*cmd)[i + 2]
+		if (((*cmd)[i] == '>' || (*cmd)[i] == '<') && (*cmd)[i + 1] && \
+				(*cmd)[i + 1] == '&' && (*cmd)[i + 2]
 			&& ((*cmd)[i + 2] == '-' || ft_isdigit((*cmd)[i + 2])))
 		{
 			if ((*cmd)[i - 1] && ft_isdigit((*cmd)[i - 1]))
@@ -59,10 +60,12 @@ static int	detect_aggreg(char **cmd, int *fd_in, int *fd_out)
 				(*fd_in) = detect_numbers((*cmd), ++j);
 			}
 			(*fd_in) = !(*fd_in) ? 1 : (*fd_in);
-			(*fd_out) = ft_isdigit((*cmd)[i + 2]) ? detect_numbers((*cmd), i + 2) : -1;
+			(*fd_out) = ft_isdigit((*cmd)[i + 2]) ? detect_numbers((*cmd), \
+					i + 2) : -1;
 			return (replace_cmd_aggreg(cmd, i + 2, j));
 		}
-		else if (((*cmd)[i] == '>' || (*cmd)[i] == '<') && (*cmd)[i + 1] && (*cmd)[i + 1] == '&' && (*cmd)[i + 2]
+		else if (((*cmd)[i] == '>' || (*cmd)[i] == '<') && (*cmd)[i + 1] && \
+				(*cmd)[i + 1] == '&' && (*cmd)[i + 2]
 			&& ((*cmd)[i + 2] != '-' || !ft_isdigit((*cmd)[i + 2])))
 			return (0);
 		i++;

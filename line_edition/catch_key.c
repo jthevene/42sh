@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 17:16:00 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/02/13 12:37:39 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/21 13:30:00 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,11 @@ int				is_arrow(char *key)
 
 int				readkeyspecial(char *key)
 {
-//	readkeyspecial2();
-	if (key[0] == 27 && key[1] == 99) // ALT + C
-	{
-//		ft_putendl("COPY");
+	if (key[0] == 27 && key[1] == 99)
 		return (K_COPY);
-	}
-	else if (key[0] == 27 && key[1] == 0) // ECHAP
-	{
-//		ft_putendl("ECHAP");
+	else if (key[0] == 27 && key[1] == 0)
 		return (K_ESCAPE);
-	}
-	else if (key[0] == 27 && key[1] == 118) // ALT + V
+	else if (key[0] == 27 && key[1] == 118)
 		return (K_PAST);
 	else if (is_arrow(key))
 		return (detect_arrow(key));
@@ -53,22 +46,22 @@ int				readkey(void)
 {
 	FT_INIT(char*, c, g_shell.c);
 	ft_bzero(c, 16);
-	if (read(STDIN_FILENO, c, 15))// on bloque ici en attendant au moins 1 byte
+	if (read(STDIN_FILENO, c, 15))
 	{
-		if (c[0] == 27)// caractere d'echappement recu
-			return (readkeyspecial(c));// on doit donc traiter une touche speciale codee sur plusieurs bytes
+		if (c[0] == 27)
+			return (readkeyspecial(c));
 	}
-	if (c[0] == 4 && c[1] == 0) // CTRL + D
+	if (c[0] == 4 && c[1] == 0)
 		return (K_ESCAPE);
 	else if (c[0] > 31 && c[0] < 127)
 		return (K_PRINT);
-	else if (c[0] == 5) // CTRL + E
+	else if (c[0] == 5)
 		return (K_COPY);
-	else if (c[0] == 9) // TAB
+	else if (c[0] == 9)
 		return (K_TAB);
-	else if (c[0] == 18) // CTRL + R
+	else if (c[0] == 18)
 		return (K_CUT);
-	else if (c[0] == 20) // PAST CTRL + T
+	else if (c[0] == 20)
 		past_line(g_shell.clipboard);
 	else if (c[0] == 127)
 		return (K_BACKSP);

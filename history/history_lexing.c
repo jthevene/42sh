@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 22:25:24 by jules             #+#    #+#             */
-/*   Updated: 2017/02/18 15:44:50 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/21 13:56:43 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		invalid_option(void)
 	while (g_shell.hist_opt.options[i])
 	{
 		c = g_shell.hist_opt.options[i];
-		if (ft_isalpha(c) && c != 'a' && c != 'r' && c != 'w' && c != 'p' && 
+		if (ft_isalpha(c) && c != 'a' && c != 'r' && c != 'w' && c != 'p' && \
 			c != 's' && c != 'd' && c != 'c')
 		{
 			ft_putendl_fd("history : invalid option", 2);

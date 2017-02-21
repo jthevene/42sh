@@ -85,7 +85,7 @@ typedef struct				s_shell
 	char					*c;
 	char					*oldpwd;
 	char					*clipboard;
-	char						*prompt;
+	char					*prompt;
 	char					*current_line;
 	int						env_opt;
 	t_var					*env;

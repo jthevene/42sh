@@ -18,7 +18,6 @@ void		ft_exit(void)
 	ft_putstr("\n");
 	ft_reset_termios(g_shell.t_back);
 	update_history_file(get_histsize("HISTFILESIZE"));
-
 	free(g_shell.save_list);
 	free_hist();
 	exit(0);

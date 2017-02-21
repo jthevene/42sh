@@ -137,9 +137,10 @@ typedef struct			s_glob
 }						t_glob;
 
 int						glob_parser(char **line);
-void					replace_env_var(char **line);
+int						replace_env_var(char **line);
 int						ft_strchr_bslash(char *s, int c);
-int						verif_tokens(char *str);
+int						verif_tokens(char **str);
+int						backslash_char_globing(char **line);
 char					*recreate_token_string(t_glob *glob);
 void					free_glob(t_glob *glob);
 

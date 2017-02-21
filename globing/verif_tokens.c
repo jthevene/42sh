@@ -57,31 +57,29 @@ int					ft_strchr_bslash(char *s, int c)
 	return (found);
 }
 
-int					verif_tokens(char *str)
+int					verif_tokens(char **str)
 {
 	FT_INIT(int, nb, 0);
-	if (ft_strchr_bslash(str, '[') && !ft_strchr_bslash(str, ']'))
+	if (ft_strchr_bslash((*str), '[') && !ft_strchr_bslash((*str), ']'))
 		return (0);
-	else if (!ft_strchr_bslash(str, '[') && ft_strchr_bslash(str, ']'))
+	else if (!ft_strchr_bslash((*str), '[') && ft_strchr_bslash((*str), ']'))
 		return (0);
-	else if (!count_brackets(str, '['))
+	else if (!count_brackets((*str), '['))
 		return (0);
-	else if (ft_strchr_bslash(str, '[') && ft_strchr_bslash(str, ']'))
+	else if (ft_strchr_bslash((*str), '[') && ft_strchr_bslash((*str), ']'))
 		nb++;
-	if (ft_strchr_bslash(str, '{') && !ft_strchr_bslash(str, '}'))
+	if (ft_strchr_bslash((*str), '{') && !ft_strchr_bslash((*str), '}'))
 		return (0);
-	else if (ft_strchr_bslash(str, '{') && !ft_strchr_bslash(str, '}'))
+	else if (ft_strchr_bslash((*str), '{') && !ft_strchr_bslash((*str), '}'))
 		return (0);
-	else if (!count_brackets(str, '{'))
+	else if (!count_brackets((*str), '{'))
 		return (0);
-	else if (ft_strchr_bslash(str, '{') && ft_strchr_bslash(str, '}'))
+	else if (ft_strchr_bslash((*str), '{') && ft_strchr_bslash((*str), '}'))
 		nb++;
-	if ((ft_strchr(str, '*') && !ft_strchr_bslash(str, '*'))
-		|| (ft_strchr(str, '?') && !ft_strchr_bslash(str, '?')))
+	if ((ft_strchr((*str), '*') && !ft_strchr_bslash((*str), '*'))
+		|| (ft_strchr((*str), '?') && !ft_strchr_bslash((*str), '?')))
 		return (0);
-	else if (ft_strchr_bslash(str, '*') || ft_strchr_bslash(str, '?'))
+	else if (ft_strchr_bslash((*str), '*') || ft_strchr_bslash((*str), '?'))
 		nb++;
-	if (!nb)
-		return (0);
-	return (1);
+	return (!nb ? 0 : 1);
 }

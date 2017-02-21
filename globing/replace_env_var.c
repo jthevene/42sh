@@ -87,7 +87,7 @@ static void	reform_line_var(char **line, char *value, int i)
 	free(tmp_end ? tmp_end : NULL);
 }
 
-void		replace_env_var(char **line)
+int			replace_env_var(char **line)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp, NULL);
@@ -109,4 +109,5 @@ void		replace_env_var(char **line)
 		}
 		i++;
 	}
+	return (0);
 }

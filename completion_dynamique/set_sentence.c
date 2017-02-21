@@ -71,8 +71,7 @@ char		*default_sentence(char **sentence)
 		{
 			tmp = str;
 			str = ft_strjoin(str, " ");
-			if (tmp)
-				ft_strdel(&tmp);
+			ft_strdel(tmp ? &tmp : NULL);
 		}
 		i++;
 	}

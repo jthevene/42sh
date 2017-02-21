@@ -40,14 +40,27 @@ t_glob					*init_glob(void)
 	return (glob);
 }
 
+static void				glob_parser_end(char **line, t_glob *glob)
+{
+	FT_INIT(char *, tmp, NULL);
+	tmp = recreate_token_string(glob);
+	if (tmp)
+	{
+		free((*line));
+		(*line) = ft_strdup(tmp);
+	}
+	free(tmp);
+}
+
 int						glob_parser(char **line)
 {
 	static t_glob		*glob = NULL;
 
 	if (!(*line))
 		return (0);
-	if (!verif_tokens((*line)))
-		return (0);
+	if (!verif_tokens(&(*line)))
+		return (backslash_char_globing(&(*line)));
+	backslash_char_globing(&(*line));
 	glob = !glob ? init_glob() : glob;
 	glob->command = ft_strdup((*line));
 	if (ft_strchr((*line), '{'))
@@ -63,8 +76,7 @@ int						glob_parser(char **line)
 		free(glob->command ? glob->command : NULL);
 		return (0);
 	}
-	free((*line));
-	(*line) = recreate_token_string(glob);
+	glob_parser_end(&(*line), glob);
 	free(glob->command ? glob->command : NULL);
 	return (1);
 }
@@ -80,10 +92,7 @@ int						send_token_to_glob(t_all *all)
 		tmp = tmp->next;
 	}
 	else
-	{
-		replace_env_var(&tmp->lexeme);
-		return (0);
-	}
+		return (replace_env_var(&tmp->lexeme));
 	while (tmp)
 	{
 		if (tmp->lexeme)

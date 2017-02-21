@@ -36,6 +36,5 @@ int			init_env(void)
 		i++;
 	}
 	g_shell.oldpwd = get_var(&g_shell, "OLDPWD");
-	// g_shell.hist = (t_lst*)ft_memalloc(sizeof(t_lst));
 	return (1);
 }

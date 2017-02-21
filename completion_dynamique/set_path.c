@@ -94,15 +94,15 @@ char				**clear_path(char **sentence)
 	return (sentence);
 }
 
-char				**set_path(char **sentence, char *home, char *current_path)
+char				**set_path(char **sentence, char *home, char *c_path)
 {
 	FT_INIT(char*, new_path, NULL);
 	FT_INIT(char**, dirs, NULL);
 	home = !home ? "" : home;
-	current_path = !current_path ? "" : current_path;
+	c_path = !c_path ? "" : c_path;
 	if ((*sentence)[ft_strlen(*sentence) - 1] == ' ')
-		return (ft_strsplit(current_path, '\n'));
-	if (!ft_strchr(*sentence, ' ') && *sentence[0] != '/' && ft_strlen(current_path))
+		return (ft_strsplit(c_path, '\n'));
+	if (!ft_strchr(*sentence, ' ') && *sentence[0] != '/' && ft_strlen(c_path))
 	{
 		new_path = get_var(&g_shell, "PATH");
 		dirs = ft_strsplit(new_path, ':');
@@ -111,8 +111,7 @@ char				**set_path(char **sentence, char *home, char *current_path)
 	}
 	else
 		sentence = clear_path(sentence);
-	new_path = set_begining(*sentence, home, *sentence[0] == '/' ? ""
-		: current_path);
+	new_path = set_begining(*sentence, home, *sentence[0] == '/' ? "" : c_path);
 	dirs = ft_strsplit(new_path, '/');
 	ft_bzero((void*)new_path, ft_strlen(new_path));
 	ft_strcat(new_path, "/");

@@ -40,7 +40,7 @@ void	replace_hdoc(t_token *token)
 	ft_strdel(&g_shell.prompt);
 	myline = prompt_dquote("heredoc> ");
 	if (ft_strcmp(myline, token->lexeme) != 0)
-		heredoc = ft_strjoinchar(heredoc, myline, '\n');
+		heredoc = ft_strjoin(heredoc, myline);
 	while (ft_strcmp(myline, token->lexeme) != 0)
 	{
 		ft_strdel(&g_shell.prompt);

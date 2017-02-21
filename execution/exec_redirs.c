@@ -57,14 +57,14 @@ void		handle_aggreg(t_save_fd **save_list)
 			if (g_shell.aggreg->fd_file == -1)
 				close(g_shell.aggreg->fd_in);
 			else
-				dup2(g_shell.aggreg->fd_in, g_shell.aggreg->fd_file);
+				dup2(g_shell.aggreg->fd_file, g_shell.aggreg->fd_in);
 			g_shell.aggreg = g_shell.aggreg->next;
 		}
 		go_save_fd(&(*save_list), g_shell.aggreg->fd_in);
 		if (g_shell.aggreg->fd_file == -1)
 			close(g_shell.aggreg->fd_in);
 		else
-			dup2(g_shell.aggreg->fd_in, g_shell.aggreg->fd_file);
+			dup2(g_shell.aggreg->fd_file, g_shell.aggreg->fd_in);
 	}
 }
 

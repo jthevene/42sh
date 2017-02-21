@@ -48,6 +48,11 @@ int				exec_pipe(t_tree *left, t_tree *right)
 		close(fd[0]);
 		close(fd[1]);
 	}
+//	else
+//	{
+//		g_shell.t_back.c_lflag |= (ICANON | ECHO);
+//		tcsetattr(0, 0, &(g_shell.t_back));
+//	}
 	if ((int)pid == 0)
 	{
 		call_redirections(&left->content);
@@ -61,6 +66,7 @@ int				exec_pipe(t_tree *left, t_tree *right)
 	ret1 = WEXITSTATUS(pid) == 0 ? 1 : 0;
 	ret2 = execve_pipe(content_to_exec(left, right));
 	wait(&pid);
+//	init_termios(g_shell.t_back);
 	return (!ret1 || !ret2 ? 0 : 1);
 }
 
@@ -72,8 +78,13 @@ int				run_pipe(t_tree *left, t_tree *right)
 	if ((int)pid == -1)
 		ret = 0;
 	else if ((int)pid == 0)
+	{
+//		g_shell.t_back.c_lflag |= (ICANON | ECHO);
+//		tcsetattr(0, 0, &(g_shell.t_back));
 		exit(ret = exec_pipe(left, right));
+	}
 	wait(NULL);
+//	init_termios(g_shell.t_back);
 	restablish_fd(&g_shell.save_list);
 	return (ret);
 }

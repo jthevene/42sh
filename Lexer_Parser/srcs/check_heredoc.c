@@ -20,31 +20,38 @@ void	check_for_hdoc(t_token *token)
 	while (tmp->next)
 	{
 		if (tmp->type == DLESS)
+		{
+			ft_strdel(&(tmp->lexeme));
+			tmp->lexeme = ft_strdup("<");
 			replace_hdoc(tmp->next);
+		}
 		tmp = tmp->next;
 	}
 }
 
 void	replace_hdoc(t_token *token)
 {
-	char *myline;
-	char *heredoc;
+	char	*myline;
+	char	*heredoc;
+	int		fd_file;
+
 
 	heredoc = ft_strdup("");
 	ft_strdel(&g_shell.prompt);
-	myline = prompt_dquote("> ");
+	myline = prompt_dquote("heredoc> ");
 	if (ft_strcmp(myline, token->lexeme) != 0)
 		heredoc = ft_strjoinchar(heredoc, myline, '\n');
 	while (ft_strcmp(myline, token->lexeme) != 0)
 	{
 		ft_strdel(&g_shell.prompt);
 		ft_putstr("\n");
-		myline = prompt_dquote("> ");
+		myline = prompt_dquote("heredoc> ");
 		if (ft_strcmp(myline, token->lexeme) != 0)
 			heredoc = ft_strjoinchar(heredoc, myline, '\n');
 	}
+	fd_file = open("heredoc.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	ft_putstr_fd(heredoc, fd_file);
 	ft_strdel(&(token->lexeme));
-	token->lexeme = ft_strdup(heredoc);
-	free(myline);
+	token->lexeme = ft_strdup("heredoc.txt");
 	free(heredoc);
 }

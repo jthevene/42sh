@@ -25,7 +25,6 @@ static int		execve_pipe(char **content)
 
 char 			**content_to_exec(t_tree *left, t_tree *right)
 {
-//	FT_INIT(char *, content, right->content);
 	if (!ft_strcmp(right->content, "|") && left)
 	{
 		if (right->left && right->right)
@@ -51,15 +50,17 @@ int				exec_pipe(t_tree *left, t_tree *right)
 	}
 	if ((int)pid == 0)
 	{
+		call_redirections(&left->content);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[0]);
 		exit(execve_pipe(&left->content));
 	}
-	wait(&pid);
+	call_redirections(&right->content);
 	dup2(fd[0], STDIN_FILENO);
 	close(fd[1]);
 	ret1 = WEXITSTATUS(pid) == 0 ? 1 : 0;
 	ret2 = execve_pipe(content_to_exec(left, right));
+	wait(&pid);
 	return (!ret1 || !ret2 ? 0 : 1);
 }
 
@@ -73,5 +74,6 @@ int				run_pipe(t_tree *left, t_tree *right)
 	else if ((int)pid == 0)
 		exit(ret = exec_pipe(left, right));
 	wait(NULL);
+	restablish_fd(&g_shell.save_list);
 	return (ret);
 }

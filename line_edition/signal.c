@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 11:31:13 by jules             #+#    #+#             */
-/*   Updated: 2017/02/13 12:37:26 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/21 13:24:57 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		ft_sigwinch(int sig)
 	}
 }
 
-void		ft_sigint(int sig)  // ctrl + c
+void		ft_sigint(int sig)
 {
 	(void)sig;
 	reset_line();
@@ -52,7 +52,7 @@ void		ft_segfault(int sig)
 	ft_exit();
 }
 
-void 		distrib_signals(int sig)
+void		distrib_signals(int sig)
 {
 	if (sig == SIGWINCH)
 		ft_sigwinch(sig);
@@ -70,5 +70,4 @@ void		ft_signal(void)
 		signal(sig, distrib_signals);
 		sig++;
 	}
-	
 }

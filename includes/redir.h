@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 18:56:17 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:09 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/21 13:53:47 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 int					simple_right();
 int					double_right();
 int					detect_out();
-void				exec_redir_right(int fd/*, int fd_out*/);
+void				exec_redir_right(int fd);
 int					create_file(char *filename, t_fdlist **fdlist, int type);
 
 #endif

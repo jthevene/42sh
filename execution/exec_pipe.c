@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 09:28:00 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:38 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/21 14:02:58 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int		execve_pipe(char **content)
 	return (parse_bin_directories(bin_dir, args));
 }
 
-char 			**content_to_exec(t_tree *left, t_tree *right)
+char			**content_to_exec(t_tree *left, t_tree *right)
 {
 	if (!ft_strcmp(right->content, "|") && left)
 	{
@@ -32,7 +32,6 @@ char 			**content_to_exec(t_tree *left, t_tree *right)
 	}
 	return (&right->content);
 }
-
 
 int				exec_pipe(t_tree *left, t_tree *right)
 {
@@ -48,11 +47,6 @@ int				exec_pipe(t_tree *left, t_tree *right)
 		close(fd[0]);
 		close(fd[1]);
 	}
-//	else
-//	{
-//		g_shell.t_back.c_lflag |= (ICANON | ECHO);
-//		tcsetattr(0, 0, &(g_shell.t_back));
-//	}
 	if ((int)pid == 0)
 	{
 		call_redirections(&left->content);
@@ -66,7 +60,6 @@ int				exec_pipe(t_tree *left, t_tree *right)
 	ret1 = WEXITSTATUS(pid) == 0 ? 1 : 0;
 	ret2 = execve_pipe(content_to_exec(left, right));
 	wait(&pid);
-//	init_termios(g_shell.t_back);
 	return (!ret1 || !ret2 ? 0 : 1);
 }
 
@@ -79,12 +72,9 @@ int				run_pipe(t_tree *left, t_tree *right)
 		ret = 0;
 	else if ((int)pid == 0)
 	{
-//		g_shell.t_back.c_lflag |= (ICANON | ECHO);
-//		tcsetattr(0, 0, &(g_shell.t_back));
 		exit(ret = exec_pipe(left, right));
 	}
 	wait(NULL);
-//	init_termios(g_shell.t_back);
 	restablish_fd(&g_shell.save_list);
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 19:00:27 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/16 19:00:29 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/21 13:16:19 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void				stock_redirs_in_gshell(t_fdlist *fdlist)
 		return ;
 	while (fdlist->next)
 		fdlist = fdlist->next;
-	if (!push_right_redir(fdlist->filename, fdlist->fd_in, fdlist->fd_file, &g_shell.right_redirs))
+	if (!push_right_redir(fdlist->filename, fdlist->fd_in, fdlist->fd_file, \
+				&g_shell.right_redirs))
 		return ;
 	if (fdlist->prev)
 		fdlist = fdlist->prev;
@@ -43,7 +44,8 @@ void				stock_redirs_in_gshell(t_fdlist *fdlist)
 	{
 		if (!fd_already_in_fdlist(&g_shell.right_redirs, fdlist->fd_in))
 		{
-			if (!push_right_redir(fdlist->filename, fdlist->fd_in, fdlist->fd_file, &g_shell.right_redirs))
+			if (!push_right_redir(fdlist->filename, fdlist->fd_in, \
+						fdlist->fd_file, &g_shell.right_redirs))
 				return ;
 		}
 		if (!fdlist->prev)

@@ -6,13 +6,13 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 12:38:56 by jules             #+#    #+#             */
-/*   Updated: 2017/02/14 13:10:43 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/21 13:56:11 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/history.h"
 
-void	navigation_hist(int arrow)
+void			navigation_hist(int arrow)
 {
 	if (g_shell.curr_hist)
 	{
@@ -23,7 +23,7 @@ void	navigation_hist(int arrow)
 	}
 }
 
-static void 	replace_current_line(char *content)
+static void		replace_current_line(char *content)
 {
 	FT_INIT(int, i, 0);
 	if (!content)
@@ -38,10 +38,9 @@ static void 	replace_current_line(char *content)
 		i++;
 	}
 	g_shell.line_size = g_shell.cursor_x;
-
 }
 
-void	nav_hist_up(void)
+void			nav_hist_up(void)
 {
 	if (g_shell.curr_hist->prev && g_shell.curr_hist->prev->content)
 	{
@@ -53,7 +52,7 @@ void	nav_hist_up(void)
 	}
 }
 
-void	nav_hist_down(void)
+void			nav_hist_down(void)
 {
 	if (g_shell.curr_hist->next)
 	{

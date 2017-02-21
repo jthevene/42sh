@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 11:01:23 by jules             #+#    #+#             */
-/*   Updated: 2017/02/13 12:37:30 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/21 13:26:19 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void			fill_btwn_char(char c)
 	{
 		tmp = g_shell.current_line;
 		g_shell.current_line = ft_strnew(len + 1 + 256);
-//		g_shell.current_line = (char*)malloc(sizeof(char) * (len + 1 + 256));
 		ft_strcpy(g_shell.current_line, tmp);
 		ft_strdel(&tmp);
 	}
@@ -87,8 +86,6 @@ void			fill_current_line(char c)
 		{
 			tmp = g_shell.current_line;
 			g_shell.current_line = ft_strnew(len + 1 + 256);
-//			g_shell.current_line = (char*)malloc(sizeof(char) *
-//				(len + 1 + 256));
 			ft_strcpy(g_shell.current_line, tmp);
 			ft_strdel(&tmp);
 		}

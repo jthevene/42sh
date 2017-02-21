@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:40:03 by jules             #+#    #+#             */
-/*   Updated: 2017/02/13 12:37:34 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/21 13:26:42 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int				init_all(void)
 	g_shell.save_list->save_stdin = -1;
 	g_shell.save_list->save_stdout = -1;
 	g_shell.save_list->save_stderr = -1;
-	tcgetattr(STDIN_FILENO, &g_shell.t_back);// save les données termios d'origine
+	tcgetattr(STDIN_FILENO, &g_shell.t_back);
 	init_termios(g_shell.t_back);
 	return (0);
 }

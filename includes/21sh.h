@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:25 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/21 13:53:20 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,58 +71,55 @@
 # define SIMPLE 1
 # define DOUBLE 2
 
-
 /*
 ** AUTO_COMLETION
 */
-void 						free_int_tab(float *tab_to_del, int len);
-void 						free_lists(t_file *match_files);
-void 						free_lst_lst(t_completion *lst_lst);
-void						free_auto_tab(char **table);
-void 						free_files(t_file **files_list);
+void				free_int_tab(float *tab_to_del, int len);
+void				free_lists(t_file *match_files);
+void				free_lst_lst(t_completion *lst_lst);
+void				free_auto_tab(char **table);
+void				free_files(t_file **files_list);
 
-int 						arrondi(float val);
-int 						ft_nb_elem_lst(int nb_elem, int nb_col);
-int 						prev_sentence_value(char *sentence);
-int 						verif_sentence(char *sentence);
-
-char						*set_sentence(char *str, int len_str, char *name);
-char 						*set_copy_sentence(char *sentence);
-char 						*set_end_path(char **new_path, char **sentence);
-
-t_file						*sort_list(t_file *files);
-char 						*default_sentence(char **sentence);
-char						*detect_auto_completion(char *sentence);
-t_file 						*store_files_dirs(DIR *rep, t_file *files, char *path, char *to_search);
-t_file 						*compare_list_sentence(t_file *files, char *sentence);
-char 						**set_path(char **sentence, char *home, char *current_path);
-void 						display_completion(char *sentence, t_file *match_files);
-t_completion 				*build_lst_lst(t_file *match_files, int nb_elem, int nb_col);
-char 						*similarity(t_file *match_files, char *sentence);
+int					arrondi(float val);
+int					ft_nb_elem_lst(int nb_elem, int nb_col);
+int					prev_sentence_value(char *sentence);
+int					verif_sentence(char *sentence);
+char				*set_sentence(char *str, int len_str, char *name);
+char				*set_copy_sentence(char *sentence);
+char				*set_end_path(char **new_path, char **sentence);
+t_file				*sort_list(t_file *files);
+char				*default_sentence(char **sentence);
+char				*detect_auto_completion(char *sentence);
+t_file				*store_files_dirs(DIR *rp, t_file *f, char *pth, char *sh);
+t_file				*compare_list_sentence(t_file *files, char *sentence);
+char				**set_path(char **sentence, char *home, char *current_path);
+void				display_completion(char *sentence, t_file *match_files);
+t_completion		*build_lst_lst(t_file *matchfiles, int nbelem, int nbcol);
+char				*similarity(t_file *match_files, char *sentence);
 /*
 ** CD
 */
-int 				cd(char *line);
+int					cd(char *line);
 void				remove_last_dir(char **str, char c);
-char		 		*path_converter(char *sentence, char *home, char *pwd);
+char				*path_converter(char *sentence, char *home, char *pwd);
 int					error_cd(char *type, char *file);
 char				**lsh_read_line(char *line);
 int					verif_access(char **path, char **file, char *option);
 /*
 ** CATCH_KEY
 */
-void 				set_2d_edition_val(void);
+void				set_2d_edition_val(void);
 int					detect_arrow(char *key);
 int					readkey(void);
 /*
 ** CURSOR_MOVE
 */
 int					ft_cursor_right(int i);
-int 				distrib_cursor_moves(int key);
-void 				arrow_move_left();
-void 				arrow_move_right();
-void 				move_cursor_n_to_direction(int n, int direction);
-void 				go_to_end();
+int					distrib_cursor_moves(int key);
+void				arrow_move_left();
+void				arrow_move_right();
+void				move_cursor_n_to_direction(int n, int direction);
+void				go_to_end();
 /*
 ** INIT
 */
@@ -134,9 +131,9 @@ int					init_env(void);
 ** LINE_EDITION
 */
 void				fill_current_line(char c);
-void 				copy_cut_line(int key);
-void 				past_line(char *clipboard);
-char			 	*set_prompt(char *pwd);
+void				copy_cut_line(int key);
+void				past_line(char *clipboard);
+char				*set_prompt(char *pwd);
 /*
 ** MAIN
 */
@@ -146,8 +143,8 @@ void				display_prompt(void);
 */
 void				clean_line();
 void				print_line(int i);
-void 				reset_cursor_pos(void);
-int 				set_cursor_start(int len, int ref_cursor);
+void				reset_cursor_pos(void);
+int					set_cursor_start(int len, int ref_cursor);
 /*
 ** RETURN_KEY
 */
@@ -158,14 +155,13 @@ void				reset_line(void);
 ** SIGNAL
 */
 void				ft_signal(void);
-void 				ft_sigkill(int sig);
+void				ft_sigkill(int sig);
 void				ft_sigint(int sig);
 /*
 ** TERMIOS
 */
 int					init_termios(struct termios my_termios);
 void				ft_reset_termios(struct termios t_back);
-
 /*
 ** BUILTINS
 */
@@ -173,15 +169,14 @@ int					ft_echo(char *line);
 int					ft_env(char *cmd);
 int					ft_setenv(char *line);
 int					ft_unsetenv(char *name);
-void 				ft_exit(void);
+void				ft_exit(void);
 char				*get_var(t_shell *g_shell, char *n_var);
 void				ft_varappend(t_var *new_element);
 t_var				*new_var(char *v_name, char *v_value);
-
 /*
 ** EXECUTION
 */
-int					detect_builtins(char* to_exec, char *command_line);
+int					detect_builtins(char *to_exec, char *command_line);
 void				handle_redirections(void);
 char				**get_bin_directories(void);
 int					verif_access_others(char *path);
@@ -191,7 +186,6 @@ char				**lst_to_tab(t_var *env);
 int					lenght_list(t_var *env);
 int					exec_function(char **content);
 void				error_exec(char **args, char **cmd);
-
 /*
 ** REDIRECTIONS
 */
@@ -202,7 +196,7 @@ int					hub_aggreg(char **cmd);
 int					get_fd_in(char *line, int i);
 char				*delete_right_redirs_str(char *str);
 char				*get_filename(char *line, int i);
-int					push_right_redir(char *f, int fdin, int type, t_fdlist **flist);
+int					push_right_redir(char *f, int in, int type, t_fdlist **lst);
 t_fdlist			*new_node_fdlist(char *filename, int fd_in, int type);
 void				stock_redirs_in_gshell(t_fdlist *fdlist);
 int					fd_already_in_fdlist(t_fdlist **fdlist, int fd);

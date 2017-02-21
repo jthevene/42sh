@@ -6,13 +6,13 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 09:11:45 by jules             #+#    #+#             */
-/*   Updated: 2017/02/17 18:39:58 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/21 13:25:31 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/21sh.h"
 
-void			reset_line(void)
+void	reset_line(void)
 {
 	free(g_shell.line);
 	move_cursor_n_to_direction(g_shell.line_size, 1);
@@ -26,7 +26,7 @@ void			reset_line(void)
 	init_hist_opt();
 }
 
-void				return_key(void)
+void	return_key(void)
 {
 	go_to_end();
 	FT_INIT(int, add_hist, 0);

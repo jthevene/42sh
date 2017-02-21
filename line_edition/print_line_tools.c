@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 18:21:08 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/13 12:37:28 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/21 13:25:59 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int				set_cursor_start(int len, int ref_cursor)
 		if (ref_cursor == g_shell.line_size)
 			tputs(tgetstr("do", NULL), 1, ft_putchar_int);
 		while (go_up-- > 0)
-			tputs(tgetstr("up", NULL), 1, ft_putchar_int); // scroll up
+			tputs(tgetstr("up", NULL), 1, ft_putchar_int);
 		len = g_shell.line_2d_y;
 	}
 	else

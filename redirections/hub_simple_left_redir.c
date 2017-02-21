@@ -6,13 +6,13 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 11:06:16 by jules             #+#    #+#             */
-/*   Updated: 2017/02/13 12:36:23 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/21 13:20:50 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/21sh.h"
 
-static int 		simple_left(char *filename)
+static int		simple_left(char *filename)
 {
 	FT_INIT(int, new_fd, 0);
 	if ((new_fd = open(filename, O_RDONLY, 0600)) == -1)
@@ -26,8 +26,7 @@ static int 		simple_left(char *filename)
 	return (1);
 }
 
-
-static int	get_left_redirs(char *line)
+static int		get_left_redirs(char *line)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, filename, NULL);
@@ -51,7 +50,7 @@ static int	get_left_redirs(char *line)
 	return (1);
 }
 
-static char	*delete_left_redirs_str(char *str)
+static char		*delete_left_redirs_str(char *str)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, 0);
@@ -80,7 +79,7 @@ static char	*delete_left_redirs_str(char *str)
 	return (str);
 }
 
-char		*hub_simple_left_redir(char *line)
+char			*hub_simple_left_redir(char *line)
 {
 	FT_INIT(int, ret_redir, get_left_redirs(line));
 	FT_INIT(char *, ret, NULL);

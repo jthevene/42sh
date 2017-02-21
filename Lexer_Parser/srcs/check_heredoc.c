@@ -35,7 +35,6 @@ void	replace_hdoc(t_token *token)
 	char	*heredoc;
 	int		fd_file;
 
-
 	heredoc = ft_strdup("");
 	ft_strdel(&g_shell.prompt);
 	myline = prompt_dquote("heredoc> ");
@@ -49,10 +48,12 @@ void	replace_hdoc(t_token *token)
 		if (ft_strcmp(myline, token->lexeme) != 0)
 			heredoc = ft_strjoinchar(heredoc, myline, '\n');
 	}
+	heredoc = ft_strjoin(heredoc, "\n");
 	fd_file = open("/tmp/heredoc.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	ft_putstr_fd(heredoc, fd_file);
 	ft_strdel(&(token->lexeme));
 	token->lexeme = ft_strdup("/tmp/heredoc.txt");
 	free(heredoc);
 	close(fd_file);
+	ft_putchar('\n');
 }

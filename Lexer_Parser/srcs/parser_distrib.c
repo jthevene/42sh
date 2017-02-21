@@ -81,7 +81,6 @@ int		lire_lexeme(t_token *token, char *line, int pos)
 		add_lexeme(token, line, pos, i);
 		if (str_is_digit(token->lexeme) == 1)
 			token->type = FDIGIT;
-		//backslash_char(token);
 	}
 	else if (ft_isope(line[pos]) >= 1)
 		pos = check_ope(token, line, pos, i);

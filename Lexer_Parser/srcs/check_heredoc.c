@@ -49,9 +49,9 @@ void	replace_hdoc(t_token *token)
 		if (ft_strcmp(myline, token->lexeme) != 0)
 			heredoc = ft_strjoinchar(heredoc, myline, '\n');
 	}
-	fd_file = open("heredoc.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	fd_file = open("/tmp/heredoc.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	ft_putstr_fd(heredoc, fd_file);
 	ft_strdel(&(token->lexeme));
-	token->lexeme = ft_strdup("heredoc.txt");
+	token->lexeme = ft_strdup("/tmp/heredoc.txt");
 	free(heredoc);
 }

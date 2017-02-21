@@ -20,7 +20,7 @@ static int		simple_left(char *filename)
 		ft_error(filename);
 		return (0);
 	}
-	if (g_shell.left_redir_fd != 0)
+	if (g_shell.left_redir_fd != -1)
 		close(g_shell.left_redir_fd);
 	g_shell.left_redir_fd = new_fd;
 	return (1);

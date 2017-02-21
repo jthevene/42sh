@@ -72,9 +72,12 @@ int				run_pipe(t_tree *left, t_tree *right)
 		ret = 0;
 	else if ((int)pid == 0)
 	{
+		g_shell.t_back.c_lflag |= (ICANON | ECHO);
+		tcsetattr(0, 0, &(g_shell.t_back));
 		exit(ret = exec_pipe(left, right));
 	}
 	wait(NULL);
+	init_termios(g_shell.t_back);
 	restablish_fd(&g_shell.save_list);
 	return (ret);
 }

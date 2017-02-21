@@ -86,11 +86,11 @@ void		handle_redirections(void)
 		dup2(g_shell.right_redirs->fd_file, g_shell.right_redirs->fd_in);
 		close(g_shell.right_redirs->fd_file);
 	}
-	if (g_shell.left_redir_fd)
+	if (g_shell.left_redir_fd != -1)
 	{
 		dup2(g_shell.left_redir_fd, STDIN_FILENO);
 		close(g_shell.left_redir_fd);
-		g_shell.left_redir_fd = 0;
+		g_shell.left_redir_fd = -1;
 	}
 }
 
@@ -99,16 +99,16 @@ void		call_redirections(char **content)
 	FT_INIT(char *, tmp, NULL);
 	if (ft_strstr((*content), ">&") || ft_strstr((*content), "<&"))
 		hub_aggreg(&(*content));
-	else if (ft_strchr((*content), '>'))
+	if (ft_strchr((*content), '<'))
 	{
-		tmp = hub_right_redir(ft_strdup((*content)));
+		tmp = hub_simple_left_redir(ft_strdup((*content)));
 		ft_strdel(&(*content));
 		(*content) = ft_strdup(tmp);
 		ft_strdel(&tmp);
 	}
-	if (ft_strchr((*content), '<'))
+	if (ft_strchr((*content), '>'))
 	{
-		tmp = hub_simple_left_redir(ft_strdup((*content)));
+		tmp = hub_right_redir(ft_strdup((*content)));
 		ft_strdel(&(*content));
 		(*content) = ft_strdup(tmp);
 		ft_strdel(&tmp);

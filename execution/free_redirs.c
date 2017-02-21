@@ -33,4 +33,6 @@ void		free_right_redir(void)
 {
 	if (g_shell.right_redirs)
 		free_fdlist(&g_shell.right_redirs, 1);
+	if (g_shell.left_redir_fd != -1)
+		g_shell.left_redir_fd = -1;
 }

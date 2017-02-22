@@ -16,9 +16,9 @@ void	start_parse(t_token *token)
 {
 	t_tree	*tree;
 
-	tree = create_node();
 	if (error_parse(token))
 	{
+		tree = create_node();
 		parse(tree, token);
 		exec_tree(tree);
 		free_tree(tree);

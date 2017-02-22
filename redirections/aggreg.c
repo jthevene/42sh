@@ -28,16 +28,22 @@ static int	detect_numbers(char *cmd, int i)
 static int	replace_cmd_aggreg(char **cmd, int i, int j)
 {
 	FT_INIT(char *, tmp, NULL);
+	FT_INIT(char *, tmp2, NULL);
 	FT_INIT(char *, tmp_replace, NULL);
 	while ((*cmd)[i] && (*cmd)[i + 1] && ft_isdigit((*cmd)[i]))
 		i++;
 	if ((*cmd)[i] && !ft_isdigit((*cmd)[i]) && (*cmd)[i] != '-')
 		i--;
-	tmp = ft_strsub((*cmd), j, i - j + 1);
-	tmp_replace = ft_str_replace((*cmd), tmp, "");
-	ft_strdel(&(*cmd));
+	printf("cmd before = %p\n", (*cmd));
+	tmp2 = ft_strdup((*cmd));
+	ft_strdel(cmd);
+	printf("cmd before3 = %p\n", (*cmd));
+	tmp = ft_strsub(tmp2, j, i - j + 1);
+	tmp_replace = ft_str_replace(tmp2, tmp, "");
 	(*cmd) = ft_strdup(tmp_replace);
+	printf("cmd after = %p\n", (*cmd));
 	ft_strdel(&tmp);
+	ft_strdel(&tmp2);
 	ft_strdel(&tmp_replace);
 	return (1);
 }
@@ -62,7 +68,7 @@ static int	detect_aggreg(char **cmd, int *fd_in, int *fd_out)
 			(*fd_in) = !(*fd_in) ? 1 : (*fd_in);
 			(*fd_out) = ft_isdigit((*cmd)[i + 2]) ? detect_numbers((*cmd), \
 					i + 2) : -1;
-			return (replace_cmd_aggreg(cmd, i + 2, j));
+			return (replace_cmd_aggreg(&(*cmd), i + 2, j));
 		}
 		else if (((*cmd)[i] == '>' || (*cmd)[i] == '<') && (*cmd)[i + 1] && \
 				(*cmd)[i + 1] == '&' && (*cmd)[i + 2]

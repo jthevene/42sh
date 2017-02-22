@@ -31,6 +31,12 @@ int		error_parse(t_token *token)
 		}
 		tmp = tmp->next;
 	}
+	if (tmp->type == DLESS || tmp->type == DMORE || tmp->type == LESS \
+		|| tmp->type == MORE)
+	{
+		leave_error();
+		return (0);
+	}
 	return (1);
 }
 
@@ -45,7 +51,7 @@ int		check_type_ope(int type)
 
 void	leave_error(void)
 {
-	ft_putstr("Syntax Error");
+	ft_putstr("Syntax Error\n");
 	go_to_end();
 	if (g_shell.current_line)
 		ft_bzero(g_shell.current_line, g_shell.line_size -

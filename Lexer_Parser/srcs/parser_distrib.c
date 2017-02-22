@@ -34,6 +34,7 @@ void	lexer_parser(char *line)
 		analise_line(all);
 		check_for_hdoc(all->tokens_begin);
 		send_token_to_glob(all);
+		remove_bslash_quotes(all->tokens_begin);
 		start_parse(all->tokens_begin);
 	}
 	free(all->line);

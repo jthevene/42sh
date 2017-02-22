@@ -36,6 +36,7 @@ char	*finish_the_squote(char *line)
 	ft_putstr("\n");
 	myline = prompt_dquote("quote> ");
 	myline = ft_strjoin(line, myline);
+	ft_putchar('\n');
 	free(line);
 	return (myline);
 }
@@ -48,6 +49,7 @@ char	*finish_the_dquote(char *line)
 	ft_putstr("\n");
 	myline = prompt_dquote("dquote> ");
 	myline = ft_strjoin(line, myline);
+	ft_putchar('\n');
 	free(line);
 	return (myline);
 }

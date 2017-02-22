@@ -74,3 +74,15 @@ int		get_lexeme_pos(char *line, int pos)
 	}
 	return (pos);
 }
+
+void	remove_bslash_quotes(t_token *token)
+{
+	t_token	*tmp;
+
+	tmp = token;
+	while (tmp)
+	{
+		backslash_char(tmp);
+		tmp = tmp->next;
+	}
+}

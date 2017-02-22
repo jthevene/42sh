@@ -39,6 +39,16 @@ static int	echo_is_option(char *line)
 	return (0);
 }
 
+int 		len_tab(char **tabl)
+{
+	FT_INIT(int, len, 0);
+	if (!tabl)
+		return (0);
+	while (tabl[len])
+		len++;
+	return (len);
+}
+
 int			ft_echo(char *line)
 {
 	FT_INIT(int, i, 1);
@@ -52,7 +62,7 @@ int			ft_echo(char *line)
 	}
 	if (!ft_strcmp(commands[i], "-n"))
 		i++;
-	while (commands[i])
+	while (i < len_tab(commands) && commands[i])
 	{
 		ft_putstr(commands[i]);
 		i++;

@@ -71,12 +71,12 @@ static size_t		ft_wl(size_t index, const char *s, char c)
 
 char				**ft_strsplit(char const *s, char c)
 {
-	char	**ret;
-	size_t	i;
-	size_t	j;
-	size_t	l;
-
-	ret = (char **)ft_memalloc(sizeof(char *) * (ft_tab_len(s, c) + 1));
+	FT_INIT(size_t, j, 0);
+	FT_INIT(size_t, i, 0);
+	FT_INIT(size_t, l, 0);
+	FT_INIT(char**, ret, NULL);
+	if (s)
+		ret = (char **)ft_memalloc(sizeof(char *) * (ft_tab_len(s, c) + 1));
 	if (ret)
 	{
 		j = 0;

@@ -15,28 +15,26 @@
 static	char		*set_begining(char *sentence, char *home,
 					char *current_path)
 {
-	FT_INIT(char*, new_path, ft_strnew(ft_strlen(sentence) + 100));
+	FT_INIT(char*, new_path, NULL);
+	FT_INIT(char*, tmp, NULL);
 	if (ft_strlen(sentence) >= 2 && !ft_strncmp(sentence, "./", 2))
-	{
-		ft_strcpy(new_path, current_path);
-		ft_strcat(new_path, sentence + 1);
-	}
+		new_path = ft_strjoin(current_path, sentence + 1);
 	else if (sentence[0] == '~')
-	{
-		ft_strcpy(new_path, home);
-		ft_strcat(new_path, sentence + 1);
-	}
+		new_path = ft_strjoin(home, sentence + 1);
 	else if (!ft_strcmp(sentence, ".."))
 	{
-		ft_strncpy(new_path, current_path, ft_strlen(current_path) -
+		new_path = ft_strsub(current_path, 0, ft_strlen(current_path) -
 			ft_strlen(ft_strrchr(current_path, '/')));
-		ft_strcat(new_path, "/");
+		tmp = new_path;
+		new_path = ft_strjoin(new_path, "/");
+		free(tmp);
 	}
 	else
 	{
-		ft_strcpy(new_path, current_path);
-		ft_strcat(new_path, "/");
-		ft_strcat(new_path, sentence);
+		new_path = ft_strjoin(current_path, "/");
+		tmp = new_path;
+		new_path = ft_strjoin(new_path, sentence);
+		free(tmp);
 	}
 	return (new_path);
 }

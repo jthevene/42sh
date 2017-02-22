@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 17:59:34 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/21 13:28:35 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/02/22 08:56:17 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 static int		detect_selection_text(char *key, int start,
 		int end, int cursor_x)

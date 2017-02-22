@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 09:28:00 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/21 14:02:58 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/02/22 08:57:54 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 static int		execve_pipe(char **content)
 {

@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:20:49 by jules             #+#    #+#             */
-/*   Updated: 2017/02/13 12:37:30 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/22 08:56:14 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 void			display_prompt(void)
 {

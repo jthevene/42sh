@@ -6,15 +6,15 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 18:56:07 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/21 13:34:23 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/02/22 08:55:27 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GLOBING_H
 # define GLOBING_H
 
-# ifndef _21SH_H
-#  include "21sh.h"
+# ifndef SH21_H
+#  include "sh21.h"
 # endif
 
 # ifndef FT_INIT

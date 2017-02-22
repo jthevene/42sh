@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 14:20:42 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:56 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/22 08:58:08 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 char		*get_var(t_shell *g_shell, char *n_var)
 {

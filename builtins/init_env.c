@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 16:55:03 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:53 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/22 08:58:06 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 int			init_env(void)
 {

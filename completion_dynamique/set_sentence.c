@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 17:19:59 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:41 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/22 08:57:57 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 void		free_simple_tab(char ***tab_to_del)
 {

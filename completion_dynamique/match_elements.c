@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 17:19:09 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:43 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/22 08:58:00 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 static t_file		*get_values(t_file *match_files)
 {

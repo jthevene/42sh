@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 12:21:52 by jules             #+#    #+#             */
-/*   Updated: 2017/02/13 12:37:23 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/22 08:56:10 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 int		init_termios(struct termios my_termios)
 {

@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 15:37:25 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:52 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/22 08:58:05 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 char		*recup_name(char *line)
 {

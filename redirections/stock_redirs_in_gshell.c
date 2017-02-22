@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   stock_redirs_in_gshell.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 19:00:27 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/21 13:16:19 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/02/22 08:55:53 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 int					fd_already_in_fdlist(t_fdlist **fdlist, int fd)
 {

@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:29:42 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/02/21 14:03:34 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/02/22 08:57:56 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 static int	verif_buitins(char *to_exec)
 {

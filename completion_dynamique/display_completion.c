@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 17:18:06 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:48 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/22 08:58:02 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 static	int		if_col(t_file *col, char *tmp,
 								int len_str, t_completion *all_col)

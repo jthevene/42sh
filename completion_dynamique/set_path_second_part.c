@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 17:19:43 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:42 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/22 08:57:58 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 static char			*add_slash(char *second_str, char *first_str,
 					char **sentence, int len)

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_redirs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 17:55:43 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/20 17:55:43 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/22 08:57:50 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 void		free_aggreg(void)
 {

@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 13:01:44 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/21 13:19:05 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/02/22 08:56:10 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 static int	detect_numbers(char *cmd, int i)
 {

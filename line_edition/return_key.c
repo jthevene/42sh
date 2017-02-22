@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 09:11:45 by jules             #+#    #+#             */
-/*   Updated: 2017/02/21 13:25:31 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/02/22 08:56:12 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 void	reset_line(void)
 {

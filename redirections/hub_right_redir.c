@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hub_right_redir.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 18:33:17 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/14 18:33:17 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/22 08:56:06 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 int				push_right_redir(char *f, int fdin, int type, t_fdlist **flist)
 {

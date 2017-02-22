@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 17:17:47 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:50 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/22 08:58:03 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 static char		*str_to_search(char *sentence)
 {

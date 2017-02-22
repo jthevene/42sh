@@ -6,15 +6,15 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 16:40:01 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/02/21 13:41:17 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/02/22 08:59:33 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# ifndef _21SH_H
-#  include "21sh.h"
+# ifndef SH21_H
+#  include "sh21.h"
 # endif
 
 typedef struct				s_file

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 14:52:21 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/21 13:17:52 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/02/22 08:55:54 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 char		*get_filename(char *line, int i)
 {

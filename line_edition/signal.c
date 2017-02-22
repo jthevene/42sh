@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 11:31:13 by jules             #+#    #+#             */
-/*   Updated: 2017/02/21 13:24:57 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/02/22 08:56:11 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 void		ft_sigwinch(int sig)
 {

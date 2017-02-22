@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 11:29:38 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/02/17 11:34:11 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/22 08:58:10 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 static char			**verif_args_cd(char *line, int *len_tab)
 {

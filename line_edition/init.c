@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 11:40:03 by jules             #+#    #+#             */
-/*   Updated: 2017/02/21 13:26:42 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/02/22 08:56:15 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 void			init_hist_opt(void)
 {

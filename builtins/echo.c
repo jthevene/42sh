@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 13:23:43 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:57 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/22 08:58:09 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 static void	free_commands(char **commands)
 {

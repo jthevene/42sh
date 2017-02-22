@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redir.h                                            :+:      :+:    :+:   */
+/*   left_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/15 18:56:17 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/22 08:59:45 by jules            ###   ########.fr       */
+/*   Created: 2017/02/18 16:03:44 by jules             #+#    #+#             */
+/*   Updated: 2017/02/22 08:56:04 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REDIR_H
-# define REDIR_H
+#include "../includes/sh21.h"
 
-# ifndef SH21_H
-#  include "sh21.h"
-# endif
-
-# ifndef FT_INIT
-#  define FT_INIT(type, name, value) type name = value
-# endif
-
-int					simple_right();
-int					double_right();
-int					detect_out();
-void				exec_redir_right(int fd);
-int					create_file(char *filename, t_fdlist **fdlist, int type);
-
-#endif
+int		is_left_redir(char *str)
+{
+	FT_INIT(int, i, 0);
+	FT_INIT(int, start, 0);
+	FT_INIT(char *, filename, NULL);
+	while (str[i])
+	{
+		if (str[i] == '<')
+		{
+			if (str[i + 1] == '<')
+				return (0);
+		}
+		i++;
+	}
+	if (str[i] == ' ')
+		i++;
+	start = i;
+	while (str[i] && str[i] != ' ')
+		i++;
+	if (start == i)
+		return (0);
+}

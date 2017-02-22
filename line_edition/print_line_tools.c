@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 18:21:08 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/21 13:25:59 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/02/22 08:56:13 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 void			reset_cursor_pos(void)
 {

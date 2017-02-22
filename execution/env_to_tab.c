@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 17:06:30 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:38 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/22 08:57:55 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 char			**lst_to_tab(t_var *env)
 {

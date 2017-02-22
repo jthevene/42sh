@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 17:16:00 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/02/21 13:30:00 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/02/22 08:56:19 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 int				is_arrow(char *key)
 {

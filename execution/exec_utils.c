@@ -6,11 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 08:20:31 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/13 12:38:36 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/22 08:57:51 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/sh21.h"
 
 int			verif_access_bin(char *path)
 {

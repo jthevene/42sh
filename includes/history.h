@@ -6,15 +6,15 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 18:51:39 by jthevene          #+#    #+#             */
-/*   Updated: 2017/02/17 16:33:44 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/22 08:59:53 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HISTORY_H
 # define HISTORY_H
 
-# ifndef _21SH_H
-#  include "21sh.h"
+# ifndef SH21_H
+#  include "sh21.h"
 # endif
 
 /*

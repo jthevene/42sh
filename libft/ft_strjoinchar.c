@@ -20,7 +20,7 @@ char		*ft_strjoinchar(char const *s1, char const *s2, char c)
 	int		j;
 
 	length = (s2) ? ft_strlen(s1) + ft_strlen(s2) + 1 : ft_strlen(s1) + 1;
-	if (!(str = (char*)malloc(sizeof(char) * length)))
+	if (!(str = (char*)malloc(sizeof(char) * (length + 1))))
 		return (NULL);
 	i = -1;
 	while (s1[++i] != '\0')

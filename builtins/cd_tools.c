@@ -14,10 +14,11 @@
 
 int			error_cd(char *type, char *file)
 {
-	ft_putstr("cd: ");
-	ft_putstr(type);
-	ft_putstr(": ");
-	ft_putendl(file);
+	ft_putstr_fd("cd: ", 2);
+	ft_putstr_fd(type, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd("\n", 2);
 	return (0);
 }
 

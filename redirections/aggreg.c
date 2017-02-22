@@ -107,11 +107,22 @@ static int	pushback_aggreg(t_fdlist **flist, int fd_in, int fd_out)
 	return (1);
 }
 
+int 		free_tmp(t_fdlist **tmp)
+{
+	FT_INIT(t_fdlist *, inter, NULL);
+	inter = g_shell.aggreg;
+	g_shell.aggreg = *tmp;
+	free_aggreg();
+	g_shell.aggreg = inter;
+	return (0);
+}
+
 int			hub_aggreg(char **cmd)
 {
 	FT_INIT(int, fd_in, 0);
 	FT_INIT(int, fd_out, 0);
 	FT_INIT(t_fdlist *, tmp, NULL);
+	FT_INIT(t_fdlist *, tmp_start, NULL);
 	while (ft_strstr((*cmd), ">&") || ft_strstr((*cmd), "<&"))
 	{
 		if (!detect_aggreg(&(*cmd), &fd_in, &fd_out))
@@ -121,22 +132,24 @@ int			hub_aggreg(char **cmd)
 		fd_in = 0;
 		fd_out = 0;
 	}
+	tmp_start = tmp;
 	while (tmp->next)
 		tmp = tmp->next;
 	if (!pushback_aggreg(&g_shell.aggreg, tmp->fd_in, tmp->fd_file))
-		return (0);
+		return (free_tmp(&tmp_start));
 	if (tmp->prev)
 		tmp = tmp->prev;
 	else
-		return (0);
+		return (free_tmp(&tmp_start));
 	while (tmp)
 	{
 		if (!fd_already_in_fdlist(&g_shell.aggreg, tmp->fd_in))
 			if (!pushback_aggreg(&g_shell.aggreg, tmp->fd_in, tmp->fd_file))
-				return (0);
+				return (free_tmp(&tmp_start));
 		if (!tmp->prev)
 			break ;
 		tmp = tmp->prev;
 	}
+	free_tmp(&tmp_start);
 	return (1);
 }

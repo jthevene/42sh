@@ -25,18 +25,15 @@ static char			**verif_args_cd(char *line, int *len_tab)
 	if (tab_line && *len_tab == 3 && (ft_strcmp(tab_line[1], "-P")
 		&& ft_strcmp(tab_line[1], "-L")))
 	{
-		ft_putendl("cd: error arguments");
-		ft_putendl("Try cd [-L|-P] [dir]");
-		ft_putendl("Options:");
-		ft_putendl("-L	force symbolic links to be followed");
-		ft_putstr("-P	use the physical directory structure ");
-		ft_putendl("without following symbolic");
-		ft_putendl("links");
+		ft_putstr_fd("cd: error arguments\nTry cd [-L|-P] [dir]\n", 2);
+		ft_putstr_fd("Options:\n-L	force symbolic links to be followed\n", 2);
+		ft_putstr_fd("-P	use the physical directory structure ",2);
+		ft_putstr_fd("without following symbolic links\n", 2);
 		free_tab(tab_line);
 		return (NULL);
 	}
 	if ((*len_tab) > 3)
-		ft_putendl("cd: too many arguments");
+		ft_putstr_fd("cd: too many arguments\n", 2);
 	return (tab_line);
 }
 
@@ -66,7 +63,7 @@ static void			in_dir(char *path, char *pwd)
 {
 	FT_INIT(char*, tmp, NULL);
 	if (chdir(path))
-		ft_putstr("Error chdir\n");
+		ft_putstr_fd("Error chdir\n", 2);
 	else
 	{
 		tmp = ft_strjoin("setenv PWD=", path);

@@ -97,7 +97,7 @@ int			hub_final(t_glob *g, char *line)
 		else
 			g_parse_expr(tmp, g);
 		ft_memdel((void *)&tmp);
-		if (!line[i + 1])
+		if ((i + 1) < (int)ft_strlen(line) && !line[i + 1])
 			break ;
 	}
 	if (!g->args)

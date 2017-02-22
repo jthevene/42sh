@@ -19,6 +19,7 @@ t_glob					*init_glob(void)
 	glob = (t_glob *)malloc(sizeof(t_glob));
 	glob->sbracket = NULL;
 	glob->cbracket = NULL;
+	glob->args = NULL;
 	glob->tmp_c = NULL;
 	glob->c_touch = FALSE;
 	glob->lastb_count = 1;

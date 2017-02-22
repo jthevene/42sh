@@ -34,7 +34,7 @@ char			*get_cmd_path(char *str)
 	FT_INIT(char *, tmp, NULL);
 	while (str[i] && str[i] != '[' && str[i] != '*' && str[i] != '?')
 		i++;
-	while (str[i] && str[i] != '/')
+	while (i > (int)ft_strlen(str) && str[i] && str[i] != '/')
 		i--;
 	if (!str[i])
 		return (NULL);

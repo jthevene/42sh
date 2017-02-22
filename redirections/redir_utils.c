@@ -95,7 +95,7 @@ char		*delete_right_redirs_str(char *str)
 	FT_INIT(int, j, 0);
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(char *, tmp2, NULL);
-	while (str[i] && i < (int)ft_strlen(str))
+	while (str && i < (int)ft_strlen(str))
 	{
 		if (str[i] == '>')
 		{

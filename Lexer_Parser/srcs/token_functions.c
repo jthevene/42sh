@@ -74,7 +74,7 @@ int		compare_end(char *str1, char *str2)
 	FT_INIT(int, i, ft_strlen(str1));
 	FT_INIT(int, e, i - 2);
 	FT_INIT(int, x, 0);
-	while (str2[x] == str1[e] && str1[e] && str2[x])
+	while (e >= 0 && str1[e] && str2[x] && str2[x] == str1[e])
 	{
 		x++;
 		e++;

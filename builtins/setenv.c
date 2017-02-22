@@ -35,7 +35,7 @@ char		*recup_value(char *line)
 	FT_INIT(int, i, 0);
 	while (line[i])
 	{
-		if (line[i - 1] == '=')
+		if (i > 1 && line[i - 1] == '=')
 			return (ft_strsub(line, i, ft_strlen(line) - i));
 		i++;
 	}

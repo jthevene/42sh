@@ -22,7 +22,7 @@ char		*ft_str_replace(char *str, char *to_search, char *to_replace)
 	len_str = ft_strlen(str) - ft_strlen(to_search);
 	len_str = len_str < 0 ? -len_str : len_str;
 	len_str += ft_strlen(to_replace);
-	str_replaced = ft_strnew(len_str);
+	str_replaced = ft_strnew(len_str + 1);
 	strstr_match = ft_strstr(str, to_search);
 	if (!ft_strcmp(strstr_match, str))
 		len_str = 0;

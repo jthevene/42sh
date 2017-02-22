@@ -87,7 +87,7 @@ int				init_all(void)
 	init_hist();
 	init_win();
 	init_edition();
-	g_shell.left_redir_fd = 0;
+	g_shell.left_redir_fd = -1;
 	g_shell.right_redirs = NULL;
 	g_shell.aggreg = NULL;
 	g_shell.save_list = (t_save_fd *)malloc(sizeof(t_save_fd));

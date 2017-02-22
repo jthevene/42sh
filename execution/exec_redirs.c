@@ -14,7 +14,9 @@
 
 void		restablish_fd(t_save_fd **save_list)
 {
-	if (!save_list || !(*save_list))
+	if (save_list)
+		return ;
+/*	if (!save_list || !(*save_list))
 		return ;
 	if ((*save_list)->save_stdin != -1)
 		dup2((*save_list)->save_stdin, STDIN_FILENO);
@@ -27,11 +29,14 @@ void		restablish_fd(t_save_fd **save_list)
 	(*save_list)->save_stderr = -1;
 	free_aggreg();
 	free_right_redir();
+*/
 }
 
 static void	go_save_fd(t_save_fd **save_list, int fd_to_save)
 {
-	if (fd_to_save == 0)
+	if (save_list && fd_to_save)
+		return ;
+/*	if (fd_to_save == 0)
 		(*save_list)->save_stdin = dup(STDIN_FILENO);
 	else
 		(*save_list)->save_stdin = -1;
@@ -43,12 +48,14 @@ static void	go_save_fd(t_save_fd **save_list, int fd_to_save)
 		(*save_list)->save_stderr = dup(STDERR_FILENO);
 	else
 		(*save_list)->save_stderr = -1;
+*/
 }
 
 void		handle_aggreg(t_save_fd **save_list)
 {
 	if (g_shell.aggreg != NULL)
 	{
+		printf("AGGREG OP\n");
 		while (g_shell.aggreg->prev)
 			g_shell.aggreg = g_shell.aggreg->prev;
 		while (g_shell.aggreg->next)
@@ -73,6 +80,7 @@ void		handle_redirections(void)
 	handle_aggreg(&g_shell.save_list);
 	if (g_shell.right_redirs)
 	{
+		printf("RIGHT REDIRS OP\n");
 		while (g_shell.right_redirs->prev)
 			g_shell.right_redirs = g_shell.right_redirs->prev;
 		while (g_shell.right_redirs->next)
@@ -88,6 +96,7 @@ void		handle_redirections(void)
 	}
 	if (g_shell.left_redir_fd != -1)
 	{
+		printf("LEFT REDIRS OP\n");
 		dup2(g_shell.left_redir_fd, STDIN_FILENO);
 		close(g_shell.left_redir_fd);
 		g_shell.left_redir_fd = -1;

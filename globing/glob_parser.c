@@ -59,7 +59,7 @@ int						glob_parser(char **line)
 	if (!(*line))
 		return (0);
 	if (!verif_tokens(&(*line)))
-		return (backslash_char_globing(&(*line)));
+		return (0);
 	backslash_char_globing(&(*line));
 	glob = !glob ? init_glob() : glob;
 	glob->command = ft_strdup((*line));

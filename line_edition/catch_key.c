@@ -20,6 +20,10 @@ int				is_arrow(char *key)
 	if ((key[0] == 27 && key[1] == 91 && (key[2] != 51
 		&& key[2] != 70 && key[2] != 72)))
 		return (1);
+	if (key[0] == 27 && key[1] == 27 && key[2] == 91)
+		return (1);
+	if (key[0] == 27 && key[1] == 91)
+		return (1);
 	return (0);
 }
 

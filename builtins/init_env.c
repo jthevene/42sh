@@ -12,6 +12,24 @@
 
 #include "../includes/sh21.h"
 
+/*
+static void	create_safety_vars(void)
+{
+	FT_INIT(char *, pwd, ft_strnew(255));
+	FT_INIT(char *, tmp, NULL);
+	ft_setenv("SHLVL=1");
+	tmp = getcwd(tmp, 255);
+	pwd = ft_strjoin("PWD=", tmp);
+	ft_setenv(pwd);
+	ft_strdel(&pwd);
+	pwd = ft_strjoin("HOME=", tmp);
+	ft_setenv(pwd);
+	ft_strdel(&tmp);
+	ft_strdel(&pwd);
+	ft_setenv("PATH=/bin:/usr/bin");
+}
+*/
+
 int			init_env(void)
 {
 	int				i;
@@ -23,7 +41,7 @@ int			init_env(void)
 	i = 0;
 	if (!environ[0])
 	{
-		ft_putendl("error : extern char **environ does not exist");
+		ft_putstr_fd("Environment not found.\n", 2);
 		return (0);
 	}
 	while (environ[i])

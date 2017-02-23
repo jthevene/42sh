@@ -12,7 +12,7 @@
 
 #include "../includes/sh.h"
 
-void	check_for_hdoc(t_token *token)
+void			check_for_hdoc(t_token *token)
 {
 	t_token *tmp;
 
@@ -29,7 +29,30 @@ void	check_for_hdoc(t_token *token)
 	}
 }
 
-void	replace_hdoc(t_token *token)
+static void		replace_hdoc2(char **myline, char **tmp, char **heredoc,
+	t_token *token)
+{
+	if (ft_strcmp((*myline), token->lexeme) != 0)
+	{
+		(*tmp) = (*heredoc);
+		(*heredoc) = ft_strjoin((*heredoc), (*myline));
+		ft_strdel(&(*tmp));
+	}
+	while (ft_strcmp((*myline), token->lexeme) != 0)
+	{
+		ft_strdel(&g_shell.prompt);
+		ft_putstr("\n");
+		(*myline) = prompt_dquote("heredoc> ");
+		if (ft_strcmp((*myline), token->lexeme) != 0)
+		{
+			(*tmp) = (*heredoc);
+			(*heredoc) = ft_strjoinchar((*heredoc), (*myline), '\n');
+			ft_strdel(&(*tmp));
+		}
+	}
+}
+
+void			replace_hdoc(t_token *token)
 {
 	char	*myline;
 	char	*tmp;
@@ -38,24 +61,7 @@ void	replace_hdoc(t_token *token)
 	FT_INIT(char *, heredoc, ft_strdup(""));
 	ft_strdel(&g_shell.prompt);
 	myline = prompt_dquote("heredoc> ");
-	if (ft_strcmp(myline, token->lexeme) != 0)
-	{
-		tmp = heredoc;
-		heredoc = ft_strjoin(heredoc, myline);
-		ft_strdel(&tmp);
-	}
-	while (ft_strcmp(myline, token->lexeme) != 0)
-	{
-		ft_strdel(&g_shell.prompt);
-		ft_putstr("\n");
-		myline = prompt_dquote("heredoc> ");
-		if (ft_strcmp(myline, token->lexeme) != 0)
-		{
-			tmp = heredoc;
-			heredoc = ft_strjoinchar(heredoc, myline, '\n');
-			ft_strdel(&tmp);
-		}
-	}
+	replace_hdoc2(&myline, &tmp, &heredoc, token);
 	tmp = heredoc;
 	heredoc = ft_strjoin(heredoc, "\n");
 	ft_strdel(&tmp);

@@ -49,8 +49,6 @@ int			verif_access(char **path, char **file, char *option)
 	lstat(*path, &infos);
 	if (access(*path, F_OK) != 0)
 		return (error_cd("no such file or directory", *file));
-	else if (access(*path, X_OK) != 0)
-		return (error_cd("permission denied", *file));
 	else if (S_ISLNK(infos.st_mode) && !ft_strcmp(option, "-P"))
 	{
 		link_name = ft_strnew(infos.st_size + 1);
@@ -62,5 +60,7 @@ int			verif_access(char **path, char **file, char *option)
 	}
 	else if (!S_ISDIR(infos.st_mode) && !S_ISLNK(infos.st_mode))
 		return (error_cd("not a directory", *file));
+	else if (access(*path, X_OK) != 0)
+		return (error_cd("permission denied", *file));
 	return (1);
 }

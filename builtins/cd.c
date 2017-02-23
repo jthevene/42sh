@@ -66,6 +66,8 @@ static void			in_dir(char *path, char *pwd)
 		ft_putstr_fd("Error chdir\n", 2);
 	else
 	{
+		if (path[ft_strlen(path) - 1] == '/')
+			path[ft_strlen(path) - 1] = '\0';
 		tmp = ft_strjoin("setenv PWD=", path);
 		ft_setenv(tmp);
 		ft_strdel(&tmp);
@@ -75,27 +77,32 @@ static void			in_dir(char *path, char *pwd)
 	}
 }
 
-static void			go_to_dir(int cas, char *path, char *home, char *file_name)
+static void			go_to_dir(int cas, char **path, char *home, char *file_name)
 {
 	FT_INIT(char*, tmp, NULL);
 	if (!cas)
+	{
+		ft_strdel(path);
 		return ;
+	}
 	FT_INIT(char*, pwd, get_var(&g_shell, "PWD"));
 	if (cas == -1)
 	{
 		if (file_name[0] != '/')
 		{
-			remove_last_dir(&path, '/');
-			tmp = path;
-			path = ft_strjoin(path, file_name);
+			remove_last_dir(path, '/');
+			tmp = *path;
+			*path = ft_strjoin(*path, file_name);
 			ft_strdel(&tmp);
 		}
 		else
-			path = file_name;
-		path = path_converter(path, home, pwd);
-		ft_strdel(&file_name);
+			*path = file_name;
+		tmp = *path;
+		*path = path_converter(*path, home, pwd);
+		ft_strdel(&tmp);
 	}
-	in_dir(path, pwd);
+	in_dir(*path, pwd);
+	ft_strdel(path);
 	free(pwd);
 }
 
@@ -116,9 +123,8 @@ int					cd(char *line)
 	file = ft_strdup(path + (ft_strlen(path) -
 		ft_strlen(ft_strrchr(path, '/')) + 1));
 	len_tab = verif_access(&path, &file, option);
-	go_to_dir(len_tab, path, home, file);
+	go_to_dir(len_tab, &path, home, file);
 	free_tab(tab_line);
-	free(path);
 	free(home);
 	free(sentence);
 	free(file);

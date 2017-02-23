@@ -41,7 +41,7 @@ int				parse_bin_directories(char **bin_dir, char **args)
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, cmd, NULL);
 	FT_INIT(char *, tmp, NULL);
-	if (args[0][0] == '/')
+	if (args[0][0] == '/' || !ft_strncmp(args[0], "./", 2))
 	{
 		if (verif_access_bin(args[0]))
 			exec_function_execve(args[0], args);

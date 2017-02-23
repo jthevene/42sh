@@ -99,17 +99,7 @@ char		*delete_right_redirs_str(char *str)
 	{
 		if (str[i] == '>')
 		{
-			while (str[i] && str[i] != ' ')
-				i--;
-			j = i;
-			while (str[j] && str[j - 1] != '>')
-				j++;
-			if (str[j] == '>')
-				j++;
-			while (str[j] && str[j] == ' ')
-				j++;
-			while (str[j] && str[j] != ' ')
-				j++;
+			nav_to_delete_redir(str, &i, &j);
 			tmp2 = ft_strsub(str, i, j - i);
 			tmp = ft_str_replace(str, tmp2, "");
 			ft_strdel(&tmp2);

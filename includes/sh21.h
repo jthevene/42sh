@@ -70,6 +70,8 @@
 # define K_TAB     		20
 # define SIMPLE 1
 # define DOUBLE 2
+# define IS_NOT_BUILTIN 0
+# define IS_BUILTIN 1
 
 /*
 ** AUTO_COMLETION
@@ -177,7 +179,7 @@ t_var				*new_var(char *v_name, char *v_value);
 ** EXECUTION
 */
 int					detect_builtins(char *to_exec, char *command_line);
-void				handle_redirections(void);
+void				handle_redirections(int is_builtin);
 char				**get_bin_directories(void);
 int					verif_access_others(char *path);
 int					verif_access_bin(char *path);
@@ -186,6 +188,7 @@ char				**lst_to_tab(t_var *env);
 int					lenght_list(t_var *env);
 int					exec_function(char **content);
 int					error_exec(char **args, char **cmd);
+int					error_parse_bin(char *error);
 /*
 ** REDIRECTIONS
 */
@@ -195,6 +198,7 @@ char				*hub_simple_left_redir(char *line);
 int					hub_aggreg(char **cmd);
 int					get_fd_in(char *line, int i);
 char				*delete_right_redirs_str(char *str);
+void				nav_to_delete_redir(char *str, int *i, int *j);
 char				*get_filename(char *line, int i);
 int					push_right_redir(char *f, int in, int type, t_fdlist **lst);
 t_fdlist			*new_node_fdlist(char *filename, int fd_in, int type);

@@ -12,7 +12,7 @@
 
 #include "../includes/sh21.h"
 
-static int	verif_buitins(char *to_exec)
+static int	verif_builtins(char *to_exec)
 {
 	if (!ft_strcmp(to_exec, "echo"))
 		return (1);
@@ -33,10 +33,10 @@ static int	verif_buitins(char *to_exec)
 
 int			detect_builtins(char *to_exec, char *command_line)
 {
-	if (!verif_buitins(to_exec))
+	if (!verif_builtins(to_exec))
 		return (-1);
 	FT_INIT(int, ret, -1);
-	handle_redirections();
+	handle_redirections(IS_BUILTIN);
 	if (!ft_strcmp(to_exec, "echo"))
 		ret = ft_echo(command_line);
 	else if (!ft_strcmp(to_exec, "unsetenv"))

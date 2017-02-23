@@ -53,9 +53,8 @@ static int		check_right_redir(char *line, int i, t_fdlist **fdlist)
 		return (0);
 	else
 		i += line[i + 1] == ' ' ? 2 : 1;
-	if (!(filename = get_filename(line, i)))
-		return (0);
-	if (!(push_right_redir(filename, fd_in, type, fdlist)))
+	if (!(filename = get_filename(line, i))
+		|| !(push_right_redir(filename, fd_in, type, fdlist)))
 	{
 		ft_strdel(&filename);
 		return (0);

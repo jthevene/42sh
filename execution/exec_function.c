@@ -15,7 +15,7 @@
 int				exec_function_execve(char *cmd, char **args)
 {
 	FT_INIT(char **, env_tab, lst_to_tab(g_shell.env));
-	handle_redirections();
+	handle_redirections(IS_NOT_BUILTIN);
 	if (execve(cmd, args, g_shell.env_opt == FALSE ? env_tab : NULL) == -1)
 	{
 		free_tab(env_tab);
@@ -26,14 +26,6 @@ int				exec_function_execve(char *cmd, char **args)
 		free_tab(env_tab);
 		return (1);
 	}
-}
-
-int				error_parse_bin(char *error)
-{
-	ft_putstr_fd("21sh:", 2);
-	ft_putstr_fd(error, 2);
-	ft_putstr_fd(":No such file or directory\n", 2);
-	return (0);
 }
 
 int				parse_bin_directories(char **bin_dir, char **args)

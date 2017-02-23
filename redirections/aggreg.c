@@ -45,33 +45,31 @@ int			replace_cmd_aggreg(char **cmd, int i, int j)
 	return (1);
 }
 
-int			detect_aggreg(char **cmd, int *fd_in, int *fd_out)
+int			detect_aggreg(char **c, int *fd_in, int *out)
 {
-	FT_INIT(int, i, 0);
+	FT_INIT(int, i, -1);
 	FT_INIT(int, j, 0);
-	while ((*cmd)[i])
+	while ((*c)[++i])
 	{
-		if (((*cmd)[i] == '>' || (*cmd)[i] == '<') && (*cmd)[i + 1] && \
-			(*cmd)[i + 1] == '&' && (*cmd)[i + 2]
-			&& ((*cmd)[i + 2] == '-' || ft_isdigit((*cmd)[i + 2])))
+		if (((*c)[i] == '>' || (*c)[i] == '<') && (*c)[i + 1] && \
+			(*c)[i + 1] == '&' && (*c)[i + 2]
+			&& ((*c)[i + 2] == '-' || ft_isdigit((*c)[i + 2])))
 		{
-			if ((*cmd)[i - 1] && ft_isdigit((*cmd)[i - 1]))
+			if ((*c)[i - 1] && ft_isdigit((*c)[i - 1]))
 			{
 				j = i - 1;
-				while ((*cmd)[j] && j >= 0 && ft_isdigit((*cmd)[j]))
+				while ((*c)[j] && j >= 0 && ft_isdigit((*c)[j]))
 					j--;
-				(*fd_in) = detect_numbers((*cmd), ++j);
+				(*fd_in) = detect_numbers((*c), ++j);
 			}
-			(*fd_in) = !(*fd_in) ? FT_TER((*cmd[i] == '>', 1, 0)) : (*fd_in);
-			(*fd_out) = ft_isdigit((*cmd)[i + 2]) ? detect_numbers((*cmd), \
-					i + 2) : -1;
-			return (replace_cmd_aggreg(&(*cmd), i + 2, j));
+			(*fd_in) = !(*fd_in) ? FT_TER((*c)[i] == '>', 1, 0) : (*fd_in);
+			(*out) = ft_isdigit((*c)[i + 2]) ? detect_numbers((*c), i + 2) : -1;
+			return (replace_cmd_aggreg(&(*c), i + 2, j));
 		}
-		else if (((*cmd)[i] == '>' || (*cmd)[i] == '<') && (*cmd)[i + 1] && \
-				(*cmd)[i + 1] == '&' && (*cmd)[i + 2]
-			&& ((*cmd)[i + 2] != '-' || !ft_isdigit((*cmd)[i + 2])))
+		else if (((*c)[i] == '>' || (*c)[i] == '<') && (*c)[i + 1] && \
+				(*c)[i + 1] == '&' && (*c)[i + 2]
+			&& ((*c)[i + 2] != '-' || !ft_isdigit((*c)[i + 2])))
 			return (0);
-		i++;
 	}
 	return (1);
 }
@@ -119,7 +117,7 @@ int			hub_aggreg(char **cmd)
 		return (free_tmp_aggreg(&tmp_start));
 	if (!tmp->prev)
 		return (free_tmp_aggreg(&tmp_start));
-	tmp = tmp->prev;		
+	tmp = tmp->prev;
 	while (tmp)
 	{
 		if (!fd_already_in_fdlist(&g_shell.aggreg, tmp->fd_in))

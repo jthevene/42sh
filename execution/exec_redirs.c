@@ -31,6 +31,8 @@ void		restablish_fd(t_save_fd **save_list)
 
 static void	go_save_fd(t_save_fd **save_list, int fd_to_save)
 {
+	if (!save_list || !(*save_list))
+		return ;
 	if (fd_to_save == 0)
 		(*save_list)->save_stdin = dup(STDIN_FILENO);
 	if (fd_to_save == 1)
@@ -39,7 +41,7 @@ static void	go_save_fd(t_save_fd **save_list, int fd_to_save)
 		(*save_list)->save_stderr = dup(STDERR_FILENO);
 }
 
-void		handle_aggreg(t_save_fd **save_list)
+void		handle_aggreg(t_save_fd **save_list, int is_builtin)
 {
 	if (g_shell.aggreg != NULL)
 	{
@@ -47,14 +49,16 @@ void		handle_aggreg(t_save_fd **save_list)
 			g_shell.aggreg = g_shell.aggreg->prev;
 		while (g_shell.aggreg->next)
 		{
-			go_save_fd(&(*save_list), g_shell.aggreg->fd_in);
+			if (is_builtin == IS_BUILTIN)
+				go_save_fd(&(*save_list), g_shell.aggreg->fd_in);
 			if (g_shell.aggreg->fd_file == -1)
 				close(get_fd_to_close(g_shell.aggreg->fd_in));
 			else
 				dup2(g_shell.aggreg->fd_file, g_shell.aggreg->fd_in);
 			g_shell.aggreg = g_shell.aggreg->next;
 		}
-		go_save_fd(&(*save_list), g_shell.aggreg->fd_in);
+		if (is_builtin == IS_BUILTIN)
+			go_save_fd(&(*save_list), g_shell.aggreg->fd_in);
 		if (g_shell.aggreg->fd_file == -1)
 			close(get_fd_to_close(g_shell.aggreg->fd_in));
 		else
@@ -62,21 +66,23 @@ void		handle_aggreg(t_save_fd **save_list)
 	}
 }
 
-void		handle_redirections(void)
+void		handle_redirections(int is_builtin)
 {
-	handle_aggreg(&g_shell.save_list);
+	handle_aggreg(&g_shell.save_list, is_builtin);
 	if (g_shell.right_redirs)
 	{
 		while (g_shell.right_redirs->prev)
 			g_shell.right_redirs = g_shell.right_redirs->prev;
 		while (g_shell.right_redirs->next)
 		{
-			go_save_fd(&g_shell.save_list, g_shell.right_redirs->fd_in);
+			if (is_builtin == IS_BUILTIN)
+				go_save_fd(&g_shell.save_list, g_shell.right_redirs->fd_in);
 			dup2(g_shell.right_redirs->fd_file, g_shell.right_redirs->fd_in);
 			close(g_shell.right_redirs->fd_file);
 			g_shell.right_redirs = g_shell.right_redirs->next;
 		}
-		go_save_fd(&g_shell.save_list, g_shell.right_redirs->fd_in);
+		if (is_builtin == IS_BUILTIN)
+			go_save_fd(&g_shell.save_list, g_shell.right_redirs->fd_in);
 		dup2(g_shell.right_redirs->fd_file, g_shell.right_redirs->fd_in);
 		close(g_shell.right_redirs->fd_file);
 	}

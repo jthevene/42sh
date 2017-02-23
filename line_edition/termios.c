@@ -14,9 +14,11 @@
 
 int		init_termios(struct termios my_termios)
 {
-	char			*term_name;
-
-	if ((term_name = getenv("TERM")) == NULL)
+	FT_INIT(char*, term_name, NULL);
+	FT_INIT(char*, term_lvl, NULL);
+	FT_INIT(char*, tmp, NULL);
+	FT_INIT(int, lvl_int, 0);
+	if ((term_name = get_var(&g_shell, "TERM")) == NULL)
 		return (1);
 	if (tgetent(NULL, term_name) == ERR)
 		return (1);
@@ -26,5 +28,15 @@ int		init_termios(struct termios my_termios)
 	my_termios.c_cc[VMIN] = 1;
 	my_termios.c_cc[VTIME] = 0;
 	tcsetattr(STDIN_FILENO, TCSANOW, &my_termios);
+	if ((tmp = get_var(&g_shell, "SHLVL")))
+	{
+		lvl_int = ft_atoi(tmp);
+		ft_strdel(&tmp);
+		tmp = ft_itoa(lvl_int + 1);
+		term_lvl = ft_strjoin("setenv SHLVL=", tmp);
+		ft_setenv(term_lvl);
+		ft_strdel(&tmp);
+		ft_strdel(&term_lvl);
+	}
 	return (0);
 }

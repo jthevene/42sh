@@ -28,7 +28,7 @@ int				exec_function_execve(char *cmd, char **args)
 	}
 }
 
-int 			error_parse_bin(char *error)
+int				error_parse_bin(char *error)
 {
 	ft_putstr_fd("21sh:", 2);
 	ft_putstr_fd(error, 2);

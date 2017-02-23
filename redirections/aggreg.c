@@ -34,14 +34,14 @@ static int	replace_cmd_aggreg(char **cmd, int i, int j)
 		i++;
 	if ((*cmd)[i] && !ft_isdigit((*cmd)[i]) && (*cmd)[i] != '-')
 		i--;
-	printf("cmd before = %p\n", (*cmd));
+//	printf("cmd before = %p\n", (*cmd));
 	tmp2 = ft_strdup((*cmd));
 	ft_strdel(cmd);
-	printf("cmd before3 = %p\n", (*cmd));
+//	printf("cmd before3 = %p\n", (*cmd));
 	tmp = ft_strsub(tmp2, j, i - j + 1);
 	tmp_replace = ft_str_replace(tmp2, tmp, "");
 	(*cmd) = ft_strdup(tmp_replace);
-	printf("cmd after = %p\n", (*cmd));
+//	printf("cmd after = %p\n", (*cmd));
 	ft_strdel(&tmp);
 	ft_strdel(&tmp2);
 	ft_strdel(&tmp_replace);

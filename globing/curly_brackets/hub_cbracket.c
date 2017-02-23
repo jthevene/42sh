@@ -26,7 +26,7 @@ int				hub_cbracket(t_glob *glob, char *line)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp, NULL);
-	while (line[i])
+	while (i < (int)ft_strlen(line) && line[i])
 	{
 		if (line[i] == '{')
 		{

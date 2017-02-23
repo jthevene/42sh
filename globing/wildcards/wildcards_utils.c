@@ -81,11 +81,12 @@ int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 	if (!taille || !g || (taille == 1 && s1[0] == s2[0]))
 		return (!taille || !g ? 0 : -1);
 	i = s2[j] == '?' ? i + 1 : i;
-	while (s1[i])
+	while (i < (int)ft_strlen(s1) && s1[i])
 	{
 		j = s2[j] == '?' ? j + 1 : j;
-		while ((ret = i + j) >= 0 && s1[i + j] && s2[j] && (s1[i + j] == s2[j]
-			|| s2[j] == '[' || s2[j] == '?'))
+		while (i + j < (int)ft_strlen(s1) && j < (int)ft_strlen(s2) 
+&& (ret = i + j) >= 0 && s1[i + j] && s2[j] && (s1[i + j] == s2[j]
+|| s2[j] == '[' || s2[j] == '?'))
 		{
 			if (s2[j] == '[')
 				ret = ft_check_bracket(s1, i + j

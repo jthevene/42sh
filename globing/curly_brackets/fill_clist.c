@@ -57,8 +57,8 @@ static char		*special_sub(char *str, int i)
 
 static int		start_cbracket(char *str, t_glob *glob)
 {
-	FT_INIT(int, i, 0);
-	while (str[i - 1] != '{')
+	FT_INIT(int, i, 1);
+	while (i < (int)ft_strlen(str) && str[i] && str[i - 1] != '{')
 		i++;
 	glob->ext_args = recup_ext_args(str);
 	return (i);

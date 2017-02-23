@@ -6,7 +6,7 @@
 /*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 18:23:31 by sgaudin           #+#    #+#             */
-/*   Updated: 2016/12/12 18:23:31 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/23 15:16:51 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 	while (i < (int)ft_strlen(s1) && s1[i])
 	{
 		j = s2[j] == '?' ? j + 1 : j;
-		while (i + j < (int)ft_strlen(s1) && j < (int)ft_strlen(s2) 
-&& (ret = i + j) >= 0 && s1[i + j] && s2[j] && (s1[i + j] == s2[j]
-|| s2[j] == '[' || s2[j] == '?'))
+		while (i + j < (int)ft_strlen(s1) && j < (int)ft_strlen(s2)
+	&& (ret = i + j) >= 0 && s1[i + j] && s2[j] && (s1[i + j] == s2[j]
+	|| s2[j] == '[' || s2[j] == '?'))
 		{
 			if (s2[j] == '[')
 				ret = ft_check_bracket(s1, i + j

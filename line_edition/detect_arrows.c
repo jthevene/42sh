@@ -39,15 +39,13 @@ static int		arrow_combo(char *key)
 {
 	FT_INIT(int, start, g_shell.start_select);
 	FT_INIT(int, end, g_shell.end_select);
-	if (key[2] != 49 || key[3] != 59)
-		return (0);
-	if (key[4] == 53 && key[5] == 67)
+	if (key[0] == 27 && key[1] == 27 && key[2] == 91 && key[3] == 67)
 		return (K_OW_RIGHT);
-	else if (key[4] == 53 && key[5] == 68)
+	else if (key[0] == 27 && key[1] == 27 && key[2] == 91 && key[3] == 68)
 		return (K_OW_LEFT);
-	else if (key[4] == 53 && key[5] == 65)
+	else if (key[0] == 27 && key[1] == 27 && key[2] == 91 && key[3] == 65)
 		return (K_OL_UP);
-	else if (key[4] == 53 && key[5] == 66)
+	else if (key[0] == 27 && key[1] == 27 && key[2] == 91 && key[3] == 66)
 		return (K_OL_DOWN);
 	else if (key[4] == 50 && key[5] == 67)
 	{
@@ -68,19 +66,16 @@ int				detect_arrow(char *key)
 	if (g_shell.start_select && g_shell.end_select && !(key[4] == 50
 		&& (key[5] == 67 || key[5] == 68 || key[5] == 65 || key[5] == 66)))
 	{
-		ft_printf("\nTEST\n");
 		MULTI(g_shell.start_select, g_shell.end_select, 0);
 		print_line(g_shell.line_size);
 	}
-	if (key[0] != 27 || key[1] != 91)
-		return (0);
-	if (key[2] == 67 && key[3] == 0)
+	if (key[0] == 27 && key[1] == 91 && key[2] == 67)
 		return (K_RIGHT);
-	else if (key[2] == 68 && key[3] == 0)
+	else if (key[0] == 27 && key[1] == 91 && key[2] == 68)
 		return (K_LEFT);
-	else if (key[2] == 65 && key[3] == 0)
+	else if (key[0] == 27 && key[1] == 91 && key[2] == 65)
 		return (K_UP);
-	else if (key[2] == 66 && key[3] == 0)
+	else if (key[0] == 27 && key[1] == 91 && key[2] == 66)
 		return (K_DOWN);
 	return (arrow_combo(key));
 }

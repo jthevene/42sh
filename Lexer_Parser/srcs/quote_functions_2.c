@@ -17,7 +17,7 @@ int		unfinished_quote(char *line)
 	FT_INIT(int, sq, 0);
 	FT_INIT(int, dq, 0);
 	FT_INIT(int, i, -1);
-	while (++i >= 0 && ++i < (int)ft_strlen(line) && line[++i])
+	while (line[++i])
 	{
 		if (line[i] == '\'')
 		{

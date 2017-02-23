@@ -38,7 +38,7 @@ int		supp_squote(t_token *token, int pos, int s)
 	s = pos;
 	ft_memmove(&(token->lexeme[s]), \
 		&(token->lexeme[s + 1]), ft_strlen(token->lexeme) - s);
-	while (token->lexeme[pos] != '\'')
+	while (pos < (int)ft_strlen(token->lexeme) && token->lexeme[pos] != '\'')
 		pos++;
 	ft_memmove(&(token->lexeme[pos]), \
 		&(token->lexeme[pos + 1]), ft_strlen(token->lexeme) - pos);
@@ -51,7 +51,7 @@ int		supp_dquote(t_token *token, int pos, int d)
 	d = pos;
 	ft_memmove(&(token->lexeme[d]), \
 		&(token->lexeme[d + 1]), ft_strlen(token->lexeme) - d);
-	while (token->lexeme[pos] != '\"')
+	while (pos < (int)ft_strlen(token->lexeme) && token->lexeme[pos] != '\"')
 		pos++;
 	ft_memmove(&(token->lexeme[pos]), \
 		&(token->lexeme[pos + 1]), ft_strlen(token->lexeme) - pos);

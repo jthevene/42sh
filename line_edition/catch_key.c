@@ -45,9 +45,15 @@ int				readkeyspecial(char *key)
 int				readkey(void)
 {
 	FT_INIT(char*, c, g_shell.c);
+	FT_INIT(int, i, 0);
 	ft_bzero(c, 16);
 	if (read(STDIN_FILENO, c, 15))
 	{
+		while (c[i])
+		{
+			ft_printf("c =%d\n", c[i]);
+			i++;
+		}
 		if (c[0] == 27)
 			return (readkeyspecial(c));
 	}

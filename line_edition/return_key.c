@@ -16,8 +16,6 @@ void	reset_line(void)
 {
 	free(g_shell.line);
 	move_cursor_n_to_direction(g_shell.line_size, 1);
-	if (g_shell.cursor_2d_x)
-		ft_putchar('\n');
 	if (g_shell.current_line)
 		ft_strdel(&g_shell.current_line);
 	g_shell.current_line = NULL;
@@ -44,5 +42,7 @@ void	return_key(void)
 		ft_putchar(10);
 	g_shell.curr_hist = g_shell.hist;
 	g_shell.len = 0;
+	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
+	tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
 	display_prompt();
 }

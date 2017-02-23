@@ -148,6 +148,7 @@ EXECUTION 		= 	./execution/
 
 FILES_EXECUTION =	distrib_functions.c exec_tree.c \
 					env_to_tab.c exec_utils.c exec_redirs.c exec_pipe.c free_redirs.c \
+					exec_function.c
 
 SRC_EXECUTION 	= 	$(addprefix $(EXECUTION), $(FILES_EXECUTION))
 

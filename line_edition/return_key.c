@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 09:11:45 by jules             #+#    #+#             */
-/*   Updated: 2017/02/22 09:20:22 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/22 10:54:13 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	reset_line(void)
 {
 	free(g_shell.line);
 	move_cursor_n_to_direction(g_shell.line_size, 1);
-	// if (g_shell.cursor_2d_x)
-		// ft_putchar('\n');
+	if (g_shell.cursor_2d_x)
+		ft_putchar('\n');
 	if (g_shell.current_line)
 		ft_strdel(&g_shell.current_line);
 	g_shell.current_line = NULL;

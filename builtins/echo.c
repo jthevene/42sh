@@ -39,7 +39,7 @@ static int	echo_is_option(char *line)
 	return (0);
 }
 
-int 		len_tab(char **tabl)
+int			len_tab(char **tabl)
 {
 	FT_INIT(int, len, 0);
 	if (!tabl)

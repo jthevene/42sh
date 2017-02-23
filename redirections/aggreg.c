@@ -104,7 +104,7 @@ static int	pushback_aggreg(t_fdlist **flist, int fd_in, int fd_out)
 	return (1);
 }
 
-int 		free_tmp(t_fdlist **tmp)
+int			free_tmp(t_fdlist **tmp)
 {
 	FT_INIT(t_fdlist *, inter, NULL);
 	inter = g_shell.aggreg;

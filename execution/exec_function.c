@@ -38,7 +38,7 @@ int				parse_bin_directories(char **bin_dir, char **args)
 		if (verif_access_bin(args[0]))
 			exec_function_execve(args[0], args);
 		else
-			return (ft_printf("21sh: %s: No such file or directory\n", args[0]));
+			return (ft_printf("21sh:%s:No such file or directory\n", args[0]));
 	}
 	while (bin_dir && bin_dir[i])
 	{

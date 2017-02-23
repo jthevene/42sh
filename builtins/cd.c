@@ -27,7 +27,7 @@ static char			**verif_args_cd(char *line, int *len_tab)
 	{
 		ft_putstr_fd("cd: error arguments\nTry cd [-L|-P] [dir]\n", 2);
 		ft_putstr_fd("Options:\n-L	force symbolic links to be followed\n", 2);
-		ft_putstr_fd("-P	use the physical directory structure ",2);
+		ft_putstr_fd("-P	use the physical directory structure ", 2);
 		ft_putstr_fd("without following symbolic links\n", 2);
 		free_tab(tab_line);
 		return (NULL);

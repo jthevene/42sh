@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 17:21:26 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/22 08:57:53 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/23 15:17:23 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void		restablish_fd(t_save_fd **save_list)
 	(*save_list)->save_stderr = -1;
 	free_aggreg();
 	free_right_redir();
-
 }
 
 static void	go_save_fd(t_save_fd **save_list, int fd_to_save)
@@ -44,14 +43,12 @@ static void	go_save_fd(t_save_fd **save_list, int fd_to_save)
 		(*save_list)->save_stderr = dup(STDERR_FILENO);
 	else
 		(*save_list)->save_stderr = -1;
-
 }
 
 void		handle_aggreg(t_save_fd **save_list)
 {
 	if (g_shell.aggreg != NULL)
 	{
-//		printf("AGGREG OP\n");
 		while (g_shell.aggreg->prev)
 			g_shell.aggreg = g_shell.aggreg->prev;
 		while (g_shell.aggreg->next)
@@ -76,7 +73,6 @@ void		handle_redirections(void)
 	handle_aggreg(&g_shell.save_list);
 	if (g_shell.right_redirs)
 	{
-//		printf("RIGHT REDIRS OP\n");
 		while (g_shell.right_redirs->prev)
 			g_shell.right_redirs = g_shell.right_redirs->prev;
 		while (g_shell.right_redirs->next)
@@ -92,7 +88,6 @@ void		handle_redirections(void)
 	}
 	if (g_shell.left_redir_fd != -1)
 	{
-//		printf("LEFT REDIRS OP\n");
 		dup2(g_shell.left_redir_fd, STDIN_FILENO);
 		close(g_shell.left_redir_fd);
 		g_shell.left_redir_fd = -1;

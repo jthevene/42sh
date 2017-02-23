@@ -14,8 +14,7 @@
 
 void	lexer_parser(char *line)
 {
-	t_all	*all;
-
+	FT_INIT(t_all, *all, NULL);
 	FT_INIT(int, o, 0);
 	if (!(all = (t_all *)malloc(sizeof(t_all))))
 		return ;

@@ -33,16 +33,10 @@ static void	go_save_fd(t_save_fd **save_list, int fd_to_save)
 {
 	if (fd_to_save == 0)
 		(*save_list)->save_stdin = dup(STDIN_FILENO);
-	else
-		(*save_list)->save_stdin = -1;
 	if (fd_to_save == 1)
 		(*save_list)->save_stdout = dup(STDOUT_FILENO);
-	else
-		(*save_list)->save_stdout = -1;
 	if (fd_to_save == 2)
 		(*save_list)->save_stderr = dup(STDERR_FILENO);
-	else
-		(*save_list)->save_stderr = -1;
 }
 
 void		handle_aggreg(t_save_fd **save_list)
@@ -55,14 +49,14 @@ void		handle_aggreg(t_save_fd **save_list)
 		{
 			go_save_fd(&(*save_list), g_shell.aggreg->fd_in);
 			if (g_shell.aggreg->fd_file == -1)
-				close(g_shell.aggreg->fd_in);
+				close(get_fd_to_close(g_shell.aggreg->fd_in));
 			else
 				dup2(g_shell.aggreg->fd_file, g_shell.aggreg->fd_in);
 			g_shell.aggreg = g_shell.aggreg->next;
 		}
 		go_save_fd(&(*save_list), g_shell.aggreg->fd_in);
 		if (g_shell.aggreg->fd_file == -1)
-			close(g_shell.aggreg->fd_in);
+			close(get_fd_to_close(g_shell.aggreg->fd_in));
 		else
 			dup2(g_shell.aggreg->fd_file, g_shell.aggreg->fd_in);
 	}

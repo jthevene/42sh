@@ -55,8 +55,6 @@ int			only_star(char *str, t_glob *glob)
 int			multi_handling(t_glob *glob)
 {
 	FT_INIT(t_bracket *, tmp, NULL);
-	if (!glob->args)
-		return (0);
 	rewind_tbracket(&glob->args);
 	while (ft_strchr(glob->args->content, '*')
 		|| ft_strchr(glob->args->content, '?')
@@ -100,8 +98,5 @@ int			hub_final(t_glob *g, char *line)
 		if ((i + 1) < (int)ft_strlen(line) && !line[i + 1])
 			break ;
 	}
-	if (!g->args)
-		return (0);
-	multi_handling(g);
-	return (1);
+	return (!g->args ? 0 : multi_handling(g));
 }

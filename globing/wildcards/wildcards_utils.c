@@ -88,9 +88,8 @@ int		ft_istrstr(char *s1, char *s2, int i, t_glob *g)
 	&& (ret = i + j) >= 0 && s1[i + j] && s2[j] && (s1[i + j] == s2[j]
 	|| s2[j] == '[' || s2[j] == '?'))
 		{
-			if (s2[j] == '[')
-				ret = ft_check_bracket(s1, i + j
-				, j + next_bracket(s2, '[', j) == taille - 1 ? FALSE : TRUE, g);
+			ret = s2[j] == '[' ? ft_check_bracket(s1, i + j, FT_TER(j +
+			next_bracket(s2, '[', j) == taille - 1, FALSE, TRUE), g) : ret;
 			j += s2[j] == '[' ? next_bracket(s2, '[', j) : 0;
 			if (j == taille - 1 && ret != 0 && !ft_istrstr(s1, s2, i + 1, g))
 				return (ret);

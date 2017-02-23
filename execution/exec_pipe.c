@@ -33,6 +33,13 @@ char			**content_to_exec(t_tree *left, t_tree *right)
 	return (&right->content);
 }
 
+static int		error_fork(int fd[2])
+{
+	close(fd[0]);
+	close(fd[1]);
+	return (0);
+}
+
 int				exec_pipe(t_tree *left, t_tree *right)
 {
 	int			fd[2];
@@ -43,10 +50,7 @@ int				exec_pipe(t_tree *left, t_tree *right)
 	if (pipe(fd) == -1)
 		return (0);
 	if ((pid = fork()) == -1)
-	{
-		close(fd[0]);
-		close(fd[1]);
-	}
+		return (error_fork(fd));
 	if ((int)pid == 0)
 	{
 		call_redirections(&left->content);

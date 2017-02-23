@@ -48,6 +48,7 @@ int			ft_unsetenv_suite(t_var **tmp, t_var **tmp_prev,
 	else if (!(*tmp_next))
 	{
 		free_node(&(*tmp_free));
+		(*tmp_prev)->next = NULL;
 		return (1);
 	}
 	else

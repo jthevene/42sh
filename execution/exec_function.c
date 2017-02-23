@@ -28,17 +28,25 @@ int				exec_function_execve(char *cmd, char **args)
 	}
 }
 
+int 			error_parse_bin(char *error)
+{
+	ft_putstr_fd("21sh:", 2);
+	ft_putstr_fd(error, 2);
+	ft_putstr_fd(":No such file or directory\n", 2);
+	return (0);
+}
+
 int				parse_bin_directories(char **bin_dir, char **args)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, cmd, NULL);
 	FT_INIT(char *, tmp, NULL);
-	if (args[0][0] == '/')
+	if (args[0][0] == '/' || !ft_strncmp(args[0], "./", 2))
 	{
 		if (verif_access_bin(args[0]))
 			exec_function_execve(args[0], args);
 		else
-			return (ft_printf("21sh:%s:No such file or directory\n", args[0]));
+			return (error_parse_bin(args[0]));
 	}
 	while (bin_dir && bin_dir[i])
 	{

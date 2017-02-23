@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 20:33:04 by jules             #+#    #+#             */
-/*   Updated: 2017/02/17 16:41:46 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/23 10:27:10 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,23 @@ void	update_histfilesize(int histfilesize)
 
 void	update_histsize(int histsize)
 {
-	int		i;
-	t_lst	*tmp;
-	t_lst	*lst;
-
-	i = 1;
-	lst = g_shell.hist;
+	FT_INIT(int, i, 1);
+	FT_INIT(t_lst *, tmp1, NULL);
+	FT_INIT(t_lst *, tmp2, NULL);
+	FT_INIT(t_lst *, lst, g_shell.hist);
 	if (histsize <= get_histsize("HISTSIZE"))
 	{
 		while (i++ < histsize && lst->prev)
 			lst = lst->prev;
 		if (lst->prev)
 		{
-			tmp = lst->prev;
-			while (tmp)
+			tmp1 = lst->prev;
+			while (tmp1)
 			{
-				free(tmp->content);
-				free(tmp);
-				tmp = tmp->prev;
+				free(tmp1->content);
+				tmp2 = tmp1;
+				tmp1 = tmp1->prev;
+				free(tmp2);
 			}
 			lst->prev = NULL;
 		}

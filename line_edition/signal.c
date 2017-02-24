@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 11:31:13 by jules             #+#    #+#             */
-/*   Updated: 2017/02/22 08:56:11 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/24 17:02:42 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,6 @@ void		ft_sigkill(int sig)
 				g_shell.prompt_len);
 	if (g_shell.line_2d_x)
 		ft_putstr("\n");
-	ft_reset_termios(g_shell.t_back);
-	ft_exit();
-}
-
-void		ft_segfault(int sig)
-{
-	(void)sig;
-	ft_putstr("Error segfault\nFin du programme\n");
 	ft_reset_termios(g_shell.t_back);
 	ft_exit();
 }

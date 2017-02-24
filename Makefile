@@ -6,7 +6,7 @@
 #    By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/13 10:43:29 by sgaudin           #+#    #+#              #
-#    Updated: 2017/02/24 17:58:15 by sgaudin          ###   ########.fr        #
+#    Updated: 2017/02/24 18:02:40 by sgaudin          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -181,7 +181,6 @@ fclean_lib: clean_lib
 
 fclean: clean fclean_lib
 	rm -rf $(NAME)
-	sh ./rm_files.sh
 
 re: fclean all
 

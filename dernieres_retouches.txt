@@ -1,6 +1,4 @@
 Bug quand on fait ls -l 1 > 2 > 3 > 4 > 5 > 6
-Au niveau des "parenthèses à fermer" : ` ( [ {
 "env -i" ?
 "./21sh < ls" ?
-\ + entrée dans le réaffichage du prompt = segfault
 Quand on spam les ALT + GAUCHE / DROITE / HAUT / BAS on finit par "perdre" les termcaps

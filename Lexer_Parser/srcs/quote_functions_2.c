@@ -12,6 +12,17 @@
 
 #include "../includes/sh.h"
 
+int		unfinished_parenthesis(char *line, int i, int *var, char to_find)
+{
+	(*var) = 1;
+	i++;
+	while (i < (int)ft_strlen(line) && line[i] != to_find && line[i])
+		i++;
+	if (line[i] == to_find)
+		(*var) = 0;
+	return (i);
+}
+
 int		unfinished_quote(char *line)
 {
 	FT_INIT(int, sq, 0);
@@ -24,47 +35,17 @@ int		unfinished_quote(char *line)
 	while (line[++i])
 	{
 		if (line[i] == '\'')
-		{
-			sq = 1;
-			i = unfinished_squote(line, i);
-			if (line[i] == '\'')
-				sq = 0;
-		}
+			i = unfinished_parenthesis(line, i, &sq, '\'');
 		else if (line[i] == '\"')
-		{
-			dq = 1;
-			i = unfinished_dquote(line, i);
-			if (line[i] == '\"')
-				dq = 0;
-		}
+			i = unfinished_parenthesis(line, i, &dq, '\"');
 		else if (line[i] == '`')
-		{
-			bq = 1;
-			i = unfinished_bquote(line, i);
-			if (line[i] == '`')
-				bq = 0;
-		}
+			i = unfinished_parenthesis(line, i, &bq, '`');
 		else if (line[i] == '{')
-		{
-			aco = 1;
-			i = unfinished_aco(line, i);
-			if (line[i] == '}')
-				aco = 0;
-		}
+			i = unfinished_parenthesis(line, i, &aco, '}');
 		else if (line[i] == '[')
-		{
-			cro = 1;
-			i = unfinished_cro(line, i);
-			if (line[i] == ']')
-				cro = 0;
-		}
+			i = unfinished_parenthesis(line, i, &cro, ']');
 		else if (line[i] == '(')
-		{
-			par = 1;
-			i = unfinished_par(line, i);
-			if (line[i] == ')')
-				par = 0;
-		}
+			i = unfinished_parenthesis(line, i, &par, ')');
 	}
 	if (sq == 1)
 		return (1);
@@ -73,52 +54,4 @@ int		unfinished_quote(char *line)
 	else if (bq == 1 || aco == 1 || cro == 1 || par == 1)
 		return (3);
 	return (0);
-}
-
-int		unfinished_squote(char *line, int i)
-{
-	i++;
-	while (i < (int)ft_strlen(line) && line[i] != '\'' && line[i])
-		i++;
-	return (i);
-}
-
-int		unfinished_dquote(char *line, int i)
-{
-	i++;
-	while (i < (int)ft_strlen(line) && line[i] != '\"' && line[i])
-		i++;
-	return (i);
-}
-
-int		unfinished_bquote(char *line, int i)
-{
-	i++;
-	while (i < (int)ft_strlen(line) && line[i] != '`' && line[i])
-		i++;
-	return (i);
-}
-
-int		unfinished_aco(char *line, int i)
-{
-	i++;
-	while (i < (int)ft_strlen(line) && line[i] != '}' && line[i])
-		i++;
-	return (i);
-}
-
-int		unfinished_cro(char *line, int i)
-{
-	i++;
-	while (i < (int)ft_strlen(line) && line[i] != ']' && line[i])
-		i++;
-	return (i);
-}
-
-int		unfinished_par(char *line, int i)
-{
-	i++;
-	while (i < (int)ft_strlen(line) && line[i] != ')' && line[i])
-		i++;
-	return (i);
 }

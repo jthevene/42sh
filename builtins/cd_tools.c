@@ -12,6 +12,14 @@
 
 #include "../includes/sh21.h"
 
+void		free_cd_vars(char **home, char **sentence, char **file, char **pwd)
+{
+	free((*home));
+	free((*sentence));
+	free((*file));
+	free((*pwd));
+}
+
 int			error_cd(char *type, char *file)
 {
 	ft_putstr_fd("cd: ", 2);

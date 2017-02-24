@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:32:45 by apinho           ###   ########.fr       */
+/*   Updated: 2017/02/24 20:14:37 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void		distrib_signals(int sig)
 		ft_sigwinch(sig);
 	else if (sig == SIGINT)
 		ft_sigint(sig);
-	else if (sig == SIGSEGV)
-		ft_segfault(sig);
 }
 
 void		ft_signal(void)

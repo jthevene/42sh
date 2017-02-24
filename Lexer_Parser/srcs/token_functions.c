@@ -47,6 +47,8 @@ char	*finish_quotes(char *line)
 			tmp = finish_the_squote(tmp);
 		else if (i == 2)
 			tmp = finish_the_dquote(tmp);
+		else if (i == 3)
+			tmp = finish_line_backslash(tmp);
 	}
 	if (!tmp)
 		tmp = line;

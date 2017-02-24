@@ -35,14 +35,14 @@ int				readkeyspecial(char *key)
 		return (K_ESCAPE);
 	else if (key[0] == 27 && key[1] == 118)
 		return (K_PAST);
-	else if (is_arrow(key))
-		return (detect_arrow(key));
-	else if (key[0] == 27 && key[1] == 91 && key[2] == 51 && key[3] == 126)
-		return (K_DEL);
 	else if (key[0] == 27 && key[1] == 91 && key[2] == 72)
 		return (K_GO_START);
 	else if (key[0] == 27 && key[1] == 91 && key[2] == 70)
 		return (K_GO_END);
+	else if (is_arrow(key))
+		return (detect_arrow(key));
+	else if (key[0] == 27 && key[1] == 91 && key[2] == 51 && key[3] == 126)
+		return (K_DEL);
 	return (K_UNKNOWN);
 }
 

@@ -55,9 +55,9 @@ int			detect_aggreg(char **c, int *fd_in, int *out)
 			(*c)[i + 1] == '&' && (*c)[i + 2]
 			&& ((*c)[i + 2] == '-' || ft_isdigit((*c)[i + 2])))
 		{
+			j = i - 1;
 			if ((*c)[i - 1] && ft_isdigit((*c)[i - 1]))
 			{
-				j = i - 1;
 				while ((*c)[j] && j >= 0 && ft_isdigit((*c)[j]))
 					j--;
 				(*fd_in) = detect_numbers((*c), ++j);

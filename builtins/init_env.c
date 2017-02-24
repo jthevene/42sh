@@ -30,6 +30,23 @@ static void	create_safety_vars(void)
 }
 */
 
+void		increase_shlvl(void)
+{
+	FT_INIT(char *, tmp, NULL);
+	FT_INIT(char *, tmp_setenv, NULL);
+	FT_INIT(int, lvl_int, 0);
+	if ((tmp = get_var(&g_shell, "SHLVL")))
+	{
+		lvl_int = ft_atoi(tmp);
+		ft_strdel(&tmp);
+		tmp = ft_itoa(lvl_int + 1);
+		tmp_setenv = ft_strjoin("setenv SHLVL=", tmp);
+		ft_setenv(tmp_setenv);
+		ft_strdel(&tmp);
+		ft_strdel(&tmp_setenv);
+	}
+}
+
 int			init_env(void)
 {
 	int				i;
@@ -53,6 +70,7 @@ int			init_env(void)
 		free(v_name);
 		i++;
 	}
+	increase_shlvl();
 	g_shell.oldpwd = get_var(&g_shell, "OLDPWD");
 	return (1);
 }

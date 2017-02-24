@@ -79,6 +79,16 @@ typedef struct				s_save_fd
 	int						save_stderr;
 }							t_save_fd;
 
+typedef struct				s_quotes
+{
+	int						sq;
+	int						dq;
+	int						bq;
+	int						aco;
+	int						cro;
+	int						par;
+}							t_quotes;
+
 typedef struct				s_shell
 {
 	int						len;

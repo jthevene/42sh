@@ -12,7 +12,7 @@
 
 #include "../includes/sh.h"
 
-int		unfinished_parenthesis(char *line, int i, int *var, char to_find)
+int			unfinished_parenthesis(char *line, int i, int *var, char to_find)
 {
 	(*var) = 1;
 	i++;
@@ -23,35 +23,52 @@ int		unfinished_parenthesis(char *line, int i, int *var, char to_find)
 	return (i);
 }
 
-int		unfinished_quote(char *line)
+t_quotes	*init_quotes_struct(void)
 {
-	FT_INIT(int, sq, 0);
-	FT_INIT(int, dq, 0);
-	FT_INIT(int, bq, 0);
-	FT_INIT(int, aco, 0);
-	FT_INIT(int, cro, 0);
-	FT_INIT(int, par, 0);
+	t_quotes *quotes;
+
+	if (!(quotes = (t_quotes *)malloc(sizeof(t_quotes))))
+		return (NULL);
+	quotes->sq = 0;
+	quotes->dq = 0;
+	quotes->bq = 0;
+	quotes->aco = 0;
+	quotes->cro = 0;
+	quotes->par = 0;
+	return (quotes);
+}
+
+int			free_quotes(t_quotes **quotes, int val_to_return)
+{
+	free((*quotes));
+	return (val_to_return);
+}
+
+int			unfinished_quote(char *line)
+{
+	FT_INIT(t_quotes, *quotes, init_quotes_struct());
 	FT_INIT(int, i, -1);
 	while (line[++i])
 	{
 		if (line[i] == '\'')
-			i = unfinished_parenthesis(line, i, &sq, '\'');
+			i = unfinished_parenthesis(line, i, &quotes->sq, '\'');
 		else if (line[i] == '\"')
-			i = unfinished_parenthesis(line, i, &dq, '\"');
+			i = unfinished_parenthesis(line, i, &quotes->dq, '\"');
 		else if (line[i] == '`')
-			i = unfinished_parenthesis(line, i, &bq, '`');
+			i = unfinished_parenthesis(line, i, &quotes->bq, '`');
 		else if (line[i] == '{')
-			i = unfinished_parenthesis(line, i, &aco, '}');
+			i = unfinished_parenthesis(line, i, &quotes->aco, '}');
 		else if (line[i] == '[')
-			i = unfinished_parenthesis(line, i, &cro, ']');
+			i = unfinished_parenthesis(line, i, &quotes->cro, ']');
 		else if (line[i] == '(')
-			i = unfinished_parenthesis(line, i, &par, ')');
+			i = unfinished_parenthesis(line, i, &quotes->par, ')');
 	}
-	if (sq == 1)
-		return (1);
-	else if (dq == 1)
-		return (2);
-	else if (bq == 1 || aco == 1 || cro == 1 || par == 1)
-		return (3);
-	return (0);
+	if (quotes->sq == 1)
+		return (free_quotes(&quotes, 1));
+	else if (quotes->dq == 1)
+		return (free_quotes(&quotes, 2));
+	else if (quotes->bq == 1 || quotes->aco == 1 
+		|| quotes->cro == 1 || quotes->par == 1)
+		return (free_quotes(&quotes, 3));
+	return (free_quotes(&quotes, 0));
 }

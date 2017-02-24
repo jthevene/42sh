@@ -12,23 +12,27 @@
 
 #include "../includes/sh21.h"
 
-/*
+
 static void	create_safety_vars(void)
 {
 	FT_INIT(char *, pwd, ft_strnew(255));
-	FT_INIT(char *, tmp, NULL);
-	ft_setenv("SHLVL=1");
-	tmp = getcwd(tmp, 255);
-	pwd = ft_strjoin("PWD=", tmp);
-	ft_setenv(pwd);
+	FT_INIT(t_var *, var, NULL);
+	var = new_var("SHLVL", "1");
+	ft_varappend(var);
+	pwd = getcwd(pwd, 255);
+	var = new_var("PWD", pwd);
+	ft_varappend(var);
+	var = new_var("HOME", pwd);
+	ft_varappend(var);
+	var = new_var("PATH", "/bin:/usr/bin");
+	ft_varappend(var);
+	var = new_var("TERM", "xterm-256color");
+	ft_varappend(var);
+	var = new_var("OLDPWD", pwd);
+	ft_varappend(var);
 	ft_strdel(&pwd);
-	pwd = ft_strjoin("HOME=", tmp);
-	ft_setenv(pwd);
-	ft_strdel(&tmp);
-	ft_strdel(&pwd);
-	ft_setenv("PATH=/bin:/usr/bin");
 }
-*/
+
 
 void		increase_shlvl(void)
 {
@@ -58,8 +62,11 @@ int			init_env(void)
 	i = 0;
 	if (!environ[0])
 	{
-		ft_putstr_fd("Environment not found.\n", 2);
-		return (0);
+		create_safety_vars();
+		g_shell.oldpwd = get_var(&g_shell, "OLDPWD");	
+		return (1);
+//		ft_putstr_fd("Environment not found.\n", 2);
+//		return (0);
 	}
 	while (environ[i])
 	{

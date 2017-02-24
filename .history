@@ -1,0 +1,30 @@
+a
+b
+c
+a
+history
+env
+unsetenv HISTSIZE
+g
+f
+e
+env
+history -a
+history -r
+a
+b
+c
+c
+a
+history
+env
+unsetenv HISTSIZE
+g
+f
+e
+env
+history -a
+env
+history -d 3
+history -p history -d 3
+exit

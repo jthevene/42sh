@@ -6,7 +6,7 @@
 /*   By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 15:25:05 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/12 15:25:07 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/02/24 16:31:28 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int			unfinished_quote(char *line)
 		return (free_quotes(&quotes, 1));
 	else if (quotes->dq == 1)
 		return (free_quotes(&quotes, 2));
-	else if (quotes->bq == 1 || quotes->aco == 1 
+	else if (quotes->bq == 1 || quotes->aco == 1
 		|| quotes->cro == 1 || quotes->par == 1)
 		return (free_quotes(&quotes, 3));
 	return (free_quotes(&quotes, 0));

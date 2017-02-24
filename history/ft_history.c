@@ -55,8 +55,6 @@ int		history_hub(char *line)
 		update_history_file(get_histsize("HISTSIZE"));
 	else if (g_shell.hist_opt.s)
 		ft_newhist(g_shell.hist_opt.arg);
-	else if (g_shell.hist_opt.p)
-		ft_putendl(line);
 	return (1);
 }
 

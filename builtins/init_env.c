@@ -6,12 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 16:55:03 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/02/22 08:58:06 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/24 16:30:38 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sh21.h"
-
 
 static void	create_safety_vars(void)
 {
@@ -32,7 +31,6 @@ static void	create_safety_vars(void)
 	ft_varappend(var);
 	ft_strdel(&pwd);
 }
-
 
 void		increase_shlvl(void)
 {
@@ -63,7 +61,7 @@ int			init_env(void)
 	if (!environ[0])
 	{
 		create_safety_vars();
-		g_shell.oldpwd = get_var(&g_shell, "OLDPWD");	
+		g_shell.oldpwd = get_var(&g_shell, "OLDPWD");
 		return (1);
 	}
 	while (environ[i])

@@ -15,15 +15,12 @@
 char	*finish_line_backslash(char *line)
 {
 	char *myline;
-	char *tmpline;
 
 	ft_strdel(&g_shell.prompt);
 	ft_putstr("\n");
 	myline = prompt_dquote("> ");
-	tmpline = ft_strndup(line, ft_strlen(line) - 1);
-	myline = ft_strjoin(tmpline, myline);
+	myline = ft_strjoin(line, myline);
 	ft_putstr("\n");
-	free(tmpline);
 	free(line);
 	return (myline);
 }

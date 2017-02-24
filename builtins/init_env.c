@@ -65,8 +65,6 @@ int			init_env(void)
 		create_safety_vars();
 		g_shell.oldpwd = get_var(&g_shell, "OLDPWD");	
 		return (1);
-//		ft_putstr_fd("Environment not found.\n", 2);
-//		return (0);
 	}
 	while (environ[i])
 	{

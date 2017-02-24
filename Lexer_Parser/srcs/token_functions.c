@@ -14,25 +14,25 @@
 
 int		token_squote(t_token *token, char *line, int pos, int i)
 {
-	pos++;
 	token->type = SQUOTE;
 	i = pos;
+	pos++;
 	while (line[pos] != '\'')
 		pos++;
-	add_lexeme(token, line, pos, i);
 	pos++;
+	add_lexeme(token, line, pos, i);
 	return (pos);
 }
 
 int		token_dquote(t_token *token, char *line, int pos, int i)
 {
-	pos++;
 	token->type = DQUOTE;
 	i = pos;
+	pos++;
 	while (line[pos] != '\"')
 		pos++;
-	add_lexeme(token, line, pos, i);
 	pos++;
+	add_lexeme(token, line, pos, i);
 	return (pos);
 }
 

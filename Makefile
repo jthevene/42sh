@@ -6,7 +6,7 @@
 #    By: sgaudin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/13 10:43:29 by sgaudin           #+#    #+#              #
-#    Updated: 2016/10/13 10:43:29 by sgaudin          ###   ########.fr        #
+#    Updated: 2017/02/24 17:58:15 by sgaudin          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -21,7 +21,7 @@ LIBFT_NAME			=	$(LIBFT_DIR)/libft.a
 LIBFT_INCLUDE_DIR	=	$(LIBFT_DIR)/includes
 
 COMPILER			=	gcc
-C_FLAGS				=	-g3 -O3 -Wall -Wextra -Werror
+C_FLAGS				=	-Wall -Wextra -Werror
 LFLAGS				=	-L$(LIBFT_DIR) -l$(LIBFT)
 
 
@@ -40,7 +40,7 @@ FILES_COMPLETION	=	detect_auto_completion.c get_files.c match_elements.c \
 SRC_COMPLETION_EDIT	=	$(addprefix $(EDITION_DIR), $(FILES_EDITION)) \
 						$(addprefix $(DIR_AUTO), $(FILES_COMPLETION))
 
-BIN_COMPLETION_EDIT	= 	$(FILES_EDITION:.c=.o) $(FILES_COMPLETION:.c=.o) 
+BIN_COMPLETION_EDIT	= 	$(FILES_EDITION:.c=.o) $(FILES_COMPLETION:.c=.o)
 
 ################# 		END COMPLETION EDITION PART 	#######################
 
@@ -84,7 +84,7 @@ BIN_GLOBING 	= 	$(FILES_GLOBING:.c=.o) $(FILES_REDIR:.c=.o) \
 					$(FILES_SBRACK:.c=.o) $(FILES_CBRACK:.c=.o) \
 					$(FILES_UTILS_1:.c=.o) $(FILES_UTILS_2:.c=.o) \
 					$(FILES_WILDCARDS:.c=.o)
-		
+
 ################# 		END GLOBING PART		###############################
 
 ################# 			PARSER PART			###############################
@@ -159,14 +159,12 @@ BIN_EXECUTION 	= 	$(FILES_EXECUTION:.c=.o)
 INCLUDES 	= -I$(LIBFT_INCLUDE_DIR) -I$(INCLUDE_DIR) -I$(PARSER)../includes/
 ALL_SRCS 	= $(SRC_COMPLETION_EDIT) $(SRC_GLOBING) $(SRC_PARSER) $(SRC_BUILTIN) $(SRC_HISTORY) $(SRC_REDIRS) $(SRC_EXECUTION)
 ALL_BINS 	= $(BIN_COMPLETION_EDIT) $(BIN_GLOBING) $(BIN_PARSER) $(BIN_BUILTIN) $(BIN_HISTORY) $(BIN_REDIRS) $(BIN_EXECUTION)
-EXTENSIONS 	= $(LIBFT_DIR)/libft.a $(LIBFT_DIR)/libftprintf.a 
+EXTENSIONS 	= $(LIBFT_DIR)/libft.a $(LIBFT_DIR)/libftprintf.a
 
 all: $(NAME)
 
-lib:
+$(NAME):
 	make -C libft
-
-$(NAME): lib
 	gcc $(C_FLAGS) $(INCLUDES) $(ALL_SRCS) -Incurses -c
 	gcc $(C_FLAGS) $(ALL_BINS) $(EXTENSIONS) -ltermcap -o $(NAME)
 	mkdir bin_folder
@@ -184,7 +182,6 @@ fclean_lib: clean_lib
 fclean: clean fclean_lib
 	rm -rf $(NAME)
 	sh ./rm_files.sh
-
 
 re: fclean all
 

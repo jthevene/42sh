@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 11:29:38 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/02/22 08:58:10 by jules            ###   ########.fr       */
+/*   Updated: 2017/02/24 16:29:06 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int					cd(char *line)
 	{
 		free_tab(tab_line);
 		free_cd_vars(&home, &sentence, &file, &pwd);
-		return (error_cd("env" ,"Env variables HOME or OLDPWD not found"));
+		return (error_cd("env", "Env variables HOME or OLDPWD not found"));
 	}
 	path = len_tab == 1 ? ft_strdup(home) : path_converter(sentence, home, pwd);
 	file = ft_strdup(path + (ft_strlen(path) -

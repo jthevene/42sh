@@ -217,4 +217,6 @@ int					get_fd_to_close(int fd);
 int					free_tmp_aggreg(t_fdlist **tmp);
 void				free_right_redir(void);
 
+void				ft_sigkill(int sig);
+
 #endif

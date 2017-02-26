@@ -67,7 +67,7 @@ static void		parse_capabilities(int key)
 		print_line(1);
 	}
 	else if (key == K_ESCAPE)
-		ft_exit();
+		ft_sigkill(SIGINT);
 }
 
 static void		run_shell(void)

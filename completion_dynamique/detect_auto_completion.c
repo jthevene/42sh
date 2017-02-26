@@ -15,6 +15,8 @@
 static char		*str_to_search(char *sentence)
 {
 	FT_INIT(char*, new_sentence, NULL);
+	if (!sentence)
+		return (NULL);
 	if (ft_strchr(sentence, ' '))
 		sentence = ft_strrchr(sentence, ' ') + 1;
 	if (ft_strrchr(sentence, '/'))
@@ -46,8 +48,9 @@ t_file			*get_file_path(char *path, char *sentence)
 	else
 	{
 		closedir(rep);
-		rep = opendir(".");
-		files = store_files_dirs(rep, files, path, str_to_search(sentence));
+		if ((rep = opendir(".")))
+			files = store_files_dirs(rep, files,
+				path, str_to_search(sentence));
 	}
 	closedir(rep);
 	free(var_path);
@@ -119,6 +122,7 @@ char			*detect_auto_completion(char *sentence)
 	if (check != prev_sentence_value(sentence))
 		check = prev_sentence_value(sentence);
 	display_completion(copy_sentence, match_files);
-	ft_strdel(&copy_sentence);
+	if (copy_sentence)
+		ft_strdel(&copy_sentence);
 	return (sentence);
 }

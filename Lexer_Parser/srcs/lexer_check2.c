@@ -33,6 +33,7 @@ t_token		*init_token(void)
 	t_token	*token;
 
 	token = malloc(sizeof(t_token));
+	token->lexeme = NULL;
 	token->next = NULL;
 	return (token);
 }

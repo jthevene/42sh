@@ -106,6 +106,8 @@ int			replace_env_var(char **line)
 			tmp = recup_varname(line, i + 1);
 			reform_line_var(line, tmp, i);
 			free(tmp ? tmp : NULL);
+			if (!(*line))
+				break ;
 		}
 		i++;
 	}

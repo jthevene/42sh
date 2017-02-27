@@ -99,6 +99,8 @@ int						send_token_to_glob(t_all *all)
 		if (tmp->lexeme)
 		{
 			replace_env_var(&tmp->lexeme);
+			if (!tmp->lexeme)
+				tmp->lexeme = ft_strdup("");
 			if (!glob_parser(&tmp->lexeme))
 				nb_error++;
 			nb_all++;

@@ -92,6 +92,74 @@ char				**clear_path(char **sentence)
 	return (sentence);
 }
 
+int			verif_access_auto(char *path)
+{
+	struct stat infos;
+
+	lstat(path, &infos);
+	if (access(path, F_OK) != 0)
+		return (0);
+	else if (S_ISLNK(infos.st_mode))
+		return (1);
+	else if (!S_ISDIR(infos.st_mode) && !S_ISLNK(infos.st_mode))
+		return (0);
+	else if (access(path, X_OK) != 0)
+		return (0);
+	return (1);
+}
+
+char 		*path_str(char** str_path, char *str, int j)
+{
+	FT_INIT(char*, tmp, NULL);
+	if (j != -1 && verif_access_auto(str))
+	{
+		tmp = *str_path;
+		*str_path = ft_strjoin(*str_path, ":");
+		ft_strdel(&tmp);
+		tmp = *str_path;
+		*str_path = ft_strjoin(*str_path, str);
+		ft_strdel(&tmp);
+	}
+	return (*str_path);
+}
+
+char 		**reject_doublons(char **tabl)
+{
+	FT_INIT(int, i, 0);
+	FT_INIT(int, j, 0);
+	FT_INIT(char*, str_path, ft_strdup(""));
+	FT_INIT(char**, new_tabl, NULL);
+	while (tabl[i] && j <= len_tab(tabl))
+	{
+		while (tabl[i] && tabl[j])
+		{
+			if (j != i && !ft_strcmp(tabl[i], tabl[j]))
+			{
+				j = -1;
+				break ;
+			}
+			else
+				j++;
+		}
+		str_path = path_str(&str_path, tabl[i], j);
+		i++;
+		j = i + 1;
+	}
+	new_tabl = ft_strsplit(str_path, ':');
+	ft_strdel(&str_path);
+	return (new_tabl);
+}
+
+char 		**verif_dirs(char **tabl)
+{
+	FT_INIT(char**, tmp, tabl);
+	if (!tabl)
+		return (NULL);
+	tabl = reject_doublons(tabl);
+	free_tab(tmp);
+	return (tabl);
+}
+
 char				**set_path(char **sentence, char *home, char *c_path)
 {
 	FT_INIT(char*, new_path, NULL);
@@ -103,7 +171,7 @@ char				**set_path(char **sentence, char *home, char *c_path)
 	if (!ft_strchr(*sentence, ' ') && *sentence[0] != '/' && ft_strlen(c_path))
 	{
 		new_path = get_var(&g_shell, "PATH");
-		dirs = ft_strsplit(new_path, ':');
+		dirs = verif_dirs(ft_strsplit(new_path, ':'));
 		ft_strdel(&new_path);
 		return (dirs);
 	}
@@ -114,9 +182,9 @@ char				**set_path(char **sentence, char *home, char *c_path)
 	ft_bzero((void*)new_path, ft_strlen(new_path));
 	ft_strcat(new_path, "/");
 	new_path = parse_dirs(dirs, new_path, home);
-	free_auto_tab(dirs);
+	free_tab(dirs);
 	new_path = set_end_path(&new_path, sentence);
-	dirs = ft_strsplit(new_path, '\n');
+	dirs = verif_dirs(ft_strsplit(new_path, '\n'));
 	ft_strdel(&new_path);
 	return (dirs);
 }

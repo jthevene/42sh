@@ -31,8 +31,6 @@ int				readkeyspecial(char *key)
 {
 	if (key[0] == 27 && key[1] == 99)
 		return (K_COPY);
-	else if (key[0] == 27 && key[1] == 0)
-		return (K_ESCAPE);
 	else if (key[0] == 27 && key[1] == 118)
 		return (K_PAST);
 	else if (key[0] == 27 && key[1] == 91 && key[2] == 72)

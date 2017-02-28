@@ -218,5 +218,7 @@ int					free_tmp_aggreg(t_fdlist **tmp);
 void				free_right_redir(void);
 
 void				ft_sigkill(int sig);
+void				ft_sigint(int sig);
+int					len_tab(char **tabl);
 
 #endif

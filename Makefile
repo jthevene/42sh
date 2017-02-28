@@ -30,12 +30,12 @@ LFLAGS				=	-L$(LIBFT_DIR) -l$(LIBFT)
 FILES_EDITION 		=	main.c catch_key.c 	cursor_move.c \
 						init.c copy_cut_past.c line_edition.c print_line.c \
 						return_key.c signal.c termios.c free_term.c \
-						detect_arrows.c print_line_tools.c
+						detect_arrows.c print_line_tools.c						
 
 FILES_COMPLETION	=	detect_auto_completion.c get_files.c match_elements.c \
 						set_path.c display_completion.c build_list.c \
 						set_sentence.c free_auto_completion.c \
-						tools.c set_path_second_part.c
+						tools.c set_path_second_part.c verif_completion_dirs.c
 
 SRC_COMPLETION_EDIT	=	$(addprefix $(EDITION_DIR), $(FILES_EDITION)) \
 						$(addprefix $(DIR_AUTO), $(FILES_COMPLETION))
@@ -165,8 +165,8 @@ all: $(NAME)
 
 $(NAME):
 	make -C libft
-	gcc $(C_FLAGS) $(INCLUDES) $(ALL_SRCS) -Incurses -c
-	gcc $(C_FLAGS) $(ALL_BINS) $(EXTENSIONS) -ltermcap -o $(NAME)
+	gcc $(C_FLAGS) -g $(INCLUDES) $(ALL_SRCS) -Incurses -c
+	gcc $(C_FLAGS) -g $(ALL_BINS) $(EXTENSIONS) -ltermcap -o $(NAME)
 	mkdir bin_folder
 	mv $(ALL_BINS) bin_folder
 

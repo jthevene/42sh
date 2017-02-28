@@ -92,7 +92,7 @@ static void			go_to_dir(int cas, char **path, char *home, char *file_name)
 		ft_strdel(path);
 		return ;
 	}
-	FT_INIT(char*, pwd, get_var(&g_shell, "PWD"));
+	FT_INIT(char*, pwd, getcwd(NULL, 1024));
 	if (cas == -1)
 	{
 		if (file_name[0] != '/')
@@ -119,7 +119,7 @@ int					cd(char *line)
 	FT_INIT(int, len_tab, 0);
 	if (!(tab_line = verif_args_cd(line, &len_tab)))
 		return (1);
-	FT_INIT(char*, pwd, get_var(&g_shell, "PWD"));
+	FT_INIT(char*, pwd, getcwd(NULL, 1024));
 	FT_INIT(char*, home, get_var(&g_shell, "HOME"));
 	FT_INIT(char*, option, NULL);
 	FT_INIT(char*, sentence, NULL);

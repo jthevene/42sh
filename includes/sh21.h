@@ -98,6 +98,7 @@ char				**set_path(char **sentence, char *home, char *current_path);
 void				display_completion(char *sentence, t_file *match_files);
 t_completion		*build_lst_lst(t_file *matchfiles, int nbelem, int nbcol);
 char				*similarity(t_file *match_files, char *sentence);
+char				**clear_path(char **sentence);
 /*
 ** CD
 */
@@ -220,5 +221,6 @@ void				free_right_redir(void);
 void				ft_sigkill(int sig);
 void				ft_sigint(int sig);
 int					len_tab(char **tabl);
+char		 		**verif_dirs(char **tabl);
 
 #endif

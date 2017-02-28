@@ -64,7 +64,7 @@ static t_file	*files_list(char **sentence)
 	FT_INIT(t_file*, head, NULL);
 	FT_INIT(int, i, 0);
 	FT_INIT(char*, home, get_var(&g_shell, "HOME"));
-	FT_INIT(char*, pwd, get_var(&g_shell, "PWD"));
+	FT_INIT(char*, pwd, getcwd(NULL, 1024));
 	*sentence = default_sentence(sentence);
 	path = set_path(sentence, home, pwd);
 	while (path && path[i])

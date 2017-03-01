@@ -51,6 +51,11 @@ char			*prompt_dquote(char *quote_type)
 	{
 		if (g_shell.c[0] == 10)
 			break ;
+		else if (key == K_ESCAPE && !((int)ft_strlen(g_shell.current_line)))
+		{
+//			ft_putstr("\n");
+			return (NULL);
+		}
 		else if (detect_input_type(key, quote_type) == K_PRINT)
 		{
 			fill_current_line(g_shell.c[0]);

@@ -30,13 +30,12 @@ void		ft_sigint(int sig)
 	g_shell.len = 0;
 	ft_putstr("\n");
 	ft_putstr(g_shell.prompt);
-//	display_prompt();
 }
 
 void		ft_sigkill(int sig)
 {
 	(void)sig;
-	if (!kill(-1, SIGCHLD))
+	if (!((int)ft_strlen(g_shell.current_line)) && !kill(-1, SIGCHLD))
 		ft_exit();
 	else
 		ft_sigint(SIGINT);

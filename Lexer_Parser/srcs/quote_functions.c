@@ -17,7 +17,6 @@ char	*finish_line_backslash(char *line)
 	char *myline;
 
 	ft_strdel(&g_shell.prompt);
-	ft_putstr("\n");
 	myline = prompt_dquote("> ");
 	myline = ft_strjoin(line, myline);
 	ft_putstr("\n");
@@ -30,7 +29,6 @@ char	*finish_the_squote(char *line)
 	char *myline;
 
 	ft_strdel(&g_shell.prompt);
-	ft_putstr("\n");
 	myline = prompt_dquote("quote> ");
 	myline = ft_strjoin(line, myline);
 	ft_putchar('\n');
@@ -43,7 +41,6 @@ char	*finish_the_dquote(char *line)
 	char *myline;
 
 	ft_strdel(&g_shell.prompt);
-	ft_putstr("\n");
 	myline = prompt_dquote("dquote> ");
 	myline = ft_strjoin(line, myline);
 	ft_putchar('\n');

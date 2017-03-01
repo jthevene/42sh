@@ -47,8 +47,8 @@ int			free_quotes(t_quotes **quotes, int val_to_return)
 int			unfinished_quote(char *line)
 {
 	FT_INIT(t_quotes, *quotes, init_quotes_struct());
-	FT_INIT(int, i, -1);
-	while (line[++i])
+	FT_INIT(int, i, 0);
+	while (line && i < (int)ft_strlen(line) && i >= 0 && line[i])
 	{
 		if (line[i] == '\'')
 			i = unfinished_parenthesis(line, i, &quotes->sq, '\'');
@@ -62,11 +62,11 @@ int			unfinished_quote(char *line)
 			i = unfinished_parenthesis(line, i, &quotes->cro, ']');
 		else if (line[i] == '(')
 			i = unfinished_parenthesis(line, i, &quotes->par, ')');
+		i++;
 	}
-	if (quotes->sq == 1)
-		return (free_quotes(&quotes, 1));
-	else if (quotes->dq == 1)
-		return (free_quotes(&quotes, 2));
+	if (quotes->sq == 1 || quotes->dq == 1)
+		return (quotes->sq == 1 ? free_quotes(&quotes, 1)
+		: free_quotes(&quotes, 2));
 	else if (quotes->bq == 1 || quotes->aco == 1
 		|| quotes->cro == 1 || quotes->par == 1)
 		return (free_quotes(&quotes, 3));

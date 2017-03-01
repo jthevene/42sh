@@ -51,7 +51,10 @@ char	*finish_quotes(char *line)
 			tmp = finish_line_backslash(tmp);
 	}
 	if (!tmp)
-		tmp = line;
+	{
+		free(line);
+		return (NULL);
+	}
 	else
 		free(line);
 	return (tmp);

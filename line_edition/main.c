@@ -14,7 +14,7 @@
 
 void			display_prompt(void)
 {
-	g_shell.prompt = set_prompt(get_var(&g_shell, "PWD"));
+	g_shell.prompt = set_prompt(getcwd(NULL, 1024));
 	ft_putstr(g_shell.prompt);
 	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
 }
@@ -81,7 +81,7 @@ static void		run_shell(void)
 		if (key == K_PRINT)
 		{
 			MULTI(g_shell.start_select, g_shell.end_select, 0);
-			g_shell.prompt = set_prompt(get_var(&g_shell, "PWD"));
+			g_shell.prompt = set_prompt(getcwd(NULL, 1024));
 			fill_current_line(g_shell.c[0]);
 			g_shell.cursor_x++;
 			print_line(1);

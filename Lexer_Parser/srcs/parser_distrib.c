@@ -20,7 +20,7 @@ void	lexer_parser(char *line)
 		return ;
 	all->line = ft_strdup(line);
 	if (!(all->line = finish_quotes(all->line)))
-		return ;
+		return (free(all));
 	if ((ft_strcmp(all->line, "\0") == 0) || (isallspace(all->line) == 1))
 		;
 	else

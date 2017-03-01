@@ -25,9 +25,17 @@ void		ft_sigwinch(int sig)
 void		ft_sigint(int sig)
 {
 	(void)sig;
+	if (g_shell.running == 2)
+	{
+		ft_bzero(g_shell.current_line, ft_strlen(g_shell.current_line));
+		ft_putstr("\n");
+		ft_putstr(g_shell.prompt);		
+	}
+		return ;
 	reset_line();
 	g_shell.curr_hist = g_shell.hist;
 	g_shell.len = 0;
+	g_shell.running = 0;
 	ft_putstr("\n");
 	ft_putstr(g_shell.prompt);
 }

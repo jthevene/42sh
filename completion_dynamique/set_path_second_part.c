@@ -56,6 +56,19 @@ static	char		*verif_second_str(struct stat infos, char *second_str,
 	return (second_str);
 }
 
+static char 		*first_str_val(char *first_str, char **second_str,
+					struct stat infos)
+{
+	if (first_str && !lstat(first_str, &infos) && S_ISDIR(infos.st_mode) &&
+		first_str[ft_strlen(first_str) - 1] != '/')
+	{
+		*second_str = first_str;
+		first_str = ft_strjoin(first_str, "/");
+		ft_strdel(second_str);
+	}	
+	return (first_str);
+}
+
 char				*set_end_path(char **new_path, char **sentence)
 {
 	struct stat		infos;
@@ -71,16 +84,11 @@ char				*set_end_path(char **new_path, char **sentence)
 	if (lstat(first_str, &infos) == -1)
 	{
 		ft_strdel(&first_str);
+		ft_strdel(&second_str);
 		return (NULL);
 	}
 	else
 		ft_strdel(new_path);
-	if (first_str && !lstat(first_str, &infos) && S_ISDIR(infos.st_mode) &&
-		first_str[ft_strlen(first_str) - 1] != '/')
-	{
-		second_str = first_str;
-		first_str = ft_strjoin(first_str, "/");
-		ft_strdel(&second_str);
-	}
+	first_str = first_str_val(first_str, &second_str, infos);
 	return (first_str);
 }

@@ -80,6 +80,22 @@ static	char		*parse_dirs(char **dirs, char *new_p, char *home)
 	return (new_p);
 }
 
+static char 		**complete_char(char **new_path, char *home,
+					char **sentence, int slash)
+{
+	FT_INIT(char**, dirs, NULL);
+	dirs = ft_strsplit(*new_path, '/');
+	ft_bzero((void*)*new_path, ft_strlen(*new_path));
+	ft_strcat(*new_path, "/");
+	*new_path = parse_dirs(dirs, *new_path, home);
+	ft_strcat(*new_path, slash ? "/" : "");
+	free_tab(dirs);
+	*new_path = set_end_path(new_path, sentence);
+	dirs = verif_dirs(ft_strsplit(*new_path, '\n'));
+	ft_strdel(new_path);
+	return (dirs);
+}
+
 char				**set_path(char **sentence, char *home, char *c_path)
 {
 	FT_INIT(char*, new_path, NULL);
@@ -97,14 +113,9 @@ char				**set_path(char **sentence, char *home, char *c_path)
 	}
 	else
 		sentence = clear_path(sentence);
-	new_path = set_begining(*sentence, home, *sentence[0] == '/' ? "" : c_path);
-	dirs = ft_strsplit(new_path, '/');
-	ft_bzero((void*)new_path, ft_strlen(new_path));
-	ft_strcat(new_path, "/");
-	new_path = parse_dirs(dirs, new_path, home);
-	free_tab(dirs);
-	new_path = set_end_path(&new_path, sentence);
-	dirs = verif_dirs(ft_strsplit(new_path, '\n'));
-	ft_strdel(&new_path);
+	new_path = set_begining(*sentence, home, *sentence[0] == '/' ?
+				"" : c_path);
+	FT_INIT(int, slash, new_path[ft_strlen(new_path) - 1] == '/' ? 1 : 0);
+	dirs = complete_char(&new_path, home, sentence, slash);
 	return (dirs);
 }

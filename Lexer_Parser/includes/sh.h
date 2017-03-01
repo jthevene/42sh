@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:35:25 by apinho           ###   ########.fr       */
+/*   Updated: 2017/03/01 13:46:10 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,6 @@ int						run_redir(t_tree *left, t_tree *right, \
 int						fdlist_pushback(t_fdlist **fdlist, int key);
 int						exec_pipe(t_tree *left, t_tree *right);
 void					remove_bslash_quotes(t_token *token);
-t_all 					*init_all_struct(char *line);
+t_all					*init_all_struct(char *line);
 
 #endif

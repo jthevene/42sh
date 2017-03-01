@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   quote_functions_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:35:13 by apinho           ###   ########.fr       */
+/*   Updated: 2017/03/01 13:45:57 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sh.h"
 
-t_all 		*init_all_struct(char *line)
+t_all		*init_all_struct(char *line)
 {
 	FT_INIT(t_all, *all, NULL);
 	if (!(all = (t_all *)malloc(sizeof(t_all))))

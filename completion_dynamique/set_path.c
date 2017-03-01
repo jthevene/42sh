@@ -91,7 +91,7 @@ char				**set_path(char **sentence, char *home, char *c_path)
 	if (!ft_strchr(*sentence, ' ') && *sentence[0] != '/' && ft_strlen(c_path))
 	{
 		new_path = get_var(&g_shell, "PATH");
-		dirs = ft_strsplit(new_path, ':');
+		dirs = verif_dirs(ft_strsplit(new_path, ':'));
 		ft_strdel(&new_path);
 		return (dirs);
 	}

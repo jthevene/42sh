@@ -58,7 +58,7 @@ char				*set_prompt(char *pwd)
 			ft_strdel(&home);
 		return (head_line);
 	}
-	if (!ft_strncmp(pwd, home, ft_strlen(home)))
+	if (home && !ft_strncmp(pwd, home, ft_strlen(home)))
 	{
 		tmp = pwd;
 		pwd = ft_str_replace(pwd, home, "~");

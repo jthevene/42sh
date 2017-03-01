@@ -125,5 +125,6 @@ int						run_redir(t_tree *left, t_tree *right, \
 int						fdlist_pushback(t_fdlist **fdlist, int key);
 int						exec_pipe(t_tree *left, t_tree *right);
 void					remove_bslash_quotes(t_token *token);
+t_all 					*init_all_struct(char *line);
 
 #endif

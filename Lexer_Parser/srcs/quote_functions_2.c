@@ -12,6 +12,20 @@
 
 #include "../includes/sh.h"
 
+t_all 		*init_all_struct(char *line)
+{
+	FT_INIT(t_all, *all, NULL);
+	if (!(all = (t_all *)malloc(sizeof(t_all))))
+		return (NULL);
+	if (!(all->line = finish_quotes(line)))
+	{
+		free(line);
+		free(all);
+		return (NULL);
+	}
+	return (all);
+}
+
 int			unfinished_parenthesis(char *line, int i, int *var, char to_find)
 {
 	(*var) = 1;

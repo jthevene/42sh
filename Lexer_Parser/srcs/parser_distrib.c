@@ -16,11 +16,8 @@ void	lexer_parser(char *line)
 {
 	FT_INIT(t_all, *all, NULL);
 	FT_INIT(int, o, 0);
-	if (!(all = (t_all *)malloc(sizeof(t_all))))
+	if (!(all = init_all_struct(line)))
 		return ;
-	all->line = ft_strdup(line);
-	if (!(all->line = finish_quotes(all->line)))
-		return (free(all));
 	if ((ft_strcmp(all->line, "\0") != 0) && (isallspace(all->line) != 1))
 	{
 		all->line = trim_end(all->line);

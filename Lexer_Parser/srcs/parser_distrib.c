@@ -18,9 +18,11 @@ void	lexer_parser(char *line)
 	FT_INIT(int, o, 0);
 	if (!(all = (t_all *)malloc(sizeof(t_all))))
 		return ;
-	all->line = ft_strdup(line);
-	if (!(all->line = finish_quotes(all->line)))
+	if (!(all->line = finish_quotes(line)))
+	{
+		free(line);
 		return (free(all));
+	}
 	if ((ft_strcmp(all->line, "\0") == 0) || (isallspace(all->line) == 1))
 		;
 	else

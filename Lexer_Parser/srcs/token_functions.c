@@ -50,13 +50,6 @@ char	*finish_quotes(char *line)
 		else if (i == 3)
 			tmp = finish_line_backslash(tmp);
 	}
-	if (!tmp)
-	{
-		free(line);
-		return (NULL);
-	}
-	else
-		free(line);
 	return (tmp);
 }
 

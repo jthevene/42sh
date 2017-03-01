@@ -30,8 +30,8 @@ void		ft_sigint(int sig)
 		ft_bzero(g_shell.current_line, ft_strlen(g_shell.current_line));
 		ft_putstr("\n");
 		ft_putstr(g_shell.prompt);		
-	}
 		return ;
+	}
 	reset_line();
 	g_shell.curr_hist = g_shell.hist;
 	g_shell.len = 0;

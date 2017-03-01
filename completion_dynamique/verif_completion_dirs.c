@@ -6,7 +6,7 @@
 /*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 12:46:43 by jthevene          #+#    #+#             */
-/*   Updated: 2017/03/01 12:48:22 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/03/01 13:13:33 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int			verif_access_auto(char *path)
 	return (1);
 }
 
-static char			*path_str(char** str_path, char *str, int j)
+static char			*path_str(char **str_path, char *str, int j)
 {
 	FT_INIT(char*, tmp, NULL);
 	if (str && j != -1 && verif_access_auto(str))

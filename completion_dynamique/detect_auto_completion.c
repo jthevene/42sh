@@ -6,7 +6,7 @@
 /*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/03/01 12:49:10 by jthevene         ###   ########.fr       */
+/*   Updated: 2017/03/01 13:14:03 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static char		*if_new_sentence(char *sentence, t_file *files,
 char			*detect_auto_completion(char *sentence)
 {
 	static int check = 0;
-	
+
 	FT_INIT(t_file*, files, NULL);
 	FT_INIT(t_file*, match_files, NULL);
 	FT_INIT(char*, new_sentence, NULL);

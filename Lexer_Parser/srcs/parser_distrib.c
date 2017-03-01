@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_distrib.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:35:16 by apinho           ###   ########.fr       */
+/*   Updated: 2017/03/01 13:08:18 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ void	lexer_parser(char *line)
 	all->line = ft_strdup(line);
 	if (!(all->line = finish_quotes(all->line)))
 		return (free(all));
-	if ((ft_strcmp(all->line, "\0") == 0) || (isallspace(all->line) == 1))
-		;
-	else
+	if ((ft_strcmp(all->line, "\0") != 0) && (isallspace(all->line) != 1))
 	{
 		all->line = trim_end(all->line);
 		o = ft_strlen(all->line);

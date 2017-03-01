@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:35:26 by apinho           ###   ########.fr       */
+/*   Updated: 2017/03/01 12:43:36 by jthevene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,6 @@ void				free_right_redir(void);
 void				ft_sigkill(int sig);
 void				ft_sigint(int sig);
 int					len_tab(char **tabl);
-char		 		**verif_dirs(char **tabl);
+char				**verif_dirs(char **tabl);
 
 #endif

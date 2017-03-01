@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   verif_completion_dirs.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/01 12:46:43 by jthevene          #+#    #+#             */
+/*   Updated: 2017/03/01 12:48:22 by jthevene         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/sh21.h"
 
 static int			verif_access_auto(char *path)
@@ -16,7 +28,7 @@ static int			verif_access_auto(char *path)
 	return (1);
 }
 
-static char 		*path_str(char** str_path, char *str, int j)
+static char			*path_str(char** str_path, char *str, int j)
 {
 	FT_INIT(char*, tmp, NULL);
 	if (str && j != -1 && verif_access_auto(str))
@@ -31,7 +43,7 @@ static char 		*path_str(char** str_path, char *str, int j)
 	return (*str_path);
 }
 
-static char 		**reject_unfairs(char **tabl)
+static char			**reject_unfairs(char **tabl)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, 0);
@@ -70,7 +82,7 @@ char				**clear_path(char **sentence)
 	return (sentence);
 }
 
-char 		**verif_dirs(char **tabl)
+char				**verif_dirs(char **tabl)
 {
 	FT_INIT(char**, tmp, tabl);
 	if (!tabl)

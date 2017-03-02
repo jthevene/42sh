@@ -49,12 +49,22 @@ void		ft_sigkill(int sig)
 		ft_sigint(SIGINT);
 }
 
+void		ft_segfault(int sig)
+{		
+	(void)sig;		
+	ft_putstr("Error segfault\nFin du programme\n");		
+	ft_reset_termios(g_shell.t_back);		
+	ft_exit();		
+}
+
 void		distrib_signals(int sig)
 {
 	if (sig == SIGWINCH)
 		ft_sigwinch(sig);
 	else if (sig == SIGINT)
 		ft_sigint(sig);
+	else if (sig == SIGSEGV)
+		ft_segfault(sig);
 }
 
 void		ft_signal(void)

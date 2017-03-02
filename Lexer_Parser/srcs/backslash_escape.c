@@ -24,12 +24,9 @@ void	backslash_char(t_token *token)
 		else if (token->lexeme[pos] == '\"')
 			pos = supp_dquote(token, pos, d);
 		else if (token->lexeme[pos] == '\\')
-		{
-			printf("pos = %d\n", pos);
 			ft_memmove(&(token->lexeme[pos]), \
 				&(token->lexeme[pos + 1]), ft_strlen(token->lexeme) - pos);
 			pos++;
-		}
 		pos++;
 	}
 }

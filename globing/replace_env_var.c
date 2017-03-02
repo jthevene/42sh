@@ -111,5 +111,7 @@ int			replace_env_var(char **line)
 		}
 		i++;
 	}
+	if (!(*line))
+		(*line) = ft_strdup("");
 	return (0);
 }

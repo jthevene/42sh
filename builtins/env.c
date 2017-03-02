@@ -41,7 +41,10 @@ t_var		*new_var(char *v_name, char *v_value)
 	if (var)
 	{
 		var->name = ft_strdup(v_name);
-		var->value = ft_strdup(v_value);
+		if (!v_value)
+			var->value = ft_strdup("");
+		else
+			var->value = ft_strdup(v_value);
 		var->next = NULL;
 	}
 	return (var);

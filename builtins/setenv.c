@@ -44,7 +44,7 @@ char		*recup_value(char *line)
 
 int			check_setenv(char **name, char **value)
 {
-	if (!(*name) || !(*value))
+	if (!(*name))
 	{
 		free((*name) ? (*name) : NULL);
 		free((*value) ? (*value) : NULL);
@@ -66,14 +66,14 @@ int			ft_setenv(char *line)
 		{
 			free(name);
 			free(tmp->value);
-			tmp->value = value;
+			tmp->value = value ? value : ft_strdup("");
 			return (1);
 		}
 		if (!tmp->next)
 		{
 			FT_INIT(t_var *, new, new_var(name, value));
 			free(name);
-			free(value);
+			free(value ? value : NULL);
 			tmp->next = new;
 			return (1);
 		}

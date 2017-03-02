@@ -6,7 +6,7 @@
 /*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/03/02 17:10:01 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/03/02 17:59:05 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*finish_line_backslash(char *line)
 	myline = prompt_dquote("> ");
 	if (myline)
 		myline = ft_strjoin(line, myline);
+	else
+		myline = ft_strjoin(line, "");
 	ft_putstr("\n");
 	free(line);
 	return (myline);

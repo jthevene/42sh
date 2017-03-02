@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/03/01 13:12:08 by jthevene         ###   ########.fr       */
+/*   Created: 2017/03/02 15:18:58 by dvirgile          #+#    #+#             */
+/*   Updated: 2017/03/02 17:38:40 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void		ft_sigint(int sig)
 		ft_bzero(g_shell.current_line, ft_strlen(g_shell.current_line));
 		ft_putstr("\n");
 		ft_putstr(g_shell.prompt);
+		tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
+		g_shell.running = 0;
 		return ;
 	}
 	reset_line();
@@ -38,6 +40,7 @@ void		ft_sigint(int sig)
 	g_shell.running = 0;
 	ft_putstr("\n");
 	ft_putstr(g_shell.prompt);
+	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
 }
 
 void		ft_sigkill(int sig)
@@ -45,16 +48,6 @@ void		ft_sigkill(int sig)
 	(void)sig;
 	if (!((int)ft_strlen(g_shell.current_line)) && !kill(-1, SIGCHLD))
 		ft_exit();
-	else
-		ft_sigint(SIGINT);
-}
-
-void		ft_segfault(int sig)
-{		
-	(void)sig;		
-	ft_putstr("Error segfault\nFin du programme\n");		
-	ft_reset_termios(g_shell.t_back);		
-	ft_exit();		
 }
 
 void		distrib_signals(int sig)
@@ -63,8 +56,6 @@ void		distrib_signals(int sig)
 		ft_sigwinch(sig);
 	else if (sig == SIGINT)
 		ft_sigint(sig);
-	else if (sig == SIGSEGV)
-		ft_segfault(sig);
 }
 
 void		ft_signal(void)

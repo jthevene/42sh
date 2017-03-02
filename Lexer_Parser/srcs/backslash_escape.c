@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   backslash_escape.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:35:23 by apinho           ###   ########.fr       */
+/*   Created: 2017/02/24 18:13:29 by dvirgile          #+#    #+#             */
+/*   Updated: 2017/03/02 16:38:23 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ void	backslash_char(t_token *token)
 		else if (token->lexeme[pos] == '\"')
 			pos = supp_dquote(token, pos, d);
 		else if (token->lexeme[pos] == '\\')
+		{
 			ft_memmove(&(token->lexeme[pos]), \
 				&(token->lexeme[pos + 1]), ft_strlen(token->lexeme) - pos);
 			pos++;
+		}
 		pos++;
 	}
 }

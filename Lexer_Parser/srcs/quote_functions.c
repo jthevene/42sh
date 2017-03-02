@@ -6,7 +6,7 @@
 /*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:35:14 by apinho           ###   ########.fr       */
+/*   Updated: 2017/03/02 15:03:31 by apinho           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*finish_the_squote(char *line)
 
 	ft_strdel(&g_shell.prompt);
 	myline = prompt_dquote("quote> ");
-	myline = ft_strjoin(line, myline);
+	myline = ft_strjoinchar(line, myline, '\n');
 	ft_putchar('\n');
 	free(line);
 	return (myline);
@@ -42,7 +42,7 @@ char	*finish_the_dquote(char *line)
 
 	ft_strdel(&g_shell.prompt);
 	myline = prompt_dquote("dquote> ");
-	myline = ft_strjoin(line, myline);
+	myline = ft_strjoinchar(line, myline, '\n');
 	ft_putchar('\n');
 	free(line);
 	return (myline);

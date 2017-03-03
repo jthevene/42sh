@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   build_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:36:48 by apinho           ###   ########.fr       */
+/*   Created: 2017/02/24 18:13:29 by dvirgile          #+#    #+#             */
+/*   Updated: 2017/03/03 13:29:28 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sh21.h"
+
+t_completion	*change_col(t_completion *all_col, t_completion *head,
+					int *ref_col, int nb_elem)
+{
+	(*ref_col)++;
+	if (all_col && all_col->next)
+		all_col = all_col->next;
+	else
+	{
+		if (nb_elem)
+		{
+			*ref_col = 0;
+			all_col = head;
+			if (all_col && all_col->next)
+				ft_putendl("");
+		}
+	}
+	return (all_col);
+}
 
 t_completion	*create_cell(t_file *elem)
 {

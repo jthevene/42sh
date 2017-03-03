@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthevene <jthevene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/03/01 12:43:36 by jthevene         ###   ########.fr       */
+/*   Created: 2017/02/24 18:13:29 by dvirgile          #+#    #+#             */
+/*   Updated: 2017/03/03 13:27:56 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void				display_completion(char *sentence, t_file *match_files);
 t_completion		*build_lst_lst(t_file *matchfiles, int nbelem, int nbcol);
 char				*similarity(t_file *match_files, char *sentence);
 char				**clear_path(char **sentence);
+t_completion		*change_col(t_completion *all_col, t_completion *head,
+						int *ref_col, int nb_elem);
 /*
 ** CD
 */

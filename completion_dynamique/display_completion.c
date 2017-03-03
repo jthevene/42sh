@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_completion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:35:46 by apinho           ###   ########.fr       */
+/*   Created: 2017/02/24 18:13:29 by dvirgile          #+#    #+#             */
+/*   Updated: 2017/03/03 13:25:14 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ static void		display_form(t_completion *all_col, int nb_elem,
 			all_col = head;
 		}
 		else
-		{
-			ref_col++;
-			all_col = all_col->next;
-		}
+			all_col = change_col(all_col, head, &ref_col, nb_elem);
 	}
 	ft_strdel(&tmp);
 	ft_putendl("");

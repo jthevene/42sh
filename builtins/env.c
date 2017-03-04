@@ -17,7 +17,7 @@ char		*get_var(t_shell *g_shell, char *n_var)
 	char	*val;
 	t_var	*tmp_env;
 
-	if (!g_shell || !n_var)
+	if (!g_shell || !g_shell->env || !n_var)
 		return (NULL);
 	val = NULL;
 	tmp_env = g_shell->env;
@@ -91,11 +91,11 @@ char		*get_cmd_to_exec(char *cmd)
 
 int			ft_env(char *cmd)
 {
+	if (!g_shell.env)
+		return (1);
 	FT_INIT(char **, tmp, ft_strsplit(cmd, ' '));
 	FT_INIT(t_var *, tmp_env, g_shell.env);
 	FT_INIT(char *, to_exec, get_cmd_to_exec(cmd));
-	if (!g_shell.env)
-		return (1);
 	if (tmp && tmp[1] && !ft_strcmp(tmp[1], "-i"))
 		g_shell.env_opt = TRUE;
 	if (to_exec != NULL)

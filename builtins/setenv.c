@@ -50,6 +50,13 @@ int			check_setenv(char **name, char **value)
 		free((*value) ? (*value) : NULL);
 		return (0);
 	}
+	else if (!g_shell.env && (*name))
+	{
+		g_shell.env = new_var((*name), (*value));
+		free((*name));
+		free((*value) ? (*value) : NULL);
+		return (0);
+	}
 	return (1);
 }
 

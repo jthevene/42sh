@@ -39,6 +39,12 @@ char		*unsetenv_get_name(char *line)
 int			ft_unsetenv_suite(t_var **tmp, t_var **tmp_prev,
 							t_var **tmp_next, t_var **tmp_free)
 {
+	if (!(*tmp_prev) && !(*tmp_next))
+	{
+		free_node(&(*tmp_free));
+		g_shell.env = NULL;
+		return (1);
+	}
 	if (!(*tmp_prev))
 	{
 		free_node(&(*tmp_free));
@@ -60,8 +66,17 @@ int			ft_unsetenv_suite(t_var **tmp, t_var **tmp_prev,
 	return (0);
 }
 
+static int	free_name_unsetenv(int val_to_return, char **name)
+{
+	if ((*name))
+		free((*name));
+	return (val_to_return);
+}
+
 int			ft_unsetenv(char *line)
 {
+	if (!g_shell.env)
+		return (0);
 	FT_INIT(t_var *, tmp, g_shell.env);
 	FT_INIT(t_var *, tmp_free, NULL);
 	FT_INIT(t_var *, tmp_prev, NULL);
@@ -77,14 +92,10 @@ int			ft_unsetenv(char *line)
 			tmp_next = tmp->next;
 			tmp = tmp->next ? tmp->next : tmp;
 			if (ft_unsetenv_suite(&tmp, &tmp_prev, &tmp_next, &tmp_free) == 1)
-			{
-				free(name);
-				return (1);
-			}
+				return (free_name_unsetenv(1, &name));
 		}
 		tmp_prev = tmp;
 		tmp = tmp->next;
 	}
-	free(name);
-	return (0);
+	return (free_name_unsetenv(0, &name));
 }

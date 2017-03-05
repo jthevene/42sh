@@ -224,5 +224,6 @@ void				ft_sigkill(int sig);
 void				ft_sigint(int sig);
 int					len_tab(char **tabl);
 char				**verif_dirs(char **tabl);
+int					verif_access_bin_directory_(char *path);
 
 #endif

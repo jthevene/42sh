@@ -32,10 +32,11 @@ void	return_key(void)
 	{
 		if (g_shell.current_line && ft_strchr(g_shell.current_line, '!'))
 			add_hist += history_event(g_shell.current_line);
-		ft_putchar(10);
+		ft_putchar('\n');
 		g_shell.result_exec = -99;
 		g_shell.all_results = -99;
 		lexer_parser(ft_strdup(g_shell.current_line));
+		ft_putchar('\n');
 		reset_line();
 	}
 	else

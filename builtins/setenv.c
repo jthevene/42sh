@@ -48,7 +48,7 @@ char		*recup_value(char *line)
 
 int			check_setenv(char **name, char **value)
 {
-	if (!(*name))
+	if (!(*name) || !(*value))
 	{
 		free((*name) ? (*name) : NULL);
 		free((*value) ? (*value) : NULL);

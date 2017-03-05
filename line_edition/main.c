@@ -70,6 +70,53 @@ static void		parse_capabilities(int key)
 		ft_sigkill(SIGINT);
 }
 
+static void			in_dir_rescue(char *path)
+{
+	FT_INIT(char*, tmp, NULL);
+	if (chdir(path))
+		ft_putstr_fd("Error chdir\n", 2);
+	else
+	{
+		if (path[ft_strlen(path) - 1] == '/')
+			path[ft_strlen(path) - 1] = '\0';
+		tmp = ft_strjoin("setenv PWD=", path);
+		ft_setenv(tmp);
+		ft_strdel(&tmp);
+		tmp = ft_strjoin("setenv OLDPWD=", g_shell.line);
+		if (path)
+		{
+			free(g_shell.line);
+			g_shell.line = ft_strdup(path);
+		}
+		ft_setenv(tmp);
+		ft_strdel(&tmp);
+	}
+}
+
+
+int 					ft_rescue_directory(void)
+{
+	if (!g_shell.line)
+		return (0);
+	FT_INIT(char*, path_rescue, ft_strdup(g_shell.line));
+	FT_INIT(char*, tmp, NULL);
+	while (path_rescue && !verif_access_bin_directory_(path_rescue))
+	{
+		if (!verif_access_bin_directory_(path_rescue))
+		{
+			if (ft_strrchr(path_rescue, '/'))
+			{
+				tmp = ft_strsub(path_rescue, 0, ft_strlen(path_rescue) - ft_strlen(ft_strrchr(path_rescue, '/')) - 1);
+				ft_strdel(&path_rescue);
+				path_rescue = tmp;
+			}
+		}
+	}
+	if (verif_access_bin_directory_(path_rescue))
+		in_dir_rescue(path_rescue);
+	return (1);
+}
+
 static void		run_shell(void)
 {
 	FT_INIT(int, key, 0);
@@ -77,7 +124,11 @@ static void		run_shell(void)
 	ioctl(0, TIOCGWINSZ, g_shell.win);
 	while (42)
 	{
+		if (!getcwd(NULL, 1024))
+			ft_rescue_directory();
 		key = readkey();
+		if (!getcwd(NULL, 1024))
+			ft_rescue_directory();
 		if (key == K_PRINT)
 		{
 			MULTI(g_shell.start_select, g_shell.end_select, 0);

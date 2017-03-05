@@ -14,10 +14,10 @@
 
 void		free_cd_vars(char **home, char **sentence, char **file, char **pwd)
 {
-	free((*home));
-	free((*sentence));
-	free((*file));
-	free((*pwd));
+	free((*home) ? (*home) : NULL);
+	free((*sentence) ? (*sentence) : NULL);
+	free((*file) ? (*file) : NULL);
+	free((*pwd) ? (*pwd) : NULL);
 }
 
 int			error_cd(char *type, char *file)

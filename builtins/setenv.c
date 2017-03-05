@@ -16,6 +16,8 @@ char		*recup_name(char *line)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, start, 0);
+	if (!line)
+		return (NULL);
 	while (line[i] && line[i] != ' ')
 		i++;
 	if (!line[i])
@@ -33,6 +35,8 @@ char		*recup_name(char *line)
 char		*recup_value(char *line)
 {
 	FT_INIT(int, i, 0);
+	if (!line)
+		return (NULL);
 	while (line[i])
 	{
 		if (i > 1 && line[i - 1] == '=')

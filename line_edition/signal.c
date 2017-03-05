@@ -50,20 +50,8 @@ void		ft_sigkill(int sig)
 		ft_exit();
 }
 
-void		distrib_signals(int sig)
-{
-	if (sig == SIGWINCH)
-		ft_sigwinch(sig);
-	else if (sig == SIGINT)
-		ft_sigint(sig);
-}
-
 void		ft_signal(void)
 {
-	FT_INIT(int, sig, 2);
-	while (sig < 32)
-	{
-		signal(sig, distrib_signals);
-		sig++;
-	}
+	signal(SIGWINCH, ft_sigwinch);
+	signal(SIGINT, ft_sigint);
 }

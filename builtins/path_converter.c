@@ -35,7 +35,6 @@ static	char		*set_begining_sec(char **pwd, char **new_path,
 		ft_strcat(*new_path, "/");
 		ft_strcat(*new_path, sentence);
 	}
-	free(*pwd);
 	return (*new_path);
 }
 
@@ -65,6 +64,7 @@ static	char		*set_begining(char *sentence, char *home,
 	}
 	else
 		new_path = set_begining_sec(&pwd, &new_path, current_path, sentence);
+	free(pwd);
 	return (new_path);
 }
 

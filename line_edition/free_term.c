@@ -20,6 +20,7 @@ static void			free_edition_line(void)
 	free(g_shell.oldpwd);
 	free(g_shell.prompt);
 	free(g_shell.win);
+	free(g_shell.line);
 }
 
 void				ft_reset_termios(struct termios t_back)

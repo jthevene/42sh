@@ -58,7 +58,7 @@ static void		init_win(void)
 static void		init_edition(void)
 {
 	g_shell.current_line = NULL;
-	g_shell.line = NULL;
+	g_shell.line = getcwd(NULL, 1024);
 	g_shell.cursor_x = 3;
 	g_shell.cursor_2d_x = 0;
 	g_shell.cursor_2d_y = 0;

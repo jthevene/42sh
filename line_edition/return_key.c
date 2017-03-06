@@ -14,7 +14,6 @@
 
 void	reset_line(void)
 {
-	free(g_shell.line);
 	move_cursor_n_to_direction(g_shell.line_size, 1);
 	if (g_shell.current_line)
 		ft_strdel(&g_shell.current_line);

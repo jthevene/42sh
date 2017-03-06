@@ -69,6 +69,8 @@ static int			set_option_sentence(char **sentence, char **option,
 static void			in_dir(char *path, char *pwd)
 {
 	FT_INIT(char*, tmp, NULL);
+	if (!path)
+		return ;
 	if (chdir(path))
 		ft_putstr_fd("Error chdir\n", 2);
 	else
@@ -76,6 +78,11 @@ static void			in_dir(char *path, char *pwd)
 		if (path[ft_strlen(path) - 1] == '/')
 			path[ft_strlen(path) - 1] = '\0';
 		tmp = ft_strjoin("setenv PWD=", path);
+		if (path)
+		{
+			free(g_shell.line);
+			g_shell.line = ft_strdup(pwd);
+		}
 		ft_setenv(tmp);
 		ft_strdel(&tmp);
 		tmp = ft_strjoin("setenv OLDPWD=", pwd);
@@ -87,7 +94,7 @@ static void			in_dir(char *path, char *pwd)
 static void			go_to_dir(int cas, char **path, char *home, char *file_name)
 {
 	FT_INIT(char*, tmp, NULL);
-	if (!cas)
+	if (!cas || !path || !file_name)
 	{
 		ft_strdel(path);
 		return ;
@@ -132,10 +139,13 @@ int					cd(char *line)
 		return (error_cd("env", "Env variables HOME or OLDPWD not found"));
 	}
 	path = len_tab == 1 ? ft_strdup(home) : path_converter(sentence, home, pwd);
-	file = ft_strdup(path + (ft_strlen(path) -
-		ft_strlen(ft_strrchr(path, '/')) + 1));
-	len_tab = verif_access(&path, &file, option);
-	go_to_dir(len_tab, &path, home, file);
+	if (path)
+	{
+		file = ft_strdup(path + (ft_strlen(path) -
+			ft_strlen(ft_strrchr(path, '/')) + 1));
+		len_tab = verif_access(&path, &file, option);
+		go_to_dir(len_tab, &path, home, file);
+	}
 	free_tab(tab_line);
 	free_cd_vars(&home, &sentence, &file, &pwd);
 	return (!len_tab ? 1 : 0);

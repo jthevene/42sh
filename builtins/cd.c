@@ -81,7 +81,7 @@ static void			in_dir(char *path, char *pwd)
 		if (path)
 		{
 			free(g_shell.line);
-			g_shell.line = ft_strdup(pwd);
+			g_shell.line = ft_strdup(path);
 		}
 		ft_setenv(tmp);
 		ft_strdel(&tmp);
@@ -96,6 +96,8 @@ static void			go_to_dir(int cas, char **path, char *home, char *file_name)
 	FT_INIT(char*, tmp, NULL);
 	if (!cas || !path || !file_name)
 	{
+		free(g_shell.line);
+		g_shell.line = ft_strdup(*path);
 		ft_strdel(path);
 		return ;
 	}

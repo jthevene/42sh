@@ -49,6 +49,7 @@ char				*set_prompt(char *pwd)
 	FT_INIT(char*, head_line, ft_strdup("\033[32m$> \033[0m"));
 	FT_INIT(char*, tmp, NULL);
 	FT_INIT(char*, home, get_var(&g_shell, "HOME"));
+	pwd = pwd ? pwd : ft_strdup(g_shell.line);
 	g_shell.prompt_len = 3;
 	if (!pwd)
 	{

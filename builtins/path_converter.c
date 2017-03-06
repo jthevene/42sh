@@ -26,20 +26,20 @@ char 					*ft_rescue_directory(void)
 				ft_strlen(ft_strrchr(path_rescue, '/')));
 			ft_strdel(&path_rescue);
 			path_rescue = ft_strjoin(tmp, "/");
+			free(tmp);
 		}
 	}
-	if (verif_access_bin_directory_(path_rescue))
 		return (path_rescue);
-	return (ft_strdup(g_shell.line));
 }
 
 static	char		*set_begining(char *sentence, char *home,
 					char *current_path)
 {
 	FT_INIT(char*, new_path, ft_strnew(ft_strlen(sentence) + 100));
+	FT_INIT(char*, pwd, getcwd(NULL, 1024));
 	if (ft_strlen(sentence) && !ft_strcmp(sentence, "."))
 	{
-		if (!getcwd(NULL, 1024))
+		if (!pwd)
 		{
 			ft_putstr("cd: error retrieving current directory: getcwd: ");
 			ft_putstr("cannot access parent directories: No such file or");
@@ -60,7 +60,7 @@ static	char		*set_begining(char *sentence, char *home,
 	}
 	else if (!ft_strcmp(sentence, ".."))
 	{
-		if (!getcwd(NULL, 1024))
+		if (!pwd)
 		{
 			free(new_path);
 			return (ft_rescue_directory());
@@ -78,6 +78,7 @@ static	char		*set_begining(char *sentence, char *home,
 		ft_strcat(new_path, "/");
 		ft_strcat(new_path, sentence);
 	}
+	free(pwd);
 	return (new_path);
 }
 
@@ -87,19 +88,19 @@ void				remove_last_dir(char **str, char c)
 		return ;
 	FT_INIT(int, i, 0);
 	FT_INIT(int, nb_slash, 0);
-	while ((*str)[i])
+	while ((*str) && i >= 0 && (*str)[i])
 	{
 		if ((*str)[i] == c)
 			nb_slash++;
 		i++;
 	}
 	i--;
-	while ((*str)[i] && (*str)[i] == c)
+	while ((*str) && i >= 0 && (*str)[i] && (*str)[i] == c)
 	{
 		(*str)[i] = '\0';
 		i--;
 	}
-	while ((*str)[i] && (*str)[i] != c)
+	while ((*str) && i >= 0 && (*str)[i] && (*str)[i] != c)
 	{
 		(*str)[i] = '\0';
 		i--;

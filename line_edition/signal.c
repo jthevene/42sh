@@ -37,10 +37,13 @@ void		ft_sigint(int sig)
 	reset_line();
 	g_shell.curr_hist = g_shell.hist;
 	g_shell.len = 0;
+	if (!g_shell.running)
+	{
+		ft_putstr("\n\n");
+		ft_putstr(g_shell.prompt);
+		tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
+	}
 	g_shell.running = 0;
-	ft_putstr("\n\n");
-	ft_putstr(g_shell.prompt);
-	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
 }
 
 void		ft_sigkill(int sig)

@@ -34,12 +34,14 @@ void	return_key(void)
 		ft_putchar('\n');
 		g_shell.result_exec = -99;
 		g_shell.all_results = -99;
+		g_shell.running = 3;
 		lexer_parser(ft_strdup(g_shell.current_line));
 		ft_putchar('\n');
 		reset_line();
 	}
 	else
 		ft_putstr("\n\n");
+	g_shell.running = 0;
 	g_shell.curr_hist = g_shell.hist;
 	g_shell.len = 0;
 	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);

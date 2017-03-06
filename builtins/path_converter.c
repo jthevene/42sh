@@ -40,9 +40,8 @@ static	char		*set_begining_sec(char **pwd, char **new_path,
 }
 
 static	char		*set_begining(char *sentence, char *home,
-					char *current_path)
+					char *current_path, char *new_path)
 {
-	FT_INIT(char*, new_path, ft_strnew(ft_strlen(sentence) + 100));
 	FT_INIT(char*, pwd, getcwd(NULL, 1024));
 	if (ft_strlen(sentence) && !ft_strcmp(sentence, "."))
 	{
@@ -124,8 +123,9 @@ char				*path_converter(char *sentence, char *home, char *pwd)
 	FT_INIT(char*, str, NULL);
 	FT_INIT(char**, dirs_tab, NULL);
 	if (sentence[0] != '/')
-		if (!(str = set_begining(sentence, home, pwd)))
-			return (NULL);
+		if (!(str = set_begining(sentence, home, pwd,
+			ft_strnew(ft_strlen(sentence) + 100))))
+			return (NULL);		
 	dirs_tab = ft_strsplit(str ? str : sentence, '/');
 	ft_strdel(&str);
 	str = parse_dirs(dirs_tab, home, ft_strlen(sentence));

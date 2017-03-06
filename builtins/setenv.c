@@ -48,13 +48,13 @@ char		*recup_value(char *line)
 
 int			check_setenv(char **name, char **value)
 {
-	if (!(*name) || !(*value))
+	if (!(*name))
 	{
 		free((*name) ? (*name) : NULL);
 		free((*value) ? (*value) : NULL);
 		return (0);
 	}
-	else if (ft_strchr((*value), '='))
+	else if ((*value) && ft_strchr((*value), '='))
 	{
 		ft_putendl_fd("21sh: setenv: No '=' allowed in the value field.", 2);
 		free((*name) ? (*name) : NULL);

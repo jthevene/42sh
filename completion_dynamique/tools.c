@@ -48,7 +48,7 @@ int				verif_sentence(char *sentence)
 
 int				arrondi(float val)
 {
-	FT_INIT(int, val2, val);
+	FT_INIT(int, val2, val < 1 ? 1 : val);
 	FT_INIT(float, result, val - val2);
 	if (result >= 0.5)
 		return (val2);

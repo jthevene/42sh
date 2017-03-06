@@ -78,7 +78,7 @@ static	int		ask_to_show_data(float *disp_val)
 	ft_putendl("");
 	if (max_elem_lst < elem_lst)
 	{
-		ft_printf("Display all %d possibilities? (y or n)", (int)disp_val[0]);
+		ft_printf("Display all %d possibilities? (y or n)\n", (int)disp_val[0]);
 		while (readkey() && !situation)
 		{
 			c = g_shell.c;

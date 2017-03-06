@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_path_second_part.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:35:41 by apinho           ###   ########.fr       */
+/*   Updated: 2017/03/06 15:54:50 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static	char		*verif_second_str(struct stat infos, char *second_str,
 	return (second_str);
 }
 
-static char 		*first_str_val(char *first_str, char **second_str,
+static char			*first_str_val(char *first_str, char **second_str,
 					struct stat infos)
 {
 	if (first_str && !lstat(first_str, &infos) && S_ISDIR(infos.st_mode) &&
@@ -65,7 +65,7 @@ static char 		*first_str_val(char *first_str, char **second_str,
 		*second_str = first_str;
 		first_str = ft_strjoin(first_str, "/");
 		ft_strdel(second_str);
-	}	
+	}
 	return (first_str);
 }
 

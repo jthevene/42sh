@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_converter.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:36:50 by apinho           ###   ########.fr       */
+/*   Updated: 2017/03/06 16:39:35 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static	char		*set_begining(char *sentence, char *home,
 		ft_strcat(new_path, sentence + 1);
 	}
 	else
-		new_path = 	set_begining_sec(&pwd, &new_path, current_path, sentence);
+		new_path = set_begining_sec(&pwd, &new_path, current_path, sentence);
 	return (new_path);
 }
 
@@ -125,7 +125,7 @@ char				*path_converter(char *sentence, char *home, char *pwd)
 	FT_INIT(char**, dirs_tab, NULL);
 	if (sentence[0] != '/')
 		if (!(str = set_begining(sentence, home, pwd)))
-			return (NULL);		
+			return (NULL);
 	dirs_tab = ft_strsplit(str ? str : sentence, '/');
 	ft_strdel(&str);
 	str = parse_dirs(dirs_tab, home, ft_strlen(sentence));

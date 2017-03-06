@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/03/03 13:27:56 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/03/06 16:40:25 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,10 @@ char				**lsh_read_line(char *line);
 int					verif_access(char **path, char **file, char *option);
 void				free_cd_vars(char **home, char **sentence, char **file
 								, char **pwd);
-char 				*ft_rescue_directory(void);
+char				*ft_rescue_directory(void);
+void				cd_suite(char **file, char **path, char *option
+							, int *len_tab);
+
 /*
 ** CATCH_KEY
 */

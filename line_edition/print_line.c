@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:32:47 by apinho           ###   ########.fr       */
+/*   Updated: 2017/03/06 15:59:18 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ char				*set_prompt(char *pwd)
 	{
 		tmp = pwd;
 		pwd = ft_str_replace(pwd, home, "~");
-		if (pwd)
-			ft_strdel(&tmp);
+		ft_strdel(pwd ? &tmp : NULL);
 		pwd = !pwd ? tmp : pwd;
 	}
 	tmp = head_line;

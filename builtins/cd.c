@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/03/06 15:29:01 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/06 16:32:43 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,22 +66,22 @@ static int			set_option_sentence(char **sentence, char **option,
 	return (1);
 }
 
-static void			in_dir(char *path, char *pwd)
+static void			in_dir(char **path, char *pwd)
 {
 	FT_INIT(char*, tmp, NULL);
-	if (!path)
+	if (!(*path))
 		return ;
-	if (chdir(path))
+	if (chdir((*path)))
 		ft_putstr_fd("Error chdir\n", 2);
 	else
 	{
-		if (path[ft_strlen(path) - 1] == '/')
-			path[ft_strlen(path) - 1] = '\0';
-		tmp = ft_strjoin("setenv PWD=", path);
-		if (path)
+		if ((*path)[ft_strlen((*path)) - 1] == '/')
+			(*path)[ft_strlen((*path)) - 1] = '\0';
+		tmp = ft_strjoin("setenv PWD=", (*path));
+		if ((*path))
 		{
 			free(g_shell.line);
-			g_shell.line = ft_strdup(path);
+			g_shell.line = ft_strdup((*path));
 		}
 		ft_setenv(tmp);
 		ft_strdel(&tmp);
@@ -89,6 +89,7 @@ static void			in_dir(char *path, char *pwd)
 		ft_setenv(tmp);
 		ft_strdel(&tmp);
 	}
+	ft_strdel(&(*path));
 }
 
 static void			go_to_dir(int cas, char **path, char *home, char *file_name)
@@ -116,8 +117,7 @@ static void			go_to_dir(int cas, char **path, char *home, char *file_name)
 		*path = path_converter(*path, home, pwd);
 		ft_strdel(&tmp);
 	}
-	in_dir(*path, pwd);
-	ft_strdel(path);
+	in_dir(&(*path), pwd);
 	free(pwd ? pwd : NULL);
 }
 
@@ -126,7 +126,7 @@ int					cd(char *line)
 	FT_INIT(char**, tab_line, NULL);
 	FT_INIT(int, len_tab, 0);
 	if (!(tab_line = verif_args_cd(line, &len_tab)))
-		return (1);
+		return (0);
 	FT_INIT(char*, pwd, getcwd(NULL, 1024));
 	FT_INIT(char*, home, get_var(&g_shell, "HOME"));
 	FT_INIT(char*, option, NULL);
@@ -142,12 +142,10 @@ int					cd(char *line)
 	path = len_tab == 1 ? ft_strdup(home) : path_converter(sentence, home, pwd);
 	if (path)
 	{
-		file = ft_strdup(path + (ft_strlen(path) -
-			ft_strlen(ft_strrchr(path, '/')) + 1));
-		len_tab = verif_access(&path, &file, option);
+		cd_suite(&file, &path, option, &len_tab);
 		go_to_dir(len_tab, &path, home, file);
 	}
 	free_tab(tab_line);
 	free_cd_vars(&home, &sentence, &file, &pwd);
-	return (!len_tab ? 1 : 0);
+	return (!len_tab ? 0 : 1);
 }

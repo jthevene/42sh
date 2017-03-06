@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:36:45 by apinho           ###   ########.fr       */
+/*   Updated: 2017/03/06 16:18:04 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int				exec_function(char **content)
 	FT_INIT(char **, args, get_args((*content)));
 	FT_INIT(int, return_value, 0);
 	FT_INIT(int, return_builtins, 0);
-	if ((return_builtins = detect_builtins(args[0], (*content)) != -1))
+	if ((return_builtins = detect_builtins(args[0], (*content))) != -1)
 	{
 		free_tab(bin_dir);
 		free_tab(args);

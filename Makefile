@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apinho <apinho@student.42.fr>              +#+  +:+       +#+         #
+#    By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/24 18:13:29 by apinho            #+#    #+#              #
-#    Updated: 2017/02/24 18:20:39 by apinho           ###   ########.fr        #
+#    Updated: 2017/03/06 16:33:45 by sgaudin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,7 @@ BIN_PARSER 		= 	$(FILES_PARSER:.c=.o)
 BUILTIN 		= 	./builtins/
 
 FILES_BUILTIN 	= 	echo.c env.c setenv.c unsetenv.c cd.c path_converter.c \
-					exit.c cd_tools.c init_env.c
+					exit.c cd_tools.c cd_tools2.c init_env.c
 
 SRC_BUILTIN  	= 	$(addprefix $(BUILTIN), $(FILES_BUILTIN))
 

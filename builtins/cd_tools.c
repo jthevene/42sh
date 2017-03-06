@@ -3,33 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   cd_tools.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:36:55 by apinho           ###   ########.fr       */
+/*   Updated: 2017/03/06 16:32:24 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sh21.h"
 
-char 					*ft_rescue_directory(void)
+void		cd_suite(char **file, char **path, char *option, int *len_tab)
 {
-	if (!g_shell.line)
-		return (NULL);
-	FT_INIT(char*, path_rescue, ft_strdup(g_shell.line));
-	FT_INIT(char*, tmp, NULL);
-	if (!verif_access_bin_directory_(path_rescue))
-	{
-		if (path_rescue && ft_strrchr(path_rescue, '/'))
-		{
-			tmp = ft_strsub(path_rescue, 0, ft_strlen(path_rescue) -
-				ft_strlen(ft_strrchr(path_rescue, '/')));
-			ft_strdel(&path_rescue);
-			path_rescue = ft_strjoin(tmp, "/");
-			free(tmp);
-		}
-	}
-		return (path_rescue);
+	(*file) = ft_strdup((*path) + (ft_strlen((*path)) -
+		ft_strlen(ft_strrchr((*path), '/')) + 1));
+	(*len_tab) = verif_access(&(*path), &(*file), option);
 }
 
 void		free_cd_vars(char **home, char **sentence, char **file, char **pwd)

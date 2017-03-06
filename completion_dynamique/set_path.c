@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:35:42 by apinho           ###   ########.fr       */
+/*   Updated: 2017/03/06 15:55:25 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static	char		*parse_dirs(char **dirs, char *new_p, char *home)
 	return (new_p);
 }
 
-static char 		**complete_char(char **new_path, char *home,
+static char			**complete_char(char **new_path, char *home,
 					char **sentence, int slash)
 {
 	FT_INIT(char**, dirs, NULL);

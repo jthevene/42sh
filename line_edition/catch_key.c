@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/03/06 14:54:43 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/06 15:04:47 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int				readkey(void)
 	ft_bzero(c, 16);
 	if (read(STDIN_FILENO, c, 15))
 	{
-//		printf("%d %d %d %d %d %d %d\n", c[0], c[1], c[2], c[3], c[4], c[5], c[6]);
 		if (c[0] == 27)
 			return (readkeyspecial(c));
 	}

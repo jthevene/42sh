@@ -12,24 +12,31 @@
 
 #include "../includes/sh21.h"
 
-char 					*ft_rescue_directory(void)
+static	char		*set_begining_sec(char **pwd, char **new_path,
+					char *current_path, char *sentence)
 {
-	if (!g_shell.line)
-		return (NULL);
-	FT_INIT(char*, path_rescue, ft_strdup(g_shell.line));
-	FT_INIT(char*, tmp, NULL);
-	if (!verif_access_bin_directory_(path_rescue))
+	if (!ft_strcmp(sentence, ".."))
 	{
-		if (path_rescue && ft_strrchr(path_rescue, '/'))
+		if (!(*pwd))
 		{
-			tmp = ft_strsub(path_rescue, 0, ft_strlen(path_rescue) -
-				ft_strlen(ft_strrchr(path_rescue, '/')));
-			ft_strdel(&path_rescue);
-			path_rescue = ft_strjoin(tmp, "/");
-			free(tmp);
+			free(*new_path);
+			return (ft_rescue_directory());
+		}
+		else
+		{
+			ft_strncpy(*new_path, current_path, ft_strlen(current_path) -
+				ft_strlen(ft_strrchr(current_path, '/')));
+			ft_strcat(*new_path, "/");
 		}
 	}
-		return (path_rescue);
+	else
+	{
+		ft_strcpy(*new_path, current_path);
+		ft_strcat(*new_path, "/");
+		ft_strcat(*new_path, sentence);
+	}
+	free(*pwd);
+	return (*new_path);
 }
 
 static	char		*set_begining(char *sentence, char *home,
@@ -44,8 +51,7 @@ static	char		*set_begining(char *sentence, char *home,
 			ft_putstr("cd: error retrieving current directory: getcwd: ");
 			ft_putstr("cannot access parent directories: No such file or");
 			ft_putstr(" directory\n");
-			free(new_path);
-			return (NULL);
+			ft_strdel(&new_path);
 		}
 		else
 		{
@@ -58,27 +64,8 @@ static	char		*set_begining(char *sentence, char *home,
 		ft_strcpy(new_path, home);
 		ft_strcat(new_path, sentence + 1);
 	}
-	else if (!ft_strcmp(sentence, ".."))
-	{
-		if (!pwd)
-		{
-			free(new_path);
-			return (ft_rescue_directory());
-		}
-		else
-		{
-			ft_strncpy(new_path, current_path, ft_strlen(current_path) -
-				ft_strlen(ft_strrchr(current_path, '/')));
-			ft_strcat(new_path, "/");
-		}
-	}
 	else
-	{
-		ft_strcpy(new_path, current_path);
-		ft_strcat(new_path, "/");
-		ft_strcat(new_path, sentence);
-	}
-	free(pwd);
+		new_path = 	set_begining_sec(&pwd, &new_path, current_path, sentence);
 	return (new_path);
 }
 

@@ -112,6 +112,7 @@ char				**lsh_read_line(char *line);
 int					verif_access(char **path, char **file, char *option);
 void				free_cd_vars(char **home, char **sentence, char **file
 								, char **pwd);
+char 				*ft_rescue_directory(void);
 /*
 ** CATCH_KEY
 */

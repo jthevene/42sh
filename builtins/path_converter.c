@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   path_converter.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:36:50 by apinho           ###   ########.fr       */
+/*   Updated: 2017/03/06 15:53:36 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sh21.h"
 
-char 					*ft_rescue_directory(void)
+char				*ft_rescue_directory(void)
 {
 	if (!g_shell.line)
 		return (NULL);
@@ -29,7 +29,7 @@ char 					*ft_rescue_directory(void)
 			free(tmp);
 		}
 	}
-		return (path_rescue);
+	return (path_rescue);
 }
 
 static	char		*set_begining(char *sentence, char *home,
@@ -138,7 +138,7 @@ char				*path_converter(char *sentence, char *home, char *pwd)
 	FT_INIT(char**, dirs_tab, NULL);
 	if (sentence[0] != '/')
 		if (!(str = set_begining(sentence, home, pwd)))
-			return (NULL);		
+			return (NULL);
 	dirs_tab = ft_strsplit(str ? str : sentence, '/');
 	ft_strdel(&str);
 	str = parse_dirs(dirs_tab, home, ft_strlen(sentence));

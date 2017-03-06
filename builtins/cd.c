@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:36:56 by apinho           ###   ########.fr       */
+/*   Updated: 2017/03/06 15:29:01 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,15 +111,14 @@ static void			go_to_dir(int cas, char **path, char *home, char *file_name)
 			*path = ft_strjoin(*path, file_name);
 			ft_strdel(&tmp);
 		}
-		else
-			*path = file_name;
+		*path = file_name[0] == '/' ? file_name : *path;
 		tmp = *path;
 		*path = path_converter(*path, home, pwd);
 		ft_strdel(&tmp);
 	}
 	in_dir(*path, pwd);
 	ft_strdel(path);
-	free(pwd);
+	free(pwd ? pwd : NULL);
 }
 
 int					cd(char *line)

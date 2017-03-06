@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 15:18:58 by dvirgile          #+#    #+#             */
-/*   Updated: 2017/03/02 17:38:40 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/03/06 14:09:44 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		ft_sigint(int sig)
 	g_shell.curr_hist = g_shell.hist;
 	g_shell.len = 0;
 	g_shell.running = 0;
-	ft_putstr("\n");
+	ft_putstr("\n\n");
 	ft_putstr(g_shell.prompt);
 	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
 }

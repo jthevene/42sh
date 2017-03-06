@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   detect_arrows.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:32:51 by apinho           ###   ########.fr       */
+/*   Updated: 2017/03/06 15:00:50 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,29 @@ static int		detect_selection_text(char *key, int start,
 	return (0);
 }
 
+static int		is_ctrl_or_alt_key(char *key)
+{
+	if (key[0] == 27 && key[1] == 91 && key[2] == 49 && key[3] == 59
+		&& key[4] == 53 && key[5] == 68)
+		return (K_OW_LEFT);
+	if (key[0] == 27 && key[1] == 91 && key[2] == 49 && key[3] == 59
+		&& key[4] == 53 && key[5] == 67)
+		return (K_OW_RIGHT);
+	if (key[0] == 27 && key[1] == 91 && key[2] == 49 && key[3] == 59
+		&& key[4] == 53 && key[5] == 65)
+		return (K_OL_UP);
+	if (key[0] == 27 && key[1] == 91 && key[2] == 49 && key[3] == 59
+		&& key[4] == 53 && key[5] == 66)
+		return (K_OL_DOWN);
+	return (0);
+}
+
 static int		arrow_combo(char *key)
 {
 	FT_INIT(int, start, g_shell.start_select);
 	FT_INIT(int, end, g_shell.end_select);
-	if (key[0] == 27 && key[1] == 27 && key[2] == 91 && key[3] == 67)
-		return (K_OW_RIGHT);
-	else if (key[0] == 27 && key[1] == 27 && key[2] == 91 && key[3] == 68)
-		return (K_OW_LEFT);
-	else if (key[0] == 27 && key[1] == 27 && key[2] == 91 && key[3] == 65)
-		return (K_OL_UP);
-	else if (key[0] == 27 && key[1] == 27 && key[2] == 91 && key[3] == 66)
-		return (K_OL_DOWN);
+	if (is_ctrl_or_alt_key(key) != 0)
+		return (is_ctrl_or_alt_key(key));
 	else if (key[4] == 50 && key[5] == 67)
 	{
 		g_shell.start_select = start ? start : g_shell.cursor_x;

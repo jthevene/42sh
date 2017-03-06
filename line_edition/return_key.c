@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   return_key.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:32:45 by apinho           ###   ########.fr       */
+/*   Updated: 2017/03/06 14:07:50 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	return_key(void)
 		reset_line();
 	}
 	else
-		ft_putchar(10);
+		ft_putstr("\n\n");
 	g_shell.curr_hist = g_shell.hist;
 	g_shell.len = 0;
 	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);

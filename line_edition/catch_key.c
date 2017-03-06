@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   catch_key.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/02/24 18:33:04 by apinho           ###   ########.fr       */
+/*   Updated: 2017/03/06 14:54:43 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ int				readkeyspecial(char *key)
 		return (K_GO_START);
 	else if (key[0] == 27 && key[1] == 91 && key[2] == 70)
 		return (K_GO_END);
-	else if (is_arrow(key))
-		return (detect_arrow(key));
 	else if (key[0] == 27 && key[1] == 91 && key[2] == 51 && key[3] == 126)
 		return (K_DEL);
+	else if (is_arrow(key))
+		return (detect_arrow(key));
 	return (K_UNKNOWN);
 }
 
@@ -50,6 +50,7 @@ int				readkey(void)
 	ft_bzero(c, 16);
 	if (read(STDIN_FILENO, c, 15))
 	{
+//		printf("%d %d %d %d %d %d %d\n", c[0], c[1], c[2], c[3], c[4], c[5], c[6]);
 		if (c[0] == 27)
 			return (readkeyspecial(c));
 	}

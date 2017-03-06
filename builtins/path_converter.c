@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/03/06 16:39:35 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/06 16:53:32 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ char				*path_converter(char *sentence, char *home, char *pwd)
 	if (sentence[0] != '/')
 		if (!(str = set_begining(sentence, home, pwd,
 			ft_strnew(ft_strlen(sentence) + 100))))
-			return (NULL);		
+			return (NULL);
 	dirs_tab = ft_strsplit(str ? str : sentence, '/');
 	ft_strdel(&str);
 	str = parse_dirs(dirs_tab, home, ft_strlen(sentence));

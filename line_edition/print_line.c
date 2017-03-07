@@ -23,7 +23,7 @@ static void			display_with_select(char *line)
 					g_shell.start_select : g_shell.end_select;
 	end_select += g_shell.end_select > g_shell.start_select ?
 					g_shell.end_select : g_shell.start_select;
-	while (line[i])
+	while (line  && line[i])
 	{
 		if (i == start_select)
 			ft_putstr("\033[47m\033[30m");

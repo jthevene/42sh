@@ -12,36 +12,7 @@
 
 #include "../includes/sh21.h"
 
-void		restablish_fd(t_save_fd **save_list)
-{
-	if (!save_list || !(*save_list))
-		return ;
-	if ((*save_list)->save_stdin != -1)
-		dup2((*save_list)->save_stdin, STDIN_FILENO);
-	if ((*save_list)->save_stdout != -1)
-		dup2((*save_list)->save_stdout, STDOUT_FILENO);
-	if ((*save_list)->save_stderr != -1)
-		dup2((*save_list)->save_stderr, STDERR_FILENO);
-	(*save_list)->save_stdin = -1;
-	(*save_list)->save_stdout = -1;
-	(*save_list)->save_stderr = -1;
-	free_aggreg();
-	free_right_redir();
-}
-
-static void	go_save_fd(t_save_fd **save_list, int fd_to_save)
-{
-	if (!save_list || !(*save_list))
-		return ;
-	if (fd_to_save == 0)
-		(*save_list)->save_stdin = dup(STDIN_FILENO);
-	if (fd_to_save == 1)
-		(*save_list)->save_stdout = dup(STDOUT_FILENO);
-	if (fd_to_save == 2)
-		(*save_list)->save_stderr = dup(STDERR_FILENO);
-}
-
-void		handle_aggreg(t_save_fd **save_list, int is_builtin)
+void			handle_aggreg(t_save_fd **save_list, int is_builtin)
 {
 	if (g_shell.aggreg != NULL)
 	{
@@ -66,7 +37,16 @@ void		handle_aggreg(t_save_fd **save_list, int is_builtin)
 	}
 }
 
-void		handle_redirections(int is_builtin)
+static void		handle_left_redir(int is_builtin)
+{
+	if (is_builtin == IS_BUILTIN)
+		go_save_fd(&g_shell.save_list, STDIN_FILENO);
+	dup2(g_shell.left_redir_fd, STDIN_FILENO);
+	close(g_shell.left_redir_fd);
+	g_shell.left_redir_fd = -1;
+}
+
+void			handle_redirections(int is_builtin)
 {
 	handle_aggreg(&g_shell.save_list, is_builtin);
 	if (g_shell.right_redirs)
@@ -87,14 +67,10 @@ void		handle_redirections(int is_builtin)
 		close(g_shell.right_redirs->fd_file);
 	}
 	if (g_shell.left_redir_fd != -1)
-	{
-		dup2(g_shell.left_redir_fd, STDIN_FILENO);
-		close(g_shell.left_redir_fd);
-		g_shell.left_redir_fd = -1;
-	}
+		handle_left_redir(is_builtin);
 }
 
-void		call_redirections(char **content)
+void			call_redirections(char **content)
 {
 	FT_INIT(char *, tmp, NULL);
 	if (ft_strstr((*content), ">&") || ft_strstr((*content), "<&"))

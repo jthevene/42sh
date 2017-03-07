@@ -77,8 +77,9 @@ void				print_line(int i)
 {
 	set_2d_edition_val();
 	FT_INIT(int, ref_cursor, g_shell.cursor_x);
-	if (i)
-		i--;
+	(void)i;
+	if (!g_shell.current_line)
+		return ;
 	go_to_end();
 	g_shell.len = set_cursor_start(g_shell.len, ref_cursor);
 	if (!g_shell.start_select && !g_shell.end_select)

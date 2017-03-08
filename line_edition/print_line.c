@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/24 18:13:29 by apinho            #+#    #+#             */
-/*   Updated: 2017/03/06 15:59:18 by sgaudin          ###   ########.fr       */
+/*   Created: 2017/03/08 14:36:42 by hjacque           #+#    #+#             */
+/*   Updated: 2017/03/08 14:54:17 by hjacque          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void			display_with_select(char *line)
 					g_shell.start_select : g_shell.end_select;
 	end_select += g_shell.end_select > g_shell.start_select ?
 					g_shell.end_select : g_shell.start_select;
-	while (line  && line[i])
+	while (line && line[i])
 	{
 		if (i == start_select)
 			ft_putstr("\033[47m\033[30m");

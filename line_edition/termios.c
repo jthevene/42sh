@@ -18,7 +18,10 @@ int		init_termios(struct termios my_termios)
 	if ((term_name = get_var(&g_shell, "TERM")) == NULL)
 		term_name = ft_strdup("xterm-256color");
 	if (tgetent(NULL, term_name) == ERR)
-		return (1);
+	{
+		term_name = ft_strdup("xterm-256color");
+		tgetent(NULL, term_name);
+	}
 	tcgetattr(STDIN_FILENO, &my_termios);
 	my_termios.c_lflag &= ~ICANON;
 	my_termios.c_lflag &= ~ECHO;

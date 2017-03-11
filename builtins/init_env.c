@@ -17,18 +17,18 @@ static void	create_safety_vars(void)
 	FT_INIT(char *, pwd, ft_strnew(255));
 	FT_INIT(t_var *, var, NULL);
 	var = new_var("SHLVL", "1");
-	ft_varappend(var);
+	ft_varappend(var, &g_shell.env);
 	pwd = getcwd(pwd, 255);
 	var = new_var("PWD", pwd);
-	ft_varappend(var);
+	ft_varappend(var, &g_shell.env);
 	var = new_var("HOME", pwd);
-	ft_varappend(var);
+	ft_varappend(var, &g_shell.env);
 	var = new_var("PATH", "/bin:/usr/bin");
-	ft_varappend(var);
+	ft_varappend(var, &g_shell.env);
 	var = new_var("TERM", "xterm-256color");
-	ft_varappend(var);
+	ft_varappend(var, &g_shell.env);
 	var = new_var("OLDPWD", pwd);
-	ft_varappend(var);
+	ft_varappend(var, &g_shell.env);
 	ft_strdel(&pwd);
 }
 
@@ -43,7 +43,7 @@ void		increase_shlvl(void)
 		ft_strdel(&tmp);
 		tmp = ft_itoa(lvl_int + 1);
 		tmp_setenv = ft_strjoin("setenv SHLVL=", tmp);
-		ft_setenv(tmp_setenv);
+		ft_setenv(tmp_setenv, DEFAULT);
 		ft_strdel(&tmp);
 		ft_strdel(&tmp_setenv);
 	}
@@ -69,7 +69,7 @@ int			init_env(void)
 		v_value = ft_strchr(environ[i], '=') + 1;
 		v_name = ft_strsub(environ[i], 0, v_value - environ[i] - 1);
 		var = new_var(v_name, v_value);
-		ft_varappend(var);
+		ft_varappend(var, &g_shell.env);
 		free(v_name);
 		i++;
 	}

@@ -36,8 +36,8 @@ void			init_hist(void)
 	init_hist_opt();
 	filename = ft_strjoin(home, "/.history");
 	g_shell.hist_fd = open(filename, O_RDWR | O_CREAT, 0600);
-	ft_varappend(new_var("HISTSIZE", "500"));
-	ft_varappend(new_var("HISTFILESIZE", "500"));
+	ft_varappend(new_var("HISTSIZE", "500"), &g_shell.env);
+	ft_varappend(new_var("HISTFILESIZE", "500"), &g_shell.env);
 	get_hist();
 	g_shell.curr_hist = g_shell.hist;
 	free(filename);
@@ -87,6 +87,7 @@ int				init_all(void)
 	init_hist();
 	init_win();
 	init_edition();
+	g_shell.tmp_env = NULL;
 	g_shell.left_redir_fd = -1;
 	g_shell.right_redirs = NULL;
 	g_shell.aggreg = NULL;

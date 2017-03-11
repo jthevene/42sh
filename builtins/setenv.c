@@ -12,6 +12,21 @@
 
 #include "../includes/sh21.h"
 
+void		ft_varappend(t_var *new_element, t_var **env)
+{
+	t_var	*tmp;
+
+	if (!(*env))
+		(*env) = new_element;
+	else
+	{
+		tmp = (*env);
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new_element;
+	}
+}
+
 char		*recup_name(char *line)
 {
 	FT_INIT(int, i, 0);
@@ -46,7 +61,7 @@ char		*recup_value(char *line)
 	return (NULL);
 }
 
-int			check_setenv(char **name, char **value)
+int			check_setenv(char **name, char **value, int env)
 {
 	if (!(*name))
 	{
@@ -61,9 +76,13 @@ int			check_setenv(char **name, char **value)
 		free((*value) ? (*value) : NULL);
 		return (0);
 	}
-	else if (!g_shell.env && (*name))
+	else if (((env == DEFAULT && !g_shell.env)
+		|| (env == TMP && !g_shell.tmp_env)) && (*name))
 	{
-		g_shell.env = new_var((*name), (*value));
+		if (env == DEFAULT)
+			g_shell.env = new_var((*name), (*value));
+		else
+			g_shell.tmp_env = new_var((*name), (*value));
 		free((*name));
 		free((*value) ? (*value) : NULL);
 		return (0);
@@ -71,12 +90,12 @@ int			check_setenv(char **name, char **value)
 	return (1);
 }
 
-int			ft_setenv(char *line)
+int			ft_setenv(char *line, int env)
 {
-	FT_INIT(t_var *, tmp, g_shell.env);
+	FT_INIT(t_var *, tmp, env == DEFAULT ? g_shell.env : g_shell.tmp_env);
 	FT_INIT(char *, name, recup_name(line));
 	FT_INIT(char *, value, recup_value(line));
-	if (!check_setenv(&name, &value))
+	if (!check_setenv(&name, &value, env))
 		return (0);
 	while (tmp)
 	{

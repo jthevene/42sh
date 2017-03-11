@@ -106,7 +106,7 @@ BIN_PARSER 		= 	$(FILES_PARSER:.c=.o)
 BUILTIN 		= 	./builtins/
 
 FILES_BUILTIN 	= 	echo.c env.c setenv.c unsetenv.c cd.c path_converter.c \
-					exit.c cd_tools.c cd_tools2.c init_env.c
+					exit.c cd_tools.c cd_tools2.c init_env.c env_utils.c
 
 SRC_BUILTIN  	= 	$(addprefix $(BUILTIN), $(FILES_BUILTIN))
 

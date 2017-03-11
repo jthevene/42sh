@@ -50,43 +50,54 @@ t_var		*new_var(char *v_name, char *v_value)
 	return (var);
 }
 
-void		ft_varappend(t_var *new_element)
+char		*get_cmd_to_exec2(char *cmd, int i)
 {
-	t_var	*tmp;
-
-	if (!g_shell.env)
-		g_shell.env = new_element;
-	else
+	FT_INIT(int, egal, 0);
+	FT_INIT(int, j, 0);
+	while (cmd[i])
 	{
-		tmp = g_shell.env;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new_element;
+		j = i;
+		while (cmd[i] && cmd[i] == ' ')
+			i++;
+		while (cmd[i] && cmd[i] != ' ')
+		{
+			if (cmd[i] == '=')
+				egal = 1;
+			i++;
+		}
+		if (!egal)
+		{
+			i = j;
+			break ;
+		}
+		egal = 0;
 	}
+	if (!cmd[i])
+		return (NULL);
+	while (cmd[i] && cmd[i] == ' ')
+		i++;
+	return (ft_strsub(cmd, i, ft_strlen(cmd) - i));
 }
 
 char		*get_cmd_to_exec(char *cmd)
 {
 	FT_INIT(int, i, 0);
-	while (cmd[i] == ' ')
+	while (cmd[i] && cmd[i] == ' ')
 		i++;
 	while (cmd[i] && cmd[i] != ' ')
 		i++;
 	while (cmd[i] && cmd[i] == ' ')
 		i++;
-	if (cmd[i] == '-' && cmd[i + 1] == 'i' && cmd[i + 2] == ' ')
+	if (g_shell.env_opt)
 	{
-		while (cmd[i] != ' ')
+		while (cmd[i] && cmd[i] != ' ')
 			i++;
-		while (cmd[i] == ' ')
+		while (cmd[i] && cmd[i] == ' ')
 			i++;
-		return (ft_strsub(cmd, i, ft_strlen(cmd) - i));
 	}
-	else if (cmd[i] == '-' && cmd[i + 1] == 'i' && !cmd[i + 2])
+	if (!cmd[i])
 		return (NULL);
-	else if (cmd[i] && cmd[i] != ' ')
-		return (ft_strsub(cmd, i, ft_strlen(cmd) - i));
-	return (NULL);
+	return (get_cmd_to_exec2(cmd, i));
 }
 
 int			ft_env(char *cmd)
@@ -94,23 +105,20 @@ int			ft_env(char *cmd)
 	if (!g_shell.env)
 		return (1);
 	FT_INIT(char **, tmp, ft_strsplit(cmd, ' '));
-	FT_INIT(t_var *, tmp_env, g_shell.env);
-	FT_INIT(char *, to_exec, get_cmd_to_exec(cmd));
 	if (tmp && tmp[1] && !ft_strcmp(tmp[1], "-i"))
 		g_shell.env_opt = TRUE;
+	if (!g_shell.tmp_env)
+		create_tmp_env(tmp);
+	FT_INIT(char *, to_exec, get_cmd_to_exec(cmd));
+	FT_INIT(t_var *, tmp_env, g_shell.env);
+	g_shell.env = g_shell.tmp_env ? g_shell.tmp_env : g_shell.env;
 	if (to_exec != NULL)
-	{
 		exec_function(&to_exec);
-		ft_strdel(&to_exec);
-	}
-	while (!to_exec && g_shell.env_opt == FALSE && tmp_env)
-	{
-		ft_putstr(tmp_env->name);
-		ft_putchar('=');
-		ft_putendl(tmp_env->value);
-		tmp_env = tmp_env->next;
-	}
+	print_env(to_exec);
 	g_shell.env_opt = FALSE;
 	free_tab(tmp);
+	ft_strdel(&to_exec);
+	g_shell.env = tmp_env;
+	free_env(g_shell.tmp_env ? TMP : FALSE);
 	return (0);
 }

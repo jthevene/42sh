@@ -72,6 +72,8 @@
 # define DOUBLE 2
 # define IS_NOT_BUILTIN 0
 # define IS_BUILTIN 1
+# define DEFAULT 0
+# define TMP 1
 
 /*
 ** AUTO_COMLETION
@@ -178,12 +180,15 @@ void				ft_reset_termios(struct termios t_back);
 */
 int					ft_echo(char *line);
 int					ft_env(char *cmd);
-int					ft_setenv(char *line);
+int					ft_setenv(char *line, int env);
 int					ft_unsetenv(char *name);
 void				ft_exit(void);
 char				*get_var(t_shell *g_shell, char *n_var);
-void				ft_varappend(t_var *new_element);
+void				ft_varappend(t_var *new_element, t_var **env);
 t_var				*new_var(char *v_name, char *v_value);
+void				print_env(char *to_exec);
+void				create_tmp_env(char **args);
+void				free_env(int env);
 /*
 ** EXECUTION
 */

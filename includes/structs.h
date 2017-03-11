@@ -99,6 +99,7 @@ typedef struct				s_shell
 	char					*current_line;
 	int						env_opt;
 	t_var					*env;
+	t_var					*tmp_env;
 	int						prompt_len;
 	int						start_select;
 	int						result_exec;

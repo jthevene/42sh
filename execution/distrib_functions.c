@@ -42,7 +42,7 @@ int			detect_builtins(char *to_exec, char *command_line)
 	else if (!ft_strcmp(to_exec, "unsetenv"))
 		ret = ft_unsetenv(command_line);
 	else if (!ft_strcmp(to_exec, "setenv"))
-		ret = ft_setenv(command_line);
+		ret = ft_setenv(command_line, DEFAULT);
 	else if (!ft_strcmp(to_exec, "env"))
 		ret = ft_env(command_line);
 	else if (!ft_strcmp(to_exec, "cd"))

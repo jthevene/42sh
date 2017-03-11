@@ -83,10 +83,10 @@ static void			in_dir(char **path, char *pwd)
 			free(g_shell.line);
 			g_shell.line = ft_strdup((*path));
 		}
-		ft_setenv(tmp);
+		ft_setenv(tmp, DEFAULT);
 		ft_strdel(&tmp);
 		tmp = ft_strjoin("setenv OLDPWD=", pwd);
-		ft_setenv(tmp);
+		ft_setenv(tmp, DEFAULT);
 		ft_strdel(&tmp);
 	}
 	ft_strdel(&(*path));

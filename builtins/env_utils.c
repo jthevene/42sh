@@ -6,33 +6,20 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 14:26:30 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/03/11 14:26:31 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/13 17:00:16 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sh21.h"
 
-static void	init_tmp_env(void)
-{
-	FT_INIT(t_var *, tmp, g_shell.env);
-	FT_INIT(t_var *, new, NULL);
-	if (g_shell.env_opt == TRUE)
-		return ;
-	while (tmp)
-	{
-		new = new_var(tmp->name, tmp->value);
-		ft_varappend(new, &g_shell.tmp_env);
-		if (!tmp->next)
-			break ;
-		tmp = tmp->next;
-	}
-}
-
-void		print_env(char *to_exec)
+void		print_env(char *to_exec, int is_opt)
 {
 	FT_INIT(t_var *, tmp_env, g_shell.tmp_env ? g_shell.tmp_env : g_shell.env);
-	if ((!to_exec && g_shell.env_opt == FALSE)
-		|| (!to_exec && g_shell.env_opt == TRUE && g_shell.tmp_env))
+	if (!tmp_env || is_opt)
+		return ;
+	else if (!is_opt && g_shell.env_opt == TRUE && !g_shell.tmp_env)
+		return ;
+	if (!to_exec && tmp_env)
 	{
 		while (tmp_env)
 		{
@@ -44,13 +31,16 @@ void		print_env(char *to_exec)
 	}
 }
 
-void		free_env(int env)
+void		free_env(int env, t_var **old_tmp_env)
 {
 	FT_INIT(t_var *, tmp, NULL);
 	FT_INIT(t_var *, tmp_env, NULL);
-	if (env == FALSE)
+	if (env == FALSE || (env == OTHER && (!old_tmp_env || !(*old_tmp_env))))
 		return ;
-	tmp_env = env == DEFAULT ? g_shell.env : g_shell.tmp_env;
+	tmp_env = env == DEFAULT ? g_shell.env
+			: FT_TER(env == TMP, g_shell.tmp_env, (*old_tmp_env));
+	if (!tmp_env)
+		return ;
 	while (tmp_env)
 	{
 		tmp = tmp_env;
@@ -64,25 +54,27 @@ void		free_env(int env)
 	free(tmp);
 	if (env == DEFAULT)
 		g_shell.env = NULL;
-	if (env == TMP)
+	else if (env == TMP)
 		g_shell.tmp_env = NULL;
+	else
+		(*old_tmp_env) = NULL;
 }
 
-void		create_tmp_env(char **args)
+void		create_tmp_env(char **args, int is_opt)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp, NULL);
-	if (g_shell.env_opt == TRUE)
+	if (is_opt == 1)
 	{
 		i = 2;
-		g_shell.tmp_env = NULL;
+		free_env(TMP, NULL);
 	}
 	else
 		i = 1;
-	if (args[i] && ft_strchr(args[i], '='))
-		init_tmp_env();
-	else
+	if (i > ft_count_tab(args) || !args[i] || !ft_strchr(args[i], '='))
 		return ;
+	else
+		init_tmp_env();
 	while (args[i])
 	{
 		if (ft_strchr(args[i], '='))
@@ -94,5 +86,50 @@ void		create_tmp_env(char **args)
 		else
 			break ;
 		i++;
+	}
+}
+
+void		save_old_tmp_env(t_var **old_tmp_env)
+{
+	if (!g_shell.tmp_env)
+		return ;
+	FT_INIT(t_var *, tmp, g_shell.tmp_env);
+	FT_INIT(t_var *, new, NULL);
+	while (tmp)
+	{
+		new = new_var(tmp->name, tmp->value);
+		ft_varappend(new, &(*old_tmp_env));
+		if (!tmp->next)
+			break ;
+		tmp = tmp->next;
+	}
+}
+
+void		restore_new_env(t_var **old_tmp_env)
+{
+	if (!old_tmp_env || !(*old_tmp_env))
+		return ;
+	FT_INIT(t_var *, tmp_env, g_shell.tmp_env);
+	FT_INIT(char *, name_to_recup, NULL);
+	FT_INIT(char *, val_to_recup, NULL);
+	FT_INIT(char *, to_set, NULL);
+	FT_INIT(char *, tmp, NULL);
+	while (tmp_env)
+	{
+		name_to_recup = ft_strdup(tmp_env->name);
+		val_to_recup = get_var((*old_tmp_env), name_to_recup);
+		if (val_to_recup && ft_strcmp(val_to_recup, tmp_env->value))
+		{
+			to_set = ft_strjoin("setenv ", name_to_recup);
+			tmp = ft_strjoin(to_set, "=");
+			ft_strdel(&to_set);
+			to_set = ft_strjoin(tmp, tmp_env->value);
+			ft_setenv(to_set, DEFAULT);
+			ft_strdel(&to_set);
+			ft_strdel(&tmp);
+		}
+		ft_strdel(&name_to_recup);
+		ft_strdel(&val_to_recup);
+		tmp_env = tmp_env->next;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   detect_auto_completion.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:42 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/13 12:35:36 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_file			*get_file_path(char *path, char *sentence)
 	FT_INIT(t_file*, files, NULL);
 	if (!path || !sentence)
 		return (NULL);
-	FT_INIT(char*, var_path, get_var(&g_shell, "PATH"));
+	FT_INIT(char*, var_path, get_var(g_shell.env, "PATH"));
 	rep = opendir(path);
 	if (rep && !ft_strchr(sentence, ' ') && sentence[0] != '/' && var_path)
 		files = store_files_dirs(rep, files, path, str_to_search(sentence));
@@ -63,7 +63,7 @@ static t_file	*files_list(char **sentence)
 	FT_INIT(t_file*, files, NULL);
 	FT_INIT(t_file*, head, NULL);
 	FT_INIT(int, i, 0);
-	FT_INIT(char*, home, get_var(&g_shell, "HOME"));
+	FT_INIT(char*, home, get_var(g_shell.env, "HOME"));
 	FT_INIT(char*, pwd, getcwd(NULL, 1024));
 	*sentence = default_sentence(sentence);
 	path = set_path(sentence, home, pwd);

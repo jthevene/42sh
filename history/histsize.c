@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   histsize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:01 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/13 12:40:05 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	update_histsize(int histsize)
 int		get_histsize(char *var)
 {
 	FT_INIT(int, ret, 500);
-	FT_INIT(char *, histsize, get_var(&g_shell, "HISTSIZE"));
-	FT_INIT(char *, histfilesize, get_var(&g_shell, "HISTFILESIZE"));
+	FT_INIT(char *, histsize, get_var(g_shell.env, "HISTSIZE"));
+	FT_INIT(char *, histfilesize, get_var(g_shell.env, "HISTFILESIZE"));
 	if (!ft_strcmp(var, "HISTSIZE"))
 	{
 		if (!histsize)

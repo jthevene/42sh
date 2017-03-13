@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   historic.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:03 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/13 12:39:47 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	get_hist(void)
 {
 	FT_INIT(char *, filename, NULL);
 	FT_INIT(char *, line, NULL);
-	FT_INIT(char*, home, get_var(&g_shell, "HOME"));
+	FT_INIT(char*, home, get_var(g_shell.env, "HOME"));
 	FT_INIT(int, ret, 0);
 	filename = ft_strjoin(home, "/.history");
 	free(home);

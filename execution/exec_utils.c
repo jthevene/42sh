@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:32 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/13 12:40:20 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char		**get_bin_directories(void)
 	FT_INIT(char*, tmp, NULL);
 	if (!g_shell.env)
 		return (NULL);
-	tmp = get_var(&g_shell, "PATH");
+	tmp = get_var(g_shell.env, "PATH");
 	if (!tmp)
 		return (NULL);
 	else

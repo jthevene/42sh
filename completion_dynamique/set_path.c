@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:38 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/13 12:34:53 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char				**set_path(char **sentence, char *home, char *c_path)
 		return (ft_strsplit(c_path, '\n'));
 	if (!ft_strchr(*sentence, ' ') && *sentence[0] != '/' && ft_strlen(c_path))
 	{
-		new_path = get_var(&g_shell, "PATH");
+		new_path = get_var(g_shell.env, "PATH");
 		dirs = verif_dirs(ft_strsplit(new_path, ':'));
 		ft_strdel(&new_path);
 		return (dirs);

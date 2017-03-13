@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:42 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:54:17 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/13 12:35:17 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char				*set_prompt(char *pwd)
 {
 	FT_INIT(char*, head_line, ft_strdup("\033[32m$> \033[0m"));
 	FT_INIT(char*, tmp, NULL);
-	FT_INIT(char*, home, get_var(&g_shell, "HOME"));
+	FT_INIT(char*, home, get_var(g_shell.env, "HOME"));
 	pwd = pwd ? pwd : ft_strdup(g_shell.line);
 	g_shell.prompt_len = 3;
 	if (!pwd)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:45 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/13 16:29:47 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		increase_shlvl(void)
 	FT_INIT(char *, tmp, NULL);
 	FT_INIT(char *, tmp_setenv, NULL);
 	FT_INIT(int, lvl_int, 0);
-	if ((tmp = get_var(&g_shell, "SHLVL")))
+	if ((tmp = get_var(g_shell.env, "SHLVL")))
 	{
 		lvl_int = ft_atoi(tmp);
 		ft_strdel(&tmp);
@@ -46,6 +46,22 @@ void		increase_shlvl(void)
 		ft_setenv(tmp_setenv, DEFAULT);
 		ft_strdel(&tmp);
 		ft_strdel(&tmp_setenv);
+	}
+}
+
+void		init_tmp_env(void)
+{
+	FT_INIT(t_var *, tmp, g_shell.env);
+	FT_INIT(t_var *, new, NULL);
+	if (g_shell.env_opt == TRUE)
+		return ;
+	while (tmp)
+	{
+		new = new_var(tmp->name, tmp->value);
+		ft_varappend(new, &g_shell.tmp_env);
+		if (!tmp->next)
+			break ;
+		tmp = tmp->next;
 	}
 }
 
@@ -61,7 +77,7 @@ int			init_env(void)
 	if (!environ[0])
 	{
 		create_safety_vars();
-		g_shell.oldpwd = get_var(&g_shell, "OLDPWD");
+		g_shell.oldpwd = get_var(g_shell.env, "OLDPWD");
 		return (1);
 	}
 	while (environ[i])
@@ -74,6 +90,6 @@ int			init_env(void)
 		i++;
 	}
 	increase_shlvl();
-	g_shell.oldpwd = get_var(&g_shell, "OLDPWD");
+	g_shell.oldpwd = get_var(g_shell.env, "OLDPWD");
 	return (1);
 }

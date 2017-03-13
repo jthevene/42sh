@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termios.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:42 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:45:40 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/13 12:35:10 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		init_termios(struct termios my_termios)
 {
 	FT_INIT(char*, term_name, NULL);
-	if ((term_name = get_var(&g_shell, "TERM")) == NULL)
+	if ((term_name = get_var(g_shell.env, "TERM")) == NULL)
 		term_name = ft_strdup("xterm-256color");
 	if (tgetent(NULL, term_name) == ERR)
 	{

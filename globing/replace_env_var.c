@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_env_var.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:08 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/13 12:36:21 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*recup_varname(char **line, int i)
 		j++;
 	}
 	varname = ft_strsub((*line), i, j - i);
-	value = get_var(&g_shell, varname);
+	value = get_var(g_shell.env, varname);
 	free(varname);
 	return (value);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_history_options.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:03 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/13 12:39:01 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	update_history_file(int histfilesize)
 {
 	FT_INIT(t_lst *, tmp, g_shell.hist);
 	FT_INIT(int, i, 0);
-	FT_INIT(char *, histfile, get_var(&g_shell, "HOME"));
+	FT_INIT(char *, histfile, get_var(g_shell.env, "HOME"));
 	if (!tmp)
 		return ;
 	if (!g_shell.hist_opt.filename)
@@ -108,7 +108,7 @@ void	histfile_append(void)
 {
 	FT_INIT(int, ret, 0);
 	FT_INIT(char *, line, NULL);
-	FT_INIT(char *, home, get_var(&g_shell, "HOME"));
+	FT_INIT(char *, home, get_var(g_shell.env, "HOME"));
 	if (!g_shell.hist_opt.filename)
 		g_shell.hist_opt.filename = ft_strjoin(home, "/.history");
 	if (home)

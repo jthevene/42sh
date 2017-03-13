@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:42 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:45:44 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/13 12:35:05 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void			init_hist_opt(void)
 void			init_hist(void)
 {
 	FT_INIT(char *, filename, NULL);
-	FT_INIT(char*, home, get_var(&g_shell, "HOME"));
+	FT_INIT(char*, home, get_var(g_shell.env, "HOME"));
 	g_shell.hist_fd = 0;
 	g_shell.hist = NULL;
 	g_shell.nav_hist = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:49 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/13 12:37:51 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int			set_option_sentence(char **sentence, char **option,
 	{
 		if (!ft_strcmp(tab_line[1], "-"))
 		{
-			if (!(*sentence = get_var(&g_shell, "OLDPWD")))
+			if (!(*sentence = get_var(g_shell.env, "OLDPWD")))
 				return (0);
 		}
 		else
@@ -58,7 +58,7 @@ static int			set_option_sentence(char **sentence, char **option,
 	}
 	else if (len_tab == 1)
 	{
-		if (!(*sentence = get_var(&g_shell, "HOME")))
+		if (!(*sentence = get_var(g_shell.env, "HOME")))
 			return (0);
 	}
 	else
@@ -128,7 +128,7 @@ int					cd(char *line)
 	if (!(tab_line = verif_args_cd(line, &len_tab)))
 		return (0);
 	FT_INIT(char*, pwd, getcwd(NULL, 1024));
-	FT_INIT(char*, home, get_var(&g_shell, "HOME"));
+	FT_INIT(char*, home, get_var(g_shell.env, "HOME"));
 	FT_INIT(char*, option, NULL);
 	FT_INIT(char*, sentence, NULL);
 	FT_INIT(char*, path, NULL);

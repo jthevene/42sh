@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/13 14:05:21 by sgaudin          ###   ########.fr       */
-=======
-/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/13 14:14:27 by dvirgile         ###   ########.fr       */
->>>>>>> 5a3597b39339d8d542c71abcf31770ab188c28f7
+/*   Created: 2017/03/13 17:04:00 by sgaudin           #+#    #+#             */
+/*   Updated: 2017/03/13 17:05:45 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +67,9 @@ void		ft_exit(char *return_value)
 	update_history_file(get_histsize("HISTFILESIZE"));
 	free(g_shell.save_list);
 	free_hist();
-<<<<<<< HEAD
 	free_env(DEFAULT, NULL);
-	exit(0);
-=======
 	int_return_value = ft_atoi(str_ret);
 	if (str_ret)
 		free(str_ret);
 	exit(int_return_value);
->>>>>>> 5a3597b39339d8d542c71abcf31770ab188c28f7
 }

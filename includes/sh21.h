@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/13 16:29:54 by sgaudin          ###   ########.fr       */
-=======
-/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/13 12:12:33 by dvirgile         ###   ########.fr       */
->>>>>>> 5a3597b39339d8d542c71abcf31770ab188c28f7
+/*   Created: 2017/03/13 17:04:00 by sgaudin           #+#    #+#             */
+/*   Updated: 2017/03/13 17:05:14 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,13 +184,8 @@ int					ft_echo(char *line);
 int					ft_env(char *cmd);
 int					ft_setenv(char *line, int env);
 int					ft_unsetenv(char *name);
-<<<<<<< HEAD
-void				ft_exit(void);
 char				*get_var(t_var *env, char *n_var);
-=======
 void				ft_exit(char *return_value);
-char				*get_var(t_shell *g_shell, char *n_var);
->>>>>>> 5a3597b39339d8d542c71abcf31770ab188c28f7
 void				ft_varappend(t_var *new_element, t_var **env);
 t_var				*new_var(char *v_name, char *v_value);
 void				print_env(char *to_exec, int is_opt);

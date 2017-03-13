@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/13 16:29:47 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/13 19:11:17 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,25 @@ void		increase_shlvl(void)
 
 void		init_tmp_env(void)
 {
+	FT_INIT(int, len, 0);
+	FT_INIT(int, i, 0);
 	FT_INIT(t_var *, tmp, g_shell.env);
 	FT_INIT(t_var *, new, NULL);
+	FT_INIT(t_var *, tmp_len, g_shell.env);
 	if (g_shell.env_opt == TRUE)
 		return ;
-	while (tmp)
+	while (tmp_len)
+	{
+		len++;
+		tmp_len = tmp_len->next;
+	}
+	while (tmp && i < len)
 	{
 		new = new_var(tmp->name, tmp->value);
 		ft_varappend(new, &g_shell.tmp_env);
 		if (!tmp->next)
 			break ;
+		i++;
 		tmp = tmp->next;
 	}
 }

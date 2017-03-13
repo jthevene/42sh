@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 14:26:30 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/03/13 17:00:16 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/13 19:19:43 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ void		free_env(int env, t_var **old_tmp_env)
 	while (tmp_env)
 	{
 		tmp = tmp_env;
-		free(tmp_env->name ? tmp_env->name : NULL);
-		free(tmp_env->value ? tmp_env->value : NULL);
+		ft_strdel(&tmp_env->name);
+		ft_strdel(&tmp_env->value);
 		if (!tmp_env->next)
 			break ;
 		tmp_env = tmp_env->next;
-		free(tmp);
+		free(tmp ? tmp : NULL);
 	}
-	free(tmp);
+	free(tmp ? tmp : NULL);
 	if (env == DEFAULT)
 		g_shell.env = NULL;
 	else if (env == TMP)
 		g_shell.tmp_env = NULL;
-	else
+	else if (env == OTHER)
 		(*old_tmp_env) = NULL;
 }
 
@@ -68,12 +68,14 @@ void		create_tmp_env(char **args, int is_opt)
 	{
 		i = 2;
 		free_env(TMP, NULL);
+		if (g_shell.env_PUTE)
+			g_shell.env = NULL;
 	}
 	else
 		i = 1;
 	if (i > ft_count_tab(args) || !args[i] || !ft_strchr(args[i], '='))
 		return ;
-	else
+	else if (!g_shell.tmp_env)
 		init_tmp_env();
 	while (args[i])
 	{

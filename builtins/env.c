@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/13 16:43:43 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/13 18:52:32 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ char		*get_var(t_var *env, char *n_var)
 	tmp_env = env;
 	while (tmp_env)
 	{
-		if (!ft_strcmp(tmp_env->name, n_var))
+		if (tmp_env->name && n_var && !ft_strcmp(tmp_env->name, n_var))
 		{
-			val = ft_strdup(tmp_env->value);
+			val = tmp_env->value ? ft_strdup(tmp_env->value) : NULL;
 			return (val);
 		}
+		if (!tmp_env->next)
+			break ;
 		tmp_env = tmp_env->next;
 	}
 	return (val);
@@ -119,7 +121,13 @@ int			ft_env(char *cmd)
 	}
 	FT_INIT(char *, to_exec, get_cmd_to_exec(cmd));
 	FT_INIT(t_var *, tmp_env, g_shell.env);
-	g_shell.env = g_shell.tmp_env ? g_shell.tmp_env : g_shell.env;
+	if (g_shell.tmp_env)
+	{
+		g_shell.env = g_shell.tmp_env;
+		g_shell.env_PUTE = 1;
+	}
+	else
+		g_shell.env_PUTE = 0;
 	save_old_tmp_env(&old_tmp_env);
 	if (to_exec != NULL)
 		exec_function(&to_exec);

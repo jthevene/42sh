@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:42 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:45:40 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/13 12:13:13 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		ft_sigkill(int sig)
 {
 	(void)sig;
 	if (!((int)ft_strlen(g_shell.current_line)) && !kill(-1, SIGCHLD))
-		ft_exit();
+		ft_exit(NULL);
 }
 
 void		ft_signal(void)

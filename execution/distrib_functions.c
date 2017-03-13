@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   distrib_functions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:35 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/13 12:29:12 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int			detect_builtins(char *to_exec, char *command_line)
 	else if (!ft_strcmp(to_exec, "history"))
 		ret = history_hub(command_line);
 	else if (!ft_strcmp(to_exec, "exit"))
-		ft_exit();
+		ft_exit(command_line);
 	restablish_fd(&g_shell.save_list);
 	return (ret);
 }

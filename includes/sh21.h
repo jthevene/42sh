@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh21.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:45:58 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/13 12:12:33 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ int					ft_echo(char *line);
 int					ft_env(char *cmd);
 int					ft_setenv(char *line, int env);
 int					ft_unsetenv(char *name);
-void				ft_exit(void);
+void				ft_exit(char *return_value);
 char				*get_var(t_shell *g_shell, char *n_var);
 void				ft_varappend(t_var *new_element, t_var **env);
 t_var				*new_var(char *v_name, char *v_value);

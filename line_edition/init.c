@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:42 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/13 18:05:07 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/14 14:58:48 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int				init_all(void)
 	g_shell.save_list->save_stdin = -1;
 	g_shell.save_list->save_stdout = -1;
 	g_shell.save_list->save_stderr = -1;
-	g_shell.env_PUTE = 0;
+	g_shell.null_env = 0;
 	tcgetattr(STDIN_FILENO, &g_shell.t_back);
 	init_termios(g_shell.t_back);
 	return (0);

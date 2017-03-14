@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/13 18:04:51 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/14 14:58:00 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ typedef struct				s_shell
 	t_fdlist				*right_redirs;
 	int						left_redir_fd;
 	t_save_fd				*save_list;
-	int						env_PUTE;
+	int						null_env;
 }							t_shell;
 
 t_shell						g_shell;

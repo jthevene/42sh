@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 14:26:30 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/03/13 19:19:43 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/14 14:57:53 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,10 @@ void		create_tmp_env(char **args, int is_opt)
 	FT_INIT(char *, tmp, NULL);
 	if (is_opt == 1)
 	{
-		i = 2;
 		free_env(TMP, NULL);
-		if (g_shell.env_PUTE)
-			g_shell.env = NULL;
+		g_shell.env = g_shell.null_env ? NULL : g_shell.env;
 	}
-	else
-		i = 1;
+	i = is_opt == 1 ? 2 : 1;
 	if (i > ft_count_tab(args) || !args[i] || !ft_strchr(args[i], '='))
 		return ;
 	else if (!g_shell.tmp_env)

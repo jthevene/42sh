@@ -6,26 +6,11 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/13 18:47:35 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/14 14:56:19 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sh21.h"
-
-void		ft_varappend(t_var *new_element, t_var **env)
-{
-	t_var	*tmp;
-
-	if (!(*env))
-		(*env) = new_element;
-	else
-	{
-		tmp = (*env);
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new_element;
-	}
-}
 
 char		*recup_name(char *line)
 {

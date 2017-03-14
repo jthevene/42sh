@@ -6,27 +6,27 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 17:04:00 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/03/13 17:05:45 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/14 14:45:26 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sh21.h"
 
-char 		*get_tab_arguments(char ** tabl, int len_tab)
+char		*get_tab_arguments(char **tabl, int len_tab)
 {
 	FT_INIT(char*, val, "0");
 	FT_INIT(int, i, 0);
 	if (tabl && len_tab == 2)
+	{
+		while (i >= 0 && tabl[1][i])
 		{
-			while (i >= 0 && tabl[1][i])
-			{
-				if (!ft_isdigit(tabl[1][i]) && tabl[1][i] != '-')
-					i = -5;
-				i++;
-			}
-			if (i > 0)
-				val = tabl[1];
+			if (!ft_isdigit(tabl[1][i]) && tabl[1][i] != '-')
+				i = -5;
+			i++;
 		}
+		if (i > 0)
+			val = tabl[1];
+	}
 	return (val);
 }
 
@@ -53,7 +53,7 @@ char		*get_value_to_return(char *return_value)
 	else
 		val = ft_strdup("0");
 	return (val);
-}	
+}
 
 void		ft_exit(char *return_value)
 {

@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/14 14:56:19 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/14 18:37:31 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,13 @@ char		*recup_name(char *line)
 	start = ++i;
 	while (line[i])
 	{
-		if (line[i] == '=')
+		if (line[i] == '=' && (start - i) != 0)
 			return (ft_strsub(line, start, i - start));
+		else if (line[i] == '=' && (start - i) == 0)
+		{
+			ft_putendl_fd("21sh: setenv: Invalid argument", 2);
+			return (NULL);
+		}
 		i++;
 	}
 	return (NULL);
@@ -56,7 +61,7 @@ int			check_setenv(char **name, char **value, int env)
 	}
 	else if ((*value) && ft_strchr((*value), '='))
 	{
-		ft_putendl_fd("21sh: setenv: No '=' allowed in the value field.", 2);
+		ft_putendl_fd("21sh: setenv: Invalid argument", 2);
 		free((*name) ? (*name) : NULL);
 		free((*value) ? (*value) : NULL);
 		return (0);

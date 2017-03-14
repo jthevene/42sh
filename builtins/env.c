@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/14 15:14:27 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/14 18:25:12 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ static void	ft_env2(char *cmd, int is_opt, char ***tmp, t_var **old_tmp_env)
 	}
 	else
 		g_shell.null_env = 0;
+	if (is_opt == TRUE && !g_shell.tmp_env)
+		g_shell.env = NULL;
 	save_old_tmp_env(&(*old_tmp_env));
 	if (to_exec != NULL)
 		exec_function(&to_exec);

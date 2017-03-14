@@ -69,6 +69,8 @@ int		lire_lexeme(t_token *token, char *line, int pos)
 		pos = check_for_aggreg_fd(token, line, pos);
 	if (ft_isope(line[pos]) == 2 || ft_isope(line[pos]) == 3)
 		pos = check_for_aggreg(token, line, pos);
+	if (ft_isdigit(line[pos]))
+		pos = fd_redir(token, line, pos);
 	if (ft_isprintnotope(line[pos]) == 1)
 	{
 		token->type = WORDS;

@@ -37,3 +37,19 @@ t_token		*init_token(void)
 	token->next = NULL;
 	return (token);
 }
+
+int			fd_redir(t_token *token, char *line, int pos)
+{
+	FT_INIT(int, i, 1);
+	FT_INIT(int, x, pos);
+	while (ft_isdigit((unsigned char)line[pos + i]))
+		i++;
+	if (line[pos + i] == '>')
+	{
+		pos = pos + i + 1;
+		token->type = MORE;
+		add_lexeme(token, line, pos, x);
+		return (pos);
+	}
+	return (pos);
+}

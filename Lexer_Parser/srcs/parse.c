@@ -101,12 +101,7 @@ char	*commands_leaf(t_token *token)
 		if (tmp->next)
 		{
 			tmp_leaf = leaf;
-			if (tmp->type == FDIGIT && (tmp->next->type == LESS \
-				|| tmp->next->type == MORE \
-				|| tmp->next->type == DMORE))
-				leaf = ft_strjoin(leaf, tmp->next->lexeme);
-			else
-				leaf = ft_strjoinchar(leaf, tmp->next->lexeme, ' ');
+			leaf = ft_strjoinchar(leaf, tmp->next->lexeme, ' ');
 			ft_strdel(&tmp_leaf);
 		}
 		tmp = tmp->next;

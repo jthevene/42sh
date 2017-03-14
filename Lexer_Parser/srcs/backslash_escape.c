@@ -17,19 +17,22 @@ void	backslash_char(t_token *token)
 	FT_INIT(int, pos, 0);
 	FT_INIT(int, s, 0);
 	FT_INIT(int, d, 0);
-	while (token->lexeme[pos])
+	if (token->lexeme)
 	{
-		if (token->lexeme[pos] == '\'')
-			pos = supp_squote(token, pos, s);
-		else if (token->lexeme[pos] == '\"')
-			pos = supp_dquote(token, pos, d);
-		else if (token->lexeme[pos] == '\\')
+		while (token->lexeme[pos])
 		{
-			ft_memmove(&(token->lexeme[pos]), \
-				&(token->lexeme[pos + 1]), ft_strlen(token->lexeme) - pos);
+			if (token->lexeme[pos] == '\'')
+				pos = supp_squote(token, pos, s);
+			else if (token->lexeme[pos] == '\"')
+				pos = supp_dquote(token, pos, d);
+			else if (token->lexeme[pos] == '\\')
+			{
+				ft_memmove(&(token->lexeme[pos]), \
+					&(token->lexeme[pos + 1]), ft_strlen(token->lexeme) - pos);
+				pos++;
+			}
 			pos++;
 		}
-		pos++;
 	}
 }
 

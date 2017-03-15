@@ -20,7 +20,7 @@ int			detect_numbers(char *cmd, int i)
 	while (cmd[i] && ft_isdigit(cmd[i]))
 		i++;
 	number = ft_strsub(cmd, start, i - start);
-	ret = atoi(number);
+	ret = ft_atoi(number);
 	free(number ? number : NULL);
 	return (ret);
 }

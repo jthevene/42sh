@@ -54,7 +54,7 @@ char			*fill_nomult(char *str)
 		return (NULL);
 	while (i <= 126)
 	{
-		if (!strchr(tmp, i))
+		if (!ft_strchr(tmp, i))
 		{
 			ret[j] = i;
 			j++;

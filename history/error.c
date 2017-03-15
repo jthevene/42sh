@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:06 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/15 21:40:44 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_error(char *str)
 	ft_putstr_fd("21sh: history: ", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd(": ", 2);
-	ft_putendl_fd(strerror(errno), 2);
+	ft_putendl_fd("opendir failed: bad address", 2);
 }
 
 void	ft_out_of_range(int i)

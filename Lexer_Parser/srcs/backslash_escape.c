@@ -29,7 +29,6 @@ void	backslash_char(t_token *token)
 			{
 				ft_memmove(&(token->lexeme[pos]), \
 					&(token->lexeme[pos + 1]), ft_strlen(token->lexeme) - pos);
-				pos++;
 			}
 			pos++;
 		}

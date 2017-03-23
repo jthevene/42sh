@@ -41,7 +41,8 @@ t_file			*get_file_path(char *path, char *sentence)
 		return (NULL);
 	FT_INIT(char*, var_path, get_var(g_shell.env, "PATH"));
 	rep = opendir(path);
-	if (rep && !ft_strchr(sentence, ' ') && sentence[0] != '/' && var_path)
+	if (rep && !ft_strchr(sentence, ' ')
+		&& sentence[0] != '/' && var_path)
 		files = store_files_dirs(rep, files, path, str_to_search(sentence));
 	else if (rep && path && sentence[ft_strlen(sentence) - 1] != ' ')
 		files = store_files_dirs(rep, files, path, str_to_search(sentence));
@@ -57,7 +58,7 @@ t_file			*get_file_path(char *path, char *sentence)
 	return (files);
 }
 
-static t_file	*files_list(char **sentence)
+static t_file	*files_list(char **sentence, bool detect_bins)
 {
 	FT_INIT(char**, path, NULL);
 	FT_INIT(t_file*, files, NULL);
@@ -66,7 +67,7 @@ static t_file	*files_list(char **sentence)
 	FT_INIT(char*, home, get_var(g_shell.env, "HOME"));
 	FT_INIT(char*, pwd, getcwd(NULL, 1024));
 	*sentence = default_sentence(sentence);
-	path = set_path(sentence, home, pwd);
+	path = set_path(sentence, home, pwd, detect_bins);
 	while (path && path[i])
 	{
 		if (!files)
@@ -99,7 +100,7 @@ static char		*if_new_sentence(char *sentence, t_file *files,
 	return (g_shell.current_line);
 }
 
-char			*detect_auto_completion(char *sentence)
+char			*detect_auto_completion(char *sentence, bool detect_bins)
 {
 	static int check = 0;
 
@@ -110,7 +111,7 @@ char			*detect_auto_completion(char *sentence)
 	if (!sentence || !ft_strlen(sentence) || !verif_sentence(sentence))
 		return (sentence);
 	FT_INIT(char*, copy_sentence, set_copy_sentence(sentence));
-	files = files_list(&copy_sentence);
+	files = files_list(&copy_sentence, detect_bins);
 	to_search = str_to_search(copy_sentence);
 	if ((match_files = compare_list_sentence(files, to_search)))
 		new_sentence = similarity(match_files, to_search);

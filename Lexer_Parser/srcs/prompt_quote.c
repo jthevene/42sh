@@ -22,11 +22,13 @@ static void		modif_prompt(char *modif_by)
 
 static int		detect_input_type(int key, char *quote_type)
 {
-	if (key == K_DEL)
+	if (key == K_DEL || key == K_DEL)
 		backspace_key(K_DEL);
 	else if (key == K_BACKSP)
 		backspace_key(K_BACKSP);
-	else if (key == K_RIGHT || key == K_LEFT)
+	else if (key == K_RIGHT || key == K_LEFT  || key == K_OW_RIGHT ||
+		key == K_OW_LEFT || key == K_OL_UP || key == K_OL_DOWN ||
+		key == K_GO_END || key == K_GO_START)
 		distrib_cursor_moves(key);
 	else if (key == K_UP || key == K_DOWN)
 	{
@@ -35,6 +37,13 @@ static int		detect_input_type(int key, char *quote_type)
 	}
 	else if (key == K_PRINT)
 		return (1);
+	else if (key == K_COPY || key == K_CUT)
+		copy_cut_line(key);
+	else if (key == K_TAB)
+	{
+		detect_auto_completion(g_shell.current_line, false);
+		print_line(1);
+	}
 	return (0);
 }
 

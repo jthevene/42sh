@@ -96,7 +96,7 @@ static char			**complete_char(char **new_path, char *home,
 	return (dirs);
 }
 
-char				**set_path(char **sentence, char *home, char *c_path)
+char				**set_path(char **sentence, char *home, char *c_path, bool detect_bins)
 {
 	FT_INIT(char*, new_path, NULL);
 	FT_INIT(char**, dirs, NULL);
@@ -104,7 +104,8 @@ char				**set_path(char **sentence, char *home, char *c_path)
 	c_path = !c_path ? "" : c_path;
 	if ((*sentence)[ft_strlen(*sentence) - 1] == ' ')
 		return (ft_strsplit(c_path, '\n'));
-	if (!ft_strchr(*sentence, ' ') && *sentence[0] != '/' && ft_strlen(c_path))
+	if (detect_bins && !ft_strchr(*sentence, ' ')
+		&& *sentence[0] != '/' && ft_strlen(c_path))
 	{
 		new_path = get_var(g_shell.env, "PATH");
 		dirs = verif_dirs(ft_strsplit(new_path, ':'));

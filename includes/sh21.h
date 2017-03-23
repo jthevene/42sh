@@ -94,10 +94,10 @@ char				*set_copy_sentence(char *sentence);
 char				*set_end_path(char **new_path, char **sentence);
 t_file				*sort_list(t_file *files);
 char				*default_sentence(char **sentence);
-char				*detect_auto_completion(char *sentence);
+char				*detect_auto_completion(char *sentence, bool detect_bins);
 t_file				*store_files_dirs(DIR *rp, t_file *f, char *pth, char *sh);
 t_file				*compare_list_sentence(t_file *files, char *sentence);
-char				**set_path(char **sentence, char *home, char *current_path);
+char				**set_path(char **sentence, char *home, char *current_path, bool detect_bins);
 void				display_completion(char *sentence, t_file *match_files);
 t_completion		*build_lst_lst(t_file *matchfiles, int nbelem, int nbcol);
 char				*similarity(t_file *match_files, char *sentence);
@@ -239,5 +239,6 @@ void				ft_sigint(int sig);
 int					len_tab(char **tabl);
 char				**verif_dirs(char **tabl);
 int					verif_access_bin_directory_(char *path);
+void				parse_capabilities(int key);
 
 #endif

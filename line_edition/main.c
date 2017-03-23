@@ -47,7 +47,7 @@ void			set_2d_edition_val(void)
 	g_shell.cursor_2d_x = ref_x;
 }
 
-static void		parse_capabilities(int key)
+void		parse_capabilities(int key)
 {
 	if (distrib_cursor_moves(key))
 		;
@@ -63,7 +63,7 @@ static void		parse_capabilities(int key)
 	}
 	else if (key == K_TAB)
 	{
-		detect_auto_completion(g_shell.current_line);
+		detect_auto_completion(g_shell.current_line, true);
 		print_line(1);
 	}
 	else if (key == K_ESCAPE)

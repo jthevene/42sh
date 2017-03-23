@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:50:32 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/23 18:45:16 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,11 +146,9 @@ char				*ft_realloc(void *str, int sizebase, int size);
 int					size_bin(unsigned int nbr);
 void				ft_putunbrprec(unsigned long long nbr, int *state,
 						unsigned int base, int caps);
-void				ft_putunbrchelou(unsigned long long nbr,
-						unsigned int base, int caps);
 void				ft_putnbrprec(long long nbr, int *state,
-						int base, int caps);
-void				ft_putnbrchelou(long long nbr, int base, int caps);
+						int caps);
+void				ft_putnbr_ftprintf(long long nbr, int caps);
 
 int					ft_count_tab(char **array);
 int					get_nb(const char *str, int *i);

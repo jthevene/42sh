@@ -6,7 +6,7 @@
 #    By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/08 14:36:42 by hjacque           #+#    #+#              #
-#    Updated: 2017/03/14 14:56:42 by sgaudin          ###   ########.fr        #
+#    Updated: 2017/03/23 18:06:22 by sgaudin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -159,7 +159,7 @@ BIN_EXECUTION 	= 	$(FILES_EXECUTION:.c=.o)
 INCLUDES 	= -I$(LIBFT_INCLUDE_DIR) -I$(INCLUDE_DIR) -I$(PARSER)../includes/
 ALL_SRCS 	= $(SRC_COMPLETION_EDIT) $(SRC_GLOBING) $(SRC_PARSER) $(SRC_BUILTIN) $(SRC_HISTORY) $(SRC_REDIRS) $(SRC_EXECUTION)
 ALL_BINS 	= $(BIN_COMPLETION_EDIT) $(BIN_GLOBING) $(BIN_PARSER) $(BIN_BUILTIN) $(BIN_HISTORY) $(BIN_REDIRS) $(BIN_EXECUTION)
-EXTENSIONS 	= $(LIBFT_DIR)/libft.a $(LIBFT_DIR)/libftprintf.a
+EXTENSIONS 	= $(LIBFT_DIR)/libft.a $(LIBFT_DIR)/ft_printf/libftprintf.a
 
 all: $(NAME)
 

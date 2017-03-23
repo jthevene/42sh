@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 17:04:00 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/03/23 11:02:48 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/23 18:54:15 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ char				*default_sentence(char **sentence);
 char				*detect_auto_completion(char *sentence, bool detect_bins);
 t_file				*store_files_dirs(DIR *rp, t_file *f, char *pth, char *sh);
 t_file				*compare_list_sentence(t_file *files, char *sentence);
-char				**set_path(char **sentence, char *home, char *current_path, bool detect_bins);
+char				**set_path(char **sentence, char *home, char *current_path,
+					bool detect_bins);
 void				display_completion(char *sentence, t_file *match_files);
 t_completion		*build_lst_lst(t_file *matchfiles, int nbelem, int nbcol);
 char				*similarity(t_file *match_files, char *sentence);

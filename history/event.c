@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:05 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/23 18:37:52 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ static int			exec_match(char *event, char *str_to_replace,
 	free(tmp ? tmp : NULL);
 	if (ft_strchr(g_shell.current_line, '!'))
 		return (history_event(g_shell.current_line));
-	ft_printf("\n%s\n", g_shell.current_line);
+	ft_putchar('\n');
+	ft_putendl(g_shell.current_line);
 	return (1);
 }
 

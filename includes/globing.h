@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   globing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:00 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/23 18:05:47 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 
 # ifndef FT_TER
 #  define FT_TER(si, alors, sinon) si ? alors : sinon
+# endif
+
+# ifndef MULTI
+#  define MULTI(val_a, val_b, val_c) val_a = val_b = val_c
 # endif
 
 # ifndef MULT

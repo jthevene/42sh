@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:41 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:45:50 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/23 18:54:44 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int		detect_input_type(int key, char *quote_type)
 		backspace_key(K_DEL);
 	else if (key == K_BACKSP)
 		backspace_key(K_BACKSP);
-	else if (key == K_RIGHT || key == K_LEFT  || key == K_OW_RIGHT ||
+	else if (key == K_RIGHT || key == K_LEFT || key == K_OW_RIGHT ||
 		key == K_OW_LEFT || key == K_OL_UP || key == K_OL_DOWN ||
 		key == K_GO_END || key == K_GO_START)
 		distrib_cursor_moves(key);

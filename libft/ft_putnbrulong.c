@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbrulong.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 18:13:29 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:50:57 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/23 18:46:44 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,6 @@ int			ft_unbrlen(unsigned long long nbr, unsigned int base)
 	return (len);
 }
 
-void		ft_putunbrprec(unsigned long long nbr, int *state, \
-						unsigned int base, int caps)
-{
-	int		useme;
-	int		ret;
-
-	ret = ft_unbrlen(nbr, base);
-	useme = -1;
-	if (state[6] > ret)
-		while (++useme != state[6] - ret)
-			(void)write(1, "0", 1);
-	ft_putunbrchelou(nbr, base, caps);
-}
-
 void		ft_putunbrchelou(unsigned long long nbr, unsigned int base, \
 							int caps)
 {
@@ -54,4 +40,18 @@ void		ft_putunbrchelou(unsigned long long nbr, unsigned int base, \
 	else
 		c = c + '0';
 	(void)write(1, &c, 1);
+}
+
+void		ft_putunbrprec(unsigned long long nbr, int *state, \
+						unsigned int base, int caps)
+{
+	int		useme;
+	int		ret;
+
+	ret = ft_unbrlen(nbr, base);
+	useme = -1;
+	if (state[6] > ret)
+		while (++useme != state[6] - ret)
+			(void)write(1, "0", 1);
+	ft_putunbrchelou(nbr, base, caps);
 }

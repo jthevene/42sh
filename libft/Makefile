@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+         #
+#    By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/24 18:13:29 by hjacque           #+#    #+#              #
-#    Updated: 2017/03/08 14:51:29 by hjacque          ###   ########.fr        #
+#    Updated: 2017/03/23 18:43:25 by sgaudin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,12 +29,12 @@ ft_abs.c ft_print_list.c ft_lstadd_bottom.c ft_itoabase.c ft_putwchar.c \
 ft_atoibase.c ft_recursive_pow.c ft_putwstr.c get_next_line.c ft_putnbrendl.c \
 ft_isspace.c ft_putchar_int.c ft_nbrlen.c ft_lstaddend.c ft_puttab.c \
 ft_get_nbr.c ft_lstaddback.c ft_ltoa.c ft_putendl_exit.c ft_putendl_fd_exit.c \
-ft_putnbrchelou.c ft_putnbrulong.c ft_putstrspace.c ft_count_tab.c \
+ft_putnbrulong.c ft_putstrspace.c ft_count_tab.c \
 ft_putstrtime.c ft_putstrtimespace.c ft_realloc.c ft_strjoinchar.c \
 ft_strjoinfree.c ft_strdupfree.c ft_tabdup.c size_bin.c ft_strndup.c \
-ft_str_replace.c
+ft_str_replace.c ft_putnbrprec.c ft_putnbr_ftprintf.c
 
-FT_PRINTF = ./ft_printf/
+ft_printf = ./ft_printf/
 
 BINARY = $(SRC:.c=.o)
 
@@ -47,19 +47,19 @@ $(NAME):
 	@printf "\033[31mCreation et indexage de libft.a\n\033[0m"
 	@ar rcs $(NAME) $(BINARY)
 	@printf "\033[31mCreation et indexage de libftprintf.a\033[0m"
-	@make -C $(FT_PRINTF) re
+	@make -C $(ft_printf) re
 	@printf "\033[32mDone !\033[0m\n"
 
 clean:
 	@printf "\033[31mSuppression des fichiers .o\033[0m"
 	@rm -rf $(BINARY)
 	@printf "\033[32mDone !\033[0m\n"
-	@make -C $(FT_PRINTF) clean
+	@make -C $(ft_printf) clean
 
 fclean: clean
 	@printf "\033[31mSuppression de libft.a\033[0m"
 	@rm -rf $(NAME)
 	@printf "\033[32mDone !\033[0m\n"
-	@make -C $(FT_PRINTF) fclean
+	@make -C $(ft_printf) fclean
 
 re: fclean all

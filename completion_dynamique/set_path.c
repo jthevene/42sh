@@ -6,13 +6,13 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/13 12:34:53 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/23 18:53:32 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sh21.h"
 
-static	char		*set_begining(char *sentence, char *home,
+static	char	*set_begining(char *sentence, char *home,
 					char *current_path)
 {
 	FT_INIT(char*, new_path, NULL);
@@ -39,7 +39,7 @@ static	char		*set_begining(char *sentence, char *home,
 	return (new_path);
 }
 
-static void			remove_char(char **str, char c)
+static void		remove_char(char **str, char c)
 {
 	if (!str || !c)
 		return ;
@@ -51,7 +51,7 @@ static void			remove_char(char **str, char c)
 	}
 }
 
-static	char		*parse_dirs(char **dirs, char *new_p, char *home)
+static	char	*parse_dirs(char **dirs, char *new_p, char *home)
 {
 	while (dirs && *dirs)
 	{
@@ -80,7 +80,7 @@ static	char		*parse_dirs(char **dirs, char *new_p, char *home)
 	return (new_p);
 }
 
-static char			**complete_char(char **new_path, char *home,
+static char		**complete_char(char **new_path, char *home,
 					char **sentence, int slash)
 {
 	FT_INIT(char**, dirs, NULL);
@@ -96,7 +96,8 @@ static char			**complete_char(char **new_path, char *home,
 	return (dirs);
 }
 
-char				**set_path(char **sentence, char *home, char *c_path, bool detect_bins)
+char			**set_path(char **sentence, char *home, char *c_path,
+				bool detect_bins)
 {
 	FT_INIT(char*, new_path, NULL);
 	FT_INIT(char**, dirs, NULL);

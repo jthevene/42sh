@@ -3,103 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/24 18:13:29 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:51:31 by hjacque          ###   ########.fr       */
+/*   Created: 2015/10/02 14:38:14 by hjacque           #+#    #+#             */
+/*   Updated: 2017/03/23 18:44:31 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# ifndef FT_INIT
-#  define FT_INIT(type,name,value)		type name = value
-# endif
-
-# ifndef TER
-#  define TER(si,alors,sinon)			si ? alors : sinon
-# endif
-
-# ifndef MULTI
-#  define MULTI(val_a, val_b, val_c)		val_a = val_b = val_c
-# endif
-
+# include <unistd.h>
 # include <stdarg.h>
-# include <wchar.h>
 # include <stdint.h>
+# include <wchar.h>
+# include <locale.h>
 # include "../../includes/libft.h"
 
-typedef struct		s_docker
+# define DIEZ 0
+# define ZERO 1
+# define MINUS 2
+# define PLUS 3
+# define SPACE 4
+# define CHAMP 5
+# define PRECISION 6
+# define HH 8
+# define H 7
+# define L 9
+# define LL 10
+# define J 11
+# define Z 12
+
+typedef struct		s_printf
 {
-	int				result;
-	int				i;
-	int				len;
-	int				(*fct[256])(const char *, va_list, struct s_docker *);
-	int				dieze;
-	int				zero;
-	int				less;
-	int				more;
-	int				space;
-	int				dot;
-	int				width;
-	int				precision;
-	char			type;
-	int				choice;
-	int				length;
-	int				wide_width;
-	enum {
-		z = 1,
-		j,
-		ll,
-		l,
-		hh,
-		h
-	}				enum_length;
-}					t_docker;
+	char			c;
+	int				(*ptr)(va_list *ap, int *state);
+}					t_printf;
 
+int					shortf(int ret, int *state);
+int					printf_call(const char *str, int *i, va_list *ap);
+int					conv(const char *format, int *i, va_list *ap);
+int					indexof(const char *str, const char c);
+void				range(int *state, const char *str, int *p, int *i);
+int					ft_witoa(char *dest, wint_t src);
+size_t				ft_wcharlen(wchar_t *s);
+int					*ft_wctoa(char **dest, wchar_t *src);
 int					ft_printf(const char *format, ...);
-
-int					longueur_nb(int64_t nb);
-int					len_base(uintmax_t nb, uint32_t base);
-int					ft_add_spaces(int nb_spaces, int len, char c);
-
-void				ft_detect_flags(const char *str, t_docker *data);
-void				ft_detect_width(const char *str, t_docker *data, int who);
-int					distrib_putbase(t_docker *data, uintmax_t result, int base
-									, uint8_t flag);
-
-int					ftp_putbase(uintmax_t n, uint32_t base, uint8_t flag,
-								t_docker *data);
-int					ftp_octal(uint32_t nb, va_list args, t_docker *data);
-int					ftp_putchar(uint32_t c);
-int					ftp_putstr(uint8_t *str);
-int					ftp_strlen(uint8_t *str);
-int					ftp_putnbr(int64_t n, t_docker *data);
-int					ftp_putnbr_long(int64_t n, t_docker *data);
-int					ftp_putbase_long(uintmax_t n, uint32_t base, uint8_t flag,
-									t_docker *data);
-
-int					call_putstr(const char *str, va_list args, t_docker *data);
-int					call_putchar(const char *str, va_list args, t_docker *data);
-int					call_putnbr(const char *str, va_list args, t_docker *data);
-int					call_putbase(const char *str, va_list args, t_docker *data);
-int					call_putbase_long(const char *str, va_list args,
-									t_docker *data);
-int					call_putnbr_long(const char *str, va_list args,
-									t_docker *data);
-int					call_putwchar(const char *str, va_list args,
-									t_docker *data);
-int					call_putwstr(const char *str, va_list args, t_docker *data);
-int					call_putadress(const char *str, va_list args,
-									t_docker *data);
-int					call_purcent(const char *str, va_list args, t_docker *data);
-
-t_docker			init_tabptr(void);
-void				detect_conversion(const char *str, t_docker *data);
-uintmax_t			unsigned_conversion(t_docker *data, va_list args);
-intmax_t			signed_conversion(t_docker *data, va_list args);
-int					ft_check_valid(const char *str, t_docker *data);
-int					detect(const char *s, t_docker *data);
+int					printf_pourcent(va_list *ap, int *state);
+int					printf_s(va_list *ap, int *state);
+int					printf_d(va_list *ap, int *state);
+int					printf_gd(va_list *ap, int *state);
+int					printf_gs(va_list *ap, int *state);
+int					printf_o(va_list *ap, int *state);
+int					printf_go(va_list *ap, int *state);
+int					printf_u(va_list *ap, int *state);
+int					printf_gu(va_list *ap, int *state);
+int					printf_x(va_list *ap, int *state);
+int					printf_gx(va_list *ap, int *state);
+int					printf_i(va_list *ap, int *state);
+int					printf_p(va_list *ap, int *state);
+int					printf_c(va_list *ap, int *state);
+int					printf_gc(va_list *ap, int *state);
+long long			get_arg(va_list *ap, int *state);
+unsigned long long	get_uarg(va_list *ap, int *state);
 
 #endif

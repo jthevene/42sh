@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_sentence.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:37 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/23 18:37:10 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ void		free_simple_tab(char ***tab_to_del)
 
 char		*set_sentence(char *str, int len_str, char *name)
 {
-	FT_INIT(char*, tmp, ft_itoa(len_str + 2));
-	str = ft_strcat(str, "%-");
-	str = ft_strcat(str, tmp);
-	str = ft_strcat(str, "s");
-	ft_printf(str, name);
+	len_str += 2;
+	ft_putstr(name);
+	while ((len_str-- - ft_strlen(name)) > 0)
+		ft_putchar(' ');
+	(void)name;
 	ft_bzero(str, ft_strlen(str));
-	ft_strdel(&tmp);
 	return (str);
 }
 

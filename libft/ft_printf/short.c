@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ftp_strlen.c                                       :+:      :+:    :+:   */
+/*   short.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hjacque <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/24 18:13:29 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:50:41 by hjacque          ###   ########.fr       */
+/*   Created: 2016/01/25 13:47:29 by hjacque           #+#    #+#             */
+/*   Updated: 2016/01/25 13:49:15 by hjacque          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "includes/ft_printf.h"
 
-int		ftp_strlen(uint8_t *str)
+int		shortf(int ret, int *state)
 {
-	int i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
+	if (ret < state[CHAMP] && state[MINUS] == 0)
+		while (ret < state[CHAMP])
+		{
+			(void)write(1, " ", 1);
+			ret++;
+		}
+	return (ret);
 }

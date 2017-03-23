@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:42 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/23 11:01:08 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/23 18:55:08 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void			set_2d_edition_val(void)
 	g_shell.cursor_2d_x = ref_x;
 }
 
-void		parse_capabilities(int key)
+void			parse_capabilities(int key)
 {
 	if (distrib_cursor_moves(key))
 		;

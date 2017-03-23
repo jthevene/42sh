@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/13 19:11:17 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/23 11:02:07 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,25 +74,24 @@ void		init_tmp_env(void)
 	}
 }
 
-int			init_env(void)
+int			init_env(char **envp)
 {
 	int				i;
 	char			*v_name;
 	char			*v_value;
 	t_var			*var;
-	extern char		**environ;
 
 	i = 0;
-	if (!environ[0])
+	if (!envp[0])
 	{
 		create_safety_vars();
 		g_shell.oldpwd = get_var(g_shell.env, "OLDPWD");
 		return (1);
 	}
-	while (environ[i])
+	while (envp[i])
 	{
-		v_value = ft_strchr(environ[i], '=') + 1;
-		v_name = ft_strsub(environ[i], 0, v_value - environ[i] - 1);
+		v_value = ft_strchr(envp[i], '=') + 1;
+		v_name = ft_strsub(envp[i], 0, v_value - envp[i] - 1);
 		var = new_var(v_name, v_value);
 		ft_varappend(var, &g_shell.env);
 		free(v_name);

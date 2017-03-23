@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:42 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/14 14:58:48 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/23 11:01:21 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ static void		init_edition(void)
 	g_shell.all_results = -99;
 }
 
-int				init_all(void)
+int				init_all(char **envp)
 {
 	ft_signal();
-	if (!init_env())
+	if (!init_env(envp))
 		return (1);
 	init_hist();
 	init_win();

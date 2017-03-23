@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:42 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:45:42 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/23 11:01:08 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ static void		run_shell(void)
 	}
 }
 
-int				main(void)
+int				main(int ac, char **av, char **envp)
 {
-	if (init_all())
+	if (!ac || !av || init_all(envp))
 		return (0);
 	display_prompt();
 	run_shell();

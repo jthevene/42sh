@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 17:04:00 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/03/13 17:05:14 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/23 11:02:48 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,9 +138,9 @@ void				go_to_end();
 ** INIT
 */
 void				init_hist_opt();
-int					init_all(void);
+int					init_all(char **envp);
 void				init_hist(void);
-int					init_env(void);
+int					init_env(char **envp);
 void				init_tmp_env(void);
 /*
 ** LINE_EDITION

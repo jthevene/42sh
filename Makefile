@@ -6,7 +6,7 @@
 #    By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/08 14:36:42 by hjacque           #+#    #+#              #
-#    Updated: 2017/03/23 18:06:22 by sgaudin          ###   ########.fr        #
+#    Updated: 2017/03/24 09:51:10 by sgaudin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -165,7 +165,7 @@ all: $(NAME)
 
 $(NAME):
 	make -C libft
-	gcc $(C_FLAGS) -g $(INCLUDES) $(ALL_SRCS) -Incurses -c
+	gcc $(C_FLAGS) -g $(INCLUDES) $(ALL_SRCS) -c
 	gcc $(C_FLAGS) -g $(ALL_BINS) $(EXTENSIONS) -ltermcap -o $(NAME)
 	mkdir bin_folder
 	mv $(ALL_BINS) bin_folder

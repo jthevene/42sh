@@ -48,7 +48,7 @@ void			copy_cut_line(int key)
 	end_select += g_shell.end_select > g_shell.start_select ?
 		g_shell.end_select : g_shell.start_select;
 	end_select++;
-	if (end_select - start_select <= 0)
+	if (end_select - start_select <= 0 || start_select < 0 || end_select < 0)
 		return ;
 	g_shell.clipboard = store_selection(start_select, end_select, key);
 }

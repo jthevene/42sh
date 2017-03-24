@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/14 14:58:00 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/24 13:13:30 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct				s_shell
 	int						hist_fd;
 	t_lst					*end_hist_file;
 	t_hist_opt				hist_opt;
+	char					*saved_current_line;
 	int						nav_hist;
 	struct termios			my_termios;
 	struct termios			t_back;

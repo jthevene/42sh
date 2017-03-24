@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:42 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/23 11:01:21 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/24 13:16:00 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void			init_hist(void)
 	g_shell.hist_fd = 0;
 	g_shell.hist = NULL;
 	g_shell.nav_hist = 0;
+	g_shell.saved_current_line = NULL;
 	init_hist_opt();
 	filename = ft_strjoin(home, "/.history");
 	g_shell.hist_fd = open(filename, O_RDWR | O_CREAT, 0600);

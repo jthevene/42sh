@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   navigation_hist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:00 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/24 16:05:27 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void			nav_hist_up(void)
 	{
 		if (g_shell.nav_hist == 1)
 			g_shell.curr_hist = g_shell.curr_hist->prev;
+		else if (g_shell.nav_hist == 0)
+			g_shell.saved_current_line = ft_strdup(g_shell.current_line);
 		g_shell.nav_hist = 1;
 		put_hist_line(g_shell.curr_hist->content);
 		replace_current_line(g_shell.curr_hist->content);
@@ -59,5 +61,11 @@ void			nav_hist_down(void)
 		g_shell.curr_hist = g_shell.curr_hist->next;
 		put_hist_line(g_shell.curr_hist->content);
 		replace_current_line(g_shell.curr_hist->content);
+	}
+	else
+	{
+		g_shell.nav_hist = 2;
+		put_hist_line(g_shell.saved_current_line);
+		replace_current_line(g_shell.saved_current_line);
 	}
 }

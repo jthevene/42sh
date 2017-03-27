@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/24 16:05:27 by jules            ###   ########.fr       */
+/*   Updated: 2017/03/27 08:53:01 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void			nav_hist_down(void)
 	{
 		g_shell.nav_hist = 2;
 		put_hist_line(g_shell.saved_current_line);
+		if (g_shell.saved_current_line == NULL)
+			g_shell.saved_current_line = ft_strdup("");
 		replace_current_line(g_shell.saved_current_line);
 	}
 }

@@ -34,8 +34,6 @@ ft_putstrtime.c ft_putstrtimespace.c ft_realloc.c ft_strjoinchar.c \
 ft_strjoinfree.c ft_strdupfree.c ft_tabdup.c size_bin.c ft_strndup.c \
 ft_str_replace.c ft_putnbrprec.c ft_putnbr_ftprintf.c
 
-ft_printf = ./ft_printf/
-
 BINARY = $(SRC:.c=.o)
 
 all: $(NAME)
@@ -47,19 +45,16 @@ $(NAME):
 	@printf "\033[31mCreation et indexage de libft.a\n\033[0m"
 	@ar rcs $(NAME) $(BINARY)
 	@printf "\033[31mCreation et indexage de libftprintf.a\033[0m"
-	@make -C $(ft_printf) re
 	@printf "\033[32mDone !\033[0m\n"
 
 clean:
 	@printf "\033[31mSuppression des fichiers .o\033[0m"
 	@rm -rf $(BINARY)
 	@printf "\033[32mDone !\033[0m\n"
-	@make -C $(ft_printf) clean
 
 fclean: clean
 	@printf "\033[31mSuppression de libft.a\033[0m"
 	@rm -rf $(NAME)
 	@printf "\033[32mDone !\033[0m\n"
-	@make -C $(ft_printf) fclean
 
 re: fclean all

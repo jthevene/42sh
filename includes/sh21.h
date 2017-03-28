@@ -105,6 +105,9 @@ char				*similarity(t_file *match_files, char *sentence);
 char				**clear_path(char **sentence);
 t_completion		*change_col(t_completion *all_col, t_completion *head,
 						int *ref_col, int nb_elem);
+int					ask_to_show_data(float *disp_val);
+float				*get_display_values(t_file *match_files);
+
 /*
 ** CD
 */

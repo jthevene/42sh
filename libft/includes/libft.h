@@ -22,7 +22,6 @@
 # include <stdint.h>
 # include <wchar.h>
 
-# include "../ft_printf/includes/ft_printf.h"
 # include "get_next_line.h"
 
 # ifndef FT_INIT

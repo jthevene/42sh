@@ -35,7 +35,8 @@ FILES_EDITION 		=	main.c catch_key.c 	cursor_move.c \
 FILES_COMPLETION	=	detect_auto_completion.c get_files.c match_elements.c \
 						set_path.c display_completion.c build_list.c \
 						set_sentence.c free_auto_completion.c \
-						tools.c set_path_second_part.c verif_completion_dirs.c
+						tools.c set_path_second_part.c verif_completion_dirs.c \
+						display_completion_tools.c
 
 SRC_COMPLETION_EDIT	=	$(addprefix $(EDITION_DIR), $(FILES_EDITION)) \
 						$(addprefix $(DIR_AUTO), $(FILES_COMPLETION))
@@ -159,7 +160,7 @@ BIN_EXECUTION 	= 	$(FILES_EXECUTION:.c=.o)
 INCLUDES 	= -I$(LIBFT_INCLUDE_DIR) -I$(INCLUDE_DIR) -I$(PARSER)../includes/
 ALL_SRCS 	= $(SRC_COMPLETION_EDIT) $(SRC_GLOBING) $(SRC_PARSER) $(SRC_BUILTIN) $(SRC_HISTORY) $(SRC_REDIRS) $(SRC_EXECUTION)
 ALL_BINS 	= $(BIN_COMPLETION_EDIT) $(BIN_GLOBING) $(BIN_PARSER) $(BIN_BUILTIN) $(BIN_HISTORY) $(BIN_REDIRS) $(BIN_EXECUTION)
-EXTENSIONS 	= $(LIBFT_DIR)/libft.a $(LIBFT_DIR)/ft_printf/libftprintf.a
+EXTENSIONS 	= $(LIBFT_DIR)/libft.a
 
 all: $(NAME)
 

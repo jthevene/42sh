@@ -20,8 +20,7 @@ int		token_squote(t_token *token, char *line, int pos, int i)
 	while (line[pos] != '\'')
 		pos++;
 	pos++;
-	while (ft_isprintnotope(line[pos]) == 1)
-		pos++;
+	pos = get_lexeme_pos(line, pos);
 	add_lexeme(token, line, pos, i);
 	return (pos);
 }
@@ -34,8 +33,7 @@ int		token_dquote(t_token *token, char *line, int pos, int i)
 	while (line[pos] != '\"')
 		pos++;
 	pos++;
-	while (ft_isprintnotope(line[pos]) == 1)
-		pos++;
+	pos = get_lexeme_pos(line, pos);
 	add_lexeme(token, line, pos, i);
 	return (pos);
 }

@@ -30,7 +30,8 @@ void	backslash_char(t_token *token)
 				ft_memmove(&(token->lexeme[pos]), \
 					&(token->lexeme[pos + 1]), ft_strlen(token->lexeme) - pos);
 			}
-			pos++;
+			else
+				pos++;
 		}
 	}
 }
@@ -44,7 +45,6 @@ int		supp_squote(t_token *token, int pos, int s)
 		pos++;
 	ft_memmove(&(token->lexeme[pos]), \
 		&(token->lexeme[pos + 1]), ft_strlen(token->lexeme) - pos);
-	pos++;
 	return (pos);
 }
 
@@ -57,7 +57,6 @@ int		supp_dquote(t_token *token, int pos, int d)
 		pos++;
 	ft_memmove(&(token->lexeme[pos]), \
 		&(token->lexeme[pos + 1]), ft_strlen(token->lexeme) - pos);
-	pos++;
 	return (pos);
 }
 
@@ -71,7 +70,8 @@ int		get_lexeme_pos(char *line, int pos)
 		while (ft_isprintnotope(line[pos]) == 1)
 			pos++;
 		pos = quote_in_word(line, pos);
-		if (ft_isprintnotope(line[pos]) == 0)
+		if (ft_isprintnotope(line[pos]) == 0 && line[pos] != '\"' \
+			&& line[pos] != '\'')
 			exit = 1;
 	}
 	return (pos);

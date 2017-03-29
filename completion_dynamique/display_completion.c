@@ -57,6 +57,17 @@ static void		display_form(t_completion *all_col, int nb_elem,
 	ft_putendl("");
 }
 
+static void 	ajust_final_positon(void)
+{
+	FT_INIT(int, go_down, g_shell.line_2d_y);
+	while (go_down-- > 0)
+		ft_putstr("\n");
+	go_down = 0;
+	while (go_down++ < g_shell.line_2d_y)
+		tputs(tgetstr("up", NULL), 1, ft_putchar_int);
+	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
+}
+
 void			display_completion(char *sentence, t_file *match_files)
 {
 	if (!sentence || !match_files)
@@ -79,7 +90,7 @@ void			display_completion(char *sentence, t_file *match_files)
 			1 : nb_elem_lst), nb_col);
 	tmp_lst = lst_lst;
 	display_form(lst_lst, disp_val[0], disp_val[1], disp_val[2]);
-	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
+	ajust_final_positon();
 	free(disp_val);
 	free_lst_lst(tmp_lst);
 }

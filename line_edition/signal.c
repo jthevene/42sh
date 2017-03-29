@@ -25,6 +25,7 @@ void		ft_sigwinch(int sig)
 void		ft_sigint(int sig)
 {
 	(void)sig;
+	kill(-1, SIGCHLD);
 	if (g_shell.running == 2)
 	{
 		ft_bzero(g_shell.current_line, ft_strlen(g_shell.current_line));

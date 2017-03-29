@@ -78,6 +78,7 @@ static void		init_edition(void)
 	g_shell.prompt_len = 0;
 	g_shell.result_exec = -99;
 	g_shell.all_results = -99;
+	g_shell.sig = -1;
 }
 
 int				init_all(char **envp)

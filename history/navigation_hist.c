@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/27 08:53:01 by jules            ###   ########.fr       */
+/*   Updated: 2017/03/30 13:09:00 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,14 @@ static void		replace_current_line(char *content)
 
 void			nav_hist_up(void)
 {
-	if (g_shell.curr_hist->prev && g_shell.curr_hist->prev->content)
-	{
-		if (g_shell.nav_hist == 1)
-			g_shell.curr_hist = g_shell.curr_hist->prev;
-		else if (g_shell.nav_hist == 0)
-			g_shell.saved_current_line = ft_strdup(g_shell.current_line);
-		g_shell.nav_hist = 1;
-		put_hist_line(g_shell.curr_hist->content);
-		replace_current_line(g_shell.curr_hist->content);
-	}
+	if (g_shell.nav_hist == 1 && g_shell.curr_hist->prev && 
+		g_shell.curr_hist->content)
+		g_shell.curr_hist = g_shell.curr_hist->prev;
+	else if (g_shell.nav_hist == 0)
+		g_shell.saved_current_line = ft_strdup(g_shell.current_line);
+	g_shell.nav_hist = 1;
+	put_hist_line(g_shell.curr_hist->content);
+	replace_current_line(g_shell.curr_hist->content);
 }
 
 void			nav_hist_down(void)
@@ -64,7 +62,7 @@ void			nav_hist_down(void)
 	}
 	else
 	{
-		g_shell.nav_hist = 2;
+		g_shell.nav_hist = 0;
 		put_hist_line(g_shell.saved_current_line);
 		if (g_shell.saved_current_line == NULL)
 			g_shell.saved_current_line = ft_strdup("");

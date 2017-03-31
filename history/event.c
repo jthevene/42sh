@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/23 18:37:52 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/31 15:15:04 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int			exec_match(char *event, char *str_to_replace,
 	tmp = ft_str_replace(event, str_to_replace, replace_by);
 	if (!replace_by)
 	{
-		ft_putstr_fd("\n21sh: ", 2);
+		ft_putstr_fd("\n42sh: ", 2);
 		ft_putstr_fd(str_to_replace, 2);
 		ft_putstr_fd(": event not found", 2);
 		free(str_to_replace ? str_to_replace : NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hub_sbracket.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:16 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/31 15:14:58 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int				fill_bracket_tabs(char *line, t_glob *glob)
 	free(line);
 	if (!check_rng(tmp))
 	{
-		tmp2 = ft_strjoin("21sh: no matches found: ", glob->command);
+		tmp2 = ft_strjoin("42sh: no matches found: ", glob->command);
 		ft_putendl_fd(tmp2, 2);
 		free(tmp2);
 		return (0);

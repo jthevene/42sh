@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/sh21.h"
+#include "../includes/sh42.h"
 
 static	int			compare(char *str1, char *str2)
 {

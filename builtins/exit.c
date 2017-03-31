@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 17:04:00 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/03/14 14:45:26 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/31 15:14:48 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/sh21.h"
+#include "../includes/sh42.h"
 
 char		*get_tab_arguments(char **tabl, int len_tab)
 {
@@ -60,7 +60,7 @@ void		ft_exit(char *return_value)
 	FT_INIT(int, int_return_value, 0);
 	FT_INIT(char*, str_ret, NULL);
 	if (!(str_ret = get_value_to_return(return_value)))
-		return (ft_putstr_fd("21sh: exit: too many arguments", 2));
+		return (ft_putstr_fd("42sh: exit: too many arguments", 2));
 	go_to_end();
 	ft_putstr("\n");
 	ft_reset_termios(g_shell.t_back);

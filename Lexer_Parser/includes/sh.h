@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   sh.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:45:57 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/31 15:13:46 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SH_H
 # define SH_H
 
-# ifndef SH21_H
-#  include "sh21.h"
+# ifndef SH42_H
+#  include "sh42.h"
 # endif
 
 # define WORDS			0

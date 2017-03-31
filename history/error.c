@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/15 21:40:44 by jules            ###   ########.fr       */
+/*   Updated: 2017/03/31 15:15:01 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_error(char *str)
 {
-	ft_putstr_fd("21sh: history: ", 2);
+	ft_putstr_fd("42sh: history: ", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putendl_fd("opendir failed: bad address", 2);
@@ -29,7 +29,7 @@ void	ft_out_of_range(int i)
 
 int		error_parse_bin(char *error)
 {
-	ft_putstr_fd("21sh:", 2);
+	ft_putstr_fd("42sh:", 2);
 	ft_putstr_fd(error, 2);
 	ft_putstr_fd(":No such file or directory\n", 2);
 	return (0);
@@ -37,7 +37,7 @@ int		error_parse_bin(char *error)
 
 int		error_exec(char **args, char **cmd)
 {
-	ft_putstr_fd("21sh: ", 2);
+	ft_putstr_fd("42sh: ", 2);
 	ft_putstr_fd(args[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
 	ft_strdel(&(*cmd));

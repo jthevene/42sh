@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   globing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/23 18:05:47 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/03/31 15:13:48 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GLOBING_H
 # define GLOBING_H
 
-# ifndef SH21_H
-#  include "sh21.h"
+# ifndef SH42_H
+#  include "sh42.h"
 # endif
 
 # ifndef FT_INIT

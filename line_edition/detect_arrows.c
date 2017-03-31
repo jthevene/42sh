@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/sh21.h"
+#include "../includes/sh42.h"
 
 static int		detect_selection_text(char *key, int start,
 		int end, int cursor_x)

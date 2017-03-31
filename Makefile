@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+         #
+#    By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/08 14:36:42 by hjacque           #+#    #+#              #
-#    Updated: 2017/03/24 09:51:10 by sgaudin          ###   ########.fr        #
+#    Updated: 2017/03/31 15:10:21 by dvirgile         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME				=	21sh
+NAME				=	42sh
 
 INCLUDE_DIR			=	./includes
 EDITION_DIR			=	./line_edition/

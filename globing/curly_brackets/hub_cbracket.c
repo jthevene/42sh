@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hub_cbracket.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:22 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/31 17:50:50 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@ int				hub_cbracket(t_glob *glob, char *line)
 		{
 			tmp = ft_strdup(line);
 			i += ft_strlen(tmp);
-			hub_expansion(ft_strdup(tmp), glob);
+			if (!hub_expansion(ft_strdup(tmp), glob))
+				return (free_triple_str(&tmp, NULL, NULL));
 			if (glob->exp)
 			{
-				free(tmp);
+				ft_strdel(&tmp);
 				tmp = ft_strdup(glob->exp);
-				free(glob->exp);
-				glob->exp = NULL;
+				ft_strdel(&glob->exp);
 			}
 			if (!handle_cbracket(tmp, glob))
 				return (0);
-			free(tmp);
+			ft_strdel(&tmp);
 			free_double_tab(&glob->ext_args);
 		}
 		i++;

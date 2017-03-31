@@ -42,7 +42,7 @@ static void		replace_current_line(char *content)
 
 void			nav_hist_up(void)
 {
-	if (g_shell.nav_hist == 1 && g_shell.curr_hist->prev && 
+	if (g_shell.nav_hist == 1 && g_shell.curr_hist->prev &&
 		g_shell.curr_hist->content)
 		g_shell.curr_hist = g_shell.curr_hist->prev;
 	else if (g_shell.nav_hist == 0)

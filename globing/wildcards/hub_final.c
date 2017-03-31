@@ -56,9 +56,10 @@ int			multi_handling(t_glob *glob)
 {
 	FT_INIT(t_bracket *, tmp, NULL);
 	rewind_tbracket(&glob->args);
-	while (ft_strchr(glob->args->content, '*')
+	while (glob && glob->args && glob->args->content
+		&& (ft_strchr(glob->args->content, '*')
 		|| ft_strchr(glob->args->content, '?')
-		|| ft_strchr(glob->args->content, '['))
+		|| ft_strchr(glob->args->content, '[')))
 	{
 		copy_list(&glob->args, &tmp);
 		free_tbracket(&glob->args);

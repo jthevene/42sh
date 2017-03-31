@@ -16,8 +16,11 @@ static char		*store_selection(int start_select, int end_select, int key)
 {
 	FT_INIT(char*, clipboard, NULL);
 	FT_INIT(int, nb_del, 0);
+	FT_INIT(int, len_current_line, (int)ft_strlen(g_shell.current_line));
+	if (end_select > len_current_line)
+		end_select = len_current_line;
 	clipboard = ft_strsub(g_shell.current_line, start_select,
-		end_select - start_select);
+		ft_abs(end_select - start_select));
 	if (key == K_CUT)
 	{
 		nb_del = end_select - start_select;

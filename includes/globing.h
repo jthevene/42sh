@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   globing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/31 15:13:48 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/03/31 17:33:19 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,12 +215,12 @@ void					rewind_index(t_clist **list, int index);
 void					i2_hub_imbric(char *str, int i, t_glob *glob);
 void					i_hub_patterns(char *str, t_glob *glob);
 
-void					hub_expansion(char *str, t_glob *glob);
+int						hub_expansion(char *str, t_glob *glob);
 
 int						exp_type(char *str);
 char					*ft_cdup(char c);
 int						is_solo_arg(t_bracket *args);
-void					free_double_str(char **s, char **s2);
+int						free_triple_str(char **s, char **s2, char **s3);
 
 int						hub_final(t_glob *glob, char *line);
 int						is_only_token(char token, char *str);

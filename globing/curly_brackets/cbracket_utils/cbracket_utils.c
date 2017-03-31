@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cbracket_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:29 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/31 18:02:24 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void				free_double_tab(char ***tabl)
 int					detect_double_bracket(char *str)
 {
 	FT_INIT(int, i, 0);
+	if (!str)
+		return (0);
 	while (str[i])
 	{
 		if (str[i] == '{' && str[i + 1] == '{')

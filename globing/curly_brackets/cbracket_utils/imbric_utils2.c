@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   imbric_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:25 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/31 18:03:08 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int				i_detect_imbric(char *str)
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, 0);
 	FT_INIT(int, count, 0);
+	if (!str)
+		return (0);
 	while (str[i])
 	{
 		if (str[i] == '{')

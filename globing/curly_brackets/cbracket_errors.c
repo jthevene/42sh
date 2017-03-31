@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cbracket_errors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/31 15:14:57 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/03/31 17:32:58 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ int		is_expansion(char *line)
 int		cbracket_errors(char *line, t_glob *glob)
 {
 	FT_INIT(char *, tmp, NULL);
+	FT_INIT(int, i, 0);
+	while (line[i] != '{')
+		i++;
 	if (ft_strchr(line, ' '))
 	{
 		tmp = ft_strjoin("42sh: Spaces are forbidden in expression: "
@@ -36,7 +39,7 @@ int		cbracket_errors(char *line, t_glob *glob)
 		free(line);
 		return (0);
 	}
-	else if (!check_commas(line, 0) && !(is_expansion(line)))
+	else if (!check_commas(line, i) && !(is_expansion(line)))
 	{
 		tmp = ft_strjoin("42sh: Bad pattern in expression: ", glob->command);
 		ft_putendl_fd(tmp, 2);

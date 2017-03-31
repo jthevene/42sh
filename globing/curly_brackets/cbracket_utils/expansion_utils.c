@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:27 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/31 17:23:11 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,22 @@ int			is_solo_arg(t_bracket *args)
 	return (count == 1 ? 1 : 0);
 }
 
-void		free_double_str(char **s, char **s2)
+int			free_triple_str(char **s, char **s2, char **s3)
 {
-	if ((*s) != NULL)
+	if (s != NULL && (*s) != NULL)
 	{
 		free((*s));
 		(*s) = NULL;
 	}
-	if ((*s2) != NULL)
+	if (s2 != NULL && (*s2) != NULL)
 	{
 		free((*s2));
 		(*s2) = NULL;
 	}
+	if (s3 != NULL && (*s3) != NULL)
+	{
+		free((*s3));
+		(*s3) = NULL;
+	}
+	return (0);
 }

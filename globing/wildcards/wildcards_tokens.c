@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards_tokens.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:11 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/31 17:20:44 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			only_qmark(char *str, int star, t_glob *g)
 	else if (star == FALSE && len == ft_strlen(files->content))
 		push_content_path(&g->args, ft_strdup(files->content), g);
 	ft_lst_free(&files);
-	free_double_str(&g->f_path, &g->l_path);
+	free_triple_str(&g->f_path, &g->l_path, NULL);
 	return (0);
 }
 
@@ -69,7 +69,7 @@ int			only_cbrkt(char *str, t_glob *g)
 			break ;
 		f = f->next;
 	}
-	free_double_str(&g->f_path, &g->l_path);
+	free_triple_str(&g->f_path, &g->l_path, NULL);
 	free_tbracket(&g->sbracket);
 	ft_lst_free(&f);
 	return (0);
@@ -92,11 +92,11 @@ int			mix_with_star(char *str, t_glob *g)
 		files = files->next;
 	}
 	if (g->f_path)
-		free(g->f_path);
+		ft_strdel(&g->f_path);
 	if (g->l_path)
-		free(g->l_path);
+		ft_strdel(&g->l_path);
 	if (token)
-		free(token);
+		ft_strdel(&token);
 	free_tbracket(&g->sbracket);
 	ft_lst_free(&files);
 	return (0);

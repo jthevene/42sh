@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:23 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/31 17:21:36 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int				e_solo(char *exp, int i, t_bracket *args, t_glob *glob)
 	while (exp[i] != '}')
 		i++;
 	tmp = ft_strdup(glob->exp);
-	tmp2 = ft_strsub(exp, i + 1, ft_strlen(exp) - i);
+	tmp2 = ft_strsub(exp, i + 1, ft_strlen(exp) - i - 1);
 	free(glob->exp);
 	glob->exp = ft_strjoin(tmp, tmp2);
 	free(tmp);
@@ -73,7 +73,7 @@ int				e_recreate(char *exp, int i, t_bracket *args, t_glob *glob)
 	{
 		tmp2 = ft_strjoin(args->content, ",");
 		glob->exp = ft_strjoin(tmp, tmp2);
-		free_double_str(&tmp, &tmp2);
+		free_triple_str(&tmp, &tmp2, NULL);
 		tmp = ft_strdup(glob->exp);
 		free(glob->exp);
 		args = args->next;
@@ -84,7 +84,7 @@ int				e_recreate(char *exp, int i, t_bracket *args, t_glob *glob)
 	tmp2 = ft_strjoin(args->content, glob->exp);
 	free(glob->exp);
 	glob->exp = ft_strjoin(tmp, tmp2);
-	free_double_str(&tmp, &tmp2);
+	free_triple_str(&tmp, &tmp2, NULL);
 	return (free_tbracket(&args));
 }
 
@@ -103,21 +103,21 @@ int				is_valid_expansion(char *exp, int i, t_glob *glob)
 		k++;
 	s2 = k ? ft_strsub(exp, j - k, k) : NULL;
 	if (!s || !s2 || exp_type(s) == BOTH || exp_type(s2) == BOTH
-	|| (exp_type(s) == DIGIT && ft_strlen(s) > 1 && exp_type(s2) == CHARS)
-	|| (exp_type(s2) == DIGIT && ft_strlen(s2) > 1 && exp_type(s) == CHARS)
+	|| (exp_type(s) == DIGIT && ft_strlen(s) >= 1 && exp_type(s2) == CHARS)
+	|| (exp_type(s2) == DIGIT && ft_strlen(s2) >= 1 && exp_type(s) == CHARS)
 	|| (exp_type(s) == CHARS && ft_strlen(s) > 1)
 	|| (exp_type(s2) == CHARS && ft_strlen(s2) > 1))
 	{
-		free_double_str(&s, &s2);
+		free_triple_str(&s, &s2, &exp);
 		return (0);
 	}
 	e_recreate(exp, i, expansion_args(s, s2), glob);
-	free_double_str(&s, &s2);
-	free(exp);
+	free_triple_str(&s, &s2, NULL);
+	ft_strdel(&exp);
 	return (1);
 }
 
-void			hub_expansion(char *str, t_glob *glob)
+int				hub_expansion(char *str, t_glob *glob)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, j, 0);
@@ -131,7 +131,7 @@ void			hub_expansion(char *str, t_glob *glob)
 				if (str[j] == '.' && str[j + 1] == '.')
 				{
 					if (!is_valid_expansion(str, i + 1, glob))
-						break ;
+						return (0);
 					else
 						str = ft_strdup(glob->exp);
 					j += 2;
@@ -143,4 +143,5 @@ void			hub_expansion(char *str, t_glob *glob)
 		i++;
 	}
 	free(str);
+	return (1);
 }

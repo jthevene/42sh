@@ -24,59 +24,48 @@ float			*get_display_values(t_file *match_files)
 	return (tab_val);
 }
 
-void 			interrupt_prompt(int sig)
+void			ft_sigint_completion(int sig)
 {
 	(void)sig;
-	if (g_shell.sig == 0)
-	{
-		ft_putstr("^C");
-		exit(0);
-	}
+	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
+	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
+	tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
+	ft_putstr("Choose (y or n)\n");
 }
 
 static void		print_choice(float *disp_val)
 {
-	FT_INIT(char*, c, g_shell.c);
 	ft_putstr("Display all ");
 	ft_putnbr((int)disp_val[0]);
-	ft_putstr(" possibilities? (y or n)");
-	while (g_shell.sig == 0 && readkey())
-	{
-		signal(SIGINT, interrupt_prompt);
-		c = g_shell.c;
-		if (c[0] == 89 || c[0] == 121)
-			exit(1);
-		else if (c[0] == 78 || c[0] == 110)
-		{
-			ft_putendl("");
-			tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
-			exit(0);
-		}
-	}
+	ft_putstr(" possibilities? (y or n)\n");
+	signal(SIGINT, ft_sigint_completion);
 }
 
 int				ask_to_show_data(float *disp_val)
 {
 	FT_INIT(int, max_elem_lst, disp_val[5]);
 	FT_INIT(int, elem_lst, disp_val[4]);
-	FT_INIT(int, ret, 1);
+	FT_INIT(char*, c, g_shell.c);
+	FT_INIT(int, situation, 0);
 	ft_putendl("");
-	if(max_elem_lst < elem_lst)
+	if (max_elem_lst < elem_lst)
 	{
-		if ((g_shell.sig = fork()) == -1)
-			return (0);
-		if (g_shell.sig == 0)
-			print_choice(disp_val);
-		else
+		print_choice(disp_val);
+		while (readkey() && !situation)
 		{
-			wait(&g_shell.sig);
-			ret = WEXITSTATUS(g_shell.sig);
-			if (ret == 0)
+			c = g_shell.c;
+			if (c[0] == 89 || c[0] == 121)
+				break ;
+			else if (c[0] == 78 || c[0] == 110)
+			{
+				ft_putendl("");
+				tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
 				free(disp_val);
-			else
-				disp_val[4] = max_elem_lst;
+				signal(SIGINT, ft_sigint);
+				return (0);
+			}
 		}
+		disp_val[4] = max_elem_lst;
 	}
-	signal(SIGINT, ft_sigint);
-	return (ret);
+	return (1);
 }

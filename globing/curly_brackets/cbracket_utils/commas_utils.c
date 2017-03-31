@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commas_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:29 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/03/31 17:42:45 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int		count_commas(char *line, int i)
 {
 	FT_INIT(int, count, 0);
 	FT_INIT(int, tmp, 0);
-	while (line[i])
+	if (line[i] && line[i] == '{')
+		i++;
+	while (i < (int)ft_strlen(line) && line[i])
 	{
 		if (line[i] == ',')
 			count++;
@@ -24,8 +26,6 @@ int		count_commas(char *line, int i)
 		{
 			if (!(tmp = count_commas(line, i + 1)))
 				return (0);
-			else
-				count += tmp;
 			i += next_bracket(line, '{', i + 1);
 		}
 		if (line[i] == '}')
@@ -41,11 +41,7 @@ int		check_commas(char *line, int i)
 	if (!commas)
 		return (0);
 	else if (commas == 1)
-	{
-		while (line[i] != ',')
-			i++;
-		return (line[i + 1] != '}' ? 1 : 0);
-	}
+		return (1);
 	while (line[++i])
 	{
 		if (line[i] == '{')

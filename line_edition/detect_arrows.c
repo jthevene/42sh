@@ -12,23 +12,43 @@
 
 #include "../includes/sh42.h"
 
+static void		ajust_selection_text(int start, int end, int cursor_x)
+{
+	if (g_shell.cursor_x == g_shell.line_size && !start)
+		g_shell.start_select = cursor_x;
+	else if (start)
+		g_shell.start_select = start;
+	else
+		g_shell.start_select = cursor_x - 1;
+	if (end && end < cursor_x)
+		g_shell.end_select = cursor_x;
+	if (end && end < cursor_x && cursor_x == start + 1)
+		g_shell.end_select = g_shell.end_select > g_shell.prompt_len ?
+		g_shell.end_select - 1 : g_shell.end_select;
+	else if (end && end < cursor_x)
+		g_shell.end_select = g_shell.end_select > g_shell.prompt_len ?
+		g_shell.end_select - 2 : g_shell.end_select;
+	if (!(end && end < cursor_x))
+		g_shell.end_select = cursor_x > g_shell.prompt_len ?
+		cursor_x - 1 : cursor_x;
+	return ;
+}
+
 static int		detect_selection_text(char *key, int start,
 		int end, int cursor_x)
 {
 	if (key[4] == 50 && key[5] == 68)
 	{
-		g_shell.start_select = start ? start : cursor_x - 1;
-		if (end && end < cursor_x)
-			g_shell.end_select = cursor_x;
-		if (end && end < cursor_x && cursor_x == start + 1)
-			g_shell.end_select = g_shell.end_select > g_shell.prompt_len ?
-				g_shell.end_select - 1 : g_shell.end_select;
-		else if (end && end < cursor_x)
-			g_shell.end_select = g_shell.end_select > g_shell.prompt_len ?
-				g_shell.end_select - 2 : g_shell.end_select;
-		if (!(end && end < cursor_x))
-			g_shell.end_select = cursor_x > g_shell.prompt_len ?
-				cursor_x - 1 : cursor_x;
+		if (start == end && start && start == g_shell.prompt_len
+			&& g_shell.cursor_x == g_shell.prompt_len + 1)
+		{
+			MULTI(g_shell.start_select, g_shell.end_select, 0);
+			print_line(g_shell.line_size);
+			return (K_LEFT);
+		}
+		ajust_selection_text(start, end, cursor_x);
+		if (g_shell.start_select < g_shell.prompt_len)
+			MULTI(g_shell.start_select, g_shell.end_select, 0);
 		print_line(g_shell.line_size);
 		return (K_LEFT);
 	}
@@ -63,8 +83,6 @@ static int		arrow_combo(char *key)
 		g_shell.start_select = start ? start : g_shell.cursor_x;
 		g_shell.end_select = (end && end == g_shell.cursor_x ?
 			g_shell.cursor_x + 1 : g_shell.cursor_x);
-		if (g_shell.end_select >= g_shell.line_size)
-			g_shell.end_select = g_shell.line_size - 1;
 		print_line(g_shell.line_size);
 		return (K_RIGHT);
 	}

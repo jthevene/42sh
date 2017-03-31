@@ -131,7 +131,7 @@ typedef struct				s_shell
 	int						left_redir_fd;
 	t_save_fd				*save_list;
 	int						null_env;
-	pid_t 					sig;
+	pid_t					sig;
 }							t_shell;
 
 t_shell						g_shell;

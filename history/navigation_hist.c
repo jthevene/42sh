@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/30 13:09:00 by jules            ###   ########.fr       */
+/*   Updated: 2017/04/01 13:23:25 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,11 @@ void			nav_hist_up(void)
 		g_shell.curr_hist->content)
 		g_shell.curr_hist = g_shell.curr_hist->prev;
 	else if (g_shell.nav_hist == 0)
+	{
+		if (g_shell.saved_current_line)
+			ft_strdel(&g_shell.saved_current_line);
 		g_shell.saved_current_line = ft_strdup(g_shell.current_line);
+	}
 	g_shell.nav_hist = 1;
 	put_hist_line(g_shell.curr_hist->content);
 	replace_current_line(g_shell.curr_hist->content);

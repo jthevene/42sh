@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_history.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:04 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/04/01 13:09:17 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		history_hub(char *line)
 		histfile_append();
 	else if (g_shell.hist_opt.w)
 		update_history_file(get_histsize("HISTSIZE"));
-	else if (g_shell.hist_opt.s)
+	else if (g_shell.hist_opt.s && g_shell.hist_opt.arg)
 		ft_newhist(g_shell.hist_opt.arg);
 	return (1);
 }

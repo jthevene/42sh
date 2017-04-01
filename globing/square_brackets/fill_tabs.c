@@ -14,6 +14,8 @@
 
 char			*fill_rng(char *str)
 {
+	if (!str)
+		return (NULL);
 	FT_INIT(int, diff, 0);
 	FT_INIT(int, i, 0);
 	FT_INIT(int, last, 1);
@@ -21,12 +23,11 @@ char			*fill_rng(char *str)
 	FT_INIT(char *, tmp, ft_strchr(str, '[')
 		? clean_brackets(str) : ft_strdup(str));
 	FT_INIT(int, first, tmp[0]);
-	while (tmp[last] != '-')
+	while (last < (int)ft_strlen(tmp) && tmp[last] && tmp[last] != '-')
 		last++;
 	if (!(ret = (char *)malloc(sizeof(char) * (tmp[2] - tmp[0] + 1))))
 		return (NULL);
-	last++;
-	diff = tmp[last] - tmp[0];
+	diff = tmp[++last] - tmp[0];
 	while (i <= diff)
 	{
 		ret[i] = first;
@@ -34,14 +35,16 @@ char			*fill_rng(char *str)
 		first++;
 	}
 	ret[i] = '\0';
-	free(tmp);
+	ft_strdel(&tmp);
 	tmp = strdup_nodouble(ret);
-	free(ret);
+	ft_strdel(&ret);
 	return (tmp);
 }
 
 char			*fill_nomult(char *str)
 {
+	if (!str)
+		return (NULL);
 	FT_INIT(int, i, 32);
 	FT_INIT(int, j, 0);
 	FT_INIT(char *, tmp, ft_strchr(str, '[')
@@ -68,6 +71,8 @@ char			*fill_nomult(char *str)
 
 char			*fill_norng(char *str)
 {
+	if (!str)
+		return (NULL);
 	FT_INIT(int, i, 32);
 	FT_INIT(int, j, 0);
 	FT_INIT(int, last, 0);
@@ -92,8 +97,10 @@ char			*fill_norng(char *str)
 	return (ret);
 }
 
-static void		create_mix(char *tmp_str, char **ret, int i)
+static int		create_mix(char *tmp_str, char **ret, int i)
 {
+	if (!tmp_str)
+		return (0);
 	FT_INIT(char *, tmp_rng, NULL);
 	FT_INIT(char *, tmp_rng2, NULL);
 	FT_INIT(char *, tmp_ret, NULL);
@@ -104,10 +111,13 @@ static void		create_mix(char *tmp_str, char **ret, int i)
 	free(tmp_rng);
 	free(tmp_rng2);
 	free(tmp_ret);
+	return (1);
 }
 
 char			*fill_mix(char *str)
 {
+	if (!str)
+		return (NULL);
 	FT_INIT(int, i, 0);
 	FT_INIT(char *, tmp_ret, NULL);
 	FT_INIT(char *, tmp_str, clean_brackets(str));
@@ -116,7 +126,8 @@ char			*fill_mix(char *str)
 	while (tmp_str[i])
 	{
 		if (tmp_str[i] == '-')
-			create_mix(tmp_str, &ret, i);
+			if (!create_mix(tmp_str, &ret, i))
+				return (NULL);
 		i++;
 	}
 	if (tmp_str[0] == '!')

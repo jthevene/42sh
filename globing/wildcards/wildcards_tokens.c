@@ -55,8 +55,8 @@ int			only_cbrkt(char *str, t_glob *g)
 	FT_INIT(int, len, get_len_token(str));
 	FT_INIT(t_lst *, f, get_dir_content(!g->f_path ? "./" : g->f_path));
 	FT_INIT(int, i, -1);
-	hub_sbracket(g, str);
-	rewind_tbracket(&g->sbracket);
+	if (!secured_call_to_sbracket(g, str, &f))
+		return (0);
 	while (f)
 	{
 		if ((int)ft_strlen(f->content) == len)
@@ -81,8 +81,8 @@ int			mix_with_star(char *str, t_glob *g)
 	g->l_path = get_cmd_last_path(str);
 	FT_INIT(char *, token, wild_get_token(str));
 	FT_INIT(t_lst *, files, get_dir_content(!g->f_path ? "./" : g->f_path));
-	hub_sbracket(g, token);
-	rewind_tbracket(&g->sbracket);
+	if (!secured_call_to_sbracket(g, str, &files))
+		return (0);
 	while (files)
 	{
 		if (ft_strcmp(files->content, ".") && ft_strcmp(files->content, ".."))
@@ -109,8 +109,8 @@ int			mix_token(char *str, t_glob *g)
 	FT_INIT(char *, token, wild_get_token(str));
 	FT_INIT(t_lst *, files, get_dir_content(!g->f_path ? "./" : g->f_path));
 	FT_INIT(int, len, get_len_token(token));
-	hub_sbracket(g, token);
-	rewind_tbracket(&g->sbracket);
+	if (!secured_call_to_sbracket(g, str, &files))
+		return (0);
 	while (files)
 	{
 		if ((int)ft_strlen(files->content) == len)

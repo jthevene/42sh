@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   detect_auto_completion.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/13 12:35:36 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/04/01 18:13:15 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sh42.h"
-
-static char		*str_to_search(char *sentence)
-{
-	FT_INIT(char*, new_sentence, NULL);
-	if (!sentence)
-		return (NULL);
-	if (ft_strchr(sentence, ' '))
-		sentence = ft_strrchr(sentence, ' ') + 1;
-	if (ft_strrchr(sentence, '/'))
-	{
-		new_sentence = ft_strrchr(sentence, '/') + 1;
-		if (ft_strlen(new_sentence))
-			return (new_sentence);
-		else
-			return ("");
-	}
-	else
-		new_sentence = sentence;
-	return (new_sentence);
-}
 
 t_file			*get_file_path(char *path, char *sentence)
 {
@@ -100,6 +80,19 @@ static char		*if_new_sentence(char *sentence, t_file *files,
 	return (g_shell.current_line);
 }
 
+static char			*get_similaryties(char *sentence, t_file *match_files, char *to_search)
+{
+	FT_INIT(char*, similarity_val, NULL);
+	similarity_val = similarity(match_files, to_search);
+	if (sentence && !ft_strchr(sentence, ' ') && !ft_strcmp(sentence, ".") &&
+	similarity_val && !((int)ft_strlen(similarity_val)))
+	{
+		fill_current_line('/');
+		g_shell.cursor_x++;
+	}
+	return (similarity_val);
+}
+
 char			*detect_auto_completion(char *sentence, bool detect_bins)
 {
 	static int check = 0;
@@ -114,7 +107,7 @@ char			*detect_auto_completion(char *sentence, bool detect_bins)
 	files = files_list(&copy_sentence, detect_bins);
 	to_search = str_to_search(copy_sentence);
 	if ((match_files = compare_list_sentence(files, to_search)))
-		new_sentence = similarity(match_files, to_search);
+		new_sentence = get_similaryties(sentence, match_files, to_search);
 	if (new_sentence && ft_strlen(new_sentence))
 	{
 		check = 0;

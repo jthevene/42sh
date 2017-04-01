@@ -6,7 +6,7 @@
 /*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 17:04:00 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/03/31 15:13:13 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/04/01 18:06:44 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ t_completion		*change_col(t_completion *all_col, t_completion *head,
 						int *ref_col, int nb_elem);
 int					ask_to_show_data(float *disp_val);
 float				*get_display_values(t_file *match_files);
+char				*str_to_search(char *sentence);
 
 /*
 ** CD

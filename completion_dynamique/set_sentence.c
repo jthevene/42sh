@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   set_sentence.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/23 18:37:10 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/04/01 18:24:26 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sh42.h"
+
+char		*str_to_search(char *sentence)
+{
+	FT_INIT(char*, new_sentence, NULL);
+	if (!sentence)
+		return (NULL);
+	if (ft_strchr(sentence, ' '))
+		sentence = ft_strrchr(sentence, ' ') + 1;
+	if (ft_strrchr(sentence, '/'))
+	{
+		new_sentence = ft_strrchr(sentence, '/') + 1;
+		if (ft_strlen(new_sentence))
+			return (new_sentence);
+		else
+			return ("");
+	}
+	else
+		new_sentence = sentence;
+	return (new_sentence);
+}
 
 void		free_simple_tab(char ***tab_to_del)
 {

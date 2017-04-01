@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/23 18:53:32 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/04/01 18:22:07 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,19 @@ static char		**complete_char(char **new_path, char *home,
 	return (dirs);
 }
 
+int 			verif_bins(char *sentence)
+{
+	if (ft_strcmp(sentence, "./"))
+		return (1);
+	else if (ft_strcmp(sentence, "."))
+		return (1);
+	else if (ft_strcmp(sentence, ".."))
+		return (1);
+	else if (ft_strcmp(sentence, "../"))
+		return (1);
+	return (0);
+}
+
 char			**set_path(char **sentence, char *home, char *c_path,
 				bool detect_bins)
 {
@@ -106,7 +119,7 @@ char			**set_path(char **sentence, char *home, char *c_path,
 	if ((*sentence)[ft_strlen(*sentence) - 1] == ' ')
 		return (ft_strsplit(c_path, '\n'));
 	if (detect_bins && !ft_strchr(*sentence, ' ')
-		&& *sentence[0] != '/' && ft_strlen(c_path))
+		&& *sentence[0] != '/' && ft_strlen(c_path) && !verif_bins(*sentence))
 	{
 		new_path = get_var(g_shell.env, "PATH");
 		dirs = verif_dirs(ft_strsplit(new_path, ':'));

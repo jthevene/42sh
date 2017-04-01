@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/13 12:37:51 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/04/01 17:09:12 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void			in_dir(char **path, char *pwd)
 		ft_putstr_fd("Error chdir\n", 2);
 	else
 	{
-		if ((*path)[ft_strlen((*path)) - 1] == '/')
+		if ((*path)[ft_strlen((*path)) - 1] == '/' && ft_strcmp(*path, "/"))
 			(*path)[ft_strlen((*path)) - 1] = '\0';
 		tmp = ft_strjoin("setenv PWD=", (*path));
 		if ((*path))

@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:42 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/24 14:22:25 by jules            ###   ########.fr       */
+/*   Updated: 2017/04/01 18:08:13 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void	reset_line(void)
 void	return_key(void)
 {
 	go_to_end();
-	FT_INIT(int, add_hist, 0);
+	// FT_INIT(int, add_hist, 0);
 	ft_strdel(&g_shell.saved_current_line);
 	if (ft_strlen(g_shell.current_line))
 	{
-		if (g_shell.current_line && ft_strchr(g_shell.current_line, '!'))
-			add_hist += history_event(g_shell.current_line);
+		// if (g_shell.current_line && ft_strchr(g_shell.current_line, '!'))
+			// add_hist += history_event(g_shell.current_line);
 		ft_putchar('\n');
 		g_shell.result_exec = -99;
 		g_shell.all_results = -99;

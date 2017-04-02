@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_env_var.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/13 12:36:21 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/04/01 18:09:10 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,11 @@ static void	reform_line_var(char **line, char *value, int i)
 
 int			replace_env_var(char **line)
 {
-	FT_INIT(int, i, 0);
+	FT_INIT(int, i, -1);
 	FT_INIT(char *, tmp, NULL);
-	while (i < (int)ft_strlen((*line)) && (*line)[i])
+	if ((*line) && ft_strchr((*line), '!'))
+		history_event(*line);
+	while (++i < (int)ft_strlen((*line)) && (*line)[i])
 	{
 		if ((*line)[i] == '\\')
 			i++;
@@ -109,9 +111,7 @@ int			replace_env_var(char **line)
 			if (!(*line))
 				break ;
 		}
-		i++;
 	}
-	if (!(*line))
-		(*line) = ft_strdup("");
+	(*line) = !(*line) ? ft_strdup("") : (*line);
 	return (0);
 }

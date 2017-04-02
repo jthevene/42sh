@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   histsize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/13 12:40:05 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/04/02 16:10:06 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,15 @@ int		get_histsize(char *var)
 	FT_INIT(char *, histfilesize, get_var(g_shell.env, "HISTFILESIZE"));
 	if (!ft_strcmp(var, "HISTSIZE"))
 	{
-		if (!histsize)
+		if (!histsize || ft_strlen(histsize) > 9 || !ft_strisnum(histsize))
 			ret = 500;
 		else
 			ret = ft_atoi(histsize);
 	}
 	else if (!ft_strcmp(var, "HISTFILESIZE"))
 	{
-		if (!histfilesize)
+		if (!histfilesize || ft_strlen(histfilesize) > 9 ||
+			!ft_strisnum(histfilesize))
 			ret = (500);
 		else
 			ret = ft_atoi(histfilesize);

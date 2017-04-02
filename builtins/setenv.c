@@ -28,10 +28,7 @@ char		*recup_name(char *line)
 		if (line[i] == '=' && (start - i) != 0)
 			return (ft_strsub(line, start, i - start));
 		else if (line[i] == '=' && (start - i) == 0)
-		{
-			ft_putendl_fd("42sh: setenv: Invalid argument", 2);
 			return (NULL);
-		}
 		i++;
 	}
 	return (NULL);
@@ -55,8 +52,8 @@ int			check_setenv(char **name, char **value, int env)
 {
 	if (!(*name))
 	{
-		free((*name) ? (*name) : NULL);
-		free((*value) ? (*value) : NULL);
+		free_triple_str(&(*name), &(*value), NULL);
+		ft_putendl_fd("42sh: setenv: Invalid argument", 2);
 		return (0);
 	}
 	else if ((*value) && ft_strchr((*value), '='))

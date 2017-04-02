@@ -12,6 +12,19 @@
 
 #include "../../includes/globing.h"
 
+int			secured_call_to_sbracket(t_glob *g, char *s, t_lst **f)
+{
+	hub_sbracket(g, s);
+	if (!g->sbracket)
+	{
+		ft_lst_free(&(*f));
+		free_triple_str(&g->f_path, &g->l_path, NULL);
+		return (0);
+	}
+	rewind_tbracket(&g->sbracket);
+	return (1);
+}
+
 void		ft_lst_free(t_lst **list)
 {
 	FT_INIT(t_lst *, tmp, NULL);

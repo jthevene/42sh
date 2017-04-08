@@ -85,14 +85,14 @@ char			*recreate_token_string(t_glob *glob)
 		free_tbracket(&glob->args);
 		return (ret);
 	}
-	while (glob->args)
+	while (glob->args != NULL)
 	{
 		tmp = ft_strdup(ret);
-		free(ret);
+		ft_strdel(&ret);
 		tmp2 = ft_strjoin(tmp, " ");
-		free(tmp);
+		ft_strdel(&tmp);
 		ret = ft_strjoin(tmp2, glob->args->content);
-		free(tmp2);
+		ft_strdel(&tmp2);
 		if (!glob->args->next)
 			break ;
 		glob->args = glob->args->next;

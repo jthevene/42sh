@@ -222,7 +222,8 @@ char					*ft_cdup(char c);
 int						is_solo_arg(t_bracket *args);
 int						free_triple_str(char **s, char **s2, char **s3);
 
-int						secured_call_to_sbracket(t_glob *g, char *s, t_lst **f);
+int						secured_call_to_sbracket(t_glob *g, char *s, t_lst **filef
+												, char ** token);
 int						hub_final(t_glob *glob, char *line);
 int						is_only_token(char token, char *str);
 int						only_star(char *str, t_glob *glob);

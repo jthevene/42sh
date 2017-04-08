@@ -12,13 +12,14 @@
 
 #include "../../includes/globing.h"
 
-int			secured_call_to_sbracket(t_glob *g, char *s, t_lst **f)
+int			secured_call_to_sbracket(t_glob *g, char *s, t_lst **f
+									, char **token)
 {
 	hub_sbracket(g, s);
-	if (!g->sbracket)
+	if ((ft_strchr(s, '[') || ft_strchr(s, ']')) && !g->sbracket)
 	{
 		ft_lst_free(&(*f));
-		free_triple_str(&g->f_path, &g->l_path, NULL);
+		free_triple_str(&g->f_path, &g->l_path, &(*token));
 		return (0);
 	}
 	rewind_tbracket(&g->sbracket);

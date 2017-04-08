@@ -55,7 +55,7 @@ int			only_cbrkt(char *str, t_glob *g)
 	FT_INIT(int, len, get_len_token(str));
 	FT_INIT(t_lst *, f, get_dir_content(!g->f_path ? "./" : g->f_path));
 	FT_INIT(int, i, -1);
-	if (!secured_call_to_sbracket(g, str, &f))
+	if (!secured_call_to_sbracket(g, str, &f, NULL))
 		return (0);
 	while (f)
 	{
@@ -81,7 +81,7 @@ int			mix_with_star(char *str, t_glob *g)
 	g->l_path = get_cmd_last_path(str);
 	FT_INIT(char *, token, wild_get_token(str));
 	FT_INIT(t_lst *, files, get_dir_content(!g->f_path ? "./" : g->f_path));
-	if (!secured_call_to_sbracket(g, str, &files))
+	if (!token || !secured_call_to_sbracket(g, str, &files, &token))
 		return (0);
 	while (files)
 	{
@@ -109,7 +109,7 @@ int			mix_token(char *str, t_glob *g)
 	FT_INIT(char *, token, wild_get_token(str));
 	FT_INIT(t_lst *, files, get_dir_content(!g->f_path ? "./" : g->f_path));
 	FT_INIT(int, len, get_len_token(token));
-	if (!secured_call_to_sbracket(g, str, &files))
+	if (!token || !secured_call_to_sbracket(g, str, &files, &token))
 		return (0);
 	while (files)
 	{

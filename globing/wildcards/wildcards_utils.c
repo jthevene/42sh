@@ -16,6 +16,8 @@ int		get_len_token(char *str)
 {
 	FT_INIT(int, i, 0);
 	FT_INIT(int, len, 0);
+	if (!str)
+		return (0);
 	while (str[i])
 	{
 		if (str[i] != '*' && str[i] != '[')

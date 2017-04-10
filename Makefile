@@ -62,7 +62,7 @@ FILES_SBRACK 	= 	hub_sbracket.c fill_tabs.c init_tabs.c category_bracket.c \
 					sbracket_list.c
 
 FILES_CBRACK 	= 	hub_cbracket.c fill_clist.c cbracket_list.c \
-					cbracket_errors.c expansion.c print_clist.c \
+					cbracket_errors.c expansion.c
 
 FILES_UTILS_1 	= 	catch_dash.c check_rng.c clean_brackets.c \
 					count_brackets.c get_functions.c str_nodouble.c

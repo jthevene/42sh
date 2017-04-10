@@ -91,8 +91,8 @@ int			replace_env_var(char **line)
 {
 	FT_INIT(int, i, -1);
 	FT_INIT(char *, tmp, NULL);
-	if ((*line) && ft_strchr((*line), '!'))
-		history_event(*line);
+//	if ((*line) && ft_strchr((*line), '!'))
+//		history_event(*line);
 	while (++i < (int)ft_strlen((*line)) && (*line)[i])
 	{
 		if ((*line)[i] == '\\')

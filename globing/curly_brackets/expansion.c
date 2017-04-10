@@ -128,7 +128,8 @@ int				hub_expansion(char *str, t_glob *glob)
 			j = i;
 			while (str[j] && str[j] != '}')
 			{
-				if (str[j] == '.' && str[j + 1] == '.')
+				if (str[j] == '.' && str[j + 1] && str[j + 1] == '.'
+					&& str[j + 2] && ft_isalnum(str[j + 2]))
 				{
 					if (!is_valid_expansion(str, i + 1, glob))
 						return (0);

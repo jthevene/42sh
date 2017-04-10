@@ -15,10 +15,18 @@
 int		is_expansion(char *line)
 {
 	FT_INIT(int, i, 0);
-	while (line[i])
+	while (i < (int)ft_strlen(line) && line[i])
 	{
-		if (line[i] == '.' && line[i + 1] == '.')
-			return (1);
+		if (line[i] == '.')
+		{
+			if (line[i + 1] && line[i + 1] == '.')
+			{
+				if (line[i + 2] && ft_isalnum(line[i + 2]))
+					return (1);
+				else
+					return (0);
+			}
+		}
 		i++;
 	}
 	return (0);

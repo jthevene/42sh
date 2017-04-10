@@ -69,6 +69,19 @@ static char			*first_str_val(char *first_str, char **second_str,
 	return (first_str);
 }
 
+int					verif_bins(char *sentence)
+{
+	if (ft_strcmp(sentence, "./"))
+		return (1);
+	else if (ft_strcmp(sentence, "."))
+		return (1);
+	else if (ft_strcmp(sentence, ".."))
+		return (1);
+	else if (ft_strcmp(sentence, "../"))
+		return (1);
+	return (0);
+}
+
 char				*set_end_path(char **new_path, char **sentence)
 {
 	struct stat		infos;

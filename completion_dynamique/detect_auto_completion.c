@@ -80,7 +80,8 @@ static char		*if_new_sentence(char *sentence, t_file *files,
 	return (g_shell.current_line);
 }
 
-static char			*get_similaryties(char *sentence, t_file *match_files, char *to_search)
+static char		*get_similaryties(char *sentence, t_file *match_files
+								, char *to_search)
 {
 	FT_INIT(char*, similarity_val, NULL);
 	similarity_val = similarity(match_files, to_search);

@@ -26,9 +26,10 @@ int		count_commas(char *line, int i)
 		{
 			if (!(tmp = count_commas(line, i + 1)))
 				return (0);
-			i += next_bracket(line, '{', i + 1);
+			i += next_bracket(line, '{', i) + 1;
+			count += line[i] && line[i] == ',' ? 1 : 0;
 		}
-		if (line[i] == '}')
+		if (line[i] && line[i] == '}')
 			return (count);
 		i++;
 	}

@@ -86,6 +86,7 @@ void				free_auto_tab(char **table);
 void				free_files(t_file **files_list);
 
 int					arrondi(float val);
+int					verif_bins(char *sentence);
 int					ft_nb_elem_lst(int nb_elem, int nb_col);
 int					prev_sentence_value(char *sentence);
 int					verif_sentence(char *sentence);

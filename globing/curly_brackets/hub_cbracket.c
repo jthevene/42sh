@@ -32,8 +32,9 @@ int				hub_cbracket(t_glob *glob, char *line)
 		{
 			tmp = ft_strdup(line);
 			i += ft_strlen(tmp);
-			if (!hub_expansion(ft_strdup(tmp), glob))
-				return (free_triple_str(&tmp, NULL, NULL));
+			if (is_expansion(tmp))
+				if (!hub_expansion(ft_strdup(tmp), glob))
+					return (free_triple_str(&tmp, NULL, NULL));
 			if (glob->exp)
 			{
 				ft_strdel(&tmp);

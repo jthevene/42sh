@@ -65,19 +65,6 @@ char	*trim_end(char *line)
 	return (ret);
 }
 
-void	print_tokens(t_token *token)
-{
-	t_token	*tmp;
-
-	tmp = token;
-	while (tmp)
-	{
-		printf("LIST\n");
-		printf("%s\n", tmp->lexeme);
-		tmp = tmp->next;
-	}
-}
-
 int		and_or_error(t_token *token, char *line, int pos, int i)
 {
 	if (line[pos + 1] == '&')

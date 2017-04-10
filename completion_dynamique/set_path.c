@@ -6,7 +6,7 @@
 /*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/04/01 18:22:07 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/04/10 11:42:57 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,13 @@ static char		**complete_char(char **new_path, char *home,
 
 int 			verif_bins(char *sentence)
 {
-	if (ft_strcmp(sentence, "./"))
+	if (!ft_strcmp(sentence, "./"))
 		return (1);
-	else if (ft_strcmp(sentence, "."))
+	else if (!ft_strcmp(sentence, "."))
 		return (1);
-	else if (ft_strcmp(sentence, ".."))
+	else if (!ft_strcmp(sentence, ".."))
 		return (1);
-	else if (ft_strcmp(sentence, "../"))
+	else if (!ft_strcmp(sentence, "../"))
 		return (1);
 	return (0);
 }

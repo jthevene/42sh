@@ -96,22 +96,6 @@ static char		**complete_char(char **new_path, char *home,
 	return (dirs);
 }
 
-<<<<<<< HEAD
-=======
-int 			verif_bins(char *sentence)
-{
-	if (!ft_strcmp(sentence, "./"))
-		return (1);
-	else if (!ft_strcmp(sentence, "."))
-		return (1);
-	else if (!ft_strcmp(sentence, ".."))
-		return (1);
-	else if (!ft_strcmp(sentence, "../"))
-		return (1);
-	return (0);
-}
-
->>>>>>> 4bb04fbe59551d5ec60f85470058be25e2a3857a
 char			**set_path(char **sentence, char *home, char *c_path,
 				bool detect_bins)
 {

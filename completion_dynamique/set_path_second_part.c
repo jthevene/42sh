@@ -71,13 +71,13 @@ static char			*first_str_val(char *first_str, char **second_str,
 
 int					verif_bins(char *sentence)
 {
-	if (ft_strcmp(sentence, "./"))
+	if (!ft_strcmp(sentence, "./"))
 		return (1);
-	else if (ft_strcmp(sentence, "."))
+	else if (!ft_strcmp(sentence, "."))
 		return (1);
-	else if (ft_strcmp(sentence, ".."))
+	else if (!ft_strcmp(sentence, ".."))
 		return (1);
-	else if (ft_strcmp(sentence, "../"))
+	else if (!ft_strcmp(sentence, "../"))
 		return (1);
 	return (0);
 }

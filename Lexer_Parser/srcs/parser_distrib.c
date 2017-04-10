@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_distrib.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:41 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:45:51 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/04/10 11:50:21 by apinho           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	lexer_parser(char *line)
 			all->line = finish_line_backslash(all->line);
 		ft_newhist(all->line);
 		analise_line(all);
+		print_tokens(all->tokens_begin);
 		check_for_hdoc(all->tokens_begin);
 		send_token_to_glob(all);
 		remove_bslash_quotes(all->tokens_begin);

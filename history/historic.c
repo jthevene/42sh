@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   historic.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/13 12:39:47 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/04/10 16:56:55 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,13 @@ void	ft_newhist(char *line)
 
 void	put_hist_line(char *content)
 {
-	clean_line();
-	display_prompt();
-	ft_putstr(content);
+	if (!((int)ft_strlen(content)))
+	{
+		tputs(tgetstr("rc", NULL), 1, ft_putchar_int);
+		tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
+		tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
+		tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
+		ft_putstr(g_shell.prompt);
+		ft_putstr(content);
+	}
 }

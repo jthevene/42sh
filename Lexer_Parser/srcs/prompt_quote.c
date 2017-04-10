@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:41 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/23 18:54:44 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/04/10 16:52:29 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void		modif_prompt(char *modif_by)
 	g_shell.prompt_len = ft_strlen(g_shell.prompt);
 }
 
-static int		detect_input_type(int key, char *quote_type)
+static int		detect_input_type(int key)
 {
 	if (key == K_DEL || key == K_DEL)
 		backspace_key(K_DEL);
@@ -30,11 +30,6 @@ static int		detect_input_type(int key, char *quote_type)
 		key == K_OW_LEFT || key == K_OL_UP || key == K_OL_DOWN ||
 		key == K_GO_END || key == K_GO_START)
 		distrib_cursor_moves(key);
-	else if (key == K_UP || key == K_DOWN)
-	{
-		distrib_cursor_moves(key);
-		modif_prompt(quote_type);
-	}
 	else if (key == K_PRINT)
 		return (1);
 	else if (key == K_COPY || key == K_CUT)
@@ -64,7 +59,7 @@ char			*prompt_dquote(char *quote_type)
 			break ;
 		else if (key == K_ESCAPE && !((int)ft_strlen(g_shell.current_line)))
 			return (NULL);
-		else if (detect_input_type(key, quote_type) == K_PRINT)
+		else if (detect_input_type(key) == K_PRINT)
 		{
 			fill_current_line(g_shell.c[0]);
 			g_shell.cursor_x++;

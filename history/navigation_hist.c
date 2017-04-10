@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   navigation_hist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/04/01 13:23:25 by jules            ###   ########.fr       */
+/*   Updated: 2017/04/10 16:55:24 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,12 @@ static void		replace_current_line(char *content)
 		ft_strdel(&g_shell.current_line);
 	while (content && content[i])
 	{
-		fill_current_line(content[i]);
-		g_shell.cursor_x++;
+		if (content[i] != '\n')
+		{
+			fill_current_line(content[i]);
+			g_shell.cursor_x++;
+			print_line(1);
+		}
 		i++;
 	}
 	g_shell.line_size = g_shell.cursor_x;

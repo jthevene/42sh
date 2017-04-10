@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   isallspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:45:53 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/04/10 12:05:45 by apinho           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,36 @@ char	*trim_end(char *line)
 	ret = ft_strndup(line, i + 1);
 	free(line);
 	return (ret);
+}
+
+void	print_tokens(t_token *token)
+{
+	t_token	*tmp;
+
+	tmp = token;
+	while (tmp)
+	{
+		printf("LIST\n");
+		printf("%s\n", tmp->lexeme);
+		tmp = tmp->next;
+	}
+}
+
+int		and_or_error(t_token *token, char *line, int pos, int i)
+{
+	if (line[pos + 1] == '&')
+	{
+		token->type = AND;
+		i = pos;
+		pos = pos + 2;
+		add_lexeme(token, line, pos, i);
+	}
+	else
+	{
+		token->type = 50;
+		i = pos;
+		pos++;
+		add_lexeme(token, line, pos, i);
+	}
+	return (pos);
 }

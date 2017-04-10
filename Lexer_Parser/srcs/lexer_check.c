@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:45:53 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/04/10 12:06:14 by apinho           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,7 @@
 int			check_ope(t_token *token, char *line, int pos, int i)
 {
 	if (ft_isope(line[pos]) == 1)
-	{
-		token->type = AND;
-		i = pos;
-		pos = pos + 2;
-		add_lexeme(token, line, pos, i);
-	}
+		pos = and_or_error(token, line, pos, i);
 	else if (ft_isope(line[pos]) == 2)
 		pos = left_redir_token(token, line, pos, i);
 	else if (ft_isope(line[pos]) == 3)

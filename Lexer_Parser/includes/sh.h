@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/31 15:13:46 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/04/10 12:11:55 by apinho           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int						right_redir_token(t_token *token, char *line, int pos, \
 						int i);
 int						pipe_or_token(t_token *token, char *line, int pos, \
 						int i);
+int						and_or_error(t_token *token, char *line, int pos, \
+						int i);
 int						supp_squote(t_token *token, int pos, int s);
 int						supp_dquote(t_token *token, int pos, int d);
 int						unfinished_squote(char *line, int i);
@@ -111,7 +113,7 @@ void					free_token(t_token *token);
 int						compare_end(char *str1, char *str2);
 int						error_parse(t_token *token);
 int						check_type_ope(int type);
-void					leave_error(void);
+int						leave_error(void);
 int						check_for_aggreg_fd(t_token *token, char *line, \
 						int pos);
 int						check_for_aggreg(t_token *token, char *line, int pos);

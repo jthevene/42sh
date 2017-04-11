@@ -40,7 +40,6 @@ char	*event_str(char *str, char *type)
 		tmp = tmp->prev;
 	}
 	(void)type;
-	ft_putendl_fd("42sh: event not found", 2);
 	return (NULL);
 }
 

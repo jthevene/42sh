@@ -44,17 +44,17 @@ static int			exec_match(char *event, char *str_to_replace,
 							char *replace_by)
 {
 	FT_INIT(char*, tmp, NULL);
-	tmp = ft_str_replace(event, str_to_replace, replace_by);
-	if (!replace_by)
+	if (!replace_by || !ft_strcmp(replace_by, g_shell.current_line))
 	{
 		ft_putstr_fd("\n42sh: ", 2);
 		ft_putstr_fd(str_to_replace, 2);
 		ft_putstr_fd(": event not found", 2);
 		free(str_to_replace ? str_to_replace : NULL);
+		ft_bzero(g_shell.current_line, ft_strlen(g_shell.current_line));
 		return (0);
 	}
-	else
-		ft_strdel(&replace_by);
+	tmp = ft_str_replace(event, str_to_replace, replace_by);
+	ft_strdel(&replace_by);
 	free(str_to_replace ? str_to_replace : NULL);
 	ft_bzero(g_shell.current_line, g_shell.len);
 	ft_strcpy(g_shell.current_line, tmp);

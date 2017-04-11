@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_path_second_part.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:38 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/04/11 12:18:24 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,19 @@ static char			*first_str_val(char *first_str, char **second_str,
 
 int					verif_bins(char *sentence)
 {
-	if (!ft_strcmp(sentence, "./"))
-		return (1);
-	else if (!ft_strcmp(sentence, "."))
-		return (1);
-	else if (!ft_strcmp(sentence, ".."))
-		return (1);
-	else if (!ft_strcmp(sentence, "../"))
-		return (1);
+	FT_INIT(char**, points, ft_strsplit(sentence, '/'));
+	FT_INIT(int, i, 0);
+	while (points && points[i])
+	{
+		if (ft_strstr(points[i], "..") || !ft_strcmp(points[i], "."))
+		{
+			free_tab(points);
+			return (1);
+		}
+		i++;
+	}
+	if (points)
+		free_tab(points);
 	return (0);
 }
 

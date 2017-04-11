@@ -6,7 +6,7 @@
 /*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/04/01 18:24:26 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/04/11 12:18:15 by dvirgile         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char		*default_sentence(char **sentence)
 	FT_INIT(int, i, 0);
 	FT_INIT(char*, tmp, NULL);
 	FT_INIT(char*, str, NULL);
-	if (!ft_strchr(*sentence, ' '))
+	if (!sentence || !(*sentence) || !ft_strchr(*sentence, ' '))
 		return (*sentence);
 	str = ft_strdup("");
 	path = ft_strsplit(*sentence, ' ');

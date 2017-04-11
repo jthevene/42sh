@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/31 15:15:06 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/04/11 18:56:38 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ char	*event_n(int n, char *type)
 			return (ft_strdup(tmp->content));
 	}
 	(void)type;
-	ft_putendl_fd("42sh: event not found", 2);
 	return (NULL);
 }

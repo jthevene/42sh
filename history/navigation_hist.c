@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   navigation_hist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/04/10 16:55:24 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/04/11 20:45:29 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,13 @@ void			nav_hist_down(void)
 	}
 	else
 	{
-		g_shell.nav_hist = 0;
-		put_hist_line(g_shell.saved_current_line);
-		if (g_shell.saved_current_line == NULL)
-			g_shell.saved_current_line = ft_strdup("");
-		replace_current_line(g_shell.saved_current_line);
+		if (g_shell.nav_hist == 1)
+		{
+			g_shell.nav_hist = 0;
+			put_hist_line(g_shell.saved_current_line);
+			if (g_shell.saved_current_line == NULL)
+				g_shell.saved_current_line = ft_strdup("");
+			replace_current_line(g_shell.saved_current_line);
+		}
 	}
 }

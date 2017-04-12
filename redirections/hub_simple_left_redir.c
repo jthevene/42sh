@@ -42,7 +42,7 @@ static int		get_left_redirs(char *line)
 			if (!(filename = get_filename(line, i)))
 				return (0);
 			if (!simple_left(filename))
-				return (0);
+				return (free_triple_str(&filename, NULL, NULL));
 			free(filename);
 		}
 		i++;

@@ -58,7 +58,7 @@ int			ft_echo(char *line)
 	if (!commands)
 	{
 		ft_putchar('\n');
-		return (0);
+		return (1);
 	}
 	if (!ft_strcmp(commands[i], "-n"))
 		i++;
@@ -72,5 +72,5 @@ int			ft_echo(char *line)
 	if (option != 1)
 		ft_putchar('\n');
 	free_commands(commands);
-	return (0);
+	return (1);
 }

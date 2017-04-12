@@ -107,5 +107,5 @@ int			ft_env(char *cmd)
 	free_env(old_tmp_env ? OTHER : FALSE, old_tmp_env ? &old_tmp_env : NULL);
 	free_env(g_shell.tmp_env ? TMP : FALSE, NULL);
 	g_shell.null_env = 0;
-	return (0);
+	return (1);
 }

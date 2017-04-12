@@ -27,6 +27,7 @@ void	lexer_parser(char *line)
 			all->line = finish_line_backslash(all->line);
 		ft_newhist(all->line);
 		analise_line(all);
+		print_tokens(all->tokens_begin);
 		check_for_hdoc(all->tokens_begin);
 		send_token_to_glob(all);
 		remove_bslash_quotes(all->tokens_begin);
@@ -61,28 +62,25 @@ int		lire_lexeme(t_token *token, char *line, int pos)
 	FT_INIT(int, i, 0);
 	while (line[pos] == ' ' || line[pos] == '\t')
 		pos++;
+	FT_INIT(int, x, pos);
 	if (line[pos] == '\'')
-		pos = token_squote(token, line, pos, i);
+		return (token_squote(token, line, pos, i));
 	if (line[pos] == '\"')
-		pos = token_dquote(token, line, pos, i);
-	if (ft_isdigit(line[pos]))
-		pos = check_for_aggreg_fd(token, line, pos);
+		return (token_dquote(token, line, pos, i));
 	if (ft_isope(line[pos]) == 2 || ft_isope(line[pos]) == 3)
-		pos = check_for_aggreg(token, line, pos);
-	if (ft_isdigit(line[pos]))
-		pos = fd_redir(token, line, pos);
-	if (ft_isprintnotope(line[pos]) == 1)
 	{
-		token->type = WORDS;
-		i = pos;
-		pos = get_lexeme_pos(line, pos);
-		add_lexeme(token, line, pos, i);
-		if (str_is_digit(token->lexeme) == 1)
-			token->type = FDIGIT;
+		pos = check_for_aggreg(token, line, pos);
+		if (x != pos)
+			return (pos);
 	}
-	else if (ft_isope(line[pos]) >= 1)
-		pos = check_ope(token, line, pos, i);
-	return (pos);
+	if (ft_isdigit(line[pos]))
+	{
+		pos = check_for_aggreg_fd(token, line, pos);
+		if (x != pos)
+			return (pos);
+	}
+	return (lire_lexeme_2(token, line, pos, i));
+
 }
 
 void	add_lexeme(t_token *token, char *line, int pos, int i)

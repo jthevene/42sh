@@ -83,3 +83,16 @@ int		and_or_error(t_token *token, char *line, int pos, int i)
 	}
 	return (pos);
 }
+
+void	print_tokens(t_token *token)
+{
+	t_token	*tmp;
+
+	tmp = token;
+	while (tmp)
+	{
+		printf("LIST_TOKEN\n");
+		printf("lexeme : %s\n", tmp->lexeme);
+		tmp = tmp->next;
+	}
+}

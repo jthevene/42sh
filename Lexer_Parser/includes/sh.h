@@ -129,5 +129,7 @@ int						exec_pipe(t_tree *left, t_tree *right);
 void					remove_bslash_quotes(t_token *token);
 t_all					*init_all_struct(char *line);
 int						fd_redir(t_token *token, char *line, int pos);
+int						words_token(t_token *token, char *line, int pos, int i);
+int						lire_lexeme_2(t_token *token, char *line, int pos, int i);
 
 #endif

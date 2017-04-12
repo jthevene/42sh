@@ -37,3 +37,30 @@ int			fd_redir(t_token *token, char *line, int pos)
 	}
 	return (pos);
 }
+
+int			words_token(t_token *token, char *line, int pos, int i)
+{
+	token->type = WORDS;
+	i = pos;
+	pos = get_lexeme_pos(line, pos);
+	add_lexeme(token, line, pos, i);
+	if (str_is_digit(token->lexeme) == 1)
+		token->type = FDIGIT;
+	return (pos);
+}
+
+int			lire_lexeme_2(t_token *token, char *line, int pos, int i)
+{
+	FT_INIT(int, x, pos);
+	if (ft_isdigit(line[pos]))
+	{
+		pos = fd_redir(token, line, pos);
+		if (x != pos)
+			return (pos);
+	}
+	if (ft_isprintnotope(line[pos]) == 1)
+		return (words_token(token, line, pos, i));
+	if (ft_isope(line[pos]) >= 1)
+		return (check_ope(token, line, pos, i));
+	return (pos);
+}

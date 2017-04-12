@@ -83,7 +83,7 @@ int		and_or_error(t_token *token, char *line, int pos, int i)
 	}
 	return (pos);
 }
-
+/*
 void	print_tokens(t_token *token)
 {
 	t_token	*tmp;
@@ -96,3 +96,4 @@ void	print_tokens(t_token *token)
 		tmp = tmp->next;
 	}
 }
+*/

@@ -27,7 +27,7 @@ void	lexer_parser(char *line)
 			all->line = finish_line_backslash(all->line);
 		ft_newhist(all->line);
 		analise_line(all);
-		print_tokens(all->tokens_begin);
+//		print_tokens(all->tokens_begin);
 		check_for_hdoc(all->tokens_begin);
 		send_token_to_glob(all);
 		remove_bslash_quotes(all->tokens_begin);

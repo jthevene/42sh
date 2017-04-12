@@ -48,7 +48,6 @@ static void		handle_left_redir(int is_builtin)
 
 void			handle_redirections(int is_builtin)
 {
-	handle_aggreg(&g_shell.save_list, is_builtin);
 	if (g_shell.right_redirs)
 	{
 		while (g_shell.right_redirs->prev)
@@ -66,6 +65,7 @@ void			handle_redirections(int is_builtin)
 		dup2(g_shell.right_redirs->fd_file, g_shell.right_redirs->fd_in);
 		close(g_shell.right_redirs->fd_file);
 	}
+	handle_aggreg(&g_shell.save_list, is_builtin);
 	if (g_shell.left_redir_fd != -1)
 		handle_left_redir(is_builtin);
 }

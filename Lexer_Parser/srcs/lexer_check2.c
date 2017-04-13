@@ -28,7 +28,14 @@ int			fd_redir(t_token *token, char *line, int pos)
 	FT_INIT(int, x, pos);
 	while (ft_isdigit((unsigned char)line[pos + i]))
 		i++;
-	if (line[pos + i] == '>')
+	if (line[pos + i] == '>' && line[pos + i + 1] == '>')
+	{
+		pos = pos + i + 2;
+		token->type = DMORE;
+		add_lexeme(token, line, pos, x);
+		return (pos);
+	}
+	else if (line[pos + i] == '>')
 	{
 		pos = pos + i + 1;
 		token->type = MORE;

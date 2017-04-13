@@ -44,7 +44,8 @@ static int			exec_match(char *event, char **str_to_replace,
 							char *replace_by)
 {
 	FT_INIT(char*, tmp, NULL);
-	if (!replace_by || !ft_strcmp(replace_by, g_shell.current_line))
+	if (!replace_by || (g_shell.current_line
+		&& !ft_strcmp(replace_by, g_shell.current_line)))
 	{
 		ft_putstr_fd("\n42sh: ", 2);
 		ft_putstr_fd((*str_to_replace), 2);
@@ -56,10 +57,10 @@ static int			exec_match(char *event, char **str_to_replace,
 	tmp = ft_str_replace(event, (*str_to_replace), replace_by);
 	ft_strdel(&replace_by);
 	ft_strdel(&(*str_to_replace));
-	ft_bzero(g_shell.current_line, g_shell.len);
-	ft_strcpy(g_shell.current_line, tmp);
+	ft_strdel(&g_shell.current_line);
+	g_shell.current_line = ft_strdup(tmp);
 	ft_strdel(&tmp);
-	if (ft_strchr(g_shell.current_line, '!'))
+	if (g_shell.current_line && ft_strchr(g_shell.current_line, '!'))
 		return (history_event(g_shell.current_line));
 	ft_putchar('\n');
 	ft_putendl(g_shell.current_line);

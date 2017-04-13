@@ -14,20 +14,13 @@
 
 void	reset_line(void)
 {
-	ft_putstr("\n1\n");
 	move_cursor_n_to_direction(g_shell.line_size, 1);
-	ft_putstr("2\n");
 	if (g_shell.current_line)
 		ft_strdel(&g_shell.current_line);
-	ft_putstr("3\n");
 	g_shell.current_line = NULL;
-	ft_putstr("4\n");
 	g_shell.nav_hist = 0;
-	ft_putstr("5\n");
 	free_hist_opt();
-	ft_putstr("6\n");
 	init_hist_opt();
-	ft_putstr("7\n");
 }
 
 void	return_key(void)

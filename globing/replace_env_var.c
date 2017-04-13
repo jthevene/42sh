@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 10:49:30 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/04/10 14:57:29 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/04/11 11:40:10 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ int			replace_env_var(char **line)
 {
 	FT_INIT(int, i, -1);
 	FT_INIT(char *, tmp, NULL);
-//	if ((*line) && ft_strchr((*line), '!'))
-//		history_event(*line);
 	while (++i < (int)ft_strlen((*line)) && (*line)[i])
 	{
 		if ((*line)[i] == '\\')

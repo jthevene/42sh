@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/04/11 19:02:09 by jules            ###   ########.fr       */
+/*   Updated: 2017/04/13 12:28:51 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,25 @@ static char			*get_target(char *str_to_replace)
 	return (target);
 }
 
-static int			exec_match(char *event, char *str_to_replace,
+static int			exec_match(char *event, char **str_to_replace,
 							char *replace_by)
 {
 	FT_INIT(char*, tmp, NULL);
 	if (!replace_by || !ft_strcmp(replace_by, g_shell.current_line))
 	{
 		ft_putstr_fd("\n42sh: ", 2);
-		ft_putstr_fd(str_to_replace, 2);
+		ft_putstr_fd((*str_to_replace), 2);
 		ft_putstr_fd(": event not found", 2);
-		free(str_to_replace ? str_to_replace : NULL);
+		ft_strdel(&(*str_to_replace));
 		ft_bzero(g_shell.current_line, ft_strlen(g_shell.current_line));
 		return (0);
 	}
-	tmp = ft_str_replace(event, str_to_replace, replace_by);
+	tmp = ft_str_replace(event, (*str_to_replace), replace_by);
 	ft_strdel(&replace_by);
-	free(str_to_replace ? str_to_replace : NULL);
+	ft_strdel(&(*str_to_replace));
 	ft_bzero(g_shell.current_line, g_shell.len);
 	ft_strcpy(g_shell.current_line, tmp);
-	free(tmp ? tmp : NULL);
+	ft_strdel(&tmp);
 	if (ft_strchr(g_shell.current_line, '!'))
 		return (history_event(g_shell.current_line));
 	ft_putchar('\n');
@@ -87,5 +87,5 @@ int					history_event(char *event)
 	else if (alnum && alnum == (int)ft_strlen(target))
 		replace_by = event_str(target, str_to_replace);
 	ft_strdel(&target);
-	return (exec_match(event, str_to_replace, replace_by) * mult_ret);
+	return (exec_match(event, &str_to_replace, replace_by) * mult_ret);
 }

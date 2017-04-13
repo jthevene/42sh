@@ -20,7 +20,8 @@ static int		simple_left(char *filename)
 		if (g_shell.left_redir_fd != -1)
 			close(g_shell.left_redir_fd);
 		g_shell.left_redir_fd = -1;
-		return (error_parse_bin(filename));
+		error_parse_bin(filename);
+		return (0);
 	}
 	if (g_shell.left_redir_fd != -1)
 		close(g_shell.left_redir_fd);

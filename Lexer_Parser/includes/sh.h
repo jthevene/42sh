@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/04/10 12:11:55 by apinho           ###   ########.fr       */
+/*   Updated: 2017/04/13 10:15:26 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void					remove_bslash_quotes(t_token *token);
 t_all					*init_all_struct(char *line);
 int						fd_redir(t_token *token, char *line, int pos);
 int						words_token(t_token *token, char *line, int pos, int i);
-int						lire_lexeme_2(t_token *token, char *line, int pos, int i);
+int						lire_lexeme_2(t_token *token, char *line, int pos, \
+						int i);
 
 #endif

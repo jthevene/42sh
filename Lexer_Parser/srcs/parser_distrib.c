@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_distrib.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:41 by hjacque           #+#    #+#             */
-/*   Updated: 2017/04/10 11:50:21 by apinho           ###   ########.fr       */
+/*   Updated: 2017/04/13 10:16:17 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	lexer_parser(char *line)
 			all->line = finish_line_backslash(all->line);
 		ft_newhist(all->line);
 		analise_line(all);
-//		print_tokens(all->tokens_begin);
 		check_for_hdoc(all->tokens_begin);
 		send_token_to_glob(all);
 		remove_bslash_quotes(all->tokens_begin);
@@ -80,7 +79,6 @@ int		lire_lexeme(t_token *token, char *line, int pos)
 			return (pos);
 	}
 	return (lire_lexeme_2(token, line, pos, i));
-
 }
 
 void	add_lexeme(t_token *token, char *line, int pos, int i)

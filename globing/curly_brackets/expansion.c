@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 11:15:42 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/04/10 14:58:10 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/04/13 10:18:43 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,7 @@ int				hub_expansion(char *str, t_glob *glob)
 						str = ft_strdup(glob->exp);
 					j += 2;
 				}
-				if (str[++j] == '{')
-					j += next_bracket(str, '{', i);
+				j = str[++j] == '{' ? j + next_bracket(str, '{', i) : j;
 			}
 		}
 		i++;

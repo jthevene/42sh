@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh42.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvirgile <dvirgile@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 17:04:00 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/04/01 18:06:44 by dvirgile         ###   ########.fr       */
+/*   Updated: 2017/04/13 10:42:28 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,7 @@ int					error_parse_bin(char *error);
 /*
 ** REDIRECTIONS
 */
-void				call_redirections(char **content);
+int					call_redirections(char **content);
 char				*hub_right_redir(char *line);
 char				*hub_simple_left_redir(char *line);
 int					hub_aggreg(char **cmd);

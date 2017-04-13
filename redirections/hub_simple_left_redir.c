@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 15:18:50 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/04/10 14:58:51 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/04/13 10:40:07 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ static int		simple_left(char *filename)
 	FT_INIT(int, new_fd, 0);
 	if ((new_fd = open(filename, O_RDONLY, 0600)) == -1)
 	{
-		ft_error(filename);
-		return (0);
+		if (g_shell.left_redir_fd != -1)
+			close(g_shell.left_redir_fd);
+		g_shell.left_redir_fd = -1;
+		return (error_parse_bin(filename));
 	}
 	if (g_shell.left_redir_fd != -1)
 		close(g_shell.left_redir_fd);
@@ -42,8 +44,11 @@ static int		get_left_redirs(char *line)
 			if (!(filename = get_filename(line, i)))
 				return (0);
 			if (!simple_left(filename))
-				return (free_triple_str(&filename, NULL, NULL));
-			free(filename);
+			{
+				ft_strdel(&filename);
+				return (-1);
+			}
+			ft_strdel(&filename);
 		}
 		i++;
 	}
@@ -83,6 +88,11 @@ char			*hub_simple_left_redir(char *line)
 {
 	FT_INIT(int, ret_redir, get_left_redirs(line));
 	FT_INIT(char *, ret, NULL);
+	if (ret_redir == -1)
+	{
+		ft_strdel(&line);
+		return (NULL);
+	}
 	if (!ret_redir)
 		return (line);
 	else

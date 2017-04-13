@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hjacque <hjacque@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/08 14:46:33 by hjacque          ###   ########.fr       */
+/*   Updated: 2017/04/13 10:37:13 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,20 @@ void			handle_redirections(int is_builtin)
 		handle_left_redir(is_builtin);
 }
 
-void			call_redirections(char **content)
+int				call_redirections(char **content)
 {
 	FT_INIT(char *, tmp, NULL);
-	if (ft_strstr((*content), ">&") || ft_strstr((*content), "<&"))
-		hub_aggreg(&(*content));
 	if (ft_strchr((*content), '<'))
 	{
 		tmp = hub_simple_left_redir(ft_strdup((*content)));
+		if (!tmp)
+			return (0);
 		ft_strdel(&(*content));
 		(*content) = ft_strdup(tmp);
 		ft_strdel(&tmp);
 	}
+	if (ft_strstr((*content), ">&") || ft_strstr((*content), "<&"))
+		hub_aggreg(&(*content));
 	if (ft_strchr((*content), '>'))
 	{
 		tmp = hub_right_redir(ft_strdup((*content)));
@@ -89,4 +91,5 @@ void			call_redirections(char **content)
 		(*content) = ft_strdup(tmp);
 		ft_strdel(&tmp);
 	}
+	return (1);
 }

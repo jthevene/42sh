@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/04/11 18:29:47 by jules            ###   ########.fr       */
+/*   Updated: 2017/04/13 10:43:06 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	ft_out_of_range(int i)
 
 int		error_parse_bin(char *error)
 {
-	ft_putstr_fd("42sh:", 2);
+	ft_putstr_fd("42sh: ", 2);
 	ft_putstr_fd(error, 2);
-	ft_putstr_fd(":No such file or directory\n", 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
 	return (0);
 }
 

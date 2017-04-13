@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   isallspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apinho <apinho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/04/10 12:05:45 by apinho           ###   ########.fr       */
+/*   Updated: 2017/04/13 10:15:50 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,3 @@ int		and_or_error(t_token *token, char *line, int pos, int i)
 	}
 	return (pos);
 }
-/*
-void	print_tokens(t_token *token)
-{
-	t_token	*tmp;
-
-	tmp = token;
-	while (tmp)
-	{
-		printf("LIST_TOKEN\n");
-		printf("lexeme : %s\n", tmp->lexeme);
-		tmp = tmp->next;
-	}
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 17:46:15 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/04/10 14:57:56 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/04/13 11:00:39 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ char			*fill_mix(char *str)
 				return (NULL);
 		i++;
 	}
-	if (tmp_str[0] == '!')
+	if (tmp_str[0] == '^')
 	{
 		tmp_ret = fill_nomult(ret);
 		free(tmp_str);

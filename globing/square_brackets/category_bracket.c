@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 18:40:11 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/04/10 14:57:57 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/04/13 11:00:26 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ static char				*replace_category(char *str, t_glob *glob)
 	ret = ft_strnew(ft_strlen(category_choice(category, glob))
 		+ ft_strlen(str) - ft_strlen(category) - 4);
 	ret[++j] = '[';
-	if (str[1] == '!')
-		ret[++j] = '!';
+	if (str[1] == '^')
+		ret[++j] = '^';
 	while (tmp_cat[i])
 		ret[++j] = tmp_cat[i++];
 	free(tmp_cat);
-	i = str[1] == '!' ? 2 : 1;
+	i = str[1] == '^' ? 2 : 1;
 	while (str[i])
 	{
 		if (str[i] == '[' && str[i + 1] == ':' && !check++)

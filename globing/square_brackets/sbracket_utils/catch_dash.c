@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 18:40:12 by sgaudin           #+#    #+#             */
-/*   Updated: 2017/04/10 14:58:06 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/04/13 11:02:39 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static int		catch_dash_mix(int i)
 {
 	FT_INIT(int, letters, 0);
-	while (g_shell.line[i] == '!' || g_shell.line[i] == '[')
+	while (g_shell.line[i] == '^' || g_shell.line[i] == '[')
 		i++;
 	if (ft_strchr(g_shell.line, '-'))
 	{

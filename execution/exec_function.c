@@ -6,7 +6,7 @@
 /*   By: sgaudin <sgaudin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:36:40 by hjacque           #+#    #+#             */
-/*   Updated: 2017/03/23 11:35:45 by sgaudin          ###   ########.fr       */
+/*   Updated: 2017/04/13 10:41:26 by sgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ static void		set_default_shell(void)
 int				exec_function(char **content)
 {
 	FT_INIT(pid_t, pid, 0);
-	call_redirections(content);
+	if (!call_redirections(content))
+		return (0);
 	FT_INIT(char **, bin_dir, get_bin_directories());
 	FT_INIT(char **, args, get_args((*content)));
 	FT_INIT(int, return_value, 0);
